@@ -23,7 +23,7 @@
                                 <button type="submit" class="btn btn-success btn-sm" id="login">Iniciar Sesión <i class="fa fa-sign-in"></i></button>
                             </div>
                             <div class="col-md-1" id="log2">
-                                <button type="reset" class="btn btn-danger btn-sm" id="closes">Cancelar <i class="fa fa-times"></i></button>
+                                <button type="reset" class="btn btn-danger btn-sm" id="close">Cancelar <i class="fa fa-times"></i></button>
                             </div>
                         </div>
                     </form>
