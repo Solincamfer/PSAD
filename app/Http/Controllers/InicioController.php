@@ -10,4 +10,9 @@ class InicioController extends Controller
     {
     	return view('login');
     }//
+
+    public function verificar()
+    {
+    	return view('redireccion');
+    }//
 }

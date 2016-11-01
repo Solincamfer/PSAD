@@ -7,7 +7,7 @@
             <div class="container">
                 <div id="card">
                     <h1 class="title">Panel de Acceso</h1>
-                    <form action="" method="post">
+                    <form action="/login/verificar" method="">
                         <div class="row">
                             <div class="col-md-6 col-md-offset-3">
                                 <label for="user" style="font-size: 20px"><i class="fa fa-user"></i> Usuario:</label>
