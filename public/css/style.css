@@ -47,8 +47,13 @@
         border-collapse: collapse;
         border-spacing: 0
     }
-
+    #AccesoTrue{
+        display: none;
+    }
 /**Clases**/
+    .visible{
+        display: block;
+    }
     .hdr{
         background: #26a69a;
         padding: 3.5em;
