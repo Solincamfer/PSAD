@@ -12,5 +12,6 @@
     @yield('contenido')
     <script src="{{asset('plugins/bootstrap3.3.7/js/jquery.min.js')}}"></script>
     <script src="{{asset('plugins/bootstrap3.3.7/js/bootstrap.min.js')}}"></script>
+    <script src="{{asset('js/val.js')}}"></script>
 </body>
 </html>
