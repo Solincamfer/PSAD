@@ -7,18 +7,18 @@
             <div class="container">
                 <div id="card">
                     <h1 class="title">Panel de Acceso</h1>
-                    <form action="/login/verificar" method="" id="log">
+                    <form action="/login/verificar" method="" id="log" data-toggle="validator">
                         <div class="row">
-                            <div class="col-md-6 col-md-offset-3">
+                            <div class="form-group col-md-6 col-md-offset-3">
                                 <label for="user" style="font-size: 20px"><i class="fa fa-user"></i> Usuario:</label>
-                                <input type="text" id="user" name="user">
+                                <input type="text" id="user" name="user" class="form-control" required>
                             </div>
-                            <div class="col-md-6 col-md-offset-3">
+                            <div class="form-group col-md-6 col-md-offset-3">
                                 <label for="pwd" style="font-size: 20px"><i class="fa fa-lock"></i> Contraseña:</label>
-                                <input type="password" id="pwd" name="pwd">
+                                <input type="password" id="pwd" name="pwd" class="form-control" required>
                             </div>
                         </div>
-                        <div class="row" id="f2">
+                        <div class="form-group row" id="f2">
                             <div class="col-md-2 col-md-offset-8" id="log1">
                                 <button type="submit" class="btn btn-success btn-sm" id="login">Iniciar Sesión <i class="fa fa-sign-in"></i></button>
                             </div>
