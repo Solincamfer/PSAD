@@ -1,0 +1,130 @@
+    *{
+        margin: 0;
+        padding: 0;
+    }
+
+/**Etiquetas**/
+
+    html, body, div, span, applet, object, iframe,
+    h1, h2, h3, h4, h5, h6, p,
+    blockquote, pre, a, abbr, acronym, address, big,
+    cite, code, del, dfn, em, font, img,
+    ins, kbd, q, s, samp, small, strike,
+    strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li,
+    fieldset, form, label, legend,
+    table, caption, tbody, tfoot, thead, tr, th, td,
+    center, u, b, i {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        outline: 0;
+        font-weight: normal;
+        font-style: normal;
+        font-size: 100%;
+        font-family: inherit;
+        vertical-align: baseline
+    }
+
+    input, textarea {
+        margin: 0;
+        padding: 0
+    }
+
+    hr {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        color: #000;
+        background-color: #000;
+        height: 1px
+    }
+
+    ol, ul {
+        list-style: none
+    }
+
+    table {
+        border-collapse: collapse;
+        border-spacing: 0
+    }
+
+/**Clases**/
+    .hdr{
+        background: #26a69a;
+        padding: 3.5em;
+        font-family: 'Ubuntu Condensed', sans-serif;
+    }
+    .ftr{
+        background: rgba(0, 0, 0, 0.2);
+        padding: 1em;
+        text-decoration: none;
+        color: black;
+        font-family: 'Ubuntu Condensed', sans-serif;
+        margin-top: 4.6em;
+        bottom: 0;
+    }
+
+    .ftr a {
+        text-decoration: none;
+        color: black;
+    } 
+
+    .title {
+        font-size: 3em;  
+        margin-bottom: 1em;
+    }
+
+/**Identificadores**/
+
+
+#ftr1{
+    text-align: right;
+    border-right: 1px solid #000; 
+    padding: 0 10px;
+}
+#ftr2{
+    padding: 0 10px;
+}
+
+#user{
+    width: 100%;
+    border-radius: 4px;
+    border: 2px solid #555;
+    margin-bottom: 1em;
+    padding: 2px;
+}
+
+#pwd{
+    width: 100%;
+    border-radius: 4px;
+    border: 2px solid #555;
+    margin-bottom: 1em;
+    padding: 2px;
+}
+
+#log1{
+    padding: 0 0.4em; 
+    text-align: right;
+}
+
+#log2{
+    padding: 0;
+}
+
+#f2{
+    margin-top: 1.5em;
+    text-align: right;
+}
+
+#card{
+    box-shadow: 1em 0.5em 1.5em #aaa;
+    background: white;
+    height: auto;
+    border-radius: 3px;
+    padding: 2em;
+    margin: 2em 15em 0 15em;
+    overflow: hidden;
+    position: relative;
+    flex: auto;
+    font-family: 'Ubuntu Condensed', sans-serif;
+}
