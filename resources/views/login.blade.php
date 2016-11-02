@@ -3,7 +3,7 @@
         @section('title')
             Login
         @endsection        
-        @include('layout/header')        
+        @include('layout/header')       
             <div class="container">
                 <div id="card">
                     <h1 class="title">Panel de Acceso</h1>

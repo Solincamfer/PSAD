@@ -1,11 +1,10 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title></title>
-</head>
-<body>
-	
-	
 
-</body>
-</html>
+@extends('admin.base')
+    @section('contenido')
+        @section('title')
+            Inicio
+        @endsection        
+            @include('layout/sidebar')
+                @include('layout/footer')
+    @endsection
+
