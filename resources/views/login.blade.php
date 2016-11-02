@@ -7,8 +7,9 @@
             <div class="container">
                 <div id="card">
                     <h1 class="title">Panel de Acceso</h1>
-                    <form action="/login/verificar" method="" id="log" data-toggle="validator">
-                        
+                    <form action="/login/verificar" method="post" id="log" data-toggle="validator">
+                         {{ csrf_field() }}
+
                         <div class="alert alert-success alert-dismissible fade in" role="alert" id="AccesoTrue"><p>Credenciales correctas.</p>
                             </div>
                             <div class="form-group col-md-6 col-md-offset-3">
