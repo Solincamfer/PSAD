@@ -7,9 +7,10 @@
             <div class="container">
                 <div id="card">
                     <h1 class="title">Panel de Acceso</h1>
+                    <hr>
                     <form action="/login/verificar" method="" id="log" data-toggle="validator">
                         
-                        <div class="alert alert-success alert-dismissible fade in" role="alert" id="AccesoTrue"><p>Credenciales correctas.</p>
+                            <div class="alert alert-success alert-dismissible fade in" role="alert" id="AccesoTrue"><p>Credenciales correctas.</p>
                             </div>
                             <div class="form-group col-md-6 col-md-offset-3">
                                 <label for="user" style="font-size: 20px"><i class="fa fa-user"></i> Usuario:</label>
