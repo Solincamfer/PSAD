@@ -39,4 +39,7 @@ class InicioController extends Controller
     	echo $password;*/
     	//$password=Request::get('pwd');
     }//
+    public function MetodoPrueba(){
+
+    }
 }
