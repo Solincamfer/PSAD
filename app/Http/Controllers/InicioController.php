@@ -22,7 +22,7 @@ class InicioController extends Controller
     	
     	$_usuario=usuario::where('usuario_',$usuario)->where('clave',$password)->first();
     	
-    	
+        
     	if (empty($_usuario)==false)
     		{
     			return view('redireccion', compact('_usuario'));
@@ -32,14 +32,6 @@ class InicioController extends Controller
 
     		 	return view('login');	
     		}
-
-    	//return view('login');
-    	/*echo $usuario;
-    	echo "<br>";
-    	echo $password;*/
-    	//$password=Request::get('pwd');
-    }//
-    public function MetodoPrueba(){
-
     }
+   
 }
