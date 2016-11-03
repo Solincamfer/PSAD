@@ -1,0 +1,185 @@
+    *{
+        margin: 0;
+        padding: 0;
+    }
+
+/**Etiquetas**/
+
+    html, body, div, span, applet, object, iframe,
+    h1, h2, h3, h4, h5, h6, p,
+    blockquote, pre, a, abbr, acronym, address, big,
+    cite, code, del, dfn, em, font, img,
+    ins, kbd, q, s, samp, small, strike,
+    strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li,
+    fieldset, form, label, legend,
+    table, caption, tbody, tfoot, thead, tr, th, td,
+    center, u, b, i {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        outline: 0;
+        font-weight: normal;
+        font-style: normal;
+        font-size: 100%;
+        font-family: inherit;
+        vertical-align: baseline
+    }
+
+    body{
+        background: url('../img/O70K6L0.png');
+        background-size: 100%;
+        background-repeat: no-repeat;
+    }
+
+    input, textarea {
+        margin: 0;
+        padding: 0
+    }
+
+    hr {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        color: #000;
+        background-color: #000;
+        height: 1px
+    }
+
+    ol, ul {
+        list-style: none
+    }
+
+    table {
+        border-collapse: collapse;
+        border-spacing: 0
+    }
+
+/**Clases**/
+    .visible{
+        display: block;
+    }
+    /*Header*/
+        .hdr{
+            background: rgba(38, 166, 154, 0.7);
+            padding: 2em;
+            font-family: 'Ubuntu Condensed', sans-serif;
+        }
+
+/**Identificadores**/
+    /*footer*/
+        #ftr{
+            position: absolute; 
+            bottom: 0; 
+            background: rgba(0, 0, 0, 0.3);
+            padding: 1em;
+            font-family: 'Ubuntu Condensed', sans-serif;
+            color: black;
+        }
+
+        #ftr a{
+            text-decoration: none;
+            color: black;
+        }
+
+        #ftr1{
+            text-align: right;
+            border-right: 1px solid #000; 
+            padding: 0 10px;
+        }
+
+        #ftr2{
+            padding: 0 10px;
+        }
+    /*Panel del login*/
+        #AccesoTrue{
+            display: none;
+        }
+
+        #user{
+            width: 100%;
+            border-radius: 4px;
+            border: 2px solid #555;
+            margin-bottom: 1em;
+            padding: 2px;
+        }
+
+        #pwd{
+            width: 100%;
+            border-radius: 4px;
+            border: 2px solid #555;
+            margin-bottom: 1em;
+            padding: 2px;
+        }
+
+        #log1{
+            padding: 0 0.4em; 
+            text-align: right;
+        }
+
+        #log2{
+            padding: 0;
+        }
+
+        #f2{
+            margin-top: 1.5em;
+            text-align: right;
+        }
+
+        #card{
+            box-shadow: 1em 0.5em 1.5em #aaa;
+            background: rgba(255, 255, 255, 0.2);
+            height: 90%;
+            border-radius: 2px 2px 5px 5px;
+            padding: 10px 20px 20px 20px;
+            width: 90%;
+            max-width: 420px;
+            margin: 10% 32%;
+            overflow: hidden;
+            position: relative;
+            flex: auto;
+            padding-bottom: 10px;
+            font-family: 'Ubuntu Condensed', sans-serif;
+        }
+
+        #card .title {
+            color: #111;
+            font-size: 20px;
+            font-weight: bold;
+            margin: 10px 0 30px 0;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 20px;
+        }
+
+        #card input {
+            display: block;
+            padding: 15px 10px;
+            margin-bottom: 10px;
+            width: 100%;
+            border: 1px solid #ddd;
+            transition: border-width 0.2s ease;
+            border-radius: 2px;
+            color: #ccc;
+        }
+
+        #card input + i.fa {
+            color: #fff;
+            font-size: 1em;
+            position: absolute;
+            margin-top: -35px;
+            opacity: 0;
+            left: 0;
+            transition: all 0.1s ease-in;
+        }
+
+        #card input:focus {
+            outline: none;
+            color: #444;
+            border-color: #26a69a;
+            border-left-width: 35px;
+        }
+
+        #card input:focus + i.fa {
+            opacity: 1;
+            left: 26px;
+            transition: all 0.25s ease-out;
+        }

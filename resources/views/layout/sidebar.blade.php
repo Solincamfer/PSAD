@@ -1,7 +1,7 @@
 <ul class="nav nav-pills">
 	<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true" >
 	  <div class="panel panel-default">
-		  <div class="container-fluid" style="padding: 1.8em; background: #26a69a;">
+		  <div class="container-fluid" style="padding: 1.8em; background: rgba(38, 166, 154, 0.5);">
 			<div class="row">
 				<div class="col-md-3">
 					<div class="panel-heading" role="tab" id="headingOne">

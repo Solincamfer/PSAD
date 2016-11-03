@@ -1,8 +1,7 @@
- @extends('admin.base')
+ @extends('admin.basesys')
     @section('contenido')
         @section('title')
             Inicio
         @endsection        
-            @include('layout/sidebar')
-                @include('layout/footer')
+            @include('layout/header')
     @endsection
