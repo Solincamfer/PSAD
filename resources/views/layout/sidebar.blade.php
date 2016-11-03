@@ -1,13 +1,22 @@
-<ul class="nav nav-pills " >
-    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true" >
-      <div class="panel panel-default" >
-        <div class="panel-heading" role="tab" id="headingOne" >
-          <h4 class="panel-title">
-            <a  role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapse1">
-             <i class="fa fa-bars" aria-hidden="true"></i>
-            </a>
-          </h4>
-        </div>
+<ul class="nav nav-pills">
+	<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true" >
+	  <div class="panel panel-default">
+		  <div class="container-fluid" style="padding: 1.8em; background: #26a69a;">
+			<div class="row">
+				<div class="col-md-3">
+					<div class="panel-heading" role="tab" id="headingOne">
+						<h4 class="panel-title">
+							<a  role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapse1">
+								<i class="fa fa-bars" style="font-size: 40px;"></i>
+							</a>
+						</h4>
+					</div>
+				</div>
+				<div class="col-md-3 col-md-offset-6" align="right">
+					<button class="btn btn-default" id="cerrar">Cerrar Sesión</button>
+				</div>
+			</div>
+		</div>
         <div class="col-xs-6 col-md-4 col-lg-2"  style="padding-left:0em;">
           <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
             <div class="panel-body" style="padding:0.15em;">
