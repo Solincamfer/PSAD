@@ -16,4 +16,4 @@ Route::get('/', function () {
 });
 
 Route::get('/login','InicioController@index'); //controlador
-Route::get('/login/verificar','InicioController@verificar');
+Route::post('/login/verificar','InicioController@verificar');

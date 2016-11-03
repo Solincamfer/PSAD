@@ -8,7 +8,7 @@
                 <div id="card">
                     <h1 class="title">Panel de Acceso</h1>
                     <hr>
-                    <form action="/login/verificar" method="" id="log" data-toggle="validator">
+                    <form method="GETz" id="log" data-toggle="validator">
                             <div class="alert alert-success alert-dismissible fade in" role="alert" id="AccesoTrue"><p>Credenciales correctas.</p>
                             </div>
                             <div class="form-group col-md-6 col-md-offset-3">
@@ -24,7 +24,7 @@
                         
                         <div class="form-group row" id="f2">                            
                             <div class="col-md-2 col-md-offset-8" id="log1">
-                                <button type="submit" class="btn btn-success btn-sm" id="login">
+                                <button type="" class="btn btn-success btn-sm" id="login">
                                 Iniciar Sesión 
                                 <i class="fa fa-sign-in"></i>
                                 </button>
@@ -37,8 +37,12 @@
                             </div>
                             <div class="help-block with-errors"></div>
                         </div>
+                        <i class="fa fa-refresh fa-spin login"></i>
                     </form>
+                    <span></span>
                 </div>
             </div>
+
+</script>
         @include('layout/footer')
     @endsection
