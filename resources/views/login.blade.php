@@ -40,7 +40,5 @@
                     <span></span>
                 </div>
             </div>
-
-</script>
         @include('layout/footer')
     @endsection

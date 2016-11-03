@@ -29,7 +29,6 @@ class InicioController extends Controller
     		}
     	else
     		{
-
     		 	return view('login');	
     		}
     }
