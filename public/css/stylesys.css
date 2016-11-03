@@ -1,0 +1,60 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+/**Etiquetas**/
+
+    html, body, div, span, applet, object, iframe,
+    h1, h2, h3, h4, h5, h6, p,
+    blockquote, pre, a, abbr, acronym, address, big,
+    cite, code, del, dfn, em, font, img,
+    ins, kbd, q, s, samp, small, strike,
+    strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li,
+    fieldset, form, label, legend,
+    table, caption, tbody, tfoot, thead, tr, th, td,
+    center, u, b, i {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        outline: 0;
+        font-weight: normal;
+        font-style: normal;
+        font-size: 100%;
+        font-family: inherit;
+        vertical-align: baseline
+    }
+
+    input, textarea {
+        margin: 0;
+        padding: 0
+    }
+
+    hr {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        color: #000;
+        background-color: #000;
+        height: 1px
+    }
+
+    ol, ul {
+        list-style: none
+    }
+
+    table {
+        border-collapse: collapse;
+        border-spacing: 0
+    }
+
+/**Clases**/
+
+    /*Header*/
+        .hdr{
+            background: rgba(38, 166, 154, 0.7);
+            padding: 2em;
+            font-family: 'Ubuntu Condensed', sans-serif;
+        }
+
+/**Identificadores**/
