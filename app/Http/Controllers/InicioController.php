@@ -25,7 +25,7 @@ class InicioController extends Controller
     	
     	if (empty($_usuario)==false)
     		{
-    			return view('redireccion', compact('_usuario'));
+    			return view('redireccion');
     		}
     	else
     		{

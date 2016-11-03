@@ -10,7 +10,7 @@ $(function(){
     
 //swal("Lo Siento", "Credenciales Invalidas, Por favor revise nuevamente", "error");  
     $('#cerrar').click(function(){
-        var url = "/login" 
+        var url = "/login"; 
         swal({
             title: "Cerrar Sesión",
             text: "¿Desea salir del sistema?",
