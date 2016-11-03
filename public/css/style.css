@@ -50,6 +50,9 @@
     #AccesoTrue{
         display: none;
     }
+    .login{
+        display: none;
+    }
 /**Clases**/
     .visible{
         display: block;
