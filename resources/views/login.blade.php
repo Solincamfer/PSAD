@@ -20,14 +20,9 @@
                                 <div class="help-block with-errors"></div>
                             </div>
                         
-                        <div class="form-group row" id="f2">                            
-<<<<<<< HEAD
+                        <div class="form-group row" id="f2">                       
                             <div class="col-md-3 col-md-offset-6" id="log1">
-                                <button type="submit" class="btn btn-success btn-sm" id="login">
-=======
-                            <div class="col-md-2 col-md-offset-8" id="log1">
                                 <button type="" class="btn btn-success btn-sm" id="login">
->>>>>>> origin/master
                                 Iniciar Sesión 
                                 <i class="fa fa-sign-in"></i>
                                 </button>
