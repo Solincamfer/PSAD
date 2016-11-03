@@ -1,5 +1,4 @@
-
-@extends('admin.base')
+ @extends('admin.base')
     @section('contenido')
         @section('title')
             Inicio
@@ -7,4 +6,3 @@
             @include('layout/sidebar')
                 @include('layout/footer')
     @endsection
-
