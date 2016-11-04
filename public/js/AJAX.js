@@ -7,7 +7,7 @@
 
 	var posting = $.post( url, data,function(resultado){
 		if (resultado=='true'){
-			swal('Bienvenido'); 
+			swal('Bienvenido');
 		}else{
 			swal('Usuario incorrecto');
 		}		
