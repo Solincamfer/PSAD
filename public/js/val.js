@@ -9,8 +9,12 @@ $(function(){
 //  $('#AccesoTrue').toggleClass( "visible" );
 //});
     
-//swal("Lo Siento", "Credenciales Invalidas, Por favor revise nuevamente", "error");  
-    $('#cerrar').click(function(){
+//swal("Lo Siento", "Credenciales Invalidas, Por favor revise nuevamente", "error");
+    $('#ico').on('click', function(){
+        $('.contenido').toggleClass('open');
+    });
+    
+    $('#lnk').click(function(){
         var url = "/login"; 
         swal({
             title: "Cerrar Sesión",

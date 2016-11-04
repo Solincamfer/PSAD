@@ -47,14 +47,112 @@
         border-collapse: collapse;
         border-spacing: 0
     }
+    
+    body{
+        overflow: hidden;
+    }
 
 /**Clases**/
 
     /*Header*/
         .hdr{
-            background: rgba(38, 166, 154, 0.7);
-            padding: 2em;
             font-family: 'Ubuntu Condensed', sans-serif;
         }
+        
+        .img{
+            width: 200px;
+            top: 15px;
+            left: 80px;
+            position: absolute;
+        }
+    /*Sidebar*/
+        .sidebar {
+            position: absolute;
+            width: 15em;
+            top: 13%;
+            height: 100%;
+            color: #fff;
+            background: #444;
+            outline: 1px solid #26a69f;
+        }
 
+        .open {
+            transform: translateX(15em);
+        }
+
+    /*Contenido*/
+        .contenido {
+            width: 100%;
+            height: 100%;
+            top: 12.8%;
+            position: absolute;
+            background: #eee;
+            padding: 30px;
+            transition: all 0.5s;
+            box-sizing: border-box;
+        }
 /**Identificadores**/
+    /*Header*/
+        #hd{
+            background: rgba(38, 166, 154, 0.7);
+            padding: 1em;
+            border: 0;
+        }
+        
+
+        #ico{
+            font-size: 50px;
+            margin-left: 10px;
+            color: #000;
+            top: 0;
+            margin-top: 15px;
+            position: absolute;
+            cursor: pointer;
+        }
+        
+        #nom{
+            margin-top: 25px; 
+            text-align: right;
+            top: 0;
+            right: 7em;
+            position: absolute;
+        }
+
+        #nomUser{
+            font-size: 20px;
+        }
+
+        #icocs{
+            font-size: 14px;
+        }
+
+        #bttn{
+            background: rgba(0, 0, 0, 0.2); 
+            text-align: center; 
+            color: #000; 
+            text-decoration: none; 
+            padding: 0.5em; 
+            border-radius: 3px;
+            top: 0;
+            right: 0;
+            margin-right: 10px;
+            position: absolute;
+            margin-top: 20px;
+            transition: 1.5s;
+        }
+        
+        #bttn #lnk{
+            color: #111; 
+            font-size: 12px; 
+            font-weight: bold;
+            text-decoration: none;
+            transition: 1s;
+        }
+
+        #bttn:hover{
+            background: rgba(255, 255, 255, 0.9);
+            cursor: pointer;
+        }
+
+    /*Sidebar*/
+        
