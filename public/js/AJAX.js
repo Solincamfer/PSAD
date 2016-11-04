@@ -1,4 +1,4 @@
-    alert('hola');
+    
     $( "#log" ).submit(function( event ) {
 	event.preventDefault();
 	var form=$('#log');
@@ -6,11 +6,12 @@
 	var data= form.serialize();
 
 	var posting = $.post( url, data,function(resultado){
-		if (resultado=='true'){
+		if (resultado == true) {
 			swal('Bienvenido');
+			location.href = "/login/redireccion";
 		}else{
-			swal('Usuario incorrecto');
-		}		
+			swal('Fallo');
+		}					
 	});
 	  posting.fail(function() {
 	    alert( "desconectado" );

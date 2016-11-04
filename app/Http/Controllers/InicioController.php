@@ -13,6 +13,11 @@ class InicioController extends Controller
     	return view('login');
     }//
 
+    public function redireccion()
+    {
+
+        return view('redireccion');
+    }
 
 
     public function verificar()
@@ -25,11 +30,11 @@ class InicioController extends Controller
         
     	if (empty($_usuario)==false)
     		{
-    			return view('redireccion');
+    			echo true;
     		}
     	else
     		{
-    		 	return view('login');	
+
     		}
     }
    

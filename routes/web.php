@@ -17,6 +17,7 @@ Route::get('/', function () {
 
 Route::get('/login','InicioController@index'); //controlador
 Route::post('/login/verificar','InicioController@verificar');
+Route::get('/login/redireccion','InicioController@redireccion');
 
 //Route::get('/login/verificar','InicioController@verificar');
 
