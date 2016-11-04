@@ -55,7 +55,7 @@
 
 /**Clases**/
     .visible{
-        display: block;
+        display: none;
     }
     /*Header*/
         .hdr{

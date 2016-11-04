@@ -7,7 +7,7 @@
                 <div id="card">
                     <img src="{{asset('img/PSAD_logo1.png')}}" style="margin-left: 40%; width: 250px;">
                     <!--<h1 class="title">Panel de Acceso</h1>-->
-                    <form action="/login/verificar" method="post" id="log" data-toggle="validator">
+                    <form action="login/verificar/" method="POST" id="log" data-toggle="validator">
                             {{ csrf_field() }}
                             <div class="alert alert-success alert-dismissible fade in" role="alert" id="AccesoTrue"><p>Credenciales correctas.</p>
                             </div>
@@ -19,7 +19,6 @@
                                 <input type="password" id="pwd" name="pwd" class="form-control" placeholder="Contraseña" required><i class="fa fa-lock"></i>
                                 <div class="help-block with-errors"></div>
                             </div>
-                        
                         <div class="form-group container-fluid" id="f2">
                             <div class="col-md-12">
                                 <button type="" id="log1">
