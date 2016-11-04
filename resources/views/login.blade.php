@@ -20,27 +20,22 @@
                                 <div class="help-block with-errors"></div>
                             </div>
                         
-                        <div class="form-group row" id="f2">                       
-                            <div class="col-md-3 col-md-offset-6" id="log1">
-                                <button type="" class="btn btn-success btn-sm" id="login">
-                                Iniciar Sesión 
-                                <i class="fa fa-sign-in"></i>
+                        <div class="form-group container-fluid" id="f2">
+                            <div class="col-md-12">
+                                <button type="" id="log1">
+                                    <p>Iniciar Sesión <i class="fa fa-sign-in"></i></p>
                                 </button>
                             </div>
-                            <div class="col-md-2" id="log2">
-                                <button type="reset" class="btn btn-danger btn-sm" id="close">
-                                Cancelar 
-                                <i class="fa fa-times"></i>
+                            <div class="col-md-12">
+                                <button type="reset" id="log2">
+                                    <p>Cancelar <i class="fa fa-times"></i></p> 
                                 </button>
                             </div>
                             <div class="help-block with-errors"></div>
                         </div>
-                        <i class="fa fa-refresh fa-spin login"></i>
                     </form>
                     <span></span>
                 </div>
             </div>
-
-</script>
         @include('layout/footer')
     @endsection
