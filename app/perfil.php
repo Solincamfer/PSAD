@@ -4,32 +4,32 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class perfil extends Model
+
+class Perfil extends Model
 {
-   protected $table="perfiles";
-   protected $fillable=['id','descripcion'];// //
+    protected $table="perfiles";
 
-  public function usuarios()
-  {
+    protected $fillable=['id','descripcion'];
 
-  	return $this->hasMany('App\usaurio');
-  }
+    public function usuarios()
+    {
+      return $this->hasMany('App\Usuario');
+    }
 
-   public function modulos()
-   {
-   	return $this->belongsToMany('App\modulo');
-   }
+    public function modulos()
+    {
+      return $this->belongsToMany('App\Modulo')->withTimestamps();
+    }
 
-   public function submodulos()
-   {
 
-   	return $this->belongsToMany('App\submodulo');
-   }
+    public function submodulos()
+    {
+      return $this->belongsToMany('App\Submodulo')->withTimestamps();
+    }
 
-   public function acciones()
-   {
-   	return $this->belongsToMany('App\sccion');
-
-   }
+    public function acciones()
+    {
+      return $this->belongsToMany('App\Accion')->withTimestamps();
+    }
 }
 

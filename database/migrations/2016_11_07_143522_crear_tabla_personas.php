@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CrearTablaPerfiles extends Migration
+class CrearTablaPersonas extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,12 @@ class CrearTablaPerfiles extends Migration
      */
     public function up()
     {
-        Schema::create('perfiles', function (Blueprint $table) {
+        Schema::create('empleados', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('descripcion',20);
+            $table->string('nombre',100);
+            $table->string('apellido',100);
+            $table->integer('usuario_id')->unsigned();
+            $table->foreign('usuario_id')->references('id')->on('usuarios')->onDelate('cascade');
             $table->timestamps();
         });
     }
@@ -27,6 +30,6 @@ class CrearTablaPerfiles extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('perfiles');
+        Schema::dropIfExists('personas');
     }
 }
