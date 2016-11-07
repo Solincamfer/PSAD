@@ -3,19 +3,24 @@ $( "#log" ).submit(function( event ) {
 	var form=$('#log');
 	var url= form.attr('action');
 	var data= form.serialize();
+	var nombreusuario='Angel Toyo';
 	var posting = $.post( url, data,function(resultado){
-		if (resultado == true) {
+		if (resultado[0] == true) {
 			swal({
 				title:'Bienvenido',//Contenido del modal
-				timer:2000,//Tiempo de retardo en ejecucion del modal
-				showConfirmButton:false//Eliminar boton de confirmacion
+				text: "<p style='font-size:30px';>"+nombreusuario+"</p>" ,
+				type: "success",
+				timer:3000,//Tiempo de retardo en ejecucion del modal
+				showConfirmButton:false,//Eliminar boton de confirmacion
+				html:true
 			});
 			//Retardo en ejecucion de ruta.
-			setTimeout(function(){location.href = "/login/redireccion";},2200); // 3000ms = 3s			
+			setTimeout(function(){location.href = "/login/redireccion";},3200); // 3000ms = 3s			
 		}else{
 			swal({
-				title:'Credenciales invalidos.',//Contenido del modal
-				timer:1000,//Tiempo de retardo en ejecucion del modal
+				title:'Credenciales invalidas.',//Contenido del modal
+				type: "error",
+				timer:1500,//Tiempo de retardo en ejecucion del modal
 				showConfirmButton:false//Eliminar boton de confirmacion
 			});
 		}					
