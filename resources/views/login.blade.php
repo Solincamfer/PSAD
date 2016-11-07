@@ -2,7 +2,7 @@
     @section('contenido')
         @section('title')
             Login
-        @endsection             
+        @endsection    
             <div class="container">
                 <div id="card">
                     <img src="{{asset('img/PSAD_logo1.png')}}" style="margin-left: 40%; width: 250px;">

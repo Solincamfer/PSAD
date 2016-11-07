@@ -9,25 +9,26 @@ $('#log1').click(function(){
 			var url= form.attr('action');
 			var data= form.serialize();
 			var posting = $.post( url, data,function(resultado){
-				if (resultado == true) {
+				if (resultado[0] == true) {
 					swal({
 						title:'Bienvenido',//Contenido del modal
+						text: resultado[1]+' '+resultado[2],
 						timer:2000,//Tiempo de retardo en ejecucion del modal
-						showConfirmButton:false//Eliminar boton de confirmacion
+						type: "success",
+						showConfirmButton:false,//Eliminar boton de confirmacion
+						html: true
 					});
 					//Retardo en ejecucion de ruta.
 					setTimeout(function(){location.href = "/login/redireccion";},2200); // 3000ms = 3s			
-				}else{	
-					swal({
-						title:'Credenciales invalidos.',//Contenido del modal
-						timer:1000,//Tiempo de retardo en ejecucion del modal
-						showConfirmButton:false//Eliminar boton de confirmacion
-					});
 				}					
 			});
 			posting.fail(function() {
-				//Ruta al controlador principal no encontrada.
-				alert( "desconectado" );
+				swal({
+						title:'Credenciales invalidos.',//Contenido del modal
+						timer:1500,//Tiempo de retardo en ejecucion del modal
+						type: "error",
+						showConfirmButton:false//Eliminar boton de confirmacion
+					});
 			})
 			posting.always(function() {
 				//Validar preload
