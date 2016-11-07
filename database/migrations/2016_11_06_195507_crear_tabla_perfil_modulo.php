@@ -13,11 +13,13 @@ class CrearTablaPerfilModulo extends Migration
      */
     public function up()
     {
-        Schema::create('perfiles_modulos', function (Blueprint $table) {
-            $table->integer('id_perfil')->unsigned();
-            $table->integer('id_modulo')->unsigned();
-            $table->foreign('id_perfil')->references('id')->on('perfiles')->onDelate('cascade');
-            $table->foreign('id_modulo')->references('id')->on('modulos')->onDelate('cascade');
+        Schema::create('modulo_perfil', function (Blueprint $table) 
+        {
+            $table->increments('id');
+            $table->integer('perfil_id')->unsigned();
+            $table->integer('modulo_id')->unsigned();
+            $table->foreign('perfil_id')->references('id')->on('perfiles');
+            $table->foreign('modulo_id')->references('id')->on('modulos');
             $table->timestamps();
         });
     }
@@ -29,6 +31,6 @@ class CrearTablaPerfilModulo extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('perfiles_modulos');
+        Schema::dropIfExists('modulo_perfil');
     }
 }

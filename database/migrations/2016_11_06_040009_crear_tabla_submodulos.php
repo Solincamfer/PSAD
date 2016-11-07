@@ -16,9 +16,10 @@ class CrearTablaSubmodulos extends Migration
         Schema::create('submodulos', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('status_sm')->default(0);
-            $table->string('descripcion',20);
-            $table->integer('id_modulo')->unsigned();
-            $table->foreign('id_modulo')->references('id')->on('modulos')->onDelate('cascade');
+            $table->string('descripcion',100);
+            $table->string('url',100);
+            $table->integer('modulo_id')->unsigned();
+            $table->foreign('modulo_id')->references('id')->on('modulos')->onDelate('cascade');
             $table->timestamps();
         });
     }

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CrearTablaUsuarios extends Migration
+class CrearTablaPerfilAccion extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CrearTablaUsuarios extends Migration
      */
     public function up()
     {
-        Schema::create('usuarios', function (Blueprint $table) {
+        Schema::create('accion_perfil', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('usuario_',20);
-            $table->string('clave',50);
-            $table->integer('id_perfil')->unsigned();
-            $table->foreign('id_perfil')->references('id')->on('perfiles')->onDelate('cascade');
+            $table->integer('perfil_id')->unsigned();
+            $table->integer('accion_id')->unsigned();
+            $table->foreign('perfil_id')->references('id')->on('perfiles');
+            $table->foreign('accion_id')->references('id')->on('acciones');
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ class CrearTablaUsuarios extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('usuarios');
+        Schema::dropIfExists('accion_perfil');
     }
 }

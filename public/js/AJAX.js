@@ -22,7 +22,7 @@ $( "#log" ).submit(function( event ) {
 	});
 	  posting.fail(function() {
 	  	//Ruta al controlador principal no encontrada.
-	    alert( "desconectado" );
+	    alert( resultado );
 	  })
 	  posting.always(function() {
 	  	//Validar preload

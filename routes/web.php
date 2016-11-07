@@ -16,8 +16,39 @@ Route::get('/', function () {
 });
 
 Route::get('/login','InicioController@index'); //controlador
-Route::post('/login/verificar','InicioController@verificar');
+
+
+
+
 Route::get('/login/redireccion','InicioController@redireccion');
 
-//Route::get('/login/verificar','InicioController@verificar');
+
+Route::match( ['post','get'], '/login/verificar',
+
+		[
+			
+			
+			'uses'=>'InicioController@verificar'
+
+		]
+	);
+
+
+
+
+
+Route::group
+	(
+		['prefix'=>'menu'],function()
+			{
+
+		
+				Route::match(['post','get'],'/modulos','InicioController@iniciar');
+				Route::match(['post','get'],'/modulos/submodulos/clientes','RegistrosBasicos@iniciar');
+
+			}
+
+	);
+
+
 

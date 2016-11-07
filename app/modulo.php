@@ -4,26 +4,22 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class modulo extends Model
+class Modulo extends Model
 {
-   protected $table="modulos";
-   protected $fillable=['id','status_m','descripcion'];//
+    protected $table="modulos";
+    protected $fillable=['id','status_m','descripcion','url'];
 
+    public function submodulos()
+    {
+    	return $this->hasMany('App\Submodulo');
+    }
 
-   
-   
-   
-   public function perfiles()
-   {
+    public function perfiles()
+    {
+    	return $this->belongsToMany('App\Perfil')->withTimestamps();
+    }
 
-   	return $this->belongsToMany('App\perfil');
-
-   }
-
-   public function submodulos()
-   {
-   	return $this->belongsTo('App\submodulo');
-   }
+}
 
 	
-}
+

@@ -4,8 +4,9 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CrearTablaAcciones extends Migration
+class CrearTablaUsuarios extends Migration
 {
+    
     /**
      * Run the migrations.
      *
@@ -13,12 +14,13 @@ class CrearTablaAcciones extends Migration
      */
     public function up()
     {
-        Schema::create('acciones', function (Blueprint $table) {
+        Schema::create('usuarios', function (Blueprint $table) 
+        {
             $table->increments('id');
-            $table->integer('status')->default(0);
-            $table->string('descripcion',20);
-            $table->integer('id_submodulo')->unsigned();
-            $table->foreign('id_submodulo')->references('id')->on('submodulos')->onDelate('cascade');
+            $table->string('n_usuario',100);
+            $table->string('clave',100);
+            $table->integer('perfil_id')->unsigned();
+            $table->foreign('perfil_id')->references('id')->on('perfiles')->onDelate('cascade');
             $table->timestamps();
         });
     }
@@ -30,6 +32,6 @@ class CrearTablaAcciones extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('acciones');
+        Schema::dropIfExists('usuarios');
     }
 }
