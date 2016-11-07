@@ -57,12 +57,10 @@
     .visible{
         display: none;
     }
-    /*Header*/
-        .hdr{
-            background: rgba(38, 166, 154, 0.7);
-            padding: 2em;
-            font-family: 'Ubuntu Condensed', sans-serif;
-        }
+    
+    .disb {
+	    cursor: no-drop;
+    }
 
 /**Identificadores**/
     /*footer*/
@@ -81,15 +79,10 @@
             font-weight: bold;
         }
 
-        #ftr1{
+       /* #ftr1{
             text-align: right;
-            border-right: 1px solid #bbb; 
             padding: 0 10px;
-        }
-
-        #ftr2{
-            padding: 0 10px;
-        }
+        }*/
 
     /*Panel del login*/
         #AccesoTrue{

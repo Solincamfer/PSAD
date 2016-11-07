@@ -21,12 +21,12 @@
                             </div>
                         <div class="form-group container-fluid" id="f2">
                             <div class="col-md-12">
-                                <button type="" id="log1">
-                                    <p>Iniciar Sesión <i class="fa fa-sign-in"></i></p>
-                                </button>
+                                   <button type="submit" class="btn" id="log1">
+                                       <p>Iniciar Sesión <i class="fa fa-sign-in"></i></p>
+                                   </button>
                             </div>
                             <div class="col-md-12">
-                                <button type="reset" id="log2">
+                                <button type="" id="log2">
                                     <p>Cancelar <i class="fa fa-times"></i></p> 
                                 </button>
                             </div>

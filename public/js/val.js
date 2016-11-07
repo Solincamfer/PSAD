@@ -10,6 +10,10 @@ $(function(){
 //});
     
 //swal("Lo Siento", "Credenciales Invalidas, Por favor revise nuevamente", "error");
+    $('#log2').click(function(event){
+        $('#log')[0].reset();               
+    });
+    
     $('#ico').on('click', function(){
         $('.contenido').toggleClass('open');
     });
