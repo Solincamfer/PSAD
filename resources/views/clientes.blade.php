@@ -1,31 +1,50 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title></title>
-</head>
-<body>
-<div class="col-xs-5 col-sm-5 col-md-6" style="margin-top: 10em;"> 
+@extends('admin.basesys')
+<style type="text/css">
+	.contenedorModulo{
+		height: 50px; 
+		background: white; 
+		margin-top: 4px; 
+		border-radius: 10px 10px 10px 10px; 
+		border-bottom:7px solid black;
+		border-right:5px solid black; 
+		border-top:1px solid black; 
+		border-left:1px solid black;
+	}
+	.botonAcciones{
+		margin-top:5px; 
+		margin-right:6px; 
+		float: right;
+	}
+	.tituloModulo{
+		margin-top:12px; 
+		margin-left:30px;
+		font-size: 15px;
+	}
+</style>
+<div class="col-xs-5 col-sm-5 col-md-6 col-md-offset-3" style="margin-top: 10em;"> 
 		<button id="botonAgregar" type="button" class="btn" data-toggle="modal" data-target="#myModal">AGREGAR</button>
 		<?php 
 		$filas=5;
-		for ($i=0; $i <=$filas; $i++) { 
-		
+		for ($i=1; $i <=$filas; $i++) {
+
 		 ?>
 		
-		<div class="" style="height: 50px; background: white; margin-top: 20px; border-radius: 10px 10px 10px 10px; border-bottom:2px solid black; border-right:5px solid black; border-top:1px solid black; border-left:1px solid black;" >
+		<div class="contenedorModulo" style="" >
 		<?php 
 		$acciones=5;
-		for ($i=1; $i <= $acciones; $i++) { 
+		for ($j=1; $j<= $acciones; $j++) { 
 		
 		?>
-			<button class="btn btn-default" type="submit" style="margin-top:6px; margin-right:6px; float: right;">Modificar</button>
-		<?php 
+			<button class="botonAcciones btn btn-default" type="submit" >Modificar</button>
+		<?php   
 		 } 
-		}
-		 ?>	
-			<p style="margin-top:12px; margin-left:30px;font-size: 15px;"><strong>REGISTRO</strong></p>
+		?>
+			<p class="tituloModulo"><strong>REGISTRO</strong></p>
 		</div>
+		<?php 
+			}
 
+		 ?>
 
   	</div>
        		<!-- Modal -->
@@ -62,5 +81,3 @@
 			    </div>
 			  </div>
 			</div>
-</body>
-</html>
