@@ -6,9 +6,10 @@ $('#log1').click(function(){
 		$( "#log" ).submit(function( event ) {
 			event.preventDefault();
 			var form=$('#log');
-			var url= form.attr('action');
+			var url= 'login/verificar';
 			var data= form.serialize();
 			var posting = $.post( url, data,function(resultado){
+				alert(resultado);
 				if (resultado[0] == true) {
 					swal({
 						title:'Bienvenido',//Contenido del modal
@@ -20,15 +21,17 @@ $('#log1').click(function(){
 					});
 					//Retardo en ejecucion de ruta.
 					setTimeout(function(){location.href = "/login/redireccion";},2200); // 3000ms = 3s			
-				}					
-			});
-			posting.fail(function() {
-				swal({
+				}else{
+					swal({
 						title:'Credenciales invalidos.',//Contenido del modal
 						timer:1500,//Tiempo de retardo en ejecucion del modal
 						type: "error",
 						showConfirmButton:false//Eliminar boton de confirmacion
 					});
+				}					
+			});
+			posting.fail(function() {
+				alert('desconecta');
 			})
 			posting.always(function() {
 				//Validar preload
