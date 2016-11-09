@@ -1,10 +1,4 @@
 $(function(){
-    var $switch1 = 0;
-//    $('#close').click(function(event){
-//      $('#log')[0].reset();  
-//    });
-//});
-
 
 //$('#login').click(function() {
 //  $('#AccesoTrue').toggleClass( "visible" );
@@ -16,23 +10,33 @@ $(function(){
     $('#ico').on('click',function(){
       $('.contenido').toggleClass('ocultar'); 
     });
+    var Accordion = function(el, multiple) {
+        this.el = el || {};
+        this.multiple = multiple || false;
+
+        // Variables privadas
+        var links = this.el.find('.link');
+        // Evento
+        links.on('click', {
+            el: this.el,
+            multiple: this.multiple
+        }, this.dropdown)
+    }
+
+    Accordion.prototype.dropdown = function(e) {
+        var $el = e.data.el;
+        $this = $(this),
+            $next = $this.next();
+
+        $next.slideToggle();
+        $this.parent().toggleClass('open');
+
+        if (!e.data.multiple) {
+            $el.find('.submenu').not($next).slideUp().parent().removeClass('open');
+        };
+    }
+    var accordion = new Accordion($('#accordion'), false);
     
-    $('.subMenu').on('click',function(){
-        $(this).children('ul').slideToggle();
-        if($switch1 == 0){
-            $switch1 = 1;
-            $(this).addClass('rt1');
-            $(this).removeClass('rt2');
-        }else{
-            $switch1 = 0;
-            $(this).addClass('rt2');
-            $(this).removeClass('rt1');
-        }
-    });
-    
-    $('ul').on('click', function(p){
-        p.stopPropagation();  
-    });
     
     $('#lnk').click(function(){
         var url = "/login"; 

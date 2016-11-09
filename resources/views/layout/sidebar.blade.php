@@ -1,20 +1,23 @@
 <div class="sidebar">
 	<h3 class="ttl1">Menu</h3>
-	<ul class="accordion">
-		<li class="subMenu">
-			<div class="lnk1"><span class="fa fa-chevron-circle-left"></span></div>
-			<ul>
-				<li><a href="#"><span class="fa fa-user"></span></a></li>
-			</ul>
-		</li>
-		<li class="subMenu">
-			<div class="lnk1"><span class="fa fa-chevron-circle-left"></span></div>
-			<ul>
-				<li><a href="#"><span class="fa fa-user"></span></a></li>
+	<ul id="accordion" class="accordion">
+		<li>
+			<div class="link"><i class="fa fa-paint-brush"></i>Diseño web<i class="fa fa-chevron-circle-left"></i></div>
+			<ul class="submenu">
+				<li><a href="#">Photoshop</a></li>
+				<li><a href="#">HTML</a></li>
+				<li><a href="#">CSS</a></li>
+				<li><a href="#">Maquetacion web</a></li>
 			</ul>
 		</li>
 		<li>
-			<div class="fn"></div>
+			<div class="link"><i class="fa fa-mobile"></i>Diseño responsive<i class="fa fa-chevron-circle-left"></i></div>
+			<ul class="submenu">
+				<li><a href="#">Tablets</a></li>
+				<li><a href="#">Dispositivos mobiles</a></li>
+				<li><a href="#">Medios de escritorio</a></li>
+				<li><a href="#">Otros dispositivos</a></li>
+			</ul>
 		</li>
 	</ul>
 </div>
