@@ -10,6 +10,7 @@ $(function(){
     $('#ico').on('click',function(){
       $('.contenido').toggleClass('ocultar'); 
     });
+    //Funcionalidad del menu en el sidebar
     var Accordion = function(el, multiple) {
         this.el = el || {};
         this.multiple = multiple || false;

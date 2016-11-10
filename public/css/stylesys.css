@@ -89,13 +89,6 @@
             transform: translateX(-15em);
         }
         /*Acordeon*/
-            
-            .ttl1{
-                text-align: right;
-                margin-top: 10px;
-                margin-right: 15px;
-                font-size: 30px;
-            }
             .accordion {
                 width: 100%;
                 max-width: 360px;

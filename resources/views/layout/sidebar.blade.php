@@ -1,5 +1,4 @@
 <div class="sidebar">
-	<h3 class="ttl1">Menu</h3>
 	<ul id="accordion" class="accordion">
 		<li>
 			<div class="link"><i class="fa fa-paint-brush"></i>Diseño web<i class="fa fa-chevron-circle-left"></i></div>
