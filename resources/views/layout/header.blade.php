@@ -1,7 +1,7 @@
 <header class="hdr">
     <span>
-        <i class="fa fa-bars" id="ico">
-        </i><img src="{{asset('img/PSAD_logo1.png')}}" alt="" class="img">
+        <i class="fa fa-bars col-md-2" id="ico"></i>
+        <img src="{{asset('img/PSAD_logo1.png')}}" alt="" class="img">
     </span>
     <span id="usnam">Usuario: <span>{{$nombre." ".$apellido}}</span></span>
     <a href="#" id="lnk">
