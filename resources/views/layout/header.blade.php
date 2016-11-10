@@ -1,7 +1,7 @@
 <header class="hdr">
     <span>
         <i class="fa fa-bars" id="ico">
-        </i><img src="../img/PSAD_logo1.png" alt="" class="img">
+        </i><img src="{{asset('img/PSAD_logo1.png')}}" alt="" class="img">
     </span>
     <span id="usnam">Usuario: <span>VirguezR</span></span>
     <a href="#" id="lnk">
