@@ -24,14 +24,14 @@
 <div class="col-xs-5 col-sm-5 col-md-6 col-md-offset-3" style="margin-top: 10em;"> 
 		<button id="botonAgregar" type="button" class="btn" data-toggle="modal" data-target="#myModal">AGREGAR</button>
 		<?php 
-		$filas=5;
+		$filas=1;
 		for ($i=1; $i <=$filas; $i++) {
 
 		 ?>
 		
 		<div class="contenedorModulo" style="" >
 		<?php 
-		$acciones=5;
+		$acciones=2;
 		for ($j=1; $j<= $acciones; $j++) { 
 		
 		?>
