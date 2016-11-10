@@ -1,22 +1,16 @@
 <div class="sidebar">
 	<ul id="accordion" class="accordion">
-		<li>
-			<div class="link"><i class="fa fa-paint-brush"></i>Diseño web<i class="fa fa-chevron-circle-left"></i></div>
-			<ul class="submenu">
-				<li><a href="#">Photoshop</a></li>
-				<li><a href="#">HTML</a></li>
-				<li><a href="#">CSS</a></li>
-				<li><a href="#">Maquetacion web</a></li>
-			</ul>
-		</li>
-		<li>
-			<div class="link"><i class="fa fa-mobile"></i>Diseño responsive<i class="fa fa-chevron-circle-left"></i></div>
-			<ul class="submenu">
-				<li><a href="#">Tablets</a></li>
-				<li><a href="#">Dispositivos mobiles</a></li>
-				<li><a href="#">Medios de escritorio</a></li>
-				<li><a href="#">Otros dispositivos</a></li>
-			</ul>
+		<li>		
+			@foreach($modulos as $modulo)
+				<div class="link"><i class=""></i>{{$modulo->descripcion}}<i class="fa fa-chevron-circle-left"></i></div>
+				<ul class="submenu">
+				@foreach($submodulos as $submodulo)
+					@if($submodulo->modulo_id ==$modulo->id)
+						<li><a href="#">{{$submodulo->descripcion}}</a></li>
+					@endif
+				@endforeach
+		       </ul>
+			@endforeach
 		</li>
 	</ul>
 </div>

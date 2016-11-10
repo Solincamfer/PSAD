@@ -10,10 +10,11 @@ class Empleado extends Model
    protected $fillable=['id','nombre','apellido','usuario_id'];
 
 
-    public function usuario()
+  /* public function usuario()
     {
 
     	return $this->hasOne('App\Usuario');
 
     }
+*/
 }
