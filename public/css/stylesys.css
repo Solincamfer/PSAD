@@ -261,6 +261,15 @@
             margin-left:30px;
             font-size: 15px;
         }
+
+        .bttnMd {
+            width: 80px;
+            height: 30px;
+            outline: none;
+            border: none;
+            border-radius: 2px;
+            color: #111;
+        }
 /**Identificadores**/
     /*Header*/
         #hd{
@@ -323,3 +332,212 @@
             background: rgba(229, 229, 231, 0.9);
             color: #111;
         }
+    /*Modal*/
+        #myModal{
+            font-family: 'Ubuntu Condensed', sans-serif;
+        }
+
+        #contDb, #contdf, #contdc, #contctt{
+            margin-top: 20px;
+            padding: 10px;
+        }
+
+        #btnSv{
+            background: #26a69d;
+        }
+
+        #btnCs{
+            background: #ec1c24;
+        }
+
+        /*Datos Basicos, telefono movil y local*/
+            #rDb input{
+                display: block;
+                padding: 3px 5px;
+                margin-bottom: 10px;
+                width: 100%;
+                border: 1px solid #ddd;
+                transition: border-width .2s ease-in-out;
+                border-radius: 2px;
+                color: #ccc;
+            }
+
+            #rDb input + i.fa{
+                color: #fff;
+                font-size: 1em;
+                position: absolute;
+                margin-top: -33px;
+                opacity: 0;
+                left: 0;
+                transition: all .1s ease-in;
+            }
+
+            #rDb input:focus{
+                outline: none;
+                color: #444;
+                border-color: #26a69d;
+                border-left-width: 35px;
+            }
+
+            #rDb input:focus + i.fa{
+                opacity: 1;
+                left: 26px;
+                transition: all .25s ease-out;
+            }
+
+            #einp {
+                width: 78.7%;
+                padding: 3px 5px;
+                margin-bottom: 10px;
+                border: 1px solid #ddd;
+                transition: border-width .2s ease-in-out;
+                border-radius: 2px;
+                color: #ccc;
+            }
+
+            #einp + i.fa, #einp1 + i.fa, #einp2 + i.fa{
+                color: #fff;
+                font-size: 1em;
+                position: absolute;
+                margin-top: 7px;
+                opacity: 0;
+                left: 0;
+                transition: all .1s ease-in;
+            }
+
+            #einp:focus, #einp1:focus, #einp2:focus{
+                outline: none;
+                color: #444;
+                border-color: #26a69d;
+                border-left-width: 35px;
+            }
+
+            #einp:focus + i.fa{
+                opacity: 1;
+                left: 65px;
+                transition: all .25s ease-out;
+            }
+
+            #einp1, #einp2{
+                width: 69.7%;
+                padding: 3px 5px;
+                margin-bottom: 10px;
+                border: 1px solid #ddd;
+                transition: border-width .2s ease-in-out;
+                border-radius: 2px;
+                color: #ccc;
+            }
+
+            #einp1:focus + i.fa {
+                opacity: 1;
+                left: 60px;
+                transition: all .25s ease-out;
+            }
+
+            #einp2:focus + i.fa {
+                opacity: 1;
+                left: 60px;
+                transition: all .25s ease-out;
+            }
+
+            #rif, #tlflcl, #tlfmvl{
+                height: 28px;
+                border: 1px solid #ddd;
+                border-radius: 2px;
+                color: #ccc;
+            }
+
+            #rif:focus, #tlflcl:focus, #tlfmvl{
+                border-color: #26a69d;
+                outline: none;
+                color: #111;
+            }
+
+            #rif option, #tlflcl option, #tlfmvl option{
+                border-color: #26a69d;
+                color: #111;
+            }
+
+            #tipCon{
+                width: 100%;
+                padding: 3px 5px;
+                margin-bottom: 10px;
+                border: 1px solid #ddd;
+                transition: border-width .2s ease-in-out;
+                border-radius: 2px;
+                color: #ccc;
+            }
+
+            #tipCon:focus{
+                border-color: #26a69d;
+                outline: none;
+                color: #111;
+            }
+
+            #tipCon option{
+                border-color: #26a69d;
+                padding: 3px 5px;
+                margin-bottom: 10px;
+                border: 1px solid #ddd;
+                transition: border-width .2s ease-in-out;
+                color: #111;
+            }
+        /*Direccion Fiscal y Comercial, correo*/
+
+            #locDf select, #locDc select{
+                width: 100%;
+                display: block;
+                padding: 3px 5px;
+                margin-bottom: 15px;
+                border: 1px solid #ddd;
+                border-radius: 2px;
+                color: #ccc;
+            }
+
+            #locDf select:focus, #locDc select:focus{
+                color: #111;
+                outline: none;
+                border-color: #26a69d;
+            }
+
+            #locDf select option, #locDc select option{
+                background: #E5E5E7;
+                border: 2px solid #eee;
+            }
+
+            #locDfdd input, #locDcdd input, #correo input{
+                display: block;
+                padding: 3px 5px;
+                margin-bottom: 10px;
+                width: 100%;
+                border: 1px solid #ddd;
+                transition: border-width .2s ease-in-out;
+                border-radius: 2px;
+                color: #ccc;
+            }
+
+            #locDfdd input + i.fa, #locDcdd input + i.fa, 
+            #correo input + i.fa{
+                color: #fff;
+                font-size: 1em;
+                position: absolute;
+                margin-top: -33px;
+                opacity: 0;
+                left: 0;
+                transition: all .1s ease-in;
+            }
+
+            #locDfdd input:focus, #locDcdd input:focus,
+            #correo input:focus{
+                outline: none;
+                color: #444;
+                border-color: #26a69d;
+                border-left-width: 35px;
+            }
+
+            #locDfdd input:focus + i.fa, #locDcdd input:focus + i.fa,
+            #correo input:focus + i.fa{
+                opacity: 1;
+                left: 26px;
+                transition: all .25s ease-out;
+            }
