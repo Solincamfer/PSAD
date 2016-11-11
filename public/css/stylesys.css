@@ -337,7 +337,8 @@
             font-family: 'Ubuntu Condensed', sans-serif;
         }
 
-        #contDb, #contdf, #contdc, #contctt{
+        #contDb, #contdf, #contdc, #contctt, 
+        #contdpto, #contcgo{
             margin-top: 20px;
             padding: 10px;
         }
@@ -350,7 +351,65 @@
             background: #ec1c24;
         }
 
+        /*Departamentos y Cargos*/
+
+            #rDpto input, #rCgo input{
+                display: block;
+                padding: 3px 5px;
+                margin-bottom: 10px;
+                width: 100%;
+                border: 1px solid #ddd;
+                transition: border-width .2s ease-in-out;
+                border-radius: 2px;
+                color: #ccc;
+            }
+
+            #rDpto input + i.fa, #rCgo input + i.fa{
+                color: #fff;
+                font-size: 1em;
+                position: absolute;
+                margin-top: -32px;
+                opacity: 0;
+                left: 0;
+                transition: all .1s ease-in;
+            }
+
+            #rDpto input:focus, #rCgo input:focus{
+                outline: none;
+                color: #444;
+                border-color: #26a69d;
+                border-left-width: 35px;
+            }
+
+            #rDpto input:focus + i.fa, #rCgo input:focus + i.fa{
+                opacity: 1;
+                left: 25px;
+                transition: all .25s ease-out;
+            }
+
+            #rDpto select, #rCgo select{
+                width: 100%;
+                display: block;
+                padding: 3px 5px;
+                margin-bottom: 15px;
+                border: 1px solid #ddd;
+                border-radius: 2px;
+                color: #ccc;
+            }
+
+            #rDpto select:focus, #rCgo select:focus{
+                color: #111;
+                outline: none;
+                border-color: #26a69d;
+            }
+
+            #rDpto select option, #rCgo select option{
+                background: #fff;
+                border: 2px solid #eee;
+            }
+
         /*Datos Basicos, telefono movil y local*/
+
             #rDb input{
                 display: block;
                 padding: 3px 5px;
