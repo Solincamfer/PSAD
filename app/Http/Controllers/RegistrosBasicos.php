@@ -24,4 +24,11 @@ class RegistrosBasicos extends Controller
  	return view('cargos');
 
  }
+
+ public function planes()
+ {
+ 	return view('planes');
+
+ }
+
 }

@@ -47,7 +47,7 @@ Route::group
 				Route::match(['post','get'],'/modulos/submodulos/clientes','RegistrosBasicos@iniciar');
 				Route::match(['post','get'],'/modulos/submodulos/departamentos','RegistrosBasicos@iniciar_');
 				Route::match(['post','get'],'/modulos/submodulos/departamentos/cargos','RegistrosBasicos@cargos');
-
+				Route::match(['post','get'],'/modulos/submodulos/planes','RegistrosBasicos@planes');
 			}
 
 	);
