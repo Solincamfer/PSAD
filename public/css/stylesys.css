@@ -338,7 +338,7 @@
         }
 
         #contDb, #contdf, #contdc, #contctt, 
-        #contdpto, #contcgo{
+        #contdpto, #contcgo, #contPn{
             margin-top: 20px;
             padding: 10px;
         }
@@ -351,9 +351,8 @@
             background: #ec1c24;
         }
 
-        /*Departamentos y Cargos*/
-
-            #rDpto input, #rCgo input{
+        /*Departamentos y cargos - Planes*/
+            #rDpto input, #rCgo input, #rPn input{
                 display: block;
                 padding: 3px 5px;
                 margin-bottom: 10px;
@@ -364,7 +363,7 @@
                 color: #ccc;
             }
 
-            #rDpto input + i.fa, #rCgo input + i.fa{
+            #rDpto input + i.fa, #rCgo input + i.fa, #rPn input + i.fa{
                 color: #fff;
                 font-size: 1em;
                 position: absolute;
@@ -374,20 +373,22 @@
                 transition: all .1s ease-in;
             }
 
-            #rDpto input:focus, #rCgo input:focus{
+            #rDpto input:focus, #rCgo input:focus, 
+            #rPn input:focus{
                 outline: none;
                 color: #444;
                 border-color: #26a69d;
                 border-left-width: 35px;
             }
 
-            #rDpto input:focus + i.fa, #rCgo input:focus + i.fa{
+            #rDpto input:focus + i.fa, #rCgo input:focus + i.fa, 
+            #rPn input:focus + i.fa{
                 opacity: 1;
                 left: 25px;
                 transition: all .25s ease-out;
             }
 
-            #rDpto select, #rCgo select{
+            #rDpto select, #rCgo select, #rPn select{
                 width: 100%;
                 display: block;
                 padding: 3px 5px;
@@ -397,13 +398,13 @@
                 color: #ccc;
             }
 
-            #rDpto select:focus, #rCgo select:focus{
+            #rDpto select:focus, #rCgo select:focus, #rPn select:focus{
                 color: #111;
                 outline: none;
                 border-color: #26a69d;
             }
 
-            #rDpto select option, #rCgo select option{
+            #rDpto select option, #rCgo select option, #rPn select option{
                 background: #fff;
                 border: 2px solid #eee;
             }
