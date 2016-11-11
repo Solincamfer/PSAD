@@ -19,5 +19,9 @@ class RegistrosBasicos extends Controller
 		return view('departamentos');
 	}
 
+ public function cargos()
+ {
+ 	return view('cargos');
 
+ }
 }
