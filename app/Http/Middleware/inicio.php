@@ -16,7 +16,7 @@ class inicio
      */
     public function handle($request, Closure $next)
     {
-        if (Session::has('sesion')) 
+        if (Session::has('sesion')) //
 
         {
         

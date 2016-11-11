@@ -23,7 +23,7 @@ Route::get('/login','InicioController@index'); //controlador
 Route::get('/login/redireccion','InicioController@redireccion');
 
 
-Route::match( ['post','get'], '/login/verificar',
+Route::post(  '/login/verificar',
 
 		[
 			
@@ -39,12 +39,14 @@ Route::match( ['post','get'], '/login/verificar',
 
 Route::group
 	(
-		['prefix'=>'menu'],function()
+		['prefix'=>'menu' ],function()
 			{
 
 		
 				Route::match(['post','get'],'/modulos','InicioController@iniciar');
 				Route::match(['post','get'],'/modulos/submodulos/clientes','RegistrosBasicos@iniciar');
+				Route::match(['post','get'],'/modulos/submodulos/departamentos','RegistrosBasicos@iniciar_');
+				Route::match(['post','get'],'/modulos/submodulos/departamentos/cargos','RegistrosBasicos@cargos');
 
 			}
 

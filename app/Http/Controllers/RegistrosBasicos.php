@@ -14,5 +14,14 @@ class RegistrosBasicos extends Controller
 	}
 
 
+	public function iniciar_ ()
+	{
+		return view('departamentos');
+	}
 
+ public function cargos()
+ {
+ 	return view('cargos');
+
+ }
 }
