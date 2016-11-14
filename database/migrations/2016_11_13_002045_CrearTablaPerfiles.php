@@ -4,8 +4,9 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CrearTablaSubmodulos extends Migration
+class CrearTablaPerfiles extends Migration
 {
+    public $timestamps=false;
     /**
      * Run the migrations.
      *
@@ -13,14 +14,10 @@ class CrearTablaSubmodulos extends Migration
      */
     public function up()
     {
-        Schema::create('submodulos', function (Blueprint $table) {
+        Schema::create('perfiles', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('status_sm')->default(0);
             $table->string('descripcion',100);
-            $table->string('url',100);
-            $table->integer('modulo_id')->unsigned();
-            $table->foreign('modulo_id')->references('id')->on('modulos')->onDelate('cascade');
-            $table->timestamps();
+            //$table->timestamps();
         });
     }
 
@@ -31,6 +28,6 @@ class CrearTablaSubmodulos extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('submodulos');
+        Schema::dropIfExists('perfiles');
     }
 }

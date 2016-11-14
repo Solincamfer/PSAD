@@ -9,7 +9,8 @@ class Usuario extends Model
 {
     protected $table="usuarios";
     protected $fillable=['id','n_usuario','clave','perfil_id'];
-
+    public $timestamps=false;
+    
     public function perfil()
     {
     	return $this->belongsTo('App\Perfil');

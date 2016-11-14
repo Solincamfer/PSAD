@@ -4,8 +4,10 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CrearTablaPerfilAccion extends Migration
+class TablaModuloPerfil extends Migration
 {
+    
+    public $timestamps=false;
     /**
      * Run the migrations.
      *
@@ -13,13 +15,13 @@ class CrearTablaPerfilAccion extends Migration
      */
     public function up()
     {
-        Schema::create('accion_perfil', function (Blueprint $table) {
+        Schema::create('modulo_perfil', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('perfil_id')->unsigned();
-            $table->integer('accion_id')->unsigned();
+            $table->integer('modulo_id')->unsigned();
             $table->foreign('perfil_id')->references('id')->on('perfiles');
-            $table->foreign('accion_id')->references('id')->on('acciones');
-            $table->timestamps();
+            $table->foreign('modulo_id')->references('id')->on('modulos');
+            //$table->timestamps();
         });
     }
 
@@ -30,6 +32,6 @@ class CrearTablaPerfilAccion extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('accion_perfil');
+        Schema::dropIfExists('modulo_perfil');
     }
 }

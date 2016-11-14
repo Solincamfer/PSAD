@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Submodulo extends Model
 {
     protected $table="submodulos";
-    protected $fillable=['id','status_sm','descripcion','url','modulo_id'];
-
+    protected $fillable=['id','status_sm','descripcion','url','ruta','modulo_id','padre'];
+    public $timestamps=false;
 
     public function modulo()
     {
@@ -22,7 +22,7 @@ class Submodulo extends Model
 
     public function perfiles()
     {
-      return $this->belongsToMany('App\Perfil')->withTimestamps();
+      return $this->belongsToMany('App\Perfil');
     }
     
 }

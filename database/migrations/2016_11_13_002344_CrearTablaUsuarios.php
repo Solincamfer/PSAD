@@ -6,7 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 
 class CrearTablaUsuarios extends Migration
 {
-    
+    public $timestamps=false;
     /**
      * Run the migrations.
      *
@@ -14,14 +14,13 @@ class CrearTablaUsuarios extends Migration
      */
     public function up()
     {
-        Schema::create('usuarios', function (Blueprint $table) 
-        {
+        Schema::create('usuarios', function (Blueprint $table) {
             $table->increments('id');
             $table->string('n_usuario',100);
             $table->string('clave',100);
             $table->integer('perfil_id')->unsigned();
             $table->foreign('perfil_id')->references('id')->on('perfiles')->onDelate('cascade');
-            $table->timestamps();
+            //$table->timestamps();
         });
     }
 

@@ -20,7 +20,7 @@ $('#log1').click(function(){
 						html: true
 					});
 					//Retardo en ejecucion de ruta.
-					setTimeout(function(){location.href = "/login/redireccion";},2200); // 3000ms = 3s			
+					setTimeout(function(){location.href = "/menu";},2200); // 3000ms = 3s			
 				}else{
 					swal({
 						title:'Credenciales invalidos.',//Contenido del modal

@@ -4,8 +4,9 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CrearTablaPerfilSubmodulo extends Migration
+class TablaPerfilSubmodulo extends Migration
 {
+    public $timestamps=false;
     /**
      * Run the migrations.
      *
@@ -19,7 +20,7 @@ class CrearTablaPerfilSubmodulo extends Migration
             $table->integer('submodulo_id')->unsigned();
             $table->foreign('perfil_id')->references('id')->on('perfiles');
             $table->foreign("submodulo_id")->references('id')->on('submodulos');
-            $table->timestamps();
+           // $table->timestamps();
         });
     }
 

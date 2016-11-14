@@ -15,42 +15,42 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+
+
+
+
+//Route::match(['post','get'],'/login/redireccion','InicioController@redireccion');
+
+
+
+
+
+
+
 Route::get('/login','InicioController@index'); //controlador
+Route::post( '/login/verificar','InicioController@verificar');
+Route::match(['post','get'],'/menu',['middleware'=>'v_menu','uses'=>'InicioController@iniciarMenu']);//Carga el menu personalizado por perfil //permite el ingreso solo de porseer sesion activa//actual redireccion
 
 
-
-
-Route::get('/login/redireccion','InicioController@redireccion');
-
-
-Route::post(  '/login/verificar',
-
-		[
-			
-			
-			'uses'=>'InicioController@verificar'
-
-		]
-	);
+//MODULO: REGISTROS BASICOS, rutas de los submodulos ingresadas al clickear en la sidebar o por url //cargaria las acciones disponibles para el perfil logueado
 
 
 
 
 
-Route::group
-	(
-		['prefix'=>'menu' ],function()
-			{
 
-		
-				Route::match(['post','get'],'/modulos','InicioController@iniciar');
-				Route::match(['post','get'],'/modulos/submodulos/clientes','RegistrosBasicos@iniciar');
-				Route::match(['post','get'],'/modulos/submodulos/departamentos','RegistrosBasicos@iniciar_');
-				Route::match(['post','get'],'/modulos/submodulos/departamentos/cargos','RegistrosBasicos@cargos');
-				Route::match(['post','get'],'/modulos/submodulos/planes','RegistrosBasicos@planes');
-			}
+Route::group(['prefix'=>'/menu/registros','middleware'=>['validar_sm','v_menu']],function()
+				{
 
-	);
+				//Route::match(['post','get'],'/modulos,                                     'RegistrosBasicos@modulos');
+				Route::match(['post','get'],'/departamentos',                      		 'RegistrosBasicos@departamentos');
+				Route::match(['post','get'],'/servicios',                  				 'RegistrosBasicos@servicios');
+				Route::match(['post','get'],'/tiposequipos',               				 'RegistrosBasicos@tipos');
+				Route::match(['post','get'],'/perfiles',                   				 'RegistrosBasicos@perfiles');
+				Route::match(['post','get'],'/empleados',                  				 'RegistrosBasicos@empleados');
+				Route::match(['post','get'],'/clientes',                   				 'RegistrosBasicos@clientes');
+				Route::match(['post','get'],'/departamentos/cargos/{departamento_id}',       'RegistrosBasicos@cargos');
 
-
-
+				}
+			);

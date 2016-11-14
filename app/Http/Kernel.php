@@ -54,5 +54,8 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'login'=>\App\Http\Middleware\inicio::class,
         'v_menu'=>\App\Http\Middleware\menu::class,
+        'validar_sm'=>\App\Http\Middleware\ValidarSubmodulo::class,
+
+       
     ];
 }

@@ -4,8 +4,9 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CrearTablaPersonas extends Migration
+class TablaEmpleados extends Migration
 {
+    public $timestamps=false;
     /**
      * Run the migrations.
      *
@@ -18,9 +19,12 @@ class CrearTablaPersonas extends Migration
             $table->string('nombre',100);
             $table->string('apellido',100);
             $table->integer('usuario_id')->unsigned();
-            $table->foreign('usuario_id')->references('id')->on('usuarios')->onDelate('cascade');
-            $table->timestamps();
-        });
+            $table->integer('cargo_id')->unsigned();
+            $table->foreign('usuario_id')->references('id')->on('usuarios');
+            $table->foreign('cargo_id')->references('id')->on('cargos');
+
+
+    });
     }
 
     /**
@@ -30,6 +34,6 @@ class CrearTablaPersonas extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('personas');
+        Schema::dropIfExists('empleados');
     }
 }

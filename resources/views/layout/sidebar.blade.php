@@ -1,12 +1,15 @@
 <div class="sidebar">
 	<ul id="accordion" class="accordion">
 		<li>		
+			
 			@foreach($modulos as $modulo)
-				<div class="link"><i class=""></i>{{$modulo->descripcion}}<i class="fa fa-chevron-circle-left"></i></div>
-				<ul class="submenu">
+				@if($modulo->status_m==1)
+					<div class="link">{{$modulo->descripcion}}<i class="fa fa-chevron-circle-left"></i></div>
+					<ul class="submenu">
+				@endif
 				@foreach($submodulos as $submodulo)
-					@if(($submodulo->modulo_id ==$modulo->id)and ($submodulo->status_sm==1))
-						<li><a href="#">{{$submodulo->descripcion}}</a></li>
+					@if(($submodulo->modulo_id ==$modulo->id)and ($submodulo->status_sm==1 and $submodulo->padre==1))
+						<li><a href="{{$submodulo->ruta}}">{{$submodulo->descripcion}}</a></li>
 					@endif
 				@endforeach
 		       </ul>

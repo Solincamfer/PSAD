@@ -6,6 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 
 class CrearTablaAcciones extends Migration
 {
+    public $timestamps=false;
     /**
      * Run the migrations.
      *
@@ -20,7 +21,7 @@ class CrearTablaAcciones extends Migration
             $table->string('url',100);
             $table->integer('submodulo_id')->unsigned();
             $table->foreign('submodulo_id')->references('id')->on('submodulos')->ondelate('cascade');
-            $table->timestamps();
+           // $table->timestamps();
         });
     }
 

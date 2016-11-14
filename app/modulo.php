@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Modulo extends Model
 {
+    public $timestamps=false;
     protected $table="modulos";
     protected $fillable=['id','status_m','descripcion','url'];
 
@@ -16,7 +17,7 @@ class Modulo extends Model
 
     public function perfiles()
     {
-    	return $this->belongsToMany('App\Perfil')->withTimestamps();
+    	return $this->belongsToMany('App\Perfil');
     }
 
 }

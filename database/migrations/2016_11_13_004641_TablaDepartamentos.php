@@ -4,9 +4,9 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CrearTablaPerfiles extends Migration
+class TablaDepartamentos extends Migration
 {
-   
+    public $timestamps=false;
     /**
      * Run the migrations.
      *
@@ -14,10 +14,12 @@ class CrearTablaPerfiles extends Migration
      */
     public function up()
     {
-        Schema::create('perfiles', function (Blueprint $table) {
+        Schema::create('departamentos', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('descripcion',100);
-            $table->timestamps();
+            $table->integer('status_d');
+            $table->string('nombre_d',100);
+           
+            //$table->timestamps();
         });
     }
 
@@ -28,6 +30,6 @@ class CrearTablaPerfiles extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('perfiles');
+        Schema::dropIfExists('departamentos');
     }
 }

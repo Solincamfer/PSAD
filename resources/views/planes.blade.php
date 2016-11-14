@@ -3,6 +3,8 @@
         @section('title')
             Registro Planes
         @endsection
+          @include('layout/header')
+                @include('layout/sidebar')
             <div class="contenido">
                 <div class="col-xs-5 col-sm-5 col-md-6 col-md-offset-3" style=""> 
                     <button id="btnAdd" type="button" class="btnAd col-md-offset-10" data-toggle="modal" data-target="#myModal" href="#myModal">AGREGAR <i class="fa fa-plus-circle"></i></button>
