@@ -31,27 +31,37 @@ class RegistrosBasicos extends Controller
 	
 	
 	
+	public function cargar_acciones_submodulo_perfil($acciones_perfil,$acciones_sm,$accion_agregar)
+	{
+		
+
+		$acciones=array();
+		$agregar=false;
+
+
+		foreach ($acciones_perfil as $accion) 
+			{
+				if((in_array($accion->id, $acciones_sm) )and ($accion->status_ac==1))
+				{
+					array_push($acciones, $accion);
+				}
+				else if (($accion->id==$accion_agregar)and($accion->status_ac==1))
+			 	{
+					$agregar=true;
+				}
+			}
+        return(compact('acciones','agregar'));
+
+	}
+
 
 
 	public function cargos($departamento_id)
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
-		$cargos=DB::table('cargos')->where('departamento_id',$departamento_id)->get();
-		$agregar=false;
-		$acciones=array();
-		$acciones_sd=array(5,6);
+		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(5,6),7);
 
-		foreach ($datos['acciones'] as $accion) 
-			{
-				if((in_array($accion->id, $acciones_sd) )and ($accion->status_ac==1))
-				{
-					array_push($acciones, $accion);
-				}
-				else if (($accion->id==7)and($accion->status_ac==1))
-			 	{
-					$agregar=true;
-				}
-			}
+		$cargos=DB::table('cargos')->where('departamento_id',$departamento_id)->get();
 
 		return view('cargos',
 					['modulos'=>$datos['modulos'],
@@ -59,8 +69,8 @@ class RegistrosBasicos extends Controller
 					 'nombre'=>$datos['nombre'],
 					 'apellido'=>$datos['apellido'],
 					 'cargos'=>$cargos,
-					 'acciones'=>$acciones,
-					 'agregar'=>$agregar
+					 'acciones'=>$acciones['acciones'],
+					 'agregar'=>$acciones['agregar']
 					 ]
 					 );
 	}
@@ -70,37 +80,23 @@ class RegistrosBasicos extends Controller
 	public function departamentos()
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
-		
-		$agregar=false;
-		$acciones=array();
-		$acciones_sd=array(1,2,3);
-		foreach ($datos['acciones'] as $accion) 
-			{
-				if((in_array($accion->id, $acciones_sd) )and ($accion->status_ac==1))
-				{
-					array_push($acciones, $accion);
-				}
-				else if (($accion->id==4)and($accion->status_ac==1))
-			 	{
-					$agregar=true;
-				}
-			}
-		
+		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(1,2,3),4);
 		$departamentos=DB::table('departamentos')->get();
-
 
 		return view('departamentos',
 					[
 					 'modulos'=>$datos['modulos'],
 					 'submodulos'=>$datos['submodulos'],
-					 'acciones'=>$acciones,
+					 'acciones'=>$acciones['acciones'],
 					 'nombre'=>$datos['nombre'],
 					 'apellido'=>$datos['apellido'],
 					 'departamentos'=>$departamentos,
-					 'agregar'=>$agregar
+					 'agregar'=>$acciones['agregar']
 					 ]
 					 );
 	}
+
+
 
 	public function servicios()
 	{
@@ -115,6 +111,7 @@ class RegistrosBasicos extends Controller
 					 );
 	}
 	
+
 
 	public function clientes()
 	{

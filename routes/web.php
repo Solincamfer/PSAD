@@ -50,7 +50,7 @@ Route::group(['prefix'=>'/menu/registros','middleware'=>['validar_sm','v_menu']]
 				Route::match(['post','get'],'/perfiles',                   				 'RegistrosBasicos@perfiles');
 				Route::match(['post','get'],'/empleados',                  				 'RegistrosBasicos@empleados');
 				Route::match(['post','get'],'/clientes',                   				 'RegistrosBasicos@clientes');
-				Route::match(['post','get'],'/departamentos/cargos/{departamento_id}',       'RegistrosBasicos@cargos');
+				Route::match(['post','get'],'/departamentos/cargos/{departamento_id}',   'RegistrosBasicos@cargos');
 
 				}
 			);
