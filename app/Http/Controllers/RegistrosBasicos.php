@@ -316,5 +316,272 @@ public function clientes_sucursales_usuarios()
 						);
 	}
 
+/////////////////////////////////////////////////////////15-11-2016 2da ronda///////////////////////////////////////////////
+////////////////////////////////////////////////////Modulo Clientes///////////////////////////////////////////////
+
+	public function clientes_categoria()
+	{
+		$datos=$this->cargar_header_sidebar_acciones();
+		return view ('clientes_categoria',
+						[
+
+						 'modulos'=>$datos['modulos'],
+						 'submodulos'=>$datos['submodulos'],
+						 'nombre'=>$datos['nombre'],
+						 'apellido'=>$datos['apellido']
+						]
+
+
+						);
+	}
+
+
+	public function clientes_categoria_modificar()
+	{
+		$datos=$this->cargar_header_sidebar_acciones();
+		return view ('clientes_categoria_modificar',
+						[
+
+						 'modulos'=>$datos['modulos'],
+						 'submodulos'=>$datos['submodulos'],
+						 'nombre'=>$datos['nombre'],
+						 'apellido'=>$datos['apellido']
+						]
+
+
+						);
+	}
+
+public function clientes_categoria_responsable()
+	{
+		$datos=$this->cargar_header_sidebar_acciones();
+		return view ('clientes_categoria_responsable',
+						[
+
+						 'modulos'=>$datos['modulos'],
+						 'submodulos'=>$datos['submodulos'],
+						 'nombre'=>$datos['nombre'],
+						 'apellido'=>$datos['apellido']
+						]
+
+
+						);
+	}
+
+public function clientes_sucursales_responsable_agregar()
+	{
+		$datos=$this->cargar_header_sidebar_acciones();
+		return view ('clientes_sucursales_responsable_agregar',
+						[
+
+						 'modulos'=>$datos['modulos'],
+						 'submodulos'=>$datos['submodulos'],
+						 'nombre'=>$datos['nombre'],
+						 'apellido'=>$datos['apellido']
+						]
+
+
+						);
+	}
+
+public function clientes_sucursales_responsable_modificar()
+	{
+		$datos=$this->cargar_header_sidebar_acciones();
+		return view ('clientes_sucursales_responsable_modificar',
+						[
+
+						 'modulos'=>$datos['modulos'],
+						 'submodulos'=>$datos['submodulos'],
+						 'nombre'=>$datos['nombre'],
+						 'apellido'=>$datos['apellido']
+						]
+
+
+						);
+	}
+
+
+
+public function clientes_sucursales_plan_agregar()
+	{
+		$datos=$this->cargar_header_sidebar_acciones();
+		return view ('clientes_sucursales_plan_agregar',
+						[
+
+						 'modulos'=>$datos['modulos'],
+						 'submodulos'=>$datos['submodulos'],
+						 'nombre'=>$datos['nombre'],
+						 'apellido'=>$datos['apellido']
+						]
+
+
+						);
+	}
+
+public function clientes_sucursales_plan_modificar()
+	{
+		$datos=$this->cargar_header_sidebar_acciones();
+		return view ('clientes_sucursales_plan_modificar',
+						[
+
+						 'modulos'=>$datos['modulos'],
+						 'submodulos'=>$datos['submodulos'],
+						 'nombre'=>$datos['nombre'],
+						 'apellido'=>$datos['apellido']
+						]
+
+
+						);
+	}
+
+public function clientes_sucursales_plan_servicios()
+	{
+		$datos=$this->cargar_header_sidebar_acciones();
+		return view ('clientes_sucursales_plan_servicios',
+						[
+
+						 'modulos'=>$datos['modulos'],
+						 'submodulos'=>$datos['submodulos'],
+						 'nombre'=>$datos['nombre'],
+						 'apellido'=>$datos['apellido']
+						]
+
+
+						);
+	}
+
+public function clientes_sucursales_plan_serv_modificar()
+	{
+		$datos=$this->cargar_header_sidebar_acciones();
+		return view ('clientes_sucursales_plan_serv_modificar',
+						[
+
+						 'modulos'=>$datos['modulos'],
+						 'submodulos'=>$datos['submodulos'],
+						 'nombre'=>$datos['nombre'],
+						 'apellido'=>$datos['apellido']
+						]
+
+
+						);
+	}
+public function clientes_sucursales_plan_serv_agregar()
+	{
+		$datos=$this->cargar_header_sidebar_acciones();
+		return view ('clientes_sucursales_pla_serv_agregar',
+						[
+
+						 'modulos'=>$datos['modulos'],
+						 'submodulos'=>$datos['submodulos'],
+						 'nombre'=>$datos['nombre'],
+						 'apellido'=>$datos['apellido']
+						]
+
+
+						);
+	}
+
+public function clientes_sucursales_equipos_agregar()
+	{
+		$datos=$this->cargar_header_sidebar_acciones();
+		return view ('clientes_sucursales_equipos_agregar',
+						[
+
+						 'modulos'=>$datos['modulos'],
+						 'submodulos'=>$datos['submodulos'],
+						 'nombre'=>$datos['nombre'],
+						 'apellido'=>$datos['apellido']
+						]
+
+
+						);
+	}
+
+public function clientes_sucursales_equipos_modificar()
+	{
+		$datos=$this->cargar_header_sidebar_acciones();
+		return view ('clientes_sucursales_equipos_modificar',
+						[
+
+						 'modulos'=>$datos['modulos'],
+						 'submodulos'=>$datos['submodulos'],
+						 'nombre'=>$datos['nombre'],
+						 'apellido'=>$datos['apellido']
+						]
+
+
+						);
+	}
+
+public function clientes_sucursales_equipos_componentes()
+	{
+		$datos=$this->cargar_header_sidebar_acciones();
+		return view ('clientes_sucursales_equipos_componentes',
+						[
+
+						 'modulos'=>$datos['modulos'],
+						 'submodulos'=>$datos['submodulos'],
+						 'nombre'=>$datos['nombre'],
+						 'apellido'=>$datos['apellido']
+						]
+
+
+						);
+	}
+
+public function clientes_sucursales_usuarios_agregar()
+	{
+		$datos=$this->cargar_header_sidebar_acciones();
+		return view ('clientes_sucursales_usuarios_agregar',
+						[
+
+						 'modulos'=>$datos['modulos'],
+						 'submodulos'=>$datos['submodulos'],
+						 'nombre'=>$datos['nombre'],
+						 'apellido'=>$datos['apellido']
+						]
+
+
+						);
+	}
+
+
+public function clientes_sucursales_usuarios_modificar()
+	{
+		$datos=$this->cargar_header_sidebar_acciones();
+		return view ('clientes_sucursales_usuarios_modificar',
+						[
+
+						 'modulos'=>$datos['modulos'],
+						 'submodulos'=>$datos['submodulos'],
+						 'nombre'=>$datos['nombre'],
+						 'apellido'=>$datos['apellido']
+						]
+
+
+						);
+	}
+
+
+public function clientes_sucursales_usuarios_perfil()
+	{
+		$datos=$this->cargar_header_sidebar_acciones();
+		return view ('clientes_sucursales_usuarios_perfil',
+						[
+
+						 'modulos'=>$datos['modulos'],
+						 'submodulos'=>$datos['submodulos'],
+						 'nombre'=>$datos['nombre'],
+						 'apellido'=>$datos['apellido']
+						]
+
+
+						);
+	}
+
+
+
+
+
 
 }

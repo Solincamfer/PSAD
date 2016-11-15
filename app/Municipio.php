@@ -6,6 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Municipio extends Model
 {
-    $table="municipios";
-    $fillable=['id','descripcion','estado_id'];
+    public $timestamps=false;
+    protected $table="municipios";
+    protected $fillable=['id','descripcion','estado_id'];
+
+    public function estado()
+    {
+    	return $this->belongsTo('App\Estado');
+    }
+
 }
