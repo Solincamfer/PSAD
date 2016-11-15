@@ -1,7 +1,7 @@
 @extends('admin.basesys')
     @section('contenido')
         @section('title')
-            Registro Equipo
+            Registro Componente
         @endsection
             @include('layout/header')
                 @include('layout/sidebar')
@@ -17,56 +17,65 @@
                                 </div>
                             @endfor
                         </div>
-                        <!--Registro -->
+                        <!--Registro-->
 
-                        <!--Modal -->
+
+                        <!--Modal-->
                         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                        <h4 class="modal-title" id="myModalLabel">Agregar Equipo</h4>
+                                        <h4 class="modal-title" id="myModalLabel">Agregar Componente</h4>
                                     </div>
                                     <div class="modal-body">
                                         <form action="">
-                                            <div class="container-fluid" id="conteq">
-                                                <div class="form-group row" id="rEq1">
+                                            <div class="container-fluid" id="contcomp">
+                                                <div class="form-group row" id="rComp1">
                                                     <div class="col-md-6">
-                                                        <label for="selTe">Tipo de Equipo</label>
-                                                        <select name="selTe" class="form-control" id="selTe">
+                                                        <label for="selTc">Tipo de Componente</label>
+                                                        <select name="selTc" class="form-control" id="selTc">
                                                             <option value="0">-</option>
                                                         </select>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <label for="nomEq">Nombre del Equipo</label>
-                                                        <input type="text" class="form-control" name="nomEq" id="nomEq"><i class="fa fa-desktop"></i>
+                                                        <label for="nomComp">Nombre del Componente</label>
+                                                        <input type="text" class="form-control" name="nomComp" id="nomComp"><i class="fa fa-cogs"></i>
                                                     </div>
                                                 </div>
-                                                <div class="form-group row" id="rEq2">
+                                                <div class="form-group row" id="rComp2">
                                                     <div class="col-md-6">
-                                                        <label for="selMe">Marca del Equipo</label>
-                                                        <select name="selMe" class="form-control" id="selMe">
+                                                        <label for="selMc">Marca del Componente</label>
+                                                        <select name="selMc" class="form-control" id="selMc">
                                                             <option value="0">-</option>
                                                         </select>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <label for="selMeq">Modelo del Equipo</label>
-                                                        <select name="selMeq" class="form-control" id="selMeq">
+                                                        <label for="selMcm">Modelo del Componente</label>
+                                                        <select name="selMcm" class="form-control" id="selMcm">
                                                             <option value="0">-</option>
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div class="form-group row" id="rEq3">
+                                                <div class="form-group row" id="rComp3">
                                                     <div class="col-md-6">
-                                                        <label for="serEq">Serial del Equipo</label>
-                                                        <input type="text" class="form-control" name="serEq" id="serEq"><i class="fa fa-barcode"></i>
+                                                        <label for="serCm">Serial del Componente</label>
+                                                        <input type="text" class="form-control" name="serCm" id="serCm"><i class="fa fa-barcode"></i>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <label for="selStEq">Estatus del Equipo</label>
-                                                        <select name="selStEq" class="form-control" id="selStEq">
+                                                        <label for="selStCm">Estatus del Componente</label>
+                                                        <select name="selStCm" class="form-control" id="selStCm">
                                                             <option value="0">-</option>
                                                             <option value="1">Activo</option>
                                                             <option value="2">Inactivo</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row" id="rComp4">
+                                                    <div class="col-md-8 col-md-offset-2">
+                                                        <label for="selPsc">Pieza y Software</label>
+                                                        <select name="selPsc" class="form-control" id="selPsc">
+                                                            <option value="0">-</option>
                                                         </select>
                                                     </div>
                                                 </div>
