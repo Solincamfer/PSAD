@@ -50,7 +50,32 @@ Route::group(['prefix'=>'/menu/registros','middleware'=>['validar_sm','v_menu']]
 				Route::match(['post','get'],'/perfiles',                   				 'RegistrosBasicos@perfiles');
 				Route::match(['post','get'],'/empleados',                  				 'RegistrosBasicos@empleados');
 				Route::match(['post','get'],'/clientes',                   				 'RegistrosBasicos@clientes');
-				Route::match(['post','get'],'/departamentos/cargos/{departamento_id}',   'RegistrosBasicos@cargos');
+				Route::match(['post','get'],'/departamentos/cargos/{departamento_id}',   'RegistrosBasicos@departamentos_cargos');
+				
+				Route::match(['post','get'],'/clientes/modificar',                   				 'RegistrosBasicos@clientes_modificar');
+				Route::match(['post','get'],'/clientes/responsable',                   				 'RegistrosBasicos@clientes_responsables');
+				Route::match(['post','get'],'/clientes/responsable/modificar',                   	 'RegistrosBasicos@clientes_responsables_modificar');
+				Route::match(['post','get'],'/clientes/responsable/agregar',                   		 'RegistrosBasicos@clientes_responsables_agregar');
+
+				Route::match(['post','get'],'/clientes/sucursales',                   				 'RegistrosBasicos@clientes_sucursales');
+				Route::match(['post','get'],'/clientes/sucursales/modificar',                   	 'RegistrosBasicos@clientes_sucursales_modificar');
+				Route::match(['post','get'],'/clientes/sucursales/agregar',                   		 'RegistrosBasicos@clientes_sucursales_agregar');
+				Route::match(['post','get'],'/clientes/sucursales/responsable',                   	 'RegistrosBasicos@clientes_sucursales_responsable');
+				Route::match(['post','get'],'/clientes/sucursales/plan',                   			 'RegistrosBasicos@clientes_sucursales_plan');
+				Route::match(['post','get'],'/clientes/sucursales/equipos',                   		 'RegistrosBasicos@clientes_sucursales_equipos');
+				Route::match(['post','get'],'/clientes/sucursales/usuario',                   		 'RegistrosBasicos@clientes_sucursales_usuarios');
+				
+
+				
+
+				
+
+				
+
+				
+
+
+
 
 				}
 			);

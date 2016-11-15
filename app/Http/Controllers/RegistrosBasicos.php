@@ -56,6 +56,7 @@ class RegistrosBasicos extends Controller
 
 
 
+
 	public function cargos($departamento_id)//Inicializacion del submodulo: /departamentos/cargos
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
@@ -77,7 +78,7 @@ class RegistrosBasicos extends Controller
 
 
 
-	public function departamentos()//Inicializacion del submodulo: /departamentos
+	public function departamentos_cargos()//Inicializacion del submodulo: /departamentos
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
 		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(1,2,3),4);
@@ -125,5 +126,188 @@ class RegistrosBasicos extends Controller
 					 ]
 					 );
 	}
+
+
+/////////////////////////////////////////////////////////15-11-2016///////////////////////////////////////////////
+	public function clientes_modificar()
+	{
+		$datos=$this->cargar_header_sidebar_acciones();
+		return view ('clientes_modificar',
+						[
+
+						 'modulos'=>$datos['modulos'],
+						 'submodulos'=>$datos['submodulos'],
+						 'nombre'=>$datos['nombre'],
+						 'apellido'=>$datos['apellido']
+						]
+
+
+						);
+	}
+
+
+	public function clientes_responsables()
+	{
+		$datos=$this->cargar_header_sidebar_acciones();
+		return view ('clientes_responsables',
+						[
+
+						 'modulos'=>$datos['modulos'],
+						 'submodulos'=>$datos['submodulos'],
+						 'nombre'=>$datos['nombre'],
+						 'apellido'=>$datos['apellido']
+						]
+
+
+						);
+	}
+
+
+	public function clientes_responsables_modificar()
+	{
+		$datos=$this->cargar_header_sidebar_acciones();
+		return view ('clientes_responsables_modificar',
+						[
+
+						 'modulos'=>$datos['modulos'],
+						 'submodulos'=>$datos['submodulos'],
+						 'nombre'=>$datos['nombre'],
+						 'apellido'=>$datos['apellido']
+						]
+
+
+						);
+	}
+
+	public function clientes_responsables_agregar()
+	{
+		$datos=$this->cargar_header_sidebar_acciones();
+		return view ('clientes_responsables_agregar',
+						[
+
+						 'modulos'=>$datos['modulos'],
+						 'submodulos'=>$datos['submodulos'],
+						 'nombre'=>$datos['nombre'],
+						 'apellido'=>$datos['apellido']
+						]
+
+
+						);
+	}
+
+
+	public function clientes_sucursales()
+	{
+		$datos=$this->cargar_header_sidebar_acciones();
+		return view ('clientes_sucursales',
+						[
+
+						 'modulos'=>$datos['modulos'],
+						 'submodulos'=>$datos['submodulos'],
+						 'nombre'=>$datos['nombre'],
+						 'apellido'=>$datos['apellido']
+						]
+
+
+						);
+	}
+
+
+	public function clientes_sucursales_modificar()
+	{
+		$datos=$this->cargar_header_sidebar_acciones();
+		return view ('clientes_sucursales_modificar',
+						[
+
+						 'modulos'=>$datos['modulos'],
+						 'submodulos'=>$datos['submodulos'],
+						 'nombre'=>$datos['nombre'],
+						 'apellido'=>$datos['apellido']
+						]
+
+
+						);
+	}
+
+	public function clientes_sucursales_agregar()
+	{
+		$datos=$this->cargar_header_sidebar_acciones();
+		return view ('clientes_sucursales_agregar',
+						[
+
+						 'modulos'=>$datos['modulos'],
+						 'submodulos'=>$datos['submodulos'],
+						 'nombre'=>$datos['nombre'],
+						 'apellido'=>$datos['apellido']
+						]
+
+
+						);
+	}
+
+public function clientes_sucursales_responsable()
+	{
+		$datos=$this->cargar_header_sidebar_acciones();
+		return view ('clientes_sucursales_responsable',
+						[
+
+						 'modulos'=>$datos['modulos'],
+						 'submodulos'=>$datos['submodulos'],
+						 'nombre'=>$datos['nombre'],
+						 'apellido'=>$datos['apellido']
+						]
+
+
+						);
+	}
+
+public function clientes_sucursales_plan()
+	{
+		$datos=$this->cargar_header_sidebar_acciones();
+		return view ('clientes_sucursales_plan',
+						[
+
+						 'modulos'=>$datos['modulos'],
+						 'submodulos'=>$datos['submodulos'],
+						 'nombre'=>$datos['nombre'],
+						 'apellido'=>$datos['apellido']
+						]
+
+
+						);
+	}
+
+public function clientes_sucursales_equipos()
+	{
+		$datos=$this->cargar_header_sidebar_acciones();
+		return view ('clientes_sucursales_equipos',
+						[
+
+						 'modulos'=>$datos['modulos'],
+						 'submodulos'=>$datos['submodulos'],
+						 'nombre'=>$datos['nombre'],
+						 'apellido'=>$datos['apellido']
+						]
+
+
+						);
+	}
+
+public function clientes_sucursales_usuarios()
+	{
+		$datos=$this->cargar_header_sidebar_acciones();
+		return view ('clientes_sucursales_usuarios',
+						[
+
+						 'modulos'=>$datos['modulos'],
+						 'submodulos'=>$datos['submodulos'],
+						 'nombre'=>$datos['nombre'],
+						 'apellido'=>$datos['apellido']
+						]
+
+
+						);
+	}
+
 
 }
