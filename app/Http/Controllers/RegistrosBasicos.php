@@ -10,7 +10,7 @@ use DB;
 class RegistrosBasicos extends Controller 
 {
     
-	public function cargar_header_sidebar_acciones()
+	public function cargar_header_sidebar_acciones()//obtiene desde la variable, la configuracion para el usuario logueado
 	{
 
 		
@@ -31,7 +31,7 @@ class RegistrosBasicos extends Controller
 	
 	
 	
-	public function cargar_acciones_submodulo_perfil($acciones_perfil,$acciones_sm,$accion_agregar)
+	public function cargar_acciones_submodulo_perfil($acciones_perfil,$acciones_sm,$accion_agregar)//obtiene las acciones para un submodulo, asociadas a un perfil
 	{
 		
 
@@ -56,7 +56,7 @@ class RegistrosBasicos extends Controller
 
 
 
-	public function cargos($departamento_id)
+	public function cargos($departamento_id)//Inicializacion del submodulo: /departamentos/cargos
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
 		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(5,6),7);
@@ -77,7 +77,7 @@ class RegistrosBasicos extends Controller
 
 
 
-	public function departamentos()
+	public function departamentos()//Inicializacion del submodulo: /departamentos
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
 		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(1,2,3),4);
