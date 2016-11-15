@@ -57,7 +57,7 @@ class RegistrosBasicos extends Controller
 
 
 
-	public function cargos($departamento_id)//Inicializacion del submodulo: /departamentos/cargos
+	public function departamentos_cargos($departamento_id)//Inicializacion del submodulo: /departamentos/cargos
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
 		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(5,6),7);
@@ -78,7 +78,7 @@ class RegistrosBasicos extends Controller
 
 
 
-	public function departamentos_cargos()//Inicializacion del submodulo: /departamentos
+	public function departamentos()//Inicializacion del submodulo: /departamentos
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
 		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(1,2,3),4);
@@ -128,7 +128,14 @@ class RegistrosBasicos extends Controller
 	}
 
 
+
+
+
+
 /////////////////////////////////////////////////////////15-11-2016///////////////////////////////////////////////
+////////////////////////////////////////////////////Modulo Clientes///////////////////////////////////////////////
+
+
 	public function clientes_modificar()
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
