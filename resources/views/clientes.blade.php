@@ -31,8 +31,9 @@
 									<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 									<h4 class="modal-title" id="myModalLabel">Agregar Cliente Matriz</h4>
 								</div>
-								<div class="modal-body">
-									<form>
+								
+									<form method="post" class="form-horizontal Validacion" action="#">
+									<div class="modal-body">						
 										<ul class="nav nav-tabs" role="tablist">
 											<li role="presentation" class="active"><a href="#db" aria-controls="db" role="tab" data-toggle="tab">Datos basicos</a></li>
 											<li role="presentation"><a href="#df" aria-controls="df" role="tab" data-toggle="tab">Dirección Fiscal</a></li>
@@ -44,156 +45,194 @@
 
 												<div role="tabpanel" class="tab-pane active" id="db">
 													<div class="container-fluid" id="contDb">
-														<div class="row" id="rDb">
-															<div class="form-group col-md-5 col-md-offset-1">
-																<label for="rs">Razon Social:</label>
-																<input type="text" name="rs" class=" .inp" id="rz"><i class="fa fa-university"></i>
-															</div>
-															<div class="form-group col-md-5">
+														<div class="col-md-12">
+															<div class="form-group col-md-12">
+																<label for="rs">Razon Social:</label>							
+																<input type="text" name="rs" class="form-control"  id="rz"/>
+																<i class="fa fa-university"></i>								
+															</div>															
+															<div class="form-group col-md-12">
+															
 																<label for="nc">Nombre Comercial:</label>
-																<input type="text" name="nc" class=" .inp"><i class="fa fa-building"></i>
+																<input type="text" name="nc" class="form-control" />
+																<i class="fa fa-building"></i>
+															
 															</div>
 														</div>
-														<div class="row">
-															<div class="form-group col-md-5 col-md-offset-1">
-																<label for="rif">Rif:</label>
-																<br>
-																<select name="rif" id="rif">
-																	<option value="0" selected>-</option>
+														<div class="col-md-6">	
+														<label for="rif" class="col-md-12">Rif:</label>										
+															<div class="form-group col-md-6">
+																<select name="rif" id="" class="form-control ">
+																	<option value="">-</option>
 																	<option value="1">J-</option>
 																	<option value="2">G-</option>
 																</select>
-																<input type="tel" placeholder="Doc. Fiscal" id="einp"><i class="fa fa-address-card"></i>
-															</div>
-															<div class="form-group col-md-5">
-																<label for="tipCon">Tipo de Contribuyente</label>
+															</div>	
+															<div class="form-group col-md-8">									
+																<input type="text" id="" class="form-control" name="df" />
+																<i class="fa fa-address-card"></i>
+															</div>	
+														</div>															
+														<div class="col-md-6 ">	
+															<div class="form-group col-md-12">													
+																<label for="tipCon">Contribuyente</label>
 																<br>
-																<select name="tipCon" id="tipCon">
-																	<option value="0">-</option>
-																</select>
-															</div>
+																<select name="tipCon" id="" class="form-control" >
+																	<option value="">-</option>
+																	<option value="1">asdas</option>
+																	<option value="2">sada</option>
+																</select>															
+														</div>
 														</div>
 													</div>
 												</div>
 
 												<div role="tabpanel" class="tab-pane" id="df">
 													<div class="container-fluid" id="contdf">
-														<div class="row" id="locDf">
-															<div class="col-md-5 col-md-offset-1">
-																<label for="paisdf">País</label>
-																<br>
-																<select name="paisdf" id="paisdf">
-																	<option value="0">-</option>
-																</select>
-															</div>
-															<div class="col-md-5">
-																<label for="regiondf">Región</label>
-																<br>
-																<select name="regiondf" id="regiondf">
-																	<option value="0">-</option>
-																</select>
-															</div>
-															<div class="col-md-5 col-md-offset-1">
-																<label for="edodf">Estado</label>
-																<br>
-																<select name="edodf" id="edodf">
-																	<option value="0">-</option>
-																</select>
-															</div>
-															<div class="col-md-5">
-																<label for="mundf">Municipio</label>
-																<br>
-																<select name="mundf" id="mundf">
-																	<option value="0">-</option>
-																</select>
+														<div class="form-group col-md-6">
+															<label for="paisdf">País</label>
+															<br>
+															<select name="paisdf" id="paisdf" class="form-control">
+																<option value="">-</option>
+																<option value="caracas">caracas</option>											
+															</select>
+														</div>
+														<div class="form-group col-md-7">
+															<div class="col-md-offset-2">
+															<label for="regiondf">Región</label>
+															<br>
+															<select name="regiondf" id="regiondf" class="form-control">
+																<option value="">-</option>
+																<option value="caracas">caracas</option>
+															</select>
 															</div>
 														</div>
-														<div class="row" id="locDfdd">
-															<div class="col-md-10 col-md-offset-1">
+														<div class="form-group col-md-6">
+															<label for="edodf">Estado</label>
+															<br>
+															<select name="edodf" id="edodf" class="form-control">
+																<option value="">-</option>
+																<option value="caracas">caracas</option>
+															</select>
+														</div>
+														<div class="form-group col-md-7">
+															<div class="col-md-offset-2">
+															<label for="mundf">Municipio</label>
+															<br>
+															<select name="mundf" id="mundf" class="form-control">
+																<option value="">-</option>
+																<option value="caracas">caracas</option>
+															</select>
+														</div>	
+														</div>
+														<div class="form-group col-md-12">
+															<i class="fa fa-map-marker"></i>
 																<label for="descDirdf">Descripción de la dirección</label>
-																<input type="text" name="descDirdf"><i class="fa fa-map-marker"></i>
+																<textarea type="text" name="descDirdf" class="form-control"></textarea> 
 															</div>
-														</div>
 													</div>
 												</div>
 
 												<div role="tabpanel" class="tab-pane" id="dc">
-													<div class="container-fluid" id="contdc">
-														<div class="row" id="locDc">
-															<div class="col-md-5 col-md-offset-1">
-																<label for="paisdc">País</label>
-																<br>
-																<select name="paisdc" id="paisdc">
-																	<option value="0">-</option>
-																</select>
-															</div>
-															<div class="col-md-5">
-																<label for="regiondc">Región</label>
-																<br>
-																<select name="regiondc" id="regiondc">
-																	<option value="0">-</option>
-																</select>
-															</div>
-															<div class="col-md-5 col-md-offset-1">
-																<label for="edodc">Estado</label>
-																<br>
-																<select name="edodc" id="edodc">
-																	<option value="0">-</option>
-																</select>
-															</div>
-															<div class="col-md-5">
-																<label for="mundc">Municipio</label>
-																<br>
-																<select name="mundc" id="mundc">
-																	<option value="0">-</option>
-																</select>
+													<div class="container-fluid" id="contdc">									
+														<div class="form-group col-md-6">
+															<label for="paisdc">País</label>
+															<br>
+															<select name="paisdc" id="paisdc" class="form-control">
+																<option value="">-</option>
+																<option value="caracas">caracas</option>											
+															</select>
+														</div>
+														<div class="form-group col-md-7">
+															<div class="col-md-offset-2">
+															<label for="regiondc">Región</label>
+															<br>
+															<select name="regiondc" id="regiondc" class="form-control">
+																<option value="">-</option>
+																<option value="caracas">caracas</option>
+															</select>
 															</div>
 														</div>
-														<div class="row" id="locDcdd">
-															<div class="col-md-10 col-md-offset-1">
+														<div class="form-group col-md-6">
+															<label for="edodc">Estado</label>
+															<br>
+															<select name="edodc" id="edodc" class="form-control">
+																<option value="">-</option>
+																<option value="caracas">caracas</option>
+															</select>
+														</div>
+														<div class="form-group col-md-7">
+															<div class="col-md-offset-2">
+															<label for="mundc">Municipio</label>
+															<br>
+															<select name="mundc" id="mundc" class="form-control">
+																<option value="">-</option>
+																<option value="caracas">caracas</option>
+															</select>
+														</div>	
+														</div>													
+														
+															<div class="form-group col-md-12">
+															<i class="fa fa-map-marker"></i>
 																<label for="descDirdc">Descripción de la dirección</label>
-																<input type="text" name="descDirdc"><i class="fa fa-map-marker"></i>
+																<textarea type="text" name="descDirdc" class="form-control"></textarea> 
 															</div>
-														</div>
+														
 													</div>
+													
 												</div>
 
 												<div role="tabpanel" class="tab-pane" id="ctt">
 													<div class="container-fluid" id="contctt">
-														<div class="row">
-															<div class="col-md-5 col-md-offset-1">
-																<label for="tlflcl">Teléfono Local</label>
-																<br>
-																<select name="tlflcl" id="tlflcl">
-																	<option value="0" selected>-</option>
+														
+															
+															
+															<label for="tlflcl" class="col-md-12">N° Local:</label>	
+															<div class="form-group col-md-4">
+															<div class="col-md-offset-1">										
+																<select name="tlflcl" id="" class="form-control">
+																	<option value="">-</option>
+																	<option value="0212">0212</option>
 																</select>
-																<input type="tel" id="einp1"><i class="fa fa-phone"></i>
+															</div>	
 															</div>
-															<div class="col-md-5">
-																<label for="tlfmvl">Teléfono Móvil</label>
-																<br>
-																<select name="tlfmvl" id="tlfmvl">
-																	<option value="0" selected>-</option>
+															<div class="form-group col-md-8">													
+																<input type="text" name="tcl" class="form-control col-md-12" />					
+															</div>
+															
+															
+															<label for="tlfmvl" class="col-md-12">N° Móvil</label>
+															<div class="form-group col-md-4 ">
+															<div class="col-md-offset-1">											
+																<select name="tlfmvl" id="" class="form-control">
+																	<option value="">-</option>
+																	<option value="0416">0416</option>
 																</select>
-																<input type="tel" id="einp2"><i class="fa fa-mobile"></i>
 															</div>
-															<div class="row" id="correo">
-																<div class="col-md-10 col-md-offset-1">
+															</div>
+															<div class="form-group col-md-8">											
+																<input type="text" name="tmvl" class="form-control" />
+																<i class="fa fa-mobile"></i>
+															</div>
+															</div>
+															<div class="form-group col-md-12 " id="">
+																
 																	<label for="mail">Correo Electrónico</label>
-																	<input type="email" name="mail"><i class="fa fa-envelope"></i>
-																</div>
+																	<input type="email" name="mail" class="form-control">
+																	<i class="fa fa-envelope"></i>
+																
 															</div>
-														</div>
+														
 													</div>
 												</div>
 											</div>
+										</div>								
+										<div class="modal-footer">
+											<button type="submit" class="bttnMd" id="btnSv">Guardar<i class="fa fa-floppy-o"></i></button>
+											<button type="button" class="bttnMd" data-dismiss="modal" id="btnCs">Cerrar <i class="fa fa-times"></i></button>
 										</div>
-									</form>
-								</div>
-								<div class="modal-footer">
-									<button type="button" class="bttnMd" id="btnSv">Guardar <i class="fa fa-floppy-o"></i></button>
-									<button type="button" class="bttnMd" data-dismiss="modal" id="btnCs">Cerrar <i class="fa fa-times"></i></button>
-								</div>
+								</form>
+															
 							</div>
 						</div>
 					</div>

@@ -39,29 +39,33 @@
                                 <h4 class="modal-title" id="myModalLabel"><strong>Agregar Cargo</strong></h4>
                             </div>
                             <div class="modal-body">
-                                <form action="">
+
+                                <form method="post" class="form-horizontal Validacion" action="ajaxSubmit.php">
                                     <div class="container-fluid" id="contcgo">
-                                        <div class="row" id="rCgo">
-                                            <div class="form-group col-md-8 col-md-offset-2">
+                                        
+                                        <div class="col-md-6 col-md-offset-3">
+                                            <div class="form-group">
                                                 <label for="nomCgo">Nombre del cargo</label>
-                                                <input type="text" name="nomCgo" id="nomCgo"><i class="fa fa-id-badge"></i>
-                                            </div>
-                                            <div class="form-group col-md-8 col-md-offset-2">
+                                                <input type="text" class="form-control" name="textCgo" id="nomCgo" /><i class="fa fa-id-badge"></i>                     
+                                                </div>
+                                                <div class="form-group">
                                                 <label for="stCgo">Estatus del Cargo</label>
-                                                <select name="stCgo" id="stCgo">
-                                                    <option value="0">-</option>
+                                                <select id="stCgo" class="form-control" name="comboCgo">
+                                                    <option value="">-</option>
                                                     <option value="1">Activo</option>
                                                     <option value="2">Inactivo</option>
                                                 </select>
                                             </div>
                                         </div>
+                                        
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="bttnMd" id="btnSv">Guardar <i class="fa fa-floppy-o"></i></button>
+                                        <button type="button" class="bttnMd" data-dismiss="modal" id="btnCs">Cerrar <i class="fa fa-times"></i></button>
                                     </div>
                                 </form>
                             </div>
-                            <div class="modal-footer">
-                                <button type="button" class="bttnMd" id="btnSv">Guardar <i class="fa fa-floppy-o"></i></button>
-                                <button type="button" class="bttnMd" data-dismiss="modal" id="btnCs">Cerrar <i class="fa fa-times"></i></button>
-                            </div>
+                            
                         </div>
                     </div>
                 </div>

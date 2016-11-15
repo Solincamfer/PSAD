@@ -32,39 +32,38 @@
                     @endforeach
                 </div>
                 <!-- Modal -->
-                
                 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
-
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title" id="myModalLabel"><strong>Agregar Departamento</strong></h4>
+                                <h4 class="modal-title" id="myModalLabel"><strong>Agregar Cargo</strong></h4>
                             </div>
                             <div class="modal-body">
-                                <form action="">
+                                <form method="post" class="form-horizontal Validacion" action="">
                                     <div class="container-fluid" id="contdpto">
-                                        <div class="row" id="rDpto">
-                                            <div class="form-group col-md-8 col-md-offset-2">
+                                        <div class="col-md-6 col-md-offset-3">
+                                            <div class="form-group">
                                                 <label for="nomDpto">Nombre del Departamento</label>
-                                                <input type="text" name="nomDpto" id="nomDpto"><i class="fa fa-briefcase"></i>
+                                                <input type="text" name="textDpto" class="form-control" id="nomDpto"/>
+                                                <i class="fa fa-briefcase"></i>
                                             </div>
-                                            <div class="form-group col-md-8 col-md-offset-2">
+                                            <div class="form-group">
                                                 <label for="stDpto">Estatus del Departamento</label>
-                                                <select name="stDpto" id="stDpto">
-                                                    <option value="0">-</option>
+                                                <select name="comboDpto" class="form-control" id="stDpto">
+                                                    <option value="">-</option>
                                                     <option value="1">Activo</option>
                                                     <option value="2">Inactivo</option>
                                                 </select>
-                                            </div>
-                                        </div>
+                                            </div> 
+                                        </div> 
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="bttnMd" id="btnSv">Guardar <i class="fa fa-floppy-o"></i></button>
+                                        <button type="button" class="bttnMd" data-dismiss="modal" id="btnCs">Cerrar <i class="fa fa-times"></i></button>
                                     </div>
                                 </form>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="bttnMd" id="btnSv">Guardar <i class="fa fa-floppy-o"></i></button>
-                                <button type="button" class="bttnMd" data-dismiss="modal" id="btnCs">Cerrar <i class="fa fa-times"></i></button>
-                            </div>
+                            </div>                           
                         </div>
                     </div>
                 </div>
