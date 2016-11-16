@@ -187,6 +187,7 @@
                     color: #111;
                     font-weight: bold;
                 }
+
     /*Contenido*/
         .contenido {
             width: 100%;
@@ -260,6 +261,13 @@
             margin-top:12px; 
             margin-left:30px;
             font-size: 15px;
+        }
+
+        input[type = "radio"] {
+            position: absolute;
+            left: 0;
+            margin-left: 2em;
+            margin-top: 5px;
         }
 
         .bttnMd {
