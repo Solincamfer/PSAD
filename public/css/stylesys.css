@@ -58,7 +58,11 @@
 
 /**Clases**/
 
+
     /*Header*/
+        .disabled{
+            display: none;
+        }
         .hdr{
             font-family: 'Ubuntu Condensed', sans-serif;
             background: rgba(0, 167, 142, 0.5); 
@@ -356,6 +360,9 @@
         }
 
         #btnCs{
+            background: #ec1c24;
+        }
+        #btnAn{
             background: #ec1c24;
         }
 

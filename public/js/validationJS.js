@@ -10,19 +10,33 @@ for (var i = 1; i <= 15; i++) {
         }        
     }
 if (switchtab==5) {
-   $("#a2").click();
+    $("#a2").click();    
+    $("#btnAn").removeClass("disabled");
+    $('#btnAn').click(function(){
+        $("#a1").click(); 
+        $("#btnAn").addClass("disabled"); 
+    });
 }else if (switchtab==10) {
     $("#a3").click();
+    $('#btnAn').click(function(){
+        $("#btnAn").removeClass("disabled");
+        $("#a2").click();
+    });
 }else if (switchtab==15) {
     $("#a4").click();
+    $('#btnAn').click(function(){
+        $("#btnAn").removeClass("disabled");
+        $("#a3").click();
+    });
+}else if (switchtab==20) {
+    $("#a4").click();
+    $('#btnAn').click(function(){
+        $("#btnAn").removeClass("disabled");
+        $("#a3").click();
+    });
 }
 });
-$('#btnCs').click(function(){
-    if (switchtab<15) {
-        $("#a1").click();
-        switchtab=0;
-    }
-});
+
     $('.Validacion')
         .bootstrapValidator({
             message: 'This value is not valid',
