@@ -41,6 +41,7 @@
                             <div class="modal-body">
 
                                 <form method="post" class="form-horizontal Validacion" action="ajaxSubmit.php">
+                                    {{ csrf_field() }}
                                     <div class="container-fluid" id="contcgo">
                                         
                                         <div class="col-md-6 col-md-offset-3">

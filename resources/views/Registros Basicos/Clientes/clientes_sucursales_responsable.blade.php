@@ -30,6 +30,7 @@
                                 </div>
                                 <div class="modal-body">
                                     <form action="">
+                                        {{ csrf_field() }}
                                         <ul class="nav nav-tabs" role="tablist">
                                             <li role="presentation" class="active"><a href="#dbr1" aria-controls="dbr1" role="tab" data-toggle="tab">Datos básicos Primarios</a></li>
                                             <li role="presentation"><a href="#dbr2" aria-controls="dbr2" role="tab" data-toggle="tab">Datos básicos Secundarios</a></li>

@@ -30,6 +30,7 @@
                                     </div>
                                     <div class="modal-body">
                                         <form action="">
+                                            {{ csrf_field() }}
                                             <div class="container-fluid" id="contus">
                                                 <div class="form-group row" id="rUs1">
                                                     <div class="col-md-8 col-md-offset-2">

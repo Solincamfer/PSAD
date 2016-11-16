@@ -39,6 +39,7 @@
                             </div>
                             <div class="modal-body">
                                 <form method="post" class="form-horizontal Validacion" action="">
+                                    {{ csrf_field() }}
                                     <div class="container-fluid" id="contdpto">
                                         <div class="col-md-6 col-md-offset-3">
                                             <div class="form-group">

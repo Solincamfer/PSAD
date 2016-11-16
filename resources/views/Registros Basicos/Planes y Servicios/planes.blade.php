@@ -27,6 +27,7 @@
                             </div>
                             <div class="modal-body">
                                 <form action="">
+                                    {{ csrf_field() }}
                                     <div class="container-fluid" id="contpn">
                                         <div class="row" id="rPn">
                                             <div class="form-group col-md-8 col-md-offset-2">

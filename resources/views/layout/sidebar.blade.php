@@ -9,7 +9,7 @@
 				@endif
 				@foreach($submodulos as $submodulo)
 					@if(($submodulo->modulo_id ==$modulo->id)and ($submodulo->status_sm==1 and $submodulo->padre==1))
-						<li><a href="{{$submodulo->ruta}}">{{$submodulo->descripcion}}</a></li>
+						<li class="c"><a href="{{$submodulo->ruta}}">{{$submodulo->descripcion}}</a></li>
 					@endif
 				@endforeach
 		       </ul>

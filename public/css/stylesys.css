@@ -185,7 +185,7 @@
                     text-decoration: none;
                 }
 
-                .submenu a:hover {
+                .submenu a:hover, .submenu a:focus  {
                     border-left: 5px solid #eee;
                     background: #26A69D;
                     color: #111;
