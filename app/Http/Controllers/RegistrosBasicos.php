@@ -64,7 +64,7 @@ class RegistrosBasicos extends Controller
 
 		$cargos=DB::table('cargos')->where('departamento_id',$departamento_id)->get();
 
-		return view('cargos',
+		return view('Registros Basicos\Departamentos\cargos',
 					['modulos'=>$datos['modulos'],
 					 'submodulos'=>$datos['submodulos'],
 					 'nombre'=>$datos['nombre'],
@@ -84,7 +84,7 @@ class RegistrosBasicos extends Controller
 		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(1,2,3),4);
 		$departamentos=DB::table('departamentos')->get();
 
-		return view('departamentos',
+		return view('Registros Basicos\Departamentos\departamentos',
 					[
 					 'modulos'=>$datos['modulos'],
 					 'submodulos'=>$datos['submodulos'],
@@ -102,7 +102,7 @@ class RegistrosBasicos extends Controller
 	public function servicios()
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
-		return view('planes', 
+		return view('Registros Basicos\Planes y Servicios\planes', 
 					[
 					 'modulos'=>$datos['modulos'],
 					 'submodulos'=>$datos['submodulos'],
@@ -117,7 +117,7 @@ class RegistrosBasicos extends Controller
 	public function clientes()
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
-			return view('clientes', 
+			return view('Registros Basicos\Clientes\clientes', 
 					[
 					 'modulos'=>$datos['modulos'],
 					 'submodulos'=>$datos['submodulos'],
@@ -139,7 +139,7 @@ class RegistrosBasicos extends Controller
 	public function clientes_modificar()
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
-		return view ('clientes_modificar',
+		return view ('Registros Basicos\Clientes\clientes_modificar',
 						[
 
 						 'modulos'=>$datos['modulos'],
@@ -156,7 +156,7 @@ class RegistrosBasicos extends Controller
 	public function clientes_responsables()
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
-		return view ('clientes_responsables',
+		return view ('Registros Basicos\Clientes\clientes_responsables',
 						[
 
 						 'modulos'=>$datos['modulos'],
@@ -173,7 +173,7 @@ class RegistrosBasicos extends Controller
 	public function clientes_responsables_modificar()
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
-		return view ('clientes_responsables_modificar',
+		return view ('Registros Basicos\Clientes\clientes_responsables_modificar',
 						[
 
 						 'modulos'=>$datos['modulos'],
@@ -189,7 +189,7 @@ class RegistrosBasicos extends Controller
 	public function clientes_responsables_agregar()
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
-		return view ('clientes_responsables_agregar',
+		return view ('Registros Basicos\Clientes\clientes_responsables_agregar',
 						[
 
 						 'modulos'=>$datos['modulos'],
@@ -206,7 +206,7 @@ class RegistrosBasicos extends Controller
 	public function clientes_sucursales()
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
-		return view ('clientes_sucursales',
+		return view ('Registros Basicos\Clientes\clientes_sucursales',
 						[
 
 						 'modulos'=>$datos['modulos'],
@@ -223,7 +223,7 @@ class RegistrosBasicos extends Controller
 	public function clientes_sucursales_modificar()
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
-		return view ('clientes_sucursales_modificar',
+		return view ('Registros Basicos\Clientes\clientes_sucursales_modificar',
 						[
 
 						 'modulos'=>$datos['modulos'],
@@ -239,7 +239,7 @@ class RegistrosBasicos extends Controller
 	public function clientes_sucursales_agregar()
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
-		return view ('clientes_sucursales_agregar',
+		return view ('Registros Basicos\Clientes\clientes_sucursales_agregar',
 						[
 
 						 'modulos'=>$datos['modulos'],
@@ -255,7 +255,7 @@ class RegistrosBasicos extends Controller
 public function clientes_sucursales_responsable()
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
-		return view ('clientes_sucursales_responsable',
+		return view ('Registros Basicos\Clientes\clientes_sucursales_responsable',
 						[
 
 						 'modulos'=>$datos['modulos'],
@@ -271,7 +271,7 @@ public function clientes_sucursales_responsable()
 public function clientes_sucursales_plan()
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
-		return view ('clientes_sucursales_plan',
+		return view ('Registros Basicos\Clientes\clientes_sucursales_plan',
 						[
 
 						 'modulos'=>$datos['modulos'],
@@ -287,7 +287,7 @@ public function clientes_sucursales_plan()
 public function clientes_sucursales_equipos()
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
-		return view ('clientes_sucursales_equipos',
+		return view ('Registros Basicos\Clientes\clientes_sucursales_equipos',
 						[
 
 						 'modulos'=>$datos['modulos'],
@@ -303,7 +303,7 @@ public function clientes_sucursales_equipos()
 public function clientes_sucursales_usuarios()
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
-		return view ('clientes_sucursales_usuarios',
+		return view ('Registros Basicos\Clientes\clientes_sucursales_usuarios',
 						[
 
 						 'modulos'=>$datos['modulos'],
@@ -322,7 +322,7 @@ public function clientes_sucursales_usuarios()
 	public function clientes_categoria()
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
-		return view ('clientes_categoria',
+		return view ('Registros Basicos\Clientes\clientes_categoria',
 						[
 
 						 'modulos'=>$datos['modulos'],
@@ -339,7 +339,7 @@ public function clientes_sucursales_usuarios()
 	public function clientes_categoria_modificar()
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
-		return view ('clientes_categoria_modificar',
+		return view ('Registros Basicos\Clientes\clientes_categoria_modificar',
 						[
 
 						 'modulos'=>$datos['modulos'],
@@ -355,7 +355,7 @@ public function clientes_sucursales_usuarios()
 public function clientes_categoria_responsable()
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
-		return view ('clientes_categoria_responsable',
+		return view ('Registros Basicos\Clientes\clientes_categoria_responsable',
 						[
 
 						 'modulos'=>$datos['modulos'],
@@ -371,7 +371,7 @@ public function clientes_categoria_responsable()
 public function clientes_sucursales_responsable_agregar()
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
-		return view ('clientes_sucursales_responsable_agregar',
+		return view ('Registros Basicos\Clientes\clientes_sucursales_responsable_agregar',
 						[
 
 						 'modulos'=>$datos['modulos'],
@@ -387,7 +387,7 @@ public function clientes_sucursales_responsable_agregar()
 public function clientes_sucursales_responsable_modificar()
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
-		return view ('clientes_sucursales_responsable_modificar',
+		return view ('Registros Basicos\Clientes\clientes_sucursales_responsable_modificar',
 						[
 
 						 'modulos'=>$datos['modulos'],
@@ -405,7 +405,7 @@ public function clientes_sucursales_responsable_modificar()
 public function clientes_sucursales_plan_agregar()
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
-		return view ('clientes_sucursales_plan_agregar',
+		return view ('Registros Basicos\Clientes\clientes_sucursales_plan_agregar',
 						[
 
 						 'modulos'=>$datos['modulos'],
@@ -421,7 +421,7 @@ public function clientes_sucursales_plan_agregar()
 public function clientes_sucursales_plan_modificar()
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
-		return view ('clientes_sucursales_plan_modificar',
+		return view ('Registros Basicos\Clientes\clientes_sucursales_plan_modificar',
 						[
 
 						 'modulos'=>$datos['modulos'],
@@ -437,7 +437,7 @@ public function clientes_sucursales_plan_modificar()
 public function clientes_sucursales_plan_servicios()
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
-		return view ('clientes_sucursales_plan_servicios',
+		return view ('Registros Basicos\Clientes\clientes_sucursales_plan_servicios',
 						[
 
 						 'modulos'=>$datos['modulos'],
@@ -453,7 +453,7 @@ public function clientes_sucursales_plan_servicios()
 public function clientes_sucursales_plan_serv_modificar()
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
-		return view ('clientes_sucursales_plan_serv_modificar',
+		return view ('Registros Basicos\Clientes\clientes_sucursales_plan_serv_modificar',
 						[
 
 						 'modulos'=>$datos['modulos'],
@@ -468,7 +468,7 @@ public function clientes_sucursales_plan_serv_modificar()
 public function clientes_sucursales_plan_serv_agregar()
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
-		return view ('clientes_sucursales_pla_serv_agregar',
+		return view ('Registros Basicos\Clientes\clientes_sucursales_pla_serv_agregar',
 						[
 
 						 'modulos'=>$datos['modulos'],
@@ -484,7 +484,7 @@ public function clientes_sucursales_plan_serv_agregar()
 public function clientes_sucursales_equipos_agregar()
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
-		return view ('clientes_sucursales_equipos_agregar',
+		return view ('Registros Basicos\Clientes\clientes_sucursales_equipos_agregar',
 						[
 
 						 'modulos'=>$datos['modulos'],
@@ -500,7 +500,7 @@ public function clientes_sucursales_equipos_agregar()
 public function clientes_sucursales_equipos_modificar()
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
-		return view ('clientes_sucursales_equipos_modificar',
+		return view ('Registros Basicos\Clientes\clientes_sucursales_equipos_modificar',
 						[
 
 						 'modulos'=>$datos['modulos'],
@@ -516,7 +516,7 @@ public function clientes_sucursales_equipos_modificar()
 public function clientes_sucursales_equipos_componentes()
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
-		return view ('clientes_sucursales_equipos_componentes',
+		return view ('Registros Basicos\Clientes\clientes_sucursales_equipos_componentes',
 						[
 
 						 'modulos'=>$datos['modulos'],
@@ -532,7 +532,7 @@ public function clientes_sucursales_equipos_componentes()
 public function clientes_sucursales_usuarios_agregar()
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
-		return view ('clientes_sucursales_usuarios_agregar',
+		return view ('Registros Basicos\Clientes\clientes_sucursales_usuarios_agregar',
 						[
 
 						 'modulos'=>$datos['modulos'],
@@ -549,7 +549,7 @@ public function clientes_sucursales_usuarios_agregar()
 public function clientes_sucursales_usuarios_modificar()
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
-		return view ('clientes_sucursales_usuarios_modificar',
+		return view ('Registros Basicos\Clientes\clientes_sucursales_usuarios_modificar',
 						[
 
 						 'modulos'=>$datos['modulos'],
@@ -566,7 +566,7 @@ public function clientes_sucursales_usuarios_modificar()
 public function clientes_sucursales_usuarios_perfil()
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
-		return view ('clientes_sucursales_usuarios_perfil',
+		return view ('Registros Basicos\Clientes\clientes_sucursales_usuarios_perfil',
 						[
 
 						 'modulos'=>$datos['modulos'],

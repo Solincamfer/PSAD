@@ -72,7 +72,7 @@ class InicioController extends Controller
         $datos=Session::get('sesion');//obtiene datos del usuario
 
         return view(
-                    'menu',
+                    'Menu\menu',
                         [
                             "modulos"=>$modulos[0],
                             "submodulos"=>$submodulos[0],

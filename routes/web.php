@@ -59,15 +59,15 @@ Route::group(['prefix'=>'/menu/registros','middleware'=>['validar_sm','v_menu']]
 
 				/**/Route::match(['post','get'],'/clientes/categoria',                   			  'RegistrosBasicos@clientes_categoria');
 				/**/Route::match(['post','get'],'/clientes/categoria/modificar',                   	  'RegistrosBasicos@clientes_categoria_modificar');
-				/**/Route::match(['post','get'],'/clientes/categoria/responsable',                   			  'RegistrosBasicos@clientes_categoria_responsable');
+				/**/Route::match(['post','get'],'/clientes/responsable',                   			  'RegistrosBasicos@clientes_categoria_responsable');
 				
-				Route::match(['post','get'],'/clientes/sucursales',                   				 'RegistrosBasicos@clientes_sucursales');//cliente-categoria-sucursales
-				Route::match(['post','get'],'/clientes/sucursales/modificar',                   	 'RegistrosBasicos@clientes_sucursales_modificar');
-				Route::match(['post','get'],'/clientes/sucursales/agregar',                   		 'RegistrosBasicos@clientes_sucursales_agregar');
-				Route::match(['post','get'],'/clientes/sucursales/responsable',                   	 'RegistrosBasicos@clientes_sucursales_responsable');
-				Route::match(['post','get'],'/clientes/sucursales/plan',                   			 'RegistrosBasicos@clientes_sucursales_plan');
-				Route::match(['post','get'],'/clientes/sucursales/equipos',                   		 'RegistrosBasicos@clientes_sucursales_equipos');
-				Route::match(['post','get'],'/clientes/sucursales/usuario',                   		 'RegistrosBasicos@clientes_sucursales_usuarios');
+				 Route::match(['post','get'],'/clientes/sucursales',                   				 'RegistrosBasicos@clientes_sucursales');//cliente-categoria-sucursales
+				 Route::match(['post','get'],'/clientes/sucursales/modificar',                   	 'RegistrosBasicos@clientes_sucursales_modificar');
+				 Route::match(['post','get'],'/clientes/sucursales/agregar',                   		 'RegistrosBasicos@clientes_sucursales_agregar');
+				 Route::match(['post','get'],'/clientes/sucursales/responsable',                   	 'RegistrosBasicos@clientes_sucursales_responsable');
+				 Route::match(['post','get'],'/clientes/sucursales/plan',                   			 'RegistrosBasicos@clientes_sucursales_plan');
+				 Route::match(['post','get'],'/clientes/sucursales/equipos',                   		 'RegistrosBasicos@clientes_sucursales_equipos');
+				 Route::match(['post','get'],'/clientes/sucursales/usuario',                   		 'RegistrosBasicos@clientes_sucursales_usuarios');
 
 				/**/Route::match(['post','get'],'/clientes/sucursales/responsable/agregar',              'RegistrosBasicos@clientes_sucursales_responsable_agregar');
 				/**/Route::match(['post','get'],'/clientes/sucursales/responsable/modificar',              'RegistrosBasicos@clientes_sucursales_responsable_modificar');
