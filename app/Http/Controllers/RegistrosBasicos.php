@@ -117,12 +117,16 @@ class RegistrosBasicos extends Controller
 	public function clientes()
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
+		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(9,10,11,12),8);
+		//$clientes=DB::table('clientes')->get();
 			return view('Registros Basicos\Clientes\clientes', 
 					[
 					 'modulos'=>$datos['modulos'],
 					 'submodulos'=>$datos['submodulos'],
 					 'nombre'=>$datos['nombre'],
 					 'apellido'=>$datos['apellido'],
+					 'acciones'=>$acciones['acciones'],
+					 'agregar'=>$acciones['agregar']
 					 ]
 					 );
 	}

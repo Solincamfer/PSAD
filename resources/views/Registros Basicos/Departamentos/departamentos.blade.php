@@ -12,15 +12,13 @@
                         <div class="contMd" style="">
                             @foreach($acciones as $accion)
                                 @if($accion->descripcion!="Status" )
-                                     <a href="{{$accion->url.$departamento->id}}". class="btnAcc">{{$accion->descripcion}}</a>
-                                @endif
-                                @if($accion->descripcion=="Status" )
+                                     <a href="{{$accion->url.$departamento->id}}" class="btnAcc">{{$accion->descripcion}}</a>
+                                @elseif($accion->descripcion=="Status" )
                                     @if($departamento->status_d==1)
 
                                         <input type="checkbox" class="btnAcc" name="status" value="{{$departamento->status_d}}" checked>
                                         
-                                    @endif
-                                    @if($departamento->status_d==0)
+                                    @elseif($departamento->status_d==0)
                                          <input type="checkbox" name="status"  class="btnAcc" value="{{$departamento->status_d}}" >
 
                                     @endif

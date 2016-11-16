@@ -8,7 +8,7 @@ class Accion extends Model
 {
     public $timestamps=false;
     protected $table="acciones";
-    protected $fillable=['id','status_ac','descripcion','url','submodulo_id'];
+    protected $fillable=['id','status_ac','descripcion','url','clase_css','submodulo_id'];
 
     public function submodulo()
     {

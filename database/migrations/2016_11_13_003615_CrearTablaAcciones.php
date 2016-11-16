@@ -19,6 +19,7 @@ class CrearTablaAcciones extends Migration
             $table->integer('status_ac')->default(0);
             $table->string('descripcion',100);
             $table->string('url',100);
+            $table->string('clase_css',100);
             $table->integer('submodulo_id')->unsigned();
             $table->foreign('submodulo_id')->references('id')->on('submodulos')->ondelate('cascade');
            // $table->timestamps();
