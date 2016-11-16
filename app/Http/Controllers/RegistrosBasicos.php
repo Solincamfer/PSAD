@@ -157,16 +157,19 @@ class RegistrosBasicos extends Controller
 	}
 
 
-	public function clientes_responsables()
+	public function clientes_responsables()//agregar acciones 
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
+		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(14,15),13);
 		return view ('Registros Basicos\Clientes\clientes_responsables',
 						[
 
 						 'modulos'=>$datos['modulos'],
 						 'submodulos'=>$datos['submodulos'],
 						 'nombre'=>$datos['nombre'],
-						 'apellido'=>$datos['apellido']
+						 'apellido'=>$datos['apellido'],
+						 'acciones'=>$acciones['acciones'],
+						 'agregar'=>$acciones['agregar']
 						]
 
 
@@ -210,13 +213,16 @@ class RegistrosBasicos extends Controller
 	public function clientes_sucursales()
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
+		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(25,26,27,28,29,30),24);
 		return view ('Registros Basicos\Clientes\clientes_sucursales',
 						[
 
 						 'modulos'=>$datos['modulos'],
 						 'submodulos'=>$datos['submodulos'],
 						 'nombre'=>$datos['nombre'],
-						 'apellido'=>$datos['apellido']
+						 'apellido'=>$datos['apellido'],
+						 'acciones'=>$acciones['acciones'],
+						 'agregar'=>$acciones['agregar']
 						]
 
 
@@ -326,13 +332,16 @@ public function clientes_sucursales_usuarios()
 	public function clientes_categoria()
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
+		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(16,17,18,19),20);
 		return view ('Registros Basicos\Clientes\clientes_categoria',
 						[
 
 						 'modulos'=>$datos['modulos'],
 						 'submodulos'=>$datos['submodulos'],
 						 'nombre'=>$datos['nombre'],
-						 'apellido'=>$datos['apellido']
+						 'apellido'=>$datos['apellido'],
+						 'acciones'=>$acciones['acciones'],
+						 'agregar'=>$acciones['agregar']
 						]
 
 
@@ -359,13 +368,16 @@ public function clientes_sucursales_usuarios()
 public function clientes_categoria_responsable()
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
+		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(22,23),21);
 		return view ('Registros Basicos\Clientes\clientes_categoria_responsable',
 						[
 
 						 'modulos'=>$datos['modulos'],
 						 'submodulos'=>$datos['submodulos'],
 						 'nombre'=>$datos['nombre'],
-						 'apellido'=>$datos['apellido']
+						 'apellido'=>$datos['apellido'],
+						 'acciones'=>$acciones['acciones'],
+						 'agregar'=>$acciones['agregar']
 						]
 
 

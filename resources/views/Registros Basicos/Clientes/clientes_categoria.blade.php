@@ -7,20 +7,39 @@
                 @include('layout/sidebar')
                     <div class="contenido">
                         <div class="col-xs-5 col-sm-5 col-md-6 col-md-offset-3" style=""> 
-                            <button id="btnAdd" type="button" class="btnAd col-md-offset-10" data-toggle="modal" data-target="#myModal" href="#myModal">AGREGAR <i class="fa fa-plus-circle"></i></button>
-                            @for($i=0; $i < 5; $i++)
+                        @if($agregar)
+                           <button id="btnAdd" type="button" class="btnAd col-md-offset-10" data-toggle="modal" data-target="#myModal" href="#myModal">AGREGAR <i class="fa fa-plus-circle"></i></button>
+                        @endif   
+                           
                                 <div class="contMd" style="">
-                                    @for($j=0; $j < 5; $j++)
-                                        <button class="btnAcc" type="submit">Modificar</button>
-                                    @endfor
+                                    @foreach($acciones as $accion)
+                                        @if($accion->descripcion!="Status")
+                                            <span style="display: inline-block; float: right;"><a href="{{$accion->url}}"><i class="{{$accion->clase_css}}"></i></a></span>
+                                        @elseif($accion->descripcion=="Status")
+                                            @if($accion->status_ac==1)
+                                                 <input type="checkbox" class="btnAcc" name="status" value="{{$accion->status_ac}}" checked>
+                                            
+                                            @elseif($accion->status_ac==0)
+                                                 <input type="checkbox" class="btnAcc" name="status" value="{{$accion->status_ac}}" >
+                                            
+                                            @endif
+
+
+
+                                        @endif
+
+
+
+                                    @endforeach
                                     <p class="ttlMd"><strong>REGISTRO</strong></p>
                                 </div>
-                            @endfor
+                          
                         </div>
                         <!-- 	Registro -->
 
 
                         <!-- Modal -->
+                        @if($agregar)
                         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
@@ -56,5 +75,6 @@
                                 </div>
                             </div>
                         </div>
+                       @endif 
                     </div>   
     @endsection
