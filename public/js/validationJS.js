@@ -1,4 +1,28 @@
 $(document).ready(function() {
+    $('#btnSv').click(function(){
+var switchtab=0;
+for (var i = 1; i <= 15; i++) {
+        var input= $('#input'+i).val();
+        if (input!="") {
+            switchtab=switchtab+1;
+        }else{
+            switchtab=switchtab+0;
+        }        
+    }
+if (switchtab==5) {
+   $("#a2").click();
+}else if (switchtab==10) {
+    $("#a3").click();
+}else if (switchtab==15) {
+    $("#a4").click();
+}
+});
+$('#btnCs').click(function(){
+    if (switchtab<15) {
+        $("#a1").click();
+        switchtab=0;
+    }
+});
     $('.Validacion')
         .bootstrapValidator({
             message: 'This value is not valid',
@@ -74,13 +98,13 @@ $(document).ready(function() {
                             message: 'Campo vacio.'
                         },
                         stringLength: {
-                            min: 6,
-                            max: 30,
-                            message: 'La razon social debe ser mayor de 4 letras y menor de 15 letras.'
+                            min: 9,
+                            max: 9,
+                            message: 'Ingrese 9 digitos.'
                         },
                         regexp: {
-                            regexp: /^[a-zA-Z0-9\.-]+$/,
-                            message: 'La razon social no puede poseer caracteres especiales.'
+                            regexp: /^[0-9-]+$/,
+                            message: 'Solo numeros.'
                         }
                     }
                 },
@@ -89,10 +113,6 @@ $(document).ready(function() {
                     validators: {
                         notEmpty: {
                             message: 'Campo vacio.'
-                        },
-                        regexp: {
-                            regexp: /^[a-zA-Z0-9\.-]+$/,
-                            message: 'La razon social no puede poseer caracteres especiales.'
                         }
                     }
                 },
@@ -118,15 +138,6 @@ $(document).ready(function() {
                     validators: {
                         notEmpty: {
                             message: 'Campo vacio.'
-                        },
-                        stringLength: {
-                            min: 6,
-                            max: 30,
-                            message: 'El nombre del departamento debe ser mayor de 4 letras y menor de 15 letras.'
-                        },
-                        regexp: {
-                            regexp: /^[a-zA-Z0-9\.]+$/,
-                            message: 'El nombre del departamento no puede poseer caracteres especiales.'
                         }
                     }
                 },
@@ -135,15 +146,6 @@ $(document).ready(function() {
                     validators: {
                         notEmpty: {
                             message: 'Campo vacio.'
-                        },
-                        stringLength: {
-                            min: 6,
-                            max: 30,
-                            message: 'El nombre del departamento debe ser mayor de 4 letras y menor de 15 letras.'
-                        },
-                        regexp: {
-                            regexp: /^[a-zA-Z0-9\.]+$/,
-                            message: 'El nombre del departamento no puede poseer caracteres especiales.'
                         }
                     }
                 },
@@ -152,15 +154,6 @@ $(document).ready(function() {
                     validators: {
                         notEmpty: {
                             message: 'Campo vacio.'
-                        },
-                        stringLength: {
-                            min: 6,
-                            max: 30,
-                            message: 'El nombre del departamento debe ser mayor de 4 letras y menor de 15 letras.'
-                        },
-                        regexp: {
-                            regexp: /^[a-zA-Z0-9\.]+$/,
-                            message: 'El nombre del departamento no puede poseer caracteres especiales.'
                         }
                     }
                 },
@@ -169,15 +162,6 @@ $(document).ready(function() {
                     validators: {
                         notEmpty: {
                             message: 'Campo vacio.'
-                        },
-                        stringLength: {
-                            min: 6,
-                            max: 30,
-                            message: 'El nombre del departamento debe ser mayor de 4 letras y menor de 15 letras.'
-                        },
-                        regexp: {
-                            regexp: /^[a-zA-Z0-9\.]+$/,
-                            message: 'El nombre del departamento no puede poseer caracteres especiales.'
                         }
                     }
                 },
@@ -188,13 +172,13 @@ $(document).ready(function() {
                             message: 'Campo vacio.'
                         },
                         stringLength: {
-                            min: 6,
-                            max: 30,
-                            message: 'El nombre del departamento debe ser mayor de 4 letras y menor de 15 letras.'
+                            min: 10,
+                            max: 100,
+                            message: 'La direccion debe contar con 10 a 100 carateres.'
                         },
                         regexp: {
-                            regexp: /^[a-zA-Z0-9\.]+$/,
-                            message: 'El nombre del departamento no puede poseer caracteres especiales.'
+                            regexp: /^[a-zA-Z0-9\.#-]+$/,
+                            message: 'el tipo de carater que utiliza no es valido.'
                         }
                     }
                 },
@@ -203,15 +187,6 @@ $(document).ready(function() {
                     validators: {
                         notEmpty: {
                             message: 'Campo vacio.'
-                        },
-                        stringLength: {
-                            min: 6,
-                            max: 30,
-                            message: 'El nombre del departamento debe ser mayor de 4 letras y menor de 15 letras.'
-                        },
-                        regexp: {
-                            regexp: /^[a-zA-Z0-9\.]+$/,
-                            message: 'El nombre del departamento no puede poseer caracteres especiales.'
                         }
                     }
                 },
@@ -220,15 +195,6 @@ $(document).ready(function() {
                     validators: {
                         notEmpty: {
                             message: 'Campo vacio.'
-                        },
-                        stringLength: {
-                            min: 6,
-                            max: 30,
-                            message: 'El nombre del departamento debe ser mayor de 4 letras y menor de 15 letras.'
-                        },
-                        regexp: {
-                            regexp: /^[a-zA-Z0-9\.]+$/,
-                            message: 'El nombre del departamento no puede poseer caracteres especiales.'
                         }
                     }
                 },
@@ -237,15 +203,6 @@ $(document).ready(function() {
                     validators: {
                         notEmpty: {
                             message: 'Campo vacio.'
-                        },
-                        stringLength: {
-                            min: 6,
-                            max: 30,
-                            message: 'El nombre del departamento debe ser mayor de 4 letras y menor de 15 letras.'
-                        },
-                        regexp: {
-                            regexp: /^[a-zA-Z0-9\.]+$/,
-                            message: 'El nombre del departamento no puede poseer caracteres especiales.'
                         }
                     }
                 },
@@ -254,15 +211,6 @@ $(document).ready(function() {
                     validators: {
                         notEmpty: {
                             message: 'Campo vacio.'
-                        },
-                        stringLength: {
-                            min: 6,
-                            max: 30,
-                            message: 'El nombre del departamento debe ser mayor de 4 letras y menor de 15 letras.'
-                        },
-                        regexp: {
-                            regexp: /^[a-zA-Z0-9\.]+$/,
-                            message: 'El nombre del departamento no puede poseer caracteres especiales.'
                         }
                     }
                 },
@@ -273,13 +221,13 @@ $(document).ready(function() {
                             message: 'Campo vacio.'
                         },
                         stringLength: {
-                            min: 6,
-                            max: 30,
-                            message: 'El nombre del departamento debe ser mayor de 4 letras y menor de 15 letras.'
+                            min: 10,
+                            max: 100,
+                            message: 'La direccion debe contar con 10 a 100 carateres.'
                         },
                         regexp: {
-                            regexp: /^[a-zA-Z0-9\.]+$/,
-                            message: 'El nombre del departamento no puede poseer caracteres especiales.'
+                            regexp: /^[a-zA-Z0-9\.#-]+$/,
+                            message: 'el tipo de carater que utiliza no es valido.'
                         }
                     }
                 },
@@ -288,10 +236,6 @@ $(document).ready(function() {
                     validators: {
                         notEmpty: {
                             message: 'Campo vacio.'
-                        },
-                        regexp: {
-                            regexp: /^[a-zA-Z0-9\.]+$/,
-                            message: 'El nombre del departamento no puede poseer caracteres especiales.'
                         }
                     }
                 },
@@ -302,13 +246,13 @@ $(document).ready(function() {
                             message: 'Campo vacio.'
                         },
                         stringLength: {
-                            min: 6,
-                            max: 30,
-                            message: 'El nombre del departamento debe ser mayor de 4 letras y menor de 15 letras.'
+                            min: 7,
+                            max: 7,
+                            message: 'El numero solo cuenta con 7 digitos..'
                         },
                         regexp: {
-                            regexp: /^[a-zA-Z0-9\.]+$/,
-                            message: 'El nombre del departamento no puede poseer caracteres especiales.'
+                            regexp: /^[0-9]+$/,
+                            message: 'Solo numeros.'
                         }
                     }
                 },
@@ -317,10 +261,6 @@ $(document).ready(function() {
                     validators: {
                         notEmpty: {
                             message: 'Campo vacio.'
-                        },
-                        regexp: {
-                            regexp: /^[a-zA-Z0-9\.]+$/,
-                            message: 'El nombre del departamento no puede poseer caracteres especiales.'
                         }
                     }
                 },
@@ -331,13 +271,13 @@ $(document).ready(function() {
                             message: 'Campo vacio.'
                         },
                         stringLength: {
-                            min: 6,
-                            max: 30,
-                            message: 'El nombre del departamento debe ser mayor de 4 letras y menor de 15 letras.'
+                            min: 7,
+                            max: 7,
+                            message: 'El numero solo cuenta con 7 digitos..'
                         },
                         regexp: {
-                            regexp: /^[a-zA-Z0-9\.]+$/,
-                            message: 'El nombre del departamento no puede poseer caracteres especiales.'
+                            regexp: /^[0-9]+$/,
+                            message: 'Solo numeros.'
                         }
                     }
                 },
@@ -348,30 +288,32 @@ $(document).ready(function() {
                             message: 'Campo vacio.'
                         },
                         stringLength: {
-                            min: 6,
-                            max: 30,
-                            message: 'El nombre del departamento debe ser mayor de 4 letras y menor de 15 letras.'
+                            min: 10,
+                            max: 40,
+                            message: 'La email debe contar como minimo de 10 carateres.'
                         },
                         regexp: {
                             regexp: /^[a-zA-Z0-9\.-_@]+$/,
-                            message: 'El nombre del departamento no puede poseer caracteres especiales.'
+                            message: 'El caracter especial que utiliza no es valido.'
                         }
                     }
                 },
                 comboCgo: {
                     validators: {
-                        notEmpty: {
-                            message: 'El estatus de cargo no puede ser vacio.'
+                         notEmpty: {
+                            message: 'Campo vacio.'
                         }
                     }
                 },
                 comboDpto: {
                     validators: {
-                        notEmpty: {
-                            message: 'El estatus del departamento no puede ser vacio.'
+                       notEmpty: {
+                            message: 'Campo vacio.'
                         }
                     }
                 }
             }
         })
+
+
 });
