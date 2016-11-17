@@ -210,35 +210,35 @@
 															<label for="tlflcl" class="col-md-12">N° Local:</label>	
 															<div class="form-group col-md-4">
 															<div class="col-md-offset-1">										
-																<select name="tlflcl" id="" class="form-control">
+																<select name="tlflcl" id="input16" class="form-control">
 																	<option value="">-</option>
 																	<option value="0212">0212</option>
 																</select>
 															</div>	
 															</div>
 															<div class="form-group col-md-8">													
-																<input type="text" name="tcl" class="form-control col-md-12" />					
+																<input type="text" name="tcl" id="input17" class="form-control col-md-12" />					
 															</div>
 															
 															
 															<label for="tlfmvl" class="col-md-12">N° Móvil</label>
 															<div class="form-group col-md-4 ">
 															<div class="col-md-offset-1">											
-																<select name="tlfmvl" id="" class="form-control">
+																<select name="tlfmvl" id="input18" class="form-control">
 																	<option value="">-</option>
 																	<option value="0416">0416</option>
 																</select>
 															</div>
 															</div>
 															<div class="form-group col-md-8">											
-																<input type="text" name="tmvl" class="form-control" />
+																<input type="text" name="tmvl" id="input19" class="form-control" />
 																<i class="fa fa-mobile"></i>
 															</div>
 															</div>
-															<div class="form-group col-md-12 " id="">
+															<div class="form-group col-md-12 ">
 																
 																	<label for="mail">Correo Electrónico</label>
-																	<input type="email" name="mail" class="form-control">
+																	<input type="email" name="mail" id="input20" class="form-control">
 																	<i class="fa fa-envelope"></i>
 																
 															</div>
@@ -248,9 +248,8 @@
 											</div>
 										</div>								
 										<div class="modal-footer">
-											<button type="button" class="bttnMd disabled" id="btnAn">Anterior <i class="fa fa-times"></i></button>
-											<button type="button" class="bttnMd" id="btnSv">Siguiente<i class="fa fa-floppy-o"></i></button>		
-											<button type="reset" class="bttnMd" id="btnCs">Cerrar<i class="fa fa-times"></i></button>
+											<button type="button" class="bttnMd" id="btnAn">Anterior <i class="fa fa-times"></i></button>
+											<button type="button" class="bttnMd" id="btnSv">Siguiente <i class="fa fa-hand-o-right"></i></button>	
 										</div>
 								</form>
 															
