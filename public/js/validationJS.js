@@ -46,6 +46,266 @@ $('#btnAn').click(function(){
                 validating: 'glyphicon glyphicon-refresh'
             },
             fields: {
+                 txtci: {
+                    message: 'The username is not valid',
+                    validators: {
+                        notEmpty: {
+                            message: 'Campo vacio.'
+                        },
+                        stringLength: {
+                            min: 10,
+                            max: 40,
+                            message: 'La email debe contar como minimo de 10 carateres.'
+                        },
+                        regexp: {
+                            regexp: /^[a-zA-Z0-9\.-_@]+$/,
+                            message: 'El caracter especial que utiliza no es valido.'
+                        }
+                    }
+                },
+                mail2: {
+                    message: 'The username is not valid',
+                    validators: {
+                        notEmpty: {
+                            message: 'Campo vacio.'
+                        },
+                        stringLength: {
+                            min: 10,
+                            max: 40,
+                            message: 'La email debe contar como minimo de 10 carateres.'
+                        },
+                        regexp: {
+                            regexp: /^[a-zA-Z0-9\.-_@]+$/,
+                            message: 'El caracter especial que utiliza no es valido.'
+                        }
+                    }
+                },
+                selciRpb: {
+                    message: 'The username is not valid',
+                    validators: {
+                        notEmpty: {
+                            message: 'Campo vacio.'
+                        }
+                    }
+                },
+                mail2: {
+                    message: 'The username is not valid',
+                    validators: {
+                        notEmpty: {
+                            message: 'Campo vacio.'
+                        },
+                        stringLength: {
+                            min: 10,
+                            max: 40,
+                            message: 'La email debe contar como minimo de 10 carateres.'
+                        },
+                        regexp: {
+                            regexp: /^[a-zA-Z0-9\.-_@]+$/,
+                            message: 'El caracter especial que utiliza no es valido.'
+                        }
+                    }
+                },
+                mailRpb: {
+                    message: 'The username is not valid',
+                    validators: {
+                        notEmpty: {
+                            message: 'Campo vacio.'
+                        },
+                        stringLength: {
+                            min: 6,
+                            max: 30,
+                            message: 'El nombre del cargo debe ser mayor de 4 letras y menor de 15 letras.'
+                        },
+                        regexp: {
+                            regexp: /^[a-zA-Z0-9\.]+$/,
+                            message: 'El nombre del cargo no puede poseer caracteres especiales.'
+                        }
+                    }
+                },
+                numTelclRpb: {
+                    message: 'The username is not valid',
+                    validators: {
+                        notEmpty: {
+                            message: 'Campo vacio.'
+                        },
+                        stringLength: {
+                            min: 6,
+                            max: 30,
+                            message: 'El nombre del cargo debe ser mayor de 4 letras y menor de 15 letras.'
+                        },
+                        regexp: {
+                            regexp: /^[a-zA-Z0-9\.]+$/,
+                            message: 'El nombre del cargo no puede poseer caracteres especiales.'
+                        }
+                    }
+                },
+                numTelmvlRpb: {
+                    message: 'The username is not valid',
+                    validators: {
+                        notEmpty: {
+                            message: 'Campo vacio.'
+                        },
+                        stringLength: {
+                            min: 6,
+                            max: 30,
+                            message: 'El nombre del cargo debe ser mayor de 4 letras y menor de 15 letras.'
+                        },
+                        regexp: {
+                            regexp: /^[a-zA-Z0-9\.]+$/,
+                            message: 'El nombre del cargo no puede poseer caracteres especiales.'
+                        }
+                    }
+                },
+                selTelclRpb: {
+                    message: 'The username is not valid',
+                    validators: {
+                        notEmpty: {
+                            message: 'Campo vacio.'
+                        }
+                    }
+                },
+                selTelmvlRpb: {
+                    message: 'The username is not valid',
+                    validators: {
+                        notEmpty: {
+                            message: 'Campo vacio.'
+                        }
+                    }
+                },
+                cgoRpb: {
+                    message: 'The username is not valid',
+                    validators: {
+                        notEmpty: {
+                            message: 'Campo vacio.'
+                        }
+                    }
+                },
+                 fnRpb: {
+                    message: 'The username is not valid',
+                    validators: {
+                        notEmpty: {
+                            message: 'Campo vacio.'
+                        }
+                    }
+                },
+                numCiRpb: {
+                    message: 'The username is not valid',
+                    validators: {
+                        notEmpty: {
+                            message: 'Campo vacio.'
+                        },
+                        stringLength: {
+                            min: 6,
+                            max: 30,
+                            message: 'El nombre del cargo debe ser mayor de 4 letras y menor de 15 letras.'
+                        },
+                        regexp: {
+                            regexp: /^[a-zA-Z0-9\.]+$/,
+                            message: 'El nombre del cargo no puede poseer caracteres especiales.'
+                        }
+                    }
+                },
+                 selCiRpb: {
+                    message: 'The username is not valid',
+                    validators: {
+                        notEmpty: {
+                            message: 'Campo vacio.'
+                        }
+                    }
+                },
+                numRifRpb: {
+                    message: 'The username is not valid',
+                    validators: {
+                        notEmpty: {
+                            message: 'Campo vacio.'
+                        },
+                        stringLength: {
+                            min: 6,
+                            max: 30,
+                            message: 'El nombre del cargo debe ser mayor de 4 letras y menor de 15 letras.'
+                        },
+                        regexp: {
+                            regexp: /^[a-zA-Z0-9\.]+$/,
+                            message: 'El nombre del cargo no puede poseer caracteres especiales.'
+                        }
+                    }
+                },
+                selRifRpb: {
+                    message: 'The username is not valid',
+                    validators: {
+                        notEmpty: {
+                            message: 'Campo vacio.'
+                        }
+                    }
+                },
+                apellRpb2: {
+                    message: 'The username is not valid',
+                    validators: {
+                        notEmpty: {
+                            message: 'Campo vacio.'
+                        },
+                        stringLength: {
+                            min: 6,
+                            max: 30,
+                            message: 'El nombre del cargo debe ser mayor de 4 letras y menor de 15 letras.'
+                        },
+                        regexp: {
+                            regexp: /^[a-zA-Z0-9\.]+$/,
+                            message: 'El nombre del cargo no puede poseer caracteres especiales.'
+                        }
+                    }
+                },
+                apellRpb1: {
+                    message: 'The username is not valid',
+                    validators: {
+                        notEmpty: {
+                            message: 'Campo vacio.'
+                        },
+                        stringLength: {
+                            min: 6,
+                            max: 30,
+                            message: 'El nombre del cargo debe ser mayor de 4 letras y menor de 15 letras.'
+                        },
+                        regexp: {
+                            regexp: /^[a-zA-Z0-9\.]+$/,
+                            message: 'El nombre del cargo no puede poseer caracteres especiales.'
+                        }
+                    }
+                },
+                nomRpb2: {
+                    message: 'The username is not valid',
+                    validators: {
+                        notEmpty: {
+                            message: 'Campo vacio.'
+                        },
+                        stringLength: {
+                            min: 6,
+                            max: 30,
+                            message: 'El nombre del cargo debe ser mayor de 4 letras y menor de 15 letras.'
+                        },
+                        regexp: {
+                            regexp: /^[a-zA-Z0-9\.]+$/,
+                            message: 'El nombre del cargo no puede poseer caracteres especiales.'
+                        }
+                    }
+                },
+                nomRpb1: {
+                    message: 'The username is not valid',
+                    validators: {
+                        notEmpty: {
+                            message: 'Campo vacio.'
+                        },
+                        stringLength: {
+                            min: 6,
+                            max: 30,
+                            message: 'El nombre del cargo debe ser mayor de 4 letras y menor de 15 letras.'
+                        },
+                        regexp: {
+                            regexp: /^[a-zA-Z0-9\.]+$/,
+                            message: 'El nombre del cargo no puede poseer caracteres especiales.'
+                        }
+                    }
+                },
                 textCgo: {
                     message: 'The username is not valid',
                     validators: {
@@ -326,7 +586,7 @@ $('#btnAn').click(function(){
                         }
                     }
                 }
-            }
+                 }
         })
 
 
