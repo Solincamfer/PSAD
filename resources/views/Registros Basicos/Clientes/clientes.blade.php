@@ -14,22 +14,26 @@
 						@endif
 						
 							<div class="contMd" style="">
-								@foreach($acciones as $accion)
-									@if($accion->descripcion!="Status")
-										<span style="display: inline-block; float: right;"><a href="{{$accion->url}}"><i class="{{$accion->clase_css}}"></i></a></span>
-								
-									@elseif($accion->descripcion=="Status")
-
-										@if($accion->status_ac==1)
-											 <input type="checkbox" class="btnAcc" name="status" value="{{$accion->status_ac}}" checked>
-										
-										@elseif($accion->staus_ac==0)
-											 <input type="checkbox" class="btnAcc" name="status" value="{{$accion->status_ac}}" >
+								<div class="icl">
+									@foreach($acciones as $accion)
+									
+										@if($accion->descripcion!="Status")
+											
+												<span class="iclsp"><a href="{{$accion->url}}"><i class="{{$accion->clase_css}}" title="modificar"></i></a></span>
+												
+										@elseif($accion->descripcion=="Status")
+											@if($accion->status_ac==1)
+												<div class="chbx">
+													<input type="checkbox" class="btnAcc" name="status" id="inchbx1" value="{{$accion->status_ac}}" checked><label for="inchbx1" title="Estatus"></label>
+												</div>
+											@elseif($accion->staus_ac==0)
+												<div class="chbx">
+													<input type="checkbox" class="btnAcc" name="status" id="inchbx2" value="{{$accion->status_ac}}"><label for="inchbx2" title="Estatus"></label>
+												</div>
+											@endif
 										@endif
-
-
-									@endif
-								@endforeach
+									@endforeach
+								</div>
 								<p class="ttlMd" style="display: inline-block;"><strong>REGISTRO</strong></p>
 							</div>
 					
@@ -62,7 +66,7 @@
 													<div class="container-fluid" id="contDb">
 													<center><u><p>DATOS BASICOS</p></u></center>
 													<br>
-														<div class="col-md-12">
+														<div class="col-md-12" id="dbc">
 															<div class="form-group col-md-12">
 																<label for="rs">Razon Social:</label>							
 																<input type="text" name="rs" class="form-control"  id="input1"/>

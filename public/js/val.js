@@ -55,6 +55,8 @@ $(function(){
                 $(location).attr('href',url);
         });  
     });
+    
+    $('.tooltip').tooltipster();
 
 });
 

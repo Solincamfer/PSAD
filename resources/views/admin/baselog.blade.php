@@ -8,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css?family=Ubuntu+Condensed" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('css/stylelog.css')}}">
     <link rel="stylesheet" href="{{asset('plugins/sweetalert/sweetalert.css')}}">
+    <link rel="stylesheet" href="{{asset('plugins/tooltipster/dist/css/tooltipster.bundle.min.css')}}">
 </head>
 <body>
     @yield('contenido')
@@ -17,5 +18,6 @@
     <script src="{{asset('js/val.js')}}"></script>
     <script src="{{asset('js/AJAX.js')}}"></script>
     <script src="{{asset('js/validator.min.js')}}"></script>
+    <script src="{{asset('plugins/tooltipster/dist/js/tooltipster.bundle.min.js')}}"></script>
 </body>
 </html>
