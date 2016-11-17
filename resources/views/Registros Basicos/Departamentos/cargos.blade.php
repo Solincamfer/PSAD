@@ -44,18 +44,18 @@
                                     {{ csrf_field() }}
                                     <div class="container-fluid" id="contcgo">
                                         
-                                        <div class="col-md-6 col-md-offset-3">
+                                        <div class="col-md-6 col-md-offset-3" id="cgo">
                                             <div class="form-group">
                                                 <label for="nomCgo">Nombre del cargo</label>
-                                                <input type="text" class="form-control" name="textCgo" id="nomCgo" /><i class="fa fa-id-badge"></i>                     
-                                                </div>
-                                                <div class="form-group">
-                                                <label for="stCgo">Estatus del Cargo</label>
+                                                <input type="text" class="form-control" name="textCgo" id="nomCgo" /><i class="fa fa-id-badge" id="iccg1"></i>                     
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="stCgo">Estatus del Cargo</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
                                                 <select id="stCgo" class="form-control" name="comboCgo">
                                                     <option value="">-</option>
                                                     <option value="1">Activo</option>
                                                     <option value="2">Inactivo</option>
-                                                </select>
+                                                </select><i class="fa fa-check" id="iccg2"></i>
                                             </div>
                                         </div>
                                         

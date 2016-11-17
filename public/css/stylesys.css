@@ -365,9 +365,63 @@
         #btnAn{
             background: #ec1c24;
         }
+        
+        /*Departamento, Cargo*/
 
-        /*Departamentos y cargos - Planes*/
-            #rDpto input, #rCgo input, #rPn input{
+        #dpto input, #dpto select, #cgo input, #cgo select {
+            display: block;
+            padding: 3px 5px;
+            margin-bottom: 10px;
+            width: 100%;
+            border: 1px solid #ddd;
+            text-indent: 15px;
+            transition: border-width .2s ease-in-out;
+            border-radius: 2px;
+            color: #ccc;
+        }
+        
+        #dpto input:focus, #dpto select:focus, #cgo input:focus, #cgo select:focus{
+            outline: none;
+            color: #444;
+            border-color: #26a69d;
+            border-left-width: 35px;
+        }
+
+        #dpto #icdp1, #dpto #icdp2, #cgo #iccg1, #cgo #iccg2{
+            color: #fff;
+            font-size: 1em;
+            position: absolute;
+            margin-top: -33px;
+            margin-left: 10px;
+            opacity: 1;
+            left: 0;
+            transition: all .1s ease-in;
+        }
+        
+        /*#dpto input:focus + span.fa, #dpto select:focus + span.fa{
+            opacity: 1;
+            left: 26px;
+            transition: all .25s ease-out;
+        }*/
+
+        #dpto .ic, #cgo .ic{
+            background-color: #26a69d;
+            position: absolute;
+            padding-top: 7px;
+            top: 0;
+            right: 0;
+            height: 33.5px;
+            width: 30px;
+            margin-top: 22px;
+            margin-right: 0;
+            text-align: center;
+            pointer-events: none;
+            color: #333;
+            border: none;
+        }
+
+        /*Planes*/
+            #rPn input{
                 display: block;
                 padding: 3px 5px;
                 margin-bottom: 10px;
@@ -378,7 +432,7 @@
                 color: #ccc;
             }
 
-            #rDpto input + i.fa, #rCgo input + i.fa, #rPn input + i.fa{
+            #rPn input + i.fa{
                 color: #fff;
                 font-size: 1em;
                 position: absolute;
@@ -387,23 +441,21 @@
                 left: 0;
                 transition: all .1s ease-in;
             }
-
-            #rDpto input:focus, #rCgo input:focus, 
+ 
             #rPn input:focus{
                 outline: none;
                 color: #444;
                 border-color: #26a69d;
                 border-left-width: 35px;
             }
-
-            #rDpto input:focus + i.fa, #rCgo input:focus + i.fa, 
+ 
             #rPn input:focus + i.fa{
                 opacity: 1;
                 left: 25px;
                 transition: all .25s ease-out;
             }
 
-            #rDpto select, #rCgo select, #rPn select{
+            #rPn select{
                 width: 100%;
                 display: block;
                 padding: 3px 5px;
@@ -413,13 +465,13 @@
                 color: #ccc;
             }
 
-            #rDpto select:focus, #rCgo select:focus, #rPn select:focus{
+            #rPn select:focus{
                 color: #111;
                 outline: none;
                 border-color: #26a69d;
             }
 
-            #rDpto select option, #rCgo select option, #rPn select option{
+            #rPn select option{
                 background: #fff;
                 border: 2px solid #eee;
             }

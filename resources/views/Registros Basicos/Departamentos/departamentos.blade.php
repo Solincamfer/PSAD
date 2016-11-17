@@ -35,27 +35,28 @@
                         <div class="modal-content">
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title" id="myModalLabel"><strong>Agregar Cargo</strong></h4>
+                                <h4 class="modal-title" id="myModalLabel"><strong>Agregar Departamento</strong></h4>
                             </div>
                             <div class="modal-body">
                                 <form method="post" class="form-horizontal Validacion" action="">
                                     {{ csrf_field() }}
                                     <div class="container-fluid" id="contdpto">
-                                        <div class="col-md-6 col-md-offset-3">
-                                            <div class="form-group">
-                                                <label for="nomDpto">Nombre del Departamento</label>
-                                                <input type="text" name="textDpto" class="form-control" id="nomDpto"/>
-                                                <i class="fa fa-briefcase"></i>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="stDpto">Estatus del Departamento</label>
-                                                <select name="comboDpto" class="form-control" id="stDpto">
-                                                    <option value="">-</option>
-                                                    <option value="1">Activo</option>
-                                                    <option value="2">Inactivo</option>
-                                                </select>
+                                        <div class="row">
+                                            <div class="col-md-6 col-md-offset-3" id="dpto">
+                                                <div class="form-group">
+                                                    <label for="nomDpto">Nombre del Departamento</label>
+                                                    <input type="text" name="textDpto" class="form-control" id="nomDpto"/><span class="fa fa-briefcase" id="icdp1"></span>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="stDpto">Estatus del Departamento</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
+                                                    <select name="comboDpto" class="form-control" id="stDpto">
+                                                        <option value="">-</option>
+                                                        <option value="1">Activo</option>
+                                                        <option value="2">Inactivo</option>
+                                                    </select><i class="fa fa-check" id="icdp2"></i>
+                                                </div> 
                                             </div> 
-                                        </div> 
+                                        </div>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="submit" class="bttnMd" id="btnSv">Guardar <i class="fa fa-floppy-o"></i></button>
@@ -65,7 +66,6 @@
                             </div>                           
                         </div>
                     </div>
-                </div>
-                
+                </div> 
             </div>
     @endsection
