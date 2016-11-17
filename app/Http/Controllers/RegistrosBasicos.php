@@ -144,12 +144,81 @@ class RegistrosBasicos extends Controller
 	}
 
 	
-
 	
 
+	public function clientes_sucursales_responsable()
+	{
+		$datos=$this->cargar_header_sidebar_acciones();
+		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(32,33),31);
+		return view ('Registros Basicos\Clientes\clientes_sucursales_responsable',$this->datos_vista($datos,$acciones,array()));
+						
+	}
+
+	public function clientes_sucursales_plan()
+		{
+			$datos=$this->cargar_header_sidebar_acciones();
+			$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(35,36,37),34);
+			return view ('Registros Basicos\Clientes\clientes_sucursales_plan',$this->datos_vista($datos,$acciones,array()));
+							
+		}
+		
+
+	public function clientes_sucursales_plan_servicios()
+		{
+			$datos=$this->cargar_header_sidebar_acciones();
+			$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(40,39),38);
+			return view ('Registros Basicos\Clientes\clientes_sucursales_plan_servicios',$this->datos_vista($datos,$acciones,array()));
+							
+		}
 
 
+	public function clientes_sucursales_equipos()//
+		{
+			$datos=$this->cargar_header_sidebar_acciones();
+			$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(42,43,44),41);
+			return view ('Registros Basicos\Clientes\clientes_sucursales_equipos',$this->datos_vista($datos,$acciones,array()));
+							
+		}
 
+	public function clientes_sucursales_equipos_componentes()
+		{
+			$datos=$this->cargar_header_sidebar_acciones();
+			$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(46,47,48,49),45);
+			return view ('Registros Basicos\Clientes\clientes_sucursales_equipos_componentes',$this->datos_vista($datos,$acciones,array()));
+							
+		}
+
+	public function clientes_sucursales_equipos_aplicaciones()//crear formulario
+		{
+			$datos=$this->cargar_header_sidebar_acciones();
+			$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(51,52),50);
+			return view ('Registros Basicos\Clientes\clientes_sucursales_equipos_componentes_aplicaciones',$this->datos_vista($datos,$acciones,array()));
+							
+		}
+	
+		public function clientes_sucursales_equipos_piezas()//crear formulario
+		{
+			$datos=$this->cargar_header_sidebar_acciones();
+			$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(54,55),53);
+			return view ('Registros Basicos\Clientes\clientes_sucursales_equipos_componentes_piezas',$this->datos_vista($datos,$acciones,array()));
+							
+		}
+
+
+		public function clientes_sucursales_usuarios()
+			{
+				$datos=$this->cargar_header_sidebar_acciones();
+				$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(57,58,59),56);
+				return view ('Registros Basicos\Clientes\clientes_sucursales_usuarios',$this->datos_vista($datos,$acciones,array()));
+								
+			}
+
+		public function clientes_sucursales_usuarios_perfil()
+		{
+			$datos=$this->cargar_header_sidebar_acciones();//crear acciones
+			$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(61,62,63),60);
+			return view ('Registros Basicos\Clientes\clientes_sucursales_usuarios_perfil',$this->datos_vista($datos,$acciones,array()));
+		}
 
 /////////////////////////////////////////////////////////15-11-2016///////////////////////////////////////////////
 ////////////////////////////////////////////////////Modulo Clientes///////////////////////////////////////////////
@@ -171,156 +240,14 @@ class RegistrosBasicos extends Controller
 
 
 
-	public function clientes_modificar()
-	{
-		$datos=$this->cargar_header_sidebar_acciones();
-		return view ('Registros Basicos\Clientes\clientes_modificar',
-						[
-
-						 'modulos'=>$datos['modulos'],
-						 'submodulos'=>$datos['submodulos'],
-						 'nombre'=>$datos['nombre'],
-						 'apellido'=>$datos['apellido']
-						]
-
-
-						);
-	}
 
 
 
-
-	public function clientes_responsables_modificar()
-	{
-		$datos=$this->cargar_header_sidebar_acciones();
-		return view ('Registros Basicos\Clientes\clientes_responsables_modificar',
-						[
-
-						 'modulos'=>$datos['modulos'],
-						 'submodulos'=>$datos['submodulos'],
-						 'nombre'=>$datos['nombre'],
-						 'apellido'=>$datos['apellido']
-						]
-
-
-						);
-	}
-
-	public function clientes_responsables_agregar()
-	{
-		$datos=$this->cargar_header_sidebar_acciones();
-		return view ('Registros Basicos\Clientes\clientes_responsables_agregar',
-						[
-
-						 'modulos'=>$datos['modulos'],
-						 'submodulos'=>$datos['submodulos'],
-						 'nombre'=>$datos['nombre'],
-						 'apellido'=>$datos['apellido']
-						]
-
-
-						);
-	}
 
 
 	
 
 
-	public function clientes_sucursales_modificar()
-	{
-		$datos=$this->cargar_header_sidebar_acciones();
-		return view ('Registros Basicos\Clientes\clientes_sucursales_modificar',
-						[
-
-						 'modulos'=>$datos['modulos'],
-						 'submodulos'=>$datos['submodulos'],
-						 'nombre'=>$datos['nombre'],
-						 'apellido'=>$datos['apellido']
-						]
-
-
-						);
-	}
-
-	public function clientes_sucursales_agregar()
-	{
-		$datos=$this->cargar_header_sidebar_acciones();
-		return view ('Registros Basicos\Clientes\clientes_sucursales_agregar',
-						[
-
-						 'modulos'=>$datos['modulos'],
-						 'submodulos'=>$datos['submodulos'],
-						 'nombre'=>$datos['nombre'],
-						 'apellido'=>$datos['apellido']
-						]
-
-
-						);
-	}
-
-public function clientes_sucursales_responsable()
-	{
-		$datos=$this->cargar_header_sidebar_acciones();
-		return view ('Registros Basicos\Clientes\clientes_sucursales_responsable',
-						[
-
-						 'modulos'=>$datos['modulos'],
-						 'submodulos'=>$datos['submodulos'],
-						 'nombre'=>$datos['nombre'],
-						 'apellido'=>$datos['apellido']
-						]
-
-
-						);
-	}
-
-public function clientes_sucursales_plan()
-	{
-		$datos=$this->cargar_header_sidebar_acciones();
-		return view ('Registros Basicos\Clientes\clientes_sucursales_plan',
-						[
-
-						 'modulos'=>$datos['modulos'],
-						 'submodulos'=>$datos['submodulos'],
-						 'nombre'=>$datos['nombre'],
-						 'apellido'=>$datos['apellido']
-						]
-
-
-						);
-	}
-
-public function clientes_sucursales_equipos()
-	{
-		$datos=$this->cargar_header_sidebar_acciones();
-		return view ('Registros Basicos\Clientes\clientes_sucursales_equipos',
-						[
-
-						 'modulos'=>$datos['modulos'],
-						 'submodulos'=>$datos['submodulos'],
-						 'nombre'=>$datos['nombre'],
-						 'apellido'=>$datos['apellido']
-						]
-
-
-						);
-	}
-
-public function clientes_sucursales_usuarios()
-	{
-		$datos=$this->cargar_header_sidebar_acciones();
-		return view ('Registros Basicos\Clientes\clientes_sucursales_usuarios',
-						[
-
-						 'modulos'=>$datos['modulos'],
-						 'submodulos'=>$datos['submodulos'],
-						 'nombre'=>$datos['nombre'],
-						 'apellido'=>$datos['apellido']
-						]
-
-
-						);
-	}
 
 /////////////////////////////////////////////////////////15-11-2016 2da ronda///////////////////////////////////////////////
 ////////////////////////////////////////////////////Modulo Clientes///////////////////////////////////////////////
@@ -328,73 +255,8 @@ public function clientes_sucursales_usuarios()
 	
 
 
-	public function clientes_categoria_modificar()
-	{
-		$datos=$this->cargar_header_sidebar_acciones();
-		return view ('Registros Basicos\Clientes\clientes_categoria_modificar',
-						[
-
-						 'modulos'=>$datos['modulos'],
-						 'submodulos'=>$datos['submodulos'],
-						 'nombre'=>$datos['nombre'],
-						 'apellido'=>$datos['apellido']
-						]
 
 
-						);
-	}
-
-
-
-public function clientes_sucursales_responsable_agregar()
-	{
-		$datos=$this->cargar_header_sidebar_acciones();
-		return view ('Registros Basicos\Clientes\clientes_sucursales_responsable_agregar',
-						[
-
-						 'modulos'=>$datos['modulos'],
-						 'submodulos'=>$datos['submodulos'],
-						 'nombre'=>$datos['nombre'],
-						 'apellido'=>$datos['apellido']
-						]
-
-
-						);
-	}
-
-public function clientes_sucursales_responsable_modificar()
-	{
-		$datos=$this->cargar_header_sidebar_acciones();
-		return view ('Registros Basicos\Clientes\clientes_sucursales_responsable_modificar',
-						[
-
-						 'modulos'=>$datos['modulos'],
-						 'submodulos'=>$datos['submodulos'],
-						 'nombre'=>$datos['nombre'],
-						 'apellido'=>$datos['apellido']
-						]
-
-
-						);
-	}
-
-
-
-public function clientes_sucursales_plan_agregar()
-	{
-		$datos=$this->cargar_header_sidebar_acciones();
-		return view ('Registros Basicos\Clientes\clientes_sucursales_plan_agregar',
-						[
-
-						 'modulos'=>$datos['modulos'],
-						 'submodulos'=>$datos['submodulos'],
-						 'nombre'=>$datos['nombre'],
-						 'apellido'=>$datos['apellido']
-						]
-
-
-						);
-	}
 
 public function clientes_sucursales_plan_modificar()
 	{
@@ -412,150 +274,7 @@ public function clientes_sucursales_plan_modificar()
 						);
 	}
 
-public function clientes_sucursales_plan_servicios()
-	{
-		$datos=$this->cargar_header_sidebar_acciones();
-		return view ('Registros Basicos\Clientes\clientes_sucursales_plan_servicios',
-						[
 
-						 'modulos'=>$datos['modulos'],
-						 'submodulos'=>$datos['submodulos'],
-						 'nombre'=>$datos['nombre'],
-						 'apellido'=>$datos['apellido']
-						]
-
-
-						);
-	}
-
-public function clientes_sucursales_plan_serv_modificar()
-	{
-		$datos=$this->cargar_header_sidebar_acciones();
-		return view ('Registros Basicos\Clientes\clientes_sucursales_plan_serv_modificar',
-						[
-
-						 'modulos'=>$datos['modulos'],
-						 'submodulos'=>$datos['submodulos'],
-						 'nombre'=>$datos['nombre'],
-						 'apellido'=>$datos['apellido']
-						]
-
-
-						);
-	}
-public function clientes_sucursales_plan_serv_agregar()
-	{
-		$datos=$this->cargar_header_sidebar_acciones();
-		return view ('Registros Basicos\Clientes\clientes_sucursales_pla_serv_agregar',
-						[
-
-						 'modulos'=>$datos['modulos'],
-						 'submodulos'=>$datos['submodulos'],
-						 'nombre'=>$datos['nombre'],
-						 'apellido'=>$datos['apellido']
-						]
-
-
-						);
-	}
-
-public function clientes_sucursales_equipos_agregar()
-	{
-		$datos=$this->cargar_header_sidebar_acciones();
-		return view ('Registros Basicos\Clientes\clientes_sucursales_equipos_agregar',
-						[
-
-						 'modulos'=>$datos['modulos'],
-						 'submodulos'=>$datos['submodulos'],
-						 'nombre'=>$datos['nombre'],
-						 'apellido'=>$datos['apellido']
-						]
-
-
-						);
-	}
-
-public function clientes_sucursales_equipos_modificar()
-	{
-		$datos=$this->cargar_header_sidebar_acciones();
-		return view ('Registros Basicos\Clientes\clientes_sucursales_equipos_modificar',
-						[
-
-						 'modulos'=>$datos['modulos'],
-						 'submodulos'=>$datos['submodulos'],
-						 'nombre'=>$datos['nombre'],
-						 'apellido'=>$datos['apellido']
-						]
-
-
-						);
-	}
-
-public function clientes_sucursales_equipos_componentes()
-	{
-		$datos=$this->cargar_header_sidebar_acciones();
-		return view ('Registros Basicos\Clientes\clientes_sucursales_equipos_componentes',
-						[
-
-						 'modulos'=>$datos['modulos'],
-						 'submodulos'=>$datos['submodulos'],
-						 'nombre'=>$datos['nombre'],
-						 'apellido'=>$datos['apellido']
-						]
-
-
-						);
-	}
-
-public function clientes_sucursales_usuarios_agregar()
-	{
-		$datos=$this->cargar_header_sidebar_acciones();
-		return view ('Registros Basicos\Clientes\clientes_sucursales_usuarios_agregar',
-						[
-
-						 'modulos'=>$datos['modulos'],
-						 'submodulos'=>$datos['submodulos'],
-						 'nombre'=>$datos['nombre'],
-						 'apellido'=>$datos['apellido']
-						]
-
-
-						);
-	}
-
-
-public function clientes_sucursales_usuarios_modificar()
-	{
-		$datos=$this->cargar_header_sidebar_acciones();
-		return view ('Registros Basicos\Clientes\clientes_sucursales_usuarios_modificar',
-						[
-
-						 'modulos'=>$datos['modulos'],
-						 'submodulos'=>$datos['submodulos'],
-						 'nombre'=>$datos['nombre'],
-						 'apellido'=>$datos['apellido']
-						]
-
-
-						);
-	}
-
-
-public function clientes_sucursales_usuarios_perfil()
-	{
-		$datos=$this->cargar_header_sidebar_acciones();
-		return view ('Registros Basicos\Clientes\clientes_sucursales_usuarios_perfil',
-						[
-
-						 'modulos'=>$datos['modulos'],
-						 'submodulos'=>$datos['submodulos'],
-						 'nombre'=>$datos['nombre'],
-						 'apellido'=>$datos['apellido']
-						]
-
-
-						);
-	}
 
 
 
