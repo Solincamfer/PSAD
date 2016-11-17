@@ -56,47 +56,103 @@ class RegistrosBasicos extends Controller
 
 
 
+	public function datos_vista($datos_session,$datos_acciones,$consulta)//asocia en un vector los datos que deben pasarse a una vista
+	{
+		$valores_vista=array(
+								'modulos'=>$datos_session['modulos'],//side bar
+								'submodulos'=>$datos_session['submodulos'],//side bar
+								'nombre'=>$datos_session['nombre'],//header
+								'apellido'=>$datos_session['apellido'],//header
+								'acciones'=>$datos_acciones['acciones'],//acciones
+								'agregar'=>$datos_acciones['agregar'],//boton de agregar
+								'consulta'=>$consulta//registros provenientes de la base de datos
+
+
+								);
+
+		return $valores_vista;	
+	}
+
+
+/////////////////////controladores de las rutas //////////////////////////////////////////////
+
+	
 
 	public function departamentos_cargos($departamento_id)//Inicializacion del submodulo: /departamentos/cargos
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
 		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(5,6),7);
-
-		$cargos=DB::table('cargos')->where('departamento_id',$departamento_id)->get();
-
-		return view('Registros Basicos\Departamentos\cargos',
-					['modulos'=>$datos['modulos'],
-					 'submodulos'=>$datos['submodulos'],
-					 'nombre'=>$datos['nombre'],
-					 'apellido'=>$datos['apellido'],
-					 'cargos'=>$cargos,
-					 'acciones'=>$acciones['acciones'],
-					 'agregar'=>$acciones['agregar']
-					 ]
-					 );
+		return view('Registros Basicos\Departamentos\cargos',$this->datos_vista($datos,$acciones,DB::table('cargos')->where('departamento_id',$departamento_id)->get()));
+					
 	}
-
 
 
 	public function departamentos()//Inicializacion del submodulo: /departamentos
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
 		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(1,2,3),4);
-		$departamentos=DB::table('departamentos')->get();
-
-		return view('Registros Basicos\Departamentos\departamentos',
-					[
-					 'modulos'=>$datos['modulos'],
-					 'submodulos'=>$datos['submodulos'],
-					 'acciones'=>$acciones['acciones'],
-					 'nombre'=>$datos['nombre'],
-					 'apellido'=>$datos['apellido'],
-					 'departamentos'=>$departamentos,
-					 'agregar'=>$acciones['agregar']
-					 ]
-					 );
+		
+		return view('Registros Basicos\Departamentos\departamentos',$this->datos_vista($datos,$acciones,DB::table('departamentos')->get()));
+					
 	}
 
+
+	public function clientes()//inicializacion del submodulo: clientes
+	{
+		$datos=$this->cargar_header_sidebar_acciones();
+		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(9,10,11,12),8);
+	
+		return view('Registros Basicos\Clientes\clientes',$this->datos_vista($datos,$acciones,array())); 
+	}
+
+
+
+
+	public function clientes_responsables()//
+	{
+		$datos=$this->cargar_header_sidebar_acciones();
+		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(14,15),13);
+		return view ('Registros Basicos\Clientes\clientes_responsables',$this->datos_vista($datos,$acciones,array())); 
+					
+	}
+
+
+
+
+	public function clientes_sucursales()
+	{
+		$datos=$this->cargar_header_sidebar_acciones();
+		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(25,26,27,28,29,30),24);
+		return view ('Registros Basicos\Clientes\clientes_sucursales',$this->datos_vista($datos,$acciones,array()));
+						
+	}
+
+	public function clientes_categoria()
+	{
+		$datos=$this->cargar_header_sidebar_acciones();
+		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(16,17,18,19),20);
+		return view ('Registros Basicos\Clientes\clientes_categoria',$this->datos_vista($datos,$acciones,array()));
+						
+	}
+
+	public function clientes_categoria_responsable()
+	{
+		$datos=$this->cargar_header_sidebar_acciones();
+		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(22,23),21);
+		return view ('Registros Basicos\Clientes\clientes_categoria_responsable',$this->datos_vista($datos,$acciones,array()));
+						
+	}
+
+	
+
+	
+
+
+
+
+
+/////////////////////////////////////////////////////////15-11-2016///////////////////////////////////////////////
+////////////////////////////////////////////////////Modulo Clientes///////////////////////////////////////////////
 
 
 	public function servicios()
@@ -113,31 +169,6 @@ class RegistrosBasicos extends Controller
 	}
 	
 
-
-	public function clientes()
-	{
-		$datos=$this->cargar_header_sidebar_acciones();
-		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(9,10,11,12),8);
-		//$clientes=DB::table('clientes')->get();
-			return view('Registros Basicos\Clientes\clientes', 
-					[
-					 'modulos'=>$datos['modulos'],
-					 'submodulos'=>$datos['submodulos'],
-					 'nombre'=>$datos['nombre'],
-					 'apellido'=>$datos['apellido'],
-					 'acciones'=>$acciones['acciones'],
-					 'agregar'=>$acciones['agregar']
-					 ]
-					 );
-	}
-
-
-
-
-
-
-/////////////////////////////////////////////////////////15-11-2016///////////////////////////////////////////////
-////////////////////////////////////////////////////Modulo Clientes///////////////////////////////////////////////
 
 
 	public function clientes_modificar()
@@ -157,24 +188,6 @@ class RegistrosBasicos extends Controller
 	}
 
 
-	public function clientes_responsables()//agregar acciones 
-	{
-		$datos=$this->cargar_header_sidebar_acciones();
-		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(14,15),13);
-		return view ('Registros Basicos\Clientes\clientes_responsables',
-						[
-
-						 'modulos'=>$datos['modulos'],
-						 'submodulos'=>$datos['submodulos'],
-						 'nombre'=>$datos['nombre'],
-						 'apellido'=>$datos['apellido'],
-						 'acciones'=>$acciones['acciones'],
-						 'agregar'=>$acciones['agregar']
-						]
-
-
-						);
-	}
 
 
 	public function clientes_responsables_modificar()
@@ -210,24 +223,7 @@ class RegistrosBasicos extends Controller
 	}
 
 
-	public function clientes_sucursales()
-	{
-		$datos=$this->cargar_header_sidebar_acciones();
-		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(25,26,27,28,29,30),24);
-		return view ('Registros Basicos\Clientes\clientes_sucursales',
-						[
-
-						 'modulos'=>$datos['modulos'],
-						 'submodulos'=>$datos['submodulos'],
-						 'nombre'=>$datos['nombre'],
-						 'apellido'=>$datos['apellido'],
-						 'acciones'=>$acciones['acciones'],
-						 'agregar'=>$acciones['agregar']
-						]
-
-
-						);
-	}
+	
 
 
 	public function clientes_sucursales_modificar()
@@ -329,24 +325,7 @@ public function clientes_sucursales_usuarios()
 /////////////////////////////////////////////////////////15-11-2016 2da ronda///////////////////////////////////////////////
 ////////////////////////////////////////////////////Modulo Clientes///////////////////////////////////////////////
 
-	public function clientes_categoria()
-	{
-		$datos=$this->cargar_header_sidebar_acciones();
-		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(16,17,18,19),20);
-		return view ('Registros Basicos\Clientes\clientes_categoria',
-						[
-
-						 'modulos'=>$datos['modulos'],
-						 'submodulos'=>$datos['submodulos'],
-						 'nombre'=>$datos['nombre'],
-						 'apellido'=>$datos['apellido'],
-						 'acciones'=>$acciones['acciones'],
-						 'agregar'=>$acciones['agregar']
-						]
-
-
-						);
-	}
+	
 
 
 	public function clientes_categoria_modificar()
@@ -365,24 +344,7 @@ public function clientes_sucursales_usuarios()
 						);
 	}
 
-public function clientes_categoria_responsable()
-	{
-		$datos=$this->cargar_header_sidebar_acciones();
-		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(22,23),21);
-		return view ('Registros Basicos\Clientes\clientes_categoria_responsable',
-						[
 
-						 'modulos'=>$datos['modulos'],
-						 'submodulos'=>$datos['submodulos'],
-						 'nombre'=>$datos['nombre'],
-						 'apellido'=>$datos['apellido'],
-						 'acciones'=>$acciones['acciones'],
-						 'agregar'=>$acciones['agregar']
-						]
-
-
-						);
-	}
 
 public function clientes_sucursales_responsable_agregar()
 	{

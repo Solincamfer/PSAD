@@ -8,7 +8,7 @@
             <div class="contenido">
                 <div class="col-xs-5 col-sm-5 col-md-6 col-md-offset-3" style=""> 
                     <button id="btnAdd" type="button" class="btnAd col-md-offset-10" data-toggle="modal" data-target="#myModal" href="#myModal">AGREGAR <i class="fa fa-plus-circle"></i></button>
-                    @foreach($departamentos as $departamento)
+                    @foreach($consulta as $departamento)
                         <div class="contMd" style="">
                             @foreach($acciones as $accion)
                                 @if($accion->descripcion!="Status" )
