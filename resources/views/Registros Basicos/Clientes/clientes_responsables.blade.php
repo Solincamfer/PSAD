@@ -1,7 +1,7 @@
 @extends('admin.basesys')
     @section('contenido')
         @section('title')
-            Registro Cliente - Responsable
+            Registro Responsable - Cliente
         @endsection
             @include('layout/header')
                 @include('layout/sidebar')
@@ -39,15 +39,15 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                        <h4 class="modal-title" id="myModalLabel">Agregar Cliente - Responsable</h4>
+                                        <h4 class="modal-title" id="myModalLabel">Agregar Responsable - Cliente</h4>
                                     </div>
                                     
                                         <form method="post" class="form-horizontal Validacion" action="">
                                         <div class="modal-body">
                                             <ul class="nav nav-tabs" role="tablist">
-                                                <li role="presentation" class="active"><a href="#dbr1" aria-controls="dbr1" role="tab" data-toggle="tab" style="display: none;">Datos básicos Primarios</a></li>
-                                                <li role="presentation"><a href="#dbr2" aria-controls="dbr2" role="tab" data-toggle="tab" style="display: none;">Datos básicos Secundarios</a></li>
-                                                <li role="presentation"><a href="#ctor" aria-controls="ctor" role="tab" data-toggle="tab" style="display: none;">Contactos</a></li>
+                                                <li role="presentation" class="active"><a href="#dbr1" aria-controls="dbr1" role="tab" data-toggle="tab" style="display:;">Datos básicos Primarios</a></li>
+                                                <li role="presentation"><a href="#dbr2" aria-controls="dbr2" role="tab" data-toggle="tab" style="display:;">Datos básicos Secundarios</a></li>
+                                                <li role="presentation"><a href="#ctor" aria-controls="ctor" role="tab" data-toggle="tab" style="display:;">Contactos</a></li>
                                             </ul>
                                             <div class="container-fluid">
                                                 <div class="tab-content">
@@ -62,23 +62,23 @@
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4  col-md-offset-1">
-                                                                <div class="form-group" id="rRpb1">    
+                                                                <div class="form-group" id="rRpb2">    
                                                                 
                                                                     <label for="nomRpb2">2do Nombre</label>
                                                                     <input type="text" name="nomRpb2" class="form-control" id="nomRpb2"><i class="fa fa-user-plus"></i>
                                                                 </div>
                                                             </div>
-                                                            </div>
-                                                            <div class="row" id="contrpbdbr1">   
+                                                        </div>
+                                                        <div class="row" id="contrpbdbr2">   
                                                             <div class="col-md-5  col-md-offset-1">
-                                                                <div class="form-group" id="rRpb2">
+                                                                <div class="form-group" id="rRpb3">
                                                                 
                                                                     <label for="apellRpb1">1er Apellido</label>
                                                                     <input type="text" name="apellRpb1" class="form-control" id="apellRpb1"><i class="fa fa-user"></i>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4 col-md-offset-1">
-                                                                <div class="form-group" id="rRpb2">                                               
+                                                                <div class="form-group" id="rRpb4">                                               
                                                                     <label for="apellRpb2">2do Apellido</label>
                                                                     <input type="text" name="apellRpb2" class="form-control" id="apellRpb2"><i class="fa fa-user-plus"></i>
                                                                 </div> 
@@ -88,7 +88,7 @@
                                                     <div role="tabpanel" class="tab-pane" id="dbr2">
                                                     <center><u><p>DATOS BASICOS SECUNDARIOS</p></u></center>
                                                     <br>
-                                                        <div class="container-fluid" id="contrpbdbr2">
+                                                    <div class="container-fluid" id="contrpbdbr3">
                                                         <div class="col-md-12">
                                                                 <div class="col-md-6">                                                            
                                                                 <div class="col-md-12">

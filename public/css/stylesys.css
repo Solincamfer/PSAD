@@ -431,24 +431,25 @@
             color: #111;
         }
     /*Modal*/
-        #myModal{
+        #myModal, #myModal2{
             font-family: 'Ubuntu Condensed', sans-serif;
         }
 
-        #contDb, #contdf, #contdc, #contctt, 
+        #contDb, #contdf, #contdc, #contctt,
+        #contDbm, #contdfm, #contdcm, #contcttm,
         #contdpto, #contcgo, #contPn{
             margin-top: 20px;
             padding: 10px;
         }
 
-        #btnSv{
+        #btnSv, #btnSvm{
             background: #26a69d;
         }
 
-        #btnCs{
+        #btnCs, #btnCsm{
             background: #ec1c24;
         }
-        #btnAn{
+        #btnAn, #btnAnm{
             background: #ec1c24;
         }
         
@@ -473,7 +474,7 @@
             border-left-width: 35px;
         }
 
-        #dpto #icdp1, #dpto #icdp2, #cgo #iccg1, #cgo #iccg2{
+        #dpto #icdp1, #dpto #icdp2, #cgo #iccg1, #cgo #iccg2 {
             color: #fff;
             font-size: 1em;
             position: absolute;
@@ -505,7 +506,511 @@
             color: #333;
             border: none;
         }
+        
+        /*Cliente matriz*/
+            /*modal Agregar*/
+                /*Datos Basicos*/
+                    #dbc1 input, #dbc2 select, #dbc3 select{
+                        display: block;
+                        padding: 3px 5px;
+                        margin-bottom: 10px;
+                        width: 100%;
+                        border: 1px solid #ddd;
+                        text-indent: 17px;
+                        transition: border-width .2s ease-in-out;
+                        border-radius: 2px;
+                        color: #ccc;
+                    }
 
+                
+                
+                    #dbc1 input:focus, #dbc2 input:focus, #dbc2 select:focus, 
+                    #dbc3 select:focus{
+                        outline: none;
+                        color: #444;
+                        border-color: #26a69d;
+                        border-left-width: 35px;
+                    }
+
+                    #dbc1 #icc1, #dbc2 #icc3, #dbc2 #icc4, #dbc3 #icc5{
+                        color: #fff;
+                        font-size: 1em;
+                        position: absolute;
+                        margin-top: -35px;
+                        margin-left: 23px;
+                        opacity: 1;
+                        left: 0;
+                        transition: all .1s ease-in;
+                    }
+
+                    #dbc1 #icc2 {
+                        color: #fff;
+                        font-size: 1em;
+                        position: absolute;
+                        margin-top: -35px;
+                        margin-left: 26px;
+                        opacity: 1;
+                        left: 0;
+                        transition: all .1s ease-in;
+                    }
+
+                    #dbc2 input {
+                        display: block;
+                        padding: 3px 5px;
+                        margin-bottom: 10px;
+                        width: 100%;
+                        border: 1px solid #ddd;
+                        text-indent: 20px;
+                        transition: border-width .2s ease-in-out;
+                        border-radius: 2px;
+                        color: #ccc;
+                    }
+
+                    #sep{
+                        margin-right: 14px;
+                    }
+
+                    #dbc3 .ic{
+                        background-color: #26a69d;
+                        position: absolute;
+                        padding-top: 7px;
+                        top: 0;
+                        right: 0;
+                        height: 33.5px;
+                        width: 30px;
+                        margin-top: 22px;
+                        margin-right: 16px;
+                        text-align: center;
+                        pointer-events: none;
+                        color: #333;
+                        border: none
+                    }
+
+                    #dbc2 .ic{
+                        background-color: #26a69d;
+                        position: absolute;
+                        padding-top: 7px;
+                        top: 0;
+                        left: 0;
+                        height: 33.5px;
+                        width: 30px;
+                        margin-top: 22px;
+                        margin-left: 7.3em;
+                        text-align: center;
+                        pointer-events: none;
+                        color: #333;
+                        border: none;
+                        z-index: 1;
+                    }
+                /*Direccion Fiscal & Comercial*/
+                
+                    #dfc1 select, #dfc2 select, #dfc3 select, #dfc4 select, #dfc5 textarea,
+                    #dcc1 select, #dcc2 select, #dcc3 select, #dcc4 select, #dcc5 textarea{
+                        display: block;
+                        padding: 3px 5px;
+                        margin-bottom: 10px;
+                        width: 100%;
+                        border: 1px solid #ddd;
+                        text-indent: 17px;
+                        transition: border-width .2s ease-in-out;
+                        border-radius: 2px;
+                        color: #ccc;
+                    }
+
+                    #dfc1 select:focus, #dfc2 select:focus, 
+                    #dfc3 select:focus, #dfc4 select:focus, #dfc5 textarea:focus, 
+                    #dcc1 select:focus, #dcc2 select:focus, 
+                    #dcc3 select:focus, #dcc4 select:focus, #dcc5 textarea:focus{
+                        outline: none;
+                        color: #444;
+                        border-color: #26a69d;
+                        border-left-width: 35px;
+                    }
+
+                    #dfc1 #icc6, #dfc3 #icc8, #dcc1 #icc11, #dcc3 #icc13{
+                        color: #fff;
+                        font-size: 1em;
+                        position: absolute;
+                        margin-top: -35px;
+                        margin-left: 25px;
+                        opacity: 1;
+                        left: 0;
+                        transition: all .1s ease-in;
+                    }
+
+                    #dfc2 #icc7, #dfc4 #icc9, #dcc2 #icc12, #dcc4 #icc14{
+                        color: #fff;
+                        font-size: 1em;
+                        position: absolute;
+                        margin-top: -35px;
+                        margin-left: 4.3em;
+                        opacity: 1;
+                        left: 0;
+                        transition: all .1s ease-in;
+                    }
+
+                    #dfc5 #icc10, #dcc5 #icc15{
+                        color: #fff;
+                        font-size: 1em;
+                        position: absolute;
+                        margin-top: -41px;
+                        margin-left: 28px;
+                        opacity: 1;
+                        left: 0;
+                        transition: all .1s ease-in
+                    }
+
+                    #dfc1 .ic, #dfc3 .ic, #dfc2 .ic, #dfc4 .ic,
+                    #dcc1 .ic, #dcc3 .ic, #dcc2 .ic, #dcc4 .ic{
+                        background-color: #26a69d;
+                        position: absolute;
+                        padding-top: 7px;
+                        top: 0;
+                        right: 0;
+                        height: 33.5px;
+                        width: 30px;
+                        margin-top: 22px;
+                        margin-right: 16px;
+                        text-align: center;
+                        pointer-events: none;
+                        color: #333;
+                        border: none;
+                    }
+                /*Contacto*/
+                    #ctoc1 select, #ctoc2 input, #ctoc3 select, #ctoc4 input, #ctoc5 input{
+                        display: block;
+                        padding: 3px 5px;
+                        margin-bottom: 10px;
+                        width: 100%;
+                        border: 1px solid #ddd;
+                        text-indent: 17px;
+                        transition: border-width .2s ease-in-out;
+                        border-radius: 2px;
+                        color: #ccc;
+                    }
+
+                    #ctoc1 select:focus, #ctoc2 input:focus, 
+                    #ctoc3 select:focus, #ctoc4 input:focus, 
+                    #ctoc5 input:focus {
+                        outline: none;
+                        color: #444;
+                        border-color: #26a69d;
+                        border-left-width: 35px;
+                    }
+
+                    #ctoc5 #icc20{
+                        color: #fff;
+                        font-size: 1em;
+                        position: absolute;
+                        margin-top: -35px;
+                        margin-left: 23px;
+                        opacity: 1;
+                        left: 0;
+                        transition: all .1s ease-in;
+                    }
+                    
+                    #ctoc4 #icc19{
+                        color: #fff;
+                        font-size: 1.2em;
+                        position: absolute;
+                        margin-top: -35px;
+                        margin-left: 28px;
+                        opacity: 1;
+                        left: 0;
+                        transition: all .1s ease-in;
+                    }
+
+                    #ctoc2 #icc17{
+                        color: #fff;
+                        font-size: 1em;
+                        position: absolute;
+                        margin-top: 10px;
+                        margin-left: 25px;
+                        opacity: 1;
+                        left: 0;
+                        transition: all .1s ease-in;
+                        z-index: 1;
+                    }
+
+                    #ctoc1 #icc16, #ctoc3 #icc18{
+                        color: #fff;
+                        font-size: 1em;
+                        position: absolute;
+                        margin-top: -35px;
+                        margin-left: 35px;
+                        opacity: 1;
+                        left: 0;
+                        transition: all .1s ease-in;
+                    }
+
+                    #ctoc1 .ic, #ctoc3 .ic{
+                        background-color: #26a69d;
+                        position: absolute;
+                        padding-top: 7px;
+                        top: 0;
+                        left: 0;
+                        height: 33.5px;
+                        width: 30px;
+                        margin-top: 22px;
+                        margin-left: 7.3em;
+                        text-align: center;
+                        pointer-events: none;
+                        color: #333;
+                        border: none;
+                        z-index: 1;
+                    }
+        /*Modal Modificar*/
+                /*Datos Basicos*/
+                    #dbcm1 input, #dbcm2 select, #dbcm3 select{
+                        display: block;
+                        padding: 3px 5px;
+                        margin-bottom: 10px;
+                        width: 100%;
+                        border: 1px solid #ddd;
+                        text-indent: 17px;
+                        transition: border-width .2s ease-in-out;
+                        border-radius: 2px;
+                        color: #ccc;
+                    }
+
+
+
+                    #dbcm1 input:focus, #dbcm2 input:focus, #dbcm2 select:focus, 
+                    #dbcm3 select:focus{
+                        outline: none;
+                        color: #444;
+                        border-color: #26a69d;
+                        border-left-width: 35px;
+                    }
+
+                    #dbcm1 #micc1, #dbcm2 #micc3, #dbcm2 #micc4, #dbcm3 #micc5{
+                        color: #fff;
+                        font-size: 1em;
+                        position: absolute;
+                        margin-top: -35px;
+                        margin-left: 23px;
+                        opacity: 1;
+                        left: 0;
+                        transition: all .1s ease-in;
+                    }
+
+                    #dbcm1 #micc2 {
+                        color: #fff;
+                        font-size: 1em;
+                        position: absolute;
+                        margin-top: -35px;
+                        margin-left: 26px;
+                        opacity: 1;
+                        left: 0;
+                        transition: all .1s ease-in;
+                    }
+
+                    #dbcm2 input {
+                        display: block;
+                        padding: 3px 5px;
+                        margin-bottom: 10px;
+                        width: 100%;
+                        border: 1px solid #ddd;
+                        text-indent: 20px;
+                        transition: border-width .2s ease-in-out;
+                        border-radius: 2px;
+                        color: #ccc;
+                    }
+
+                    #sepm{
+                        margin-right: 14px;
+                    }
+
+                    #dbcm3 .ic{
+                        background-color: #26a69d;
+                        position: absolute;
+                        padding-top: 7px;
+                        top: 0;
+                        right: 0;
+                        height: 33.5px;
+                        width: 30px;
+                        margin-top: 22px;
+                        margin-right: 16px;
+                        text-align: center;
+                        pointer-events: none;
+                        color: #333;
+                        border: none
+                    }
+
+                    #dbcm2 .ic{
+                        background-color: #26a69d;
+                        position: absolute;
+                        padding-top: 7px;
+                        top: 0;
+                        left: 0;
+                        height: 33.5px;
+                        width: 30px;
+                        margin-top: 22px;
+                        margin-left: 7.3em;
+                        text-align: center;
+                        pointer-events: none;
+                        color: #333;
+                        border: none;
+                        z-index: 1;
+                    }
+
+                /*Direccion Fiscal & Comercial*/
+
+                    #dfcm1 select, #dfcm2 select, #dfcm3 select, #dfcm4 select, #dfcm5 textarea,
+                    #dccm1 select, #dccm2 select, #dccm3 select, #dccm4 select, #dccm5 textarea{
+                        display: block;
+                        padding: 3px 5px;
+                        margin-bottom: 10px;
+                        width: 100%;
+                        border: 1px solid #ddd;
+                        text-indent: 17px;
+                        transition: border-width .2s ease-in-out;
+                        border-radius: 2px;
+                        color: #ccc;
+                    }
+
+                    #dfcm1 select:focus, #dfcm2 select:focus, 
+                    #dfcm3 select:focus, #dfcm4 select:focus, #dfcm5 textarea:focus, 
+                    #dccm1 select:focus, #dccm2 select:focus, 
+                    #dccm3 select:focus, #dccm4 select:focus, #dccm5 textarea:focus{
+                        outline: none;
+                        color: #444;
+                        border-color: #26a69d;
+                        border-left-width: 35px;
+                    }
+
+                    #dfcm1 #micc6, #dfcm3 #micc8, #dccm1 #micc11, #dccm3 #micc13{
+                        color: #fff;
+                        font-size: 1em;
+                        position: absolute;
+                        margin-top: -35px;
+                        margin-left: 25px;
+                        opacity: 1;
+                        left: 0;
+                        transition: all .1s ease-in;
+                    }
+
+                    #dfcm2 #micc7, #dfcm4 #micc9, #dccm2 #micc12, #dccm4 #micc14{
+                        color: #fff;
+                        font-size: 1em;
+                        position: absolute;
+                        margin-top: -35px;
+                        margin-left: 4.3em;
+                        opacity: 1;
+                        left: 0;
+                        transition: all .1s ease-in;
+                    }
+
+                    #dfcm5 #micc10, #dccm5 #micc15{
+                        color: #fff;
+                        font-size: 1em;
+                        position: absolute;
+                        margin-top: -41px;
+                        margin-left: 28px;
+                        opacity: 1;
+                        left: 0;
+                        transition: all .1s ease-in
+                    }
+
+                    #dfcm1 .ic, #dfcm3 .ic, #dfcm2 .ic, #dfcm4 .ic,
+                    #dccm1 .ic, #dccm3 .ic, #dccm2 .ic, #dccm4 .ic{
+                        background-color: #26a69d;
+                        position: absolute;
+                        padding-top: 7px;
+                        top: 0;
+                        right: 0;
+                        height: 33.5px;
+                        width: 30px;
+                        margin-top: 22px;
+                        margin-right: 16px;
+                        text-align: center;
+                        pointer-events: none;
+                        color: #333;
+                        border: none;
+                    }
+                /*Contacto*/
+                    #ctocm1 select, #ctocm2 input, #ctocm3 select, #ctocm4 input, #ctocm5 input{
+                        display: block;
+                        padding: 3px 5px;
+                        margin-bottom: 10px;
+                        width: 100%;
+                        border: 1px solid #ddd;
+                        text-indent: 17px;
+                        transition: border-width .2s ease-in-out;
+                        border-radius: 2px;
+                        color: #ccc;
+                    }
+
+                    #ctocm1 select:focus, #ctocm2 input:focus, 
+                    #ctocm3 select:focus, #ctocm4 input:focus, 
+                    #ctocm5 input:focus {
+                        outline: none;
+                        color: #444;
+                        border-color: #26a69d;
+                        border-left-width: 35px;
+                    }
+
+                    #ctocm5 #micc20{
+                        color: #fff;
+                        font-size: 1em;
+                        position: absolute;
+                        margin-top: -35px;
+                        margin-left: 23px;
+                        opacity: 1;
+                        left: 0;
+                        transition: all .1s ease-in;
+                    }
+
+                    #ctocm4 #micc19{
+                        color: #fff;
+                        font-size: 1.2em;
+                        position: absolute;
+                        margin-top: -35px;
+                        margin-left: 28px;
+                        opacity: 1;
+                        left: 0;
+                        transition: all .1s ease-in;
+                    }
+
+                    #ctocm2 #micc17{
+                        color: #fff;
+                        font-size: 1em;
+                        position: absolute;
+                        margin-top: 10px;
+                        margin-left: 25px;
+                        opacity: 1;
+                        left: 0;
+                        transition: all .1s ease-in;
+                        z-index: 1;
+                    }
+
+                    #ctocm1 #micc16, #ctocm3 #micc18{
+                        color: #fff;
+                        font-size: 1em;
+                        position: absolute;
+                        margin-top: -35px;
+                        margin-left: 35px;
+                        opacity: 1;
+                        left: 0;
+                        transition: all .1s ease-in;
+                    }
+
+                    #ctocm1 .ic, #ctocm3 .ic{
+                        background-color: #26a69d;
+                        position: absolute;
+                        padding-top: 7px;
+                        top: 0;
+                        left: 0;
+                        height: 33.5px;
+                        width: 30px;
+                        margin-top: 22px;
+                        margin-left: 7.3em;
+                        text-align: center;
+                        pointer-events: none;
+                        color: #333;
+                        border: none;
+                        z-index: 1;
+                    }
         /*Planes*/
             #rPn input{
                 display: block;
@@ -560,195 +1065,4 @@
             #rPn select option{
                 background: #fff;
                 border: 2px solid #eee;
-            }
-
-        /*Datos Basicos, telefono movil y local*/
-
-            #rDb input{
-                display: block;
-                padding: 3px 5px;
-                margin-bottom: 10px;
-                width: 100%;
-                border: 1px solid #ddd;
-                transition: border-width .2s ease-in-out;
-                border-radius: 2px;
-                color: #ccc;
-            }
-
-            #rDb input + i.fa{
-                color: #fff;
-                font-size: 1em;
-                position: absolute;
-                margin-top: -33px;
-                opacity: 0;
-                left: 0;
-                transition: all .1s ease-in;
-            }
-
-            #rDb input:focus{
-                outline: none;
-                color: #444;
-                border-color: #26a69d;
-                border-left-width: 35px;
-            }
-
-            #rDb input:focus + i.fa{
-                opacity: 1;
-                left: 26px;
-                transition: all .25s ease-out;
-            }
-
-            #einp {
-                width: 78.7%;
-                padding: 3px 5px;
-                margin-bottom: 10px;
-                border: 1px solid #ddd;
-                transition: border-width .2s ease-in-out;
-                border-radius: 2px;
-                color: #ccc;
-            }
-
-            #einp + i.fa, #einp1 + i.fa, #einp2 + i.fa{
-                color: #fff;
-                font-size: 1em;
-                position: absolute;
-                margin-top: -35px;
-                opacity: 0;
-                left: 0;
-                transition: all .1s ease-in;
-            }
-
-            #einp:focus, #einp1:focus, #einp2:focus{
-                outline: none;
-                color: #444;
-                border-color: #26a69d;
-                border-left-width: 35px;
-            }
-
-            #einp:focus + i.fa{
-                opacity: 1;
-                left: 65px;
-                transition: all .25s ease-out;
-            }
-
-            #einp1, #einp2{
-                margin-left: -20px;
-                margin-bottom: 10px;
-                border: 1px solid #ddd;
-                transition: border-width .2s ease-in-out;
-                border-radius: 2px;
-                color: #ccc;
-            }
-
-            #einp1:focus + i.fa {
-                opacity: 1;
-                left: 7.5px;
-                transition: all .25s ease-out;
-            }
-
-            #einp2:focus + i.fa {
-                opacity: 1;
-                left: 8px;
-                transition: all .25s ease-out;
-            }
-
-            #rif, #tlflcl, #tlfmvl{
-                border: 1px solid #ddd;
-                border-radius: 2px;
-                color: #ccc;
-            }
-
-            #rif:focus, #tlflcl:focus, #tlfmvl{
-                border-color: #26a69d;
-                outline: none;
-                color: #111;
-            }
-
-            #rif option, #tlflcl option, #tlfmvl option{
-                border-color: #26a69d;
-                color: #111;
-            }
-
-            #tipCon{
-                width: 100%;
-                padding: 3px 5px;
-                margin-bottom: 10px;
-                border: 1px solid #ddd;
-                transition: border-width .2s ease-in-out;
-                border-radius: 2px;
-                color: #ccc;
-            }
-
-            #tipCon:focus{
-                border-color: #26a69d;
-                outline: none;
-                color: #111;
-            }
-
-            #tipCon option{
-                border-color: #26a69d;
-                padding: 3px 5px;
-                margin-bottom: 10px;
-                border: 1px solid #ddd;
-                transition: border-width .2s ease-in-out;
-                color: #111;
-            }
-        /*Direccion Fiscal y Comercial, correo*/
-
-            #locDf select, #locDc select{
-                width: 100%;
-                display: block;
-                padding: 3px 5px;
-                margin-bottom: 15px;
-                border: 1px solid #ddd;
-                border-radius: 2px;
-                color: #ccc;
-            }
-
-            #locDf select:focus, #locDc select:focus{
-                color: #111;
-                outline: none;
-                border-color: #26a69d;
-            }
-
-            #locDf select option, #locDc select option{
-                background: #E5E5E7;
-                border: 2px solid #eee;
-            }
-
-            #locDfdd input, #locDcdd input, #correo input{
-                display: block;
-                padding: 3px 5px;
-                margin-bottom: 10px;
-                width: 100%;
-                border: 1px solid #ddd;
-                transition: border-width .2s ease-in-out;
-                border-radius: 2px;
-                color: #ccc;
-            }
-
-            #locDfdd input + i.fa, #locDcdd input + i.fa, 
-            #correo input + i.fa{
-                color: #fff;
-                font-size: 1em;
-                position: absolute;
-                margin-top: -33px;
-                opacity: 0;
-                left: 0;
-                transition: all .1s ease-in;
-            }
-
-            #locDfdd input:focus, #locDcdd input:focus,
-            #correo input:focus{
-                outline: none;
-                color: #444;
-                border-color: #26a69d;
-                border-left-width: 35px;
-            }
-
-            #locDfdd input:focus + i.fa, #locDcdd input:focus + i.fa,
-            #correo input:focus + i.fa{
-                opacity: 1;
-                left: 26px;
-                transition: all .25s ease-out;
             }
