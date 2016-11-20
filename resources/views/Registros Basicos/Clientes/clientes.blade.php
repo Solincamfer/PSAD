@@ -18,9 +18,11 @@
 									@foreach($acciones as $accion)
 									
 										@if($accion->descripcion!="Status")
-											
-												<span class="iclsp"><a href="{{$accion->url}}"><i class="{{$accion->clase_css}}" title="modificar"></i></a></span>
-												
+												<span class="iclsp">
+													<a href="{{$accion->url}}">
+														<i class="{{$accion->clase_css}}" title="modificar"></i>
+													</a>
+												</span>
 										@elseif($accion->descripcion=="Status")
 											@if($accion->status_ac==1)
 												<div class="chbx">
