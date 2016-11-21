@@ -236,14 +236,15 @@
             color: #E5E5E7;
             font-size: 12px;
             font-weight: bold;
-            transition: all .25s ease-in-out;
+            transition: all .25s ease;
             box-shadow: 2px 3px 5px 1px rgba(0, 0, 0, .2);
+            text-decoration: none;
         }
             
         .btnAd i, .btnBk i{
             margin-right: 20px;
             font-size: 18px;
-            transition: margin-right .25s ease-in-out;
+            transition: margin-right .25s ease;
             color: #e5e5e7;
         }
 
@@ -1195,8 +1196,8 @@
                     border-color: #26a69d;
                     border-left-width: 35px;
                 }
-
-                #rRpbm1 #micr1, #rRpbm3 #micr3{
+                
+                #rRpbm1 #micr1, #rRpbm3 #micr3, #rRpb1 #icr1, #rRpb3 #icr3{
                     color: #fff;
                     font-size: 1em;
                     position: absolute;
@@ -1207,7 +1208,7 @@
                     transition: all .1s ease-in;
                 }
                 
-                #rRpbm2 #micr2, #rRpbm4 #micr4{
+                #rRpbm2 #micr2, #rRpbm4 #micr4, #rRpb2 #icr2, #rRpb4 #icr4{
                     color: #fff;
                     font-size: 1em;
                     position: absolute;
@@ -1219,10 +1220,10 @@
                 }
 
                 /*Datos Basicos Secundarios*/
-                    #spm1 , #spm2 {
+                    #spm1 , #spm2, #sp1 , #sp2 {
                         padding:  0;
                     }
-                    #rRpbm7 input{
+                    #rRpbm7 input, #rRpb7 input{
                         display: block;
                         padding: 3px 5px;
                         margin-bottom: 10px;
@@ -1233,8 +1234,44 @@
                         border-radius: 2px;
                         color: #ccc;
                     }
+                    
+                    #rRpb5 .ic, #rRpb6 .ic, #rRpbm5 .ic, #rRpbm6 .ic,
+                    #rRpb9 .ic, #rRpb10 .ic, #rRpbm9 .ic, #rRpbm10 .ic{
+                        background-color: #26a69d;
+                        position: absolute;
+                        padding-top: 7px;
+                        top: 0;
+                        left: 0;
+                        height: 33.5px;
+                        width: 30px;
+                        margin-top: 22px;
+                        margin-left: 6.8em;
+                        text-align: center;
+                        pointer-events: none;
+                        color: #333;
+                        border: none;
+                        z-index: 1;
+                    }
 
-                    #rRpbm8 select{
+                    #rRpb7 .ic, #rRpb8 .ic, #rRpbm7 .ic, #rRpbm8 .ic{
+                        background-color: #26a69d;
+                        position: absolute;
+                        padding-top: 7px;
+                        top: 0;
+                        right: 0;
+                        height: 33.5px;
+                        width: 20px;
+                        margin-top: 22px;
+                        margin-right: 1px;
+                        font-size: 0.8em;
+                        text-align: center;
+                        pointer-events: none;
+                        color: #333;
+                        border: none;
+                        z-index: 1;
+                    }
+
+                    #rRpbm8 select, #rRpb8 select{
                         display: block;
                         padding: 3px 5px;
                         margin-bottom: 10px;
@@ -1246,7 +1283,7 @@
                         color: #ccc;
                     }
 
-                    #rRpbm6 input{
+                    #rRpbm6 input, #rRpb6 input{
                         display: block;
                         padding: 3px 5px;
                         margin-bottom: 10px;
@@ -1258,7 +1295,7 @@
                         color: #ccc;
                     }
                 
-                    #rRpbm5 #micr5 {
+                    #rRpbm5 #micr5, #rRpb5 #icr5 {
                         color: #fff;
                         font-size: 1em;
                         position: absolute;
@@ -1269,7 +1306,8 @@
                         transition: all .1s ease-in;
                     }
 
-                    #rRpbm7 #micr9, #rRpbm8 #micr10{
+                    #rRpbm7 #micr9, #rRpbm8 #micr10, #rRpb7 #icr9, 
+                    #rRpb8 #icr10{
                         color: #fff;
                         font-size: 1em;
                         position: absolute;
@@ -1280,7 +1318,7 @@
                         transition: all .1s ease-in;
                     }
         
-                    #rRpbm6 #micr7, #rRpbm6 #micr8 {
+                    #rRpbm6 #micr7, #rRpbm6 #micr8, #rRpb6 #icr7, #rRpb6 #icr8 {
                         color: #fff;
                         font-size: 1em;
                         position: absolute;
@@ -1291,7 +1329,7 @@
                         transition: all .1s ease-i
                     }
 
-                    #rRpbm5 #micr6 {
+                    #rRpbm5 #micr6, #rRpb5 #icr6{
                         color: #fff;
                         font-size: 1em;
                         position: absolute;
@@ -1304,7 +1342,8 @@
 
                 /*Contacto*/
 
-                    #rRpbm9 #micr11, #rRpbm10 #micr13{
+                    #rRpbm9 #micr11, #rRpbm10 #micr13, #rRpb9 #icr11, 
+                    #rRpb10 #icr13{
                         color: #fff;
                         font-size: 1em;
                         position: absolute;
@@ -1315,7 +1354,7 @@
                         transition: all .1s ease-in;
                     }
                     
-                    #rRpbm11 #micr15{
+                    #rRpbm11 #micr15, #rRpb11 #icr15{
                         color: #fff;
                         font-size: 1em;
                         position: absolute;
@@ -1326,7 +1365,7 @@
                         transition: all .1s ease-in;
                     }
 
-                    #rRpbm9 #micr12{
+                    #rRpbm9 #micr12, #rRpb9 #icr12{
                         color: #fff;
                         font-size: 1em;
                         position: absolute;
@@ -1338,7 +1377,7 @@
                         transition: all .1s ease-in;
                     }
 
-                    #rRpbm10 #micr14{
+                    #rRpbm10 #micr14, #rRpb10 #icr14{
                         color: #fff;
                         font-size: 1em;
                         position: absolute;
