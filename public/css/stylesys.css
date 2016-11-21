@@ -60,6 +60,10 @@
 
 
     /*Header*/
+        .not-active {
+   pointer-events: none;
+   cursor: default;
+}
         .disabled{
             display: none;
         }

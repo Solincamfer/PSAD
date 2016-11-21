@@ -1,6 +1,9 @@
 $( "#log" ).submit(function( event ) {
 	event.preventDefault();
 	});
+$( "#Formcliente" ).submit(function( event ) {
+	event.preventDefault();
+	});
 $('#log1').click(function(){
 	var user = $('#user').val();
 	var pwd = $('#pwd').val();
