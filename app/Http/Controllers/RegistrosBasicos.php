@@ -82,7 +82,7 @@ class RegistrosBasicos extends Controller
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
 		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(5,6),7);
-		return view('Registros Basicos\Departamentos\cargos',$this->datos_vista($datos,$acciones,DB::table('cargos')->where('departamento_id',$departamento_id)->get()));
+		return view('Registros_Basicos\Departamentos\cargos',$this->datos_vista($datos,$acciones,DB::table('cargos')->where('departamento_id',$departamento_id)->get()));
 					
 	}
 
@@ -92,7 +92,7 @@ class RegistrosBasicos extends Controller
 		$datos=$this->cargar_header_sidebar_acciones();
 		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(1,2,3),4);
 		
-		return view('Registros Basicos\Departamentos\departamentos',$this->datos_vista($datos,$acciones,DB::table('departamentos')->get()));
+		return view('Registros_Basicos\Departamentos\departamentos',$this->datos_vista($datos,$acciones,DB::table('departamentos')->get()));
 					
 	}
 
@@ -102,7 +102,7 @@ class RegistrosBasicos extends Controller
 		$datos=$this->cargar_header_sidebar_acciones();
 		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(9,10,11,12),8);
 	
-		return view('Registros Basicos\Clientes\clientes',$this->datos_vista($datos,$acciones,array())); 
+		return view('Registros_Basicos\Clientes\clientes',$this->datos_vista($datos,$acciones,array())); 
 	}
 
 
@@ -112,7 +112,7 @@ class RegistrosBasicos extends Controller
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
 		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(14,15),13);
-		return view ('Registros Basicos\Clientes\clientes_responsables',$this->datos_vista($datos,$acciones,array())); 
+		return view ('Registros_Basicos\Clientes\clientes_responsables',$this->datos_vista($datos,$acciones,array())); 
 					
 	}
 
@@ -123,7 +123,7 @@ class RegistrosBasicos extends Controller
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
 		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(25,26,27,28,29,30),24);
-		return view ('Registros Basicos\Clientes\clientes_sucursales',$this->datos_vista($datos,$acciones,array()));
+		return view ('Registros_Basicos\Clientes\clientes_sucursales',$this->datos_vista($datos,$acciones,array()));
 						
 	}
 
@@ -131,7 +131,7 @@ class RegistrosBasicos extends Controller
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
 		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(16,17,18,19),20);
-		return view ('Registros Basicos\Clientes\clientes_categoria',$this->datos_vista($datos,$acciones,array()));
+		return view ('Registros_Basicos\Clientes\clientes_categoria',$this->datos_vista($datos,$acciones,array()));
 						
 	}
 
@@ -139,7 +139,7 @@ class RegistrosBasicos extends Controller
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
 		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(22,23),21);
-		return view ('Registros Basicos\Clientes\clientes_categoria_responsable',$this->datos_vista($datos,$acciones,array()));
+		return view ('Registros_Basicos\Clientes\clientes_categoria_responsable',$this->datos_vista($datos,$acciones,array()));
 						
 	}
 
@@ -150,7 +150,7 @@ class RegistrosBasicos extends Controller
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
 		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(32,33),31);
-		return view ('Registros Basicos\Clientes\clientes_sucursales_responsable',$this->datos_vista($datos,$acciones,array()));
+		return view ('Registros_Basicos\Clientes\clientes_sucursales_responsable',$this->datos_vista($datos,$acciones,array()));
 						
 	}
 
@@ -158,7 +158,7 @@ class RegistrosBasicos extends Controller
 		{
 			$datos=$this->cargar_header_sidebar_acciones();
 			$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(35,36,37),34);
-			return view ('Registros Basicos\Clientes\clientes_sucursales_plan',$this->datos_vista($datos,$acciones,array()));
+			return view ('Registros_Basicos\Clientes\clientes_sucursales_plan',$this->datos_vista($datos,$acciones,array()));
 							
 		}
 		
@@ -167,7 +167,7 @@ class RegistrosBasicos extends Controller
 		{
 			$datos=$this->cargar_header_sidebar_acciones();
 			$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(40,39),38);
-			return view ('Registros Basicos\Clientes\clientes_sucursales_plan_servicios',$this->datos_vista($datos,$acciones,array()));
+			return view ('Registros_Basicos\Clientes\clientes_sucursales_plan_servicios',$this->datos_vista($datos,$acciones,array()));
 							
 		}
 
@@ -176,7 +176,7 @@ class RegistrosBasicos extends Controller
 		{
 			$datos=$this->cargar_header_sidebar_acciones();
 			$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(42,43,44),41);
-			return view ('Registros Basicos\Clientes\clientes_sucursales_equipos',$this->datos_vista($datos,$acciones,array()));
+			return view ('Registros_Basicos\Clientes\clientes_sucursales_equipos',$this->datos_vista($datos,$acciones,array()));
 							
 		}
 
@@ -184,7 +184,7 @@ class RegistrosBasicos extends Controller
 		{
 			$datos=$this->cargar_header_sidebar_acciones();
 			$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(46,47,48,49),45);
-			return view ('Registros Basicos\Clientes\clientes_sucursales_equipos_componentes',$this->datos_vista($datos,$acciones,array()));
+			return view ('Registros_Basicos\Clientes\clientes_sucursales_equipos_componentes',$this->datos_vista($datos,$acciones,array()));
 							
 		}
 
@@ -192,7 +192,7 @@ class RegistrosBasicos extends Controller
 		{
 			$datos=$this->cargar_header_sidebar_acciones();
 			$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(51,52),50);
-			return view ('Registros Basicos\Clientes\clientes_sucursales_equipos_componentes_aplicaciones',$this->datos_vista($datos,$acciones,array()));
+			return view ('Registros_Basicos\Clientes\clientes_sucursales_equipos_componentes_aplicaciones',$this->datos_vista($datos,$acciones,array()));
 							
 		}
 	
@@ -200,7 +200,7 @@ class RegistrosBasicos extends Controller
 		{
 			$datos=$this->cargar_header_sidebar_acciones();
 			$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(54,55),53);
-			return view ('Registros Basicos\Clientes\clientes_sucursales_equipos_componentes_piezas',$this->datos_vista($datos,$acciones,array()));
+			return view ('Registros_Basicos\Clientes\clientes_sucursales_equipos_componentes_piezas',$this->datos_vista($datos,$acciones,array()));
 							
 		}
 
@@ -209,7 +209,7 @@ class RegistrosBasicos extends Controller
 			{
 				$datos=$this->cargar_header_sidebar_acciones();
 				$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(57,58,59),56);
-				return view ('Registros Basicos\Clientes\clientes_sucursales_usuarios',$this->datos_vista($datos,$acciones,array()));
+				return view ('Registros_Basicos\Clientes\clientes_sucursales_usuarios',$this->datos_vista($datos,$acciones,array()));
 								
 			}
 
@@ -217,7 +217,7 @@ class RegistrosBasicos extends Controller
 		{
 			$datos=$this->cargar_header_sidebar_acciones();//crear acciones
 			$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(61,62,63),60);
-			return view ('Registros Basicos\Clientes\clientes_sucursales_usuarios_perfil',$this->datos_vista($datos,$acciones,array()));
+			return view ('Registros_Basicos\Clientes\clientes_sucursales_usuarios_perfil',$this->datos_vista($datos,$acciones,array()));
 		}
 
 /////////////////////////////////////////////////////////15-11-2016///////////////////////////////////////////////
@@ -227,7 +227,7 @@ class RegistrosBasicos extends Controller
 	public function servicios()
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
-		return view('Registros Basicos\Planes y Servicios\planes', 
+		return view('Registros_Basicos\Planes_y_Servicios\planes', 
 					[
 					 'modulos'=>$datos['modulos'],
 					 'submodulos'=>$datos['submodulos'],
@@ -261,7 +261,7 @@ class RegistrosBasicos extends Controller
 public function clientes_sucursales_plan_modificar()
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
-		return view ('Registros Basicos\Clientes\clientes_sucursales_plan_modificar',
+		return view ('Registros_Basicos\Clientes\clientes_sucursales_plan_modificar',
 						[
 
 						 'modulos'=>$datos['modulos'],

@@ -6,8 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Direccion extends Model
 {
-    $table="direcciones";
-    $fillable=['id','descripcion','municipio_id','pais_id','region_id','estado_id'];
+    public $timestamps=false;
+    protected $table="direcciones";
+    protected $fillable=['id','descripcion','municipio_id','pais_id','region_id','estado_id'];
+    
 
     public function estado()
     {
