@@ -10,7 +10,7 @@
 				<!-- Registro -->
 					<div class="col-xs-5 col-sm-5 col-md-6 col-md-offset-3" style=""> 
 						@if($agregar)
-						<button id="btnAdd" type="button" class="btnAd col-md-offset-10" data-toggle="modal" data-target="#myModal" href="#myModal">AGREGAR <i class="fa fa-plus-circle"></i></button>
+						<button id="btnAdd" type="button" class="btnAd col-md-offset-10" data-toggle="modal" data-target="#myModal" href="#myModal"><i class="fa fa-plus-circle"></i> AGREGAR</button>
 						@endif
 						
 							<div class="contMd" style="">
@@ -19,25 +19,25 @@
 										@if($accion->descripcion!="Status")
 											@if($accion->data_toogle=="modal")
 											<span class="iclsp">
-												<a href="#myModal2" data-toggle="modal" data-target="#myModal2"> 
-													<i class="{{$accion->clase_css}}" title="modificar"></i>
+												<a href="#myModal2" class="tltp" data-ttl="Modificar" data-toggle="modal" data-target="#myModal2"> 
+													<i class="{{$accion->clase_css}}"></i>
 												</a>
 											</span>
 											@elseif($accion->data_toogle!="modal")
 											<span class="iclsp">
-												<a href="{{$accion->url}}">
-													<i class="{{$accion->clase_css}}" title="modificar"></i>
+												<a href="{{$accion->url}}" class="tltp" data-ttl="Modificar">
+													<i class="{{$accion->clase_css}}"></i>
 												</a>
 											</span>
 											@endif
 										@elseif($accion->descripcion=="Status")
 											@if($accion->status_ac==1)
 												<div class="chbx">
-													<input type="checkbox" class="btnAcc" name="status" id="inchbx1" value="{{$accion->status_ac}}" checked><label for="inchbx1" title="Estatus"></label>
+													<input type="checkbox" class="btnAcc" name="status" id="inchbx1" value="{{$accion->status_ac}}" checked><label for="inchbx1" class="tltp" data-ttl="Estatus"></label>
 												</div>
 											@elseif($accion->staus_ac==0)
 												<div class="chbx">
-													<input type="checkbox" class="btnAcc" name="status" id="inchbx2" value="{{$accion->status_ac}}"><label for="inchbx2" title="Estatus"></label>
+													<input type="checkbox" class="btnAcc" name="status" id="inchbx2" value="{{$accion->status_ac}}"><label for="inchbx2" class="tltp" data-ttl="Modificar"></label>
 												</div>
 											@endif
 										@endif
