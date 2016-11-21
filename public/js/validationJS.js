@@ -11,7 +11,6 @@ for (var i = 1; i <= 20; i++) {
     }
 if (switchtab>=5 && switchtab<10) { 
     $( "#btnSv" ).attr( "type","button");    
-    alert(anterior);
     var backtab=2;
     $("#a2").click();
 }else if (switchtab>=10 && switchtab<15) {
