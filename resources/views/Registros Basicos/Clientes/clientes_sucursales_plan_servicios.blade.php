@@ -42,39 +42,44 @@
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                         <h4 class="modal-title" id="myModalLabel">Agregar Servicio</h4>
                                     </div>
+                                    <form action="" class="Validacion">
                                     <div class="modal-body">
-                                        <form action="">
+                                        
                                             {{ csrf_field() }}
                                             <div class="container-fluid" id="contsrvc">
+                                            <div class="col-md-8 col-md-offset-2">
                                                 <div class="form-group row" id="rSrvc1">
-                                                    <div class="col-md-8 col-md-offset-2">
+                                                    
                                                         <label for="nomSrvc">Nombre del Servicio</label>
-                                                        <input type="text" class="form-control" name="nomSrvc" id="nomSrvc"><i class="fa fa-cube"></i>
+                                                        <input type="text" class="form-control userEmail" name="nomSrvc" id="nomSrvc"><i class="fa fa-cube"></i>
                                                     </div>
                                                 </div>
+                                                <div class="col-md-8 col-md-offset-2">
                                                 <div class="form-group row" id="rSrvc2">
-                                                    <div class="col-md-8 col-md-offset-2">
+                                                    
                                                         <label for="prcSrvc">Precio del Servicio</label>
-                                                        <input type="number" class="form-control" name="prcSrvc" id="prcSrvc"><i class="fa fa-money"></i>
+                                                        <input type="text" class="form-control userEmail" name="prcSrvc" id="prcSrvc"><i class="fa fa-money"></i>
                                                     </div>
                                                 </div>
+                                                <div class="col-md-8 col-md-offset-2">
                                                 <div class="form-group row" id="rSrvc3">
-                                                    <div class="col-md-8 col-md-offset-2">
+                                                    
                                                         <label for="stSrvc">Estatus del Perfil</label>
-                                                        <select name="stSrvc" id="stSrvc" class="form-control">
-                                                            <option value="0">-</option>
+                                                        <select name="stSrvc" id="stSrvc" class="form-control userEmail">
+                                                            <option value="">-</option>
                                                             <option value="1">Activo</option>
                                                             <option value="2">Inactivo</option>
                                                         </select>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </form>
+                                        
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="bttnMd" id="btnSv">Guardar <i class="fa fa-floppy-o"></i></button>
                                         <button type="button" class="bttnMd" data-dismiss="modal" id="btnCs">Cerrar <i class="fa fa-times"></i></button>
                                     </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>

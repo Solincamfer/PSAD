@@ -40,34 +40,36 @@
                                     <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                         <h4 class="modal-title" id="myModalLabel">Agregar Perfil</h4>
-                                    </div>
+                                    </div><form action="" class="Validacion">
                                     <div class="modal-body">
-                                        <form action="">
+                                        
                                             {{ csrf_field() }}
                                             <div class="container-fluid" id="contpfl">
+                                            <div class="col-md-8 col-md-offset-2">
                                                 <div class="form-group row" id="rPfl1">
-                                                    <div class="col-md-8 col-md-offset-2">
+                                                    
                                                         <label for="duPfl">Descripcion del Usuario</label>
-                                                        <input type="text" class="form-control" name="duPfl" id="duPfl"><i class="fa fa-id-badge"></i>
+                                                        <input type="text" class="form-control userEmail" name="duPfl" id="duPfl"><i class="fa fa-id-badge"></i>
                                                     </div>
                                                 </div>
+                                                <div class="col-md-8 col-md-offset-2">
                                                 <div class="form-group row" id="rPfl2">
-                                                    <div class="col-md-8 col-md-offset-2">
+                                                    
                                                         <label for="stPfl">Estatus del Perfil</label>
-                                                        <select name="stPfl" id="stPfl" class="form-control">
-                                                            <option value="0">-</option>
+                                                        <select name="stPfl" id="stPfl" class="form-control userEmail">
+                                                            <option value="">-</option>
                                                             <option value="1">Activo</option>
                                                             <option value="2">Inactivo</option>
                                                         </select>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </form>
+                                        
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="bttnMd" id="btnSv">Guardar <i class="fa fa-floppy-o"></i></button>
                                         <button type="button" class="bttnMd" data-dismiss="modal" id="btnCs">Cerrar <i class="fa fa-times"></i></button>
-                                    </div>
+                                    </div></form>
                                 </div>
                             </div>
                         </div>

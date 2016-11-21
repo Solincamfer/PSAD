@@ -47,31 +47,35 @@
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                         <h4 class="modal-title" id="myModalLabel">Agregar Categoría</h4>
                                     </div>
+                                    <form action="" class="Validacion">
                                     <div class="modal-body">
-                                        <form action="">
+                                        
                                             {{ csrf_field() }}
                                             <div class="container-fluid" id="contcat">
                                                 <div class="row" id="rCat">
-                                                    <div class="form-group col-md-8 col-md-offset-2">
+                                                    <div class="col-md-10 ">
+                                                    <div class="form-group col-md-offset-2">
                                                         <label for="nomCat">Nombre de la Categoría</label>
-                                                        <input type="text" name="nomCat" class="form-control" id="nomCat"><i class="fa fa-briefcase"></i>
+                                                        <input type="text" name="nomCat" class="form-control userEmail" id="nomCat"><i class="fa fa-briefcase"></i>
                                                     </div>
-                                                    <div class="form-group col-md-8 col-md-offset-2">
+                                                    </div>
+                                                    <div class="col-md-10 ">
+                                                    <div class="form-group col-md-offset-2">
                                                         <label for="stCat">Estatus de la Categoría</label>
-                                                        <select name="stCat" class="form-control" id="stCat">
-                                                            <option value="0">-</option>
+                                                        <select name="stCat" class="form-control userEmail" id="stCat">
+                                                            <option value="">-</option>
                                                             <option value="1">Activo</option>
                                                             <option value="2">Inactivo</option>
                                                         </select>
                                                     </div>
-                                                </div>
+                                                    </div>
                                             </div>
-                                        </form>
+                                        
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="bttnMd" id="btnSv">Guardar <i class="fa fa-floppy-o"></i></button>
                                         <button type="button" class="bttnMd" data-dismiss="modal" id="btnCs">Cerrar <i class="fa fa-times"></i></button>
-                                    </div>
+                                    </div></form>
                                 </div>
                             </div>
                         </div>

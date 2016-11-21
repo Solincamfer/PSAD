@@ -58,14 +58,14 @@
                                                             <div class="col-md-5  col-md-offset-1">
                                                                 <div class="form-group" id="rRpb1">
                                                                     <label for="nomRpb1">1er Nombre</label>
-                                                                    <input type="text" name="nomRpb1" class="form-control" id="nomRpb1"><i class="fa fa-user"></i>
+                                                                    <input type="text" name="nomRpb1" class="form-control userEmail" id="nomRpb1"><i class="fa fa-user"></i>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4  col-md-offset-1">
                                                                 <div class="form-group" id="rRpb2">    
                                                                 
                                                                     <label for="nomRpb2">2do Nombre</label>
-                                                                    <input type="text" name="nomRpb2" class="form-control" id="nomRpb2"><i class="fa fa-user-plus"></i>
+                                                                    <input type="text" name="nomRpb2" class="form-control userEmail" id="nomRpb2"><i class="fa fa-user-plus"></i>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -74,13 +74,13 @@
                                                                 <div class="form-group" id="rRpb3">
                                                                 
                                                                     <label for="apellRpb1">1er Apellido</label>
-                                                                    <input type="text" name="apellRpb1" class="form-control" id="apellRpb1"><i class="fa fa-user"></i>
+                                                                    <input type="text" name="apellRpb1" class="form-control userEmail" id="apellRpb1"><i class="fa fa-user"></i>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4 col-md-offset-1">
                                                                 <div class="form-group" id="rRpb4">                                               
                                                                     <label for="apellRpb2">2do Apellido</label>
-                                                                    <input type="text" name="apellRpb2" class="form-control" id="apellRpb2"><i class="fa fa-user-plus"></i>
+                                                                    <input type="text" name="apellRpb2" class="form-control userEmail" id="apellRpb2"><i class="fa fa-user-plus"></i>
                                                                 </div> 
                                                             </div>
                                                         </div>
@@ -97,7 +97,7 @@
                                                                 </div>
                                                                 <div class="col-md-5">
                                                                 <div class="form-group" id="rRpb3">
-                                                                    <select name="selRifRpb" class="form-control" id="selRifRpb">
+                                                                    <select name="selRifRpb" class="form-control userEmail" id="selRifRpb">
                                                                         <option value="">-</option>
                                                                         <option value="1">G</option>
                                                                     </select>
@@ -105,7 +105,7 @@
                                                                 </div>
                                                                 <div class="col-md-7">
                                                                 <div class="form-group" id="rRpb3">                                                
-                                                                    <input type="text" class="form-control" name="numRifRpb"><i class="fa fa-address-card"></i>
+                                                                    <input type="text" class="form-control userEmail" name="numRifRpb"><i class="fa fa-address-card"></i>
                                                                 </div>
                                                                 </div>
                                                                 </div>
@@ -116,7 +116,7 @@
                                                                 </div>
                                                                 <div class="col-md-5">
                                                                 <div class="form-group" id="rRpb3">
-                                                                    <select name="selciRpb" class="form-control" id="selciRpb">
+                                                                    <select name="selciRpb" class="form-control userEmail" id="selciRpb">
                                                                         <option value="">-</option>
                                                                         <option value="1">G</option>
                                                                     </select>
@@ -124,7 +124,7 @@
                                                                 </div>
                                                                 <div class="col-md-7">
                                                                 <div class="form-group" id="rRpb3">                                                
-                                                                    <input type="text" class="form-control" name="txtci"><i class="fa fa-id-badge"></i>
+                                                                    <input type="text" class="form-control userEmail" name="txtci"><i class="fa fa-id-badge"></i>
                                                                 </div>
                                                                 </div>
                                                                 </div>                                                               
@@ -133,13 +133,13 @@
                                                             <div class="form-group row" id="rRpb4">
                                                                 
                                                                     <label for="fnRpb">Fecha de nacimiento</label>
-                                                                    <input type="date" name="fnRpb" class="form-control" id="fnRpb"><i class="fa fa-calendar"></i>
+                                                                    <input type="date" name="fnRpb" class="form-control userEmail" id="fnRpb"><i class="fa fa-calendar"></i>
                                                                 </div>
                                                                 </div><div class="col-md-5 col-md-offset-1">
                                                                 <div class="form-group row" id="rRpb4">
                                                                 
                                                                     <label for="cgoRpb">Cargo</label>
-                                                                    <select name="cgoRpb" class="form-control" id="cgoRpb">
+                                                                    <select name="cgoRpb" class="form-control userEmail" id="cgoRpb">
                                                                         <option value="">-</option>
                                                                         <option value="1">caracas</option>
                                                                     </select>
@@ -157,7 +157,7 @@
                                                                 </div>
                                                                 <div class="col-md-5">
                                                                 <div class="form-group" id="rRpb3">
-                                                                    <select name="selRifRpb" class="form-control" id="selRifRpb">
+                                                                    <select name="selRifRpb" class="form-control userEmail" id="selRifRpb">
                                                                         <option value="">-</option>
                                                                         <option value="1">0414</option>
                                                                     </select>
@@ -165,7 +165,7 @@
                                                                 </div>
                                                                 <div class="col-md-7">
                                                                 <div class="form-group" id="rRpb3">                                                
-                                                                    <input type="text" class="form-control" name="numTelclRpb"><i class="fa fa-address-card"></i>
+                                                                    <input type="text" class="form-control userEmail" name="numTelclRpb"><i class="fa fa-address-card"></i>
                                                                 </div>
                                                                 </div>
                                                                 </div>
@@ -176,7 +176,7 @@
                                                                 </div>
                                                                 <div class="col-md-5">
                                                                 <div class="form-group" id="rRpb3">
-                                                                    <select name="selRifRpb" class="form-control" id="selRifRpb">
+                                                                    <select name="selRifRpb" class="form-control userEmail" id="selRifRpb">
                                                                         <option value="">-</option>
                                                                         <option value="1">0212</option>
                                                                     </select>
@@ -184,14 +184,14 @@
                                                                 </div>
                                                                 <div class="col-md-7">
                                                                 <div class="form-group" id="rRpb3">                                                
-                                                                    <input type="text" class="form-control" name="numTelmvlRpb"><i class="fa fa-address-card"></i>
+                                                                    <input type="text" class="form-control userEmail" name="numTelmvlRpb"><i class="fa fa-address-card"></i>
                                                                 </div>
                                                                 </div>
                                                                 </div>
                                                                 <div class="form-group col-md-12 ">
                                                                 
                                                                     <label for="mail">Correo Electrónico</label>
-                                                                    <input type="email" name="mail2" id="" class="form-control">
+                                                                    <input type="text" name="mail2" id="" class="form-control userEmail">
                                                                     <i class="fa fa-envelope"></i>
                                                                 
                                                             </div>
