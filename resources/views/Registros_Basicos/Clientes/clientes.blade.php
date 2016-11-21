@@ -6,11 +6,17 @@
 			 @include('layout/header')
                 @include('layout/sidebar')
 				<div class="contenido">
-
+					<div class="container">
+						<div class="row">
+							<div class="col-md-2 ttlp">
+								<h1>Cliente Matriz</h1>
+							</div>
+						</div>
+					</div>
 				<!-- Registro -->
 					<div class="col-xs-5 col-sm-5 col-md-6 col-md-offset-3" style=""> 
 						@if($agregar)
-						<button id="btnAdd" type="button" class="btnAd col-md-offset-10" data-toggle="modal" data-target="#myModal" href="#myModal"><i class="fa fa-plus-circle"></i> AGREGAR</button>
+						<button id="btnAdd" type="button" class="btnAd col-md-offset-11" data-toggle="modal" data-target="#myModal" href="#myModal"><i class="fa fa-plus"></i> AGREGAR</button>
 						@endif
 						
 							<div class="contMd" style="">
@@ -19,13 +25,13 @@
 										@if($accion->descripcion!="Status")
 											@if($accion->data_toogle=="modal")
 											<span class="iclsp">
-												<a href="#myModal2" class="tltp" data-ttl="Modificar" data-toggle="modal" data-target="#myModal2"> 
+												<a href="#myModal2" class="tltp" data-ttl="{{$accion->descripcion}}" data-toggle="modal" data-target="#myModal2"> 
 													<i class="{{$accion->clase_css}}"></i>
 												</a>
 											</span>
 											@elseif($accion->data_toogle!="modal")
 											<span class="iclsp">
-												<a href="{{$accion->url}}" class="tltp" data-ttl="Modificar">
+												<a href="{{$accion->url}}" class="tltp" data-ttl="{{$accion->descripcion}}">
 													<i class="{{$accion->clase_css}}"></i>
 												</a>
 											</span>
@@ -33,11 +39,11 @@
 										@elseif($accion->descripcion=="Status")
 											@if($accion->status_ac==1)
 												<div class="chbx">
-													<input type="checkbox" class="btnAcc" name="status" id="inchbx1" value="{{$accion->status_ac}}" checked><label for="inchbx1" class="tltp" data-ttl="Estatus"></label>
+													<input type="checkbox" class="btnAcc" name="status" id="inchbx1" value="{{$accion->status_ac}}" checked><label for="inchbx1" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
 												</div>
 											@elseif($accion->staus_ac==0)
 												<div class="chbx">
-													<input type="checkbox" class="btnAcc" name="status" id="inchbx2" value="{{$accion->status_ac}}"><label for="inchbx2" class="tltp" data-ttl="Modificar"></label>
+													<input type="checkbox" class="btnAcc" name="status" id="inchbx2" value="{{$accion->status_ac}}"><label for="inchbx2" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
 												</div>
 											@endif
 										@endif
@@ -62,7 +68,7 @@
 								
 									<form method="post" class="form-horizontal Validacion" id="Formcliente" action="">
 										{{ csrf_field() }}
-										<div class="modal-body">						
+										<div class="modal-body">
 											 <ul class="nav nav-tabs not-active" role="tablist">
                                                 <li role="presentation" class="active" ><a href="#db" id="a1" aria-controls="db" role="tab" data-toggle="tab">Datos basicos</a></li>
                                                 <li role="presentation" ><a href="#df" id="a2" aria-controls="df" role="tab" data-toggle="tab">Dirección Fiscal </a></li>
