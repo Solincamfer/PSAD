@@ -15,4 +15,9 @@ class Pais extends Model
    	 return $this->hasMany('App\Region');
    	}
 
+   public function direcciones()
+   {
+     return $this->hasMany('App\Direccion');
+   }
+
 }
