@@ -249,7 +249,7 @@
         }
 
         .btnAd:hover i, .btn:hover i{
-            margin-right: 10px;
+            margin-right: 15px;
         }
 
         .contMd{
@@ -295,6 +295,7 @@
             margin-top:12px; 
             margin-left:30px;
             font-size: 15px;
+            display: inline-block;
         }
 
         input[type = "radio"] {
@@ -401,6 +402,7 @@
     /*Tooltip*/
         .tltp, .tltpck{
             position: relative;
+            z-index: 2;
         }
 
         .tltp:before, .tltp:after, .tltpck:before, .tltpck:after {
@@ -575,7 +577,9 @@
 
         #contDb, #contdf, #contdc, #contctt,
         #contDbm, #contdfm, #contdcm, #contcttm,
-        #contdpto, #contcgo, #contPn, #dbr1{
+        #contdpto, #contcgo, #contPn, #contrpbdbr1, 
+        #contrpbdbr2, #contrpbdbr3, #contrpbdbrm1, 
+        #contrpbdbrm2, #contrpbdbrm3{
             margin-top: 20px;
             padding: 10px;
         }
@@ -904,7 +908,8 @@
                     }
         /*Modal Modificar*/
                 /*Datos Basicos*/
-                    #dbcm1 input, #dbcm2 select, #dbcm3 select{
+                    #dbcm1 input, #dbcm2 select, #dbcm3 select, #ctocm1 select, 
+                    #ctocm2 input, #ctocm3 select, #ctocm4 input, #ctocm5 input{
                         display: block;
                         padding: 3px 5px;
                         margin-bottom: 10px;
@@ -915,8 +920,6 @@
                         border-radius: 2px;
                         color: #ccc;
                     }
-
-
 
                     #dbcm1 input:focus, #dbcm2 input:focus, #dbcm2 select:focus, 
                     #dbcm3 select:focus{
@@ -1015,7 +1018,9 @@
                     #dfcm1 select:focus, #dfcm2 select:focus, 
                     #dfcm3 select:focus, #dfcm4 select:focus, #dfcm5 textarea:focus, 
                     #dccm1 select:focus, #dccm2 select:focus, 
-                    #dccm3 select:focus, #dccm4 select:focus, #dccm5 textarea:focus{
+                    #dccm3 select:focus, #dccm4 select:focus, #dccm5 textarea:focus, 
+                    #ctocm1 select:focus, #ctocm2 input:focus, #ctocm3 select:focus, 
+                    #ctocm4 input:focus, #ctocm5 input:focus {
                         outline: none;
                         color: #444;
                         border-color: #26a69d;
@@ -1072,26 +1077,6 @@
                         border: none;
                     }
                 /*Contacto*/
-                    #ctocm1 select, #ctocm2 input, #ctocm3 select, #ctocm4 input, #ctocm5 input{
-                        display: block;
-                        padding: 3px 5px;
-                        margin-bottom: 10px;
-                        width: 100%;
-                        border: 1px solid #ddd;
-                        text-indent: 17px;
-                        transition: border-width .2s ease-in-out;
-                        border-radius: 2px;
-                        color: #ccc;
-                    }
-
-                    #ctocm1 select:focus, #ctocm2 input:focus, 
-                    #ctocm3 select:focus, #ctocm4 input:focus, 
-                    #ctocm5 input:focus {
-                        outline: none;
-                        color: #444;
-                        border-color: #26a69d;
-                        border-left-width: 35px;
-                    }
 
                     #ctocm5 #micc20{
                         color: #fff;
@@ -1156,36 +1141,211 @@
                     }
     
         /*Cliente Responsable*/
-            /*Agregar*/
-                #rRpb1 input{
+            /*Agregar y Modificar*/
+                /*Datos Basicos Primarios, Secundarios y Contacto*/
+                #rRpb1 input, #rRpb3 input, #rRpb5 select, #rRpb5 input, 
+                #rRpb6 select, #rRpb9 select, #rRpb9 input, #rRpb10 select, 
+                #rRpb10 input, #rRpb11 input, #rRpbm1 input, #rRpbm3 input, 
+                #rRpbm5 select, #rRpbm5 input, #rRpbm6 select, #rRpbm9 select, 
+                #rRpbm9 input, #rRpbm10 select, #rRpbm10 input, #rRpbm11 input {
                     display: block;
                     padding: 3px 5px;
                     margin-bottom: 10px;
                     width: 100%;
                     border: 1px solid #ddd;
-                    text-indent: 17px;
+                    text-indent: 18px;
+                    transition: border-width .2s ease-in-out;
+                    border-radius: 2px;
+                    color: #ccc;
+                }
+                
+                #rRpb2 input, #rRpb4 input, #rRpbm2 input, #rRpbm4 input{
+                    display: block;
+                    padding: 3px 5px;
+                    margin-bottom: 10px;
+                    width: 100%;
+                    border: 1px solid #ddd;
+                    text-indent: 20px;
                     transition: border-width .2s ease-in-out;
                     border-radius: 2px;
                     color: #ccc;
                 }
 
-                #rRpb1 input:focus{
+                #rRpb1 input:focus, #rRpb2 input:focus, 
+                #rRpb3 input:focus, #rRpb4 input:focus, 
+                #rRpb5 select:focus, #rRpb5 input:focus,
+                #rRpb6 input:focus, #rRpb6 select:focus,
+                #rRpb7 input:focus, #rRpb8 select:focus, 
+                #rRpb9 select:focus, #rRpb9 input:focus, 
+                #rRpb10 select:focus, #rRpb10 input:focus,
+                #rRpb11 input:focus, #rRpbm1 input:focus, 
+                #rRpbm2 input:focus, #rRpbm3 input:focus, 
+                #rRpbm4 input:focus, #rRpbm5 select:focus, 
+                #rRpbm5 input:focus, #rRpbm6 input:focus, 
+                #rRpbm6 select:focus, #rRpbm7 input:focus, 
+                #rRpbm8 select:focus,  #rRpbm9 select:focus, 
+                #rRpbm9 input:focus,  #rRpbm10 select:focus, 
+                #rRpbm10 input:focus, #rRpbm11 input:focus{
                     outline: none;
                     color: #444;
                     border-color: #26a69d;
                     border-left-width: 35px;
                 }
 
-                #rRpb1 #icr1{
+                #rRpbm1 #micr1, #rRpbm3 #micr3{
                     color: #fff;
                     font-size: 1em;
                     position: absolute;
                     margin-top: -35px;
-                    margin-left: 13px;
+                    margin-left: 12px;
                     opacity: 1;
                     left: 0;
                     transition: all .1s ease-in;
                 }
+                
+                #rRpbm2 #micr2, #rRpbm4 #micr4{
+                    color: #fff;
+                    font-size: 1em;
+                    position: absolute;
+                    margin-top: -35px;
+                    margin-left: 8px;
+                    opacity: 1;
+                    left: 0;
+                    transition: all .1s ease-i
+                }
+
+                /*Datos Basicos Secundarios*/
+                    #spm1 , #spm2 {
+                        padding:  0;
+                    }
+                    #rRpbm7 input{
+                        display: block;
+                        padding: 3px 5px;
+                        margin-bottom: 10px;
+                        width: 100%;
+                        border: 1px solid #ddd;
+                        text-indent: 10px;
+                        transition: border-width .2s ease-in-out;
+                        border-radius: 2px;
+                        color: #ccc;
+                    }
+
+                    #rRpbm8 select{
+                        display: block;
+                        padding: 3px 5px;
+                        margin-bottom: 10px;
+                        width: 100%;
+                        border: 1px solid #ddd;
+                        text-indent: 12px;
+                        transition: border-width .2s ease-in-out;
+                        border-radius: 2px;
+                        color: #ccc;
+                    }
+
+                    #rRpbm6 input{
+                        display: block;
+                        padding: 3px 5px;
+                        margin-bottom: 10px;
+                        width: 100%;
+                        border: 1px solid #ddd;
+                        text-indent: 19px;
+                        transition: border-width .2s ease-in-out;
+                        border-radius: 2px;
+                        color: #ccc;
+                    }
+                
+                    #rRpbm5 #micr5 {
+                        color: #fff;
+                        font-size: 1em;
+                        position: absolute;
+                        margin-top: -35px;
+                        margin-left: 11px;
+                        opacity: 1;
+                        left: 0;
+                        transition: all .1s ease-in;
+                    }
+
+                    #rRpbm7 #micr9, #rRpbm8 #micr10{
+                        color: #fff;
+                        font-size: 1em;
+                        position: absolute;
+                        margin-top: -35px;
+                        margin-left: 10px;
+                        opacity: 1;
+                        left: 0;
+                        transition: all .1s ease-in;
+                    }
+        
+                    #rRpbm6 #micr7, #rRpbm6 #micr8 {
+                        color: #fff;
+                        font-size: 1em;
+                        position: absolute;
+                        margin-top: -35px;
+                        margin-left: 7px;
+                        opacity: 1;
+                        left: 0;
+                        transition: all .1s ease-i
+                    }
+
+                    #rRpbm5 #micr6 {
+                        color: #fff;
+                        font-size: 1em;
+                        position: absolute;
+                        margin-top: -35px;
+                        margin-left: 6px;
+                        opacity: 1;
+                        left: 0;
+                        transition: all .1s ease-in;
+                    }
+
+                /*Contacto*/
+
+                    #rRpbm9 #micr11, #rRpbm10 #micr13{
+                        color: #fff;
+                        font-size: 1em;
+                        position: absolute;
+                        margin-top: -35px;
+                        margin-left: 10px;
+                        opacity: 1;
+                        left: 0;
+                        transition: all .1s ease-in;
+                    }
+                    
+                    #rRpbm11 #micr15{
+                        color: #fff;
+                        font-size: 1em;
+                        position: absolute;
+                        margin-top: -35px;
+                        margin-left: 23px;
+                        opacity: 1;
+                        left: 0;
+                        transition: all .1s ease-in;
+                    }
+
+                    #rRpbm9 #micr12{
+                        color: #fff;
+                        font-size: 1em;
+                        position: absolute;
+                        margin-top: -35px;
+                        margin-left: 13px;
+                        font-size: 1.2em;
+                        opacity: 1;
+                        left: 0;
+                        transition: all .1s ease-in;
+                    }
+
+                    #rRpbm10 #micr14{
+                        color: #fff;
+                        font-size: 1em;
+                        position: absolute;
+                        margin-top: -35px;
+                        margin-left: 10px;
+                        font-size: 1.2em;
+                        opacity: 1;
+                        left: 0;
+                        transition: all .1s ease-in;
+                    }
+
 
         /*Planes*/
             #rPn input{
