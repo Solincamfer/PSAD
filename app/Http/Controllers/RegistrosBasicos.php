@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Session;
 use DB;
+//use Request;
 
 
 class RegistrosBasicos extends Controller 
@@ -101,13 +102,35 @@ class RegistrosBasicos extends Controller
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
 		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(9,10,11,12),8);
-	
-		return view('Registros_Basicos\Clientes\clientes',$this->datos_vista($datos,$acciones,DB::table('clientes')->get())); 
+		$consulta=DB::table('clientes')->get();
+		$tipoR=DB::table('tipos')->where('numero_c',1)->get();
+		
+
+		return view('Registros_Basicos\Clientes\clientes',
+															['modulos'=>$datos['modulos'],//side bar
+															 'submodulos'=>$datos['submodulos'],//side bar
+															 'nombre'=>$datos['nombre'],//header
+															 'apellido'=>$datos['apellido'],//header
+															 'acciones'=>$acciones['acciones'],//acciones
+															 'agregar'=>$acciones['agregar'],//boton de agregar
+															 'consulta'=>$consulta,//registros provenientes de la base de datos
+															 'tiposR'=>$tipoR,
+															 'tipo'
+
+
+															]
+
+
+			); 
 	}
 
 	public function clientes_insertar()
 	{
 		
+		//capturar datos del formulario
+
+		$razonS=Request::get('rs');//nombre de usuario ingresado en el formulario
+		$nombreC=Request::get('nc');//
 
 		
 	}

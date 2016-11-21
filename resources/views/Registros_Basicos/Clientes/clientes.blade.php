@@ -100,9 +100,13 @@
 															<label for="rif" class="col-md-12">Rif:</label><span class="ic"><i class="fa fa-chevron-down"></i></span>									
 															<div class="form-group col-md-4" id="sep">
 																<select name="rif" id="input3" class="form-control userEmail">
-																	<option value="">-</option>
-																	<option value="1">J-</option>
-																	<option value="2">G-</option>
+
+																@foreach($tiposR as $rif)
+																	<option value="{{$rif->id}}">{{$rif->descripcion}}</option>
+																@endforeach
+																
+																	<!-- <option value="1">J-</option>
+																	<option value="2">G-</option> -->
 																</select><i class="fa fa-clipboard" id="icc3"></i>
 															</div>	
 															<div class="form-group col-md-8">									
@@ -302,6 +306,8 @@
 																	<option value="">-</option>
 																	<option value="1">J-</option>
 																	<option value="2">G-</option>
+
+
 																</select><i class="fa fa-clipboard" id="icc3"></i>
 															</div>	
 															<div class="form-group col-md-8">									
