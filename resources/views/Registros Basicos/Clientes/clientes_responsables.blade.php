@@ -63,8 +63,38 @@
                                                         <div class="container-fluid" id="dbr1">
                                                             <center><u><p>DATOS BASICOS PRIMARIOS</p></u></center>
                                                             <br>
+                                                            <div class="row">                                            
+                                                                <div class="col-md-5  col-md-offset-1" id="rRpb1">
+                                                                    <div class="form-group">
+                                                                        <label for="nomRpb1">1er Nombre</label>
+                                                                        <input type="text" name="nomRpb1" class="form-control userEmail" id="input1"><i class="fa fa-user" id="icr1"></i>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-4  col-md-offset-1">
+                                                                    <div class="form-group" id="rRpb2">    
+
+                                                                        <label for="nomRpb2">2do Nombre</label>
+                                                                        <input type="text" name="nomRpb2" class="form-control userEmail" id="input2"><i class="fa fa-user-plus"></i>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row" id="contrpbdbr2">   
+                                                                <div class="col-md-5  col-md-offset-1">
+                                                                    <div class="form-group" id="rRpb3">
+
+                                                                        <label for="apellRpb1">1er Apellido</label>
+                                                                        <input type="text" name="apellRpb1" class="form-control userEmail" id="input3"><i class="fa fa-user"></i>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-4 col-md-offset-1">
+                                                                    <div class="form-group" id="rRpb4">                                               
+                                                                        <label for="apellRpb2">2do Apellido</label>
+                                                                        <input type="text" name="apellRpb2" class="form-control userEmail" id="input4"><i class="fa fa-user-plus"></i>
+                                                                    </div> 
+                                                                </div>
+                                                            </div>
                                                         </div>
-                
+                                                    </div>
                                                     <div role="tabpanel" class="tab-pane" id="dbr2">
                                                     <center><u><p>DATOS BASICOS SECUNDARIOS</p></u></center>
                                                     <br>
