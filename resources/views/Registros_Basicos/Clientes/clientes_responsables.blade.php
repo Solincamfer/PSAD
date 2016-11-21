@@ -74,11 +74,12 @@
                                     </div>
                                     
                                         <form method="post" class="form-horizontal Validacion" action="">
+                                        {{ csrf_field() }}
                                         <div class="modal-body">
-                                            <ul class="nav nav-tabs hidden" role="tablist">
-                                                <li role="presentation" class="active"><a href="#dbr1" aria-controls="dbr1" role="tab" data-toggle="tab">Datos básicos Primarios</a></li>
-                                                <li role="presentation"><a href="#dbr2" aria-controls="dbr2" role="tab" data-toggle="tab">Datos básicos Secundarios</a></li>
-                                                <li role="presentation"><a href="#ctor" aria-controls="ctor" role="tab" data-toggle="tab">Contactos</a></li>
+                                            <ul class="nav nav-tabs not-active" role="tablist" >
+                                                <li role="presentation" class="active"><a href="#dbr1" id="a1" aria-controls="dbr1" role="tab" data-toggle="tab">Datos básicos Primarios</a></li>
+                                                <li role="presentation"><a href="#dbr2" id="a2" aria-controls="dbr2" role="tab" data-toggle="tab">Datos básicos Secundarios</a></li>
+                                                <li role="presentation"><a href="#ctor" id="a3" aria-controls="ctor" role="tab" data-toggle="tab" >Contactos</a></li>
                                             </ul>
                                             <div class="container-fluid">
                                                 <div class="tab-content">
@@ -112,8 +113,16 @@
                                                                         <label for="apellRpb2">2do Apellido</label>
                                                                         <input type="text" name="apellRpb2" class="form-control userEmail" id="input4"><i class="fa fa-user-plus" id="icr4"></i>
                                                                     </div> 
+
                                                                 </div>
                                                             </div>
+                                                            <div class="col-md-4 col-md-offset-1">
+                                                                <div class="form-group" id="rRpb4">                                               
+                                                                    <label for="apellRpb2">2do Apellido</label>
+                                                                    <input type="text" name="apellRpb2" class="form-control userEmail" id="input4"><i class="fa fa-user-plus"></i>
+                                                                </div> 
+                                                            </div>
+
                                                         </div>
                                                     </div>
                                                     <div role="tabpanel" class="tab-pane" id="dbr2">
@@ -344,7 +353,7 @@
                                                             <div class="col-md-8 col-md-offset-2" id="rRpbm8">
                                                                 <div class="form-group row">    
                                                                     <label for="cgoRpb">Cargo</label>
-                                                                    <select name="cgoRpb" class="form-control userEmail" id="cgoRpb">
+                                                                    <select name="cgoRpb" class="form-control userEmail" id="input10">
                                                                         <option value="">-</option>
                                                                         <option value="1">caracas</option>
                                                                     </select><i class="fa fa-id-badge" id="micr10"></i>

@@ -15,4 +15,8 @@ class Municipio extends Model
     	return $this->belongsTo('App\Estado');
     }
 
+   public function direcciones()
+   {
+     return $this->hasMany('App\Direccion');
+   }
 }
