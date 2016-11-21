@@ -52,7 +52,7 @@ Route::group(['prefix'=>'/menu/registros','middleware'=>['validar_sm','v_menu']]
 				Route::match(['post','get'],'/clientes',                   				 'RegistrosBasicos@clientes');
 				Route::match(['post','get'],'/departamentos/cargos/{departamento_id}',   'RegistrosBasicos@departamentos_cargos');
 				
-				Route::match(['post','get'],'/clientes/modificar',                   				 'RegistrosBasicos@clientes_modificar');
+				Route::match(['post','get'],'/clientes/insertar',                   				 'RegistrosBasicos@clientes_insertar');
 				Route::match(['post','get'],'/clientes/responsable',                   				 'RegistrosBasicos@clientes_responsables');
 				Route::match(['post','get'],'/clientes/responsable/modificar',                   	 'RegistrosBasicos@clientes_responsables_modificar');
 				Route::match(['post','get'],'/clientes/responsable/agregar',                   		 'RegistrosBasicos@clientes_responsables_agregar');

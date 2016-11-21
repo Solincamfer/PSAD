@@ -102,10 +102,15 @@ class RegistrosBasicos extends Controller
 		$datos=$this->cargar_header_sidebar_acciones();
 		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(9,10,11,12),8);
 	
-		return view('Registros_Basicos\Clientes\clientes',$this->datos_vista($datos,$acciones,array())); 
+		return view('Registros_Basicos\Clientes\clientes',$this->datos_vista($datos,$acciones,DB::table('clientes')->get())); 
 	}
 
+	public function clientes_insertar()
+	{
+		
 
+		
+	}
 
 
 	public function clientes_responsables()//

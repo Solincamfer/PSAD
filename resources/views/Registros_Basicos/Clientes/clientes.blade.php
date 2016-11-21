@@ -18,7 +18,7 @@
 						@if($agregar)
 						<button id="btnAdd" type="button" class="btnAd col-md-offset-11" data-toggle="modal" data-target="#myModal" href="#myModal"><i class="fa fa-plus"></i> AGREGAR</button>
 						@endif
-						
+						@foreach($consulta as $clientes)
 							<div class="contMd" style="">
 								<div class="icl">
 									@foreach($acciones as $accion)
@@ -49,9 +49,10 @@
 										@endif
 									@endforeach
 								</div>
-								<p class="ttlMd" style="display: inline-block;"><strong>REGISTRO</strong></p>
+								<p class="ttlMd" style="display: inline-block;"><strong>{{$clientes->razon_s}}</strong></p>
+							
 							</div>
-					
+						@endforeach
 					</div>
 
 				<!-- 	Registro -->
