@@ -40,198 +40,201 @@
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                         <h4 class="modal-title" id="myModalLabel">Agregar Sucursales</h4>
                                     </div>
-                                    <div class="modal-body">
-                                        <form action="">
-                                            {{ csrf_field() }}
-                                            <div class="container-fluid">
-                                                <div class="form-group row">
+                                    <form method="post" class="form-horizontal Validacion" id="Formmcliente" action="">
+                                    {{ csrf_field() }}
+                                    <div class="modal-body">   
+                                        <div class="form-group row">
                                                     <div class="col-md-6 col-md-offset-6" align="right">
                                                         <input type="checkbox" name="cbSuc" id="cbSuc">
                                                         <label for="chbSuc">Heredar datos del Cliente Matriz</label>
-                                                    </div>
-                                                </div>
-                                                <ul class="nav nav-tabs" role="tablist">
-                                                    <li role="presentation" class="active"><a href="#dbs" aria-controls="dbs" role="tab" data-toggle="tab">Datos básicos</a></li>
-                                                    <li role="presentation"><a href="#dfs" aria-controls="dfs" role="tab" data-toggle="tab">Dirección Fiscal</a></li>
-                                                    <li role="presentation"><a href="#dcs" aria-controls="dcs" role="tab" data-toggle="tab">Dirección Comercial</a></li>
-                                                    <li role="presentation"><a href="#ctos" aria-controls="ctos" role="tab" data-toggle="tab">Contactos</a></li>
-                                                </ul>
-                                            </div>
-                                            <div class="container-fluid">
-                                                <div class="tab-content">
+                                                    </div>{{ csrf_field() }}
+                                                </div>                     
+                                        <ul class="nav nav-tabs" role="tablist">
+                                            <li role="presentation" class="active" ><a href="#dbm" id="m1" aria-controls="dbm" role="tab" data-toggle="tab" style="display: ;">Datos basicos</a></li>
+                                            <li role="presentation" ><a href="#dfm" id="m2" aria-controls="df" role="tab" data-toggle="tab" style="display: ;">Dirección Fiscal</a></li>
+                                            <li role="presentation" ><a href="#dcm" id="m3" aria-controls="dc" role="tab" data-toggle="tab" style="display: ;">Direccion Comercial</a></li>
+                                            <li role="presentation" ><a href="#cttm" id="m4" aria-controls="ctt" role="tab" data-toggle="tab" style="display: ;">Contacto</a></li>
+                                        </ul>
+                                        <div class="container-fluid">
+                                            <div class="tab-content">
 
-                                                    <div role="tabpanel" class="tab-pane active" id="dbs">
-                                                        <div class="container-fluid" id="contdbs">
-                                                            <div class="form-group row" id="rDbs1">
-                                                                <div class="col-md-6">
-                                                                    <label for="rss">Razon Social:</label>
-                                                                    <input type="text" name="rss" class="form-control" id="rss"><i class="fa fa-university"></i>
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <label for="ncs">Nombre Comercial:</label>
-                                                                    <input type="text" name="ncs" class="form-control" id="ncs"><i class="fa fa-building"></i>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group row" id="rDbs2">
-                                                                <div class="col-md-6">
-                                                                    <label for="selRifs">Rif</label>
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <label for="tpcs">Tipo de Contribuyente</label>
-                                                                </div>
-                                                                <div class="col-md-2">
-                                                                    <select name="selRifs" class="form-control" id="selRifs">
-                                                                        <option value="0">-</option>
-                                                                    </select>
-                                                                </div>
-                                                                <div class="col-md-4">
-                                                                    <input type="tel" class="form-control" id="numRifs"><i class="fa fa-address-card"></i>
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <select name="tpcs" class="form-control" id="tpcs">
-                                                                        <option value="0">-</option>
-                                                                    </select>
-                                                                </div>
+                                                <div role="tabpanel" class="tab-pane active" id="dbm">
+                                                    <div class="container-fluid" id="contDbm">
+                                                        <center><u><p>DATOS BASICOS</p></u></center>
+                                                        <br>
+                                                        <div class="col-md-12" id="dbcm1">
+                                                            <div class="form-group col-md-12">
+                                                                <label for="rs">Razon Social:</label>                           
+                                                                <input type="text" name="rs" class="form-control userEmail"  id="inputm1"/>
+                                                                <i class="fa fa-university" id="micc1"></i>                             
+                                                            </div>                                                          
+                                                            <div class="form-group col-md-12">
+
+                                                                <label for="nc">Nombre Comercial:</label>
+                                                                <input type="text" name="nc" id="inputm2" class="form-control userEmail" />
+                                                                <i class="fa fa-building" id="micc2"></i>
+
                                                             </div>
                                                         </div>
-                                                    </div>
-
-                                                    <div role="tabpanel" class="tab-pane" id="dfs">
-                                                        <div class="container-fluid" id="contdfs">
-                                                            <div class="form-group row" id="rDfs1">
-                                                                <div class="col-md-6">
-                                                                    <label for="pdfs">País</label>
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <label for="rgdfs">Región</label>
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <select name="pdfs" class="form-control" id="pdfs">
-                                                                        <option value="0">-</option>
-                                                                    </select>
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <select name="rgdfs" class="form-control" id="rgdfs">
-                                                                        <option value="0">-</option>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group row" id="rDfs2">
-                                                                <div class="col-md-6">
-                                                                    <label for="edodfs">Estado</label>
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <label for="mundfs">Municipio</label>
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <select name="edodfs" class="form-control" id="edodfs">
-                                                                        <option value="0">-</option>
-                                                                    </select>
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <select name="mundfs" class="form-control" id="mundfs">
-                                                                        <option value="0">-</option>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group row" id="rDfs3">
-                                                                <div class="col-md-12">
-                                                                    <label for="descpdfs">Descripcion de la direccion</label>
-                                                                    <input type="text" name="descpdfs" class="form-control" id="descpdfs"><i class="fa fa-map-marker"></i>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div role="tabpanel" class="tab-pane" id="dcs">
-                                                        <div class="container-fluid" id="contdcs">
-                                                            <div class="form-group row" id="rDcs1">
-                                                                <div class="col-md-6">
-                                                                    <label for="pdcs">País</label>
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <label for="rgdcs">Región</label>
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <select name="pdcs" class="form-control" id="pdcs">
-                                                                        <option value="0">-</option>
-                                                                    </select>
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <select name="rgdcs" class="form-control" id="rgdcs">
-                                                                        <option value="0">-</option>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group row" id="rDcs2">
-                                                                <div class="col-md-6">
-                                                                    <label for="edodcs">Estado</label>
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <label for="mundcs">Municipio</label>
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <select name="edodcs" class="form-control" id="edodcs">
-                                                                        <option value="0">-</option>
-                                                                    </select>
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <select name="mundcs" class="form-control" id="mundcs">
-                                                                        <option value="0">-</option>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group row" id="rDcs3">
-                                                                <div class="col-md-12">
-                                                                    <label for="descpdcs">Descripcion de la direccion</label>
-                                                                    <input type="text" name="descpdcs" class="form-control" id="descpdcs"><i class="fa fa-map-marker"></i>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div role="tabpanel" class="tab-pane" id="ctos">
-                                                        <div class="container-fluid" id="contctos">
-                                                            <div class="form-group row" id="rCtos1">
-                                                                <div class="col-md-6">
-                                                                    <label for="tlflcls">Teléfono Local</label>
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <label for="tlfmvls">Teléfono Móvil</label>
-                                                                </div>
-                                                                <div class="col-md-2">
-                                                                    <select name="tlflcls" class="form-control" id="tlflcls">
-                                                                        <option value="0">-</option>
-                                                                    </select>
-                                                                </div>
-                                                                <div class="col-md-4">
-                                                                    <input type="tel" class="form-control" id="numtlflcls"><i class="fa fa-phone"></i>
-                                                                </div>
-                                                                <div class="col-md-2">
-                                                                    <select name="tlfmvls" class="form-control" id="tlfmvls">
-                                                                        <option value="0">-</option>
-                                                                    </select>
-                                                                </div>
-                                                                <div class="col-md-4">
-                                                                    <input type="tel" class="form-control" id="numtlfmvls"><i class="fa fa-mobile"></i>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group row" id="rCtos2">
-                                                                <div class="col-md-12">
-                                                                    <label for="mails">Correo Electrónico</label>
-                                                                    <input type="text" name="mails" class="form-control" id="mails"><i class="fa fa-envelope"></i>
-                                                                </div>
+                                                        <div class="col-md-12" id="dbcm2">  
+                                                            <label for="rif" class="col-md-12">Rif:</label><span class="ic"><i class="fa fa-chevron-down"></i></span>                                   
+                                                            <div class="form-group col-md-4" id="sepm">
+                                                                <select name="rif" id="inputm3" class="form-control userEmail">
+                                                                    <option value="">-</option>
+                                                                    <option value="1">J-</option>
+                                                                    <option value="2">G-</option>
+                                                                </select><i class="fa fa-clipboard" id="micc3"></i>
+                                                            </div>  
+                                                            <div class="form-group col-md-8">                                   
+                                                                <input type="text" id="inputm4" class="form-control userEmail" name="df"/>
+                                                                <i class="fa fa-address-card" id="micc4"></i>
+                                                            </div>  
+                                                        </div>                                                          
+                                                        <div class="col-md-12" id="dbcm3">  
+                                                            <div class="form-group col-md-12">                                                  
+                                                                <label for="tipCon">Contribuyente</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
+                                                                <select name="tipCon" id="inputm5" class="form-control userEmail" >
+                                                                    <option value="">-</option>
+                                                                    <option value="1">asdas</option>
+                                                                    <option value="2">sada</option>
+                                                                </select><i class="fa fa-clipboard" id="micc5"></i>                                                     
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
+
+                                                <div role="tabpanel" class="tab-pane" id="dfm">
+                                                    <div class="container-fluid" id="contdfm">
+                                                        <center><u><p>DIRECCION FISCAL</p></u></center>
+                                                        <br>
+                                                        <div class="form-group col-md-6" id="dfcm1">
+                                                            <label for="paisdf">País</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
+                                                            <select name="paisdf" id="inputm6" class="form-control userEmail">
+                                                                <option value="">-</option>
+                                                                <option value="caracas">caracas</option>    
+                                                            </select><i class="fa fa-globe" id="micc6"></i>
+                                                        </div>
+                                                        <div class="form-group col-md-7" id="dfcm2">
+                                                            <div class="col-md-offset-2">
+                                                                <label for="regiondf">Región</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
+                                                                <select name="regiondf" id="inputm7" class="form-control userEmail">
+                                                                    <option value="">-</option>
+                                                                    <option value="caracas">caracas</option>
+                                                                </select><i class="fa fa-map" id="micc7"></i>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group col-md-6" id="dfcm3">
+                                                            <label for="edodf">Estado</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
+                                                            <select name="edodf" id="inputm8" class="form-control userEmail">
+                                                                <option value="">-</option>
+                                                                <option value="caracas">caracas</option>
+                                                            </select><i class="fa fa-map-pin" id="micc8"></i>
+                                                        </div>
+                                                        <div class="form-group col-md-7" id="dfcm4">
+                                                            <div class="col-md-offset-2">
+                                                                <label for="mundf">Municipio</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
+                                                                <select name="mundf" id="inputm9" class="form-control userEmail">
+                                                                    <option value="">-</option>
+                                                                    <option value="caracas">caracas</option>
+                                                                </select><i class="fa fa-map-signs" id="micc9"></i>
+                                                            </div>  
+                                                        </div>
+                                                        <div class="form-group col-md-12" id="dfcm5">
+                                                            <label for="descDirdf">Descripción de la dirección</label>
+                                                            <textarea type="text" name="descDirdf" id="inputm10" class="form-control userEmail"></textarea><i class="fa fa-map-marker" id="micc10"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div role="tabpanel" class="tab-pane" id="dcm">
+                                                    <div class="container-fluid" id="contdcm">
+                                                        <center><u><p>DIRECCION COMERCIAL</p></u></center>
+                                                        <br>                                    
+                                                        <div class="form-group col-md-6" id="dccm1">
+                                                            <label for="paisdc">País</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
+                                                            <select name="paisdc" id="inputm11" class="form-control userEmail">
+                                                                <option value="">-</option>
+                                                                <option value="caracas">caracas</option>    
+                                                            </select><i class="fa fa-globe" id="micc11"></i>
+                                                        </div>
+                                                        <div class="form-group col-md-7" id="dccm2">
+                                                            <div class="col-md-offset-2">
+                                                                <label for="regiondc">Región</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
+                                                                <select name="regiondc" id="inputm12" class="form-control userEmail">
+                                                                    <option value="">-</option>
+                                                                    <option value="caracas">caracas</option>
+                                                                </select><i class="fa fa-map" id="micc12"></i>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group col-md-6" id="dccm3">
+                                                            <label for="edodc">Estado</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
+                                                            <select name="edodc" id="inputm13" class="form-control userEmail">
+                                                                <option value="">-</option>
+                                                                <option value="caracas">caracas</option>
+                                                            </select><i class="fa fa-map-pin" id="micc13"></i>
+                                                        </div>
+                                                        <div class="form-group col-md-7" id="dccm4">
+                                                            <div class="col-md-offset-2">
+                                                                <label for="mundc">Municipio</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
+                                                                <select name="mundc" id="inputm14" class="form-control userEmail">
+                                                                    <option value="">-</option>
+                                                                    <option value="caracas">caracas</option>
+                                                                </select><i class="fa fa-map-signs" id="micc14"></i>
+                                                            </div>  
+                                                        </div>                                                  
+                                                        <div class="form-group col-md-12" id="dccm5">
+                                                            <label for="descDirdc">Descripción de la dirección</label>
+                                                            <textarea type="text" name="descDirdc" id="inputm15" class="form-control userEmail"></textarea><i class="fa fa-map-marker" id="micc15"></i>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                                <div role="tabpanel" class="tab-pane" id="cttm">
+                                                    <div class="container-fluid" id="contcttm">
+                                                        <center><u><p>FORMAS DE CONTACTO</p></u></center>
+                                                        <br>                                                            
+                                                        <label for="tlflcl" class="col-md-12">N° Local:</label> 
+                                                        <div class="form-group col-md-4" id="ctocm1">
+                                                            <div class="col-md-offset-1">
+                                                                <select name="tlflcl" id="inputm16" class="form-control userEmail">
+                                                                    <option value="">-</option>
+                                                                    <option value="0212">0212</option>
+                                                                </select><i class="fa fa-hashtag" id="micc16"></i>
+                                                            </div>  
+                                                        </div>
+                                                        <div class="form-group col-md-8" id="ctocm2">
+                                                            <input type="text" name="tcl" id="inputm17" class="form-control userEmail col-md-12" /><i class="fa fa-phone" id="micc17"></i>      
+                                                        </div>
+
+
+                                                        <label for="tlfmvl" class="col-md-12">N° Móvil</label>
+                                                        <div class="form-group col-md-4" id="ctocm3">
+                                                            <div class="col-md-offset-1">
+                                                                <select name="tlfmvl" id="inputm18" class="form-control userEmail">
+                                                                    <option value="">-</option>
+                                                                    <option value="0416">0416</option>
+                                                                </select><i class="fa fa-hashtag" id="micc18"></i>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group col-md-8" id="ctocm4">       
+                                                            <input type="text" name="tmvl" id="inputm19" class="form-control userEmail" /><i class="fa fa-mobile" id="micc19"></i>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group col-md-12" id="ctocm5">
+                                                        <label for="mail">Correo Electrónico</label>
+                                                        <input type="text" name="mail" id="inputm20" class="form-control userEmail">
+                                                        <i class="fa fa-envelope" id="micc20"></i>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </form>
-                                    </div>
+                                        </div>
+                                    </div>                              
                                     <div class="modal-footer">
-                                        <button type="button" class="bttnMd" id="btnSv">Guardar <i class="fa fa-floppy-o"></i></button>
-                                        <button type="button" class="bttnMd" data-dismiss="modal" id="btnCs">Cerrar <i class="fa fa-times"></i></button>
+                                        <button type="button" class="btn" >Anterior <i class="fa fa-times"></i></button>
+                                        <button type="submit" class="bttnMd" id="btnSv">Siguiente <i class="fa fa-hand-o-right"></i></button>  
                                     </div>
+                                </form>
                                 </div>
                             </div>
                         </div>

@@ -41,65 +41,85 @@
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                         <h4 class="modal-title" id="myModalLabel">Agregar Componente</h4>
                                     </div>
+                                    <form action="" class="Validacion">
                                     <div class="modal-body">
-                                        <form action="">
+                                        
                                             {{ csrf_field() }}
                                             <div class="container-fluid" id="contcomp">
+                                            <div class="col-md-6">
                                                 <div class="form-group row" id="rComp1">
-                                                    <div class="col-md-6">
-                                                        <label for="selTc">Tipo de Componente</label>
-                                                        <select name="selTc" class="form-control" id="selTc">
-                                                            <option value="0">-</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="col-md-6">
+                                                    
                                                         <label for="nomComp">Nombre del Componente</label>
-                                                        <input type="text" class="form-control" name="nomComp" id="nomComp"><i class="fa fa-cogs"></i>
+                                                        <input type="text" class="form-control userEmail" name="nomComp" id="nomComp"><i class="fa fa-cogs"></i>
                                                     </div>
                                                 </div>
-                                                <div class="form-group row" id="rComp2">
-                                                    <div class="col-md-6">
-                                                        <label for="selMc">Marca del Componente</label>
-                                                        <select name="selMc" class="form-control" id="selMc">
-                                                            <option value="0">-</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <label for="selMcm">Modelo del Componente</label>
-                                                        <select name="selMcm" class="form-control" id="selMcm">
-                                                            <option value="0">-</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
+                                                <div class="col-md-6">
                                                 <div class="form-group row" id="rComp3">
-                                                    <div class="col-md-6">
+                                                    
                                                         <label for="serCm">Serial del Componente</label>
-                                                        <input type="text" class="form-control" name="serCm" id="serCm"><i class="fa fa-barcode"></i>
+                                                        <input type="text" class="form-control userEmail" name="serCm" id="serCm"><i class="fa fa-barcode"></i>
                                                     </div>
-                                                    <div class="col-md-6">
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group row" id="rComp1">                                                    
+                                                        <label for="selTc">Tipo de Componente</label>
+                                                        <select name="selTc" class="form-control userEmail" id="selTc">
+                                                            <option value="">-</option>
+                                                             <option value="1">caracas</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="col-md-6">
+                                                <div class="form-group row" id="rComp2">
+                                                    
+                                                        <label for="selMc">Marca del Componente</label>
+                                                        <select name="selMc" class="form-control userEmail" id="selMc">
+                                                            <option value="">-</option>
+                                                             <option value="1">caracas</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                <div class="form-group row" id="rComp2">
+                                                    
+                                                        <label for="selMcm">Modelo del Componente</label>
+                                                        <select name="selMcm" class="form-control userEmail" id="selMcm">
+                                                            <option value="">-</option>
+                                                             <option value="1">caracas</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="col-md-6">
+                                                <div class="form-group row" id="rComp3">
+                                                    
                                                         <label for="selStCm">Estatus del Componente</label>
-                                                        <select name="selStCm" class="form-control" id="selStCm">
-                                                            <option value="0">-</option>
+                                                        <select name="selStCm" class="form-control userEmail" id="selStCm">
+                                                            <option value="">-</option>
                                                             <option value="1">Activo</option>
                                                             <option value="2">Inactivo</option>
                                                         </select>
                                                     </div>
                                                 </div>
+                                                <div class="col-md-12">
                                                 <div class="form-group row" id="rComp4">
-                                                    <div class="col-md-8 col-md-offset-2">
+                                                    
                                                         <label for="selPsc">Pieza y Software</label>
-                                                        <select name="selPsc" class="form-control" id="selPsc">
-                                                            <option value="0">-</option>
+                                                        <select name="selPsc" class="form-control userEmail" id="selPsc">
+                                                            <option value="">-</option>
+                                                            <option value="1">caracas</option>
                                                         </select>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </form>
+                                        
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="bttnMd" id="btnSv">Guardar <i class="fa fa-floppy-o"></i></button>
+                                        <button type="submit" class="bttnMd" id="btnSv">Guardar <i class="fa fa-floppy-o"></i></button>
                                         <button type="button" class="bttnMd" data-dismiss="modal" id="btnCs">Cerrar <i class="fa fa-times"></i></button>
                                     </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
