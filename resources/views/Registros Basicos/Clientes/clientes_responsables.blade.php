@@ -6,9 +6,17 @@
             @include('layout/header')
                 @include('layout/sidebar')
                     <div class="contenido">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-3 ttlp">
+                                    <h1>Cliente - Responsable</h1>
+                                </div>
+                            </div>
+                        </div>
+                        
                         <div class="col-xs-5 col-sm-5 col-md-6 col-md-offset-3" style=""> 
                         @if($agregar)
-                            <button id="btnAdd" type="button" class="btnAd col-md-offset-10" data-toggle="modal" data-target="#myModal" href="#myModal">AGREGAR <i class="fa fa-plus-circle"></i></button>
+                            <button id="btnAdd" type="button" class="btnAd col-md-offset-11" data-toggle="modal" data-target="#myModal" href="#myModal"><i class="fa fa-plus"></i> AGREGAR</button>
                         @endif 
                                 <div class="contMd" style="">
                                     @foreach($acciones as $accion)
@@ -51,40 +59,12 @@
                                             </ul>
                                             <div class="container-fluid">
                                                 <div class="tab-content">
-                                                    <div role="tabpanel" class="tab-pane active" id="dbr1">
-                                                    <center><u><p>DATOS BASICOS PRIMARIOS</p></u></center>
-                                                    <br>
-                                                        <div class="row" id="contrpbdbr1">                                            
-                                                            <div class="col-md-5  col-md-offset-1">
-                                                                <div class="form-group" id="rRpb1">
-                                                                    <label for="nomRpb1">1er Nombre</label>
-                                                                    <input type="text" name="nomRpb1" class="form-control userEmail" id="nomRpb1"><i class="fa fa-user"></i>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-4  col-md-offset-1">
-                                                                <div class="form-group" id="rRpb2">    
-                                                                
-                                                                    <label for="nomRpb2">2do Nombre</label>
-                                                                    <input type="text" name="nomRpb2" class="form-control userEmail" id="nomRpb2"><i class="fa fa-user-plus"></i>
-                                                                </div>
-                                                            </div>
+                                                    <div role="tabpanel" class="tab-pane active">
+                                                        <div class="container-fluid" id="dbr1">
+                                                            <center><u><p>DATOS BASICOS PRIMARIOS</p></u></center>
+                                                            <br>
                                                         </div>
-                                                        <div class="row" id="contrpbdbr2">   
-                                                            <div class="col-md-5  col-md-offset-1">
-                                                                <div class="form-group" id="rRpb3">
-                                                                
-                                                                    <label for="apellRpb1">1er Apellido</label>
-                                                                    <input type="text" name="apellRpb1" class="form-control userEmail" id="apellRpb1"><i class="fa fa-user"></i>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-4 col-md-offset-1">
-                                                                <div class="form-group" id="rRpb4">                                               
-                                                                    <label for="apellRpb2">2do Apellido</label>
-                                                                    <input type="text" name="apellRpb2" class="form-control userEmail" id="apellRpb2"><i class="fa fa-user-plus"></i>
-                                                                </div> 
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                
                                                     <div role="tabpanel" class="tab-pane" id="dbr2">
                                                     <center><u><p>DATOS BASICOS SECUNDARIOS</p></u></center>
                                                     <br>

@@ -202,6 +202,15 @@
             padding: 30px;
             transition: all 0.5s;
             box-sizing: border-box;
+            font-family: 'Ubuntu Condensed', sans-serif;
+        }
+        
+        .ttlp{
+            font-size: 30px;
+            font-weight: bold;
+            border-bottom: 1px solid #26a69D;
+            margin: 0;
+            padding: 0;
         }
     /*Listado*/
         .btnAd, .btnBk{
@@ -211,14 +220,16 @@
             border-radius: 50px;
             background: #333;
             display: inline-block;
-            margin: 50px calc(50% - 19px);
+            /*margin: 50px calc(50% - 19px);*/
+            margin-top: 20px;
+            margin-bottom: 10px;
             white-space: nowrap;
             border: none;
             padding-top: 13px;
             padding-bottom: 10px;
             padding-left: 13px;
             box-sizing: border-box;
-            color: #fff;
+            color: #E5E5E7;
             font-size: 12px;
             font-weight: bold;
             transition: all .25s ease-in-out;
@@ -388,11 +399,11 @@
         }
 
     /*Tooltip*/
-        .tltp{
+        .tltp, .tltpck{
             position: relative;
         }
 
-        .tltp:before, .tltp:after {
+        .tltp:before, .tltp:after, .tltpck:before, .tltpck:after {
             display: block;
             opacity: 0;
             pointer-events: none;
@@ -405,11 +416,11 @@
             border-left: 6px solid transparent;
             content: '';
             height: 0;
-            top: 45px;
-            left: 20px;
+            top: 31px;
+            left: 7px;
             width: 0;
         }
-
+        
         .tltp:before {
             background: linear-gradient(#222, #333, #444, #555,#26a69d);
             border-radius: 2px;
@@ -417,9 +428,32 @@
             content: attr(data-ttl);
             font-size: 14px;
             padding: 6px 10px;
-            top: 51px;
+            top: 37px;
             white-space: nowrap;
         }
+
+        .tltpck:after{
+            border-right: 6px solid transparent;
+            border-bottom: 6px solid rgba(0, 0, 0, .75);
+            border-left: 6px solid transparent;
+            content: '';
+            height: 0;
+            top: 22px;
+            left: 7px;
+            width: 0;
+        }
+
+        .tltpck:before{
+            background: linear-gradient(#222, #333, #444, #555,#26a69d);
+            border-radius: 2px;
+            color: #e5e5e7;
+            content: attr(data-ttl);
+            font-size: 14px;
+            padding: 6px 10px;
+            top: 28px;
+            white-space: nowrap;
+        }
+
         /*Efectos Tooltip*/
             /*fade*/
             .tltp:after, .tltp:before{
@@ -432,25 +466,25 @@
                 transform: translate3d(0,0,0);
             }
 
-        /*  --> expand 
-            .tltp.expand:before {
+            /*expand*/ 
+            .tltpck:before {
                 transform: scale3d(.2,.2,1);
                 transition: all .2s ease-in-out;
             }
-            .tltp.expand:after {
+            .tltpck:after {
                 transform: translate3d(0,6px,0);
                 transition: all .1s ease-in-out;
             }
-            .tltp.expand:hover:before,
-            .tltp.expand:hover:after {
+            .tltpck:hover:before,
+            .tltpck:hover:after {
                 opacity: 1;
                 transform: scale3d(1,1,1);
             }
-            .tltp.expand:hover:after {
+            .tltpck:hover:after {
                 transition: all .2s .1s ease-in-out;
             }
 
-            --> swing
+        /*  --> swing
             .tltp.swing:before,
             .tltp.swing:after {
                 transform: translate3d(0,30px,0) rotate3d(0,0,1,60deg);
@@ -466,6 +500,12 @@
                 opacity: 1;
                 transform: translate3d(0,0,0) rotate3d(1,1,1,0deg);
             }*/
+
+        /*Modal*/
+
+            .hidden{
+                display: none;
+            }
 /**Identificadores**/
     /*Header*/
         #hd{
@@ -535,7 +575,7 @@
 
         #contDb, #contdf, #contdc, #contctt,
         #contDbm, #contdfm, #contdcm, #contcttm,
-        #contdpto, #contcgo, #contPn{
+        #contdpto, #contcgo, #contPn, #dbr1{
             margin-top: 20px;
             padding: 10px;
         }
@@ -544,9 +584,14 @@
             background: #26a69d;
         }
 
+        #btnResp, #btnRespm{
+            background: #26a69d;
+        }
+
         #btnCs, #btnCsm{
             background: #ec1c24;
         }
+
         #btnAn, #btnAnm{
             background: #ec1c24;
         }
@@ -1109,6 +1154,39 @@
                         border: none;
                         z-index: 1;
                     }
+    
+        /*Cliente Responsable*/
+            /*Agregar*/
+                #rRpb1 input{
+                    display: block;
+                    padding: 3px 5px;
+                    margin-bottom: 10px;
+                    width: 100%;
+                    border: 1px solid #ddd;
+                    text-indent: 17px;
+                    transition: border-width .2s ease-in-out;
+                    border-radius: 2px;
+                    color: #ccc;
+                }
+
+                #rRpb1 input:focus{
+                    outline: none;
+                    color: #444;
+                    border-color: #26a69d;
+                    border-left-width: 35px;
+                }
+
+                #rRpb1 #icr1{
+                    color: #fff;
+                    font-size: 1em;
+                    position: absolute;
+                    margin-top: -35px;
+                    margin-left: 13px;
+                    opacity: 1;
+                    left: 0;
+                    transition: all .1s ease-in;
+                }
+
         /*Planes*/
             #rPn input{
                 display: block;
