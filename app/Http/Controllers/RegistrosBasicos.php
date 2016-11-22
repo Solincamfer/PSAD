@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+
 use Session;
 use DB;
-//use Request;
+use Request;
 
 
 class RegistrosBasicos extends Controller 
@@ -102,8 +102,16 @@ class RegistrosBasicos extends Controller
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
 		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(9,10,11,12),8);
+
 		$consulta=DB::table('clientes')->get();
 		$tipoR=DB::table('tipos')->where('numero_c',1)->get();
+		$tipoC=DB::table('tipos')->where('numero_c',4)->get();
+		$paises=DB::table('paises')->get();
+		$regiones=DB::table('regiones')->get();
+		$estados=DB::table('estados')->orderBy('descripcion')->get();
+		$municipios=DB::table('municipios')->orderBy('descripcion')->get();
+		$codigoC=DB::table('tipos')->where('numero_c',2)->get();
+		$codigoL=DB::table('tipos')->where('numero_c',3)->get();
 		
 
 		return view('Registros_Basicos\Clientes\clientes',
@@ -114,8 +122,15 @@ class RegistrosBasicos extends Controller
 															 'acciones'=>$acciones['acciones'],//acciones
 															 'agregar'=>$acciones['agregar'],//boton de agregar
 															 'consulta'=>$consulta,//registros provenientes de la base de datos
-															 'tiposR'=>$tipoR,
-															 'tipo'
+															 'tipoR'=>$tipoR,
+															 'tipoC'=>$tipoC,
+															 'paises'=>$paises,
+															 'regiones'=>$regiones,
+															 'estados'=>$estados,
+															 'municipios'=>$municipios,
+															 'codigoC'=>$codigoC,
+															 'codigoL'=>$codigoL
+
 
 
 															]
@@ -124,13 +139,73 @@ class RegistrosBasicos extends Controller
 			); 
 	}
 
+
 	public function clientes_insertar()
 	{
 		
 		//capturar datos del formulario
 
-		$razonS=Request::get('rs');//nombre de usuario ingresado en el formulario
-		$nombreC=Request::get('nc');//
+		$razonS=(string)Request::get('rs');//razon social
+		$nombreC=(string)Request::get('nc');//nombre comercial
+		$tipoR=(integer)Request::get('rif');//tipo rif
+		$numeroR=(string)Request::get('df');//numero rif
+		$tipoC=(integer)Request::get('tipCon');//tipo de contribuyente
+		
+		
+		
+		$direccionF=(string)Request::get('descDirdf');//direccion fiscal
+		$paisF=(integer)Request::get('paisdf');//pais fiscal
+		$regionF=(integer)Request::get('regiondf');//region fiscal
+		$estadoF=(integer)Request::get('edodf');//estado fiscal
+		$municipioF=(integer)Request::get('mundf');//municipiofiscal
+		
+		$direccionC=(integer)Request::get('descDirdc');//direccion comercial
+		$paisdC=(integer)Request::get('paisdc');//pais comercial
+		$regionC=(integer)Request::get('regiondc');//region comercial
+		$edodC=(integer)Request::get('edodc');//estado comercial
+		$municipioC=(integer)Request::get('mundc');//municipio comercial
+
+		
+		$codigoL=(string)Request::get('tlflcl');//codigo local
+		$codigoM=(string)Request::get('tlfmvl');//codigo movil
+
+		$telefonoM=(string)Request::get('tmvl');//nro movil
+		$telefonoL=(string)Request::get('tcl');//nro local
+		
+
+		$correo=(string)Request::get('mail');//correo electronico
+
+		////inserciones
+
+		$id_r=(integer) DB::table('rifs')->insertGetId//insercion de rif
+			([
+				['numero'=>$numeroR,'tipo_id'=>$tipoR]
+			]);
+
+		$id_c=(integer) DB::table('contactos')->insertGetId//insercion de contacto
+			([
+
+				['tipo_id'=>$codigoM,'tipo__id'=>$codigoL,'telefono_m'=>$telefonoM,'telefono_f'=>$telefonoL]
+			]);
+
+		$id_df=(integer) DB::table('direcciones')->insertGetId//insercion de direcciones direccion fiscal
+			([
+
+				['descripcion'=>$direccionF,'municipio_id'=>$municipioF,'pais_id'=>$paisF,'redion_id'=>$regionF,'estado_id'=>$estadoF]
+			]);
+
+		$id_dc= (integer)DB::table('direcciones')->insertGetId//insercion de direcciones direccion comercial
+			([
+
+				['descripcion'=>$direccionC,'municipio_id'=>$municipioC,'pais_id'=>$paisC,'redion_id'=>$regionC,'estado_id'=>$estadoC]
+			]);
+
+		 DB::table('clientes')->insert
+		 	([
+
+		 		['razon_s'=>$razonS,'nombre_c'=>$nombreC,'rif_id'=>$id_r,'tipo_id'=>$tipoC,'direccion_id'=>$id_df,'direccion__id'=>$id_dc,'contacto_id'=>$id_c]
+		 	]);
+
 
 		
 	}
