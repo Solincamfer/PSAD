@@ -592,7 +592,7 @@
         #contrpbdbr2, #contrpbdbr3, #contrpbdbrm1, 
         #contrpbdbrm2, #contrpbdbrm3, #contcat, #contcatm,
         #contrpbdbrc1, #contrpbdbrc2, #contrpbdbrc3, 
-        #contrpbdbrcm1, #contrpbdbrcm2, #contrpbdbrcm3{
+        #contrpbdbrcm1, #contrpbdbrcm2, #contrpbdbrcm3, #conteq, #conteqm{
             margin-top: 20px;
             padding: 10px;
         }
@@ -667,7 +667,7 @@
             border: none;
         }
         
-        /*Cliente matriz*/
+        /*Cliente matriz & Sucursales*/
             /*modal Agregar*/
                 /*Datos Basicos*/
                     #dbc1 input, #dbc2 select, #dbc3 select{
@@ -1094,7 +1094,7 @@
                         border: none;
                     }
     
-        /*Cliente Responsable & Categoria Responsable*/
+        /*Cliente Responsable & Categoria Responsable & Sucursales Responsable*/
             /*Agregar y Modificar*/
                 /*Datos Basicos Primarios, Secundarios y Contacto*/
                 #rRpb1 input, #rRpb3 input, #rRpb5 select, #rRpb5 input, 
@@ -1421,6 +1421,68 @@
                     border: none;
                     z-index: 1;
                 }
+
+        /*Sucursales Equipo*/
+            /*Agregar y Modificar*/
+            #rEq1 input, #rEq1 select, #rEq2 input, #rEq2 select, #rEq3 input,#rEq3 select,
+            #rEqm1 input, #rEqm1 select, #rEqm2 input, #rEqm2 select, #rEqm3 input,#rEqm3 select{
+                display: block;
+                padding: 3px 5px;
+                margin-bottom: 10px;
+                width: 100%;
+                border: 1px solid #ddd;
+                text-indent: 18px;
+                transition: border-width .2s ease-in-out;
+                border-radius: 2px;
+                color: #ccc;
+            }
+            #rEq1 input:focus, #rEq1 select:focus, 
+            #rEq2 input:focus, #rEq2 select:focus, 
+            #rEq3 input:focus, #rEq3 select:focus,
+            #rEqm1 input:focus, #rEqm1 select:focus, 
+            #rEqm2 input:focus, #rEqm2 select:focus, 
+            #rEqm3 input:focus, #rEqm3 select:focus{
+                outline: none;
+                color: #444;
+                border-color: #26a69d;
+                border-left-width: 35px;
+            }
+
+            #rEq1 #ice1, #rEq1 #ice2,
+            #rEq2 #ice3, #rEq2 #ice4,
+            #rEq3 #ice5, #rEq3 #ice6,
+            #rEqm1 #mice1, #rEqm1 #mice2,
+            #rEqm2 #mice3, #rEqm2 #mice4,
+            #rEqm3 #mice5, #rEqm3 #mice6{
+                color: #fff;
+                font-size: 1em;
+                position: absolute;
+                margin-top: -35px;
+                margin-left: 10px;
+                opacity: 1;
+                left: 0;
+                transition: all .1s ease-in;
+            }
+
+            #rEq1 .ic, #rEq2 .ic, #rEq3 .ic,
+            #rEqm1 .ic, #rEqm2 .ic, #rEqm3 .ic{
+                background-color: #26a69d;
+                position: absolute;
+                padding-top: 7px;
+                top: 0;
+                right: 0;
+                height: 33.5px;
+                width: 20px;
+                margin-top: 22px;
+                margin-right: 1px;
+                font-size: 0.8em;
+                text-align: center;
+                pointer-events: none;
+                color: #333;
+                border: none;
+                z-index: 1;
+            }
+            
         /*Planes*/
             #rPn input{
                 display: block;
