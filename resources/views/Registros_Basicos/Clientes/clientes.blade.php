@@ -67,7 +67,7 @@
 									<h4 class="modal-title" id="myModalLabel">Agregar nuevo cliente</h4>
 								</div>
 								
-									<form method="post" class="form-horizontal Validacion" id="Formclientemd" action="">
+									<form method="post" class="form-horizontal Validacion" id="Formclientemd" action="/menu/registros/clientes/insertar">
 										{{ csrf_field() }}
 										<div class="modal-body">						
 											 <ul class="nav nav-tabs not-active" role="tablist">
@@ -215,8 +215,8 @@
 														</div>
 														<div class="form-group col-md-7" id="dfc4">
 															<div class="col-md-offset-2">
-																<label for="mundf">Municipio</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
-																<select name="mundf" id="innn4" class="form-control userEmail">
+																<label for="mundc">Municipio</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
+																<select name="mundc" id="innn4" class="form-control userEmail">
 																<option value="">-</option>
 																	@foreach($municipios as $municipio)
 																		<option value="{{$municipio->id}}">{{$municipio->descripcion}}</option>

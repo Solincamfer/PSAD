@@ -145,66 +145,75 @@ class RegistrosBasicos extends Controller
 		
 		//capturar datos del formulario
 
-		$razonS=(string)Request::get('rs');//razon social
-		$nombreC=(string)Request::get('nc');//nombre comercial
-		$tipoR=(integer)Request::get('rif');//tipo rif
-		$numeroR=(string)Request::get('df');//numero rif
-		$tipoC=(integer)Request::get('tipCon');//tipo de contribuyente
+		$razonS=Request::get('rs');//razon social
+		$nombreC=Request::get('nc');//nombre comercial
+		
+		$tipoR=(int) Request::get('rif');//tipo rif
+		$numeroR= Request::get('df');//numero rif
+		
+		$tipoC=(int)Request::get('tipCon');//tipo de contribuyente
 		
 		
 		
-		$direccionF=(string)Request::get('descDirdf');//direccion fiscal
-		$paisF=(integer)Request::get('paisdf');//pais fiscal
-		$regionF=(integer)Request::get('regiondf');//region fiscal
-		$estadoF=(integer)Request::get('edodf');//estado fiscal
-		$municipioF=(integer)Request::get('mundf');//municipiofiscal
+		$direccionF=Request::get('descDirdf');//direccion fiscal
+		$paisF=(int)Request::get('paisdf');//pais fiscal
+		$regionF=(int)Request::get('regiondf');//region fiscal
+		$estadoF=(int)Request::get('edodf');//estado fiscal
+		$municipioF=(int)Request::get('mundf');//municipiofiscal
 		
-		$direccionC=(integer)Request::get('descDirdc');//direccion comercial
-		$paisdC=(integer)Request::get('paisdc');//pais comercial
-		$regionC=(integer)Request::get('regiondc');//region comercial
-		$edodC=(integer)Request::get('edodc');//estado comercial
-		$municipioC=(integer)Request::get('mundc');//municipio comercial
+		$direccionC=(int)Request::get('descDirdc');//direccion comercial
+		$paisC=(int)Request::get('paisdc');//pais comercial
+		$regionC=(int)Request::get('regiondc');//region comercial
+		$estadoC=(int)Request::get('edodc');//estado comercial
+		$municipioC=(int)Request::get('mundc');//municipio comercial
 
 		
-		$codigoL=(string)Request::get('tlflcl');//codigo local
-		$codigoM=(string)Request::get('tlfmvl');//codigo movil
+		$codigoL=Request::get('tlflcl');//codigo local
+		$codigoM=Request::get('tlfmvl');//codigo movil
 
-		$telefonoM=(string)Request::get('tmvl');//nro movil
-		$telefonoL=(string)Request::get('tcl');//nro local
+		$telefonoM=Request::get('tmvl');//nro movil
+		$telefonoL=Request::get('tcl');//nro local
 		
 
-		$correo=(string)Request::get('mail');//correo electronico
+		$correo=Request::get('mail');//correo electronico
+
+		
 
 		////inserciones
+		echo $municipioC;
+		echo"<br>";
+		echo $municipioF;
 
-		$id_r=(integer) DB::table('rifs')->insertGetId//insercion de rif
-			([
+		$idR= DB::table('rifs')->insertGetId//insertar rif 
+			(
 				['numero'=>$numeroR,'tipo_id'=>$tipoR]
-			]);
+			);
 
-		$id_c=(integer) DB::table('contactos')->insertGetId//insercion de contacto
-			([
+		
 
-				['tipo_id'=>$codigoM,'tipo__id'=>$codigoL,'telefono_m'=>$telefonoM,'telefono_f'=>$telefonoL]
-			]);
+		$idC=DB::table('contactos')->insert//insercion de contacto
+			(
 
-		$id_df=(integer) DB::table('direcciones')->insertGetId//insercion de direcciones direccion fiscal
-			([
+			   ['tipo_id'=>$codigoM,'tipo__id'=>$codigoL,'telefono_m'=>$telefonoM,'telefono_f'=>$telefonoL]
+			);
 
-				['descripcion'=>$direccionF,'municipio_id'=>$municipioF,'pais_id'=>$paisF,'redion_id'=>$regionF,'estado_id'=>$estadoF]
-			]);
+		$iddF=(integer) DB::table('direcciones')->insertGetId//insercion de direcciones direccion fiscal
+			(
 
-		$id_dc= (integer)DB::table('direcciones')->insertGetId//insercion de direcciones direccion comercial
-			([
+				['descripcion'=>$direccionF,'municipio_id'=>$municipioF,'pais_id'=>$paisF,'region_id'=>$regionF,'estado_id'=>$estadoF]
+			);
 
-				['descripcion'=>$direccionC,'municipio_id'=>$municipioC,'pais_id'=>$paisC,'redion_id'=>$regionC,'estado_id'=>$estadoC]
-			]);
+		$iddC=(integer)DB::table('direcciones')->insertGetId//insercion de direcciones direccion comercial
+			(
+
+				['descripcion'=>$direccionC,'municipio_id'=>$municipioC,'pais_id'=>$paisC,'region_id'=>$regionC,'estado_id'=>$estadoC]
+			);
 
 		 DB::table('clientes')->insert
-		 	([
+		 	(
 
-		 		['razon_s'=>$razonS,'nombre_c'=>$nombreC,'rif_id'=>$id_r,'tipo_id'=>$tipoC,'direccion_id'=>$id_df,'direccion__id'=>$id_dc,'contacto_id'=>$id_c]
-		 	]);
+		 		['razon_s'=>$razonS,'nombre_c'=>$nombreC,'rif_id'=>$idR,'tipo_id'=>$tipoC,'direccion_id'=>$iddF,'direccion__id'=>$iddC,'contacto_id'=>$idC]
+		 	);
 
 
 		
