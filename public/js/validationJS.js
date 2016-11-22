@@ -75,7 +75,7 @@ $('.Validacion').bootstrapValidator({
                 validating: 'glyphicon glyphicon-refresh'
             },
     fields: {
-        emails: {
+        texts: {
             // All email fields have .userEmail class
             selector: '.userEmail',
             err: '#messageContainer',
@@ -85,7 +85,7 @@ $('.Validacion').bootstrapValidator({
                         }
             }
         },
-        texts: {
+        emails: {
             // All email fields have .userEmail class
             selector: '.typeEmail',
             err: '#messageContainer',
