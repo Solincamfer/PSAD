@@ -231,44 +231,64 @@
 
 												<div role="tabpanel" class="tab-pane" id="ctt">
 													<div class="container-fluid" id="contctt">
-														<br>															
-															<label for="tlflcl" class="col-md-12">N° Local:</label>	
-															<div class="form-group col-md-4" id="ctoc1">
-																<div class="col-md-offset-1">
-																	<select name="tlflcl" id="input16" class="form-control userEmail">
-																	<option value="">-</option>
-																		@foreach($codigoL as $local)
+
+														<br>
+														<div class="row">
+															<div id="ctoc1">
+																<div class="col-md-12">
+																	<label for="tlflcl">N° Local:</label><span class="ic"><i class="fa fa-chevron-down"></i></span>
+																</div>
+																<div class="col-md-5">
+																	<div class="form-group">
+																		<select name="tlflcl" id="input16" class="form-control userEmail">
+																				<option value="">-</option>
+																			@foreach($codigoL as $local)
 																			<option value="{{$local->id}}">{{$local->descripcion}}</option>
-																    	@endforeach
-																	</select><i class="fa fa-hashtag" id="icc16"></i>
-																</div>	
+																			@endforeach
+																		</select><i class="fa fa-hashtag" id="icc16"></i>
+																	</div>
+																</div>
+																<div class="col-md-7">
+																	<div class="form-group">
+																		<input type="text" name="tcl" id="input17" class="form-control typeTlfNumber col-md-12" /><i class="fa fa-phone" id="icc17"></i>
+																	</div>
+																</div>
+
 															</div>
-															<div class="form-group col-md-8" id="ctoc2">
-																<input type="text" name="tcl" id="input17" class="form-control typeTlfNumber col-md-12" /><i class="fa fa-phone" id="icc17"></i>		
+														</div>
+														<div class="row">
+															<div id="ctoc2">
+																<div class="col-md-12">
+																	<label for="tlfmvl">N° Móvil</label><span class="ic"><i class="fa fa-chevron-down"></i></span>
+																</div>
+																<div class="col-md-5">
+																	<div class="form-group">
+																		<select name="tlfmvl" id="input18" class="form-control userEmail">
+																		<option value="">-</option>
+																			@foreach($codigoC as $celular)
+																			<option value="{{$celular->id}}">{{$celular->descripcion}}</option>
+																			@endforeach
+																		</select><i class="fa fa-hashtag" id="icc18"></i>
+																	</div>
+																</div>
+																<div class="col-md-7">
+																	<div class="form-group">        
+																		<input type="text" name="tmvl" id="input19" class="form-control typeTlfNumber" /><i class="fa fa-mobile" id="icc19"></i>
+																	</div>
+																</div>
 															</div>
-															
-															
-															<label for="tlfmvl" class="col-md-12">N° Móvil</label>
-															<div class="form-group col-md-4" id="ctoc3">
-															<div class="col-md-offset-1">
-																<select name="tlfmvl" id="input18" class="form-control userEmail">
-																<option value="">-</option>
-																	@foreach($codigoC as $celular)
-																		<option value="{{$celular->id}}">{{$celular->descripcion}}</option>
-																    @endforeach
-																</select><i class="fa fa-hashtag" id="icc18"></i>
-															</div>
-															</div>
-															<div class="form-group col-md-8" id="ctoc4">		
-																<input type="text" name="tmvl" id="input19" class="form-control typeTlfNumber" /><i class="fa fa-mobile" id="icc19"></i>
-															</div>
-															</div>
-															<div class="form-group col-md-12" id="ctoc5">
+														</div>
+														<div class="row">
+															<div class="col-md-12" id="ctoc3">
+																<div class="form-group">
 																	<label for="mail">Correo Electrónico</label>
 																	<input type="text" name="mail" id="input20" class="form-control typeEmail">
-																<i class="fa fa-envelope" id="icc20"></i>
+																	<i class="fa fa-envelope" id="icc20"></i>
+																</div>
 															</div>
+														</div>
 													</div>
+												</div>
 												</div>
 											</div>
 										</div>								
