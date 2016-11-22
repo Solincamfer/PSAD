@@ -20,7 +20,7 @@
                                     <div class="col-md-2" align="left">
                                         <button id="btnBk" type="button" class="btnBk" href="#"><i class="fa fa-chevron-left"></i> VOLVER</button>
                                     </div>
-                                    <div class="col-md-2 col-md-offset-3" align="center">
+                                    <div class="col-md-offset-8">
                                         <button id="btnAdd" type="button" class="btnAd" data-toggle="modal" data-target="#myModal" href="#myModal"><i class="fa fa-plus"></i> AGREGAR</button> 
                                     </div>
                                 </div>

@@ -1,36 +1,62 @@
 @extends('admin.basesys')
     @section('contenido')
         @section('title')
-            Registro Categoría
+            Registro Cliente - Categoría
         @endsection
             @include('layout/header')
                 @include('layout/sidebar')
                     <div class="contenido">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-4 ttlp">
+                                    <h1>Cliente - Categoria</h1>
+                                </div>
+                            </div>
+                        </div>
                         <div class="col-xs-5 col-sm-5 col-md-6 col-md-offset-3" style=""> 
                         @if($agregar)
-                           <button id="btnAdd" type="button" class="btnAd col-md-offset-10" data-toggle="modal" data-target="#myModal" href="#myModal">AGREGAR <i class="fa fa-plus-circle"></i></button>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-2" align="left">
+                                        <button id="btnBk" type="button" class="btnBk" href="#"><i class="fa fa-chevron-left"></i> VOLVER</button>
+                                    </div>
+                                    <div class="col-md-offset-8">
+                                        <button id="btnAdd" type="button" class="btnAd" data-toggle="modal" data-target="#myModal" href="#myModal"><i class="fa fa-plus"></i> AGREGAR</button> 
+                                    </div>
+                                </div>
+                            </div>
                         @endif   
                            
                                 <div class="contMd" style="">
-                                    @foreach($acciones as $accion)
-                                        @if($accion->descripcion!="Status")
-                                            <span style="display: inline-block; float: right;"><a href="{{$accion->url}}"><i class="{{$accion->clase_css}}"></i></a></span>
-                                        @elseif($accion->descripcion=="Status")
-                                            @if($accion->status_ac==1)
-                                                 <input type="checkbox" class="btnAcc" name="status" value="{{$accion->status_ac}}" checked>
-                                            
-                                            @elseif($accion->status_ac==0)
-                                                 <input type="checkbox" class="btnAcc" name="status" value="{{$accion->status_ac}}" >
-                                            
-                                            @endif
-
-
-
-                                        @endif
-
-
-
-                                    @endforeach
+                                   <div class="icl">
+                                       @foreach($acciones as $accion)
+                                           @if($accion->descripcion!="Status")
+                                               @if($accion->data_toogle=="modal")
+                                                   <span class="iclsp">
+                                                       <a href="#myModal2" class="tltp" data-ttl="{{$accion->descripcion}}" data-toggle="modal" data-target="#myModal2">
+                                                           <i class="{{$accion->clase_css}}"></i>
+                                                       </a>
+                                                    </span>
+                                               @elseif($accion->data_toogle!="modal")
+                                                    <span class="iclsp">
+                                                        <a href="{{$accion->url}}" class="tltp" data-ttl="{{$accion->descripcion}}">
+                                                           <i class="{{$accion->clase_css}}"></i>
+                                                        </a>
+                                                    </span>
+                                               @endif
+                                           @elseif($accion->descripcion=="Status")
+                                               @if($accion->status_ac==1)
+                                                   <div class="chbx">
+                                                       <input type="checkbox" class="btnAcc" name="status" id="inchbx1" value="{{$accion->status_ac}}" checked><label for="inchbx1" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
+                                                   </div>
+                                                @elseif($accion->staus_ac==0)
+                                                   <div class="chbx">
+                                                       <input type="checkbox" class="btnAcc" name="status" id="inchbx2" value="{{$accion->status_ac}}"><label for="inchbx2" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
+                                                   </div>
+                                               @endif
+                                           @endif
+                                       @endforeach
+                                   </div>
                                     <p class="ttlMd"><strong>REGISTRO</strong></p>
                                 </div>
                           
@@ -56,20 +82,20 @@
                                                     <div class="col-md-10 ">
                                                     <div class="form-group col-md-offset-2">
                                                         <label for="nomCat">Nombre de la Categoría</label>
-                                                        <input type="text" name="nomCat" class="form-control userEmail" id="nomCat"><i class="fa fa-briefcase"></i>
+                                                        <input type="text" name="nomCat" class="form-control userEmail" id="nomCat"><i class="fa fa-briefcase" id="icct1"></i>
                                                     </div>
                                                     </div>
                                                     <div class="col-md-10 ">
                                                     <div class="form-group col-md-offset-2">
-                                                        <label for="stCat">Estatus de la Categoría</label>
+                                                        <label for="stCat">Estatus de la Categoría</label><span class="ic"><i class="fa fa-chevron-down"></i></span>
                                                         <select name="stCat" class="form-control userEmail" id="stCat">
                                                             <option value="">-</option>
                                                             <option value="1">Activo</option>
                                                             <option value="2">Inactivo</option>
-                                                        </select>
+                                                        </select><i class="fa fa-check" id="icct2"></i>
                                                     </div>
                                                     </div>
-                                            </div>
+                                                </div>
                                         
                                     </div>
                                     <div class="modal-footer">
@@ -80,5 +106,45 @@
                             </div>
                         </div>
                        @endif 
+                        <!--Modificar Categoria-->
+                            <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="myModalLabel2">Agregar Categoría</h4>
+                                        </div>
+                                        <form action="" class="Validacion">
+                                            <div class="modal-body">
+
+                                                {{ csrf_field() }}
+                                                <div class="container-fluid" id="contcatm">
+                                                    <div class="row" id="rCatm">
+                                                        <div class="col-md-10 ">
+                                                            <div class="form-group col-md-offset-2">
+                                                                <label for="nomCat">Nombre de la Categoría</label>
+                                                                <input type="text" name="nomCat" class="form-control userEmail" id="nomCat"><i class="fa fa-briefcase" id="micct1"></i>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-10 ">
+                                                            <div class="form-group col-md-offset-2">
+                                                                <label for="stCat">Estatus de la Categoría</label><span class="ic"><i class="fa fa-chevron-down"></i></span>
+                                                                <select name="stCat" class="form-control userEmail" id="stCat">
+                                                                    <option value="">-</option>
+                                                                    <option value="1">Activo</option>
+                                                                    <option value="2">Inactivo</option>
+                                                                </select><i class="fa fa-check" id="micct2"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="bttnMd" id="btnSv">Guardar <i class="fa fa-floppy-o"></i></button>
+                                                    <button type="button" class="bttnMd" data-dismiss="modal" id="btnCs">Cerrar <i class="fa fa-times"></i></button>
+                                                </div></form>
+                                            </div>
+                                    </div>
+                                </div>
                     </div>   
     @endsection

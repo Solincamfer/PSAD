@@ -16,7 +16,7 @@
 				<!-- Registro -->
 					<div class="col-xs-5 col-sm-5 col-md-6 col-md-offset-3" style=""> 
 						@if($agregar)
-						<button id="btnAdd" type="button" class="btnAd col-md-offset-11" data-toggle="modal" data-target="#myModal" href="#myModal"><i class="fa fa-plus"></i> AGREGAR</button>
+							<button id="btnAdd" type="button" class="btnAdc col-md-offset-11" data-toggle="modal" data-target="#myModal" href="#myModal"><i class="fa fa-plus"></i> AGREGAR</button>
 						@endif
 						@foreach($consulta as $clientes)
 							<div class="contMd" style="">
