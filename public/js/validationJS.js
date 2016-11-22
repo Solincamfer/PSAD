@@ -42,6 +42,7 @@ for (var i = 1; i <= 15; i++) {
         var input= $('#input'+i).val();
         if (input!="") {
             switchtab=switchtab+1;
+            alert(switchtab);
         }else{
         }        
     }
