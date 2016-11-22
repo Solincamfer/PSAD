@@ -14,7 +14,15 @@
                            </div>
                        </div>
                        <div class="col-xs-5 col-sm-5 col-md-6 col-md-offset-3" style="margin-top: 2em;"> 
-                       
+                           @if($agregar) 
+                           <div class="container">
+                               <div class="row">
+                                   <div class="col-md-2" align="left">
+                                       <button id="btnBk" type="button" class="btnBk" href="#"><i class="fa fa-chevron-left"></i> VOLVER</button>
+                                   </div>
+                               </div>
+                           </div>
+                           @endif
                                <div class="contMd">
                                    <div class="icl">
                                        @foreach($acciones as $accion)
