@@ -590,7 +590,9 @@
         #contDbm, #contdfm, #contdcm, #contcttm,
         #contdpto, #contcgo, #contPn, #contrpbdbr1, 
         #contrpbdbr2, #contrpbdbr3, #contrpbdbrm1, 
-        #contrpbdbrm2, #contrpbdbrm3, #contcat, #contcatm{
+        #contrpbdbrm2, #contrpbdbrm3, #contcat, #contcatm,
+        #contrpbdbrc1, #contrpbdbrc2, #contrpbdbrc3, 
+        #contrpbdbrcm1, #contrpbdbrcm2, #contrpbdbrcm3{
             margin-top: 20px;
             padding: 10px;
         }
@@ -1151,14 +1153,19 @@
                         z-index: 1;
                     }
     
-        /*Cliente Responsable*/
+        /*Cliente Responsable & Categoria Responsable*/
             /*Agregar y Modificar*/
                 /*Datos Basicos Primarios, Secundarios y Contacto*/
                 #rRpb1 input, #rRpb3 input, #rRpb5 select, #rRpb5 input, 
                 #rRpb6 select, #rRpb9 select, #rRpb9 input, #rRpb10 select, 
                 #rRpb10 input, #rRpb11 input, #rRpbm1 input, #rRpbm3 input, 
                 #rRpbm5 select, #rRpbm5 input, #rRpbm6 select, #rRpbm9 select, 
-                #rRpbm9 input, #rRpbm10 select, #rRpbm10 input, #rRpbm11 input {
+                #rRpbm9 input, #rRpbm10 select, #rRpbm10 input, #rRpbm11 input,
+                #rRpbc1 input, #rRpbc3 input, #rRpbc5 select, #rRpbc5 input, 
+                #rRpbc6 select, #rRpbc9 select, #rRpbc9 input, #rRpbc10 select, 
+                #rRpbc10 input, #rRpbc11 input, #rRpbcm1 input, #rRpbcm3 input, 
+                #rRpbcm5 select, #rRpbcm5 input, #rRpbcm6 select, #rRpbcm9 select, 
+                #rRpbcm9 input, #rRpbcm10 select, #rRpbcm10 input, #rRpbcm11 input{
                     display: block;
                     padding: 3px 5px;
                     margin-bottom: 10px;
@@ -1170,7 +1177,8 @@
                     color: #ccc;
                 }
                 
-                #rRpb2 input, #rRpb4 input, #rRpbm2 input, #rRpbm4 input{
+                #rRpb2 input, #rRpb4 input, #rRpbm2 input, #rRpbm4 input,
+                #rRpbc2 input, #rRpbc4 input, #rRpbcm2 input, #rRpbcm4 input{
                     display: block;
                     padding: 3px 5px;
                     margin-bottom: 10px;
@@ -1196,14 +1204,30 @@
                 #rRpbm6 select:focus, #rRpbm7 input:focus, 
                 #rRpbm8 select:focus,  #rRpbm9 select:focus, 
                 #rRpbm9 input:focus,  #rRpbm10 select:focus, 
-                #rRpbm10 input:focus, #rRpbm11 input:focus{
+                #rRpbm10 input:focus, #rRpbm11 input:focus,
+                #rRpbc1 input:focus, #rRpbc2 input:focus, 
+                #rRpbc3 input:focus, #rRpbc4 input:focus, 
+                #rRpbc5 select:focus, #rRpbc5 input:focus,
+                #rRpbc6 input:focus, #rRpbc6 select:focus,
+                #rRpbc7 input:focus, #rRpbc8 select:focus, 
+                #rRpbc9 select:focus, #rRpbc9 input:focus, 
+                #rRpbc10 select:focus, #rRpbc10 input:focus,
+                #rRpbc11 input:focus, #rRpbcm1 input:focus, 
+                #rRpbcm2 input:focus, #rRpbcm3 input:focus, 
+                #rRpbcm4 input:focus, #rRpbcm5 select:focus, 
+                #rRpbcm5 input:focus, #rRpbcm6 input:focus, 
+                #rRpbcm6 select:focus, #rRpbcm7 input:focus, 
+                #rRpbcm8 select:focus,  #rRpbcm9 select:focus, 
+                #rRpbcm9 input:focus,  #rRpbcm10 select:focus, 
+                #rRpbcm10 input:focus, #rRpbcm11 input:focus{
                     outline: none;
                     color: #444;
                     border-color: #26a69d;
                     border-left-width: 35px;
                 }
                 
-                #rRpbm1 #micr1, #rRpbm3 #micr3, #rRpb1 #icr1, #rRpb3 #icr3{
+                #rRpbm1 #micr1, #rRpbm3 #micr3, #rRpb1 #icr1, #rRpb3 #icr3,
+                #rRpbcm1 #micrc1, #rRpbcm3 #micrc3, #rRpbc1 #icrc1, #rRpbc3 #icrc3{
                     color: #fff;
                     font-size: 1em;
                     position: absolute;
@@ -1214,7 +1238,8 @@
                     transition: all .1s ease-in;
                 }
                 
-                #rRpbm2 #micr2, #rRpbm4 #micr4, #rRpb2 #icr2, #rRpb4 #icr4{
+                #rRpbm2 #micr2, #rRpbm4 #micr4, #rRpb2 #icr2, #rRpb4 #icr4, 
+                #rRpbcm2 #micrc2, #rRpbcm4 #micrc4, #rRpbc2 #icrc2, #rRpbc4 #icrc4{
                     color: #fff;
                     font-size: 1em;
                     position: absolute;
@@ -1226,10 +1251,12 @@
                 }
 
                 /*Datos Basicos Secundarios*/
-                    #spm1 , #spm2, #sp1 , #sp2 {
+                    #spm1 , #spm2, #sp1 , #sp2,
+                    #spcm1 , #spcm2, #spc1 , #spc2 {
                         padding:  0;
                     }
-                    #rRpbm7 input, #rRpb7 input{
+
+                    #rRpbm7 input, #rRpb7 input, #rRpbcm7 input, #rRpbc7 input{
                         display: block;
                         padding: 3px 5px;
                         margin-bottom: 10px;
@@ -1242,7 +1269,9 @@
                     }
                     
                     #rRpb5 .ic, #rRpb6 .ic, #rRpbm5 .ic, #rRpbm6 .ic,
-                    #rRpb9 .ic, #rRpb10 .ic, #rRpbm9 .ic, #rRpbm10 .ic{
+                    #rRpb9 .ic, #rRpb10 .ic, #rRpbm9 .ic, #rRpbm10 .ic,
+                    #rRpbc5 .ic, #rRpbc6 .ic, #rRpbcm5 .ic, #rRpbcm6 .ic,
+                    #rRpbc9 .ic, #rRpbc10 .ic, #rRpbcm9 .ic, #rRpbcm10 .ic{
                         background-color: #26a69d;
                         position: absolute;
                         padding-top: 7px;
@@ -1259,7 +1288,8 @@
                         z-index: 1;
                     }
 
-                    #rRpb7 .ic, #rRpb8 .ic, #rRpbm7 .ic, #rRpbm8 .ic{
+                    #rRpb7 .ic, #rRpb8 .ic, #rRpbm7 .ic, #rRpbm8 .ic, 
+                    #rRpbc7 .ic, #rRpbc8 .ic, #rRpbcm7 .ic, #rRpbcm8 .ic{
                         background-color: #26a69d;
                         position: absolute;
                         padding-top: 7px;
@@ -1277,7 +1307,8 @@
                         z-index: 1;
                     }
 
-                    #rRpbm8 select, #rRpb8 select{
+                    #rRpbm8 select, #rRpb8 select,
+                    #rRpbcm8 select, #rRpbc8 select{
                         display: block;
                         padding: 3px 5px;
                         margin-bottom: 10px;
@@ -1289,7 +1320,8 @@
                         color: #ccc;
                     }
 
-                    #rRpbm6 input, #rRpb6 input{
+                    #rRpbm6 input, #rRpb6 input, 
+                    #rRpbcm6 input, #rRpbc6 input{
                         display: block;
                         padding: 3px 5px;
                         margin-bottom: 10px;
@@ -1301,7 +1333,8 @@
                         color: #ccc;
                     }
                 
-                    #rRpbm5 #micr5, #rRpb5 #icr5 {
+                    #rRpbm5 #micr5, #rRpb5 #icr5, 
+                    #rRpbcm5 #micrc5, #rRpbc5 #icrc5 {
                         color: #fff;
                         font-size: 1em;
                         position: absolute;
@@ -1312,8 +1345,8 @@
                         transition: all .1s ease-in;
                     }
 
-                    #rRpbm7 #micr9, #rRpbm8 #micr10, #rRpb7 #icr9, 
-                    #rRpb8 #icr10{
+                    #rRpbm7 #micr9, #rRpbm8 #micr10, #rRpb7 #icr9, #rRpb8 #icr10,
+                    #rRpbcm7 #micrc9, #rRpbcm8 #micrc10, #rRpbc7 #icrc9, #rRpbc8 #icrc10{
                         color: #fff;
                         font-size: 1em;
                         position: absolute;
@@ -1324,7 +1357,8 @@
                         transition: all .1s ease-in;
                     }
         
-                    #rRpbm6 #micr7, #rRpbm6 #micr8, #rRpb6 #icr7, #rRpb6 #icr8 {
+                    #rRpbm6 #micr7, #rRpbm6 #micr8, #rRpb6 #icr7, #rRpb6 #icr8,
+                    #rRpbcm6 #micrc7, #rRpbcm6 #micrc8, #rRpbc6 #icrc7, #rRpbc6 #icrc8{
                         color: #fff;
                         font-size: 1em;
                         position: absolute;
@@ -1335,7 +1369,8 @@
                         transition: all .1s ease-i
                     }
 
-                    #rRpbm5 #micr6, #rRpb5 #icr6{
+                    #rRpbm5 #micr6, #rRpb5 #icr6, 
+                    #rRpbcm5 #micrc6, #rRpbc5 #icrc6{
                         color: #fff;
                         font-size: 1em;
                         position: absolute;
@@ -1348,8 +1383,8 @@
 
                 /*Contacto*/
 
-                    #rRpbm9 #micr11, #rRpbm10 #micr13, #rRpb9 #icr11, 
-                    #rRpb10 #icr13{
+                    #rRpbm9 #micr11, #rRpbm10 #micr13, #rRpb9 #icr11, #rRpb10 #icr13, 
+                    #rRpbcm9 #micrc11, #rRpbcm10 #micrc13, #rRpbc9 #icrc11, #rRpbc10 #icrc13{
                         color: #fff;
                         font-size: 1em;
                         position: absolute;
@@ -1360,7 +1395,8 @@
                         transition: all .1s ease-in;
                     }
                     
-                    #rRpbm11 #micr15, #rRpb11 #icr15{
+                    #rRpbm11 #micr15, #rRpb11 #icr15, 
+                    #rRpbcm11 #micrc15, #rRpbc11 #icrc15{
                         color: #fff;
                         font-size: 1em;
                         position: absolute;
@@ -1371,7 +1407,8 @@
                         transition: all .1s ease-in;
                     }
 
-                    #rRpbm9 #micr12, #rRpb9 #icr12{
+                    #rRpbm9 #micr12, #rRpb9 #icr12, 
+                    #rRpbcm9 #micrc12, #rRpbc9 #icrc12{
                         color: #fff;
                         font-size: 1em;
                         position: absolute;
@@ -1383,7 +1420,8 @@
                         transition: all .1s ease-in;
                     }
 
-                    #rRpbm10 #micr14, #rRpb10 #icr14{
+                    #rRpbm10 #micr14, #rRpb10 #icr14, 
+                    #rRpbcm10 #micrc14, #rRpbc10 #icrc14{
                         color: #fff;
                         font-size: 1em;
                         position: absolute;

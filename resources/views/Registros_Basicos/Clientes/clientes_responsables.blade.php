@@ -76,7 +76,7 @@
                                         <form method="post" class="form-horizontal Validacion" action="">
                                         {{ csrf_field() }}
                                         <div class="modal-body">
-                                            <ul class="nav nav-tabs no-active" role="tablist" >
+                                            <ul class="nav nav-tabs not-active" role="tablist" >
                                                 <li role="presentation" class="active"><a href="#dbr1" id="a1" aria-controls="dbr1" role="tab" data-toggle="tab">Datos básicos Primarios</a></li>
                                                 <li role="presentation"><a href="#dbr2" id="a2" aria-controls="dbr2" role="tab" data-toggle="tab">Datos básicos Secundarios</a></li>
                                                 <li role="presentation"><a href="#ctor" id="a3" aria-controls="ctor" role="tab" data-toggle="tab" >Contactos</a></li>
@@ -87,7 +87,7 @@
                                                         <div class="container-fluid" id="contrpbdbr1">
                                                             <center><u><p>DATOS BASICOS PRIMARIOS</p></u></center>
                                                             <br>
-                                                            <div class="row">                                            
+                                                            <div class="row">
                                                                 <div class="col-md-5  col-md-offset-1" id="rRpb1">
                                                                     <div class="form-group">
                                                                         <label for="nomRpb1">1er Nombre</label>
@@ -112,18 +112,17 @@
                                                                     <div class="form-group">  
                                                                         <label for="apellRpb2">2do Apellido</label>
                                                                         <input type="text" name="apellRpb2" class="form-control userEmail" id="input4"><i class="fa fa-user-plus" id="icr4"></i>
-                                                                    </div> 
-
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div role="tabpanel" class="tab-pane" id="dbr2">
-                                                    <div class="container-fluid" id="contrpbdbr2">
-                                                        <center><u><p>DATOS BASICOS SECUNDARIOS</p></u></center>
-                                                        <br>
-                                                        <div class="row">
-                                                            <div class="col-md-8 col-md-offset-2" id="rRpb5">
+                                                        <div class="container-fluid" id="contrpbdbr2">
+                                                            <center><u><p>DATOS BASICOS SECUNDARIOS</p></u></center>
+                                                            <br>
+                                                            <div class="row">
+                                                                <div class="col-md-8 col-md-offset-2" id="rRpb5">
                                                                     <div class="col-md-12" id="sp1">
                                                                         <label for="rifRpb">Rif</label><span class="ic"><i class="fa fa-chevron-down"></i></span>
                                                                     </div>
@@ -160,7 +159,7 @@
                                                                     </div>
                                                                 </div>           
                                                             </div>
-                                                        <div class="col-md-8 col-md-offset-2" id="rRpb7">
+                                                            <div class="col-md-8 col-md-offset-2" id="rRpb7">
                                                                 <div class="form-group row">       
                                                                     <label for="fnRpb">Fecha de nacimiento</label><span class="ic"><i class="fa fa-chevron-down"></i></span>
                                                                     <input type="date" name="fnRpb" class="form-control userEmail" id="fnRpb"><i class="fa fa-calendar" id="icr9"></i>
@@ -187,7 +186,7 @@
                                                                     </div>
                                                                     <div class="col-md-5">
                                                                         <div class="form-group">
-                                                                            <select name="selRifRpb" class="form-control userEmail" id="selRifRpb">
+                                                                            <select name="seltlfRpb" class="form-control userEmail" id="selRifRpb">
                                                                                 <option value="">-</option>
                                                                                 <option value="1">0414</option>
                                                                             </select><i class="fa fa-hashtag" id="icr11"></i>
@@ -205,7 +204,7 @@
                                                                     </div>
                                                                     <div class="col-md-5">
                                                                         <div class="form-group">
-                                                                            <select name="selRifRpb" class="form-control userEmail" id="selRifRpb">
+                                                                            <select name="seltlfmRpb" class="form-control userEmail" id="seltlfmRpb">
                                                                                 <option value="">-</option>
                                                                                 <option value="1">0212</option>
                                                                             </select><i class="fa fa-hashtag" id="icr13"></i>
@@ -266,13 +265,13 @@
                                                                 <div class="col-md-5  col-md-offset-1" id="rRpbm1">
                                                                     <div class="form-group">
                                                                         <label for="nomRpb1">1er Nombre</label>
-                                                                        <input type="text" name="nomRpb1" class="form-control userEmail" id="input1"><i class="fa fa-user" id="micr1"></i>
+                                                                        <input type="text" name="nomRpb1" class="form-control userEmail" id="inputm1"><i class="fa fa-user" id="micr1"></i>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-5  col-md-offset-1" id="rRpbm2">
                                                                     <div class="form-group">    
                                                                         <label for="nomRpb2">2do Nombre</label>
-                                                                        <input type="text" name="nomRpb2" class="form-control userEmail" id="input2"><i class="fa fa-user-plus" id="micr2"></i>
+                                                                        <input type="text" name="nomRpb2" class="form-control userEmail" id="inputm2"><i class="fa fa-user-plus" id="micr2"></i>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -280,13 +279,13 @@
                                                                 <div class="col-md-5  col-md-offset-1" id="rRpbm3">
                                                                     <div class="form-group">
                                                                         <label for="apellRpb1">1er Apellido</label>
-                                                                        <input type="text" name="apellRpb1" class="form-control userEmail" id="input3"><i class="fa fa-user" id="micr3"></i>
+                                                                        <input type="text" name="apellRpb1" class="form-control userEmail" id="inputm3"><i class="fa fa-user" id="micr3"></i>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-5 col-md-offset-1" id="rRpbm4">
                                                                     <div class="form-group">  
                                                                         <label for="apellRpb2">2do Apellido</label>
-                                                                        <input type="text" name="apellRpb2" class="form-control userEmail" id="input4"><i class="fa fa-user-plus" id="micr4"></i>
+                                                                        <input type="text" name="apellRpb2" class="form-control userEmail" id="inputm4"><i class="fa fa-user-plus" id="micr4"></i>
                                                                     </div> 
                                                                 </div>
                                                             </div>
@@ -303,7 +302,7 @@
                                                                     </div>
                                                                     <div class="col-md-5">
                                                                         <div class="form-group">
-                                                                            <select name="selRifRpb" class="form-control userEmail" id="selRifRpb">
+                                                                            <select name="selRifRpb" class="form-control userEmail" id="selRifRpbm">
                                                                                 <option value="">-</option>
                                                                                 <option value="1">G</option>
                                                                             </select><i class="fa fa-clipboard" id="micr5"></i>
@@ -321,7 +320,7 @@
                                                                     </div>
                                                                     <div class="col-md-5">
                                                                         <div class="form-group">
-                                                                            <select name="selciRpb" class="form-control userEmail" id="selciRpb">
+                                                                            <select name="selciRpb" class="form-control userEmail" id="selciRpbm">
                                                                                 <option value="">-</option>
                                                                                 <option value="1">G</option>
                                                                             </select><i class="fa fa-clipboard" id="micr7"></i>
@@ -337,7 +336,7 @@
                                                             <div class="col-md-8 col-md-offset-2" id="rRpbm7">
                                                                 <div class="form-group row">       
                                                                     <label for="fnRpb">Fecha de nacimiento</label><span class="ic"><i class="fa fa-chevron-down"></i></span>
-                                                                    <input type="date" name="fnRpb" class="form-control userEmail" id="fnRpb"><i class="fa fa-calendar" id="micr9"></i>
+                                                                    <input type="date" name="fnRpbm" class="form-control userEmail" id="fnRpbm"><i class="fa fa-calendar" id="micr9"></i>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-8 col-md-offset-2" id="rRpbm8">
@@ -357,12 +356,11 @@
                                                             <br>
                                                             <div class="row">
                                                                 <div class="col-md-8 col-md-offset-2" id="rRpbm9">         <div class="col-md-12">
-                                                                        <label for="rifRpb">Telefono movil</label>
+                                                                        <label for="rifRpb">Telefono movil</label><span class="ic"><i class="fa fa-chevron-down"></i></span>
                                                                     </div>
                                                                     <div class="col-md-5">
                                                                         <div class="form-group">
-                                                                            <span class="ic"><i class="fa fa-chevron-down"></i></span>
-                                                                            <select name="selRifRpb" class="form-control userEmail" id="selRifRpb">
+                                                                            <select name="selRifRpb" class="form-control userEmail" id="seltlfmmRpb">
                                                                                 <option value="">-</option>
                                                                                 <option value="1">0414</option>
                                                                             </select><i class="fa fa-hashtag" id="micr11"></i>
@@ -375,12 +373,12 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-8 col-md-offset-2" id="rRpbm10">         <div class="col-md-12">
-                                                                    <label for="rifRpb">Telefono fijo</label>
+                                                                        <label for="rifRpb">Telefono fijo</label><span class="ic"><i class="fa fa-chevron-down"></i></span>
                                                                     </div>
                                                                     <div class="col-md-5">
                                                                         <div class="form-group">
-                                                                            <span class="ic"><i class="fa fa-chevron-down"></i></span>
-                                                                            <select name="selRifRpb" class="form-control userEmail" id="selRifRpb">
+                                                                            
+                                                                            <select name="selRifRpb" class="form-control userEmail" id="seltlflmRpb">
                                                                                 <option value="">-</option>
                                                                                 <option value="1">0212</option>
                                                                             </select><i class="fa fa-hashtag" id="micr13"></i>
@@ -406,8 +404,8 @@
                                             </div> 
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="submit" class="bttnMd" id="btnSv">Guardar <i class="fa fa-floppy-o"></i></button>
-                                            <button type="button" class="bttnMd" data-dismiss="modal" id="btnCs">Cerrar <i class="fa fa-times"></i></button>
+                                            <button type="submit" class="bttnMd" id="btnSvm">Guardar <i class="fa fa-floppy-o"></i></button>
+                                            <button type="button" class="bttnMd" data-dismiss="modal" id="btnCsm">Cerrar <i class="fa fa-times"></i></button>
                                         </div>
                                     </form>
                                 </div>
