@@ -837,73 +837,77 @@
                         border: none;
                     }
                 /*Contacto*/
-                    #ctoc1 select, #ctoc2 input, #ctoc3 select, #ctoc4 input, #ctoc5 input{
+                    #ctoc1 select, #ctoc1 input, #ctoc2 select, #ctoc2 input, #ctoc3 input, 
+                    #ctocm1 select, #ctocm1 input, #ctocm2 select, #ctocm2 input, #ctocm3 input{
                         display: block;
                         padding: 3px 5px;
                         margin-bottom: 10px;
                         width: 100%;
                         border: 1px solid #ddd;
-                        text-indent: 17px;
+                        text-indent: 20px;
                         transition: border-width .2s ease-in-out;
                         border-radius: 2px;
                         color: #ccc;
                     }
 
-                    #ctoc1 select:focus, #ctoc2 input:focus, 
-                    #ctoc3 select:focus, #ctoc4 input:focus, 
-                    #ctoc5 input:focus {
+                    #ctoc1 select:focus, #ctoc1 input:focus, 
+                    #ctoc2 select:focus, #ctoc2 input:focus, 
+                    #ctoc3 input:focus, #ctocm1 select:focus, 
+                    #ctocm1 input:focus, #ctocm2 select:focus, 
+                    #ctocm2 input:focus, #ctocm3 input:focus{
                         outline: none;
                         color: #444;
                         border-color: #26a69d;
                         border-left-width: 35px;
                     }
 
-                    #ctoc5 #icc20{
+                    #ctoc3 #icc20, #ctocm3 #micc20{
                         color: #fff;
                         font-size: 1em;
                         position: absolute;
                         margin-top: -35px;
-                        margin-left: 23px;
+                        margin-left: 10px;
                         opacity: 1;
                         left: 0;
                         transition: all .1s ease-in;
                     }
                     
-                    #ctoc4 #icc19{
+                    #ctoc2 #icc19, #ctocm2 #micc19{
                         color: #fff;
                         font-size: 1.2em;
                         position: absolute;
                         margin-top: -35px;
-                        margin-left: 28px;
+                        margin-left: 15px;
                         opacity: 1;
                         left: 0;
                         transition: all .1s ease-in;
                     }
 
-                    #ctoc2 #icc17{
+                    #ctoc1 #icc17, #ctocm1 #micc17{
                         color: #fff;
                         font-size: 1em;
                         position: absolute;
                         margin-top: 10px;
-                        margin-left: 25px;
+                        margin-left: 10px;
                         opacity: 1;
                         left: 0;
                         transition: all .1s ease-in;
                         z-index: 1;
                     }
 
-                    #ctoc1 #icc16, #ctoc3 #icc18{
+                    #ctoc1 #icc16, #ctoc2 #icc18, 
+                    #ctocm1 #micc16, #ctocm2 #micc18{
                         color: #fff;
                         font-size: 1em;
                         position: absolute;
                         margin-top: -35px;
-                        margin-left: 35px;
+                        margin-left: 10px;
                         opacity: 1;
                         left: 0;
                         transition: all .1s ease-in;
                     }
 
-                    #ctoc1 .ic, #ctoc3 .ic{
+                    #ctoc1 .ic, #ctoc2 .ic, #ctocm1 .ic, #ctocm2 .ic{
                         background-color: #26a69d;
                         position: absolute;
                         padding-top: 7px;
@@ -912,7 +916,7 @@
                         height: 33.5px;
                         width: 30px;
                         margin-top: 22px;
-                        margin-left: 7.3em;
+                        margin-left: 12.3em;
                         text-align: center;
                         pointer-events: none;
                         color: #333;
@@ -1088,69 +1092,6 @@
                         pointer-events: none;
                         color: #333;
                         border: none;
-                    }
-                /*Contacto*/
-
-                    #ctocm5 #micc20{
-                        color: #fff;
-                        font-size: 1em;
-                        position: absolute;
-                        margin-top: -35px;
-                        margin-left: 23px;
-                        opacity: 1;
-                        left: 0;
-                        transition: all .1s ease-in;
-                    }
-
-                    #ctocm4 #micc19{
-                        color: #fff;
-                        font-size: 1.2em;
-                        position: absolute;
-                        margin-top: -35px;
-                        margin-left: 28px;
-                        opacity: 1;
-                        left: 0;
-                        transition: all .1s ease-in;
-                    }
-
-                    #ctocm2 #micc17{
-                        color: #fff;
-                        font-size: 1em;
-                        position: absolute;
-                        margin-top: 10px;
-                        margin-left: 25px;
-                        opacity: 1;
-                        left: 0;
-                        transition: all .1s ease-in;
-                        z-index: 1;
-                    }
-
-                    #ctocm1 #micc16, #ctocm3 #micc18{
-                        color: #fff;
-                        font-size: 1em;
-                        position: absolute;
-                        margin-top: -35px;
-                        margin-left: 35px;
-                        opacity: 1;
-                        left: 0;
-                        transition: all .1s ease-in;
-                    }
-
-                    #ctocm1 .ic, #ctocm3 .ic{
-                        background-color: #26a69d;
-                        position: absolute;
-                        padding-top: 7px;
-                        top: 0;
-                        left: 0;
-                        height: 33.5px;
-                        width: 30px;
-                        margin-top: 22px;
-                        margin-left: 7.3em;
-                        text-align: center;
-                        pointer-events: none;
-                        color: #333;
-                        border: none;
-                        z-index: 1;
                     }
     
         /*Cliente Responsable & Categoria Responsable*/

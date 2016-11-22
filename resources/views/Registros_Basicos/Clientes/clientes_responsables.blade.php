@@ -26,39 +26,38 @@
                                 </div>
                             </div>
                         @endif 
-                                <div class="contMd" style="">
-                                    <div class="icl">
-                                        @foreach($acciones as $accion)
-                                            @if($accion->descripcion!="Status")
-                                                @if($accion->data_toogle=="modal")
-                                                    <span class="iclsp">
-                                                        <a href="#myModal2" class="tltp" data-ttl="{{$accion->descripcion}}" data-toggle="modal" data-target="#myModal2"> 
-                                                            <i class="{{$accion->clase_css}}"></i>
-                                                        </a>
-                                                    </span>
-                                                @elseif($accion->data_toogle!="modal")
-                                                    <span class="iclsp">
-                                                        <a href="{{$accion->url}}" class="tltp" data-ttl="{{$accion->descripcion}}">
-                                                            <i class="{{$accion->clase_css}}"></i>
-                                                        </a>
-                                                    </span>
-                                                @endif
-                                            @elseif($accion->descripcion=="Status")
-                                                @if($accion->status_ac==1)
-                                                <div class="chbx">
-                                                    <input type="checkbox" class="btnAcc" name="status" id="inchbx1" value="{{$accion->status_ac}}" checked><label for="inchbx1" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
-                                                </div>
-                                                @elseif($accion->staus_ac==0)
-                                                <div class="chbx">
-                                                    <input type="checkbox" class="btnAcc" name="status" id="inchbx2" value="{{$accion->status_ac}}"><label for="inchbx2" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
-                                                </div>
-                                                @endif
+                            <div class="contMd" style="">
+                                <div class="icl">
+                                    @foreach($acciones as $accion)
+                                        @if($accion->descripcion!="Status")
+                                            @if($accion->data_toogle=="modal")
+                                                <span class="iclsp">
+                                                    <a href="#myModal2" class="tltp" data-ttl="{{$accion->descripcion}}" data-toggle="modal" data-target="#myModal2"> 
+                                                        <i class="{{$accion->clase_css}}"></i>
+                                                    </a>
+                                                </span>
+                                            @elseif($accion->data_toogle!="modal")
+                                                <span class="iclsp">
+                                                    <a href="{{$accion->url}}" class="tltp" data-ttl="{{$accion->descripcion}}">
+                                                        <i class="{{$accion->clase_css}}"></i>
+                                                    </a>
+                                                </span>
                                             @endif
-                                        @endforeach
-                                    </div>
-                                    <p class="ttlMd"><strong>REGISTRO</strong></p>
+                                        @elseif($accion->descripcion=="Status")
+                                            @if($accion->status_ac==1)
+                                            <div class="chbx">
+                                                <input type="checkbox" class="btnAcc" name="status" id="inchbx1" value="{{$accion->status_ac}}" checked><label for="inchbx1" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
+                                            </div>
+                                            @elseif($accion->staus_ac==0)
+                                            <div class="chbx">
+                                                <input type="checkbox" class="btnAcc" name="status" id="inchbx2" value="{{$accion->status_ac}}"><label for="inchbx2" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
+                                            </div>
+                                            @endif
+                                        @endif
+                                    @endforeach
                                 </div>
-                   
+                                <p class="ttlMd"><strong>REGISTRO</strong></p>
+                            </div>
                         </div>
                         <!-- 	Registro -->
 
@@ -181,7 +180,7 @@
                                                             <center><u><p>CONTACTOS</p></u></center>
                                                             <br>
                                                             <div class="row">
-                                                                <div class="col-md-8 col-md-offset-2" id="rRpb9">           <div class="col-md-12">
+                                                                <div class="col-md-8 col-md-offset-2" id="rRpb9">         <div class="col-md-12">
                                                                         <label for="rifRpb">Telefono movil</label><span class="ic"><i class="fa fa-chevron-down"></i></span>
                                                                     </div>
                                                                     <div class="col-md-5">
