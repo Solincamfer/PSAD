@@ -1,11 +1,13 @@
 $(document).ready(function() {
     $('#btnSv').click(function(){
+        alert(switchtab);
 var switchtab=0;
 var anterior=0;
 for (var i = 1; i <= 20; i++) {
         var input= $('#input'+i).val();
         if (input!="") {
             switchtab=switchtab+1;
+            alert(switchtab);
         }else{
         }        
     }
@@ -35,7 +37,67 @@ $('#btnAn').click(function(){
 
 });
 
-    $('#btnResp').click(function(){
+ $('#btnMdSv').click(function(){
+    Normal(this);
+ });
+function Normal(button){
+    var Tabcompletado=0;
+    for (var a =0; a<=3; a++) {
+        var idInputForm=['in','inn','innn','innnn'];
+        
+        
+    if (CantidadTabs(idInputForm[a])) {
+        //alert('Formulario completo');
+
+        Tabcompletado=Tabcompletado+1;
+        var next=a+1;
+        
+        $("#am"+next).click();         
+    }else{
+        alert('Tab '+(a+1)+' incompleto');
+    }
+    //alert(Tabcompletado);
+  }   
+  
+  if (Tabcompletado===4) {
+    alert('Almacenado satifactoriamente!!');
+    $( "#btnMdSv" ).attr( "type","submit");  
+  }      
+ }
+function CantidadTabs(nombreId){  
+    var acumulador=0;
+    var cantidadId=$('a').length;
+    var idExistentes=0;
+    var inputLleno=0;
+
+    for (var i =1; i <= cantidadId; i++) {
+                var cantidadTabs =$('#'+nombreId+i).length;
+                var valorInput=$('#'+nombreId+i).val();
+                acumulador=acumulador+cantidadTabs; 
+                 
+                if( typeof valorInput !== 'undefined' ) {
+                    idExistentes=idExistentes+1;                     
+                    if( valorInput !== '' ) {
+                    inputLleno=inputLleno+1;                    
+                        } 
+                }   
+              }
+            var inputsVacios=idExistentes - inputLleno;
+              //alert('Campos existentes:'+idExistentes);
+              //alert('Campos llenos:'+inputLleno); 
+              //alert('Campos vacios:'+inputsVacios); 
+            if (inputsVacios===0) {
+                 //alert('Formulario completo');
+                 return true; 
+            }else{
+                //alert('Formulario incompleto');
+                return false; 
+            }
+    }
+
+
+
+$('#btnResp').click(function(){
 var switchtab=0;
 var anterior=0;
 for (var i = 1; i <= 15; i++) {
