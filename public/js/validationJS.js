@@ -1,31 +1,45 @@
 $(document).ready(function() {
 
- $('#btnMdSv').click(function(){
-    Normal(this);
+ $('#btnModificarCliente').click(function(){
+    var idInputForm=['in1','inn1','innn1','innnn1'];
+    var idpanelsTabs='am1';
+    Normal(this,idInputForm,idpanelsTabs);
  });
-function Normal(button){
+
+ $('#btnGuardarCliente').click(function(){
+    var idInputForm=['in','inn','innn','innnn'];
+    var idpanelsTabs='am';
+    Normal(this,idInputForm,idpanelsTabs);
+ });
+
+
+
+
+
+
+
+function Normal(button,idInputForm,idpanelsTabs){
     var Tabcompletado=0;
-    for (var a =0; a<=3; a++) {
-        var idInputForm=['in','inn','innn','innnn'];
-        
-        
+    for (var a =0; a<=idInputForm.length; a++) {        
     if (CantidadTabs(idInputForm[a])) {
         //alert('Formulario completo');
-
+        if (Tabcompletado===4) {
+    $(button).attr( "type","submit");
+  } 
         Tabcompletado=Tabcompletado+1;
         var next=a+1;
         
-        $("#am"+next).click();         
+        $("#"+idpanelsTabs+next).click();         
     }else{
         alert('Tab '+(a+1)+' incompleto');
     }
     //alert(Tabcompletado);
-  }   
+  }
+   if (Tabcompletado===4) {
+    $(button).html('Guardar <i class="fa fa-floppy-o"></i>'); 
+  }    
   
-  if (Tabcompletado===4) {
-    alert('Almacenado satifactoriamente!!');
-    $( "#btnMdSv" ).attr( "type","submit");  
-  }      
+       
  }
 function CantidadTabs(nombreId){  
     var acumulador=0;
