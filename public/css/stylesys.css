@@ -592,7 +592,8 @@
         #contrpbdbr2, #contrpbdbr3, #contrpbdbrm1, 
         #contrpbdbrm2, #contrpbdbrm3, #contcat, #contcatm,
         #contrpbdbrc1, #contrpbdbrc2, #contrpbdbrc3, 
-        #contrpbdbrcm1, #contrpbdbrcm2, #contrpbdbrcm3, #conteq, #conteqm{
+        #contrpbdbrcm1, #contrpbdbrcm2, #contrpbdbrcm3, #conteq, #conteqm,
+        #contcomp, #contcompm{
             margin-top: 20px;
             padding: 10px;
         }
@@ -1422,10 +1423,12 @@
                     z-index: 1;
                 }
 
-        /*Sucursales Equipo*/
+        /*Sucursales Equipo, Componentes*/
             /*Agregar y Modificar*/
             #rEq1 input, #rEq1 select, #rEq2 input, #rEq2 select, #rEq3 input,#rEq3 select,
-            #rEqm1 input, #rEqm1 select, #rEqm2 input, #rEqm2 select, #rEqm3 input,#rEqm3 select{
+            #rEqm1 input, #rEqm1 select, #rEqm2 input, #rEqm2 select, #rEqm3 input,#rEqm3 select,
+            #rComp1 input, #rComp2 select, #rComp3 select, #rComp4 select, #rCompm1 input, #rCompm2 select, 
+            #rCompm3 select, #rCompm4 select{
                 display: block;
                 padding: 3px 5px;
                 margin-bottom: 10px;
@@ -1441,7 +1444,11 @@
             #rEq3 input:focus, #rEq3 select:focus,
             #rEqm1 input:focus, #rEqm1 select:focus, 
             #rEqm2 input:focus, #rEqm2 select:focus, 
-            #rEqm3 input:focus, #rEqm3 select:focus{
+            #rEqm3 input:focus, #rEqm3 select:focus,
+            #rComp1 input:focus, #rComp2 select:focus, 
+            #rComp3 select:focus, #rComp4 select:focus, 
+            #rCompm1 input:focus, #rCompm2 select:focus, 
+            #rCompm3 select:focus, #rCompm4 select:focus{
                 outline: none;
                 color: #444;
                 border-color: #26a69d;
@@ -1466,6 +1473,40 @@
 
             #rEq1 .ic, #rEq2 .ic, #rEq3 .ic,
             #rEqm1 .ic, #rEqm2 .ic, #rEqm3 .ic{
+                background-color: #26a69d;
+                position: absolute;
+                padding-top: 7px;
+                top: 0;
+                right: 0;
+                height: 33.5px;
+                width: 20px;
+                margin-top: 22px;
+                margin-right: 1px;
+                font-size: 0.8em;
+                text-align: center;
+                pointer-events: none;
+                color: #333;
+                border: none;
+                z-index: 1;
+            }
+
+        /*Componentes*/
+            #rComp1 #iccp1, #rComp1 #iccp2, #rComp2 #iccp3, #rComp2 #iccp4,
+            #rComp3 #iccp5, #rComp3 #iccp6, #rComp4 #iccp7, #rComp4 #iccp8,
+            #rCompm1 #miccp1, #rCompm1 #miccp2, #rCompm2 #miccp3, #rCompm2 #miccp4,
+            #rCompm3 #miccp5, #rCompm3 #miccp6, #rCompm4 #miccp7, #rCompm4 #miccp8{
+                color: #fff;
+                font-size: 1em;
+                position: absolute;
+                margin-top: -35px;
+                margin-left: 9px;
+                opacity: 1;
+                left: 0;
+                transition: all .1s ease-in;
+            }
+
+            #rComp2 .ic, #rComp3 .ic, #rComp4 .ic, 
+            #rCompm2 .ic, #rCompm3 .ic, #rCompm4 .ic{
                 background-color: #26a69d;
                 position: absolute;
                 padding-top: 7px;
