@@ -150,9 +150,10 @@ class RegistrosBasicos extends Controller
 
 		{
 			$valor=(int)$seleccion[1];
-			$regiones=DB::table('regiones')->select('id','descripcion')->where('pais_id',$valor)->get();
+			$regiones=DB::table('regiones')->select('id','descripcion')->where('pais_id',$valor)->first();
 	
-			return $regiones;
+			
+			return $regiones->descripcion;
 		}
 
 
