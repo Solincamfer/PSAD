@@ -281,11 +281,11 @@ class RegistrosBasicos extends Controller
 						
 	}
 
-	public function clientes_categoria_responsable()
+	public function clientes_categoria_responsable($categoria_id)
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
 		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(22,23),21);
-		return view ('Registros_Basicos\Clientes\clientes_categoria_responsable',$this->datos_vista($datos,$acciones,array()));
+		return view ('Registros_Basicos\Clientes\clientes_categoria_responsable',$this->datos_vista($datos,$acciones,DB::table('personas')->join('categoria_persona','personas.id','=','categoria_persona.persona_id')->where('categoria_persona.categoria_id',$categoria_id)->get()));
 						
 	}
 
