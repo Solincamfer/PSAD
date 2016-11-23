@@ -154,19 +154,13 @@
 															<label for="edodf">Estado</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
 															<select name="edodf" id="inn3" class="form-control userEmail">
 															<option value="">-</option>
-																@foreach($estados as $estado)
-																	<option value="{{$estado->id}}">{{$estado->descripcion}}</option>
-																@endforeach
 															</select><i class="fa fa-map-pin" id="icc8"></i>
 														</div>
 														<div class="form-group col-md-7" id="dfc4">
 															<div class="col-md-offset-2">
 																<label for="mundf">Municipio</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
 																<select name="mundf" id="inn4" class="form-control userEmail">
-																<option value="">-</option>
-																	@foreach($municipios as $municipio)
-																		<option value="{{$municipio->id}}">{{$municipio->descripcion}}</option>
-																    @endforeach
+																<option value="">-</option>				
 																</select><i class="fa fa-map-signs" id="icc9"></i>
 														</div>	
 														</div>

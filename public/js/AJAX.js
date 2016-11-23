@@ -57,15 +57,42 @@ $('#log1').click(function(){
 $("#inn1").change(function(){
 	$("#inn1 option:selected").each(function () {			
     		var name=$('#inn1').attr("name");
-
             elegido=$(this).val();
             var vector=[name,elegido];
-            $.get("/menu/registros/clientes/registrar", { vector: vector }, function(data){            	
-            	numeroFilas=(data.length/2);
-            	for (var i = 1; i <= numeroFilas; i++) {
-            		$('#inn2').append('<option value="'+data[0]+'">'+data[1]+'</option>');    
-            	}
-            	               
+            $.get("/menu/registros/clientes/registrar", { vector: vector }, function(data){
+            	$.each(data, function(i, item) {
+            		$('#inn2').append('<option value="'+item.id+'">'+item.descripcion+'</option>');
+				})        
+            });            
+        });
+	
+			
+		});
+
+$("#inn2").change(function(){
+	$("#inn2 option:selected").each(function () {			
+    		var name=$('#inn2').attr("name");
+            elegido=$(this).val();
+            var vector=[name,elegido];
+            $.get("/menu/registros/clientes/registrar", { vector: vector }, function(data){
+            	$.each(data, function(i, item) {
+            		$('#inn3').append('<option value="'+item.id+'">'+item.descripcion+'</option>');
+				})        
+            });            
+        });
+	
+			
+		});
+
+$("#inn3").change(function(){
+	$("#inn3 option:selected").each(function () {			
+    		var name=$('#inn3').attr("name");
+            elegido=$(this).val();
+            var vector=[name,elegido];
+            $.get("/menu/registros/clientes/registrar", { vector: vector }, function(data){
+            	$.each(data, function(i, item) {
+            		$('#inn4').append('<option value="'+item.id+'">'+item.descripcion+'</option>');
+				})        
             });            
         });
 	
