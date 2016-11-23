@@ -8,7 +8,7 @@ class Persona extends Model
 {
     public $timestamps=false;
     protected $table="personas";
-    protected $fillable=['id','p_nombre','s_nombre','p_apellido','s_apellido','cargo','encargado','contacto_id','cliente_id'];
+    protected $fillable=['id','p_nombre','s_nombre','p_apellido','s_apellido','cargo','encargado','contacto_id','cliente_id','status_p'];
 
 
     public function cedula ()
@@ -29,5 +29,11 @@ class Persona extends Model
     {
 
     	return $this->belongsTo('App\Cliente');
+    }
+
+    public function categorias()
+    {
+
+        return $this->belongsToMany('App\Categoria');
     }
 }

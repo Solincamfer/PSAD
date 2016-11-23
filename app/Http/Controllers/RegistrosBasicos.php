@@ -273,11 +273,11 @@ class RegistrosBasicos extends Controller
 						
 	}
 
-	public function clientes_categoria()
+	public function clientes_categoria($cliente_id)
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
 		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(16,17,18,19),20);
-		return view ('Registros_Basicos\Clientes\clientes_categoria',$this->datos_vista($datos,$acciones,array()));
+		return view ('Registros_Basicos\Clientes\clientes_categoria',$this->datos_vista($datos,$acciones,DB::table('categorias')->where('cliente_id',$cliente_id)->get()));
 						
 	}
 

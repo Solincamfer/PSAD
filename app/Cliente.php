@@ -16,6 +16,10 @@ class Cliente extends Model
    	 return $this->hasMany('App\Persona');
    }
 
-
+ public function categorias()
+ {
+ 	
+ 	return $this->hasMany('App\Categoria');
+ }
    
 }
