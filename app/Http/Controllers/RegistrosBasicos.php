@@ -145,17 +145,31 @@ class RegistrosBasicos extends Controller
 	{
 		
 		$seleccion=Request::get('vector');
+		
 
-		if ($seleccion[0]=="paisdf") //se seleccionan paises
+		if ($seleccion[0]=="paisdf" or $seleccion[0]=="paisdc") //se seleccionan paises
 
 		{
 			$valor=(int)$seleccion[1];
-			$regiones=DB::table('regiones')->select('id','descripcion')->where('pais_id',$valor)->first();
+			$opciones=DB::table('regiones')->select('id','descripcion')->where('pais_id',$valor)->get();
 	
 			
-			return $regiones->descripcion;
+			return $opciones;
 		}
+		elseif ($seleccion[0]=="regiondf" or $seleccion[0]=="regiondc")//se selecciona la region
+		{
+			$valor=(int)$seleccion[1];
+			$opciones=DB::table('estados')->select('id','descripcion')->where('region_id',$valor)->get();
+			return $opciones;
+	
+		}
+		elseif ($seleccion[0]=="edodf" or $seleccion[0]=="edodc") //se selecciona el estado
 
+		 {
+			$valor=(int)$seleccion[1];
+			$opciones=DB::table('municipios')->select('id','descripcion')->where('municipio_id',$valor)->get();
+			return $regiones;
+		}
 
 
 
