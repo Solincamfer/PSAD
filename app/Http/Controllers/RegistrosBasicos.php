@@ -142,18 +142,25 @@ class RegistrosBasicos extends Controller
 
 	
 	public function clientes_registrar()
-	{
+	{	
 		
 		$seleccion=Request::get('vector');
-
 		if ($seleccion[0]=="paisdf") //se seleccionan paises
 
-		{
-			$valor=(int)$seleccion[1];
-			$regiones=DB::table('regiones')->select('id','descripcion')->where('pais_id',$valor)->first();
-	
+		 {
+		 	$valor=(int)$seleccion[1];
+
+			$regiones=DB::table('regiones')->select('id' ,'descripcion')->where('pais_id',$valor)->first();
+			if(empty($regiones))
+			{
+
+			}
+			else
+			{
+				//return ("registro CORRECTO");
+				return $vector=[$regiones->id,$regiones->descripcion];
+			}
 			
-			return $regiones->descripcion;
 		}
 
 
