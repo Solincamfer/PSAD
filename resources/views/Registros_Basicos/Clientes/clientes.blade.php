@@ -21,6 +21,7 @@
 						@foreach($consulta as $clientes)
 							<div class="contMd" style="">
 								<div class="icl">
+									
 									@foreach($acciones as $accion)
 										@if($accion->descripcion!="Status")
 											@if($accion->data_toogle=="modal")
@@ -136,7 +137,7 @@
 															<select name="paisdf" id="inn1" class="form-control userEmail">
 															<option value="">-</option>
 																@foreach($paises as $pais)
-																		<option value="{{$pais->id}}">{{$pais->descripcion}}</option>
+																		<option value="{{$pais->id}}">{{$pais->id}}</option>
 																@endforeach
 															</select><i class="fa fa-globe" id="icc6"></i>
 														</div>
@@ -185,8 +186,8 @@
 													<div class="container-fluid" id="contdf">
 													<br>
 														<div class="form-group col-md-6" id="dfc1">
-															<label for="paisdf">País</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
-															<select name="paisdf" id="innn1" class="form-control userEmail">
+															<label for="paisdc">País</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
+															<select name="paisdc" id="innn1" class="form-control userEmail">
 															<option value="">-</option>
 																@foreach($paises as $pais)
 																		<option value="{{$pais->id}}">{{$pais->descripcion}}</option>
@@ -195,8 +196,8 @@
 														</div>
 														<div class="form-group col-md-7" id="dfc2">
 															<div class="col-md-offset-2">
-																<label for="regiondf">Región</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
-																<select name="regiondf" id="innn2" class="form-control userEmail">
+																<label for="regiondc">Región</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
+																<select name="regiondc" id="innn2" class="form-control userEmail">
 																<option value="">-</option>
 																	@foreach($regiones as $region)
 																		<option value="{{$region->id}}">{{$region->descripcion}}</option>
@@ -205,8 +206,8 @@
 															</div>
 														</div>
 														<div class="form-group col-md-6" id="dfc3">
-															<label for="edodf">Estado</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
-															<select name="edodf" id="innn3" class="form-control userEmail">
+															<label for="edodc">Estado</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
+															<select name="edodc" id="innn3" class="form-control userEmail">
 															<option value="">-</option>
 																@foreach($estados as $estado)
 																	<option value="{{$estado->id}}">{{$estado->descripcion}}</option>
@@ -225,8 +226,8 @@
 														</div>	
 														</div>
 														<div class="form-group col-md-12" id="dfc5">
-																<label for="descDirdf">Descripción de la dirección</label>
-															<textarea type="text" name="descDirdf" id="innn5" class="form-control userEmail"></textarea><i class="fa fa-map-marker" id="icc10"></i>
+																<label for="descDirdc">Descripción de la dirección</label>
+															<textarea type="text" name="descDirdc" id="innn5" class="form-control userEmail"></textarea><i class="fa fa-map-marker" id="icc10"></i>
 														</div>
 													</div>	
 														</div>													

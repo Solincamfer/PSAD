@@ -180,9 +180,7 @@ class RegistrosBasicos extends Controller
 		
 
 		////inserciones
-		echo $municipioC;
-		echo"<br>";
-		echo $municipioF;
+		
 
 		$idR= DB::table('rifs')->insertGetId//insertar rif 
 			(
