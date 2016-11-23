@@ -254,11 +254,11 @@ class RegistrosBasicos extends Controller
 	}
 
 
-	public function clientes_responsables()//
+	public function clientes_responsables($cliente_id)//
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
 		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(14,15),13);
-		return view ('Registros_Basicos\Clientes\clientes_responsables',$this->datos_vista($datos,$acciones,array())); 
+		return view ('Registros_Basicos\Clientes\clientes_responsables',$this->datos_vista($datos,$acciones,DB::table('personas')->where('cliente_id',$cliente_id)->get())); 
 					
 	}
 

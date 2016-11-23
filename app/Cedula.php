@@ -8,7 +8,7 @@ class Cedula extends Model
 {
     public $timestamps=false;
     protected $table="cedulas";
-    protected $fillable=['id','numero','tipo_id'];
+    protected $fillable=['id','numero','tipo_id','persona_id'];
 
     public function persona()
     {

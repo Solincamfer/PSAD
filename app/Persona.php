@@ -8,7 +8,7 @@ class Persona extends Model
 {
     public $timestamps=false;
     protected $table="personas";
-    protected $fillable=['id','p_nombre','s_nombre','p_apellido','s_apellido','cargo','encargado','cedula_id','contacto_id','cliente_id'];
+    protected $fillable=['id','p_nombre','s_nombre','p_apellido','s_apellido','cargo','encargado','contacto_id','cliente_id'];
 
 
     public function cedula ()

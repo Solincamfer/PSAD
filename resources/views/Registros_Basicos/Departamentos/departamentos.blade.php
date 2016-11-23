@@ -30,7 +30,7 @@
                                             </span>
                                         @elseif($accion->data_toogle!="modal")
                                             <span class="iclsp">
-                                                <a href="{{$accion->url}}" class="tltp" data-ttl="{{$accion->descripcion}}">
+                                                <a href="{{$accion->url.$departamento->id}}" class="tltp" data-ttl="{{$accion->descripcion}}">
                                                     <i class="{{$accion->clase_css}}"></i>
                                                 </a>
                                             </span>
