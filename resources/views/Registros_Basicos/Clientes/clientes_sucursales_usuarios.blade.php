@@ -6,11 +6,27 @@
             @include('layout/header')
                 @include('layout/sidebar')
                     <div class="contenido">
-                        <div class="col-xs-5 col-sm-5 col-md-6 col-md-offset-3" style=""> 
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-4 ttlp">
+                                    <h1>Usuario - En construcción <i class="fa fa-"></i></h1>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-5 col-sm-5 col-md-6 col-md-offset-3"> 
                            @if($agregar)
-                            <button id="btnAdd" type="button" class="btnAd col-md-offset-10" data-toggle="modal" data-target="#myModal" href="#myModal">AGREGAR <i class="fa fa-plus-circle"></i></button>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-2" align="left">
+                                        <a href="/menu/registros/clientes/categorias/sucursales"><button id="btnBk" type="button" class="btnBk" href="#"><i class="fa fa-chevron-left"></i> VOLVER</button></a>
+                                    </div>
+                                    <!--<div class="col-md-2 col-md-offset-3">
+                                        <button id="btnAdd" type="button" class="btnAd" data-toggle="modal" data-target="#myModal" href="#myModal"><i class="fa fa-plus"></i> AGREGAR</button> 
+                                    </div>-->
+                                </div>
+                            </div>
                            @endif
-                                <div class="contMd" style="">
+                                <!--<div class="contMd" style="">
                                      @foreach($acciones as $accion)
                                           @if($accion->descripcion!="Status")
                                             <span style="display: inline-block; float: right;"><a href="{{$accion->url}}"><i class="{{$accion->clase_css}}"></i></a></span>
@@ -26,8 +42,10 @@
                                           @endif
                                     @endforeach
                                     <p class="ttlMd"><strong>REGISTRO</strong></p>
-                                </div>
-                          
+                                </div>-->
+                          <div class="const">
+                              
+                          </div>
                         </div>
                         <!--    Registro -->
 

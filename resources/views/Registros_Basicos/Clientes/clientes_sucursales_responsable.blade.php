@@ -18,9 +18,9 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col-md-2" align="left">
-                                    <button id="btnBk" type="button" class="btnBk" href="#"><i class="fa fa-chevron-left"></i> VOLVER</button>
+                                    <a href="/menu/registros/clientes/categorias/sucursales"><button id="btnBk" type="button" class="btnBk" href="#"><i class="fa fa-chevron-left"></i> VOLVER</button></a>
                                 </div>
-                                <div class="col-md-offset-8">
+                                <div class="col-md-2 col-md-offset-3">
                                     <button id="btnAdd" type="button" class="btnAd" data-toggle="modal" data-target="#myModal" href="#myModal"><i class="fa fa-plus"></i> AGREGAR</button> 
                                 </div>
                             </div>

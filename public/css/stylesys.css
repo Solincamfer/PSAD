@@ -216,6 +216,15 @@
             margin: 0;
             padding: 0;
         }
+        
+        .const{
+            background: url("../img/const.png") no-repeat center center;
+            background-size: 100% 100%;
+            width: 100%;
+            height: 400px;
+            padding: 0;
+            margin: 0;
+        }
     /*Listado*/
         .btnAd, .btnBk, .btnAdc{
             font-family: 'Ubuntu Condensed', sans-serif;

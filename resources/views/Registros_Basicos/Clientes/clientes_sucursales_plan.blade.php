@@ -15,41 +15,23 @@
                        </div>
                        <div class="col-xs-5 col-sm-5 col-md-6 col-md-offset-3" style="margin-top: 2em;"> 
                            @if($agregar) 
-                           <div class="container">
-                               <div class="row">
-                                   <div class="col-md-2" align="left">
-                                       <button id="btnBk" type="button" class="btnBk" href="#"><i class="fa fa-chevron-left"></i> VOLVER</button>
+                               <div class="container">
+                                   <div class="row">
+                                       <div class="col-md-2" align="left">
+                                           <a href="/menu/registros/clientes/categorias/sucursales"><button id="btnBk" type="button" class="btnBk" href="#"><i class="fa fa-chevron-left"></i> VOLVER</button></a>
+                                       </div>
                                    </div>
                                </div>
-                           </div>
                            @endif
                                <div class="contMd">
                                    <div class="icl">
                                        @foreach($acciones as $accion)
                                            @if($accion->descripcion!="Status")
-                                               @if($accion->data_toogle=="modal")
-                                                   <span class="iclsp">
-                                                       <a href="#myModal2" class="tltp" data-ttl="{{$accion->descripcion}}" data-toggle="modal" data-target="#myModal2"> 
-                                                           <i class="{{$accion->clase_css}}"></i>
-                                                       </a>
-                                                   </span>
-                                               @elseif($accion->data_toogle!="modal")
-                                                   <span class="iclsp">
-                                                       <a href="{{$accion->url}}" class="tltp" data-ttl="{{$accion->descripcion}}">
-                                                           <i class="{{$accion->clase_css}}"></i>
-                                                       </a>
-                                                   </span>
-                                               @endif
-                                           @elseif($accion->descripcion=="Status")
-                                               @if($accion->status_ac==1)
-                                                   <div class="chbx">
-                                                       <input type="checkbox" class="btnAcc" name="status" id="inchbx1" value="{{$accion->status_ac}}" checked><label for="inchbx1" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
-                                                   </div>
-                                               @elseif($accion->staus_ac==0)
-                                                   <div class="chbx">
-                                                       <input type="checkbox" class="btnAcc" name="status" id="inchbx2" value="{{$accion->status_ac}}"><label for="inchbx2" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
-                                                   </div>
-                                               @endif
+                                               <span class="iclsp">
+                                                   <a href="{{$accion->url}}" class="tltp" data-ttl="{{$accion->descripcion}}">
+                                                       <i class="{{$accion->clase_css}}"></i>
+                                                   </a>
+                                               </span>
                                            @endif
                                        @endforeach
                                    </div>
