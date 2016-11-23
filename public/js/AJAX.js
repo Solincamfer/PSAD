@@ -55,17 +55,19 @@ $('#log1').click(function(){
 });
 
 $("#inn1").change(function(){
-			$("#inn1 option:selected").each(function () {			
+	$("#inn1 option:selected").each(function () {			
     		var name=$('#inn1').attr("name");
+
             elegido=$(this).val();
             var vector=[name,elegido];
-            $.post("/menu/registros/clientes/registrar", { vector: vector }, function(data){
-            $("#inn2").each(function() {
-			  	$("#inn2").val(data[0]);
-			    $("#inn2").html(data[1]);
-			});
-            
-                      
+            $.get("/menu/registros/clientes/registrar", { vector: vector }, function(data){            	
+            	numeroFilas=(data.length/2);
+            	for (var i = 1; i <= numeroFilas; i++) {
+            		$('#inn2').append('<option value="'+data[0]+'">'+data[1]+'</option>');    
+            	}
+            	               
             });            
         });
+	
+			
 		});
