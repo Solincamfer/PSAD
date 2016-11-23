@@ -61,11 +61,11 @@ $("#inn1").change(function(){
             var vector=[name,elegido];
             $.get("/menu/registros/clientes/registrar", { vector: vector }, function(data){
             	$.each(data, function(i, item) {
-            		$('#inn2').append('<option value="'+item.id+'">'+item.descripcion+'</option>');
+            		$('#inn2').append('<option class="limpiar" value="'+item.id+'">'+item.descripcion+'</option>');
 				})        
             });            
         });
-	
+	$( ".limpiar" ).remove();
 			
 		});
 
@@ -76,11 +76,11 @@ $("#inn2").change(function(){
             var vector=[name,elegido];
             $.get("/menu/registros/clientes/registrar", { vector: vector }, function(data){
             	$.each(data, function(i, item) {
-            		$('#inn3').append('<option value="'+item.id+'">'+item.descripcion+'</option>');
+            		$('#inn3').append('<option class="limpiar1" value="'+item.id+'">'+item.descripcion+'</option>');
 				})        
             });            
         });
-	
+	$( ".limpiar1" ).remove();
 			
 		});
 
@@ -91,10 +91,10 @@ $("#inn3").change(function(){
             var vector=[name,elegido];
             $.get("/menu/registros/clientes/registrar", { vector: vector }, function(data){
             	$.each(data, function(i, item) {
-            		$('#inn4').append('<option value="'+item.id+'">'+item.descripcion+'</option>');
+            		$('#inn4').append('<option class="limpiar2" value="'+item.id+'">'+item.descripcion+'</option>');
 				})        
             });            
         });
-	
+	$( ".limpiar2" ).remove();
 			
 		});
