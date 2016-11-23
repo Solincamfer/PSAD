@@ -146,7 +146,6 @@
 																<label for="regiondf">Región</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
 																<select name="regiondf" id="inn2" class="form-control userEmail">
 																<option value="">-</option>
-																<option id="option" value=""></option>
 																	
 																</select><i class="fa fa-map" id="icc7"></i>
 															</div>

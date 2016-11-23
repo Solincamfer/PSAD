@@ -60,10 +60,12 @@ $("#inn1").change(function(){
 
             elegido=$(this).val();
             var vector=[name,elegido];
-            $.get("/menu/registros/clientes/registrar", { vector: vector }, function(data){
-            	
-			  	$("#inn2 #option").val(data[0]);
-				$("#inn2 #option").html(data[1]);                     
+            $.get("/menu/registros/clientes/registrar", { vector: vector }, function(data){            	
+            	numeroFilas=(data.length/2);
+            	for (var i = 1; i <= numeroFilas; i++) {
+            		$('#inn2').append('<option value="'+data[0]+'">'+data[1]+'</option>');    
+            	}
+            	               
             });            
         });
 	

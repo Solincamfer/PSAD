@@ -150,7 +150,7 @@ class RegistrosBasicos extends Controller
 		 {
 		 	$valor=(int)$seleccion[1];
 
-			$regiones=DB::table('regiones')->select('id' ,'descripcion')->where('pais_id',$valor)->first();
+			$regiones=DB::table('regiones')->select('id' ,'descripcion')->where('pais_id',$valor)->get();
 			if(empty($regiones))
 			{
 
@@ -158,7 +158,7 @@ class RegistrosBasicos extends Controller
 			else
 			{
 				//return ("registro CORRECTO");
-				return $vector=[$regiones->id,$regiones->descripcion];
+				return $regiones;
 			}
 			
 		}
