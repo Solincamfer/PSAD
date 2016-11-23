@@ -87,6 +87,10 @@ Route::group(['prefix'=>'/menu/registros','middleware'=>['validar_sm','v_menu']]
 				/**/Route::match(['post','get'],'/clientes/sucursales/usuario/modificar',                   		 'RegistrosBasicos@clientes_sucursales_usuarios_modificar');
 				/**/Route::match(['post','get'],'/clientes/categoria/sucursal/usuarios/perfil',                   		 'RegistrosBasicos@clientes_sucursales_usuarios_perfil');
 
+				//////selects direccion
+
+					Route::match(['post','get'],'/clientes/registrar',                   		 'RegistrosBasicos@clientes_registrar');//select 
+
 				
 
 				

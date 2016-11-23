@@ -140,6 +140,26 @@ class RegistrosBasicos extends Controller
 	}
 
 
+	
+	public function clientes_registrar()
+	{
+		
+		$seleccion=Request::get('vector');
+
+		if ($seleccion[0]=="paisdf") //se seleccionan paises
+
+		{
+			$valor=(int)$seleccion[1];
+			$regiones=DB::table('regiones')->select('id','descripcion')->where('pais_id',$valor)->get();
+	
+			return $regiones;
+		}
+
+
+
+
+	}
+
 	public function clientes_insertar()
 	{
 		
