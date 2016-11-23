@@ -29,7 +29,7 @@
                             <div class="contMd" style="">
                                 <div class="icl">
                                     @foreach($acciones as $accion)
-                                        @if($accion->descripcion!="Status")
+                                        @if($accion->id!=15)
                                             @if($accion->data_toogle=="modal")
                                                 <span class="iclsp">
                                                     <a href="#myModal2" class="tltp" data-ttl="{{$accion->descripcion}}" data-toggle="modal" data-target="#myModal2"> 
@@ -43,12 +43,12 @@
                                                     </a>
                                                 </span>
                                             @endif
-                                        @elseif($accion->descripcion=="Status")
+                                        @elseif($accion->id==15)
                                             @if($accion->status_ac==1)
                                             <div class="chbx">
                                                 <input type="checkbox" class="btnAcc" name="status" id="inchbx1" value="{{$accion->status_ac}}" checked><label for="inchbx1" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
                                             </div>
-                                            @elseif($accion->staus_ac==0)
+                                            @elseif($accion->status_ac==0)
                                             <div class="chbx">
                                                 <input type="checkbox" class="btnAcc" name="status" id="inchbx2" value="{{$accion->status_ac}}"><label for="inchbx2" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
                                             </div>
