@@ -593,7 +593,7 @@
         #contrpbdbrm2, #contrpbdbrm3, #contcat, #contcatm,
         #contrpbdbrc1, #contrpbdbrc2, #contrpbdbrc3, 
         #contrpbdbrcm1, #contrpbdbrcm2, #contrpbdbrcm3, #conteq, #conteqm,
-        #contcomp, #contcompm{
+        #contcomp, #contcompm, #contpz, #contpzm, #contas, #contasm{
             margin-top: 20px;
             padding: 10px;
         }
@@ -1423,12 +1423,16 @@
                     z-index: 1;
                 }
 
-        /*Sucursales Equipo, Componentes*/
+        /*Sucursales Equipo, Componentes, Piezas, Aplicaciones*/
             /*Agregar y Modificar*/
             #rEq1 input, #rEq1 select, #rEq2 input, #rEq2 select, #rEq3 input,#rEq3 select,
             #rEqm1 input, #rEqm1 select, #rEqm2 input, #rEqm2 select, #rEqm3 input,#rEqm3 select,
-            #rComp1 input, #rComp2 select, #rComp3 select, #rComp4 select, #rCompm1 input, #rCompm2 select, 
-            #rCompm3 select, #rCompm4 select{
+            #rComp1 input, #rComp2 select, #rComp3 select, #rComp4 select, 
+            #rCompm1 input, #rCompm2 select, #rCompm3 select, #rCompm4 select, 
+            #rPz1 input, #rPz2 select, #rPz3 select, 
+            #rPzm1 input, #rPzm2 select, #rPzm3 select,
+            #rAs1 input, #rAs2 select, #rAs3 select, 
+            #rAsm1 input, #rAsm2 select, #rAsm3 select{
                 display: block;
                 padding: 3px 5px;
                 margin-bottom: 10px;
@@ -1448,7 +1452,13 @@
             #rComp1 input:focus, #rComp2 select:focus, 
             #rComp3 select:focus, #rComp4 select:focus, 
             #rCompm1 input:focus, #rCompm2 select:focus, 
-            #rCompm3 select:focus, #rCompm4 select:focus{
+            #rCompm3 select:focus, #rCompm4 select:focus,
+            #rPz1 input:focus, #rPz2 select:focus, 
+            #rPz3 select:focus, #rPzm1 input:focus, 
+            #rPzm2 select:focus, #rPzm3 select:focus,
+            #rAs1 input:focus, #rAs2 select:focus, 
+            #rAs3 select:focus, #rAsm1 input:focus, 
+            #rAsm2 select:focus, #rAsm3 select:focus{
                 outline: none;
                 color: #444;
                 border-color: #26a69d;
@@ -1490,11 +1500,15 @@
                 z-index: 1;
             }
 
-        /*Componentes*/
+        /*Componentes, Piezas, Aplicaciones*/
             #rComp1 #iccp1, #rComp1 #iccp2, #rComp2 #iccp3, #rComp2 #iccp4,
             #rComp3 #iccp5, #rComp3 #iccp6, #rComp4 #iccp7, #rComp4 #iccp8,
             #rCompm1 #miccp1, #rCompm1 #miccp2, #rCompm2 #miccp3, #rCompm2 #miccp4,
-            #rCompm3 #miccp5, #rCompm3 #miccp6, #rCompm4 #miccp7, #rCompm4 #miccp8{
+            #rCompm3 #miccp5, #rCompm3 #miccp6, #rCompm4 #miccp7, #rCompm4 #miccp8,
+            #rPz1 #icpz1, #rPz1 #icpz2, #rPz2 #icpz3, #rPz2 #icpz4, #rPz3 #icpz5, #rPz3 #icpz6,
+            #rPzm1 #micpz1, #rPzm1 #micpz2, #rPzm2 #micpz3, #rPzm2 #micpz4, #rPzm3 #micpz5, #rPzm3 #micpz6,
+            #rAs1 #icas1, #rAs1 #icas2, #rAs2 #icas3, #rAs2 #icas4, #rAs3 #icas6,
+            #rAsm1 #micas1, #rAsm1 #micas2, #rAsm2 #micas3, #rAsm2 #micas4, #rAsm3 #micas6{
                 color: #fff;
                 font-size: 1em;
                 position: absolute;
@@ -1506,7 +1520,11 @@
             }
 
             #rComp2 .ic, #rComp3 .ic, #rComp4 .ic, 
-            #rCompm2 .ic, #rCompm3 .ic, #rCompm4 .ic{
+            #rCompm2 .ic, #rCompm3 .ic, #rCompm4 .ic,
+            #rPz1 .ic, #rPz2 .ic, #rPz3 .ic,
+            #rPzm1 .ic, #rPzm2 .ic, #rPzm3 .ic
+            #rAs1 .ic, #rAs2 .ic, #rAs3 .ic,
+            #rAs1 .ic, #rAs2 .ic, #rAs3 .ic{
                 background-color: #26a69d;
                 position: absolute;
                 padding-top: 7px;
@@ -1522,6 +1540,17 @@
                 color: #333;
                 border: none;
                 z-index: 1;
+            }
+
+            #rAs3 #icas5, #rAsm3 #micas5{
+                color: #fff;
+                font-size: 1em;
+                position: absolute;
+                margin-top: -35px;
+                margin-left: 12px;
+                opacity: 1;
+                left: 0;
+                transition: all .1s ease-in;
             }
             
         /*Planes*/

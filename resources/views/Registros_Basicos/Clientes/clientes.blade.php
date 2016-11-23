@@ -70,7 +70,7 @@
 									<form method="post" class="form-horizontal Validacion" id="Formclientemd" action="">
 										{{ csrf_field() }}
 										<div class="modal-body">						
-											 <ul class="nav nav-tabs" role="tablist">
+											 <ul class="nav nav-tabs not-active" role="tablist">
                                                 <li role="presentation" class="active" ><a href="#panelmd1" id="am0" aria-controls="panelmd1" role="tab" data-toggle="tab">Datos basicos</a></li>
                                                 <li role="presentation" ><a href="#panelmd2" id="am1" aria-controls="panelmd2" role="tab" data-toggle="tab">Dirección Fiscal</a></li>
                                                 <li role="presentation" ><a href="#panelmd3" id="am2" aria-controls="panelmd3" role="tab" data-toggle="tab">Direccion Comercial</a></li>
@@ -316,7 +316,7 @@
 							<form method="post" class="form-horizontal Validacion" id="Formclientemd" action="">
 										{{ csrf_field() }}
 										<div class="modal-body">						
-											 <ul class="nav nav-tabs" role="tablist">
+											 <ul class="nav nav-tabs not-active" role="tablist">
                                                 <li role="presentation" class="active" ><a href="#panelmd1" id="am0" aria-controls="panelmd1" role="tab" data-toggle="tab">Datos basicos</a></li>
                                                 <li role="presentation" ><a href="#panelmd2" id="am1" aria-controls="panelmd2" role="tab" data-toggle="tab">Dirección Fiscal</a></li>
                                                 <li role="presentation" ><a href="#panelmd3" id="am2" aria-controls="panelmd3" role="tab" data-toggle="tab">Direccion Comercial</a></li>
