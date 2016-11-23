@@ -13,7 +13,7 @@
                                </div>
                            </div>
                        </div>
-                       <div class="col-xs-5 col-sm-5 col-md-6 col-md-offset-3" style="margin-top: 2em;"> 
+                       <div class="col-xs-5 col-sm-5 col-md-6 col-md-offset-3"> 
                            @if($agregar) 
                                <div class="container">
                                    <div class="row">

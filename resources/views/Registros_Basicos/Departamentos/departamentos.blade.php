@@ -6,27 +6,48 @@
         @include('layout/header')
                 @include('layout/sidebar')
             <div class="contenido">
-                <div class="col-xs-5 col-sm-5 col-md-6 col-md-offset-3" style=""> .
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-2 ttlp">
+                            <h1>Departamento</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-5 col-sm-5 col-md-6 col-md-offset-3">
                 @if($agregar)
-                    <button id="btnAdd" type="button" class="btnAd col-md-offset-10" data-toggle="modal" data-target="#myModal" href="#myModal">AGREGAR <i class="fa fa-plus-circle"></i></button>
+                    <button id="btnAdd" type="button" class="btnAdc col-md-offset-11" data-toggle="modal" data-target="#myModal" href="#myModal"><i class="fa fa-plus"></i> AGREGAR</button>
                 @endif   
                     @foreach($consulta as $departamento)
-                        <div class="contMd" style="">
-                            @foreach($acciones as $accion)
-                                @if($accion->descripcion!="Status" )
-                                     <a href="{{$accion->url.$departamento->id}}" class="btnAcc">{{$accion->descripcion}}</a>
-                                @elseif($accion->descripcion=="Status" )
-                                    @if($departamento->status_d==1)
-
-                                        <input type="checkbox" class="btnAcc" name="status" value="{{$departamento->status_d}}" checked>
-                                        
-                                    @elseif($departamento->status_d==0)
-                                         <input type="checkbox" name="status"  class="btnAcc" value="{{$departamento->status_d}}" >
-
+                        <div class="contMd">
+                            <div class="icl">
+                                @foreach($acciones as $accion)
+                                    @if($accion->descripcion!="Status" )
+                                        @if($accion->data_toogle=="modal")
+                                            <span class="iclsp">
+                                                <a href="#myModal2" class="tltp" data-ttl="{{$accion->descripcion}}" data-toggle="modal" data-target="#myModal2"> 
+                                                    <i class="{{$accion->clase_css}}"></i>
+                                                </a>
+                                            </span>
+                                        @elseif($accion->data_toogle!="modal")
+                                            <span class="iclsp">
+                                                <a href="{{$accion->url}}" class="tltp" data-ttl="{{$accion->descripcion}}">
+                                                    <i class="{{$accion->clase_css}}"></i>
+                                                </a>
+                                            </span>
+                                        @endif
+                                    @elseif($accion->descripcion=="Status" )
+                                        @if($departamento->status_d==1)
+                                            <div class="chbx">
+                                                <input type="checkbox" class="btnAcc" name="status" id="inchbx1" value="{{$accion->status_ac}}" checked><label for="inchbx1" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
+                                            </div>
+                                        @elseif($departamento->status_d==0)
+                                            <div class="chbx">
+                                                <input type="checkbox" class="btnAcc" name="status" id="inchbx2" value="{{$accion->status_ac}}"><label for="inchbx2" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
+                                            </div>
+                                        @endif
                                     @endif
-                                     
-                                @endif
-                            @endforeach
+                                @endforeach
+                            </div>
                             <p class="ttlMd"><strong>{{$departamento->nombre_d}}</strong></p>
                         </div>
                     @endforeach
@@ -45,19 +66,23 @@
                                     {{ csrf_field() }}
                                     <div class="container-fluid" id="contdpto">
                                         <div class="row">
-                                            <div class="col-md-6 col-md-offset-3" id="dpto">
-                                                <div class="form-group">
-                                                    <label for="nomDpto">Nombre del Departamento</label>
-                                                    <input type="text" name="textDpto" class="form-control" id="nomDpto"/><span class="fa fa-briefcase" id="icdp1"></span>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="stDpto">Estatus del Departamento</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
-                                                    <select name="comboDpto" class="form-control" id="stDpto">
-                                                        <option value="">-</option>
-                                                        <option value="1">Activo</option>
-                                                        <option value="2">Inactivo</option>
-                                                    </select><i class="fa fa-check" id="icdp2"></i>
-                                                </div> 
+                                            <div id="dpto">
+                                               <div class="col-md-8 col-md-offset-2">
+                                                   <div class="form-group row">
+                                                       <label for="nomDpto">Nombre del Departamento</label>
+                                                       <input type="text" name="textDpto" class="form-control" id="nomDpto"/><i class="fa fa-briefcase" id="icdp1"></i>
+                                                   </div>
+                                               </div>
+                                               <div class="col-md-8 col-md-offset-2">
+                                                   <div class="form-group row">
+                                                       <label for="stDpto">Estatus del Departamento</label><span class="ic"><i class="fa fa-chevron-down"></i></span>
+                                                       <select name="comboDpto" class="form-control" id="stDpto">
+                                                           <option value="">-</option>
+                                                           <option value="1">Activo</option>
+                                                           <option value="2">Inactivo</option>
+                                                       </select><i class="fa fa-check" id="icdp2"></i>
+                                                   </div>
+                                               </div> 
                                             </div> 
                                         </div>
                                     </div>
