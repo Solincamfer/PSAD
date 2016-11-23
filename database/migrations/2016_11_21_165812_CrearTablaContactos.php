@@ -20,6 +20,7 @@ class CrearTablaContactos extends Migration
             $table->integer('tipo__id')->unsigned();
             $table->string('telefono_m',100);
             $table->string('telefono_f',100);
+            $table->string('correo',100);
             $table->foreign('tipo_id')->references('id')->on('tipos')->onDelate('cascade');
             $table->foreign('tipo__id')->references('id')->on('tipos')->onDelate('cascade');
 

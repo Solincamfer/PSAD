@@ -8,5 +8,5 @@ class Contacto extends Model
 {
    public $timestamps=false;
    protected  $table="contactos";
-   protected $fillable=['id','tipo_id','tipo__id','telefono_m','telefono_f'];
+   protected $fillable=['id','tipo_id','tipo__id','telefono_m','telefono_f','correo'];
 }
