@@ -85,7 +85,7 @@
 													<br>
 														<div class="col-md-12" id="dbc1">
 															<div class="form-group col-md-12">
-																<label for="rs">Razon Social:</label>							
+																<label for="rs">Razon Social:</label>				
 																<input type="text" name="rs" class="form-control userEmail"  id="in1"/>
 																<i class="fa fa-university" id="icc1"></i>								
 															</div>															
@@ -379,8 +379,8 @@
 													<div class="container-fluid" id="contdf">
 													<br>
 														<div class="form-group col-md-6" id="dfc1">
-															<label for="paisdf">País</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
-															<select name="paisdf" id="inn11" class="form-control userEmail">
+															<label for="paisf">País</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
+															<select name="paisf" id="inn11" class="form-control userEmail">
 															<option value="">-</option>
 																@foreach($paises as $pais)
 																		<option value="{{$pais->id}}">{{$pais->descripcion}}</option>
@@ -432,8 +432,8 @@
 													<div class="container-fluid" id="contdf">
 													<br>
 														<div class="form-group col-md-6" id="dfc1">
-															<label for="paisdf">País</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
-															<select name="paisdf" id="innn11" class="form-control userEmail">
+															<label for="paispf">País</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
+															<select name="paispf" id="innn11" class="form-control userEmail">
 															<option value="">-</option>
 																@foreach($paises as $pais)
 																		<option value="{{$pais->id}}">{{$pais->descripcion}}</option>
