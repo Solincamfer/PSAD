@@ -188,13 +188,14 @@ class RegistrosBasicos extends Controller
 			);
 
 		
-
-		$idC=DB::table('contactos')->insert//insercion de contacto
+		$idC=DB::table('contactos')->insertGetId//insercion de contacto
 			(
 
-			   ['tipo_id'=>$codigoM,'tipo__id'=>$codigoL,'telefono_m'=>$telefonoM,'telefono_f'=>$telefonoL]
+			   ['tipo_id'=>$codigoM,'tipo__id'=>$codigoL,'telefono_m'=>$telefonoM,'telefono_f'=>$telefonoL,'correo'=>$correo]
 			);
 
+
+		
 		$iddF=(integer) DB::table('direcciones')->insertGetId//insercion de direcciones direccion fiscal
 			(
 
