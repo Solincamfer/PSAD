@@ -7,7 +7,7 @@ $(document).ready(function() {
  });
 
  $('#btnGuardarCliente').click(function(){
-    var idInputForm=['in','inn','innn','innnn'];
+    var idInputForm=['ip','ipp','ippp','ipppp'];
     var idpanelsTabs='am';
     Normal(this,idInputForm,idpanelsTabs);
  });
@@ -20,20 +20,21 @@ $(document).ready(function() {
 
 function Normal(button,idInputForm,idpanelsTabs){
     var Tabcompletado=0;
-    for (var a =0; a<=idInputForm.length; a++) {        
+    for (var a =0; a<idInputForm.length; a++) {        
     if (CantidadTabs(idInputForm[a])) {
         //alert('Formulario completo');
+        
+        Tabcompletado=Tabcompletado+1;
         if (Tabcompletado===4) {
     $(button).attr( "type","submit");
   } 
-        Tabcompletado=Tabcompletado+1;
         var next=a+1;
         
         $("#"+idpanelsTabs+next).click();         
     }else{
         alert('Tab '+(a+1)+' incompleto');
     }
-    //alert(Tabcompletado);
+    alert(Tabcompletado);
   }
    if (Tabcompletado===4) {
     $(button).html('Guardar <i class="fa fa-floppy-o"></i>'); 
