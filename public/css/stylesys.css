@@ -72,17 +72,90 @@
             background: rgba(0, 167, 142, 0.5); 
             padding: 0;
             width: 100%;
-            height: 5em;
+            height: 3.5em;
         }
         
         .img{
             position: absolute;
             top: 0;
-            margin-top: 12px;
-            margin-left: 80px;
-            width: 180px;
+            margin-top: 5px;
+            margin-left: 50px;
+            width: 50%;
             height: auto;
         }
+
+        header nav{
+            z-index: 1000;
+            margin: 9px auto;
+            text-align: right;
+        }
+
+        header nav ul{
+            list-style: none;
+        }
+
+        header nav ul li{
+            display: inline-block;
+            position: relative;
+            font-size: 14px;
+        }
+
+        header nav ul a{
+            display:block;
+            text-decoration: none;
+            color: #E5E5E7;
+            font-weight: bold;
+            padding: 10px;
+            padding-bottom: 16.5px;
+            border-radius: 4px;
+        }
+
+        header nav ul li a:hover, header nav ul li a:focus{
+            color: #e5e5e7;
+            text-decoration: none;
+        }
+
+        header nav ul li a span{
+            text-decoration: none;
+            margin: 10px;
+        }
+
+        header nav ul li a span i{
+            margin-left: 10px;
+        }
+
+        header nav ul li .chld{
+            display: none;
+            background: rgba(0, 0, 0, .2);
+            position: absolute;
+            z-index: 1000;
+            width: 100%;
+            height: 30px;
+            padding: 1px 1px;
+            left: 0;
+            margin-top: 0px;
+            margin-left: 14px;
+        }
+
+        .open2{
+            transform: translateY(-50px);
+        }
+
+        header nav ul li .chld li{
+            display: block;
+            overflow: hidden;
+        }
+
+        header nav ul li .chld li div{
+            display: block;
+            color: #26A69D;
+            font-weight: bold;
+            left: 0;
+            cursor: pointer;
+            padding: 4px;
+            margin-right: 18px;
+        }
+
     /*Sidebar*/
         .sidebar {
             position: absolute;
@@ -240,7 +313,7 @@
             border: none;
             padding-top: 13px;
             padding-bottom: 10px;
-            padding-left: 13px;
+            padding-left: 15px;
             box-sizing: border-box;
             color: #E5E5E7;
             font-size: 12px;
@@ -429,37 +502,37 @@
             position: absolute;
         }
 
-        .tltp:after {
+        .tltp:after{
             border-right: 6px solid transparent;
             border-bottom: 6px solid rgba(0, 0, 0, .75);
             border-left: 6px solid transparent;
             content: '';
             height: 0;
-            top: 31px;
-            left: 7px;
+            top: 20px;
+            left: 4px;
             width: 0;
         }
         
-        .tltp:before {
+        .tltp:before, .tltpck:before {
             background: linear-gradient(#222, #333, #444, #555,#26a69d);
             border-radius: 2px;
             color: #e5e5e7;
             content: attr(data-ttl);
             font-size: 14px;
             padding: 2px 6px;
-            top: 37px;
+            top: 26px;
             white-space: nowrap;
-            z-index: 1;
+            z-index: 1000;
         }
 
         .tltpck:after{
-            border-right: 6px solid transparent;
-            border-bottom: 6px solid rgba(0, 0, 0, .75);
-            border-left: 6px solid transparent;
+            border-right: 6px solid rgba(0, 0, 0, .75);
+            border-top: 6px solid transparent;
+            border-bottom: 6px solid transparent;
             content: '';
             height: 0;
-            top: 22px;
-            left: 7px;
+            top: 1.5px;
+            left: 25px;
             width: 0;
         }
 
@@ -470,9 +543,10 @@
             content: attr(data-ttl);
             font-size: 14px;
             padding: 2px 6px;
-            top: 28px;
+            top: -3px;
+            left: 31px;
             white-space: nowrap;
-            z-index: 1;
+            z-index: 5;
         }
 
         /*Efectos Tooltip*/
@@ -505,23 +579,6 @@
                 transition: all .2s .1s ease-in-out;
             }
 
-        /*  --> swing
-            .tltp.swing:before,
-            .tltp.swing:after {
-                transform: translate3d(0,30px,0) rotate3d(0,0,1,60deg);
-                transform-origin: 0 0;
-                transition: transform .15s ease-in-out, opacity .2s;
-            }
-            .tltp.swing:after {
-                transform: translate3d(0,60px,0);
-                transition: transform .15s ease-in-out, opacity .2s;
-            }
-            .tltp.swing:hover:before,
-            .tltp.swing:hover:after {
-                opacity: 1;
-                transform: translate3d(0,0,0) rotate3d(1,1,1,0deg);
-            }*/
-
         /*Modal*/
 
             .hidden{
@@ -533,15 +590,16 @@
             background: rgba(38, 166, 154, 0.7);
             padding: 1em;
             border: 0;
+            z-index: 1000;
         }
         
         
         #ico{
             position: absolute;
             top: 0;
-            margin-top: 10px;
+            margin-top: 15px;
             margin-left: 30px;
-            font-size: 50px;
+            font-size: 25px;
             color: #111;
             cursor: pointer;
             transition: all 0.3s;
@@ -549,14 +607,6 @@
         
         #ico:hover{
             color: #fff;
-        }
-
-        #nom{
-            margin-top: 25px; 
-            text-align: right;
-            top: 0;
-            right: 7em;
-            position: absolute;
         }
 
         #usnam{
@@ -568,6 +618,10 @@
             color: #111;
             font-size: 20px;
 
+        }
+
+        #usnam i{
+            margin-left: 15px;
         }
 
         #bttn{

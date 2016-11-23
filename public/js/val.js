@@ -10,6 +10,11 @@ $(function(){
     $('#ico').on('click',function(){
       $('.contenido').toggleClass('ocultar'); 
     });
+    
+    $('.subMenu').on('click', function(){
+        $(this).children('.chld').slideToggle('open2');
+    });
+    
     //Funcionalidad del menu en el sidebar
     var Accordion = function(el, multiple) {
         this.el = el || {};
@@ -38,7 +43,7 @@ $(function(){
     }
     var accordion = new Accordion($('#accordion'), false);
     
-    $('#lnk').click(function(){
+    $('.cs').click(function(){
         var url = "/login"; 
         swal({
             title: "Cerrar Sesión",
@@ -55,8 +60,6 @@ $(function(){
                 $(location).attr('href',url);
         });  
     });
-    
-    $('.tooltip').tooltipster();
 
 });
 
