@@ -80,7 +80,7 @@
             top: 0;
             margin-top: 5px;
             margin-left: 50px;
-            width: 50%;
+            width: 40%;
             height: auto;
         }
 
@@ -1274,7 +1274,7 @@
                     
                     #rRpb5 .ic, #rRpb6 .ic, #rRpbm5 .ic, #rRpbm6 .ic,
                     #rRpb9 .ic, #rRpb10 .ic, #rRpbm9 .ic, #rRpbm10 .ic,
-                    #rRpbc5 .ic, #rRpbc6 .ic, #rRpbcm5 .ic, #rRpbcm6 .ic,
+                    #rRpbc5 .ic, #rRpbcm5 .ic, #rRpbcm6 .ic,
                     #rRpbc9 .ic, #rRpbc10 .ic, #rRpbcm9 .ic, #rRpbcm10 .ic{
                         background-color: #26a69d;
                         position: absolute;
@@ -1285,6 +1285,23 @@
                         width: 30px;
                         margin-top: 22px;
                         margin-left: 6.8em;
+                        text-align: center;
+                        pointer-events: none;
+                        color: #333;
+                        border: none;
+                        z-index: 1;
+                    }
+
+                    #rRpbc6 .ic{
+                        background-color: #26a69d;
+                        position: absolute;
+                        padding-top: 7px;
+                        top: 0;
+                        left: 0;
+                        height: 33.5px;
+                        width: 30px;
+                        margin-top: 22px;
+                        margin-left: 9.45em;
                         text-align: center;
                         pointer-events: none;
                         color: #333;

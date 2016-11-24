@@ -77,101 +77,58 @@
                                     {{ csrf_field() }}
                                     <div class="modal-body">
                                         <ul class="nav nav-tabs not-active" role="tablist" >
-                                            <li role="presentation" class="active"><a href="#dbrc1" id="a1" aria-controls="dbrc1" role="tab" data-toggle="tab">Datos básicos Primarios</a></li>
-                                            <li role="presentation"><a href="#dbrc2" id="a2" aria-controls="dbrc2" role="tab" data-toggle="tab">Datos básicos Secundarios</a></li>
+                                            <li role="presentation" class="active"><a href="#dbrc1" id="a1" aria-controls="dbrc1" role="tab" data-toggle="tab">Datos básicos</a></li>
                                             <li role="presentation"><a href="#ctorc" id="a3" aria-controls="ctor3" role="tab" data-toggle="tab" >Contactos</a></li>
                                         </ul>
                                         <div class="container-fluid">
                                             <div class="tab-content">
                                                 <div role="tabpanel" class="tab-pane active" id="dbrc1">
                                                     <div class="container-fluid" id="contrpbdbrc1">
-                                                        <center><u><p>DATOS BASICOS PRIMARIOS</p></u></center>
+                                                        <center><u><p>DATOS BASICOS</p></u></center>
                                                         <br>
                                                         <div class="row">
-                                                            <div class="col-md-5  col-md-offset-1" id="rRpbc1">
+                                                            <div class="col-md-5 col-md-offset-1" id="rRpbc1">
                                                                 <div class="form-group">
-                                                                    <label for="nomRpb1">1er Nombre</label>
+                                                                    <label for="nomRpb1">Nombres</label>
                                                                     <input type="text" name="nomRpb1" class="form-control userEmail" id="input1"><i class="fa fa-user" id="icrc1"></i>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-md-5  col-md-offset-1" id="rRpbc2">
-                                                                <div class="form-group">    
-                                                                    <label for="nomRpb2">2do Nombre</label>
-                                                                    <input type="text" name="nomRpb2" class="form-control userEmail" id="input2"><i class="fa fa-user-plus" id="icrc2"></i>
+                                                            <div class="col-md-5" id="rRpbc3">
+                                                                <div class="form-group">
+                                                                    <label for="apellRpb1">Apellidos</label>
+                                                                    <input type="text" name="apellRpb1" class="form-control userEmail" id="input3"><i class="fa fa-user" id="icrc3"></i>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="row">   
-                                                            <div class="col-md-5  col-md-offset-1" id="rRpbc3">
-                                                                <div class="form-group">
-                                                                    <label for="apellRpb1">1er Apellido</label>
-                                                                    <input type="text" name="apellRpb1" class="form-control userEmail" id="input3"><i class="fa fa-user" id="icrc3"></i>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-5 col-md-offset-1" id="rRpbc4">
-                                                                <div class="form-group">     
-                                                                    <label for="apellRpb2">2do Apellido</label>
-                                                                    <input type="text" name="apellRpb2" class="form-control userEmail" id="input4"><i class="fa fa-user-plus" id="icrc4"></i>
-                                                                </div> 
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div role="tabpanel" class="tab-pane" id="dbrc2">
-                                                    <div class="container-fluid" id="contrpbdbrc2">
-                                                        <center><u><p>DATOS BASICOS SECUNDARIOS</p></u></center>
-                                                        <br>
-                                                        <div class="row">
-                                                            <div class="col-md-8 col-md-offset-2" id="rRpbc5">
-                                                                <div class="col-md-12" id="spc1">
-                                                                    <label for="rifRpb">Rif</label><span class="ic"><i class="fa fa-chevron-down"></i></span>
-                                                                </div>
-                                                                <div class="col-md-5">
-                                                                    <div class="form-group">
-                                                                        <select name="selRifRpb" class="form-control userEmail" id="selRifRpb">
-                                                                            <option value="">-</option>
-                                                                            <option value="1">G</option>
-                                                                        </select><i class="fa fa-clipboard" id="icrc5"></i>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-7">
-                                                                    <div class="form-group">
-                                                                        <input type="text" class="form-control userEmail" name="numRifRpb"><i class="fa fa-address-card" id="icrc6"></i>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-8 col-md-offset-2" id="rRpbc6">
-                                                                <div class="col-md-12" id="spc2">
+                                                            <div id="rRpbc6">
+                                                                <div class="col-md-10 col-md-offset-1" id="sp1">
                                                                     <label for="rifRpb">Documento de identidad</label><span class="ic"><i class="fa fa-chevron-down"></i></span>
                                                                 </div>
-                                                                <div class="col-md-5">
-                                                                    <div class="form-group">
+                                                                <div class="col-md-4 col-md-offset-1">
+                                                                    <div class="form-group row">
                                                                         <select name="selciRpb" class="form-control userEmail" id="selciRpb">
                                                                             <option value="">-</option>
                                                                             <option value="1">G</option>
                                                                         </select><i class="fa fa-clipboard" id="icrc7"></i>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-md-7">
-                                                                    <div class="form-group"> 
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group row"> 
                                                                         <input type="text" class="form-control userEmail" name="txtci"><i class="fa fa-address-card-o" id="icrc8"></i>
                                                                     </div>
                                                                 </div>
-                                                            </div>           
-                                                        </div>
-                                                        <div class="col-md-8 col-md-offset-2" id="rRpbc7">
-                                                            <div class="form-group row">
-                                                                <label for="fnRpb">Fecha de nacimiento</label><span class="ic"><i class="fa fa-chevron-down"></i></span>
-                                                                <input type="date" name="fnRpb" class="form-control userEmail" id="input9"><i class="fa fa-calendar" id="icrc9"></i>
                                                             </div>
                                                         </div>
-                                                        <div class="col-md-8 col-md-offset-2" id="rRpbc8">
-                                                            <div class="form-group row">
-                                                                <label for="cgoRpb">Cargo</label><span class="ic"><i class="fa fa-chevron-down"></i></span>
-                                                                <select name="cgoRpb" class="form-control userEmail" id="input10">
-                                                                    <option value="">-</option>
-                                                                    <option value="1">caracas</option>
-                                                                </select><i class="fa fa-id-badge" id="icrc10"></i>
+                                                        <div class="row">
+                                                            <div class="col-md-10 col-md-offset-1" id="rRpbc8">
+                                                                <div class="form-group row">
+                                                                    <label for="cgoRpb">Cargo</label><span class="ic"><i class="fa fa-chevron-down"></i></span>
+                                                                    <select name="cgoRpb" class="form-control userEmail" id="input10">
+                                                                        <option value="">-</option>
+                                                                        <option value="1">caracas</option>
+                                                                    </select><i class="fa fa-id-badge" id="icrc10"></i>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
