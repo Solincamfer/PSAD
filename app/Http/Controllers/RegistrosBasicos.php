@@ -250,7 +250,7 @@ class RegistrosBasicos extends Controller
 		 	);
 
 
-		
+		return redirect('/menu/registros/clientes/insertar');
 	}
 
 
@@ -370,25 +370,27 @@ class RegistrosBasicos extends Controller
 ////////////////////////////////////////////////////Modulo Clientes///////////////////////////////////////////////
 
 
-	public function servicios()
+	public function planes_servicios()
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
 		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(65,66,67),64);
 		return view ('Registros_Basicos\PlaneS\planes',$this->datos_vista($datos,$acciones,array()));
 
-		/*return view('Registros_Basicos\Planes_y_Servicios\planes', 
-					[
-					 'modulos'=>$datos['modulos'],
-					 'submodulos'=>$datos['submodulos'],
-					 'nombre'=>$datos['nombre'],
-					 'apellido'=>$datos['apellido'],
-					 ]
-					 );*/
+		
 	}
 	
 
 
 
+	public function planes_servicios_servicios()
+	{
+		$datos=$this->cargar_header_sidebar_acciones();
+		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(73,74),72);
+		return view ('Registros_Basicos\PlaneS\servicios',$this->datos_vista($datos,$acciones,array()));
+
+		
+	}
+	
 
 
 
@@ -402,26 +404,6 @@ class RegistrosBasicos extends Controller
 ////////////////////////////////////////////////////Modulo Clientes///////////////////////////////////////////////
 
 	
-
-
-
-
-
-public function clientes_sucursales_plan_modificar()
-	{
-		$datos=$this->cargar_header_sidebar_acciones();
-		return view ('Registros_Basicos\Clientes\clientes_sucursales_plan_modificar',
-						[
-
-						 'modulos'=>$datos['modulos'],
-						 'submodulos'=>$datos['submodulos'],
-						 'nombre'=>$datos['nombre'],
-						 'apellido'=>$datos['apellido']
-						]
-
-
-						);
-	}
 
 
 
