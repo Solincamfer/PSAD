@@ -30,7 +30,7 @@ class validarAcciones
             {
 
                 $id_hijo=$accion;
-                $id_padre=DB::table('accion_perfil')->select('accion_perfil')->where('')
+                $id_padre=DB::table('accion_perfil')->select('accion_perfil')->where('');
             }
         }
 

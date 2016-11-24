@@ -67,7 +67,7 @@
 									<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 									<h4 class="modal-title" id="myModalLabel">Agregar nuevo cliente</h4>
 								</div>
-							<form method="post" class="form-horizontal Validacion" id="Formclientesv" action="/insertar">
+							<form method="post" class="form-horizontal Validacion" id="Formclientesv" action="clientes/insertar">
 										{{ csrf_field() }}
 										<div class="modal-body">						
 											 <ul class="nav nav-tabs" role="tablist">
@@ -99,7 +99,7 @@
 														<div class="col-md-12" id="dbc2">	
 															<label for="rif" class="col-md-12">Rif:</label><span class="ic"><i class="fa fa-chevron-down"></i></span>									
 															<div class="form-group col-md-4" id="sep">
-																<select name="rifnew" id="ip3" class="form-control userEmail">
+																<select name="rif" id="ip3" class="form-control userEmail">
 																	<option value="">-</option>
 																@foreach($tipoR as $rif)
 																	<option value="{{$rif->id}}">{{$rif->descripcion}}</option>
@@ -110,7 +110,7 @@
 																</select><i class="fa fa-clipboard" id="icc3"></i>
 															</div>	
 															<div class="form-group col-md-8">									
-																<input type="text" id="ip4" class="form-control typeRifNumber" name="rif1new"/>
+																<input type="text" id="ip4" class="form-control typeRifNumber" name="rifnum"/>
 																<i class="fa fa-address-card" id="icc4"></i>
 															</div>	
 														</div>															
@@ -207,8 +207,8 @@
 														</div>	
 														</div>
 														<div class="form-group col-md-12" id="dfc5">
-																<label for="descDirdf">Descripción de la dirección</label>
-															<textarea type="text" name="descDirdf" id="ippp5" class="form-control userEmail"></textarea><i class="fa fa-map-marker" id="icc10"></i>
+																<label for="descDirdc">Descripción de la dirección</label>
+															<textarea type="text" name="descDirdc" id="ippp5" class="form-control userEmail"></textarea><i class="fa fa-map-marker" id="icc10"></i>
 														</div>
 													</div>	
 														</div>													
@@ -226,7 +226,7 @@
 																</div>
 																<div class="col-md-5">
 																	<div class="form-group">
-																		<select name="tlflclsv" id="ipppp1" class="form-control userEmail">
+																		<select name="tlflsv" id="ipppp1" class="form-control userEmail">
 																				<option value="">-</option>
 																			@foreach($codigoL as $local)
 																			<option value="{{$local->id}}">{{$local->descripcion}}</option>

@@ -27,7 +27,7 @@ function Normal(button,idInputForm,idpanelsTabs){
         $("#"+idpanelsTabs+next).click();  
         color=$('#'+idpanelsTabs+a).css('color');
             //alert(color.toString());
-            if (color.toString()=='rgb(169, 68, 66)') {
+            if (color.toString()=='rgb(169, 68, 66)'){
                 prueba=true;
             }
                 if (prueba==true){
