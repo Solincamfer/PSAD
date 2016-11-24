@@ -141,7 +141,7 @@ class RegistrosBasicos extends Controller
 
 
 	
-	public function clientes_registrar()
+	public function clientes_registrar()//manejo de los select para direcciones del cliente matriz 
 	{	
 		
 		$seleccion=Request::get('vector');
@@ -175,7 +175,7 @@ class RegistrosBasicos extends Controller
 
 	}
 
-	public function clientes_insertar()
+	public function clientes_insertar()//debe estar habilitado el boton aceptar
 	{
 		
 		//capturar datos del formulario

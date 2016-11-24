@@ -40,56 +40,58 @@ Route::match(['post','get'],'/menu',['middleware'=>'v_menu','uses'=>'InicioContr
 
 
 
-Route::group(['prefix'=>'/menu/registros','middleware'=>['validar_sm','v_menu']],function()
+Route::group(['prefix'=>'/menu/registros','middleware'=>['v_menu']],function()
 				{
 
-				//Route::match(['post','get'],'/modulos,                                     'RegistrosBasicos@modulos');
-				Route::match(['post','get'],'/departamentos',                      		 'RegistrosBasicos@departamentos');
-				Route::match(['post','get'],'/servicios',                  				 'RegistrosBasicos@servicios');
-				Route::match(['post','get'],'/tiposequipos',               				 'RegistrosBasicos@tipos');
-				Route::match(['post','get'],'/perfiles',                   				 'RegistrosBasicos@perfiles');
-				Route::match(['post','get'],'/empleados',                  				 'RegistrosBasicos@empleados');
-				Route::match(['post','get'],'/clientes',                   				 'RegistrosBasicos@clientes');
-				Route::match(['post','get'],'/departamentos/cargos/{departamento_id}',   'RegistrosBasicos@departamentos_cargos');
+			
+				Route::match(['post','get'],'/departamentos',														['middleware'=>'validar_sm:2','uses'=>'RegistrosBasicos@departamentos']);
+				Route::match(['post','get'],'/servicios',															['middleware'=>'validar_sm:3','uses'=> 'RegistrosBasicos@servicios']);
+				Route::match(['post','get'],'/tiposequipos',														['middleware'=>'validar_sm:4','uses'=>'RegistrosBasicos@tipos']);
+				Route::match(['post','get'],'/perfiles',															['middleware'=>'validar_sm:5','uses'=>'RegistrosBasicos@perfiles']);
+				Route::match(['post','get'],'/empleados',															['middleware'=>'validar_sm:6','uses'=>'RegistrosBasicos@empleados']);
+				Route::match(['post','get'],'/clientes',															['middleware'=>'validar_sm:7','uses'=>'RegistrosBasicos@clientes']);
 				
-				Route::match(['post','get'],'/clientes/insertar',                   				 'RegistrosBasicos@clientes_insertar');
-				Route::match(['post','get'],'/clientes/responsable/{cliente_id}',                   				 'RegistrosBasicos@clientes_responsables');
-				Route::match(['post','get'],'/clientes/responsable/modificar',                   	 'RegistrosBasicos@clientes_responsables_modificar');
-				Route::match(['post','get'],'/clientes/responsable/agregar',                   		 'RegistrosBasicos@clientes_responsables_agregar');
+				Route::match(['post','get'],'/departamentos/cargos/{departamento_id}',								['middleware'=>'validar_ac:3','uses'=>'RegistrosBasicos@departamentos_cargos']);
+				
+				Route::match(['post','get'],'/clientes/insertar',                   								['middleware'=>'validar_ac:8','uses'=>'RegistrosBasicos@clientes_insertar']);
+				
+				Route::match(['post','get'],'/clientes/responsable/{cliente_id}',           						['middleware'=>'validar_ac:10','uses'=>'RegistrosBasicos@clientes_responsables']);
+				//Route::match(['post','get'],'/clientes/responsable/modificar',             							['middleware'=>'validar_ac','uses'=>'RegistrosBasicos@clientes_responsables_modificar']);
+				//Route::match(['post','get'],'/clientes/responsable/agregar',               							['middleware'=>'validar_ac','uses'=>'RegistrosBasicos@clientes_responsables_agregar']);
 
-				/**/Route::match(['post','get'],'/clientes/categoria/{cliente_id}',                   			  'RegistrosBasicos@clientes_categoria');
-				/**/Route::match(['post','get'],'/clientes/categoria/modificar',                   	  'RegistrosBasicos@clientes_categoria_modificar');
-				/**/Route::match(['post','get'],'/clientes/categoria/responsable/{categoria_id}',                   			  'RegistrosBasicos@clientes_categoria_responsable');
+				/**/Route::match(['post','get'],'/clientes/categoria/{cliente_id}',         						['middleware'=>'validar_ac:11','uses'=>'RegistrosBasicos@clientes_categoria']);
+				///**/Route::match(['post','get'],'/clientes/categoria/modificar',            						['middleware'=>'validar_ac','uses'=>'RegistrosBasicos@clientes_categoria_modificar']);
+				/**/Route::match(['post','get'],'/clientes/categoria/responsable/{categoria_id}',  					['middleware'=>'validar_ac:17','uses'=>'RegistrosBasicos@clientes_categoria_responsable']);
 				
-				 Route::match(['post','get'],'/clientes/categorias/sucursales',                   				 'RegistrosBasicos@clientes_sucursales');//cliente-categoria-sucursales
-				 Route::match(['post','get'],'/clientes/sucursales/modificar',                   	 'RegistrosBasicos@clientes_sucursales_modificar');
-				 Route::match(['post','get'],'/clientes/sucursales/agregar',                   		 'RegistrosBasicos@clientes_sucursales_agregar');
-				 Route::match(['post','get'],'/clientes/categoria/sucursal/responsable',                   	 'RegistrosBasicos@clientes_sucursales_responsable');
-				 Route::match(['post','get'],'/clientes/categoria/sucursal/plan',                   			 'RegistrosBasicos@clientes_sucursales_plan');
-				 Route::match(['post','get'],'/clientes/categoria/sucursal/equipos',                   		 'RegistrosBasicos@clientes_sucursales_equipos');
-				 Route::match(['post','get'],'/clientes/categoria/sucursal/usuarios',                   		 'RegistrosBasicos@clientes_sucursales_usuarios');
+				 Route::match(['post','get'],'/clientes/categorias/sucursales',                   					['middleware'=>'validar_ac:19','uses'=>'RegistrosBasicos@clientes_sucursales']);//cliente-categoria-sucursales
+				// Route::match(['post','get'],'/clientes/sucursales/modificar',                   					['middleware'=>'validar_ac','uses'=>'RegistrosBasicos@clientes_sucursales_modificar']);
+				// Route::match(['post','get'],'/clientes/sucursales/agregar',                   						['middleware'=>'validar_ac','uses'=>'RegistrosBasicos@clientes_sucursales_agregar']);
+				 Route::match(['post','get'],'/clientes/categoria/sucursal/responsable',            				['middleware'=>'validar_ac:26','uses'=>'RegistrosBasicos@clientes_sucursales_responsable']);
+				 Route::match(['post','get'],'/clientes/categoria/sucursal/plan',                  					['middleware'=>'validar_ac:27','uses'=>'RegistrosBasicos@clientes_sucursales_plan']);
+				 Route::match(['post','get'],'/clientes/categoria/sucursal/equipos',                				['middleware'=>'validar_ac:28','uses'=>'RegistrosBasicos@clientes_sucursales_equipos']);
+				 Route::match(['post','get'],'/clientes/categoria/sucursal/usuarios',              					['middleware'=>'validar_ac:29','uses'=>'RegistrosBasicos@clientes_sucursales_usuarios']);
 
-				/**/Route::match(['post','get'],'/clientes/sucursales/responsable/agregar',              'RegistrosBasicos@clientes_sucursales_responsable_agregar');
-				/**/Route::match(['post','get'],'/clientes/sucursales/responsable/modificar',              'RegistrosBasicos@clientes_sucursales_responsable_modificar');
-				/**/Route::match(['post','get'],'/clientes/sucursales/plan/agregar',                   			 'RegistrosBasicos@clientes_sucursales_plan_agregar');
-				/**/Route::match(['post','get'],'/clientes/sucursales/plan/modificar',                   			 'RegistrosBasicos@clientes_sucursales_plan_modificar');
+				///**/Route::match(['post','get'],'/clientes/sucursales/responsable/agregar',         				['middleware'=>'validar_ac','uses'=>'RegistrosBasicos@clientes_sucursales_responsable_agregar']);
+				///**/Route::match(['post','get'],'/clientes/sucursales/responsable/modificar',       				['middleware'=>'validar_ac','uses'=>'RegistrosBasicos@clientes_sucursales_responsable_modificar']);
+				///**/Route::match(['post','get'],'/clientes/sucursales/plan/agregar',                				['middleware'=>'validar_ac','uses'=>'RegistrosBasicos@clientes_sucursales_plan_agregar']);
+				///**/Route::match(['post','get'],'/clientes/sucursales/plan/modificar',              				['middleware'=>'validar_ac','uses'=>'RegistrosBasicos@clientes_sucursales_plan_modificar']);
 				
-				/**/Route::match(['post','get'],'/clientes/categoria/sucursal/plan/servicios',                   			 'RegistrosBasicos@clientes_sucursales_plan_servicios');
+				///**/Route::match(['post','get'],'/clientes/categoria/sucursal/plan/servicios',     					['middleware'=>'validar_ac','uses'=>'RegistrosBasicos@clientes_sucursales_plan_servicios']);
 				
-				/**/Route::match(['post','get'],'/clientes/sucursales/plan/servicios/modificar',                   			 'RegistrosBasicos@clientes_sucursales_plan_serv_modificar');
-				/**/Route::match(['post','get'],'/clientes/sucursales/plan/servicio/agregar',                   			 'RegistrosBasicos@clientes_sucursales_plan_serv_agregar');
-				/**/Route::match(['post','get'],'/clientes/sucursales/equipos/agregar',                   		 'RegistrosBasicos@clientes_sucursales_equipos_agregar');
-				/**/Route::match(['post','get'],'/clientes/sucursales/equipos/modificar',                   		 'RegistrosBasicos@clientes_sucursales_equipos_modificar');
-				/**/Route::match(['post','get'],'/clientes/categoria/sucursal/equipos/componentes',                   		 'RegistrosBasicos@clientes_sucursales_equipos_componentes');
-				/**/Route::match(['post','get'],'/clientes/categoria/sucursal/equipos/componentes/piezas',                   		 'RegistrosBasicos@clientes_sucursales_equipos_piezas');
-				/**/Route::match(['post','get'],'/clientes/categoria/sucursal/equipos/componentes/aplicaciones',                   		 'RegistrosBasicos@clientes_sucursales_equipos_aplicaciones');
-				/**/Route::match(['post','get'],'/clientes/sucursales/usuario/agregar',                   		 'RegistrosBasicos@clientes_sucursales_usuarios_agregar');
-				/**/Route::match(['post','get'],'/clientes/sucursales/usuario/modificar',                   		 'RegistrosBasicos@clientes_sucursales_usuarios_modificar');
-				/**/Route::match(['post','get'],'/clientes/categoria/sucursal/usuarios/perfil',                   		 'RegistrosBasicos@clientes_sucursales_usuarios_perfil');
+				///**/Route::match(['post','get'],'/clientes/sucursales/plan/servicios/modificar',    				['middleware'=>'validar_ac','uses'=>'RegistrosBasicos@clientes_sucursales_plan_serv_modificar']);
+				///**/Route::match(['post','get'],'/clientes/sucursales/plan/servicio/agregar',       				['middleware'=>'validar_ac','uses'=>'RegistrosBasicos@clientes_sucursales_plan_serv_agregar']);
+				///**/Route::match(['post','get'],'/clientes/sucursales/equipos/agregar',             				['middleware'=>'validar_ac','uses'=>'RegistrosBasicos@clientes_sucursales_equipos_agregar']);
+				///**/Route::match(['post','get'],'/clientes/sucursales/equipos/modificar',           				['middleware'=>'validar_ac','uses'=>'RegistrosBasicos@clientes_sucursales_equipos_modificar']);
+				/**/Route::match(['post','get'],'/clientes/categoria/sucursal/equipos/componentes', 				['middleware'=>'validar_ac:44','uses'=>'RegistrosBasicos@clientes_sucursales_equipos_componentes']);
+				/**/Route::match(['post','get'],'/clientes/categoria/sucursal/equipos/componentes/piezas',			['middleware'=>'validar_ac:48','uses'=> 'RegistrosBasicos@clientes_sucursales_equipos_piezas']);
+				/**/Route::match(['post','get'],'/clientes/categoria/sucursal/equipos/componentes/aplicaciones',    ['middleware'=>'validar_ac:49','uses'=> 'RegistrosBasicos@clientes_sucursales_equipos_aplicaciones']);
+				///**/Route::match(['post','get'],'/clientes/sucursales/usuario/agregar',                   		 	['middleware'=>'validar_ac','uses'=> 'RegistrosBasicos@clientes_sucursales_usuarios_agregar']);
+				///**/Route::match(['post','get'],'/clientes/sucursales/usuario/modificar',                   		['middleware'=>'validar_ac','uses'=> 'RegistrosBasicos@clientes_sucursales_usuarios_modificar']);
+				/**/Route::match(['post','get'],'/clientes/categoria/sucursal/usuarios/perfil',                   	['middleware'=>'validar_ac:59','uses'=>  'RegistrosBasicos@clientes_sucursales_usuarios_perfil']);
 
 				//////selects direccion
 
-					Route::match(['post','get'],'/clientes/registrar',                   		 'RegistrosBasicos@clientes_registrar');//select 
+					Route::match(['post','get'],'/clientes/registrar',                   		 					['middleware'=>'validar_ac','uses'=> 'RegistrosBasicos@clientes_registrar']);//select 
 
 				
 
@@ -102,3 +104,6 @@ Route::group(['prefix'=>'/menu/registros','middleware'=>['validar_sm','v_menu']]
 
 				}
 			);
+
+
+				

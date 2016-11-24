@@ -28,6 +28,7 @@ class inicio
 
             return redirect('login');
         }
-     
+        
+    return $next($request);
     }
 }
