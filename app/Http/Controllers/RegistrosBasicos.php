@@ -183,8 +183,8 @@ class RegistrosBasicos extends Controller
 		$razonS=Request::get('rsnew');//razon social
 		$nombreC=Request::get('ncnew');//nombre comercial
 		
-		$tipoR=(int) Request::get('rif');//tipo rif
-		$numeroR= Request::get('rifnum');//numero rif
+		$tipoR=(int) Request::get('tiporif');//tipo rif
+		$numeroR= Request::get('numerorif');//numero rif
 		
 		$tipoC=(int)Request::get('tipConnew');//tipo de contribuyente
 		
@@ -250,7 +250,7 @@ class RegistrosBasicos extends Controller
 		 	);
 
 
-		return redirect('/menu/registros/clientes/insertar');
+		return redirect('/menu/registros/clientes');
 	}
 
 

@@ -67,7 +67,7 @@
 									<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 									<h4 class="modal-title" id="myModalLabel">Agregar nuevo cliente</h4>
 								</div>
-							<form method="post" class="form-horizontal Validacion" id="Formclientesv" action="clientes/insertar">
+							<form method="post" class="form-horizontal Validacion" id="Formclientesv" action="/menu/registros/clientes/insertar">
 										{{ csrf_field() }}
 										<div class="modal-body">						
 											 <ul class="nav nav-tabs" role="tablist">
@@ -99,7 +99,7 @@
 														<div class="col-md-12" id="dbc2">	
 															<label for="rif" class="col-md-12">Rif:</label><span class="ic"><i class="fa fa-chevron-down"></i></span>									
 															<div class="form-group col-md-4" id="sep">
-																<select name="rif" id="ip3" class="form-control userEmail">
+																<select name="tiporif" id="ip3" class="form-control userEmail">
 																	<option value="">-</option>
 																@foreach($tipoR as $rif)
 																	<option value="{{$rif->id}}">{{$rif->descripcion}}</option>
@@ -110,7 +110,7 @@
 																</select><i class="fa fa-clipboard" id="icc3"></i>
 															</div>	
 															<div class="form-group col-md-8">									
-																<input type="text" id="ip4" class="form-control typeRifNumber" name="rifnum"/>
+																<input type="text" id="ip4" class="form-control typeRifNumber" name="numerorif"/>
 																<i class="fa fa-address-card" id="icc4"></i>
 															</div>	
 														</div>															
