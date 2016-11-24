@@ -91,7 +91,7 @@ Route::group(['prefix'=>'/menu/registros','middleware'=>['v_menu']],function()
 
 				//////selects direccion
 
-					Route::match(['post','get'],'/clientes/registrar',                   		 					['middleware'=>'validar_ac','uses'=> 'RegistrosBasicos@clientes_registrar']);//select 
+					Route::match(['post','get'],'/clientes/registrar',                   		 					['uses'=> 'RegistrosBasicos@clientes_registrar']);//select 
 
 				
 
