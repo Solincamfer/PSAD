@@ -373,14 +373,17 @@ class RegistrosBasicos extends Controller
 	public function servicios()
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
-		return view('Registros_Basicos\Planes_y_Servicios\planes', 
+		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(65,66,67),64);
+		return view ('Registros_Basicos\PlaneS\planes',$this->datos_vista($datos,$acciones,array()));
+
+		/*return view('Registros_Basicos\Planes_y_Servicios\planes', 
 					[
 					 'modulos'=>$datos['modulos'],
 					 'submodulos'=>$datos['submodulos'],
 					 'nombre'=>$datos['nombre'],
 					 'apellido'=>$datos['apellido'],
 					 ]
-					 );
+					 );*/
 	}
 	
 

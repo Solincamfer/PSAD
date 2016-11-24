@@ -20,6 +20,21 @@ class validarAcciones
        
          $datos=Session::get('sesion');//obtener datos de la session 
 
+         $accion_asg=DB::table('accion_perfil')->where(['accion_id'=>(int)$accion,'perfil_id'=>(int)$datos[0]['perfil']])->first();
+
+        if(empty($accion_asg)==false)//si esta asignado
+        {
+            $accion_act=DB::table('acciones')->select('status_ac')->where(['id'=>(int)$accion,'status_ac'=>1])->first();
+
+            if(empty($accion_asg)==false)//si esta habilitado
+            {
+
+                $id_hijo=$accion;
+                $id_padre=DB::table('accion_perfil')->select('accion_perfil')->where('')
+            }
+        }
+
+
         return $next($request);
     }
 }

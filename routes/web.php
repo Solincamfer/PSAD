@@ -45,7 +45,7 @@ Route::group(['prefix'=>'/menu/registros','middleware'=>['v_menu']],function()
 
 			
 				Route::match(['post','get'],'/departamentos',														['middleware'=>'validar_sm:2','uses'=>'RegistrosBasicos@departamentos']);
-				Route::match(['post','get'],'/servicios',															['middleware'=>'validar_sm:3','uses'=> 'RegistrosBasicos@servicios']);
+				Route::match(['post','get'],'/planeservicios',														['middleware'=>'validar_sm:3','uses'=> 'RegistrosBasicos@servicios']);
 				Route::match(['post','get'],'/tiposequipos',														['middleware'=>'validar_sm:4','uses'=>'RegistrosBasicos@tipos']);
 				Route::match(['post','get'],'/perfiles',															['middleware'=>'validar_sm:5','uses'=>'RegistrosBasicos@perfiles']);
 				Route::match(['post','get'],'/empleados',															['middleware'=>'validar_sm:6','uses'=>'RegistrosBasicos@empleados']);
