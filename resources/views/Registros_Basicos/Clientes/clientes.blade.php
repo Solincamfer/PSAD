@@ -67,7 +67,7 @@
 									<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 									<h4 class="modal-title" id="myModalLabel">Agregar nuevo cliente</h4>
 								</div>
-							<form method="post" class="form-horizontal Validacion" id="Formclientesv" action="">
+							<form method="post" class="form-horizontal Validacion" id="Formclientesv" action="/insertar">
 										{{ csrf_field() }}
 										<div class="modal-body">						
 											 <ul class="nav nav-tabs" role="tablist">
