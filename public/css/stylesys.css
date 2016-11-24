@@ -111,7 +111,7 @@
         }
 
         header nav ul li a:hover, header nav ul li a:focus{
-            color: #e5e5e7;
+            color: #aaa;
             text-decoration: none;
         }
 
@@ -135,10 +135,6 @@
             left: 0;
             margin-top: 0px;
             margin-left: 14px;
-        }
-
-        .open2{
-            transform: translateY(-50px);
         }
 
         header nav ul li .chld li{
@@ -1272,9 +1268,9 @@
                         color: #ccc;
                     }
                     
-                    #rRpb5 .ic, #rRpb6 .ic, #rRpbm5 .ic, #rRpbm6 .ic,
+                    #rRpb5 .ic, #rRpbm5 .ic,
                     #rRpb9 .ic, #rRpb10 .ic, #rRpbm9 .ic, #rRpbm10 .ic,
-                    #rRpbc5 .ic, #rRpbcm5 .ic, #rRpbcm6 .ic,
+                    #rRpbc5 .ic, #rRpbcm5 .ic,
                     #rRpbc9 .ic, #rRpbc10 .ic, #rRpbcm9 .ic, #rRpbcm10 .ic{
                         background-color: #26a69d;
                         position: absolute;
@@ -1292,7 +1288,8 @@
                         z-index: 1;
                     }
 
-                    #rRpbc6 .ic{
+                    #rRpbc6 .ic, #rRpbcm6 .ic,
+                    #rRpb6 .ic, #rRpbm6 .ic{
                         background-color: #26a69d;
                         position: absolute;
                         padding-top: 7px;

@@ -12,7 +12,15 @@ $(function(){
     });
     
     $('.subMenu').on('click', function(){
-        $(this).children('.chld').slideToggle('open2');
+        $(this).children('.chld').slideToggle();
+    });
+
+    $('.contenido').on('click',function() {
+         $('.subMenu').children('.chld').slideUp();
+    });
+    
+    $('.sidebar').on('click',function() {
+        $('.subMenu').children('.chld').slideUp();
     });
     
     //Funcionalidad del menu en el sidebar

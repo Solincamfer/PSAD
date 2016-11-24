@@ -18,7 +18,7 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col-md-2" align="left">
-                                    <a href="/menu/registros/clientes/categoria"><button id="btnBk" type="button" class="btnBk" href="#"><i class="fa fa-chevron-left"></i> VOLVER</button></a>
+                                    <a href="/menu/registros/clientes/categoria/"><button id="btnBk" type="button" class="btnBk" href="#"><i class="fa fa-chevron-left"></i> VOLVER</button></a>
                                 </div>
                                 <div class="col-md-2 col-md-offset-3">
                                     <button id="btnAdd" type="button" class="btnAd" data-toggle="modal" data-target="#myModal" href="#myModal"><i class="fa fa-plus"></i> AGREGAR</button> 
@@ -47,18 +47,17 @@
                                        @elseif($accion->descripcion=="Status")
                                            @if($accion->status_ac==1)
                                            <div class="chbx">
-                                               <input type="checkbox" class="btnAcc" name="status" id="inchbx1" value="{{$accion->status_ac}}" checked><label for="inchbx1" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
+                                               <input type="checkbox" class="btnAcc" name="status" id="{{'inchbx'. $responsable->id}}" value="{{$accion->status_ac}}" checked><label for="{{'inchbx'. $responsable->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
                                            </div>
                                            @elseif($accion->staus_ac==0)
                                                <div class="chbx">
-                                                   <input type="checkbox" class="btnAcc" name="status" id="inchbx2" value="{{$accion->status_ac}}"><label for="inchbx2" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
+                                                   <input type="checkbox" class="btnAcc" name="status" id="{{'inchbx'. $responsable->id}}" value="{{$accion->status_ac}}"><label for="{{'inchbx'. $responsable->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
                                                </div>
                                            @endif
                                        @endif
                                    @endforeach
                                </div>
-                                <p class="ttlMd"><strong></strong></p>
-                                <span class="ttlMd"><input type="radio" name="planes" id="" value=""> <label for="planes"><strong>{{$responsable->p_nombre." ".$responsable->p_apellido}}</strong></label></span>
+                                <span class="ttlMd"><input type="radio" name="cat_rsp" id="cat_rsp" value=""> <label for="cat_rsp"><strong>{{$responsable->p_nombre." ".$responsable->p_apellido}}</strong></label></span>
                             </div>
                       @endforeach
                     </div>
@@ -103,12 +102,12 @@
                                                                </div>
                                                            </div>
                                                            <div class="row">   
-                                                               <div class="col-md-10 col-md-offset-1" id="rRpbc6">
-                                                                   <div class="col-md-10" id="spc2">
+                                                               <div id="rRpbc6">
+                                                                   <div class="col-md-10 col-md-offset-1" id="spc2">
                                                                        <label for="rifRpb">Documento de identidad</label><span class="ic"><i class="fa fa-chevron-down"></i></span>
                                                                    </div>
-                                                                   <div class="col-md-4">
-                                                                       <div class="form-group">
+                                                                   <div class="col-md-4 col-md-offset-1">
+                                                                       <div class="form-group row">
                                                                            <select name="selciRpb" class="form-control userEmail" id="selciRpb">
                                                                                <option value="">-</option>
                                                                                <option value="1">G</option>
@@ -116,14 +115,14 @@
                                                                        </div>
                                                                    </div>
                                                                    <div class="col-md-6">
-                                                                       <div class="form-group"> 
+                                                                       <div class="form-group row"> 
                                                                            <input type="text" class="form-control userEmail" name="txtci"><i class="fa fa-address-card-o" id="icrc8"></i>
                                                                        </div>
                                                                    </div>
                                                                </div> 
                                                            </div>
                                                            <div class="row">
-                                                               <div class="col-md-8 col-md-offset-2" id="rRpbc8">
+                                                               <div class="col-md-10 col-md-offset-1" id="rRpbc8">
                                                                    <div class="form-group row">
                                                                        <label for="cgoRpb">Cargo</label><span class="ic"><i class="fa fa-chevron-down"></i></span>
                                                                        <select name="cgoRpb" class="form-control userEmail" id="input10">
@@ -212,105 +211,63 @@
                                 <form method="post" class="form-horizontal Validacion" action="">
                                     <div class="modal-body">
                                         <ul class="nav nav-tabs not-active" role="tablist">
-                                            <li role="presentation" class="active"><a href="#dbrcm1" aria-controls="dbrcm1" role="tab" data-toggle="tab">Datos básicos Primarios</a></li>
-                                            <li role="presentation"><a href="#dbrcm2" aria-controls="dbrcm2" role="tab" data-toggle="tab">Datos básicos Secundarios</a></li>
+                                            <li role="presentation" class="active"><a href="#dbrcm1" aria-controls="dbrcm1" role="tab" data-toggle="tab">Datos básicos</a></li>
                                             <li role="presentation"><a href="#ctorcm" aria-controls="ctorcm" role="tab" data-toggle="tab">Contactos</a></li>
                                         </ul>
                                         <div class="container-fluid">
                                             <div class="tab-content">
                                                 <div role="tabpanel" class="tab-pane active" id="dbrcm1">
                                                     <div class="container-fluid" id="contrpbdbrcm1">
-                                                        <center><u><p>DATOS BASICOS PRIMARIOS</p></u></center>
+                                                        <center><u><p>DATOS BASICOS</p></u></center>
                                                         <br>
                                                         <div class="row">                                            
-                                                            <div class="col-md-5  col-md-offset-1" id="rRpbcm1">
+                                                            <div class="col-md-5 col-md-offset-1" id="rRpbcm1">
                                                                 <div class="form-group">
-                                                                    <label for="nomRpb1">1er Nombre</label>
+                                                                    <label for="nomRpb1">Nombres</label>
                                                                     <input type="text" name="nomRpb1" class="form-control userEmail" id="inputm1"><i class="fa fa-user" id="micrc1"></i>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-md-5  col-md-offset-1" id="rRpbcm2">
-                                                                <div class="form-group">    
-                                                                    <label for="nomRpb2">2do Nombre</label>
-                                                                    <input type="text" name="nomRpb2" class="form-control userEmail" id="inputm2"><i class="fa fa-user-plus" id="micrc2"></i>
+                                                            <div class="col-md-5" id="rRpbcm3">
+                                                                <div class="form-group">
+                                                                    <label for="apellRpb1">Apellidos</label>
+                                                                    <input type="text" name="apellRpb1" class="form-control userEmail" id="inputm3"><i class="fa fa-user" id="micrc3"></i>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="row">   
-                                                            <div class="col-md-5  col-md-offset-1" id="rRpbcm3">
-                                                                <div class="form-group">
-                                                                    <label for="apellRpb1">1er Apellido</label>
-                                                                    <input type="text" name="apellRpb1" class="form-control userEmail" id="inputm3"><i class="fa fa-user" id="micrc3"></i>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-5 col-md-offset-1" id="rRpbcm4">
-                                                                <div class="form-group">  
-                                                                    <label for="apellRpb2">2do Apellido</label>
-                                                                    <input type="text" name="apellRpb2" class="form-control userEmail" id="inputm4"><i class="fa fa-user-plus" id="micrc4"></i>
-                                                                </div> 
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div role="tabpanel" class="tab-pane" id="dbrcm2">
-                                                    <div class="container-fluid" id="contrpbdbrcm2">
-                                                        <center><u><p>DATOS BASICOS SECUNDARIOS</p></u></center>
-                                                        <br>
-                                                        <div class="row">
-                                                            <div class="col-md-8 col-md-offset-2" id="rRpbcm5">
-                                                                <div class="col-md-12" id="spcm1">
-                                                                    <label for="rifRpb">Rif</label><span class="ic"><i class="fa fa-chevron-down"></i></span>
-                                                                </div>
-                                                                <div class="col-md-5">
-                                                                    <div class="form-group">
-                                                                        <select name="selRifRpb" class="form-control userEmail" id="selRifRpbm">
-                                                                            <option value="">-</option>
-                                                                            <option value="1">G</option>
-                                                                        </select><i class="fa fa-clipboard" id="micrc5"></i>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-7">
-                                                                    <div class="form-group">
-                                                                        <input type="text" class="form-control userEmail" name="numRifRpb"><i class="fa fa-address-card" id="micrc6"></i>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-8 col-md-offset-2" id="rRpbcm6">
-                                                                <div class="col-md-12" id="spcm2">
+                                                            <div id="rRpbcm6">
+                                                                <div class="col-md-10 col-md-offset-1" id="spcm2">
                                                                     <label for="rifRpb">Documento de identidad</label><span class="ic"><i class="fa fa-chevron-down"></i></span>
                                                                 </div>
-                                                                <div class="col-md-5">
-                                                                    <div class="form-group">
+                                                                <div class="col-md-4 col-md-offset-1">
+                                                                    <div class="form-group row">
                                                                         <select name="selciRpb" class="form-control userEmail" id="selciRpbm">
                                                                             <option value="">-</option>
                                                                             <option value="1">G</option>
                                                                         </select><i class="fa fa-clipboard" id="micrc7"></i>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-md-7">
-                                                                    <div class="form-group"> 
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group row"> 
                                                                         <input type="text" class="form-control userEmail" name="txtci"><i class="fa fa-address-card-o" id="micrc8"></i>
                                                                     </div>
                                                                 </div>
-                                                            </div>                                                               
+                                                            </div>     
                                                         </div>
-                                                        <div class="col-md-8 col-md-offset-2" id="rRpbcm7">
-                                                            <div class="form-group row">       
-                                                                <label for="fnRpb">Fecha de nacimiento</label><span class="ic"><i class="fa fa-chevron-down"></i></span>
-                                                                <input type="date" name="fnRpb" class="form-control userEmail" id="fnRpb"><i class="fa fa-calendar" id="micrc9"></i>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-8 col-md-offset-2" id="rRpbcm8">
-                                                            <div class="form-group row">    
-                                                                <label for="cgoRpb">Cargo</label><span class="ic"><i class="fa fa-chevron-down"></i></span>
-                                                                <select name="cgoRpb" class="form-control userEmail" id="inputm10">
-                                                                    <option value="">-</option>
-                                                                    <option value="1">caracas</option>
-                                                                </select><i class="fa fa-id-badge" id="micrc10"></i>
+                                                        <div class="row">
+                                                            <div class="col-md-10 col-md-offset-1" id="rRpbcm8">
+                                                                <div class="form-group row">    
+                                                                    <label for="cgoRpb">Cargo</label><span class="ic"><i class="fa fa-chevron-down"></i></span>
+                                                                    <select name="cgoRpb" class="form-control userEmail" id="inputm10">
+                                                                        <option value="">-</option>
+                                                                        <option value="1">caracas</option>
+                                                                    </select><i class="fa fa-id-badge" id="micrc10"></i>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
+                                        
                                                 <div role="tabpanel" class="tab-pane" id="ctorcm">
                                                     <div class="container-fluid" id="contrpbdbrcm3">
                                                         <center><u><p>CONTACTOS</p></u></center>

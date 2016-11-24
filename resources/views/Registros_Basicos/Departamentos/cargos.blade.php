@@ -8,7 +8,7 @@
             <div class="contenido">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-2 ttlp">
+                        <div class="col-md-3 ttlp">
                             <h1>Departamentos - Cargos</h1>
                         </div>
                     </div>
@@ -47,11 +47,11 @@
                                     @elseif($accion->descripcion=="Status")
                                         @if($cargo->status_c==1)
                                             <div class="chbx">
-                                                <input type="checkbox" class="btnAcc" name="status" id="inchbx1" value="{{$accion->status_ac}}" checked><label for="inchbx1" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
+                                                <input type="checkbox" class="btnAcc" name="status" id="{{'inchbx'. $cargo->id}}" value="{{$accion->status_ac}}" checked><label for="{{'inchbx'. $cargo->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
                                             </div>
                                         @elseif($cargo->status_c==0)
                                             <div class="chbx">
-                                                <input type="checkbox" class="btnAcc" name="status" id="inchbx2" value="{{$accion->status_ac}}"><label for="inchbx2" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
+                                                <input type="checkbox" class="btnAcc" name="status" id="{{'inchbx'. $cargo->id}}" value="{{$accion->status_ac}}"><label for="{{'inchbx'. $cargo->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
                                             </div>
                                         @endif
                                     @endif

@@ -46,17 +46,17 @@
                                         @elseif($accion->descripcion=="Status")
                                             @if($accion->status_ac==1)
                                                 <div class="chbx">
-                                                    <input type="checkbox" class="btnAcc" name="status" id="inchbx1" value="{{$accion->status_ac}}" checked><label for="inchbx1" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
+                                                    <input type="checkbox" class="btnAcc" name="status" id="{{'inchbx'. $accion->id}}" value="{{$accion->status_ac}}" checked><label for="{{'inchbx'. $accion->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
                                                 </div>
                                             @elseif($accion->staus_ac==0)
                                                 <div class="chbx">
-                                                    <input type="checkbox" class="btnAcc" name="status" id="inchbx2" value="{{$accion->status_ac}}"><label for="inchbx2" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
+                                                    <input type="checkbox" class="btnAcc" name="status" id="{{'inchbx'. $accion->id}}" value="{{$accion->status_ac}}"><label for="{{'inchbx'. $accion->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
                                                 </div>
                                             @endif
                                         @endif
                                     @endforeach
                                 </div>
-                                <p class="ttlMd"><strong>REGISTRO</strong></p>
+                                <span class="ttlMd"><input type="radio" name="suc_rsp" id="suc_rsp" value=""> <label for="suc_rsp"><strong>Registro</strong></label></span>
                             </div>
                        
                     </div>
