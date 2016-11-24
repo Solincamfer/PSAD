@@ -21,7 +21,7 @@
                                         <a href="#"><button id="btnBk" type="button" class="btnBk"><i class="fa fa-chevron-left"></i> VOLVER</button></a>
                                     </div>
                                     <div class="col-md-2 col-md-offset-3">
-                                        <button id="btnAdd" type="button" class="btnAd" data-toggle="modal" data-target="#myModal2" href="#myModal2"><i class="fa fa-plus"></i> AGREGAR</button> 
+                                        <button id="btnAdd" type="button" class="btnAd" data-toggle="modal" data-target="#myModal" href="#myModal"><i class="fa fa-plus"></i> AGREGAR</button> 
                                     </div>
                                 </div>
                             </div>
@@ -77,7 +77,7 @@
                                         <form method="post" class="form-horizontal Validacion" action="">
                                         {{ csrf_field() }}
                                         <div class="modal-body">
-                                            <ul class="nav nav-tabs not-active" role="tablist" >
+                                            <ul class="nav nav-tabs" role="tablist" >
                                                 <li role="presentation" class="active"><a href="#dbr1" id="a1" aria-controls="dbr1" role="tab" data-toggle="tab">Datos básicos</a></li>
                                                 <li role="presentation"><a href="#ctor" id="a3" aria-controls="ctor" role="tab" data-toggle="tab" >Contactos</a></li>
                                             </ul>
