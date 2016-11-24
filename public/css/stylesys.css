@@ -1201,7 +1201,7 @@
                 #rRpb3 input:focus, #rRpb4 input:focus, 
                 #rRpb5 select:focus, #rRpb5 input:focus,
                 #rRpb6 input:focus, #rRpb6 select:focus,
-                #rRpb7 input:focus, #rRpb8 select:focus, 
+                #rRpb7 input:focus, #rRpb8 input:focus, 
                 #rRpb9 select:focus, #rRpb9 input:focus, 
                 #rRpb10 select:focus, #rRpb10 input:focus,
                 #rRpb11 input:focus, #rRpbm1 input:focus, 
@@ -1313,7 +1313,7 @@
                         z-index: 1;
                     }
 
-                    #rRpb7 .ic, #rRpb8 .ic, #rRpbm7 .ic, #rRpbm8 .ic, 
+                    #rRpb7 .ic, #rRpbm7 .ic, 
                     #rRpbc7 .ic, #rRpbc8 .ic, #rRpbcm7 .ic, #rRpbcm8 .ic{
                         background-color: #26a69d;
                         position: absolute;
@@ -1332,8 +1332,8 @@
                         z-index: 1;
                     }
 
-                    #rRpbm8 select, #rRpb8 select,
-                    #rRpbcm8 select, #rRpbc8 select{
+                    #rRpbm8 input, #rRpb8 input,
+                    #rRpbcm8 input, #rRpbc8 input{
                         display: block;
                         padding: 3px 5px;
                         margin-bottom: 10px;
@@ -1637,57 +1637,84 @@
             }
             
         /*Planes*/
-            #rPn input{
+            .rPn input, .rPn select{
                 display: block;
                 padding: 3px 5px;
                 margin-bottom: 10px;
                 width: 100%;
                 border: 1px solid #ddd;
+                text-indent: 23px;
+                transition: border-width .2s ease-in-out;
+                border-radius: 2px;
+                color: #ccc;
+            }
+            
+            .rPn input[type='date']{
+                display: block;
+                padding: 3px 5px;
+                margin-bottom: 10px;
+                width: 100%;
+                border: 1px solid #ddd;
+                text-indent: 10px;
                 transition: border-width .2s ease-in-out;
                 border-radius: 2px;
                 color: #ccc;
             }
 
-            #rPn input + i.fa{
-                color: #fff;
-                font-size: 1em;
-                position: absolute;
-                margin-top: -32px;
-                opacity: 0;
-                left: 0;
-                transition: all .1s ease-in;
-            }
- 
-            #rPn input:focus{
+            .rPn input:focus, .rPn select:focus{
                 outline: none;
                 color: #444;
                 border-color: #26a69d;
                 border-left-width: 35px;
             }
- 
-            #rPn input:focus + i.fa{
+
+            .rPn #icpn1, .rPn #icpn3{
+                color: #fff;
+                font-size: 1em;
+                position: absolute;
+                margin-top: -34px;
+                margin-left: 8px;
                 opacity: 1;
-                left: 25px;
-                transition: all .25s ease-out;
+                left: 0;
+                transition: all .1s ease-in;
             }
 
-            #rPn select{
-                width: 100%;
-                display: block;
-                padding: 3px 5px;
-                margin-bottom: 15px;
-                border: 1px solid #ddd;
-                border-radius: 2px;
-                color: #ccc;
+            .rPn #icpn2{
+                color: #fff;
+                font-size: 1em;
+                position: absolute;
+                margin-top: -34px;
+                margin-left: 10px;
+                opacity: 1;
+                left: 0;
+                transition: all .1s ease-in;
             }
 
-            #rPn select:focus{
-                color: #111;
-                outline: none;
-                border-color: #26a69d;
+            .rPn #icpn4{
+                color: #fff;
+                font-size: 1em;
+                position: absolute;
+                margin-top: -32.5px;
+                margin-left: 8px;
+                opacity: 1;
+                left: 0;
+                transition: all .1s ease-in;
             }
 
-            #rPn select option{
-                background: #fff;
-                border: 2px solid #eee;
+            .rPn .ic{
+                background-color: #26a69d;
+                position: absolute;
+                padding-top: 5px;
+                top: 0;
+                right: 0;
+                height: 27.9px;
+                width: 20px;
+                margin-top: 22px;
+                margin-right: 1px;
+                font-size: 0.8em;
+                text-align: center;
+                pointer-events: none;
+                color: #333;
+                border: none;
+                z-index: 1;
             }
