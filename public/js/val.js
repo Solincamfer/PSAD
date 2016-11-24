@@ -48,8 +48,20 @@ $(function(){
         if (!e.data.multiple){
             $el.find('.submenu').not($next).slideUp().parent().removeClass('open');
         }
+        
+        $('.submenu').on('click', function(k){
+            //k.preventDefault('.accordion');
+            var i=0;
+            if (i=0){
+                $(this).closest('li').find('.c').addClass('activo');
+                i++;
+            }else{
+                --i;
+                $(this).closest('li').find('.c').removeClass('activo');
+            }
+        });
     }
-    var accordion = new Accordion($('#accordion'), false);
+    var accordion = new Accordion($('.accordion'), false);
     
     $('.cs').click(function(){
         var url = "/login"; 

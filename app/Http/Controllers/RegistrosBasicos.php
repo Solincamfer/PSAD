@@ -180,13 +180,13 @@ class RegistrosBasicos extends Controller
 		
 		//capturar datos del formulario
 
-		$razonS=Request::get('rs');//razon social
-		$nombreC=Request::get('nc');//nombre comercial
+		$razonS=Request::get('rsnew');//razon social
+		$nombreC=Request::get('ncnew');//nombre comercial
 		
 		$tipoR=(int) Request::get('rif');//tipo rif
-		$numeroR= Request::get('df');//numero rif
+		$numeroR= Request::get('rifnum');//numero rif
 		
-		$tipoC=(int)Request::get('tipCon');//tipo de contribuyente
+		$tipoC=(int)Request::get('tipConnew');//tipo de contribuyente
 		
 		
 		
@@ -203,14 +203,14 @@ class RegistrosBasicos extends Controller
 		$municipioC=(int)Request::get('mundc');//municipio comercial
 
 		
-		$codigoL=Request::get('tlflcl');//codigo local
-		$codigoM=Request::get('tlfmvl');//codigo movil
+		$codigoL=Request::get('tlflsv');//codigo local
+		$codigoM=Request::get('tlfmvlsv');//codigo movil
 
-		$telefonoM=Request::get('tmvl');//nro movil
-		$telefonoL=Request::get('tcl');//nro local
+		$telefonoM=Request::get('tmvlsv');//nro movil
+		$telefonoL=Request::get('tclsv');//nro local
 		
 
-		$correo=Request::get('mail');//correo electronico
+		$correo=Request::get('mailsv');//correo electronico
 
 		
 

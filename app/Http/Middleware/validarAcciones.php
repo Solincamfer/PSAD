@@ -29,14 +29,10 @@ class validarAcciones
             if(empty($accion_asg)==false)//si esta habilitado
             {
 
-
+                $id_hijo=$accion;
+                $id_padre=DB::table('accion_perfil')->select('accion_perfil')->where('');
             }
-            
-
-            
         }
-
-
         return $next($request);
     }
 }
