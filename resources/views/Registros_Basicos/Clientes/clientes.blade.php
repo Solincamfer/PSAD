@@ -73,7 +73,7 @@
 											 <ul class="nav nav-tabs" role="tablist">
                                                 <li role="presentation" class="active" ><a href="#panelsv1" id="am0" aria-controls="" role="tab" data-toggle="tab">Datos basicos</a></li>
                                                 <li role="presentation" ><a href="#panelsv2" id="am1" aria-controls="" role="tab" data-toggle="tab">Dirección Fiscal</a></li>
-                                                <li role="presentation" ><a href="#panelsv3" id="am2" aria-controls="" role="tab" data-toggle="tab">Direccion Comercial</a></li>
+                                                <li role="presentation" ><a href="#panelsv3" id="am2" aria-controls="panelsv3" role="tab" data-toggle="tab">Direccion Comercial</a></li>
                                                 <li role="presentation" ><a href="#panelsv4" id="am3" aria-controls="panelsv4" role="tab" data-toggle="tab">Contacto</a></li>
                                             </ul>
 										<div class="container-fluid">
@@ -176,8 +176,8 @@
 													<div class="container-fluid" id="contdf">
 													<br>
 														<div class="form-group col-md-6" id="dfc1">
-															<label for="paispf">País</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
-															<select name="paispf" id="ippp1" class="form-control userEmail">
+															<label for="paisdc">País</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
+															<select name="paisdc" id="ippp1" class="form-control userEmail">
 															<option value="">-</option>
 																@foreach($paises as $pais)
 																		<option value="{{$pais->id}}">{{$pais->descripcion}}</option>
@@ -186,22 +186,22 @@
 														</div>
 														<div class="form-group col-md-7" id="dfc2">
 															<div class="col-md-offset-2">
-																<label for="regiondf">Región</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
-																<select name="regiondf" id="ippp2" class="form-control userEmail">
+																<label for="regiondc">Región</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
+																<select name="regiondc" id="ippp2" class="form-control userEmail">
 																<option value="">-</option>
 																</select><i class="fa fa-map" id="icc7"></i>
 															</div>
 														</div>
 														<div class="form-group col-md-6" id="dfc3">
-															<label for="edodf">Estado</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
-															<select name="edodf" id="ippp3" class="form-control userEmail">
+															<label for="edodc">Estado</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
+															<select name="edodc" id="ippp3" class="form-control userEmail">
 															<option value="">-</option>
 															</select><i class="fa fa-map-pin" id="icc8"></i>
 														</div>
 														<div class="form-group col-md-7" id="dfc4">
 															<div class="col-md-offset-2">
-																<label for="mundf">Municipio</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
-																<select name="mundf" id="ippp4" class="form-control userEmail">
+																<label for="mundc">Municipio</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
+																<select name="mundc" id="ippp4" class="form-control userEmail">
 																<option value="">-</option>
 																</select><i class="fa fa-map-signs" id="icc9"></i>
 														</div>	
@@ -361,8 +361,8 @@
 													<div class="container-fluid" id="contdf">
 													<br>
 														<div class="form-group col-md-6" id="dfc1">
-															<label for="paisf">País</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
-															<select name="paisf" id="inn11" class="form-control userEmail">
+															<label for="paisc">País</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
+															<select name="paisdc" id="inn1" class="form-control userEmail">
 															<option value="">-</option>
 																@foreach($paises as $pais)
 																		<option value="{{$pais->id}}">{{$pais->descripcion}}</option>
@@ -371,38 +371,29 @@
 														</div>
 														<div class="form-group col-md-7" id="dfc2">
 															<div class="col-md-offset-2">
-																<label for="regiondf">Región</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
-																<select name="regiondf" id="inn12" class="form-control userEmail">
+																<label for="regiondc">Región</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
+																<select name="regiondc" id="inn2" class="form-control userEmail">
 																<option value="">-</option>
-																	@foreach($regiones as $region)
-																		<option value="{{$region->id}}">{{$region->descripcion}}</option>
-																   @endforeach
 																</select><i class="fa fa-map" id="icc7"></i>
 															</div>
 														</div>
 														<div class="form-group col-md-6" id="dfc3">
-															<label for="edodf">Estado</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
-															<select name="edodf" id="inn13" class="form-control userEmail">
+															<label for="edodc">Estado</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
+															<select name="edodc" id="inn3" class="form-control userEmail">
 															<option value="">-</option>
-																@foreach($estados as $estado)
-																	<option value="{{$estado->id}}">{{$estado->descripcion}}</option>
-																@endforeach
 															</select><i class="fa fa-map-pin" id="icc8"></i>
 														</div>
 														<div class="form-group col-md-7" id="dfc4">
 															<div class="col-md-offset-2">
-																<label for="mundf">Municipio</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
-																<select name="mundf" id="inn14" class="form-control userEmail">
+																<label for="mundc">Municipio</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
+																<select name="mundc" id="inn4" class="form-control userEmail">
 																<option value="">-</option>
-																	@foreach($municipios as $municipio)
-																		<option value="{{$municipio->id}}">{{$municipio->descripcion}}</option>
-																    @endforeach
 																</select><i class="fa fa-map-signs" id="icc9"></i>
 														</div>	
 														</div>
 														<div class="form-group col-md-12" id="dfc5">
 																<label for="descDirdf">Descripción de la dirección</label>
-															<textarea type="text" name="descDirdf" id="inn15" class="form-control userEmail"></textarea><i class="fa fa-map-marker" id="icc10"></i>
+															<textarea type="text" name="descDirdf" id="in" class="form-control userEmail"></textarea><i class="fa fa-map-marker" id="icc10"></i>
 														</div>
 													</div>
 												
@@ -414,8 +405,8 @@
 													<div class="container-fluid" id="contdf">
 													<br>
 														<div class="form-group col-md-6" id="dfc1">
-															<label for="pais">País</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
-															<select name="pais" id="innn11" class="form-control userEmail">
+															<label for="paispf">País</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
+															<select name="paisdf" id="innn11" class="form-control userEmail">
 															<option value="">-</option>
 																@foreach($paises as $pais)
 																		<option value="{{$pais->id}}">{{$pais->descripcion}}</option>
@@ -425,21 +416,21 @@
 														<div class="form-group col-md-7" id="dfc2">
 															<div class="col-md-offset-2">
 																<label for="regiondf">Región</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
-																<select name="region" id="innn12" class="form-control userEmail">
+																<select name="regiondf" id="innn12" class="form-control userEmail">
 																<option value="">-</option>
 																</select><i class="fa fa-map" id="icc7"></i>
 															</div>
 														</div>
 														<div class="form-group col-md-6" id="dfc3">
-															<label for="edo">Estado</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
-															<select name="edo" id="innn13" class="form-control userEmail">
+															<label for="edodf">Estado</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
+															<select name="edodf" id="innn13" class="form-control userEmail">
 															<option value="">-</option>
 															</select><i class="fa fa-map-pin" id="icc8"></i>
 														</div>
 														<div class="form-group col-md-7" id="dfc4">
 															<div class="col-md-offset-2">
-																<label for="mun">Municipio</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
-																<select name="mun" id="innn14" class="form-control userEmail">
+																<label for="mundf">Municipio</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
+																<select name="mundf" id="innn14" class="form-control userEmail">
 																<option value="">-</option>
 																</select><i class="fa fa-map-signs" id="icc9"></i>
 														</div>	
