@@ -84,12 +84,6 @@
                                             </div>
                                             <div class="col-md-8 col-md-offset-2">
                                                 <div class="form-group row">
-                                                    <label for="ultMant">Ultimo mantenimiento</label>
-                                                    <input type="date" name="ultMant" id="ultMant"><i class="fa fa-wrench" id="icpn3"></i>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-8 col-md-offset-2">
-                                                <div class="form-group row">
                                                     <label for="stPn">Estatus del Plan</label><span class="ic"><i class="fa fa-chevron-down"></i></span>
                                                     <select name="stPn" id="stPn">
                                                         <option value="0">-</option>
