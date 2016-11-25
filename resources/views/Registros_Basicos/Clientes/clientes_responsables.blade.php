@@ -74,7 +74,7 @@
                                         <h4 class="modal-title" id="myModalLabel">Agregar Responsable - Cliente</h4>
                                     </div>
                                     
-                                        <form method="post" class="form-horizontal Validacion" action="/menu/registros/clientes/responsable/insertar/{{$extra}}">
+                                        <form method="post" class="form-horizontal Validacion" action="">
                                         {{ csrf_field() }}
                                         <div class="modal-body">
                                             <ul class="nav nav-tabs" role="tablist" >
@@ -110,9 +110,7 @@
                                                                         <div class="form-group row">
                                                                             <select name="selciRpb" class="form-control userEmail" id="RpSva3">
                                                                                 <option value="">-</option>
-                                                                                @foreach($datosC1 as $tipoCedula)
-                                                                                    <option value="{{$tipoCedula->id}}">{{$tipoCedula->id}}</option>
-                                                                                @endforeach
+                                                                                <option value="1">G</option>
                                                                             </select><i class="fa fa-clipboard" id="icr7"></i>
                                                                         </div>
                                                                     </div>
@@ -149,9 +147,7 @@
                                                                         <div class="form-group">
                                                                             <select name="seltlfRpb" class="form-control userEmail" id="RpSvaa1">
                                                                                 <option value="">-</option>
-                                                                                @foreach($datosC2 as $tiposCodigoMovil)
-                                                                                    <option value="{{$tiposCodigoMovil->id}}">{{$tiposCodigoMovil->descripcion}}</option>
-                                                                                @endforeach
+                                                                                <option value="1">0414</option>
                                                                             </select><i class="fa fa-hashtag" id="icr11"></i>
                                                                         </div>
                                                                     </div>
@@ -169,9 +165,7 @@
                                                                         <div class="form-group">
                                                                             <select name="seltlfmRpb" class="form-control userEmail" id="RpSvaa3">
                                                                                 <option value="">-</option>
-                                                                                 @foreach($datosC3 as $tiposCodigoLocal)
-                                                                                    <option value="{{$tiposCodigoLocal->id}}">{{$tiposCodigoLocal->descripcion}}</option>
-                                                                                @endforeach
+                                                                                <option value="1">0212</option>
                                                                             </select><i class="fa fa-hashtag" id="icr13"></i>
                                                                         </div>
                                                                     </div>
@@ -327,7 +321,7 @@
                                             </div> 
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-primary" id="btnModificarResponsable1">Guardar <i class="fa fa-floppy-o"></i></button>
+                                                <button type="button" class="btn btn-primary" id="btnModificarResponsable1">Modificar <i class="fa fa-floppy-o"></i></button>
                                             </div>
                                         </form>
                                 </div>

@@ -26,7 +26,7 @@
 										@if($accion->descripcion!="Status")
 											@if($accion->data_toogle=="modal")
 											<span class="iclsp">
-												<a href="#myModal2" class="tltp" data-ttl="{{$accion->descripcion}}" data-toggle="modal" data-target="#myModal2"> 
+												<a href="#myModal2" class="tltp" id="moficarbtn{{$clientes->id}}" data-ttl="{{$accion->descripcion}}" data-toggle="modal" data-target="#myModal2"> 
 													<i class="{{$accion->clase_css}}"></i>
 												</a>
 											</span>
@@ -53,7 +53,7 @@
 									@endforeach
 								</div>
 								<p class="ttlMd" style="display: inline-block;"><strong>{{$clientes->razon_s}}</strong></p>
-								<input type="hidden" name="idcliente{{$clientes->id}}" value="{{$clientes->id}}">
+								<input type="hidden" name="idcliente{{$clientes->id}}" value="{{$clientes->id}}" id="idCliente{{$clientes->id}}">
 							</div>
 						@endforeach
 					</div>
