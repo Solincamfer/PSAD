@@ -57,7 +57,7 @@ class RegistrosBasicos extends Controller
 
 
 
-	public function datos_vista($datos_session,$datos_acciones,$consulta)//asocia en un vector los datos que deben pasarse a una vista
+	public function datos_vista($datos_session,$datos_acciones,$consulta,$extra=" ",$datosC1=" ",$datosC2=" ",$datosC3=" ")//asocia en un vector los datos que deben pasarse a una vista
 	{
 		$valores_vista=array(
 								'modulos'=>$datos_session['modulos'],//side bar
@@ -66,7 +66,11 @@ class RegistrosBasicos extends Controller
 								'apellido'=>$datos_session['apellido'],//header
 								'acciones'=>$datos_acciones['acciones'],//acciones
 								'agregar'=>$datos_acciones['agregar'],//boton de agregar
-								'consulta'=>$consulta//registros provenientes de la base de datos
+								'consulta'=>$consulta,//registros provenientes de la base de datos
+								'extra'=>$extra,
+								'datosC1'=>$datosC1,
+								'datosC2'=>$datosC2,
+								'datosC3'=>$datosC3
 
 
 								);
@@ -175,6 +179,47 @@ class RegistrosBasicos extends Controller
 
 	}
 
+
+	public function clientes_insertar_responsable($cliente_id)
+	{
+		
+		echo $nombres=Request::get('nomRpb1');//nombres del responsable 
+		
+		echo $apellidos=Request::get('apellRpb1');//apellidos del responsable
+		
+		echo $tipoCedula=(int)Request::get('selciRpb');//tipo cedula 
+		
+		echo $cedula=Request::get('txtci');//numero de cedula
+		
+		echo $cargo=Request::get('cgoRpb');//cargo
+		
+		echo $codigoMovil=(int)Request::get('seltlfRpb');//tipo codigo
+		
+		echo $numeroMovil=Request::get('numTelclRpb');//numero telefono numTelclRpb
+		
+		echo $codigoLocal=(int)Request::get('seltlfmRpb');//ctipo codigo seltlfmRpb
+		
+		echo $numeroLocal=Request::get('numTelmvlRpb');//numero fijo
+	
+		echo $correo=Request::get('mail2');//correo 
+
+
+		$idC=DB::table('cedulas')->insertGetId//cedula del cliente
+		(['numero'=>$cedula,'tipo_id'=>$tipoCedula]);
+
+		$idCo=DB::table('contactos')->insertGetId//contacto del responsable
+		(['tipo_id'=>$codigoMovil,'tipo__id'=>$codigoLocal,'telefono_m'=>$numeroMovil,'telefono_f'=>$numeroLocal,'correo'=>$correo]);
+
+		DB::table('personas')->insert//insertar datos del responsable
+		(['p_nombre'=>$nombres,'p_apellido'=>$apellidos,'cargo'=>$cargo,'cedula_id'=>$idC,'contacto_id'=>$idCo,'cliente_id'=>(int)$cliente_id]);
+
+	
+		return redirect('/menu/registros/clientes/responsable/'.(string)$cliente_id);//redirecciona a la venta que lista los responsables de un cliente matriz especifico: indicado por: $cliente_id
+	}
+
+
+
+
 	public function clientes_insertar()//debe estar habilitado el boton aceptar
 	{
 		
@@ -258,7 +303,12 @@ class RegistrosBasicos extends Controller
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
 		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(14,15),13);
-		return view ('Registros_Basicos\Clientes\clientes_responsables',$this->datos_vista($datos,$acciones,DB::table('personas')->where('cliente_id',$cliente_id)->get())); 
+		
+		return view ('Registros_Basicos\Clientes\clientes_responsables',$this->datos_vista($datos,$acciones,
+					  DB::table('personas')->where('cliente_id',$cliente_id)->get(),$cliente_id,
+					  DB::table('tipos')->where('numero_c',5)->get(),//tipos de cedula para los select
+					  DB::table('tipos')->where('numero_c',2)->get(),//tipos de codigos de telefonos para los select
+					  DB::table('tipos')->where('numero_c',3)->get()));//tipos de codigos locales para los select 
 					
 	}
 

@@ -47,11 +47,13 @@
 													<input type="checkbox" class="btnAcc" name="status" id="{{'inchbx'. $clientes->id}}" value="{{$accion->status_ac}}"><label for="{{'inchbx'. $clientes->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
 												</div>
 											@endif
+											
 										@endif
+
 									@endforeach
 								</div>
 								<p class="ttlMd" style="display: inline-block;"><strong>{{$clientes->razon_s}}</strong></p>
-							
+								<input type="hidden" name="idcliente{{$clientes->id}}" value="{{$clientes->id}}">
 							</div>
 						@endforeach
 					</div>
@@ -297,7 +299,7 @@
 									<h4 class="modal-title" id="myModalLabel2">Modificar</h4>
 								</div>
 							<form method="post" class="form-horizontal Validacion" id="Formclientemd" action="">
-										{{ csrf_field() }}
+										
 										<div class="modal-body">						
 											 <ul class="nav nav-tabs" role="tablist">
                                                 <li role="presentation" class="active" ><a href="#panelmd1" id="am10" aria-controls="panelmd1" role="tab" data-toggle="tab">Datos basicos</a></li>
