@@ -145,6 +145,25 @@ class RegistrosBasicos extends Controller
 
 
 	
+	public function clientes_modificar()
+	{
+		$id=Request::get('idCliente');
+
+		$consulta=DB::table('clientes')
+		
+		->join('rifs','clientes.rif_id','=','rifs.id')
+		->join('tipos','clientes.tipo_id','=','tipos.id')
+		->join('contactos','clientes.contacto_id','=','contactos.id')
+		->select('clientes.razon_s','clientes.nombre_c','rifs.numero',
+				 'rifs.tipo_id','tipos.id','tipos.descripcion','contactos.telefono_m',
+				 'contactos.telefono_f','contactos.correo')
+
+		->where('clientes.id',$id)->first();
+
+		return $consulta;
+
+	}
+
 	public function clientes_registrar()//manejo de los select para direcciones del cliente matriz 
 	{	
 		
@@ -180,7 +199,7 @@ class RegistrosBasicos extends Controller
 	}
 
 
-	public function clientes_insertar_responsable($cliente_id)
+	public function clientes_insertar_responsable($cliente_id)//agregar personas afiliadas a una empresa matriz
 	{
 		
 		echo $nombres=Request::get('nomRpb1');//nombres del responsable 
@@ -299,7 +318,7 @@ class RegistrosBasicos extends Controller
 	}
 
 
-	public function clientes_responsables($cliente_id)//
+	public function clientes_responsables($cliente_id)//agregar resposnsables de una matriz
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
 		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(14,15),13);

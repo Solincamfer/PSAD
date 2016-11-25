@@ -56,7 +56,7 @@ Route::group(['prefix'=>'/menu/registros','middleware'=>['v_menu']],function()
 				Route::match(['post','get'],'/clientes/insertar',                   								['uses'=>'RegistrosBasicos@clientes_insertar']);
 				Route::match(['post','get'],'/clientes/responsable/insertar/{cliente_id}',							['uses'=>'RegistrosBasicos@clientes_insertar_responsable']);
 				Route::match(['post','get'],'/clientes/responsable/{cliente_id}',           						['middleware'=>'validar_ac:10','uses'=>'RegistrosBasicos@clientes_responsables']);
-				//Route::match(['post','get'],'/clientes/responsable/modificar',             							['middleware'=>'validar_ac','uses'=>'RegistrosBasicos@clientes_responsables_modificar']);
+				
 				//Route::match(['post','get'],'/clientes/responsable/agregar',               							['middleware'=>'validar_ac','uses'=>'RegistrosBasicos@clientes_responsables_agregar']);
 
 				/**/Route::match(['post','get'],'/clientes/categoria/{cliente_id}',         						['middleware'=>'validar_ac:11','uses'=>'RegistrosBasicos@clientes_categoria']);
@@ -91,10 +91,11 @@ Route::group(['prefix'=>'/menu/registros','middleware'=>['v_menu']],function()
 
 				//////selects direccion
 
-					Route::match(['post','get'],'/clientes/registrar',                   		 					['uses'=> 'RegistrosBasicos@clientes_registrar']);//select 
+				Route::match(['post','get'],'/clientes/registrar',                   		 					['uses'=> 'RegistrosBasicos@clientes_registrar']);//select 
+			
+				Route::match(['post','get'],'/planeservicios/servicios',										['uses'=> 'RegistrosBasicos@planes_servicios_servicios']);
 
-				Route::match(['post','get'],'/planeservicios/servicios',														['uses'=> 'RegistrosBasicos@planes_servicios_servicios']);
-
+				Route::match(['post','get'],'/clientes/modificar',             									['uses'=>'RegistrosBasicos@clientes_modificar']);
 				
 
 				
