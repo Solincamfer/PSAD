@@ -50,7 +50,6 @@ $(function(){
         }
         
         $('.submenu').on('click', function(k){
-            //k.preventDefault('.accordion');
             var i=0;
             if (i=0){
                 $(this).closest('li').find('.c').addClass('activo');
