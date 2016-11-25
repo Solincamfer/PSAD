@@ -82,13 +82,13 @@
                                                     <div class="col-md-10 ">
                                                     <div class="form-group col-md-offset-2">
                                                         <label for="nomCat">Nombre de la Categoría</label>
-                                                        <input type="text" name="nomCat" class="form-control userEmail" id="nomCat"><i class="fa fa-briefcase" id="icct1"></i>
+                                                        <input type="text" name="nomCat" class="form-control userEmail" id="Cat1"><i class="fa fa-briefcase" id="icct1"></i>
                                                     </div>
                                                     </div>
                                                     <div class="col-md-10 ">
                                                     <div class="form-group col-md-offset-2">
                                                         <label for="stCat">Estatus de la Categoría</label><span class="ic"><i class="fa fa-chevron-down"></i></span>
-                                                        <select name="stCat" class="form-control userEmail" id="stCat">
+                                                        <select name="stCat" class="form-control userEmail" id="Cat2">
                                                             <option value="">-</option>
                                                             <option value="1">Activo</option>
                                                             <option value="2">Inactivo</option>
@@ -98,10 +98,11 @@
                                                 </div>
                                         
                                     </div>
+                                    </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="bttnMd" id="btnSv">Guardar <i class="fa fa-floppy-o"></i></button>
-                                        <button type="button" class="bttnMd" data-dismiss="modal" id="btnCs">Cerrar <i class="fa fa-times"></i></button>
-                                    </div></form>
+                                        <button type="button" class="btn btn-primary" id="btnGuardarCategoria">Guardar<i class="fa fa-floppy-o"></i></button>
+                                    </div>
+                                </form>
                                 </div>
                             </div>
                         </div>
@@ -123,13 +124,13 @@
                                                         <div class="col-md-10 ">
                                                             <div class="form-group col-md-offset-2">
                                                                 <label for="nomCat">Nombre de la Categoría</label>
-                                                                <input type="text" name="nomCat" class="form-control userEmail" id="nomCat"><i class="fa fa-briefcase" id="micct1"></i>
+                                                                <input type="text" name="nomCat" class="form-control userEmail" id="CatM1"><i class="fa fa-briefcase" id="micct1"></i>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-10 ">
                                                             <div class="form-group col-md-offset-2">
                                                                 <label for="stCat">Estatus de la Categoría</label><span class="ic"><i class="fa fa-chevron-down"></i></span>
-                                                                <select name="stCat" class="form-control userEmail" id="stCat">
+                                                                <select name="stCat" class="form-control userEmail" id="CatM2">
                                                                     <option value="">-</option>
                                                                     <option value="1">Activo</option>
                                                                     <option value="2">Inactivo</option>
@@ -140,9 +141,9 @@
 
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="bttnMd" id="btnSv">Guardar <i class="fa fa-floppy-o"></i></button>
-                                                    <button type="button" class="bttnMd" data-dismiss="modal" id="btnCs">Cerrar <i class="fa fa-times"></i></button>
-                                                </div></form>
+                                                    <button type="button" class="btn btn-primary" id="btnModificarCategoria">Modificar<i class="fa fa-floppy-o"></i></button>
+                                                </div>
+                                                </form>
                                             </div>
                                     </div>
                                 </div>

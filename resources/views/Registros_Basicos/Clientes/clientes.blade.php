@@ -100,7 +100,7 @@
 															<label for="rif" class="col-md-12">Rif:</label><span class="ic"><i class="fa fa-chevron-down"></i></span>									
 															<div class="form-group col-md-4" id="sep">
 																<select name="tiporif" id="ip3" class="form-control userEmail">
-																	<option value="">-</option>
+																	<option value=" ">-</option>
 																@foreach($tipoR as $rif)
 																	<option value="{{$rif->id}}">{{$rif->descripcion}}</option>
 																@endforeach
