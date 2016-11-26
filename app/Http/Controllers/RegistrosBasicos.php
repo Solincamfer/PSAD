@@ -6,7 +6,6 @@ namespace App\Http\Controllers;
 use Session;
 use DB;
 use Request;
-use App\Cliente;
 
 
 class RegistrosBasicos extends Controller 
@@ -148,33 +147,23 @@ class RegistrosBasicos extends Controller
 	
 	public function clientes_modificar()
 	{
-		$id=(int) Request::get('idCliente');
+		$id=Request::get('idCliente');
 
-		/*$consulta=DB::table('clientes')
-		
+		$consulta=DB::table('clientes')
+
 		->join('rifs','clientes.rif_id','=','rifs.id')
 		->join('tipos','clientes.tipo_id','=','tipos.id')
 		->join('contactos','clientes.contacto_id','=','contactos.id')
 		->select('clientes.razon_s','clientes.nombre_c','rifs.numero',
 				 'rifs.tipo_id','tipos.id','tipos.descripcion','contactos.telefono_m',
 				 'contactos.telefono_f','contactos.correo')
-
-		->where('clientes.id',$id)->first();*/
-		/*if(empty($id))
-			{
-	
-			}
-        else
-        {*/
-		$consulta=Cliente::where('id',$id)->first();
-
-		//$cliente=App\Rif::find($id);
-		return($consulta);
-		}
-
 		
 
-	
+		->where('clientes.id',$id)->first();
+
+		return $consulta;
+
+	}
 
 	public function clientes_registrar()//manejo de los select para direcciones del cliente matriz 
 	{	

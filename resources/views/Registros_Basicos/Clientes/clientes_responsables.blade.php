@@ -74,7 +74,7 @@
                                         <h4 class="modal-title" id="myModalLabel">Agregar Responsable - Cliente</h4>
                                     </div>
                                     
-                                        <form method="post" class="form-horizontal Validacion" action="">
+                                        <form method="post" class="form-horizontal Validacion" action="/menu/registros/clientes/responsable/insertar/{{$extra}}">
                                         {{ csrf_field() }}
                                         <div class="modal-body">
                                             <ul class="nav nav-tabs" role="tablist" >
@@ -110,7 +110,9 @@
                                                                         <div class="form-group row">
                                                                             <select name="selciRpb" class="form-control userEmail" id="RpSva3">
                                                                                 <option value="">-</option>
-                                                                                <option value="1">G</option>
+                                                                                @foreach($datosC1 as $TipoCedula)
+                                                                                    <option value="{{$TipoCedula->id}}">{{$TipoCedula->descripcion}}</option>
+                                                                                @endforeach
                                                                             </select><i class="fa fa-clipboard" id="icr7"></i>
                                                                         </div>
                                                                     </div>
@@ -147,7 +149,9 @@
                                                                         <div class="form-group">
                                                                             <select name="seltlfRpb" class="form-control userEmail" id="RpSvaa1">
                                                                                 <option value="">-</option>
-                                                                                <option value="1">0414</option>
+                                                                                 @foreach($datosC2 as $CodigoMovil)
+                                                                                    <option value="{{$CodigoMovil->id}}">{{$CodigoMovil->descripcion}}</option>
+                                                                                @endforeach
                                                                             </select><i class="fa fa-hashtag" id="icr11"></i>
                                                                         </div>
                                                                     </div>
@@ -165,7 +169,9 @@
                                                                         <div class="form-group">
                                                                             <select name="seltlfmRpb" class="form-control userEmail" id="RpSvaa3">
                                                                                 <option value="">-</option>
-                                                                                <option value="1">0212</option>
+                                                                                  @foreach($datosC3 as $CodigoLocal)
+                                                                                    <option value="{{$CodigoLocal->id}}">{{$CodigoLocal->descripcion}}</option>
+                                                                                @endforeach
                                                                             </select><i class="fa fa-hashtag" id="icr13"></i>
                                                                         </div>
                                                                     </div>
