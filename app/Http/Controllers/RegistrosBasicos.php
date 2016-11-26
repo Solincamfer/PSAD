@@ -214,25 +214,25 @@ class RegistrosBasicos extends Controller
 	public function clientes_insertar_responsable($cliente_id)//agregar personas afiliadas a una empresa matriz
 	{
 		
-		echo $nombres=Request::get('nomRpb1');//nombres del responsable 
+		$nombres=Request::get('nomRpb1');//nombres del responsable 
 		
-		echo $apellidos=Request::get('apellRpb1');//apellidos del responsable
+		$apellidos=Request::get('apellRpb1');//apellidos del responsable
 		
-		echo $tipoCedula=(int)Request::get('selciRpb');//tipo cedula 
+		$tipoCedula=(int)Request::get('selciRpb');//tipo cedula 
 		
-		echo $cedula=Request::get('txtci');//numero de cedula
+		$cedula=Request::get('txtci');//numero de cedula
 		
-		echo $cargo=Request::get('cgoRpb');//cargo
+		$cargo=Request::get('cgoRpb');//cargo
 		
-		echo $codigoMovil=(int)Request::get('seltlfRpb');//tipo codigo
+		$codigoMovil=(int)Request::get('seltlfRpb');//tipo codigo
 		
-		echo $numeroMovil=Request::get('numTelclRpb');//numero telefono numTelclRpb
+		$numeroMovil=Request::get('numTelclRpb');//numero telefono numTelclRpb
 		
-		echo $codigoLocal=(int)Request::get('seltlfmRpb');//ctipo codigo seltlfmRpb
+		$codigoLocal=(int)Request::get('seltlfmRpb');//ctipo codigo seltlfmRpb
 		
-		echo $numeroLocal=Request::get('numTelmvlRpb');//numero fijo
+		$numeroLocal=Request::get('numTelmvlRpb');//numero fijo
 	
-		echo $correo=Request::get('mail2');//correo 
+		$correo=Request::get('mail2');//correo 
 
 
 		$idC=DB::table('cedulas')->insertGetId//cedula del cliente
