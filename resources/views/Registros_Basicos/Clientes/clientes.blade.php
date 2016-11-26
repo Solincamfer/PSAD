@@ -375,21 +375,21 @@
 															<div class="col-md-offset-2">
 																<label for="regiondc">Región</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
 																<select name="regiondc" id="inn2" class="form-control userEmail">
-																<option value="">-</option>
+																<option value="0">-</option>
 																</select><i class="fa fa-map" id="icc7"></i>
 															</div>
 														</div>
 														<div class="form-group col-md-6" id="dfc3">
 															<label for="edodc">Estado</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
 															<select name="edodc" id="inn3" class="form-control userEmail">
-															<option value="">-</option>
+															<option value="0">-</option>
 															</select><i class="fa fa-map-pin" id="icc8"></i>
 														</div>
 														<div class="form-group col-md-7" id="dfc4">
 															<div class="col-md-offset-2">
 																<label for="mundc">Municipio</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
 																<select name="mundc" id="inn4" class="form-control userEmail">
-																<option value="">-</option>
+																<option value="0">-</option>
 																</select><i class="fa fa-map-signs" id="icc9"></i>
 														</div>	
 														</div>
@@ -409,10 +409,7 @@
 														<div class="form-group col-md-6" id="dfc1">
 															<label for="paispf">País</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
 															<select name="paisdf" id="innn11" class="form-control userEmail">
-															<option value="">-</option>
-																@foreach($paises as $pais)
-																		<option value="{{$pais->id}}">{{$pais->descripcion}}</option>
-																@endforeach
+															<option value="">-</option>									
 															</select><i class="fa fa-globe" id="icc6"></i>
 														</div>
 														<div class="form-group col-md-7" id="dfc2">
