@@ -49,7 +49,6 @@ $('#btnGuardarResponsable2').click(function(){
 
 
 
-
 function Normal(button,idInputForm,idpanelsTabs){
     var Tabcompletado=0;
     var almacenado=0;

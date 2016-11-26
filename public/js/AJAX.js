@@ -242,20 +242,57 @@ $("#innn13").change(function(){
 			
 		});
 
-$("#moficarbtn1").click(function(){
 
-            idCliente=$('#idCliente1').val();
-            $.get("/menu/registros/clientes/modificar", { idCliente: idCliente }, function(data){
-            	
-            	
-            		$('#in11').val(data.razon_s);
-            		
-            		
-				      
-            });
-			
+	
+	$(".tltp").click(function(){
+			ID = $(this).attr("id");
+			idCliente=$('#idCliente'+ID).val();
+	        $.get("/menu/registros/clientes/modificar", { idCliente: idCliente }, function(data){            	
+	        		$('#in11').val(data.razon_s);
+	        		$('#in12').val(data.nombre_c);
+	        		$('#in13').val(data.rif_id);
+	        		$('#in14').val(data.rif_id);
+	        		$('#in15').val(data.tipo_id);				      
+	        });			
 		});
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	$(".btnAcc").click(function(){
+		swal({
+		  title: "Are you sure?",
+		  text: "You will not be able to recover this imaginary file!",
+		  type: "warning",
+		  showCancelButton: true,
+		  confirmButtonColor: "#DD6B55",
+		  confirmButtonText: "Yes, delete it!",
+		  closeOnConfirm: false
+		},
+		function(){
+		  swal("Deleted!", "Your imaginary file has been deleted.", "success");
+		});
+    	if ($(this).val()==1) {
+    		alert($(this).val());
+    	}else{
+    		alert($(this).val());
+    	}
+
+});
 
 
 
