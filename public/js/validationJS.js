@@ -137,6 +137,21 @@ $('.Validacion').bootstrapValidator({
                         }
             }
         },
+        nombres: {
+            // All email fields have .userEmail class
+            selector: '.usernombres',
+            err: '#messageContainer',
+            validators: {
+                notEmpty: {
+                            message: 'Campo vacio.'
+                        },
+            
+            regexp: {
+                            regexp: /^[a-zA-Z]+$/,
+                            message: 'Solo letras'                            
+                        }
+                    }
+        },
         emails: {
             // All email fields have .userEmail class
             selector: '.typeEmail',

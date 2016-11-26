@@ -91,13 +91,13 @@
                                                                 <div class="col-md-5  col-md-offset-1" id="rRpb1">
                                                                     <div class="form-group">
                                                                         <label for="nomRpb1">Nombres</label>
-                                                                        <input type="text" name="nomRpb1" class="form-control userEmail" id="RpSva1"><i class="fa fa-user" id="icr1"></i>
+                                                                        <input type="text" name="nomRpb1" class="form-control usernombres" id="RpSva1"><i class="fa fa-user" id="icr1"></i>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-5" id="rRpb3">
                                                                     <div class="form-group">
                                                                         <label for="apellRpb1">Apellidos</label>
-                                                                        <input type="text" name="apellRpb1" class="form-control userEmail" id="RpSva2"><i class="fa fa-user" id="icr3"></i>
+                                                                        <input type="text" name="apellRpb1" class="form-control usernombres" id="RpSva2"><i class="fa fa-user" id="icr3"></i>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -196,6 +196,7 @@
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-primary" id="btnGuardarResponsable1">Guardar <i class="fa fa-floppy-o"></i></button>
+                                                <button type="reset" class="btn btn-danger">limpiar <i class="fa fa-floppy-o"></i></button>
                                             </div>
                                         </form>
                                 </div>
@@ -229,13 +230,13 @@
                                                                 <div class="col-md-5  col-md-offset-1" id="rRpb1">
                                                                     <div class="form-group">
                                                                         <label for="nomRpb1">Nombres</label>
-                                                                        <input type="text" name="nomRpb1" class="form-control userEmail" id="RpMda1"><i class="fa fa-user" id="icr1"></i>
+                                                                        <input type="text" name="nomRpb1" class="form-control usernombres" id="RpMda1"><i class="fa fa-user" id="icr1"></i>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-5" id="rRpb3">
                                                                     <div class="form-group">
                                                                         <label for="apellRpb1">Apellidos</label>
-                                                                        <input type="text" name="apellRpb1" class="form-control userEmail" id="RpMda2"><i class="fa fa-user" id="icr3"></i>
+                                                                        <input type="text" name="apellRpb1" class="form-control usernombres" id="RpMda2"><i class="fa fa-user" id="icr3"></i>
                                                                     </div>
                                                                 </div>
                                                             </div>
