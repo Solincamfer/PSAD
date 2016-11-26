@@ -149,17 +149,14 @@ class RegistrosBasicos extends Controller
 	{
 		$id=Request::get('idCliente');
 
-		$consulta=DB::table('clientes')
-
-		->join('rifs','clientes.rif_id','=','rifs.id')
-		->join('tipos','clientes.tipo_id','=','tipos.id')
-		->join('contactos','clientes.contacto_id','=','contactos.id')
-		->select('clientes.razon_s','clientes.nombre_c','rifs.numero',
-				 'rifs.tipo_id','tipos.id','tipos.descripcion','contactos.telefono_m',
-				 'contactos.telefono_f','contactos.correo')
-		
-
-		->where('clientes.id',$id)->first();
+		$consulta=DB::table('clientes')->join('rifs','clientes.rif_id','=','rifs.id')
+					  ->join('contactos','clientes.contacto_id','=','contactos.id')
+					  ->join('direcciones','clientes.direccion_id','=','direcciones.id')
+					  ->select('clientes.razon_s AS razonS','clientes.nombre_c AS nombreC','rifs.numero As numeroR','rifs.tipo_id AS tipoR',
+					  		   'contactos.codigo_id AS codigoC','contactos.telefono_m AS telefonoC','contactos.codigo__id AS codigoL',
+					  		   'contactos.telefono_f AS telefonoF','contactos.correo','direcciones.pais_id AS paisC','direcciones.region_id AS regionC',
+					  		   'direcciones.estado_id AS estadoC','direcciones.municipio_id AS municipioC','direcciones.descripcion As descrdirC')
+					  ->where('clientes.id',(int)$id);
 
 		return $consulta;
 
