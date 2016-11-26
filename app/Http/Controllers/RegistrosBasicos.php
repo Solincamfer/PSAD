@@ -145,28 +145,72 @@ class RegistrosBasicos extends Controller
 
 
 	
-	public function clientes_modificar($id)
+	public function clientes_modificar()
 	{
 		$id=(int)Request::get('idCliente');
 
-		$consulta=DB::table('clientes')->join('rifs','clientes.rif_id','=','rifs.id')
+	
+
+
+		$cliente=DB::table('clientes')
+					  ->join('rifs','clientes.rif_id','=','rifs.id')
 					  ->join('contactos','clientes.contacto_id','=','contactos.id')
-					  ->join('direcciones','clientes.direccion_id','=','direcciones.id')
+					  ->join('tipos','clientes.tipo_id','=','tipos.id')
+					  
 
 					  ->select('clientes.razon_s AS razonS','clientes.nombre_c AS nombreC','rifs.numero As numeroR','rifs.tipo_id AS tipoR',
 					  		   'contactos.tipo_id AS codigoC','contactos.telefono_m AS telefonoC','contactos.tipo__id AS codigoL',
-					  		   'contactos.telefono_f AS telefonoF','contactos.correo','direcciones.pais_id AS paisC','direcciones.region_id AS regionC',
-					  		   'direcciones.estado_id AS estadoC','direcciones.municipio_id AS municipioC','direcciones.descripcion As descrdirC')
+					  		   'contactos.telefono_f AS telefonoF','contactos.correo','tipos.id As idtipoContribuyente','tipos.descripcion As Contribuyente')
 					  ->where('clientes.id',$id)->first();
-					  
 
-		$direccionF=DB::table('clientes')->join('direcciones','clientes.direccion__id','=','direcciones.id')
-										->select('direcciones.pais_id','direcciones.region_id','direcciones.estado_id',
-												 'direcciones.municipio_id','direcciones.descripcion As direccionF')
+
+		$direccionF=DB::table('clientes')->join('direcciones','clientes.direccion_id','=','direcciones.id')
+
+										->join('paises','paises.id','=','direcciones.pais_id')
+										->join('regiones','regiones.id','=','direcciones.region_id')
+										->join('estados','estados.id','=','direcciones.estado_id')
+										->join('municipios','municipios.id','=','direcciones.municipio_id')
+
+										->select('paises.id As idpaisF','paises.descripcion As paisF',
+												 'regiones.id As idregionF','regiones.descripcion As regionF ',
+												 'estados.id As idestadoF','estados.descripcion As estadoF',
+												 'municipios.id As idmunicipioF','municipios.descripcion As municipiosF',
+												 'direcciones.id As iddireccionF','direcciones.descripcion As direccionF')
+												
+										
 										->where('clientes.id',$id)->first();
 
-		return $direccionF;
+		$direccionC=DB::table('clientes')->join('direcciones','clientes.direccion__id','=','direcciones.id')
 
+										->join('paises','paises.id','=','direcciones.pais_id')
+										->join('regiones','regiones.id','=','direcciones.region_id')
+										->join('estados','estados.id','=','direcciones.estado_id')
+										->join('municipios','municipios.id','=','direcciones.municipio_id')
+
+										->select('paises.id As idpaisC','paises.descripcion As paisC',
+												 'regiones.id As idregionC','regiones.descripcion As regionC ',
+												 'estados.id As idestadoC','estados.descripcion As estadoC',
+												 'municipios.id As idmunicipioC','municipios.descripcion As municipiosC',
+												 'direcciones.id As iddireccionC','direcciones.descripcion As direccionC')
+												
+										
+										->where('clientes.id',$id)->first();
+
+		// 0 id cliente/ 1 razonS /2 nombreC /3 numeroRif / 4 tipo Rif / 5 tipo codigoCelular 
+		//  6 numero Celular / 7 codigo telefono local / 8 numero de telefono local /9 correo 
+		//10 id tipo contirbuyente/11 descripcion tipo de contribuyente
+		//12 paisidF /13 paisF/14 regionidF/15 regionF /16 estadoidF/17 estadoF /18 municipioidF/19 municipio F/20 iddireccionF/21 direccionF
+		//22 paisidC /23 paisC/24 regionidC/25 regionC /26 estadoidC/27 estadoC /28 municipioidC/29 municipioC /30 iddireccionC/31 direccionC
+
+
+		return array($cliente->razonS,$cliente->nombreC,$cliente->numeroR,$cliente->tipoR,$cliente->codigoC,$cliente->telefonoC,
+							  $cliente->codigoL,$cliente->telefonoF,$cliente->correo,$cliente->idtipoContribuyente,$cliente->Contribuyente,
+							  $direccionF->idpaisF,$direccionF->paisF,$direccionF->idregionF,$direccionF->regionF,$direccionF->idestadoF,
+							  $direccionF->estadoF,$direccionF->idmunicipioF,$direccionF->municipiosF,$direccionF->iddireccionF,$direccionF->direccionF,
+							  $direccionC->idpaisC,$direccionC->paisC,$direccionC->idregionC,$direccionC->regionC,$direccionC->idestadoC,
+							  $direccionC->estadoC,$direccionC->idmunicipioC,$direccionC->municipiosC,$direccionC->iddireccionC,$direccionC->direccionC);
+
+		
 	}
 
 
