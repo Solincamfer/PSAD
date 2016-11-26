@@ -287,7 +287,27 @@ class RegistrosBasicos extends Controller
 		return redirect('/menu/registros/clientes/responsable/'.(string)$cliente_id);//redirecciona a la venta que lista los responsables de un cliente matriz especifico: indicado por: $cliente_id
 	}
 
+	
+	public function clientes_modificar_responsables()//consulta para modificar responsables
+	{
 
+		$id=(int)Request::get('idCliente');
+		
+		$resp=DB::table('personas')
+					->join('cedulas','personas.cedula_id','=','cedulas.id')
+					->join('contactos','personas.contacto_id','=','contactos.id')
+					->join('tipos','cedulas.tipo_id','=','tipos.id')
+
+					->select('personas.p_nombre As nombre','personas.p_apellido As apellido','personas.cargo As cargo',
+						     'cedulas.numero As numeroC','cedulas.tipo_id As tipoC','tipos.descripcion As tipoCV',
+						     'contactos.tipo_id As codigoC','contactos.telefono_m As telefonoC','contactos.tipo__id As codigoL',
+						     'contactos.telefono_f As telefonoL','personas.cliente_id As matriz')->where('personas.id',(int)$id)->first();
+
+		return array($resp->nombre,$resp->apellido,$resp->cargo,$resp->numeroC,$resp->tipoC,$resp->tipoCV,
+					 $resp->codigoC,$resp->telefonoC,$resp->codigoL,$resp->telefonoL,$resp->matriz);
+		
+		
+	}
 
 
 	public function clientes_insertar()//debe estar habilitado el boton aceptar

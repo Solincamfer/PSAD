@@ -97,9 +97,9 @@ Route::group(['prefix'=>'/menu/registros','middleware'=>['v_menu']],function()
 
 				Route::match(['post','get'],'/clientes/modificar',             									['uses'=>'RegistrosBasicos@clientes_modificar']);
 				
-				Route::match(['post','get'],'/clientes/responsable/insertar/{cliente_id}',							['uses'=>'RegistrosBasicos@clientes_insertar_responsable']);
+				Route::match(['post','get'],'/clientes/responsable/insertar/{cliente_id}',						['uses'=>'RegistrosBasicos@clientes_insertar_responsable']);
 				
-
+				Route::match(['post','get'],'/clientes/modificar/responsable',						['uses'=>'RegistrosBasicos@clientes_modificar_responsables']);
 
 
 
