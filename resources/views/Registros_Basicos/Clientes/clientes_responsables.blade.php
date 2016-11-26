@@ -45,11 +45,11 @@
                                                 </span>
                                             @endif
                                         @elseif($accion->id==15)
-                                            @if($accion->status_ac==1)
+                                            @if($responsable->statusR==1)
                                             <div class="chbx">
                                                 <input type="checkbox" class="btnAcc" name="status" id="{{'inchbx'. $responsable->id}}" value="{{$accion->status_ac}}" checked><label for="{{'inchbx'. $responsable->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
                                             </div>
-                                            @elseif($accion->status_ac==0)
+                                            @elseif($responsable->statusR==0)
                                             <div class="chbx">
                                                 <input type="checkbox" class="btnAcc" name="status" id="{{'inchbx'. $responsable->id}}" value="{{$accion->status_ac}}"><label for="{{'inchbx'. $responsable->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
                                             </div>
@@ -57,7 +57,13 @@
                                         @endif
                                     @endforeach
                                 </div>
-                                <span class="ttlMd"><input type="radio" name="c_rsp" id="c_rsp" value=""> <label for="c_rsp"><strong>{{$responsable->p_nombre." ".$responsable->p_apellido}}</strong></label></span>
+                                @if($responsable->encargado==1)
+                                    <span class="ttlMd"><input type="radio" name="c_rsp" id="c_rsp" value="{{$responsable->encargado}}" checked> 
+                                    <label for="c_rsp"><strong>{{$responsable->p_nombre." ".$responsable->p_apellido}}</strong></label></span>
+                                @else
+                                     <span class="ttlMd"><input type="radio" name="c_rsp" id="c_rsp" value="{{$responsable->encargado}}" > 
+                                    <label for="c_rsp"><strong>{{$responsable->p_nombre." ".$responsable->p_apellido}}</strong></label></span>
+                                @endif
                             </div>
                         @endforeach
                         </div>
