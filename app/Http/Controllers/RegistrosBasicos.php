@@ -147,21 +147,29 @@ class RegistrosBasicos extends Controller
 	
 	public function clientes_modificar($id)
 	{
-		$id=Request::get('idCliente');
+		$id=(int)Request::get('idCliente');
 
 		$consulta=DB::table('clientes')->join('rifs','clientes.rif_id','=','rifs.id')
 					  ->join('contactos','clientes.contacto_id','=','contactos.id')
 					  ->join('direcciones','clientes.direccion_id','=','direcciones.id')
 
 					  ->select('clientes.razon_s AS razonS','clientes.nombre_c AS nombreC','rifs.numero As numeroR','rifs.tipo_id AS tipoR',
-					  		   'contactos.codigo_id AS codigoC','contactos.telefono_m AS telefonoC','contactos.codigo__id AS codigoL',
+					  		   'contactos.tipo_id AS codigoC','contactos.telefono_m AS telefonoC','contactos.tipo__id AS codigoL',
 					  		   'contactos.telefono_f AS telefonoF','contactos.correo','direcciones.pais_id AS paisC','direcciones.region_id AS regionC',
 					  		   'direcciones.estado_id AS estadoC','direcciones.municipio_id AS municipioC','direcciones.descripcion As descrdirC')
-					  ->where('clientes.id',(int)$id)->get();
+					  ->where('clientes.id',$id)->first();
+					  
 
-		return $consulta;
+		$direccionF=DB::table('clientes')->join('direcciones','clientes.direccion__id','=','direcciones.id')
+										->select('direcciones.pais_id','direcciones.region_id','direcciones.estado_id',
+												 'direcciones.municipio_id','direcciones.descripcion As direccionF')
+										->where('clientes.id',$id)->first();
+
+		return $direccionF;
 
 	}
+
+
 
 	public function clientes_registrar()//manejo de los select para direcciones del cliente matriz 
 	{	
