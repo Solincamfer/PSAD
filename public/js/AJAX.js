@@ -245,14 +245,16 @@ $("#innn13").change(function(){
 
 	
 	$(".tltp").click(function(){
-			ID = $(this).attr("id");
-			idCliente=$('#idCliente'+ID).val();
-	        $.get("/menu/registros/clientes/modificar", { idCliente: idCliente }, function(data){            	
-	        		$('#in11').val(data.razon_s);
-	        		$('#in12').val(data.nombre_c);
-	        		$('#in13').val(data.rif_id);
-	        		$('#in14').val(data.rif_id);
-	        		$('#in15').val(data.tipo_id);				      
+			ID = $(this).attr("id");			
+			idCliente=$('#idCliente'+ID).val();		
+	        $.get("/menu/registros/clientes/modificar", {idCliente: idCliente}, function(data){  
+	          	
+			alert(data);  
+	        		// $('#in11').val(data.razon_s);
+	        		// $('#in12').val(data.nombre_c);
+	        		// $('#in13').val(data.rif_id);
+	        		// $('#in14').val(data.rif_id);
+	        		// $('#in15').val(data.tipo_id);				      
 	        });			
 		});
 
