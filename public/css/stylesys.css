@@ -1707,3 +1707,161 @@
                 border: none;
                 z-index: 1;
             }
+        
+        /*Servicios*/
+.espFil{
+    margin-top: 20px;
+}
+
+.hh, .sp, .sr, .st, .tr, .mant{
+    height: 150px;
+    margin-right: 10px;
+    box-shadow: 4px 5px 15px 1px rgba(0, 0, 0, 0.3);
+    transition: all .3s ease;
+    border-radius: 20px;
+}
+
+.hh{
+    background: #FCCA53; 
+}
+
+.sp{
+    background: #DC3157;
+}
+
+.sr{
+    background: #9CCC51;
+}
+
+.st{
+    background: #00B3C3;
+}
+
+.tr{
+    background: #DC4A3B;
+}
+
+.mant{
+    background: #467AB8;
+}
+
+.hh .im, .sp .im, .sr .im, .st .im, .tr .im, .mant .im{
+    height: 120px;
+    width: 120px;
+    position: absolute;
+    left: 0;
+    margin-top: px;
+    margin-left: -12px;
+}
+
+.hh:hover{
+    background: rgba(252, 202, 83, .4);
+}
+
+.sp:hover{
+    background: rgba(220, 49, 87, .4);
+}
+
+.sr:hover{
+    background: rgba(156, 204, 81, .4);
+}
+
+.st:hover{
+    background: rgba(0, 179, 195, .4);
+}
+
+.tr:hover{
+    background: rgba(220, 74, 59, .4);
+}
+
+/*modal*/
+
+.contsr1{
+    margin-top: 20px;
+}
+
+.rSrv {
+    margin-top: 10px;   
+}
+
+.rSrv input, .rSrv select{
+    display: block;
+    padding: 2px 5px;
+    width: 98%;
+    height: 30px;
+    border: 1px solid #ddd;
+    text-indent: 18px;
+    transition: border-width .2s ease-in-out;
+    border-radius: 2px;
+    color: #ccc;
+}
+
+.rSrv input[type=radio]{
+    width: 15px;
+    height: 15px;
+}
+
+.rSrv .flb{
+    margin-bottom: 10px;
+}
+
+.rSrv input:focus, .rSrv select:focus{
+    outline: none;
+    color: #444;
+    border-color: #26a69d;
+    border-left-width: 35px;
+}
+
+.rSrv .icc i{
+    color: #fff;
+    position: absolute;
+    left: 0;
+    margin-top: -25px;
+    margin-left: 9px;
+    font-size: 20px;
+}
+
+.rSrv .icc2 i{
+    color: #fff;
+    position: absolute;
+    left: 0;
+    margin-top: -24px;
+    margin-left: 7px;
+    font-size: 18px;
+}
+
+.rSrv .icc3 i{
+    color: #fff;
+    position: absolute;
+    left: 0;
+    margin-top: -24px;
+    margin-left: 7px;
+    font-size: 16px;
+}
+
+.rSrv .icc .down{
+    position: absolute;
+    right: 0;
+    margin-right: 32px;
+}
+
+.rSrv .icc .down #i1, .rSrv .icc .down #i2{
+    color: #333;
+    position: absolute;
+    height: 30px;
+    width: 20px;
+    padding: 6px 3px 3px 3px;
+    font-size: 14px;
+    background: #26a69d;
+    pointer-events: none;
+    border: none;
+    border-radius: 2px;
+}
+
+.rSrv .icc .down #i1{
+    margin-top: 0px;
+}
+
+.rSrv .icc .down #i2{
+    margin-top: 0px;
+}
