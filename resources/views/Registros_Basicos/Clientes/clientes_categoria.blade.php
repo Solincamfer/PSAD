@@ -73,7 +73,7 @@
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                         <h4 class="modal-title" id="myModalLabel">Agregar Categoría</h4>
                                     </div>
-                                    <form action="" class="Validacion">
+                                    <form method="post" action="/menu/registros/clientes/categoria/agregar/{{$extra}}" class="Validacion">
                                     <div class="modal-body">
                                         
                                             {{ csrf_field() }}
@@ -91,7 +91,7 @@
                                                         <select name="stCat" class="form-control userEmail" id="Cat2">
                                                             <option value="">-</option>
                                                             <option value="1">Activo</option>
-                                                            <option value="2">Inactivo</option>
+                                                            <option value="0">Inactivo</option>
                                                         </select><i class="fa fa-check" id="icct2"></i>
                                                     </div>
                                                     </div>

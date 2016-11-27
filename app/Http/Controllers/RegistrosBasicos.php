@@ -417,7 +417,7 @@ class RegistrosBasicos extends Controller
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
 		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(16,17,18,19),20);
-		return view ('Registros_Basicos\Clientes\clientes_categoria',$this->datos_vista($datos,$acciones,DB::table('categorias')->where('cliente_id',$cliente_id)->get()));
+		return view ('Registros_Basicos\Clientes\clientes_categoria',$this->datos_vista($datos,$acciones,DB::table('categorias')->where('cliente_id',$cliente_id)->get(),$cliente_id));
 						
 	}
 
@@ -425,11 +425,41 @@ class RegistrosBasicos extends Controller
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
 		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(22,23),21);
-		return view ('Registros_Basicos\Clientes\clientes_categoria_responsable',$this->datos_vista($datos,$acciones,DB::table('personas')->join('categoria_persona','personas.id','=','categoria_persona.persona_id')->where('categoria_persona.categoria_id',$categoria_id)->get()));
+		$responsablesC=DB::table('categoria_persona')->where('categoria_id',$categoria_id)->first();
+		if (empty($responsablesC)==false) //si esta lleno
+		{
+			$id=(int)$responsablesC->persona_id;
+		}
+		else
+		{
+
+			$id=0;
+		}
+		return view ('Registros_Basicos\Clientes\clientes_categoria_responsable',$this->datos_vista($datos,$acciones,DB::table('categorias')->join('clientes','clientes.id','=','categorias.cliente_id')
+								   ->join('personas','personas.cliente_id','=','clientes.id')
+								   ->select('personas.id','personas.p_nombre','personas.p_apellido')
+								   ->where('categorias.id','=',$categoria_id)->get(),$id
+));
 						
 	}
 
-	
+	public function clientes_categoria_agregar($id_cliente)
+	{
+		$id=(int)$id_cliente;
+		$nombreC=strtoupper(Request::get('nomCat'));//nombre de la categoria en mayusculas
+		$statusC=(int)Request::get('stCat');//status de la categoria
+
+		if(empty(DB::table('categorias')->join('clientes','clientes.id','=','categorias.cliente_id')->select('categorias.nombre')->where('categorias.nombre',$nombreC)->first())==true)//si no existe
+		{
+
+			DB::table('categorias')->insert
+			(['nombre'=>$nombreC,'status_c'=>$statusC,'cliente_id'=>$id]);
+			
+		}
+		return redirect('/menu/registros/clientes/categoria/'.(string)$id);
+
+						
+	}
 	
 
 	public function clientes_sucursales_responsable()

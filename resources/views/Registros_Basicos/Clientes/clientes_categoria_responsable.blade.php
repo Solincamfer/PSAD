@@ -57,7 +57,11 @@
                                        @endif
                                    @endforeach
                                </div>
-                                <span class="ttlMd"><input type="radio" name="cat_rsp" id="cat_rsp" value=""> <label for="cat_rsp"><strong>{{$responsable->p_nombre." ".$responsable->p_apellido}}</strong></label></span>
+                               @if($responsable->id==$extra)
+                                    <span class="ttlMd"><input type="radio" name="cat_rsp" id="cat_rsp" value="{{$responsable->id}}" checked> <label for="cat_rsp"><strong>{{$responsable->p_nombre." ".$responsable->p_apellido}}</strong></label></span>
+                               @else
+                                    <span class="ttlMd"><input type="radio" name="cat_rsp" id="cat_rsp" value="{{$responsable->id}}" > <label for="cat_rsp"><strong>{{$responsable->p_nombre." ".$responsable->p_apellido}}</strong></label></span>
+                              @endif
                             </div>
                       @endforeach
                     </div>
