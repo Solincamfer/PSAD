@@ -535,14 +535,21 @@ class RegistrosBasicos extends Controller
 
 
 
+////////////////////////////////empleados////////////////////////////////
 
-	
+public function empleados()
+{
+	$datos=$this->cargar_header_sidebar_acciones();
+	$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(76,77,78),75);
+	return view ('Registros_Basicos\empleados\empleados',$this->datos_vista($datos,$acciones,array()));
+}
 
-
-
-/////////////////////////////////////////////////////////15-11-2016 2da ronda///////////////////////////////////////////////
-////////////////////////////////////////////////////Modulo Clientes///////////////////////////////////////////////
-
+public function empleados_usuarios()
+{
+	$datos=$this->cargar_header_sidebar_acciones();
+	$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(80,81,82),79);
+	return view ('Registros_Basicos\empleados\empleados_usuarios',$this->datos_vista($datos,$acciones,array()));
+}
 	
 
 

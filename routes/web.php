@@ -71,6 +71,8 @@ Route::group(['prefix'=>'/menu/registros','middleware'=>['v_menu']],function()
 				 Route::match(['post','get'],'/clientes/categoria/sucursal/equipos',                				['middleware'=>'validar_ac:28','uses'=>'RegistrosBasicos@clientes_sucursales_equipos']);
 				 Route::match(['post','get'],'/clientes/categoria/sucursal/usuarios',              					['middleware'=>'validar_ac:29','uses'=>'RegistrosBasicos@clientes_sucursales_usuarios']);
 
+				 Route::match(['post','get'],'/empleados/usuarios',															['middleware'=>'validar_sm:6','uses'=>'RegistrosBasicos@empleados_usuarios']);
+
 				///**/Route::match(['post','get'],'/clientes/sucursales/responsable/agregar',         				['middleware'=>'validar_ac','uses'=>'RegistrosBasicos@clientes_sucursales_responsable_agregar']);
 				///**/Route::match(['post','get'],'/clientes/sucursales/responsable/modificar',       				['middleware'=>'validar_ac','uses'=>'RegistrosBasicos@clientes_sucursales_responsable_modificar']);
 				///**/Route::match(['post','get'],'/clientes/sucursales/plan/agregar',                				['middleware'=>'validar_ac','uses'=>'RegistrosBasicos@clientes_sucursales_plan_agregar']);
@@ -85,6 +87,7 @@ Route::group(['prefix'=>'/menu/registros','middleware'=>['v_menu']],function()
 				/**/Route::match(['post','get'],'/clientes/categoria/sucursal/equipos/componentes', 				['middleware'=>'validar_ac:44','uses'=>'RegistrosBasicos@clientes_sucursales_equipos_componentes']);
 				/**/Route::match(['post','get'],'/clientes/categoria/sucursal/equipos/componentes/piezas',			['middleware'=>'validar_ac:48','uses'=> 'RegistrosBasicos@clientes_sucursales_equipos_piezas']);
 				/**/Route::match(['post','get'],'/clientes/categoria/sucursal/equipos/componentes/aplicaciones',    ['middleware'=>'validar_ac:49','uses'=> 'RegistrosBasicos@clientes_sucursales_equipos_aplicaciones']);
+
 				///**/Route::match(['post','get'],'/clientes/sucursales/usuario/agregar',                   		 	['middleware'=>'validar_ac','uses'=> 'RegistrosBasicos@clientes_sucursales_usuarios_agregar']);
 				///**/Route::match(['post','get'],'/clientes/sucursales/usuario/modificar',                   		['middleware'=>'validar_ac','uses'=> 'RegistrosBasicos@clientes_sucursales_usuarios_modificar']);
 				/**/Route::match(['post','get'],'/clientes/categoria/sucursal/usuarios/perfil',                   	['middleware'=>'validar_ac:59','uses'=>  'RegistrosBasicos@clientes_sucursales_usuarios_perfil']);
