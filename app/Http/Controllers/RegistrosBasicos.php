@@ -448,8 +448,9 @@ class RegistrosBasicos extends Controller
 		$id=(int)$id_cliente;
 		$nombreC=strtoupper(Request::get('nomCat'));//nombre de la categoria en mayusculas
 		$statusC=(int)Request::get('stCat');//status de la categoria
+		
 
-		if(empty(DB::table('categorias')->join('clientes','clientes.id','=','categorias.cliente_id')->select('categorias.nombre')->where('categorias.nombre',$nombreC)->first())==true)//si no existe
+		if(empty(DB::table('categorias')->where(['categorias.nombre'=>$nombreC,'categorias.cliente_id'=>$id_cliente])->first())==true)//si no existe
 		{
 
 			DB::table('categorias')->insert
