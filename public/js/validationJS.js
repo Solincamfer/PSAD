@@ -149,7 +149,7 @@ $('.Validacion').bootstrapValidator({
                         },
             
             regexp: {///////VALIDA CAMPO SOLO LETRAS///////////
-                            regexp: /^[a-zA-Z]+$/,
+                            regexp: /^[a-z A-Z]+$/,
                             message: 'Solo letras'                            
                         }
                     }

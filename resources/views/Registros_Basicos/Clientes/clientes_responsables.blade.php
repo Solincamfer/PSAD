@@ -33,7 +33,7 @@
                                         @if($accion->id!=15)
                                             @if($accion->data_toogle=="modal")
                                                 <span class="iclsp">
-                                                    <a href="#myModal2" class="tltp" data-ttl="{{$accion->descripcion}}" data-toggle="modal" data-target="#myModal2"> 
+                                                    <a href="#myModal2" class="tltp" data-ttl="{{$accion->descripcion}}" id="m{{$responsable->id}}" data-toggle="modal" data-target="#myModal2"> 
                                                         <i class="{{$accion->clase_css}}"></i>
                                                     </a>
                                                 </span>
@@ -57,6 +57,7 @@
                                         @endif
                                     @endforeach
                                 </div>
+                                <input type="hidden" name="idresp{{$responsable->id}}" value="{{$responsable->id}}" id="idrespm{{$responsable->id}}">
                                 @if($responsable->encargado==1)
                                     <span class="ttlMd"><input type="radio" name="c_rsp" id="c_rsp" value="{{$responsable->encargado}}" checked> 
                                     <label for="c_rsp"><strong>{{$responsable->p_nombre." ".$responsable->p_apellido}}</strong></label></span>
@@ -189,8 +190,10 @@
                                                                 <div class="col-md-8 col-md-offset-2" id="rRpb11">
                                                                     <label for="mail">Correo Electrónico</label>
                                                                     <input type="text" name="mail2" id="RpSvaa5" class="form-control typeEmail">
+
                                                                     <i class="fa fa-envelope" id="icr15"></i>
                                                                 </div>
+
                                                             </div>
                                                         </div>
                                                     </div>
@@ -216,7 +219,7 @@
                                         <h4 class="modal-title" id="myModalLabel2">Modificar Responsable - Cliente</h4>
                                     </div>
 
-                                    <form method="post" class="form-horizontal Validacion" action="">
+                                    <form method="post" class="form-horizontal Validacion" action="/menu/registros/clientes/responsables/actualizar/{{$extra}}">
                                         {{ csrf_field() }}
                                         <div class="modal-body">
                                             <ul class="nav nav-tabs" role="tablist" >
@@ -260,7 +263,7 @@
                                                                     </div>
                                                                     <div class="col-md-6">
                                                                         <div class="form-group row"> 
-                                                                            <input type="text" class="form-control typeCiNumber" name="RpMda4"><i class="fa fa-address-card-o" id="micr8"></i>
+                                                                            <input type="text" id="RpMda4" class="form-control typeCiNumber" name="RpMda4"><i class="fa fa-address-card-o" id="micr8"></i>
                                                                         </div>
                                                                     </div>
                                                                 </div> 
@@ -327,6 +330,7 @@
                                                                     <input type="text" name="mail2" id="RpMdaa5" class="form-control typeEmail">
                                                                     <i class="fa fa-envelope" id="micr15"></i>
                                                                 </div>
+                                                                <input type="text" name="Registroid" id="Registroid">
                                                             </div>
                                                         </div>
                                                     </div>

@@ -401,9 +401,30 @@ $("#ippp3").change(function(){
     	}
 });
 
-	$("").clik(function(){
+	$(".tltp").click(function(){
 
-});
+		///////////BUSCADO BOTON CLICKEADO/////////////	
+			ID = $(this).attr("id");
+			idResponsable=$('#idresp'+ID).val();
+			$('#Registroid').val(idResponsable);	
+		///////////PASANDO VARIABLE Y CARGANDO LISTADO CORRESPONDIENTE A LA SELECCION PREVIA Y ESPERANDO DATA COMO RESPUESTA/////////////			        	
+			$.get("/menu/registros/clientes/modificar/responsable", {idResponsable: idResponsable}, function(data){
+	    ///////////ASIGNANDO LOS VALORES DEL ARRAY A LOS IMPUT CORRESPONDIENTES DEL MODAL MODIFICAR/////////////	
+	        	
+	        		$('#RpMda1').val(data[0]);
+	        		$('#RpMda2').val(data[1]);
+	        		$('#RpMda3').val(data[4]);
+	        		$('#RpMda4').val(data[3]);
+	        		$('#RpMda5').val(data[2]);	        		
+	        		$('#RpMdaa1').val(data[6]);
+	        		$('#RpMdaa2').val(data[7]);
+	        		$('#RpMdaa3').val(data[8]);
+	        		$('#RpMdaa4').val(data[9]);
+	        		$('#RpMdaa5').val(data[11]);
+	        		alert(data);	
+	       });
+
+	});
 
 
 
