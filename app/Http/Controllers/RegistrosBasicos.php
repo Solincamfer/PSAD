@@ -303,7 +303,7 @@ class RegistrosBasicos extends Controller
 					->select('personas.p_nombre As nombre','personas.p_apellido As apellido','personas.cargo As cargo',
 						     'cedulas.numero As numeroC','cedulas.tipo_id As tipoC','tipos.descripcion As tipoCV',
 						     'contactos.tipo_id As codigoC','contactos.telefono_m As telefonoC','contactos.tipo__id As codigoL',
-						     'contactos.telefono_f As telefonoL','personas.cliente_id As matriz')->where('personas.id',(int)$id)->first();
+						     'contactos.telefono_f As telefonoL','personas.cliente_id As matriz','contactos.correo As correo')->where('personas.id',(int)$id)->first();
 
 		return array($resp->nombre,$resp->apellido,$resp->cargo,$resp->numeroC,$resp->tipoC,$resp->tipoCV,
 					 $resp->codigoC,$resp->telefonoC,$resp->codigoL,$resp->telefonoL,$resp->matriz);
