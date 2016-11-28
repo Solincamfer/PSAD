@@ -250,6 +250,8 @@ class RegistrosBasicos extends Controller
 	}
 
 
+	
+
 	public function clientes_insertar_responsable($cliente_id)//agregar personas afiliadas a una empresa matriz
 	{
 		
@@ -310,6 +312,12 @@ class RegistrosBasicos extends Controller
 	}
 
 
+	public function clientes_modificar()
+	{
+		
+	}
+
+
 	public function clientes_insertar()//debe estar habilitado el boton aceptar
 	{
 		
@@ -347,43 +355,63 @@ class RegistrosBasicos extends Controller
 
 		$correo=Request::get('mailsv');//correo electronico
 
+		$operacion=(int)Request::get('idCliente');//campo hidden que indica la operaqcion a realizar 
+
 		
 
 		////inserciones
 		
+		if($operacion==0)
+		{
+					$idR= DB::table('rifs')->insertGetId//insertar rif 
+						(
+							['numero'=>$numeroR,'tipo_id'=>$tipoR]
+						);
 
-		$idR= DB::table('rifs')->insertGetId//insertar rif 
-			(
-				['numero'=>$numeroR,'tipo_id'=>$tipoR]
-			);
+					
+					$idC=DB::table('contactos')->insertGetId//insercion de contacto
+						(
 
-		
-		$idC=DB::table('contactos')->insertGetId//insercion de contacto
-			(
-
-			   ['tipo_id'=>$codigoM,'tipo__id'=>$codigoL,'telefono_m'=>$telefonoM,'telefono_f'=>$telefonoL,'correo'=>$correo]
-			);
+						   ['tipo_id'=>$codigoM,'tipo__id'=>$codigoL,'telefono_m'=>$telefonoM,'telefono_f'=>$telefonoL,'correo'=>$correo]
+						);
 
 
-		
-		$iddF=(integer) DB::table('direcciones')->insertGetId//insercion de direcciones direccion fiscal
-			(
+					
+					$iddF=(integer) DB::table('direcciones')->insertGetId//insercion de direcciones direccion fiscal
+						(
 
-				['descripcion'=>$direccionF,'municipio_id'=>$municipioF,'pais_id'=>$paisF,'region_id'=>$regionF,'estado_id'=>$estadoF]
-			);
+							['descripcion'=>$direccionF,'municipio_id'=>$municipioF,'pais_id'=>$paisF,'region_id'=>$regionF,'estado_id'=>$estadoF]
+						);
 
-		$iddC=(integer)DB::table('direcciones')->insertGetId//insercion de direcciones direccion comercial
-			(
+					$iddC=(integer)DB::table('direcciones')->insertGetId//insercion de direcciones direccion comercial
+						(
 
-				['descripcion'=>$direccionC,'municipio_id'=>$municipioC,'pais_id'=>$paisC,'region_id'=>$regionC,'estado_id'=>$estadoC]
-			);
+							['descripcion'=>$direccionC,'municipio_id'=>$municipioC,'pais_id'=>$paisC,'region_id'=>$regionC,'estado_id'=>$estadoC]
+						);
 
-		 DB::table('clientes')->insert
-		 	(
+					 DB::table('clientes')->insert
+					 	(
 
-		 		['razon_s'=>$razonS,'nombre_c'=>$nombreC,'rif_id'=>$idR,'tipo_id'=>$tipoC,'direccion_id'=>$iddF,'direccion__id'=>$iddC,'contacto_id'=>$idC]
-		 	);
+					 		['razon_s'=>$razonS,'nombre_c'=>$nombreC,'rif_id'=>$idR,'tipo_id'=>$tipoC,'direccion_id'=>$iddF,'direccion__id'=>$iddC,'contacto_id'=>$idC]
+					 	);
+		}
+	else if ($operacion!=0)//$operacion trae el id del registro a modificar en la tabla clientes
+		{
 
+
+				$cliente=DB::table('clientes')->where('clientes.id',$operacion)->first();//cliente a modificar
+
+				//////modificacion de razonS, nombreC y tipo contribuyente
+				DB::table('clientes')->where('clientes.id',$operacion)->update(['razon_s'=>$razonS,'nombre_c'=>$nombreC,'tipo_id'=>$tipoC]);
+				////modificacion del rif 
+				DB::table('rifs')->where('rifs.id',$cliente->rif_id)->update(['numero'=>$numeroR,'tipo_id'=>$tipoR]);
+				///modificacion de la direccion Fiscal
+				DB::table('direcciones')->where('direcciones.direccion_id',$cliente->direccion_id)->update(['descripcion'=>$direccionF,'municipio_id'=>$municipioF,'pais_id'=>$paisF,'region_id'=>$regionF,'estado_id'=>$estadoF]);
+				///modificacion de la direccion comercial
+				DB::table('direcciones')->where('direcciones.direccion_id',$cliente->direccion__id)->update(['descripcion'=>$direccionC,'municipio_id'=>$municipioC,'pais_id'=>$paisC,'region_id'=>$regionC,'estado_id'=>$estadoC]);
+				//modificacion contactos
+				DB::table('contactos')->where('contactos.id',$cliente->contacto_id)->update(['tipo_id'=>$codigoC,'tipo__id'=>$codigoL,'telefono_m'=>$telefonoM,'telefono_f'=>$telefonoL,'correo'=>$correo]);
+		}
 
 		return redirect('/menu/registros/clientes');
 	}
