@@ -14,6 +14,13 @@
                             </div>
                         </div>
                         <div class="container">
+                            <div class="row">
+                                <div class="col-md-2" align="left">
+                                    <a href="/menu/registros/planeservicios/"><button id="btnBk" type="button" class="btnBk" href="#"><i class="fa fa-chevron-left"></i> VOLVER</button></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container">
                             <div class="col-md-10 col-md-offset-2 spc">
                                 <div class="row espFil">
                                     <a id="" type="button" class="btn" data-toggle="modal" data-target="#myModal1" href="#myModal1">
