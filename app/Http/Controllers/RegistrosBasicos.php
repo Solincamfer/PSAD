@@ -327,7 +327,7 @@ class RegistrosBasicos extends Controller
 		$telefonoL=Request::get('numTelmvlRpb');//numero local
 		$correo=Request::get('mail2');//correp
 
-		$id_responsable=(int)Request::get('idResponsable');
+		$id_responsable=(int)Request::get('Registroid');
 		$id_cliente=(int)$id_cliente;
 
 
