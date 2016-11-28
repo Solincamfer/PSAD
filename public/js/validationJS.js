@@ -107,8 +107,8 @@ function CantidadTabs(nombreId){
                 }   
               }
             var inputsVacios=idExistentes - inputLleno;
-              //alert('Campos existentes:'+idExistentes);
-              //alert('Campos llenos:'+inputLleno); 
+              alert('Campos existentes:'+idExistentes);
+              alert('Campos llenos:'+inputLleno); 
               //alert('Campos vacios:'+inputsVacios); 
             if (inputsVacios===0) {
                  //alert('Formulario completo');

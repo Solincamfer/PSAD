@@ -7,9 +7,7 @@ $( "#log" ).submit(function( event ){
 $( "#Formcliente" ).submit(function( event ){
 	event.preventDefault();
 	});
-$( "#Formclientemd" ).submit(function( event ){
-	event.preventDefault();
-	});
+
 ////////////////////
 ////Validacion + permisologia + AJAX del boton submit de la vista LOGIN////
 $('#log1').click(function(){
@@ -403,7 +401,9 @@ $("#ippp3").change(function(){
     	}
 });
 
+	$("").clik(function(){
 
+});
 
 
 
