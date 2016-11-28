@@ -7,8 +7,8 @@ $(document).ready(function(){
  });
 
  $('#btnModificarCliente').click(function(){
-    var idInputForm=['in1','inn1','innn1','innnn1'];
-    var idpanelsTabs='am1';
+    var idInputForm=['in1','inn','innn1','innnn1'];
+    var idpanelsTabs='amm';
     Normal(this,idInputForm,idpanelsTabs);
  });
 

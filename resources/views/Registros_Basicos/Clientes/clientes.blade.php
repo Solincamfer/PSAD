@@ -299,13 +299,13 @@
 									<h4 class="modal-title" id="myModalLabel2">Modificar</h4>
 								</div>
 							<form method="post" class="form-horizontal Validacion" id="Formclientemd" action="">
-										
+									{{ csrf_field() }}	
 										<div class="modal-body">						
 											 <ul class="nav nav-tabs" role="tablist">
-                                                <li role="presentation" class="active" ><a href="#panelmd1" id="am10" aria-controls="panelmd1" role="tab" data-toggle="tab">Datos basicos</a></li>
-                                                <li role="presentation" ><a href="#panelmd2" id="am11" aria-controls="panelmd2" role="tab" data-toggle="tab">Dirección Fiscal</a></li>
-                                                <li role="presentation" ><a href="#panelmd3" id="am12" aria-controls="panelmd3" role="tab" data-toggle="tab">Direccion Comercial</a></li>
-                                                <li role="presentation" ><a href="#panelmd4" id="am13" aria-controls="panelmd4" role="tab" data-toggle="tab">Contacto</a></li>
+                                                <li role="presentation" class="active" ><a href="#panelmd1" id="amm0" aria-controls="panelmd1" role="tab" data-toggle="tab">Datos basicos</a></li>
+                                                <li role="presentation" ><a href="#panelmd2" id="amm1" aria-controls="panelmd2" role="tab" data-toggle="tab">Dirección Fiscal</a></li>
+                                                <li role="presentation" ><a href="#panelmd3" id="amm2" aria-controls="panelmd3" role="tab" data-toggle="tab">Direccion Comercial</a></li>
+                                                <li role="presentation" ><a href="#panelmd4" id="amm3" aria-controls="panelmd4" role="tab" data-toggle="tab">Contacto</a></li>
                                             </ul>
 										<div class="container-fluid">
 											<div class="tab-content">
@@ -395,7 +395,7 @@
 														</div>
 														<div class="form-group col-md-12" id="dfc5">
 																<label for="descDirdf">Descripción de la dirección</label>
-															<textarea type="text" name="descDirdf" id="in" class="form-control userEmail"></textarea><i class="fa fa-map-marker" id="icc10"></i>
+															<textarea type="text" name="descDirdf" id="inn5" class="form-control userEmail"></textarea><i class="fa fa-map-marker" id="icc10"></i>
 														</div>
 													</div>
 												
@@ -409,7 +409,10 @@
 														<div class="form-group col-md-6" id="dfc1">
 															<label for="paispf">País</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
 															<select name="paisdf" id="innn11" class="form-control userEmail">
-															<option value="">-</option>									
+															<option value="">-</option>		
+															@foreach($paises as $pais)
+																		<option value="{{$pais->id}}">{{$pais->descripcion}}</option>
+																@endforeach							
 															</select><i class="fa fa-globe" id="icc6"></i>
 														</div>
 														<div class="form-group col-md-7" id="dfc2">
