@@ -1225,14 +1225,14 @@
                 #rRpbm4 input:focus, #rRpbm5 select:focus, 
                 #rRpbm5 input:focus, #rRpbm6 input:focus, 
                 #rRpbm6 select:focus, #rRpbm7 input:focus, 
-                #rRpbm8 select:focus,  #rRpbm9 select:focus, 
+                #rRpbm8 input:focus,  #rRpbm9 select:focus, 
                 #rRpbm9 input:focus,  #rRpbm10 select:focus, 
                 #rRpbm10 input:focus, #rRpbm11 input:focus,
                 #rRpbc1 input:focus, #rRpbc2 input:focus, 
                 #rRpbc3 input:focus, #rRpbc4 input:focus, 
                 #rRpbc5 select:focus, #rRpbc5 input:focus,
                 #rRpbc6 input:focus, #rRpbc6 select:focus,
-                #rRpbc7 input:focus, #rRpbc8 select:focus, 
+                #rRpbc7 input:focus, #rRpbc8 input:focus, 
                 #rRpbc9 select:focus, #rRpbc9 input:focus, 
                 #rRpbc10 select:focus, #rRpbc10 input:focus,
                 #rRpbc11 input:focus, #rRpbcm1 input:focus, 
@@ -1240,7 +1240,7 @@
                 #rRpbcm4 input:focus, #rRpbcm5 select:focus, 
                 #rRpbcm5 input:focus, #rRpbcm6 input:focus, 
                 #rRpbcm6 select:focus, #rRpbcm7 input:focus, 
-                #rRpbcm8 select:focus,  #rRpbcm9 select:focus, 
+                #rRpbcm8 input:focus,  #rRpbcm9 select:focus, 
                 #rRpbcm9 input:focus,  #rRpbcm10 select:focus, 
                 #rRpbcm10 input:focus, #rRpbcm11 input:focus{
                     outline: none;
@@ -1355,7 +1355,7 @@
                         margin-bottom: 10px;
                         width: 100%;
                         border: 1px solid #ddd;
-                        text-indent: 12px;
+                        text-indent: 18px;
                         transition: border-width .2s ease-in-out;
                         border-radius: 2px;
                         color: #ccc;
@@ -1897,3 +1897,36 @@
 .spc{
     margin-top: 20px;
 }
+
+/*Perfil*/
+
+.centrado{
+    margin-top: 30px;
+    margin-left: 20px;
+    width: 78%;
+    height: 380px;
+    background: rgba(3, 3, 3, .7);
+    box-shadow: 15px 15px 20px 1px #aaa;
+}
+
+.spm{
+    margin-top: 20px;
+}
+
+.dist {
+    margin-right: 45px;
+    margin-left: 30px;
+}
+
+.card1{
+    height: 300px;
+    margin: 0;
+    position: absolute;
+    left: 0;
+    padding: 0;
+    width: 290px;
+    background: #E5E5E7;
+    box-shadow: 10px 10px 15px 1px #222;
+    overflow-y: scroll;
+}
+
