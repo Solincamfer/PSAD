@@ -313,8 +313,67 @@ class RegistrosBasicos extends Controller
 
 
 
+	public function clientes_actualizar()
+	{
 
-	public function clientes_insertar()//debe estar habilitado el boton aceptar
+		$razonS=Request::get('rs');//razon social
+		$nombreC=Request::get('nc');//nombre comercial
+		
+		$tipoR=(int) Request::get('rif');//tipo rif
+		$numeroR= Request::get('df');//numero rif
+		
+		$tipoC=(int)Request::get('tipCon');//tipo de contribuyente
+		
+		
+		
+		$direccionF=Request::get('descDirdf');//direccion fiscal
+		$paisF=(int)Request::get('paisdf');//pais fiscal
+		$regionF=(int)Request::get('regiondf');//region fiscal
+		$estadoF=(int)Request::get('edodf');//estado fiscal
+		$municipioF=(int)Request::get('mundf');//municipiofiscal
+		
+		$direccionC=Request::get('descDirdf');//direccion comercial
+		$paisC=(int)Request::get('paisdc');//pais comercial
+		$regionC=(int)Request::get('regiondc');//region comercial
+		$estadoC=(int)Request::get('edodc');//estado comercial
+		$municipioC=(int)Request::get('mundc');//municipio comercial
+
+		
+		$codigoL=Request::get('tlflcl');//codigo local
+		$codigoC=Request::get('tlfmvl');//codigo movil
+
+		$telefonoM=Request::get('tmvl');//nro movil
+		$telefonoL=Request::get('tcl');//nro local
+		
+
+		$correo=Request::get('mail');//correo electronico
+
+		
+
+
+		$id_cliente=(int)Request::get('Clienteid');//id del cliente a modificar
+
+		$cliente=DB::table('clientes')->where('id',$id_cliente)->first();//cliente a modificar
+
+		if (empty($cliente)==false)//si el cliente a modifica existe
+			{	//////modificacion de razonS, nombreC y tipo contribuyente
+				DB::table('clientes')->where('id',$id_cliente)->update(['razon_s'=>$razonS,'nombre_c'=>$nombreC,'tipo_id'=>$tipoC]);
+				// ////modificacion del rif 
+				 DB::table('rifs')->where('id',$cliente->rif_id)->update(['numero'=>$numeroR,'tipo_id'=>$tipoR]);
+				// ///modificacion de la direccion Fiscal
+				 DB::table('direcciones')->where('id',$cliente->direccion_id)->update(['descripcion'=>$direccionF,'municipio_id'=>$municipioF,'pais_id'=>$paisF,'region_id'=>$regionF,'estado_id'=>$estadoF]);
+				// ///modificacion de la direccion comercial
+				 DB::table('direcciones')->where('id',$cliente->direccion__id)->update(['descripcion'=>$direccionC,'municipio_id'=>$municipioC,'pais_id'=>$paisC,'region_id'=>$regionC,'estado_id'=>$estadoC]);
+				// //modificacion contactos
+				DB::table('contactos')->where('contactos.id',$cliente->contacto_id)->update(['tipo_id'=>$codigoC,'tipo__id'=>$codigoL,'telefono_m'=>$telefonoM,'telefono_f'=>$telefonoL,'correo'=>$correo]);
+			}
+
+		return redirect('/menu/registros/clientes');
+
+	}
+
+
+	public function clientes_insertar()//inserta en la base de datos un nuevo cliente matriz
 	{
 		
 		//capturar datos del formulario
@@ -335,7 +394,7 @@ class RegistrosBasicos extends Controller
 		$estadoF=(int)Request::get('edodf');//estado fiscal
 		$municipioF=(int)Request::get('mundf');//municipiofiscal
 		
-		$direccionC=(int)Request::get('descDirdc');//direccion comercial
+		$direccionC=Request::get('descDirdc');//direccion comercial
 		$paisC=(int)Request::get('paisdc');//pais comercial
 		$regionC=(int)Request::get('regiondc');//region comercial
 		$estadoC=(int)Request::get('edodc');//estado comercial
@@ -351,15 +410,13 @@ class RegistrosBasicos extends Controller
 
 		$correo=Request::get('mailsv');//correo electronico
 
-		$operacion=(int)Request::get('Clienteid');//campo hidden que indica la operaqcion a realizar 
+		
 
 		
 
 		////inserciones
 		
-		if($operacion==0)
-		{
-					$idR= DB::table('rifs')->insertGetId//insertar rif 
+				$idR= DB::table('rifs')->insertGetId//insertar rif 
 						(
 							['numero'=>$numeroR,'tipo_id'=>$tipoR]
 						);
@@ -390,26 +447,11 @@ class RegistrosBasicos extends Controller
 
 					 		['razon_s'=>$razonS,'nombre_c'=>$nombreC,'rif_id'=>$idR,'tipo_id'=>$tipoC,'direccion_id'=>$iddF,'direccion__id'=>$iddC,'contacto_id'=>$idC]
 					 	);
-		}
-	else if ($operacion!=0)//$operacion trae el id del registro a modificar en la tabla clientes
-		{
+		
+	
 
 
-				$cliente=DB::table('clientes')->where('clientes.id',$operacion)->first();//cliente a modificar
-
-				//////modificacion de razonS, nombreC y tipo contribuyente
-				DB::table('clientes')->where('clientes.id',$operacion)->update(['razon_s'=>$razonS,'nombre_c'=>$nombreC,'tipo_id'=>$tipoC]);
-				////modificacion del rif 
-				DB::table('rifs')->where('rifs.id',$cliente->rif_id)->update(['numero'=>$numeroR,'tipo_id'=>$tipoR]);
-				///modificacion de la direccion Fiscal
-				DB::table('direcciones')->where('direcciones.direccion_id',$cliente->direccion_id)->update(['descripcion'=>$direccionF,'municipio_id'=>$municipioF,'pais_id'=>$paisF,'region_id'=>$regionF,'estado_id'=>$estadoF]);
-				///modificacion de la direccion comercial
-				DB::table('direcciones')->where('direcciones.direccion_id',$cliente->direccion__id)->update(['descripcion'=>$direccionC,'municipio_id'=>$municipioC,'pais_id'=>$paisC,'region_id'=>$regionC,'estado_id'=>$estadoC]);
-				//modificacion contactos
-				DB::table('contactos')->where('contactos.id',$cliente->contacto_id)->update(['tipo_id'=>$codigoC,'tipo__id'=>$codigoL,'telefono_m'=>$telefonoM,'telefono_f'=>$telefonoL,'correo'=>$correo]);
-		}
-
-		return redirect('/menu/registros/clientes');
+		return redirect('/menu/registros/clientes');//retorna a la vista clientes listado todos los clientes matriz de la base de datos;
 	}
 
 
