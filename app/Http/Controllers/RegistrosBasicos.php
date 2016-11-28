@@ -293,7 +293,7 @@ class RegistrosBasicos extends Controller
 	public function clientes_modificar_responsables()//consulta para modificar responsables
 	{
 
-		$id=(int)Request::get('idCliente');
+		$id=(int)Request::get('idResponsable');
 		
 		$resp=DB::table('personas')
 					->join('cedulas','personas.cedula_id','=','cedulas.id')
@@ -312,6 +312,41 @@ class RegistrosBasicos extends Controller
 	}
 
 
+	public function clientes_actualizar_responsable($id_cliente)
+	{
+
+
+		$Pnombre=Request::get('nomRpb1');//nombre
+		$Papellido=Request::get('apellRpb1');//apellido
+		$cargo=Request::get('cgoRpb');//cargo
+		$numeroC=Request::get('RpMda4');//numero cedula
+		$tipoC=Request::get('selciRpb');//tipo cedula
+		$codigoC=Request::get('seltlfRpb');//codigo celular
+		$codigoL=Request::get('seltlfmRpb');//codigo local
+		$telefonoC=Request::get('numTelclRpb');//numero celular
+		$telefonoL=Request::get('numTelmvlRpb');//numero local
+		$correo=Request::get('mail2');//correp
+
+		$id_responsable=(int)Request::get('idResponsable');
+		$id_cliente=(int)$id_cliente;
+
+
+		$persona=DB::table('personas')->where('id',$id_cliente)->first();//$persona a modificar
+		if(empty($persona)==false)//si existe
+			{
+
+				DB::table('personas')->where('id',$persona->id)//actualizar nombre, apellido y cargo
+									 ->update(['p_nombre'=>$Pnombre,'p_apellido'=>$Papellido,'cargo'=>$cargo]);	
+
+				DB::table('cedulas')->where('id',$persona->cedula_id)->update(['numero'=>$numeroC,'tipo_id'=>$tipoC]);//actualizar numero de cedula y tipo		
+
+				DB::table('contactos')->where('id',$persona->contactos_id)->update(['tipo_id'=>$codigoC,'tipo__id'=>$codigoL,'telefono_m'=>$telefonoC,'telefono_f'=>$telefonoL,'correo'=>$correo]);	//actualizar datos de contactos		 
+			}
+
+
+			return redirect('/menu/registros/clientes/responsable/'.(string)$cliente_id);
+
+	}
 
 	public function clientes_actualizar()
 	{
