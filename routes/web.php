@@ -108,6 +108,9 @@ Route::group(['prefix'=>'/menu/registros','middleware'=>['v_menu']],function()
 
 				Route::match(['post','get'],'/clientes/categoria/agregar/{cliente_id}',						   ['uses'=>'RegistrosBasicos@clientes_categoria_agregar']);
 				Route::match(['post','get'],'/clientes/responsables/actualizar/{cliente_id}',				 ['uses'=>'RegistrosBasicos@clientes_actualizar_responsable']);
+				Route::match(['post','get'],'/perfiles/modificar',				 ['uses'=>'RegistrosBasicos@perfiles_modificar]);
+
+
 				}
 			);
 

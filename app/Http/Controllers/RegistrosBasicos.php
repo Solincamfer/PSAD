@@ -696,4 +696,14 @@ public function perfiles()
 	return view('Registros_Basicos\Perfiles\perfiles',$this->datos_vista($datos,$acciones,array()));
 }
 
+
+public function perfiles_modificar()
+{
+
+	$datos=$this->cargar_header_sidebar_acciones();
+	$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(84,85),83);
+	return view('Registros_Basicos\Perfiles\perfiles_modificar',$this->datos_vista($datos,$acciones,array()));
+}
+
+
 }
