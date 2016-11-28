@@ -306,7 +306,7 @@ class RegistrosBasicos extends Controller
 						     'contactos.telefono_f As telefonoL','personas.cliente_id As matriz','contactos.correo As correo')->where('personas.id',(int)$id)->first();
 
 		return array($resp->nombre,$resp->apellido,$resp->cargo,$resp->numeroC,$resp->tipoC,$resp->tipoCV,
-					 $resp->codigoC,$resp->telefonoC,$resp->codigoL,$resp->telefonoL,$resp->matriz);
+					 $resp->codigoC,$resp->telefonoC,$resp->codigoL,$resp->telefonoL,$resp->matriz,$resp->correo);
 		
 		
 	}
