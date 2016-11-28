@@ -14,55 +14,53 @@
                             </div>
                         </div>
                         <div class="container">
-                            <div class="col-md-10 col-md-offset-2">
+                            <div class="col-md-10 col-md-offset-2 spc">
                                 <div class="row espFil">
-                                    <div class="col-md-2 hh">
-                                        <a id="" type="button" class="btn" data-toggle="modal" data-target="#myModal1" href="#myModal1">
+                                    <a id="" type="button" class="btn" data-toggle="modal" data-target="#myModal1" href="#myModal1">
+                                        <div class="col-md-2 hh">
                                             <div class="col-md-8 col-md-offset-2">
                                                 <img src="{{asset('img/passage-of-time.png')}}" alt="" class="im">
                                             </div>
-                                        </a>
-                                    </div>
-                                    <div class="col-md-2 sp">
-                                        <a id="" type="button" class="btn" data-toggle="modal" data-target="#myModal2" href="#myModal2">
+                                        </div>
+                                    </a>
+                                    <a id="" type="button" class="btn" data-toggle="modal" data-target="#myModal2" href="#myModal2">
+                                        <div class="col-md-2 sp">
                                             <div class="col-md-8 col-md-offset-2">
                                                 <img src="{{asset('img/lifeline-signal.png')}}" alt="" class="im">
                                             </div>
-                                        </a>
-                                    </div>
-                                    <div class="col-md-2 sr">
-                                        <a id="" type="button" class="btn" data-toggle="modal" data-target="#myModal3" href="#myModal3">
+                                        </div>
+                                    </a>
+                                    <a id="" type="button" class="btn" data-toggle="modal" data-target="#myModal3" href="#myModal3">
+                                        <div class="col-md-2 sr">
                                             <div class="col-md-8 col-md-offset-2">
                                                 <img src="{{asset('img/shopping-support-online.png')}}" alt="" class="im">
                                             </div>
-                                        </a>
-                                    </div>
-
-
+                                        </div>
+                                    </a>
                                 </div>
                                 <div class="row espFil">
-                                    <div class="col-md-2 st">
-                                        <a id="" type="button" class="btn" data-toggle="modal" data-target="#myModal4" href="#myModal4">
+                                    <a id="" type="button" class="btn" data-toggle="modal" data-target="#myModal4" href="#myModal4">
+                                        <div class="col-md-2 st">
                                             <div class="col-md-8 col-md-offset-2">
                                                 <img src="{{asset('img/technical-support.png')}}" alt="" class="im">
                                             </div>
-                                        </a>
-                                    </div>
-                                    <div class="col-md-2 tr">
-                                        <a id="" type="button" class="btn" data-toggle="modal" data-target="#myModal5" href="#myModal5">
+                                        
+                                        </div>
+                                    </a>
+                                    <a id="" class="btn" data-toggle="modal" data-target="#myModal5" href="#myModal5">
+                                        <div class="col-md-2 tr">
                                             <div class="col-md-8 col-md-offset-2">
                                                 <img src="{{asset('img/technical-service-van.png')}}" alt="" class="im">
                                             </div>
-                                        </a>
-                                    </div>
-
-                                    <div class="col-md-2 mant">
-                                        <a id="" type="button" class="btn" data-toggle="modal" data-target="#myModal5" href="#myModal5">
+                                        </div>
+                                    </a>
+                                    <a id="" class="btn">
+                                        <div class="col-md-2 mant">
                                             <div class="col-md-8 col-md-offset-2">
                                                 <img src="{{asset('img/mechanic-tools.png')}}" alt="" class="im">
                                             </div>
-                                        </a>
-                                    </div>
+                                        </div>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -145,7 +143,7 @@
                                                     <div class="col-md-6 col-md-offset-3">
                                                         <label class="radio-inline flb"><input type="radio" name="radio">Soporte presencial contabilizada</label>
                                                         <div class="form-group row icc2">
-                                                            <input type="number" placeholder="Cantidad de visitas mensuales"><i class="fa fa-briefcase"></i>
+                                                            <input type="number" placeholder="Cantidad de visitas mensuales"><i class="fa fa-laptop"></i>
                                                         </div>
                                                         <label class="radio-inline flb"><input type="radio" name="radio">Respuesta presencial por emergencia</label>
                                                     </div>
@@ -181,7 +179,7 @@
                                                     <div class="col-md-6 col-md-offset-3">
                                                         <label class="radio-inline flb"><input type="radio" name="radio">Soporte remoto contabilizado</label>
                                                         <div class="form-group row icc2">
-                                                            <input type="number" placeholder="Cantidad de conexiones Remotas"><i class="fa fa-briefcase"></i>
+                                                            <input type="number" placeholder="Cantidad de conexiones Remotas"><i class="fa fa-desktop"></i>
                                                         </div>
                                                         <label class="radio-inline flb"><input type="radio" name="radio">Soporte remoto ilimitado</label>
                                                     </div>
@@ -201,6 +199,76 @@
                                 </div>
                             </div>
                         </div>
+
+                        <!--Soporte telefónico-->
+                        <div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel4">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="myModalLabel4">Modificar Servicio "Soporte Telefónico"</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="">
+                                            <div class="container-fluid contsr">
+                                                <div class="rSrv">
+                                                    <div class="col-md-6 col-md-offset-3">
+                                                        <label class="radio-inline flb"><input type="radio" name="radio">Soporte telefónico contabilizado</label>
+                                                        <div class="form-group row icc2">
+                                                            <input type="number" placeholder="Cantidad de llamadas semanales"><i class="fa fa-phone"></i>
+                                                        </div>
+                                                        <label class="radio-inline flb"><input type="radio" name="radio">Soporte telefónico ilimitada</label>
+                                                    </div>
+                                                    <div class="col-md-6 col-md-offset-3">
+                                                        <div class="form-group row icc3">
+                                                            <input type="number" placeholder="Precio"><i class="fa fa-money"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="bttnMd" id="btnSv">Guardar <i class="fa fa-floppy-o"></i></button>
+                                        <button type="button" class="bttnMd" data-dismiss="modal" id="btnCs">Cerrar <i class="fa fa-times"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--Tiempo de Respuesta-->
+                        <div class="modal fade" id="myModal5" tabindex="-1" role="dialog" aria-labelledby="myModalLabel5">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="myModalLabel5">Modificar Servicio "Soporte Telefónico"</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="">
+                                            <div class="container-fluid contsr">
+                                                <div class="rSrv">
+                                                    <div class="col-md-6 col-md-offset-3">
+                                                        <label class="flb" for="">Tiempo de Respuesta("Horas")</label>
+                                                        <div class="form-group row icc2">
+                                                            <input type="number" placeholder="No Maximo a"><i class="fa fa-wrench"></i>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 col-md-offset-3">
+                                                        <div class="form-group row icc3">
+                                                            <input type="number" placeholder="Precio"><i class="fa fa-money"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="bttnMd" id="btnSv">Guardar <i class="fa fa-floppy-o"></i></button>
+                                        <button type="button" class="bttnMd" data-dismiss="modal" id="btnCs">Cerrar <i class="fa fa-times"></i></button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
     @endsection

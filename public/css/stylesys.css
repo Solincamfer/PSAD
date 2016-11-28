@@ -54,7 +54,23 @@
 
     a{
         text-decoration: none;
-    }    
+        border: none;
+    }
+
+    a:focus, a:active, a:after, a:before{
+        border: none;
+        outline: none;
+    }
+
+    *[type="button"], *[type="button"]:active, *[type="button"]:focus{
+        border: none;
+        outline: none;
+    }
+
+    .btn, .btn:focus, .btn:active{
+        border: none;
+        outline: none;  
+    }
 
 /**Clases**/
 
@@ -1715,6 +1731,7 @@
 
 .hh, .sp, .sr, .st, .tr, .mant{
     height: 150px;
+    width: 150px;
     margin-right: 10px;
     box-shadow: 4px 5px 15px 1px rgba(0, 0, 0, 0.3);
     transition: all .3s ease;
@@ -1750,8 +1767,17 @@
     width: 120px;
     position: absolute;
     left: 0;
-    margin-top: px;
-    margin-left: -12px;
+}
+
+
+.mant .im{
+    margin-top: 15px;
+    margin-left: -19px;
+}
+
+.hh .im, .sp .im, .sr .im, .st .im, .tr .im{
+    margin-top: 13px;
+    margin-left: -17px;
 }
 
 .hh:hover{
@@ -1774,6 +1800,9 @@
     background: rgba(220, 74, 59, .4);
 }
 
+.mant:hover{
+    background: rgba(70, 122, 184, .4);
+}
 /*modal*/
 
 .contsr1{
@@ -1864,4 +1893,8 @@
 
 .rSrv .icc .down #i2{
     margin-top: 0px;
+}
+
+.spc{
+    margin-top: 20px;
 }
