@@ -13,6 +13,13 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-2" align="left">
+                                    <a href="/menu/registros/perfiles/"><button id="btnBk" type="button" class="btnBk" href="#"><i class="fa fa-chevron-left"></i> VOLVER</button></a>
+                                </div>
+                            </div>
+                        </div>
                         <div class="container centrado">
                             <div class="row spm">
                                 <div class="col-md-3 dist1">

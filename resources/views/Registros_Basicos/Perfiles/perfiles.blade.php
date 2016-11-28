@@ -39,7 +39,7 @@
                                         <div class="container-fluid" id="contpfl">
                                             <div class="form-group row" id="rPfl1">
                                                 <div class="col-md-8 col-md-offset-2">
-                                                    <label for="duPfl">Descripcion del Usuario</label>
+                                                    <label for="duPfl">Nombre del Perfil</label>
                                                     <input type="text" class="form-control" name="duPfl" id="duPfl"><i class="fa fa-id-badge"></i>
                                                 </div>
                                             </div>

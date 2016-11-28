@@ -1902,7 +1902,8 @@
 
 .centrado{
     margin-top: 20px;
-    width: 100%;
+    margin-left: 25px;
+    width: 80%;
     height: 390px;
     background: rgba(3, 3, 3, .7);
     box-shadow: 15px 15px 20px 1px #aaa;
@@ -1919,7 +1920,7 @@
 }
 
 .dist1 {
-    margin-left: 60px;
+    margin-left: 40px;
 }
 
 .dist2 {
@@ -1936,7 +1937,7 @@
     position: absolute;
     left: 0;
     padding: 0;
-    width: 350px;
+    width: 290px;
     background: #E5E5E7;
     overflow-y: scroll;
     box-shadow: 10px 10px 15px 1px #222;
@@ -2035,6 +2036,7 @@
     font-size: 18px;
     text-decoration: none;
     color: #e5e5e7;
+    margin-left: -10px;
 }
 
 .iclst a, .iclst a:hover, .iclst a:active, .iclst a:focus{
