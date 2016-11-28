@@ -440,7 +440,9 @@
 														<div class="form-group col-md-12" id="dfc5">
 																<label for="descDirdf">Descripción de la dirección</label>
 															<textarea type="text" name="descDirdf" id="innn15" class="form-control userEmail"></textarea><i class="fa fa-map-marker" id="icc10"></i>
+															<input type="text" name="Clienteid" id="Clienteid">
 														</div>
+
 													</div>	
 														</div>													
 														

@@ -275,7 +275,9 @@ $("#ippp3").change(function(){
 	
 	$(".tltp").click(function(){
 			ID = $(this).attr("id");			
-			idCliente=$('#idCliente'+ID).val();		
+			idCliente=$('#idCliente'+ID).val();	
+
+			$('#Clienteid').val(idCliente);			
 	        $.get("/menu/registros/clientes/modificar", {idCliente: idCliente}, function(data){
 	        		$('#in11').val(data[0]);
 	        		$('#in12').val(data[1]);
@@ -442,12 +444,7 @@ $("#ippp3").change(function(){
 });
 
 
-$('#btnModificarCliente').click(function(){
-    ID = $(this).attr("id");			
-			idCliente=$('#idCliente'+ID).val();		
-	        $.get("/menu/registros/clientes/insertar", {idCliente: idCliente}, function(data){
- 			});
-});
+
 
 
 
