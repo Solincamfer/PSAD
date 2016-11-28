@@ -54,24 +54,37 @@ $('#log1').click(function(){
 	}
 });
 
-$("#inn1").change(function(){
 
-	$("#inn1 option:selected").each(function () {			
-    		var name=$('#inn1').attr("name");
+
+$("#inn1").change(function(){
+	$("#inn1 option:selected").each(function () {
+			$( ".limpiarnn0" ).remove();	
+			$('#inn2 option:selected').val(0);  
+	        $('#inn2 option:selected').html(""); 
+			$( ".limpiarnn1" ).remove();	
+			$('#inn3 option:selected').val(0);  
+	        $('#inn3 option:selected').html(""); 
+	        $( ".limpiarnn2" ).remove();	
+			$('#inn4 option:selected').val(0);  
+	        $('#inn4 option:selected').html(""); 
+	        var name=$('#inn1').attr("name");
             elegido=$(this).val();
             var vector=[name,elegido];
             $.get("/menu/registros/clientes/registrar", { vector: vector }, function(data){
             	$.each(data, function(i, item) {
-            		$('#inn2').append('<option class="limpiarnn" value="'+item.id+'">'+item.descripcion+'</option>');
+            		$('#inn2').append('<option class="limpiarnn0" value="'+item.id+'">'+item.descripcion+'</option>');
 				})        
             });            
         });
-	$( ".limpiarnn" ).remove();
-			
-		});
-
+});
 $("#inn2").change(function(){
-	$("#inn2 option:selected").each(function () {			
+	$("#inn2 option:selected").each(function () {
+			$( ".limpiarnn1" ).remove();	
+			$('#inn3 option:selected').val(0);  
+	        $('#inn3 option:selected').html(""); 
+	        $( ".limpiarnn2" ).remove();	
+			$('#inn4 option:selected').val(0);  
+	        $('#inn4 option:selected').html(""); 
     		var name=$('#inn2').attr("name");
             elegido=$(this).val();
             var vector=[name,elegido];
@@ -81,18 +94,20 @@ $("#inn2").change(function(){
 				})        
             });            
         });
-	$( ".limpiarnn1" ).remove();
-			
+		
 		});
 
 $("#inn3").change(function(){
-	$("#inn3 option:selected").each(function () {			
+	$("#inn3 option:selected").each(function () {
+			$( ".limpiarnn2" ).remove();	
+			$('#inn4 option:selected').val(0);  
+	        $('#inn4 option:selected').html(""); 			
     		var name=$('#inn3').attr("name");
             elegido=$(this).val();
             var vector=[name,elegido];
             $.get("/menu/registros/clientes/registrar", { vector: vector }, function(data){
             	$.each(data, function(i, item) {
-            		$('#inn4').append('<option class="limpiarnn2" value="'+item.id+'">'+item.descripcion+'</option>');
+            		$('#inn4').append('<option class="limpiarnnn2" value="'+item.id+'">'+item.descripcion+'</option>');
 				})        
             });            
         });
@@ -252,7 +267,9 @@ $("#innn13").change(function(){
 	        		$('#in12').val(data[1]);
 	        		$('#in13').val(data[3]);
 	        		$('#in14').val(data[2]);
-	        		$('#in15').val(data[9]);
+	        		$('#in15').val(data[9]);	        		
+	        		$('#in').val(data[20]);
+	        		$('#innn15').val(data[30]);
 
 
 	        		$("#inn1 option[value="+ data[11] +"]").attr("selected",true);
@@ -274,7 +291,7 @@ $("#innn13").change(function(){
 				            var vector=[name,elegido];
 				            $.get("/menu/registros/clientes/registrar", { vector: vector }, function(data){
 				            	$.each(data, function(i, item) {
-				            		$('#inn2').append('<option class="limpiarnnn2" value="'+item.id+'">'+item.descripcion+'</option>');
+				            		$('#inn2').append('<option class="limpiarnn0" value="'+item.id+'">'+item.descripcion+'</option>');
 								})        
 				            });      
 
@@ -289,7 +306,7 @@ $("#innn13").change(function(){
 				            var vector=[name,elegido];
 				            $.get("/menu/registros/clientes/registrar", { vector: vector }, function(data){
 				            	$.each(data, function(i, item) {
-				            		$('#inn3').append('<option class="limpiarnnn2" value="'+item.id+'">'+item.descripcion+'</option>');
+				            		$('#inn3').append('<option class="limpiarnn1" value="'+item.id+'">'+item.descripcion+'</option>');
 								})        
 				            });      
 
@@ -304,7 +321,7 @@ $("#innn13").change(function(){
 				            var vector=[name,elegido];
 				            $.get("/menu/registros/clientes/registrar", { vector: vector }, function(data){
 				            	$.each(data, function(i, item) {
-				            		$('#inn4').append('<option class="limpiarnnn2" value="'+item.id+'">'+item.descripcion+'</option>');
+				            		$('#inn4').append('<option class="limpiarnn2" value="'+item.id+'">'+item.descripcion+'</option>');
 								})        
 				            });      
 
