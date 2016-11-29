@@ -427,6 +427,32 @@ $("#ippp3").change(function(){
 	});
 
 
+	$(".modificarCategoria").click(function(){
+
+		///////////BUSCADO BOTON CLICKEADO/////////////	
+			ID = $(this).attr("id");
+			idCategoria=$('#idcateg'+ID).val();
+			$('#Categoriaid').val(idCategoria);	
+		///////////PASANDO VARIABLE Y CARGANDO LISTADO CORRESPONDIENTE A LA SELECCION PREVIA Y ESPERANDO DATA COMO RESPUESTA/////////////			        	
+			$.get("/menu/registros/clientes/categoria/modificar", {idCategoria: idCategoria}, function(data){
+	    ///////////ASIGNANDO LOS VALORES DEL ARRAY A LOS IMPUT CORRESPONDIENTES DEL MODAL MODIFICAR/////////////	
+	        	
+	        		// $('#RpMda1').val(data[0]);
+	        		// $('#RpMda2').val(data[1]);
+	        		// $('#RpMda3').val(data[4]);
+	        		// $('#RpMda4').val(data[3]);
+	        		// $('#RpMda5').val(data[2]);	        		
+	        		// $('#RpMdaa1').val(data[6]);
+	        		// $('#RpMdaa2').val(data[7]);
+	        		// $('#RpMdaa3').val(data[8]);
+	        		// $('#RpMdaa4').val(data[9]);
+	        		// $('#RpMdaa5').val(data[11]);
+	        		alert(data);	
+	       });
+
+	});
+
+
 
 
 

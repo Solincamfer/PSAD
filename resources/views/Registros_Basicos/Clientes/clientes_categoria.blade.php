@@ -33,7 +33,7 @@
                                            @if($accion->descripcion!="Status")
                                                @if($accion->data_toogle=="modal")
                                                    <span class="iclsp">
-                                                       <a href="#myModal2" class="tltp" data-ttl="{{$accion->descripcion}}" data-toggle="modal" data-target="#myModal2">
+                                                       <a href="#myModal2" class="tltp modificarCategoria" data-ttl="{{$accion->descripcion}}" data-toggle="modal" id="m{{$categoria->id}}" data-target="#myModal2">
                                                            <i class="{{$accion->clase_css}}"></i>
                                                        </a>
                                                     </span>
@@ -58,6 +58,7 @@
                                        @endforeach
                                    </div>
                                     <p class="ttlMd"><strong>{{$categoria->nombre}}</strong></p>
+                                    <input type="text" name="idcateg{{$categoria->id}}" value="{{$categoria->id}}" id="idcategm{{$categoria->id}}">
                                 </div>
                           @endforeach
                         </div>
@@ -113,7 +114,7 @@
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                            <h4 class="modal-title" id="myModalLabel2">Agregar Categoría</h4>
+                                            <h4 class="modal-title" id="myModalLabel2">Modificar Categoría</h4>
                                         </div>
                                         <form action="/menu/registros/clientes/categoria/actualizar/{{$extra}}" class="Validacion">
                                             <div class="modal-body">
@@ -135,6 +136,7 @@
                                                                     <option value="1">Activo</option>
                                                                     <option value="2">Inactivo</option>
                                                                 </select><i class="fa fa-check" id="micct2"></i>
+                                                                <input type="text" name="Categoriaid" id="Categoriaid">
                                                             </div>
                                                         </div>
                                                     </div>
