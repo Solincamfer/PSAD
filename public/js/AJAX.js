@@ -430,7 +430,7 @@ $(".modificarCliente").click(function(){
 	        	
         		$('#CatM1').val(data[0]);
         		$('#CatM2').val(data[1]);
-        		///////Data para probar los campos resividos por el AJAX////->->->//alert(data);
+        		//->->->//alert(data);///////Data para probar los campos resividos por el AJAX//
 	       });
 
 	});
@@ -440,7 +440,7 @@ $(".modificarCliente").click(function(){
 		///////////BUSCADO BOTON CLICKEADO/////////////	
 			ID = $(this).attr("id");///////ID DEL BOTTON MODIFICAR/////////
 			idResponsable=$('#idresp_c'+ID).val();///////TRAER VALOR DEL ID DEL BOTTON MODIFICAR/////////	
-			$('#Registroid').val(idResponsable);///////ID DEL BOTTON MODIFICAR IGUALADA AL VALOR DEL CAMPO CORRESPONDIENTE AL ID SELECCIONADO/////////	
+			$('#Responsableid').val(idResponsable);///////ID DEL BOTTON MODIFICAR IGUALADA AL VALOR DEL CAMPO CORRESPONDIENTE AL ID SELECCIONADO/////////	
 		///////////PASANDO VARIABLE Y CARGANDO LISTADO CORRESPONDIENTE A LA SELECCION PREVIA Y ESPERANDO DATA COMO RESPUESTA/////////////			        	
 			$.get("/menu/registros/clientes/modificar/responsable", {idResponsable: idResponsable}, function(data){
 	    ///////////ASIGNANDO LOS VALORES DEL ARRAY A LOS IMPUT CORRESPONDIENTES DEL MODAL MODIFICAR/////////////		        	
@@ -455,7 +455,7 @@ $(".modificarCliente").click(function(){
         		$('#RpMdnn4').val(data[9]);
         		$('#RpMdnn5').val(data[11]);
 
-        		alert(data);///////Data para probar los campos resividos por el AJAX////->->->/
+        		//alert(data);///////Data para probar los campos resividos por el AJAX////->->->/
 	       });
 
 	});
