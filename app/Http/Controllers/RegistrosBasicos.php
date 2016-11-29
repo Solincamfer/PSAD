@@ -328,6 +328,8 @@ public function capturar_datos_responsables()
 		}
 
 
+
+
 			
 	public function clientes_modificar_responsables()//consulta para modificar responsables
 	{
@@ -351,41 +353,66 @@ public function capturar_datos_responsables()
 	}
 
 
-	public function clientes_actualizar_responsable($id_cliente)
+	public function formulario_actualizar_responsable()
 	{
-
-
 		$Pnombre=Request::get('nomRpb1');//nombre
 		$Papellido=Request::get('apellRpb1');//apellido
 		$cargo=Request::get('cgoRpb');//cargo
-		$numeroC=(int)Request::get('RpMda4');//numero cedula
+		$numeroC=(int)Request::get('RpMda4');//numero cedula selciRpb
 		$tipoC=(int)Request::get('selciRpb');//tipo cedula
-		$codigoC=(int)Request::get('seltlfRpb');//codigo celular
+		$codigoC=(int)Request::get('seltlfRpb');//codigo celular RpMda4 seltlfRpb
 		$codigoL=(int)Request::get('seltlfmRpb');//codigo local
-		$telefonoC=Request::get('numTelclRpb');//numero celular
-		$telefonoL=Request::get('numTelmvlRpb');//numero local
-		$correo=Request::get('mail2');//correp
+		$telefonoC=Request::get('numTelclRpb');//numero celular cgoRpb numTelclRpb
+		$telefonoL=Request::get('numTelmvlRpb');//numero local seltlfmRpb numTelmvlRpb
+		$correo=Request::get('mail2');//correp mail2
 
-		$id_responsable=(int)Request::get('Registroid');
-		$id_cliente=(int)$id_cliente;
+		$id_responsable=(int)Request::get('Registroid');//hiiden que trae el id del registro a modificar
 
+		return array('nombre'=>$Pnombre,'apellido'=>$Papellido,'cargo'=>$cargo,'cedula'=>$numeroC,'tipoC'=>$tipoC,
+					'codigoC'=>$codigoC,'codigoL'=>$codigoL,'telefonoC'=>$telefonoC,'telefonoL'=>$telefonoL,'correo'=>$correo,'responsableId'=>$id_responsable);
 
-		$persona=DB::table('personas')->where('id',$id_responsable)->first();//ubicar datos de la persona amodificar
+	}
+
+	public function consulta_actualizar_responsable($formulario)
+	{
+
+		$persona=DB::table('personas')->where('id',$formulario['responsableId'])->first();//ubicar datos de la persona amodificar
 		if(empty($persona)==false)//si existe
 			{
 
 				DB::table('personas')->where('id',$persona->id)//actualizar nombre, apellido y cargo
-									 ->update(['p_nombre'=>$Pnombre,'p_apellido'=>$Papellido,'cargo'=>$cargo]);	
+									 ->update(['p_nombre'=>$formulario['nombre'],'p_apellido'=>$formulario['apellido'],'cargo'=>$formulario['cargo']]);	
 
-				DB::table('cedulas')->where('id',$persona->cedula_id)->update(['numero'=>$numeroC,'tipo_id'=>$tipoC]);//actualizar numero de cedula y tipo		
+				DB::table('cedulas')->where('id',$persona->cedula_id)->update(['numero'=>$formulario['cedula'],'tipo_id'=>$formulario['tipoC']]);//actualizar numero de cedula y tipo		
 
-				DB::table('contactos')->where('id',$persona->contacto_id)->update(['tipo_id'=>$codigoC,'tipo__id'=>$codigoL,'telefono_m'=>$telefonoC,'telefono_f'=>$telefonoL,'correo'=>$correo]);	//actualizar datos de contactos		 
+				DB::table('contactos')->where('id',$persona->contacto_id)->update(['tipo_id'=>$formulario['codigoC'],'tipo__id'=>$formulario['codigoL'],'telefono_m'=>$formulario['telefonoC'],'telefono_f'=>$formulario['telefonoL'],'correo'=>$formulario['correo']]);	//actualizar datos de contactos		 
 			}
 
+	}
+
+	public function clientes_actualizar_responsable($id_cliente)
+	{
+
+		$formulario=$this->formulario_actualizar_responsable();
+		$this->consulta_actualizar_responsable($formulario);
+		$id_cliente=(int)$id_cliente;
+
+
+		
 
 			return redirect('/menu/registros/clientes/responsable/'.(string)$id_cliente);
-
 	}
+
+
+	public function categorias_actualizar_responsables($id_categoria)
+	{
+
+		$formulario=$this->formulario_actualizar_responsable();
+		$this->consulta_actualizar_responsable($formulario);
+
+		return redirect('/menu/registros/clientes/categoria/responsable/'.(string)$id_categoria);
+	}
+
 
 	public function clientes_actualizar()
 	{

@@ -209,7 +209,7 @@
                                 </div>
 
                                 
-                                <form method="post" class="form-horizontal Validacion" action="">
+                                <form method="post" class="form-horizontal Validacion" action="/menu/registros/clientes/categoria/actualizar/responsable/{{$datosC1}}">
                                         {{ csrf_field() }}
                                         <div class="modal-body">
                                             <ul class="nav nav-tabs" role="tablist" >
@@ -320,7 +320,7 @@
                                                                     <input type="text" name="mail2" id="RpMdnn5" class="form-control typeEmail">
                                                                     <i class="fa fa-envelope" id="micr15"></i>
                                                                 </div>
-                                                                <input type="text" name="Responsableid" id="Responsableid">
+                                                                <input type="text" name="Registroid" id="Responsableid">
                                                             </div>
                                                         </div>
                                                     </div>
