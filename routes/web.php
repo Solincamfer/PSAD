@@ -112,9 +112,10 @@ Route::group(['prefix'=>'/menu/registros','middleware'=>['v_menu']],function()
 
 				Route::match(['post','get'],'/clientes/categoria/actualizar/{id_categoria}',						   ['uses'=>'RegistrosBasicos@clientes_categorias_actualizar']);
 
-				Route::match(['post','get'],'/clientes/modificar/categoria',						   ['uses'=>'RegistrosBasicos@clientes_categorias_modificar']);
-				Route::match(['post','get'],'/clientes/actualizar/categoria',						   ['uses'=>'RegistrosBasicos@clientes_actualizar']);
-				Route::match(['post','get'],'/clientes/categoria/insertar/responsable/{categoria_id}',['uses'=>'RegistrosBasicos@clientes_insertar_responsable_categoria']);
+				Route::match(['post','get'],'/clientes/modificar/categoria',						  					['uses'=>'RegistrosBasicos@clientes_categorias_modificar']);
+				Route::match(['post','get'],'/clientes/actualizar/categoria',						   					['uses'=>'RegistrosBasicos@clientes_actualizar']);
+				Route::match(['post','get'],'/clientes/categoria/insertar/responsable/{categoria_id}',					['uses'=>'RegistrosBasicos@clientes_insertar_responsable_categoria']);
+				Route::match(['post','get'],'/clientes/categoria/modificar/responsable',								['uses'=>'RegistrosBasicos@clientes_modificar_responsables']);
 
 				}
 			);

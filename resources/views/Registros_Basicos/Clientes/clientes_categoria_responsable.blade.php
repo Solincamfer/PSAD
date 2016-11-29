@@ -208,7 +208,7 @@
                                 </div>
 
                                 
-                                <form method="post" class="form-horizontal Validacion" action="">
+                                <form method="post" class="form-horizontal Validacion" action="/menu/registros/clientes/categoria/modificar/responsable">
                                         {{ csrf_field() }}
                                         <div class="modal-body">
                                             <ul class="nav nav-tabs" role="tablist" >

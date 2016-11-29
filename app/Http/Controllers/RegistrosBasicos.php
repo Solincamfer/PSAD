@@ -299,7 +299,7 @@ public function capturar_datos_responsables()
 
 	
 
-	public function clientes_insertar_responsable($cliente_id)//agregar personas afiliadas a una empresa matriz
+	public function clientes_insertar_responsable($cliente_id)//agregar posibles responsables a una matriz
 	{
 		
 	
@@ -310,7 +310,7 @@ public function capturar_datos_responsables()
 
 
 
-	public function clientes_insertar_responsable_categoria($categoria_id)
+	public function clientes_insertar_responsable_categoria($categoria_id)//agregar posibles responsables a una categoria
 		{
 
 		
@@ -331,7 +331,7 @@ public function capturar_datos_responsables()
 	public function clientes_modificar_responsables()//consulta para modificar responsables
 	{
 
-		$id=(int)Request::get('idResponsable');
+		$id=(int)Request::get('idResponsable');//campo hiiden con el id del registro a modificar
 		
 		$resp=DB::table('personas')
 					->join('cedulas','personas.cedula_id','=','cedulas.id')
