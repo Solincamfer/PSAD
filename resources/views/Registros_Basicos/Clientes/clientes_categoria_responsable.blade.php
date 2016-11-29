@@ -33,7 +33,7 @@
                                        @if($accion->descripcion!="Status")
                                            @if($accion->data_toogle=="modal")
                                            <span class="iclsp">
-                                               <a href="#myModal2" class="tltp" data-ttl="{{$accion->descripcion}}" data-toggle="modal" data-target="#myModal2">
+                                               <a href="#myModal2" class="tltp modificarResponsable_clinete" data-ttl="{{$accion->descripcion}}" data-toggle="modal" data-target="#myModal2" id="m{{$responsable->id}}">
                                                    <i class="{{$accion->clase_css}}"></i>
                                                </a>
                                            </span>
@@ -57,6 +57,7 @@
                                        @endif
                                    @endforeach
                                </div>
+                                    <input type="text" name="idresp_c{{$responsable->id}}" value="{{$responsable->id}}" id="idresp_cm{{$responsable->id}}">
                                @if($responsable->id==$extra)
                                     <span class="ttlMd"><input type="radio" name="cat_rsp" id="cat_rsp" value="{{$responsable->id}}" checked> <label for="cat_rsp"><strong>{{$responsable->p_nombre." ".$responsable->p_apellido}}</strong></label></span>
                                @else
@@ -78,7 +79,7 @@
                                     <h4 class="modal-title" id="myModalLabel">Agregar Categoría - Responsable</h4>
                                 </div>
                                 
-                                <form method="post" class="form-horizontal Validacion" action="">
+                                <form method="post" class="form-horizontal Validacion" action="/menu/registros/clientes/categoria/insertar/responsable{{$datosC1}}">
                                         {{ csrf_field() }}
                                         <div class="modal-body">
                                             <ul class="nav nav-tabs" role="tablist" >
@@ -120,7 +121,7 @@
                                                                     </div>
                                                                     <div class="col-md-6">
                                                                         <div class="form-group row"> 
-                                                                            <input type="text" class="form-control typeCiNumber" name="RpMda4" id="RpSvn4"><i class="fa fa-address-card-o" id="icr8"></i>
+                                                                            <input type="text" class="form-control typeCiNumber" name="txtci" id="RpSvn4"><i class="fa fa-address-card-o" id="icr8"></i>
                                                                         </div>
                                                                     </div>
                                                                 </div> 
@@ -244,7 +245,9 @@
                                                                         <div class="form-group row">
                                                                             <select name="selciRpb" class="form-control userEmail" id="RpMdn3">
                                                                                 <option value="">-</option>
-                                                                                <option value="1">G</option>
+                                                                                @foreach($datosC2 as $tipoC)
+                                                                                    <option value="{{$tipoC->id}}">{{$tipoC->descripcion}}</option>
+                                                                                @endforeach
                                                                             </select><i class="fa fa-clipboard" id="micr7"></i>
                                                                         </div>
                                                                     </div>
@@ -278,7 +281,9 @@
                                                                         <div class="form-group">
                                                                             <select name="seltlfRpb" class="form-control userEmail" id="RpMdnn1">
                                                                                 <option value="">-</option>
-                                                                                <option value="1">0414</option>
+                                                                                  @foreach($datosC3 as $tipoCL)
+                                                                                    <option value="{{$tipoCL->id}}">{{$tipoCL->descripcion}}</option>
+                                                                                @endforeach
                                                                             </select><i class="fa fa-hashtag" id="micr11"></i>
                                                                         </div>
                                                                     </div>
@@ -296,7 +301,9 @@
                                                                         <div class="form-group">
                                                                             <select name="seltlfmRpb" class="form-control userEmail" id="RpMdnn3">
                                                                                 <option value="">-</option>
-                                                                                <option value="1">0212</option>
+                                                                                @foreach($datosC4 as $tipoTL)
+                                                                                    <option value="{{$tipoTL->id}}">{{$tipoTL->descripcion}}</option>
+                                                                                @endforeach
                                                                             </select><i class="fa fa-hashtag" id="micr13"></i>
                                                                         </div>
                                                                     </div>
@@ -313,6 +320,7 @@
                                                                     <input type="text" name="mail2" id="RpMdnn5" class="form-control typeEmail">
                                                                     <i class="fa fa-envelope" id="micr15"></i>
                                                                 </div>
+                                                                <input type="text" name="Responsableid" id="Responsableid">
                                                             </div>
                                                         </div>
                                                     </div>
