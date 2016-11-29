@@ -1930,6 +1930,10 @@
                 padding-left: 0px;
             }
 
+            .desact {
+                visibility:hidden; 
+            }
+
         /*Perfil*/
 
             .centrado{

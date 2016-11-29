@@ -79,6 +79,30 @@ $(function(){
                 $(location).attr('href',url);
         });  
     });
+    
+    //Soporte presencial
+    $('#stpc').on('click',function(){
+        $('#cvm').removeClass('desact');
+    });
+    $('#rppe').on('click', function(){
+        $('#cvm').addClass('desact');  
+    });
+    
+    //Soporte Remoto
+    $('#strc').on('click',function(){
+        $('#ccr').removeClass('desact');
+    });
+    $('#stri').on('click', function(){
+        $('#ccr').addClass('desact');  
+    });
+    
+    //Soporte Telefónico
+    $('#sttc').on('click',function(){
+        $('#clls').removeClass('desact');
+    });
+    $('#stti').on('click', function(){
+        $('#clls').addClass('desact');  
+    });
 
 });
 
