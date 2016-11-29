@@ -33,7 +33,7 @@
                                        @if($accion->descripcion!="Status")
                                            @if($accion->data_toogle=="modal")
                                            <span class="iclsp">
-                                               <a href="#myModal2" class="tltp" data-ttl="{{$accion->descripcion}}" data-toggle="modal" data-target="#myModal2">
+                                               <a href="#myModal2" class="tltp modificarResponsable_clinete" data-ttl="{{$accion->descripcion}}" data-toggle="modal" data-target="#myModal2" id="m{{$responsable->id}}">
                                                    <i class="{{$accion->clase_css}}"></i>
                                                </a>
                                            </span>
@@ -57,6 +57,7 @@
                                        @endif
                                    @endforeach
                                </div>
+                                    <input type="text" name="idresp_c{{$responsable->id}}" value="{{$responsable->id}}" id="idresp_cm{{$responsable->id}}">
                                @if($responsable->id==$extra)
                                     <span class="ttlMd"><input type="radio" name="cat_rsp" id="cat_rsp" value="{{$responsable->id}}" checked> <label for="cat_rsp"><strong>{{$responsable->p_nombre." ".$responsable->p_apellido}}</strong></label></span>
                                @else
@@ -313,6 +314,7 @@
                                                                     <input type="text" name="mail2" id="RpMdnn5" class="form-control typeEmail">
                                                                     <i class="fa fa-envelope" id="micr15"></i>
                                                                 </div>
+                                                                <input type="text" name="Responsableid" id="Responsableid">
                                                             </div>
                                                         </div>
                                                     </div>
