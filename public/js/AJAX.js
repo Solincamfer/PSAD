@@ -440,7 +440,7 @@ $(".modificarCliente").click(function(){
 		///////////BUSCADO BOTON CLICKEADO/////////////	
 			ID = $(this).attr("id");///////ID DEL BOTTON MODIFICAR/////////
 			idResponsable=$('#idresp_c'+ID).val();///////TRAER VALOR DEL ID DEL BOTTON MODIFICAR/////////	
-			$('#Responsableid').val(idResponsable);///////ID DEL BOTTON MODIFICAR IGUALADA AL VALOR DEL CAMPO CORRESPONDIENTE AL ID SELECCIONADO/////////	
+			$('#Registroid').val(idResponsable);///////ID DEL BOTTON MODIFICAR IGUALADA AL VALOR DEL CAMPO CORRESPONDIENTE AL ID SELECCIONADO/////////	
 		///////////PASANDO VARIABLE Y CARGANDO LISTADO CORRESPONDIENTE A LA SELECCION PREVIA Y ESPERANDO DATA COMO RESPUESTA/////////////			        	
 			$.get("/menu/registros/clientes/modificar/responsable", {idResponsable: idResponsable}, function(data){
 	    ///////////ASIGNANDO LOS VALORES DEL ARRAY A LOS IMPUT CORRESPONDIENTES DEL MODAL MODIFICAR/////////////		        	
