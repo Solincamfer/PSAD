@@ -250,9 +250,7 @@ class RegistrosBasicos extends Controller
 	}
 
 
-	
-
-	public function clientes_insertar_responsable($cliente_id)//agregar personas afiliadas a una empresa matriz
+	public function capturar_datos_responsables()
 	{
 		
 		$nombres=Request::get('nomRpb1');//nombres del responsable 
@@ -274,6 +272,17 @@ class RegistrosBasicos extends Controller
 		$numeroLocal=Request::get('numTelmvlRpb');//numero fijo
 	
 		$correo=Request::get('mail2');//correo 
+
+		$datos=array('nombre' => $nombres,'apellido'=>$apellidos,'tipoCedula'=>$tipoCedula,'cedula'=>$cedula,'cargo'=> );
+
+	}
+
+
+
+	public function clientes_insertar_responsable($cliente_id)//agregar personas afiliadas a una empresa matriz
+	{
+		
+		
 
 
 		$idC=DB::table('cedulas')->insertGetId//cedula del cliente
@@ -531,12 +540,12 @@ class RegistrosBasicos extends Controller
 		$responsablesC=DB::table('categoria_persona')->where('categoria_id',$categoria_id)->first();
 		if (empty($responsablesC)==false) //si esta lleno
 		{
-			$id=(int)$responsablesC->persona_id;
+			$id=(int)$responsablesC->persona_id;//id del responsable de una categoria (radio button)
 		}
 		else
 		{
 
-			$id=0;
+			$id=0;//cuando la categoria no tiene responsable asignado
 		}
 		return view ('Registros_Basicos\Clientes\clientes_categoria_responsable',$this->datos_vista($datos,$acciones,DB::table('categorias')->join('clientes','clientes.id','=','categorias.cliente_id')
 								   ->join('personas','personas.cliente_id','=','clientes.id')
