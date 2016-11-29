@@ -264,7 +264,7 @@ $("#ippp3").change(function(){
 });
 /////////////////////////////////
 ///////////LLENADO DEL MODAL MODIFICAR REGISTRO MEDIANTE SU BOTON SUBMIT/////////////	
-	$(".tltp").click(function(){
+	$(".modificarCliente").click(function(){
 		///////////BUSCADO BOTON CLICKEADO/////////////	
 			ID = $(this).attr("id");			
 			idCliente=$('#idCliente'+ID).val();	
@@ -335,8 +335,8 @@ $("#ippp3").change(function(){
 				            });   
 				        });	
 				        ///////////LIMPIAR COMBOS DEPENDIENTES DE ESTE/////////////
-				        $('#inn4 option:selected').val(data[15]);  
-	        			$('#inn4 option:selected').html(data[16]); 
+				        $('#inn4 option:selected').val(data[17]);  
+	        			$('#inn4 option:selected').html(data[18]); 
 	        		}
 	        		if ($(data[21]).empty) {
 		        			$("#innn11 option:selected").each(function () {			
@@ -401,7 +401,7 @@ $("#ippp3").change(function(){
     	}
 });
 
-	$(".tltp").click(function(){
+	$(".modificarResponsable").click(function(){
 
 		///////////BUSCADO BOTON CLICKEADO/////////////	
 			ID = $(this).attr("id");

@@ -26,7 +26,7 @@
 										@if($accion->descripcion!="Status")
 											@if($accion->data_toogle=="modal")
 											<span class="iclsp">
-												<a href="#myModal2" class="tltp" id="m{{$clientes->id}}" data-ttl="{{$accion->descripcion}}" data-toggle="modal" data-target="#myModal2"> 
+												<a href="#myModal2" class="tltp modificarCliente" id="m{{$clientes->id}}" data-ttl="{{$accion->descripcion}}" data-toggle="modal" data-target="#myModal2"> 
 													<i class="{{$accion->clase_css}}"></i>
 												</a>
 											</span>
