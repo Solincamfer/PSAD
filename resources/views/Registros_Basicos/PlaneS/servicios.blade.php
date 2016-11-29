@@ -147,14 +147,17 @@
                                         <form action="">
                                             <div class="container-fluid contsr">
                                                 <div class="rSrv">
-                                                    <div class="col-md-6 col-md-offset-3">
-                                                        <label class="radio-inline flb"><input type="radio" name="radio">Soporte presencial contabilizada</label>
-                                                        <div class="form-group row icc2">
-                                                            <input type="number" placeholder="Cantidad de visitas mensuales"><i class="fa fa-laptop"></i>
-                                                        </div>
-                                                        <label class="radio-inline flb"><input type="radio" name="radio">Respuesta presencial por emergencia</label>
+                                                    <div class="col-md-10 col-md-offset-1">
+                                                        <fieldset class="fst">
+                                                            <legend>Opciones Soporte Presencial</legend>
+                                                            <label class="flb"><input type="radio" name="radio">Soporte presencial contabilizada</label>
+                                                            <div class="form-group row icc2">
+                                                                <input type="number" placeholder="Cantidad de visitas mensuales"><i class="fa fa-laptop"></i>
+                                                            </div>
+                                                            <label class="flb"><input type="radio" name="radio">Respuesta presencial por emergencia</label>
+                                                        </fieldset>
                                                     </div>
-                                                    <div class="col-md-6 col-md-offset-3">
+                                                    <div class="col-md-8 col-md-offset-2">
                                                         <div class="form-group row icc3">
                                                             <input type="number" placeholder="Precio"><i class="fa fa-money"></i>
                                                         </div>
@@ -183,14 +186,17 @@
                                         <form action="">
                                             <div class="container-fluid contsr">
                                                 <div class="rSrv">
-                                                    <div class="col-md-6 col-md-offset-3">
-                                                        <label class="radio-inline flb"><input type="radio" name="radio">Soporte remoto contabilizado</label>
-                                                        <div class="form-group row icc2">
-                                                            <input type="number" placeholder="Cantidad de conexiones Remotas"><i class="fa fa-desktop"></i>
-                                                        </div>
-                                                        <label class="radio-inline flb"><input type="radio" name="radio">Soporte remoto ilimitado</label>
+                                                    <div class="col-md-10 col-md-offset-1 mrk">
+                                                        <fieldset class="fst">
+                                                            <legend>Opciones Soporte Remoto</legend>
+                                                            <label class="radio-inline flb"><input type="radio" name="radio">Soporte remoto contabilizado</label>
+                                                            <div class="form-group row icc2">
+                                                                <input type="number" placeholder="Cantidad de conexiones Remotas"><i class="fa fa-desktop"></i>
+                                                            </div>
+                                                            <label class="radio-inline flb"><input type="radio" name="radio">Soporte remoto ilimitado</label>
+                                                        </fieldset>
                                                     </div>
-                                                    <div class="col-md-6 col-md-offset-3">
+                                                    <div class="col-md-8 col-md-offset-2">
                                                         <div class="form-group row icc3">
                                                             <input type="number" placeholder="Precio"><i class="fa fa-money"></i>
                                                         </div>
@@ -219,14 +225,17 @@
                                         <form action="">
                                             <div class="container-fluid contsr">
                                                 <div class="rSrv">
-                                                    <div class="col-md-6 col-md-offset-3">
-                                                        <label class="radio-inline flb"><input type="radio" name="radio">Soporte telefónico contabilizado</label>
-                                                        <div class="form-group row icc2">
-                                                            <input type="number" placeholder="Cantidad de llamadas semanales"><i class="fa fa-phone"></i>
-                                                        </div>
-                                                        <label class="radio-inline flb"><input type="radio" name="radio">Soporte telefónico ilimitada</label>
+                                                    <div class="col-md-10 col-md-offset-1">
+                                                        <fieldset class="fst">
+                                                            <legend>Opciones Soporte Telefónico</legend>
+                                                            <label class="radio-inline flb"><input type="radio" name="radio">Soporte telefónico contabilizado</label>
+                                                            <div class="form-group row icc2">
+                                                                <input type="number" placeholder="Cantidad de llamadas semanales"><i class="fa fa-phone"></i>
+                                                            </div>
+                                                            <label class="radio-inline flb"><input type="radio" name="radio">Soporte telefónico ilimitada</label>
+                                                        </fieldset>
                                                     </div>
-                                                    <div class="col-md-6 col-md-offset-3">
+                                                    <div class="col-md-8 col-md-offset-2">
                                                         <div class="form-group row icc3">
                                                             <input type="number" placeholder="Precio"><i class="fa fa-money"></i>
                                                         </div>
@@ -255,13 +264,13 @@
                                         <form action="">
                                             <div class="container-fluid contsr">
                                                 <div class="rSrv">
-                                                    <div class="col-md-6 col-md-offset-3">
-                                                        <label class="flb" for="">Tiempo de Respuesta("Horas")</label>
-                                                        <div class="form-group row icc2">
-                                                            <input type="number" placeholder="No Maximo a"><i class="fa fa-wrench"></i>
-                                                        </div>
+                                                    <div class="col-md-8 col-md-offset-2">
+                                                            <label class="flb" for="">Tiempo de Respuesta("Horas")</label>
+                                                            <div class="form-group row icc4">
+                                                                <input type="number" placeholder="No Maximo a"><i class="fa fa-wrench"></i>
+                                                            </div>
                                                     </div>
-                                                    <div class="col-md-6 col-md-offset-3">
+                                                    <div class="col-md-8 col-md-offset-2">
                                                         <div class="form-group row icc3">
                                                             <input type="number" placeholder="Precio"><i class="fa fa-money"></i>
                                                         </div>
