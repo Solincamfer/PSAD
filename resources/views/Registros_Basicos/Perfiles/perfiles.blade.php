@@ -15,17 +15,35 @@
                     </div>
                     
                     <div class="col-xs-5 col-sm-5 col-md-6 col-md-offset-3"> 
+                    @if($agregar)
                         <button id="btnAdd" type="button" class="btnAdc col-md-offset-11" data-toggle="modal" data-target="#myModal" href="#myModal"><i class="fa fa-plus"></i> AGREGAR</button>
-                        @for($i=0; $i < 5; $i++)
+                    @endif   
+                        @foreach($consulta as $perfiles)
                             <div class="contMd" style="">
                                 <div class="icl">
-                                    @for($j=0; $j < 5; $j++)
-                                        <button class="btnAcc" type="submit">Modificar</button>
-                                    @endfor
+                                    @foreach($acciones as $accion)
+                                        @if($accion->id!=85)
+                                           <span class="iclsp">
+                                               <a href="{{$accion->url}}" class="tltp" data-ttl="{{$accion->descripcion}}">
+                                                   <i class="{{$accion->clase_css}}"></i>
+                                               </a>
+                                           </span>
+                                        @elseif($accion->id==85)
+                                             @if($perfiles->status_per==1)
+                                           <div class="chbx">
+                                               <input type="checkbox" class="btnAcc" name="status" id="{{'inchbx'. $perfiles->id}}" value="{{$accion->status_ac}}" checked><label for="{{'inchbx'. $perfiles->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
+                                           </div>
+                                           @elseif($perfiles->staus_per==0)
+                                               <div class="chbx">
+                                                   <input type="checkbox" class="btnAcc" name="status" id="{{'inchbx'. $perfiles->id}}" value="{{$accion->status_ac}}"><label for="{{'inchbx'. $perfiles->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
+                                               </div>
+                                           @endif
+                                        @endif
+                                    @endforeach
                                 </div>
-                                <p class="ttlMd"><strong>REGISTRO</strong></p>
+                                <p class="ttlMd"><strong>{{$perfiles->descripcion}}</strong></p>
                             </div>
-                        @endfor
+                        @endforeach
                     </div>
                     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                         <div class="modal-dialog" role="document">

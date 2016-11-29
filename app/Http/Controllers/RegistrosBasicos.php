@@ -781,11 +781,11 @@ public function empleados_usuarios()
 
 
 
-public function perfiles()
+public function perfiles()//ventana perfiles
 {
 	$datos=$this->cargar_header_sidebar_acciones();
 	$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(84,85),83);
-	return view('Registros_Basicos\Perfiles\perfiles',$this->datos_vista($datos,$acciones,array()));
+	return view('Registros_Basicos\Perfiles\perfiles',$this->datos_vista($datos,$acciones,DB::table('perfiles')->get()));
 }
 
 
