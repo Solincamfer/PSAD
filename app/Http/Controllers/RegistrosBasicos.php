@@ -79,6 +79,53 @@ class RegistrosBasicos extends Controller
 	}
 
 
+
+
+public function capturar_datos_responsables()
+	{
+		
+		$nombres=Request::get('nomRpb1');//nombres del responsable 
+		
+		$apellidos=Request::get('apellRpb1');//apellidos del responsable 
+		
+		$tipoCedula=(int)Request::get('selciRpb');//tipo cedula 
+		
+		$cedula=Request::get('txtci');//numero de cedula RpMda4
+		
+		$cargo=Request::get('cgoRpb');//cargo seltlfRpb
+		
+		$codigoMovil=(int)Request::get('seltlfRpb');//tipo codigo
+		
+		$numeroMovil=Request::get('numTelclRpb');//numero telefono numTelclRpb
+		
+		$codigoLocal=(int)Request::get('seltlfmRpb');//ctipo codigo seltlfmRpb
+		
+		$numeroLocal=Request::get('numTelmvlRpb');//numero fijo
+	
+		$correo=Request::get('mail2');//correo 
+
+		return array(
+
+					'nombre' => $nombres,'apellido'=>$apellidos,'tipoCedula'=>$tipoCedula,'cedula'=>$cedula,
+					'cargo'=>$cargo,'codigoC'=>$codigoMovil,'codigoL'=>$codigoLocal,'numeroC'=>$numeroMovil,
+					'numeroL'=>$numeroLocal,'correo'=>$correo);
+
+	}
+
+	public function consulta_ingresar_responsable($formulario,$cliente_id)
+	{
+		
+		$idC=DB::table('cedulas')->insertGetId//cedula del cliente
+		(['numero'=>$formulario['cedula'],'tipo_id'=>$formulario['tipoCedula']]);
+
+		$idCo=DB::table('contactos')->insertGetId//contacto del responsable
+		(['tipo_id'=>$formulario['codigoC'],'tipo__id'=>$formulario['codigoL'],'telefono_m'=>$formulario['numeroC'],'telefono_f'=>$formulario['numeroL'],'correo'=>$formulario['correo']]);
+
+		DB::table('personas')->insert//insertar datos del responsable
+		(['p_nombre'=>$formulario['nombre'],'p_apellido'=>$formulario['apellido'],'cargo'=>$formulario['cargo'],'cedula_id'=>$idC,'contacto_id'=>$idCo,'cliente_id'=>(int)$cliente_id]);
+
+	}
+
 /////////////////////controladores de las rutas //////////////////////////////////////////////
 
 	
@@ -250,73 +297,37 @@ class RegistrosBasicos extends Controller
 	}
 
 
-	public function capturar_datos_responsables()
-	{
-		
-		$nombres=Request::get('nomRpb1');//nombres del responsable 
-		
-		$apellidos=Request::get('apellRpb1');//apellidos del responsable
-		
-		$tipoCedula=(int)Request::get('selciRpb');//tipo cedula 
-		
-		$cedula=Request::get('txtci');//numero de cedula
-		
-		$cargo=Request::get('cgoRpb');//cargo
-		
-		$codigoMovil=(int)Request::get('seltlfRpb');//tipo codigo
-		
-		$numeroMovil=Request::get('numTelclRpb');//numero telefono numTelclRpb
-		
-		$codigoLocal=(int)Request::get('seltlfmRpb');//ctipo codigo seltlfmRpb
-		
-		$numeroLocal=Request::get('numTelmvlRpb');//numero fijo
 	
-		$correo=Request::get('mail2');//correo 
-
-		$datos=array('nombre' => $nombres,'apellido'=>$apellidos,'tipoCedula'=>$tipoCedula,'cedula'=>$cedula);
-
-	}
-
-
 
 	public function clientes_insertar_responsable($cliente_id)//agregar personas afiliadas a una empresa matriz
 	{
 		
-		$nombres=Request::get('nomRpb1');//nombres del responsable 
-		
-		$apellidos=Request::get('apellRpb1');//apellidos del responsable
-		
-		$tipoCedula=(int)Request::get('selciRpb');//tipo cedula 
-		
-		$cedula=Request::get('txtci');//numero de cedula
-		
-		$cargo=Request::get('cgoRpb');//cargo
-		
-		$codigoMovil=(int)Request::get('seltlfRpb');//tipo codigo
-		
-		$numeroMovil=Request::get('numTelclRpb');//numero telefono numTelclRpb
-		
-		$codigoLocal=(int)Request::get('seltlfmRpb');//ctipo codigo seltlfmRpb
-		
-		$numeroLocal=Request::get('numTelmvlRpb');//numero fijo
 	
-		$correo=Request::get('mail2');//correo 
-
-
-		$idC=DB::table('cedulas')->insertGetId//cedula del cliente
-		(['numero'=>$cedula,'tipo_id'=>$tipoCedula]);
-
-		$idCo=DB::table('contactos')->insertGetId//contacto del responsable
-		(['tipo_id'=>$codigoMovil,'tipo__id'=>$codigoLocal,'telefono_m'=>$numeroMovil,'telefono_f'=>$numeroLocal,'correo'=>$correo]);
-
-		DB::table('personas')->insert//insertar datos del responsable
-		(['p_nombre'=>$nombres,'p_apellido'=>$apellidos,'cargo'=>$cargo,'cedula_id'=>$idC,'contacto_id'=>$idCo,'cliente_id'=>(int)$cliente_id]);
-
-	
+		$formulario=$this->capturar_datos_responsables();
+		$this->consulta_ingresar_responsable($formulario,$cliente_id);
 		return redirect('/menu/registros/clientes/responsable/'.(string)$cliente_id);//redirecciona a la venta que lista los responsables de un cliente matriz especifico: indicado por: $cliente_id
 	}
 
-	
+
+
+	public function clientes_insertar_responsable_categoria($categoria_id)
+		{
+
+		
+			$categoria=DB::table('categorias')->where('id',(int)$categoria_id)->first();
+			if(empty($categoria)==false)
+			{
+				$formulario=$this->capturar_datos_responsables();
+				$this->consulta_ingresar_responsable($formulario,$categoria->cliente_id);
+				
+			}
+		
+			return redirect('/menu/registros/clientes/categoria/responsable/'.(string)$categoria_id);
+			
+		}
+
+
+			
 	public function clientes_modificar_responsables()//consulta para modificar responsables
 	{
 
@@ -568,7 +579,7 @@ class RegistrosBasicos extends Controller
 		return view ('Registros_Basicos\Clientes\clientes_categoria_responsable',$this->datos_vista($datos,$acciones,DB::table('categorias')->join('clientes','clientes.id','=','categorias.cliente_id')
 								   ->join('personas','personas.cliente_id','=','clientes.id')
 								   ->select('personas.id','personas.p_nombre','personas.p_apellido')
-								   ->where('categorias.id','=',$categoria_id)->get(),$id
+								   ->where('categorias.id','=',$categoria_id)->get(),$id,$categoria_id
 ));
 						
 	}

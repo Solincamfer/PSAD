@@ -78,7 +78,7 @@
                                     <h4 class="modal-title" id="myModalLabel">Agregar Categoría - Responsable</h4>
                                 </div>
                                 
-                                <form method="post" class="form-horizontal Validacion" action="">
+                                <form method="post" class="form-horizontal Validacion" action="/menu/registros/clientes/categoria/insertar/responsable/{{$datosC1}}">
                                         {{ csrf_field() }}
                                         <div class="modal-body">
                                             <ul class="nav nav-tabs" role="tablist" >
@@ -120,7 +120,7 @@
                                                                     </div>
                                                                     <div class="col-md-6">
                                                                         <div class="form-group row"> 
-                                                                            <input type="text" class="form-control typeCiNumber" name="RpMda4" id="RpSvn4"><i class="fa fa-address-card-o" id="icr8"></i>
+                                                                            <input type="text" class="form-control typeCiNumber" name="txtci" id="RpSvn4"><i class="fa fa-address-card-o" id="icr8"></i>
                                                                         </div>
                                                                     </div>
                                                                 </div> 
