@@ -58,7 +58,7 @@
                                        @endforeach
                                    </div>
                                     <p class="ttlMd"><strong>{{$categoria->nombre}}</strong></p>
-                                    <input type="text" name="idcateg{{$categoria->id}}" value="{{$categoria->id}}" id="idcategm{{$categoria->id}}">
+                                    <input type="hidden" name="idcateg{{$categoria->id}}" value="{{$categoria->id}}" id="idcategm{{$categoria->id}}">
                                 </div>
                           @endforeach
                         </div>
@@ -136,7 +136,7 @@
                                                                     <option value="1">Activo</option>
                                                                     <option value="2">Inactivo</option>
                                                                 </select><i class="fa fa-check" id="micct2"></i>
-                                                                <input type="text" name="Categoriaid" id="Categoriaid">
+                                                                <input type="hidden" name="Categoriaid" id="Categoriaid">
                                                             </div>
                                                         </div>
                                                     </div>

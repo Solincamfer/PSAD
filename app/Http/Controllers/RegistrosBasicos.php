@@ -273,7 +273,7 @@ class RegistrosBasicos extends Controller
 	
 		$correo=Request::get('mail2');//correo 
 
-		$datos=array('nombre' => $nombres,'apellido'=>$apellidos,'tipoCedula'=>$tipoCedula,'cedula'=>$cedula,'cargo'=> );
+		$datos=array('nombre' => $nombres,'apellido'=>$apellidos,'tipoCedula'=>$tipoCedula,'cedula'=>$cedula);
 
 	}
 
@@ -282,7 +282,25 @@ class RegistrosBasicos extends Controller
 	public function clientes_insertar_responsable($cliente_id)//agregar personas afiliadas a una empresa matriz
 	{
 		
+		$nombres=Request::get('nomRpb1');//nombres del responsable 
 		
+		$apellidos=Request::get('apellRpb1');//apellidos del responsable
+		
+		$tipoCedula=(int)Request::get('selciRpb');//tipo cedula 
+		
+		$cedula=Request::get('txtci');//numero de cedula
+		
+		$cargo=Request::get('cgoRpb');//cargo
+		
+		$codigoMovil=(int)Request::get('seltlfRpb');//tipo codigo
+		
+		$numeroMovil=Request::get('numTelclRpb');//numero telefono numTelclRpb
+		
+		$codigoLocal=(int)Request::get('seltlfmRpb');//ctipo codigo seltlfmRpb
+		
+		$numeroLocal=Request::get('numTelmvlRpb');//numero fijo
+	
+		$correo=Request::get('mail2');//correo 
 
 
 		$idC=DB::table('cedulas')->insertGetId//cedula del cliente
@@ -577,7 +595,7 @@ class RegistrosBasicos extends Controller
 	
 	public function clientes_categorias_modificar()
 	{
-		$cateoria_id=Request::get('categoriaid');
+		$categoria_id=(int)Request::get('idCategoria');
 		$categorias=DB::table('categorias')->where('id',$categoria_id)->first();//buscar categoria por id
 		return array($categorias->nombre,$categorias->status_c,$categorias->cliente_id);
 		
@@ -587,9 +605,9 @@ class RegistrosBasicos extends Controller
 	{
 		$nombreC=Request::get('nomCat');
 		$statusC=(int)Request::get('stCat');
-		$categoria_id=(int)Request::get('categoria');
+		$categoria_id=(int)Request::get('Categoriaid');
 
-		DB::table('categorias')->where('id',$categria_id)->update(['nombre'=>$nombreC,'statusC'=>$statusC]);
+		DB::table('categorias')->where('id',$categoria_id)->update(['nombre'=>$nombreC,'status_c'=>$statusC]);
 
 		return redirect('/menu/registros/clientes/categoria/'.(string)$cliente_id);
 	}
