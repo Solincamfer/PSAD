@@ -57,7 +57,7 @@ class RegistrosBasicos extends Controller
 
 
 
-	public function datos_vista($datos_session,$datos_acciones,$consulta,$extra=" ",$datosC1=" ",$datosC2=" ",$datosC3=" ")//asocia en un vector los datos que deben pasarse a una vista
+	public function datos_vista($datos_session,$datos_acciones,$consulta,$extra=" ",$datosC1=" ",$datosC2=" ",$datosC3=" ",$datosC4=" ")//asocia en un vector los datos que deben pasarse a una vista
 	{
 		$valores_vista=array(
 								'modulos'=>$datos_session['modulos'],//side bar
@@ -70,7 +70,8 @@ class RegistrosBasicos extends Controller
 								'extra'=>$extra,
 								'datosC1'=>$datosC1,
 								'datosC2'=>$datosC2,
-								'datosC3'=>$datosC3
+								'datosC3'=>$datosC3,
+								'datosC4'=>$datosC4
 
 
 								);
@@ -579,8 +580,12 @@ public function capturar_datos_responsables()
 		return view ('Registros_Basicos\Clientes\clientes_categoria_responsable',$this->datos_vista($datos,$acciones,DB::table('categorias')->join('clientes','clientes.id','=','categorias.cliente_id')
 								   ->join('personas','personas.cliente_id','=','clientes.id')
 								   ->select('personas.id','personas.p_nombre','personas.p_apellido')
-								   ->where('categorias.id','=',$categoria_id)->get(),$id,$categoria_id
-));
+								   ->where('categorias.id','=',$categoria_id)->get(),
+								   $id,
+								   $categoria_id,
+								   DB::table('tipos')->where('numero_c',5)->get(),//tipos de cedula $datosC2
+								   DB::table('tipos')->where('numero_c',2)->get(),//tipos de codigo de celular $datosC3
+								   DB::table('tipos')->where('numero_c',3)->get()));
 						
 	}
 

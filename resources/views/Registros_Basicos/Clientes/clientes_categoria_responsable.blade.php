@@ -245,7 +245,9 @@
                                                                         <div class="form-group row">
                                                                             <select name="selciRpb" class="form-control userEmail" id="RpMdn3">
                                                                                 <option value="">-</option>
-                                                                                <option value="1">G</option>
+                                                                                @foreach($datosC2 as $tipoC)
+                                                                                    <option value="{{$tipoC->id}}">{{$tipoC->descripcion}}</option>
+                                                                                @endforeach
                                                                             </select><i class="fa fa-clipboard" id="micr7"></i>
                                                                         </div>
                                                                     </div>
@@ -279,7 +281,9 @@
                                                                         <div class="form-group">
                                                                             <select name="seltlfRpb" class="form-control userEmail" id="RpMdnn1">
                                                                                 <option value="">-</option>
-                                                                                <option value="1">0414</option>
+                                                                                  @foreach($datosC3 as $tipoCL)
+                                                                                    <option value="{{$tipoCL->id}}">{{$tipoCL->descripcion}}</option>
+                                                                                @endforeach
                                                                             </select><i class="fa fa-hashtag" id="micr11"></i>
                                                                         </div>
                                                                     </div>
@@ -297,7 +301,9 @@
                                                                         <div class="form-group">
                                                                             <select name="seltlfmRpb" class="form-control userEmail" id="RpMdnn3">
                                                                                 <option value="">-</option>
-                                                                                <option value="1">0212</option>
+                                                                                @foreach($datosC4 as $tipoTL)
+                                                                                    <option value="{{$tipoTL->id}}">{{$tipoTL->descripcion}}</option>
+                                                                                @endforeach
                                                                             </select><i class="fa fa-hashtag" id="micr13"></i>
                                                                         </div>
                                                                     </div>
