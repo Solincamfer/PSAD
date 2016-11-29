@@ -482,6 +482,9 @@ $(".btnAcc").click(function(){
     	}
 });
 
+$("#btnLimipiarResponsable1").click(function(){
+	$('form input').val(" ");
+});
 
 
 

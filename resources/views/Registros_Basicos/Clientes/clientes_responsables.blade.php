@@ -202,7 +202,7 @@
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-primary" id="btnGuardarResponsable1">Guardar <i class="fa fa-floppy-o"></i></button>
-                                                <button type="reset" class="btn btn-danger">limpiar <i class="fa fa-floppy-o"></i></button>
+                                                <button type="button" class="btn btn-danger" id="btnLimipiarResponsable1">limpiar <i class="fa fa-floppy-o"></i></button>
                                             </div>
                                         </form>
                                 </div>
@@ -330,7 +330,7 @@
                                                                     <input type="text" name="mail2" id="RpMdaa5" class="form-control typeEmail">
                                                                     <i class="fa fa-envelope" id="micr15"></i>
                                                                 </div>
-                                                                <input type="text" name="Registroid" id="Registroid">
+                                                                <input type="hidden" name="Registroid" id="Registroid">
                                                             </div>
                                                         </div>
                                                     </div>
