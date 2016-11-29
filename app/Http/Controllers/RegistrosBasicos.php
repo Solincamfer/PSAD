@@ -514,7 +514,9 @@ class RegistrosBasicos extends Controller
 						
 	}
 
-	public function clientes_categoria($cliente_id)
+	///////////////////////////// caegorias/////////////////////////////////////
+
+	public function clientes_categoria($cliente_id)//listar categorias
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
 		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(16,17,18,19),20);
@@ -522,7 +524,7 @@ class RegistrosBasicos extends Controller
 						
 	}
 
-	public function clientes_categoria_responsable($categoria_id)
+	public function clientes_categoria_responsable($categoria_id)//listar responsables de una categoria
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
 		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(22,23),21);
@@ -544,7 +546,7 @@ class RegistrosBasicos extends Controller
 						
 	}
 
-	public function clientes_categoria_agregar($id_cliente)
+	public function clientes_categoria_agregar($id_cliente)///asociar categorias a un cliente matriz
 	{
 		$id=(int)$id_cliente;
 		$nombreC=strtoupper(Request::get('nomCat'));//nombre de la categoria en mayusculas
@@ -562,8 +564,27 @@ class RegistrosBasicos extends Controller
 
 						
 	}
-	
 
+	public function clientes_categorias_modificar()
+	{
+	
+		$categorias=DB::table('categorias')->where('id',$categoria_id)->first();//buscar categoria por id
+		return array($categorias->nombre,$categorias->status_c,$categorias->cliente_id);
+		
+	}
+
+	public function clientes_categorias_actualizar($cliente_id)
+	{
+		$nombreC=Request::get('nomCat');
+		$statusC=(int)Request::get('stCat');
+		$categoria_id=(int)Request::get('categoria');
+
+		DB::table('categorias')->where('id',$categria_id)->update(['nombre'=>$nombreC,'statusC'=>$statusC]);
+
+		return redirect('/menu/registros/clientes/categoria/'.(string)$cliente_id);
+	}
+	
+//////////////////////////////////////////////////////////////////////////////////////////
 	public function clientes_sucursales_responsable()
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
@@ -685,7 +706,7 @@ public function empleados_usuarios()
 	
 
 
-
+/////////////////////////////////////perfiles////////////////////////////////////////////////
 
 
 
