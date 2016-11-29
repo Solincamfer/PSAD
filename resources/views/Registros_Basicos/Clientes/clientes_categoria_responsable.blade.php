@@ -78,7 +78,7 @@
                                     <h4 class="modal-title" id="myModalLabel">Agregar Categoría - Responsable</h4>
                                 </div>
                                 
-                                <form method="post" class="form-horizontal Validacion" action="/menu/registros/clientes/categoria/insertar/responsable/{{$datosC1}}">
+                                <form method="post" class="form-horizontal Validacion" action="/menu/registros/clientes/categoria/insertar/responsable{{$datosC1}}">
                                         {{ csrf_field() }}
                                         <div class="modal-body">
                                             <ul class="nav nav-tabs" role="tablist" >
@@ -208,7 +208,7 @@
                                 </div>
 
                                 
-                                <form method="post" class="form-horizontal Validacion" action="/menu/registros/clientes/categoria/modificar/responsable">
+                                <form method="post" class="form-horizontal Validacion" action="">
                                         {{ csrf_field() }}
                                         <div class="modal-body">
                                             <ul class="nav nav-tabs" role="tablist" >
