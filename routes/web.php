@@ -114,7 +114,7 @@ Route::group(['prefix'=>'/menu/registros','middleware'=>['v_menu']],function()
 
 				Route::match(['post','get'],'/clientes/categoria/modificar',						   ['uses'=>'RegistrosBasicos@clientes_categorias_modificar']);
 				Route::match(['post','get'],'/clientes/actualizar',						   ['uses'=>'RegistrosBasicos@clientes_actualizar']);
-
+clientes_categorias_actualizar
 
 				}
 			);

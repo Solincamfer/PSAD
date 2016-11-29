@@ -565,9 +565,10 @@ class RegistrosBasicos extends Controller
 						
 	}
 
+	
 	public function clientes_categorias_modificar()
 	{
-	
+		$cateoria_id=Request::get('categoriaid');
 		$categorias=DB::table('categorias')->where('id',$categoria_id)->first();//buscar categoria por id
 		return array($categorias->nombre,$categorias->status_c,$categorias->cliente_id);
 		
