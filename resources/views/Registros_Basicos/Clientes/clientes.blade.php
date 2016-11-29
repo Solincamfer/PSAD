@@ -214,7 +214,7 @@
 														</div>
 													</div>	
 														</div>													
-														
+												hidden		
 													
 
 												<div role="tabpanel" class="tab-pane" id="panelsv4">
@@ -298,7 +298,7 @@
 									<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 									<h4 class="modal-title" id="myModalLabel2">Modificar</h4>
 								</div>
-							<form method="post" class="form-horizontal Validacion" id="Formclientemd" action="">
+							<form method="post" class="form-horizontal Validacion" id="Formclientemd" action="/menu/registros/clientes/actualizar">
 									{{ csrf_field() }}	
 										<div class="modal-body">						
 											 <ul class="nav nav-tabs" role="tablist">
@@ -440,7 +440,7 @@
 														<div class="form-group col-md-12" id="dfc5">
 																<label for="descDirdf">Descripción de la dirección</label>
 															<textarea type="text" name="descDirdf" id="innn15" class="form-control userEmail"></textarea><i class="fa fa-map-marker" id="icc10"></i>
-															<input type="hidden" name="Clienteid" id="Clienteid">
+															<input type="text" name="Clienteid" id="Clienteid">
 														</div>
 
 													</div>	
