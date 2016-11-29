@@ -319,10 +319,10 @@ class RegistrosBasicos extends Controller
 		$Pnombre=Request::get('nomRpb1');//nombre
 		$Papellido=Request::get('apellRpb1');//apellido
 		$cargo=Request::get('cgoRpb');//cargo
-		$numeroC=Request::get('RpMda4');//numero cedula
-		$tipoC=Request::get('selciRpb');//tipo cedula
-		$codigoC=Request::get('seltlfRpb');//codigo celular
-		$codigoL=Request::get('seltlfmRpb');//codigo local
+		$numeroC=(int)Request::get('RpMda4');//numero cedula
+		$tipoC=(int)Request::get('selciRpb');//tipo cedula
+		$codigoC=(int)Request::get('seltlfRpb');//codigo celular
+		$codigoL=(int)Request::get('seltlfmRpb');//codigo local
 		$telefonoC=Request::get('numTelclRpb');//numero celular
 		$telefonoL=Request::get('numTelmvlRpb');//numero local
 		$correo=Request::get('mail2');//correp
@@ -331,7 +331,7 @@ class RegistrosBasicos extends Controller
 		$id_cliente=(int)$id_cliente;
 
 
-		$persona=DB::table('personas')->where('id',$id_cliente)->first();//$persona a modificar
+		$persona=DB::table('personas')->where('id',$id_responsable)->first();//ubicar datos de la persona amodificar
 		if(empty($persona)==false)//si existe
 			{
 
@@ -340,11 +340,11 @@ class RegistrosBasicos extends Controller
 
 				DB::table('cedulas')->where('id',$persona->cedula_id)->update(['numero'=>$numeroC,'tipo_id'=>$tipoC]);//actualizar numero de cedula y tipo		
 
-				DB::table('contactos')->where('id',$persona->contactos_id)->update(['tipo_id'=>$codigoC,'tipo__id'=>$codigoL,'telefono_m'=>$telefonoC,'telefono_f'=>$telefonoL,'correo'=>$correo]);	//actualizar datos de contactos		 
+				DB::table('contactos')->where('id',$persona->contacto_id)->update(['tipo_id'=>$codigoC,'tipo__id'=>$codigoL,'telefono_m'=>$telefonoC,'telefono_f'=>$telefonoL,'correo'=>$correo]);	//actualizar datos de contactos		 
 			}
 
 
-			return redirect('/menu/registros/clientes/responsable/'.(string)$cliente_id);
+			return redirect('/menu/registros/clientes/responsable/'.(string)$id_cliente);
 
 	}
 
