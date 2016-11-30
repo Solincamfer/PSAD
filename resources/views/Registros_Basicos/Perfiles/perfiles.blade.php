@@ -41,7 +41,6 @@
                                         @endif
                                     @endforeach
                                 </div>
-                                <input type="text" class="" value="{{$perfiles->id}}" id="idperfilm{{$perfiles->id}}">
                                 <p class="ttlMd"><strong>{{$perfiles->descripcion}}</strong></p>
                             </div>
                         @endforeach

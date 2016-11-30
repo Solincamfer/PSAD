@@ -11,6 +11,7 @@
                                 <div class="col-md-2 ttlp">
                                     <h1>Perfil</h1>
                                 </div>
+                                <input type="hidden" value="{{$extra}}" id="idPerfil">
                             </div>
                         </div>
                         <div class="container">

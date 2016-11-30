@@ -485,12 +485,13 @@ $(".btnAcc").click(function(){
 $(".consultarSubmodulo").click(function(){
 
 		///////////BUSCADO BOTON CLICKEADO/////////////	
-			ID = $(this).attr("id");///////ID DEL BOTTON MODIFICAR/////////			
-			idPerfil=$('#Perfilid'+ID).val();///////TRAER VALOR DEL ID DEL BOTTON MODIFICAR/////////
-			
+			ID = $(this).attr("id");///////ID DEL BOTTON MODIFICAR/////////	
+			idPerfil=$('#idPerfil').val();///////TRAER VALOR DEL ID DEL BOTTON MODIFICAR/////////		
+			idModulo=$('#Perfilid'+ID).val();///////TRAER VALOR DEL ID DEL BOTTON MODIFICAR/////////
+			valores=[idPerfil,idModulo];
 			//$('#Categoriaid').val(idCategoria);///////ID DEL BOTTON MODIFICAR IGUALADA AL VALOR DEL CAMPO CORRESPONDIENTE AL ID SELECCIONADO/////////	
 		///////////PASANDO VARIABLE Y CARGANDO LISTADO CORRESPONDIENTE A LA SELECCION PREVIA Y ESPERANDO DATA COMO RESPUESTA/////////////			        	
-			$.get("/menu/registros/perfiles/submodulos", {idPerfil: idPerfil}, function(data){
+			$.get("/menu/registros/perfiles/submodulos", {valores:valores}, function(data){
 	    ///////////ASIGNANDO LOS VALORES DEL ARRAY A LOS IMPUT CORRESPONDIENTES DEL MODAL MODIFICAR/////////////	
 			    $.each(data, function(i, item) {
 			         $('#targeta2').append('<ul><li><div class="container-fluid cont"><div class="row"><div class="col-md-6"><div class="tl1"><span>'+item.descripcion+'</span></div></div><div class="col-md-2 col-md-push-4"><div class="chbx1x"><input type="checkbox" value="None" id="cck" name="cck" checked><label for="cck"></label></div></div></div></div></li></ul>');
