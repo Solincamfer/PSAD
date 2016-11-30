@@ -54,23 +54,27 @@
                                 </div>
                                 <div class="modal-body">
                                     <form action="">
-                                        <div class="container-fluid" id="contpfl">
-                                            <div class="form-group row" id="rPfl1">
-                                                <div class="col-md-8 col-md-offset-2">
-                                                    <label for="duPfl">Nombre del Perfil</label>
-                                                    <input type="text" class="form-control" name="duPfl" id="duPfl"><i class="fa fa-id-badge"></i>
-                                                </div>
-                                            </div>
-                                            <div class="form-group row" id="rPfl2">
-                                                <div class="col-md-8 col-md-offset-2">
-                                                    <label for="stPfl">Estatus del Perfil</label>
-                                                    <select name="stPfl" id="stPfl" class="form-control">
-                                                        <option value="0">-</option>
-                                                        <option value="1">Activo</option>
-                                                        <option value="2">Inactivo</option>
-                                                    </select>
-                                                </div>
-                                            </div>
+                                        <div class="container-fluid contpfl">
+                                           <div class="row">
+                                               <div class="rPfl">
+                                                  <div class="col-md-8 col-md-offset-2">
+                                                      <div class="form-group row">
+                                                          <label for="duPfl">Nombre del Perfil</label>
+                                                          <input type="text" class="form-control" name="duPfl" id="duPfl"><i class="fa fa-id-badge icpfl"></i>
+                                                      </div>
+                                                  </div>
+                                                  <div class="col-md-8 col-md-offset-2">
+                                                      <div class="form-group row">
+                                                          <label for="stPfl">Estatus del Perfil</label><span class="ic"><i class="fa fa-chevron-down"></i></span>
+                                                          <select name="stPfl" id="stPfl" class="form-control">
+                                                              <option value="0">-</option>
+                                                              <option value="1">Activo</option>
+                                                              <option value="2">Inactivo</option>
+                                                          </select><i class="fa fa-check icpfl"></i>
+                                                      </div>
+                                                  </div> 
+                                               </div>
+                                           </div>
                                         </div>
                                     </form>
                                 </div>
