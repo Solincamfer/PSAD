@@ -482,8 +482,26 @@ $(".btnAcc").click(function(){
     	}
 });
 
+$(".consultarSubmodulo").click(function(){
+
+		///////////BUSCADO BOTON CLICKEADO/////////////	
+			ID = $(this).attr("id");///////ID DEL BOTTON MODIFICAR/////////			
+			idPerfil=$('#Perfilid'+ID).val();///////TRAER VALOR DEL ID DEL BOTTON MODIFICAR/////////
+			alert(idPerfil);
+			//$('#Categoriaid').val(idCategoria);///////ID DEL BOTTON MODIFICAR IGUALADA AL VALOR DEL CAMPO CORRESPONDIENTE AL ID SELECCIONADO/////////	
+		///////////PASANDO VARIABLE Y CARGANDO LISTADO CORRESPONDIENTE A LA SELECCION PREVIA Y ESPERANDO DATA COMO RESPUESTA/////////////			        	
+			$.get("/menu/registros/perfiles/submodulos", {idPerfil: idPerfil}, function(data){
+	    ///////////ASIGNANDO LOS VALORES DEL ARRAY A LOS IMPUT CORRESPONDIENTES DEL MODAL MODIFICAR/////////////	
+	        	
+        		//$('#CatM1').val(data[0]);
+        		//$('#CatM2').val(data[1]);
+        		//->->->//alert(data);///////Data para probar los campos resividos por el AJAX//
+	       });
+});
+
 $("#btnLimipiarResponsable1").click(function(){
-	$('form input').val(" ");
+	$('form-control-feedback').css('display','none');
+	Validar();
 });
 
 

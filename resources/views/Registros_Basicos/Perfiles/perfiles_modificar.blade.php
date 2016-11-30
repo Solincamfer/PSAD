@@ -53,10 +53,9 @@
                                                         </div>
                                                         <div class="col-md-1 col-md-push-2">
                                                             <div class="iclst">
-                                                                <a href="">
-                                                                    <i class="fa fa-eye"></i>
-                                                                </a>
+                                                                    <i class="fa fa-eye consultarSubmodulo" id="m{{$modulos->id}}"></i>
                                                             </div>
+                                                            <input type="text" id="Perfilidm{{$modulos->id}}" value="{{$modulos->id}}">
                                                         </div>
                                                         <div class="col-md-2 col-md-push-3">
                                                             <div class="chbx1x">

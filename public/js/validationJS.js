@@ -125,7 +125,8 @@ function CantidadTabs(nombreId){
             }
     }
 
-
+Validar();
+function Validar(){
 //////////////VALIDACIONES DE INPUT, SELECT, TEXTAREAS, POR CLASES ASIGNADAS//////////////////////////
 $('.Validacion').bootstrapValidator({
         feedbackIcons: {
@@ -233,4 +234,5 @@ $('.Validacion').bootstrapValidator({
     }
 
 });
+};
 });
