@@ -269,16 +269,50 @@ public function perfiles_modificar($perfil_id)
 
 	$datos=$this->cargar_header_sidebar_acciones();
 	$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(84,85),83);
-	return view('Registros_Basicos\Perfiles\perfiles_modificar',$this->datos_vista($datos,$acciones,$modulos));
+	return view('Registros_Basicos\Perfiles\perfiles_modificar',$this->datos_vista($datos,$acciones,$modulos,(int)$perfil_id));
 }
 
-public function mostrar_submodulos()
+public function mostrar_submodulos()//muestra los submodulos asociados a un modulo
 {
+	$submodulos_=array();//submodulos que se mostraran en la vista
+	
+	$perfil_id=(int)Request::get('idPerfil');//id del perfil para el cual se desea mostrar los submodulos
+	$modulo_id=(int)Request::get('idModulo');//captura el id del modulo
+	
+	$perfil=Perfil::find($perfil_id);//ubica en la base de datos el perfil indicado por $perfil_id
+	
+	$submodulos=$perfil->submodulos;//captura los submodulos asociados al perfil
 
-	$perfil_id=Request::get('idPerfil');//id del perfil para el cual se desea mostrar los submodulos
-	$perfil=Perfil::find($perfil_id);//
-	$submodulos=$perfil->submodulos;
-	return $submodulos;
+	foreach ($submodulos as $submodulo) 
+	{
+		if($submodulo->modulo_id==$modulo_id)
+		{
+			array_push($submodulos_, $submodulo);//agrega los submodulos asociados al modulo_id
+		}
+	}
+
+	return $submodulos_;
+}
+
+
+public function mostrar_acciones()
+{
+	$acciones_=array();
+	$perfil_id=(int)Request::get('idPerfil');
+	$submodulo_id=(int)Request::get('idSubmodulo');
+	$perfil=Perfil::find($perfil_id);
+	$acciones=$perfil->acciones;
+
+	foreach($acciones as $accion)
+	{
+		if($accion->submodulo_id==$submodulo_id)
+		{
+			array_push($acciones_, $accion);
+		}
+
+	}
+
+  return $acciones_;
 }
 	
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
