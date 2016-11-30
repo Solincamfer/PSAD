@@ -492,9 +492,31 @@ $(".consultarSubmodulo").click(function(){
 			//$('#Categoriaid').val(idCategoria);///////ID DEL BOTTON MODIFICAR IGUALADA AL VALOR DEL CAMPO CORRESPONDIENTE AL ID SELECCIONADO/////////	
 		///////////PASANDO VARIABLE Y CARGANDO LISTADO CORRESPONDIENTE A LA SELECCION PREVIA Y ESPERANDO DATA COMO RESPUESTA/////////////			        	
 			$.get("/menu/registros/perfiles/submodulos", {valores:valores}, function(data){
+				$( ".limpiarul1" ).remove();	
 	    ///////////ASIGNANDO LOS VALORES DEL ARRAY A LOS IMPUT CORRESPONDIENTES DEL MODAL MODIFICAR/////////////	
 			    $.each(data, function(i, item) {
-			         $('#targeta2').append('<ul><li><div class="container-fluid cont"><div class="row"><div class="col-md-6"><div class="tl1"><span>'+item.descripcion+'</span></div></div><div class="col-md-2 col-md-push-4"><div class="chbx1x"><input type="checkbox" value="None" id="cck" name="cck" checked><label for="cck"></label></div></div></div></div></li></ul>');
+			         $('#targeta2').append('<ul class="limpiarul1"><li><div class="container-fluid cont"><div class="row"><div class="col-md-6"><div class="tl1"><span>'+item.descripcion+'</span></div></div><div class="col-md-1 col-md-push-2"><div class="iclst"><i class="fa fa-eye consultarAcciones" id="n'+item.id+'"></i></div><input type="hidden" id="Submoduloidn'+item.id+'" value="'+item.id+'"></div><div class="col-md-2 col-md-push-4"><div class="chbx1x"><input type="checkbox" value="None" id="cck" name="cck" checked><label for="cck"></label></div></div></div></div></li></ul>');
+				})        
+        		//$('#CatM1').val(data[0]);
+        		//$('#CatM2').val(data[1]);
+        		//->->->//alert(data);///////Data para probar los campos resividos por el AJAX//
+	       });
+});
+
+$(".consultarAcciones").click(function(){
+
+		///////////BUSCADO BOTON CLICKEADO/////////////	
+			ID = $(this).attr("id");///////ID DEL BOTTON MODIFICAR/////////	
+			idPerfil=$('#idPerfil').val();///////TRAER VALOR DEL ID DEL BOTTON MODIFICAR/////////		
+			idSubmodulo=$('#Submoduloidn'+ID).val();///////TRAER VALOR DEL ID DEL BOTTON MODIFICAR/////////
+			valores=[idPerfil,idSubmodulo];
+			//$('#Categoriaid').val(idCategoria);///////ID DEL BOTTON MODIFICAR IGUALADA AL VALOR DEL CAMPO CORRESPONDIENTE AL ID SELECCIONADO/////////	
+		///////////PASANDO VARIABLE Y CARGANDO LISTADO CORRESPONDIENTE A LA SELECCION PREVIA Y ESPERANDO DATA COMO RESPUESTA/////////////			        	
+			$.get("/menu/registros/perfiles/acciones", {valores:valores}, function(data){
+				$( ".limpiarul2" ).remove();	
+	    ///////////ASIGNANDO LOS VALORES DEL ARRAY A LOS IMPUT CORRESPONDIENTES DEL MODAL MODIFICAR/////////////	
+			    $.each(data, function(i, item) {
+			         $('#targeta3').append('<ul class="limpiarul2"><li><div class="container-fluid cont"><div class="row"><div class="col-md-6"><div class="tl1"><span>'+item.descripcion+'</span></div></div><div class="col-md-1 col-md-push-2"><div class="iclst"></div><input type="hidden" id="Submoduloidn'+item.id+'" value="'+item.id+'"></div><div class="col-md-2 col-md-push-4"><div class="chbx1x"><input type="checkbox" value="None" id="cck" name="cck" checked><label for="cck"></label></div></div></div></div></li></ul>');
 				})        
         		//$('#CatM1').val(data[0]);
         		//$('#CatM2').val(data[1]);

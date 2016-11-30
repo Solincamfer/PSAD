@@ -56,7 +56,7 @@
                                                             <div class="iclst">
                                                                     <i class="fa fa-eye consultarSubmodulo" id="m{{$modulos->id}}"></i>
                                                             </div>
-                                                            <input type="text" id="Perfilidm{{$modulos->id}}" value="{{$modulos->id}}">
+                                                            <input type="hidden" id="Perfilidm{{$modulos->id}}" value="{{$modulos->id}}">
                                                         </div>
                                                         <div class="col-md-2 col-md-push-3">
                                                             <div class="chbx1x">
@@ -73,29 +73,7 @@
                                 <div class="col-md-3 dist">
                                     <div class="card1" id="targeta2">
                                         <ul>
-                                            <li>
-                                                <div class="container-fluid cont">
-                                                    <div class="row">
-                                                        <div class="col-md-6">
-                                                            <div class="tl1">
-                                                                <span>Registro Básicos</span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-1 col-md-push-2">
-                                                            <div class="iclst">
-                                                                <a href="">
-                                                                    <i class="fa fa-eye"></i>
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-2 col-md-push-3">
-                                                            <div class="chbx1x">
-                                                                <input type="checkbox" value="None" id="cck" name="cck" checked><label for="cck"></label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </li>
+                                            
                                         </ul>
                                     </div>
                                 </div>
