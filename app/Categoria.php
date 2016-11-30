@@ -19,4 +19,11 @@ class Categoria extends Model
     {
     	return $this->belongsToMany('App\Persona');
     }
+
+    public function sucursales()
+    {
+
+
+        return $this->hasMany('App\Sucursal');
+    }
 }

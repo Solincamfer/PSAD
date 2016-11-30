@@ -26,6 +26,7 @@
                                     </div>
                                 </div>
                             @endif
+                            @foreach($consulta as $sucursal)
                                 <div class="contMd" style="">
                                     <div class="icl">
                                         @foreach($acciones as $accion)
@@ -56,9 +57,9 @@
                                             @endif
                                         @endforeach
                                     </div>
-                                    <p class="ttlMd"><strong>REGISTRO</strong></p>
+                                    <p class="ttlMd"><strong>{{$sucursal->razon_s}}</strong></p>
                                 </div>
-                          
+                          @endforeach
                         </div>
                         <!--Registro -->
 
@@ -106,8 +107,9 @@
                                                             <div class="form-group col-md-4" id="sep">
                                                                 <select name="rif" id="input3" class="form-control userEmail">
                                                                     <option value="">-</option>
-                                                                    <option value="1">J-</option>
-                                                                    <option value="2">G-</option>
+                                                                    @foreach($tipoR as $tiporif)
+                                                                        <option value="{{$tiporif->id}}">{{$tiporif->descripcion}}</option>
+                                                                    @endforeach
                                                                 </select><i class="fa fa-clipboard" id="icc3"></i>
                                                             </div>  
                                                             <div class="form-group col-md-8">                                   
@@ -120,8 +122,9 @@
                                                                 <label for="tipCon">Contribuyente</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
                                                                 <select name="tipCon" id="input5" class="form-control userEmail" >
                                                                     <option value="">-</option>
-                                                                    <option value="1">asdas</option>
-                                                                    <option value="2">sada</option>
+                                                                    @foreach($tipoC as $tipoc)
+                                                                        <option value="{{$tipoc->id}}">{{$tipoc->descripcion}}</option>
+                                                                    @endforeach>
                                                                 </select><i class="fa fa-clipboard" id="icc5"></i>                                                      
                                                         </div>
                                                         </div>
@@ -135,7 +138,9 @@
                                                             <label for="paisdf">País</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
                                                             <select name="paisdf" id="input6" class="form-control userEmail">
                                                                 <option value="">-</option>
-                                                                <option value="caracas">caracas</option>    
+                                                                @foreach($paises as $pais)
+                                                                        <option value="{{$pais->id}}">{{$pais->descripcion}}</option>
+                                                                @endforeach
                                                             </select><i class="fa fa-globe" id="icc6"></i>
                                                         </div>
                                                         <div class="form-group col-md-7" id="dfc2">
@@ -177,7 +182,9 @@
                                                             <label for="paisdc">País</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
                                                             <select name="paisdc" id="input11" class="form-control userEmail">
                                                                 <option value="">-</option>
-                                                                <option value="caracas">caracas</option>    
+                                                               @foreach($paises as $pais)
+                                                                        <option value="{{$pais->id}}">{{$pais->descripcion}}</option>
+                                                                @endforeach     
                                                             </select><i class="fa fa-globe" id="icc11"></i>
                                                         </div>
                                                         <div class="form-group col-md-7" id="dcc2">
@@ -225,7 +232,9 @@
                                                                        <div class="form-group">
                                                                            <select name="tlflcl" id="input16" class="form-control userEmail">
                                                                                <option value="">-</option>
-                                                                               <option value="0212">0212</option>
+                                                                               @foreach($codigoL as $local)
+                                                                                 <option value="{{$local->id}}">{{$local->descripcion}}</option>
+                                                                               @endforeach
                                                                            </select><i class="fa fa-hashtag" id="icc16"></i>
                                                                        </div>
                                                                    </div>
@@ -245,7 +254,9 @@
                                                                         <div class="form-group">
                                                                             <select name="tlfmvl" id="input18" class="form-control userEmail">
                                                                                 <option value="">-</option>
-                                                                                <option value="0416">0416</option>
+                                                                                @foreach($codigoC as $celular)
+                                                                                    <option value="{{$celular->id}}">{{$celular->descripcion}}</option>
+                                                                                @endforeach
                                                                             </select><i class="fa fa-hashtag" id="icc18"></i>
                                                                         </div>
                                                                     </div>

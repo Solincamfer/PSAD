@@ -806,11 +806,44 @@ public function clientes_categoria($cliente_id)//listar categorias
 
 
 
-	public function clientes_sucursales()
+	public function clientes_sucursales($categoria_id)//lista las sucursales asociadas a un cliente matriz
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
-		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(25,26,27,28,29,30),24);
-		return view ('Registros_Basicos\Clientes\clientes_sucursales',$this->datos_vista($datos,$acciones,array()));
+		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(25,26,27,28,29,30),24);//acciones 
+		
+
+
+		$consulta=DB::table('sucursales')->where('categoria_id',$categoria_id)->get();//sucursales asociadas a la categoria seleccionada
+		$consulta_=DB::table('categorias')->where('id',$categoria_id)->first();
+		$tipoR=DB::table('tipos')->where('numero_c',1)->get();//tipo de rif 
+		$tipoC=DB::table('tipos')->where('numero_c',4)->get();//tipo de contribuyente
+		$paises=DB::table('paises')->get();//paises 
+		$regiones=DB::table('regiones')->get();//regiones
+		$estados=DB::table('estados')->orderBy('descripcion')->get();//estados
+		$municipios=DB::table('municipios')->orderBy('descripcion')->get();//municipios
+		$codigoC=DB::table('tipos')->where('numero_c',2)->get();//codigo de celular
+		$codigoL=DB::table('tipos')->where('numero_c',3)->get();//codigo de telefono fijo 
+		
+
+		return view('Registros_Basicos\Clientes\clientes_sucursales',
+															['modulos'=>$datos['modulos'],//side bar
+															 'submodulos'=>$datos['submodulos'],//side bar
+															 'nombre'=>$datos['nombre'],//header
+															 'apellido'=>$datos['apellido'],//header
+															 'acciones'=>$acciones['acciones'],//acciones
+															 'agregar'=>$acciones['agregar'],//boton de agregar
+															 'consulta'=>$consulta,//registros provenientes de la base de datos
+															 'tipoR'=>$tipoR,
+															 'tipoC'=>$tipoC,
+															 'paises'=>$paises,
+															 'regiones'=>$regiones,
+															 'estados'=>$estados,
+															 'municipios'=>$municipios,
+															 'codigoC'=>$codigoC,
+															 'codigoL'=>$codigoL,
+															 'clienteId'=>$consulta_->cliente_id,
+															 'categoriaId'=>$categoria_id]);
+
 						
 	}
 
