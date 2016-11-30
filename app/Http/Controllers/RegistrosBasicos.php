@@ -300,8 +300,10 @@ public function mostrar_submodulos()//muestra los submodulos asociados a un modu
 public function mostrar_acciones()
 {
 	$acciones_=array();
-	$perfil_id=(int)Request::get('idPerfil');
-	$submodulo_id=(int)Request::get('idSubmodulo');
+	$datos=Request::get('valores');
+	//$perfil_id=(int)Request::get('idPerfil');
+	$acciones_=DB::table('acciones')->where('submodulo_id',$datos[1])->get();
+	/*$submodulo_id=(int)Request::get('idSubmodulo');
 	$perfil=Perfil::find($perfil_id);
 	$acciones=$perfil->acciones;
 
@@ -312,7 +314,7 @@ public function mostrar_acciones()
 			array_push($acciones_, $accion);
 		}
 
-	}
+	}*/
 
   return $acciones_;
 }
