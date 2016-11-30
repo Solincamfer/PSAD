@@ -40,7 +40,7 @@
                             </div>
                             <div class="row spm">
                                 <div class="col-md-3 dist">
-                                    <div class="card1">
+                                    <div class="card1" id="targeta1">
                                         <ul>
                                             @foreach($consulta as $modulos)
                                             <li>
@@ -70,7 +70,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-3 dist">
-                                    <div class="card1">
+                                    <div class="card1" id="targeta2">
                                         <ul>
                                             <li>
                                                 <div class="container-fluid cont">
@@ -99,7 +99,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-3 dist">
-                                    <div class="card1">
+                                    <div class="card1" id="targeta3">
                                         <ul>
                                             <li>
                                                 <div class="container-fluid cont">

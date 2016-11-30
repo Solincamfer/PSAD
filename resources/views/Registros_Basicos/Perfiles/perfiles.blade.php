@@ -24,8 +24,8 @@
                                     @foreach($acciones as $accion)
                                         @if($accion->id!=85)
                                            <span class="iclsp">
-                                               <a href="{{$accion->url.$perfiles->id}}" class="tltp" data-ttl="{{$accion->descripcion}}">
-                                                   <i class="{{$accion->clase_css}}"></i>
+                                               <a href="{{$accion->url.$perfiles->id}}" class="tltp modificarperfil" id="m{{$perfiles->id}}" data-ttl="{{$accion->descripcion}}">
+                                                   <i class="{{$accion->clase_css}}"></i>                                                   
                                                </a>
                                            </span>
                                         @elseif($accion->id==85)
@@ -41,6 +41,7 @@
                                         @endif
                                     @endforeach
                                 </div>
+                                <input type="text" class="" value="{{$perfiles->id}}" id="idperfilm{{$perfiles->id}}">
                                 <p class="ttlMd"><strong>{{$perfiles->descripcion}}</strong></p>
                             </div>
                         @endforeach

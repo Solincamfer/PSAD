@@ -275,7 +275,7 @@ public function perfiles_modificar($perfil_id)
 public function mostrar_submodulos()
 {
 
-	$perfil_id=Request::get('idPrfil');//id del perfil para el cual se desea mostrar los submodulos
+	$perfil_id=Request::get('idPerfil');//id del perfil para el cual se desea mostrar los submodulos
 	$perfil=Perfil::find($perfil_id);//
 	$submodulos=$perfil->submodulos;
 	return $submodulos;
