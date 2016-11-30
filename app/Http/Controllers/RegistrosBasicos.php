@@ -276,16 +276,16 @@ public function mostrar_submodulos()//muestra los submodulos asociados a un modu
 {
 	$submodulos_=array();//submodulos que se mostraran en la vista
 	
-	$perfil_id=(int)Request::get('idPerfil');//id del perfil para el cual se desea mostrar los submodulos
-	$modulo_id=(int)Request::get('idModulo');//captura el id del modulo
+	$datos=Request::get('valores');//id del perfil para el cual se desea mostrar los submodulos
+	//$modulo_id=(int)Request::get('idModulo');//captura el id del modulo
 	
-	$perfil=Perfil::find($perfil_id);//ubica en la base de datos el perfil indicado por $perfil_id
+	$perfil=Perfil::find($datos[0]);//ubica en la base de datos el perfil indicado por $perfil_id
 	
 	$submodulos=$perfil->submodulos;//captura los submodulos asociados al perfil
 
 	foreach ($submodulos as $submodulo) 
 	{
-		if($submodulo->modulo_id==$modulo_id)
+		if($submodulo->modulo_id==$datos[1])
 		{
 			array_push($submodulos_, $submodulo);//agrega los submodulos asociados al modulo_id
 		}
