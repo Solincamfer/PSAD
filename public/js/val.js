@@ -103,6 +103,10 @@ $(function(){
     $('#stti').on('click', function(){
         $('#clls').addClass('desact');  
     });
-
+    
+    //Funcion que rota la Tarjeta mantenimiento
+    $('.side').on('click', function(){
+        $('.cardrt').toggleClass('actcd');  
+    });
 });
 

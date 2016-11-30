@@ -23,21 +23,21 @@
                         <div class="container">
                             <div class="col-md-10 col-md-offset-2 spc">
                                 <div class="row espFil">
-                                    <a id="" type="button" class="btn" data-toggle="modal" data-target="#myModal1" href="#myModal1">
+                                    <a id="" type="button" class="btn tltpcd" data-ttl="Horarios" data-toggle="modal" data-target="#myModal1" href="#myModal1">
                                         <div class="col-md-2 hh">
                                             <div class="col-md-8 col-md-offset-2">
                                                 <img src="{{asset('img/passage-of-time.png')}}" alt="" class="im">
                                             </div>
                                         </div>
                                     </a>
-                                    <a id="" type="button" class="btn" data-toggle="modal" data-target="#myModal2" href="#myModal2">
+                                    <a id="" type="button" class="btn tltpcd" data-ttl="Soporte Presencial" data-toggle="modal" data-target="#myModal2" href="#myModal2">
                                         <div class="col-md-2 sp">
                                             <div class="col-md-8 col-md-offset-2">
                                                 <img src="{{asset('img/lifeline-signal.png')}}" alt="" class="im">
                                             </div>
                                         </div>
                                     </a>
-                                    <a id="" type="button" class="btn" data-toggle="modal" data-target="#myModal3" href="#myModal3">
+                                    <a id="" type="button" class="btn tltpcd" data-ttl="Soporte Remoto" data-toggle="modal" data-target="#myModal3" href="#myModal3">
                                         <div class="col-md-2 sr">
                                             <div class="col-md-8 col-md-offset-2">
                                                 <img src="{{asset('img/shopping-support-online.png')}}" alt="" class="im">
@@ -46,7 +46,7 @@
                                     </a>
                                 </div>
                                 <div class="row espFil">
-                                    <a id="" type="button" class="btn" data-toggle="modal" data-target="#myModal4" href="#myModal4">
+                                    <a id="" type="button" class="btn tltpcd" data-ttl="Soporte telefónico" data-toggle="modal" data-target="#myModal4" href="#myModal4">
                                         <div class="col-md-2 st">
                                             <div class="col-md-8 col-md-offset-2">
                                                 <img src="{{asset('img/technical-support.png')}}" alt="" class="im">
@@ -54,17 +54,29 @@
                                         
                                         </div>
                                     </a>
-                                    <a id="" class="btn" data-toggle="modal" data-target="#myModal5" href="#myModal5">
+                                    <a id="" class="btn tltpcd" data-ttl="Tiempo de Respuesta" data-toggle="modal" data-target="#myModal5" href="#myModal5">
                                         <div class="col-md-2 tr">
                                             <div class="col-md-8 col-md-offset-2">
                                                 <img src="{{asset('img/technical-service-van.png')}}" alt="" class="im">
                                             </div>
                                         </div>
                                     </a>
-                                    <a id="" class="btn">
-                                        <div class="col-md-2 mant">
-                                            <div class="col-md-8 col-md-offset-2">
-                                                <img src="{{asset('img/mechanic-tools.png')}}" alt="" class="im">
+                                    <a id="" class="btn tltpcd2" data-ttl="Mantenimiento">
+                                        <div class="col-md-2">
+                                            <div class="contcd">
+                                                <div class="cardrt">
+                                                    <div class="side ftside mnt">
+                                                        <img src="{{asset('img/mechanic-tools.png')}}" alt="" class="im">
+                                                    </div>
+                                                    <div class="side bkside">
+                                                        <div class="pf">
+                                                            <p>Mantenimiento anual,</p>
+                                                            <p>estandarización </p>
+                                                            <p>y toma de inventario.</p>
+                                                            <p>Esta incluido en el plan</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </a>
