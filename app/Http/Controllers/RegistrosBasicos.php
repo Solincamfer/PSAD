@@ -272,7 +272,14 @@ public function perfiles_modificar($perfil_id)
 	return view('Registros_Basicos\Perfiles\perfiles_modificar',$this->datos_vista($datos,$acciones,$modulos));
 }
 
+public function mostrar_submodulos()
+{
 
+	$perfil_id=Request::get('idPrfil');//id del perfil para el cual se desea mostrar los submodulos
+	$perfil=Perfil::find($perfil_id);//
+	$submodulos=$perfil->submodulos;
+	return $submodulos;
+}
 	
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
