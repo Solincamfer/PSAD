@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="{{asset('plugins/font-awesome4.7.0/css/font-awesome.min.css')}}">
         <link href="https://fonts.googleapis.com/css?family=Ubuntu+Condensed" rel="stylesheet">
         <link rel="stylesheet" href="{{asset('css/stylesys.css')}}">
-        <link rel="shortcut icon" href="{{asset('img/favicon_logo.png')}}">
+        <link rel="shortcut icon" href="{{asset('img/favicon_logo2.png')}}">
         <link rel="stylesheet" href="{{asset('plugins/sweetalert/sweetalert.css')}}">
     </head>
     <body>
