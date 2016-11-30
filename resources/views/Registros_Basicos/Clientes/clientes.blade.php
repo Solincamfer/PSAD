@@ -1,3 +1,4 @@
+
 @extends('admin.basesys')
 	@section('contenido')
 		@section('title')
@@ -214,7 +215,7 @@
 														</div>
 													</div>	
 														</div>													
-												hidden		
+										
 													
 
 												<div role="tabpanel" class="tab-pane" id="panelsv4">
@@ -395,7 +396,7 @@
 														</div>
 														<div class="form-group col-md-12" id="dfc5">
 																<label for="descDirdf">Descripción de la dirección</label>
-															<textarea type="text" name="descDirdf" id="inn5" class="form-control userEmail"></textarea><i class="fa fa-map-marker" id="icc10"></i>
+															<textarea type="text" name="descDirdc" id="inn5" class="form-control userEmail"></textarea><i class="fa fa-map-marker" id="icc10"></i>
 														</div>
 													</div>
 												

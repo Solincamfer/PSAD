@@ -33,7 +33,7 @@
                                            <div class="chbx">
                                                <input type="checkbox" class="btnAcc" name="status" id="{{'inchbx'. $perfiles->id}}" value="{{$accion->status_ac}}" checked><label for="{{'inchbx'. $perfiles->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
                                            </div>
-                                           @elseif($perfiles->staus_per==0)
+                                           @elseif($perfiles->status_per==0)
                                                <div class="chbx">
                                                    <input type="checkbox" class="btnAcc" name="status" id="{{'inchbx'. $perfiles->id}}" value="{{$accion->status_ac}}"><label for="{{'inchbx'. $perfiles->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
                                                </div>
