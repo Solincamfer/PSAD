@@ -56,7 +56,7 @@
                                                             <div class="iclst">
                                                                     <i class="fa fa-eye consultarSubmodulo" id="m{{$modulos->id}}"></i>
                                                             </div>
-                                                            <input type="hidden" id="Perfilidm{{$modulos->id}}" value="{{$modulos->id}}">
+                                                            <input type="text" id="Perfilidm{{$modulos->id}}" value="{{$modulos->id}}">
                                                         </div>
                                                         <div class="col-md-2 col-md-push-3">
                                                             <div class="chbx1x">
@@ -72,20 +72,44 @@
                                 </div>
                                 <div class="col-md-3 dist">
                                     <div class="card1" id="targeta2">
-                                        <ul>
-                                            
+                                        <div style="display:none;">                                            
+                                            <li id="clonar">
+                                                <div class="container-fluid cont">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="tl1">
+                                                                <span id="hoy"></span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-1 col-md-push-2">
+                                                            <div class="iclst">
+                                                                    <i class="fa fa-eye consultarAcciones" id="button"></i>
+                                                            </div>
+                                                            <input type="text" id="Acciones">
+                                                        </div>
+                                                        <div class="col-md-2 col-md-push-3">
+                                                            <div class="chbx1x">
+                                                                <input type="checkbox" value="None" id="cck" name="cck" checked><label for="cck"></label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>                                        
+                                        </div>
+                                        <ul id="caracas">
                                         </ul>
                                     </div>
                                 </div>
                                 <div class="col-md-3 dist">
                                     <div class="card1" id="targeta3">
-                                        <ul>
-                                            <li>
+                                        <ul id="caracas1">
+                                        <div style="display:none;">  
+                                            <li id="clonar1">
                                                 <div class="container-fluid cont">
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                             <div class="tl1">
-                                                                <span>Registro Básicos</span>
+                                                                <span id="hoy">Registro Básicos</span>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-2 col-md-push-4">
@@ -96,10 +120,11 @@
                                                     </div>
                                                 </div>
                                             </li>
+                                        </div>
                                         </ul>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>   
+                    </div> 
     @endsection

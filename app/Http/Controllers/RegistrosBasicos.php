@@ -274,7 +274,7 @@ public function perfiles_modificar($perfil_id)
 
 public function mostrar_submodulos()//muestra los submodulos asociados a un modulo
 {
-	$submodulos_=array();//submodulos que se mostraran en la vista
+	//$submodulos_=array();//submodulos que se mostraran en la vista
 	
 	$datos=Request::get('valores');//id del perfil para el cual se desea mostrar los submodulos
 	//$modulo_id=(int)Request::get('idModulo');//captura el id del modulo
@@ -291,7 +291,7 @@ public function mostrar_submodulos()//muestra los submodulos asociados a un modu
 			array_push($submodulos_, $submodulo);//agrega los submodulos asociados al modulo_id
 		}
 	}*/
-	$submodulos=DB::table('submodulos')->where('id',$datos[1])->get();
+	$submodulos_=DB::table('submodulos')->where('modulo_id',$datos[1])->get();
 
 	return $submodulos_;
 }
