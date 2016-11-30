@@ -42,12 +42,13 @@
                                 <div class="col-md-3 dist">
                                     <div class="card1">
                                         <ul>
+                                            @foreach($consulta as $modulos)
                                             <li>
                                                 <div class="container-fluid cont">
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                             <div class="tl1">
-                                                                <span>Registro Básicos</span>
+                                                                <span>{{$modulos->descripcion}}</span>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-1 col-md-push-2">
@@ -65,6 +66,7 @@
                                                     </div>
                                                 </div>
                                             </li>
+                                            @endforeach
                                         </ul>
                                     </div>
                                 </div>

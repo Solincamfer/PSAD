@@ -6,7 +6,7 @@ namespace App\Http\Controllers;
 use Session;
 use DB;
 use Request;
-
+use App\Perfil;
 
 class RegistrosBasicos extends Controller 
 {
@@ -262,12 +262,14 @@ public function perfiles()//ventana perfiles
 }
 
 
-public function perfiles_modificar()
+public function perfiles_modificar($perfil_id)
 {
+	$perfil=Perfil::find($perfil_id);
+	$modulos=$perfil->modulos; //trae los modulos asociados a un perfil
 
 	$datos=$this->cargar_header_sidebar_acciones();
 	$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(84,85),83);
-	return view('Registros_Basicos\Perfiles\perfiles_modificar',$this->datos_vista($datos,$acciones,array()));
+	return view('Registros_Basicos\Perfiles\perfiles_modificar',$this->datos_vista($datos,$acciones,$modulos));
 }
 
 
