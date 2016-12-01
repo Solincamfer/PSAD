@@ -244,11 +244,28 @@ public function empleados()
 	return view ('Registros_Basicos\empleados\empleados',$this->datos_vista($datos,$acciones,DB::table('empleados')->get()));
 }
 
-public function empleados_usuarios($empleado_id)
+public function empleados_perfiles($empleado_id)
 {
+	
 	$datos=$this->cargar_header_sidebar_acciones();
 	$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(80,81,82),79);
-	return view ('Registros_Basicos\empleados\empleados_usuarios',$this->datos_vista($datos,$acciones,DB::table('usuarios')->where('id',$empleado_id)->get()));
+	
+	$consulta=DB::table('perfiles')->join('usuarios','perfiles.id','=','usuarios.perfil_id')
+								   ->join('empleados','usuarios.id','=','empleados.id')
+								   ->select('empleados.nombre As nombreE','empleados.apellido As apellidoE',
+								   			'usuarios.n_usuario As usuarioE','perfiles.id As perfilE')
+								   ->where('empleados.id',$empleado_id)->first();
+	
+
+	
+
+	
+	return view ('Registros_Basicos\empleados\empleados_perfil',$this->datos_vista($datos,$acciones,
+						DB::table('perfiles')->get(),
+						$consulta->nombreE." ".$consulta->apellidoE,//extra
+						$consulta->perfilE,//datosC1
+						$consulta->usuarioE//datosC2
+						));
 }
 	
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
