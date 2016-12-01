@@ -10,17 +10,11 @@
                      <div class="container">
                         <div class="row">
                             <div class="col-md-2 ttlp">
-                                <h1>{{$datosC2}} </h1>
+                                <h1>Permisos</h1>
                             </div>
                         </div>
                     </div>
-                    <!-- <div class="container">
-                        <div class="row">
-                            <div class="col-md-2 ttlp">
-                                <h1>Perfil</h1>
-                            </div>
-                        </div>
-                    </div> -->
+                  
                     
                     <div class="col-xs-5 col-sm-5 col-md-6 col-md-offset-3"> 
                  <!--    @if($agregar)
@@ -34,7 +28,7 @@
                            
 
                                  @if($datosC1==$perfiles->id)
-                                    <span class="ttlMd"><input type="radio" name="c_rsp" id="c_rsp" value="1" checked> 
+                                    <span class="ttlMd"><input type="radio" name="c_rsp" id="c_rsp" value="{{$perfiles->id}}" checked> 
                                     <label for="c_rsp"><strong>{{$perfiles->descripcion}}</strong></label></span>
                                 @else
                                      <span class="ttlMd"><input type="radio" name="c_rsp" id="c_rsp" value="0" > 
