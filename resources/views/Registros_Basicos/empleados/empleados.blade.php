@@ -15,17 +15,45 @@
                         </div>
 
                         <div class="col-xs-5 col-sm-5 col-md-6 col-md-offset-3" style=""> 
+                        @if($agregar)
                                 <button id="btnAdd" type="button" class="btnAdc col-md-offset-11" data-toggle="modal" data-target="#myModal" href="#myModal"><i class="fa fa-plus"></i> AGREGAR</button>
-                            @for($i=0; $i < 5; $i++)
+                        @endif
+
+                            @foreach($consulta as $empleado)
                                 <div class="contMd" style="">
                                     <div class="icl">
-                                        @for($j=0; $j < 5; $j++)
-                                            <button class="btnAcc" type="submit">Modificar</button>
-                                        @endfor
+                                        @foreach($acciones as $accion)
+                                          @if($accion->id!=78)
+                                             
+                                             @if($accion->data_toogle!="modal")
+                                                <span class="iclsp">
+                                                <a href="{{$accion->url.$empleado->id}}" class="tltp" data-ttl="{{$accion->descripcion}}">
+                                                <i class="{{$accion->clase_css}}"></i>
+                                               </a>
+                                              </span>
+                                             @elseif($accion->data_toogle=="modal")
+                                                <span class="iclsp">
+                                                  <a href="#myModal2" class="tltp modificarCliente" id="m{{$empleado->id}}" data-ttl="{{$accion->descripcion}}" data-toggle="modal" data-target="#myModal2"> 
+                                                  <i class="{{$accion->clase_css}}"></i>
+                                                  </a>
+                                               </span>
+                                             @endif
+                                          @elseif($accion->id==78)
+                                            @if($accion->status_ac==1)
+                                                  <div class="chbx">
+                                                    <input type="checkbox" class="btnAcc" name="inchbx1" id="{{'inchbx'. $empleado->id}}" value="{{$accion->status_ac}}" checked><label for="{{'inchbx'. $empleado->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
+                                                  </div>
+                                            @elseif($accion->staus_ac==0)
+                                              <div class="chbx">
+                                                <input type="checkbox" class="btnAcc" name="status" id="{{'inchbx'. $empleado->id}}" value="{{$accion->status_ac}}"><label for="{{'inchbx'. $empleado->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
+                                              </div>
+                                            @endif
+                                          @endif
+                                        @endforeach
                                     </div>
-                                <p class="ttlMd"><strong>REGISTRO</strong></p>
+                                <p class="ttlMd"><strong>{{$empleado->nombre."  ".$empleado->apellido}}</strong></p>
                                 </div>
-                            @endfor
+                            @endforeach
                         </div>
                         <!--    Registro -->
 

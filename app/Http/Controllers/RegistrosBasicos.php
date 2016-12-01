@@ -241,14 +241,14 @@ public function empleados()
 {
 	$datos=$this->cargar_header_sidebar_acciones();
 	$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(76,77,78),75);
-	return view ('Registros_Basicos\empleados\empleados',$this->datos_vista($datos,$acciones,array()));
+	return view ('Registros_Basicos\empleados\empleados',$this->datos_vista($datos,$acciones,DB::table('empleados')->get()));
 }
 
-public function empleados_usuarios()
+public function empleados_usuarios($empleado_id)
 {
 	$datos=$this->cargar_header_sidebar_acciones();
 	$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(80,81,82),79);
-	return view ('Registros_Basicos\empleados\empleados_usuarios',$this->datos_vista($datos,$acciones,array()));
+	return view ('Registros_Basicos\empleados\empleados_usuarios',$this->datos_vista($datos,$acciones,DB::table('usuarios')->where('id',$empleado_id)->get()));
 }
 	
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -274,6 +274,8 @@ public function perfiles_modificar($perfil_id)
 
 public function mostrar_submodulos()//muestra los submodulos asociados a un modulo
 {
+	
+	//
 	//$submodulos_=array();//submodulos que se mostraran en la vista
 	
 	$datos=Request::get('valores');//id del perfil para el cual se desea mostrar los submodulos
@@ -291,7 +293,7 @@ public function mostrar_submodulos()//muestra los submodulos asociados a un modu
 			array_push($submodulos_, $submodulo);//agrega los submodulos asociados al modulo_id
 		}
 	}*/
-	$submodulos_=DB::table('submodulos')->where('modulo_id',$datos[1])->get();
+	$submodulos_=DB::table('submodulos')->where(['modulo_id'=>$datos[1],'status_sm'=>1,'padre'=>1])->get();
 
 	return $submodulos_;
 }
