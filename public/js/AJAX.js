@@ -483,7 +483,8 @@ $(".btnAcc").click(function(){
 });
 
 $(".consultarSubmodulo").click(function(){
-
+				$(".consultarSubmodulo").css("color","grey");
+			    $(this).css("color","white");
 		///////////BUSCADO BOTON CLICKEADO/////////////	
 			ID = $(this).attr("id");///////ID DEL BOTTON MODIFICAR/////////	
 
@@ -497,12 +498,34 @@ $(".consultarSubmodulo").click(function(){
 		///////////PASANDO VARIABLE Y CARGANDO LISTADO CORRESPONDIENTE A LA SELECCION PREVIA Y ESPERANDO DATA COMO RESPUESTA/////////////			        	
 			$.get("/menu/registros/perfiles/submodulos", {valores:valores}, function(data){
 				$( ".limpiarul1" ).remove();
+				$( ".limpiarul2" ).remove();
 	    ///////////ASIGNANDO LOS VALORES DEL ARRAY A LOS IMPUT CORRESPONDIENTES DEL MODAL MODIFICAR/////////////	
 			    $.each(data, function(i, item) {
-			    	alert(i);
-			    	$( "#clonar").clone($('#hoy').html(item.descripcion),$('#Acciones').val(item.id)).appendTo("#caracas");
+			    	
+			    	$('#targeta2 ul').append('<li class="limpiarul1" style="display:none;"><div class="container-fluid cont"><div class="row"><div class="col-md-6"><div class="tl1"><span>'+item.descripcion+'</span></div></div><div class="col-md-1 col-md-push-2"><div class="iclst"><i class="fa fa-eye consultarAcciones" id="n'+item.id+'"></i></div><input type="hidden" id="Accionn'+item.id+'" value="'+item.id+'"></div><div class="col-md-2 col-md-push-3"><div class="chbx1x"><input type="checkbox" value="None" id="cck" name="cck" checked><label for="cck"></label></div></div></div></div></li>');
+			    $( ".limpiarul1" ).each(function() {
+				    $( this ).slideUp(1).delay(250).fadeIn(0);
+				 });
+			    })  
 
-			    })        
+			    
+
+			    $(".consultarAcciones").click(function(){
+			    $(".consultarAcciones").css("color","grey");
+			    $(this).css("color","white");
+			    ID = $(this).attr("id");
+			    idAccion=$('#Accion'+ID).val();				
+				valoresAcc=[idPerfil,idAccion];
+				$.get("/menu/registros/perfiles/acciones", {valoresAcc:valoresAcc}, function(data1){
+					$( ".limpiarul2" ).remove();
+					$.each(data1, function(i, item) {
+						$('#targeta3 ul').append('<li class="limpiarul2" style="display:none;"><div class="container-fluid cont"><div class="row"><div class="col-md-6"><div class="tl1"><span>'+item.descripcion+'</span></div></div><div class="col-md-1 col-md-push-2"><div class="iclst"></div><input type="hidden" id="Accio2nn'+item.id+'" value="'+item.id+'"></div><div class="col-md-2 col-md-push-3"><div class="chbx1x"><input type="checkbox" value="None" id="cck" name="cck" checked><label for="cck"></label></div></div></div></div></li>');
+			    		$( ".limpiarul2" ).each(function() {
+				    $( this ).slideUp(1).delay(250).fadeIn(0);
+				 });
+			    	})  
+				});
+				});      
         		//$('#CatM1').val(data[0]);
         		//$('#CatM2').val(data[1]);
         		//->->->//alert(data);///////Data para probar los campos resividos por el AJAX//
@@ -510,10 +533,7 @@ $(".consultarSubmodulo").click(function(){
 			
 });
 
-$(".consultarAcciones").click(function(){
-	caracas=$('.consultarAcciones').attr("id")
-alert(caracas);
-});
+
 
 $("#btnLimipiarResponsable1").click(function(){
 	$('form-control-feedback').css('display','none');

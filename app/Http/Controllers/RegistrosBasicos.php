@@ -300,7 +300,7 @@ public function mostrar_submodulos()//muestra los submodulos asociados a un modu
 public function mostrar_acciones()
 {
 	$acciones_=array();
-	$datos=Request::get('valores');
+	$datos=Request::get('valoresAcc');
 	//$perfil_id=(int)Request::get('idPerfil');
 	$acciones_=DB::table('acciones')->where('submodulo_id',$datos[1])->get();
 	/*$submodulo_id=(int)Request::get('idSubmodulo');
