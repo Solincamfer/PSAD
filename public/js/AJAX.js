@@ -464,22 +464,22 @@ $(".modificarCliente").click(function(){
 /// PROTOTIPO DEL SELECTOR STATUS...
 $(".btnAcc").click(function(){
 		swal({
-		  title: "Are you sure?",
-		  text: "You will not be able to recover this imaginary file!",
+		  title: "Habilitacion de Registros",
+		  text: "La modificacion de esta accion puede afectar la funcionalidad de otros recursos",
 		  type: "warning",
 		  showCancelButton: true,
 		  confirmButtonColor: "#DD6B55",
-		  confirmButtonText: "Yes, delete it!",
+		  confirmButtonText: "Si, Ejecutar Accion!",
 		  closeOnConfirm: false
 		},
 		function(){
-		  swal("Deleted!", "Your imaginary file has been deleted.", "success");
+		  swal("Accion Ejecutada!!", "La accion fue ejecutada con exito.", "success");
 		});
-    	if ($(this).val()==1) {
+    	/*if ($(this).val()==1) {
     		alert($(this).val());
     	}else{
     		alert($(this).val());
-    	}
+    	}*/
 });
 
 $(".consultarSubmodulo").click(function(){
