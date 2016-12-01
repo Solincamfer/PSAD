@@ -23,7 +23,7 @@
                                     <a href="/menu/registros/empleados"><button id="btnBk" type="button" class="btnBk" href="#"><i class="fa fa-chevron-left"></i> VOLVER</button></a>
                                 </div>
                                 <div class="col-md-2 col-md-offset-3 pnlUs">
-                                     <span class="pnlttl"><i class="fa fa-user-circle"></i> Usuario</span>
+                                     <span class="pnlttl"><i class="fa fa-user-circle"></i> {{$datosC2}}</span>
                                 </div>
                             </div>
                         </div>
