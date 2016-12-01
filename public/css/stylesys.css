@@ -765,7 +765,8 @@
         
         /*Departamento, Cargo*/
 
-        #dpto input, #dpto select, #cgo input, #cgo select {
+        #dpto input, #dpto select, #cgo input, #cgo select,
+        #dptom input, #dptom select, #cgom input, #cgom select{
             display: block;
             padding: 3px 5px;
             margin-bottom: 10px;
@@ -777,14 +778,16 @@
             color: #ccc;
         }
         
-        #dpto input:focus, #dpto select:focus, #cgo input:focus, #cgo select:focus{
+        #dpto input:focus, #dpto select:focus, #cgo input:focus, #cgo select:focus,
+        #dptom input:focus, #dptom select:focus, #cgom input:focus, #cgom select:focus{
             outline: none;
             color: #444;
             border-color: #26a69d;
             border-left-width: 35px;
         }
 
-        #dpto #icdp1, #dpto #icdp2, #cgo #iccg1, #cgo #iccg2 {
+        #dpto #icdp1, #dpto #icdp2, #cgo #iccg1, #cgo #iccg2,
+        #dptom #micdp1, #dptom #micdp2, #cgom #miccg1, #cgom #miccg2{
             color: #fff;
             font-size: 1em;
             position: absolute;
@@ -794,14 +797,8 @@
             left: 0;
             transition: all .1s ease-in;
         }
-        
-        /*#dpto input:focus + span.fa, #dpto select:focus + span.fa{
-            opacity: 1;
-            left: 26px;
-            transition: all .25s ease-out;
-        }*/
 
-        #dpto .ic, #cgo .ic{
+        #dpto .ic, #cgo .ic, #dptom .ic, #cgom .ic{
             background-color: #26a69d;
             position: absolute;
             padding-top: 7px;
@@ -1689,9 +1686,9 @@
             #rComp2 .ic, #rComp3 .ic, #rComp4 .ic, 
             #rCompm2 .ic, #rCompm3 .ic, #rCompm4 .ic,
             #rPz1 .ic, #rPz2 .ic, #rPz3 .ic,
-            #rPzm1 .ic, #rPzm2 .ic, #rPzm3 .ic
+            #rPzm1 .ic, #rPzm2 .ic, #rPzm3 .ic,
             #rAs1 .ic, #rAs2 .ic, #rAs3 .ic,
-            #rAs1 .ic, #rAs2 .ic, #rAs3 .ic{
+            #rAsm1 .ic, #rAsm2 .ic, #rAsm3 .ic{
                 background-color: #26a69d;
                 position: absolute;
                 padding-top: 7px;
@@ -1721,7 +1718,7 @@
             }
             
         /*Planes*/
-            .rPn input, .rPn select{
+            .rPn input, .rPn select, .rPnm input, .rPnm select{
                 display: block;
                 padding: 3px 5px;
                 margin-bottom: 10px;
@@ -1733,14 +1730,14 @@
                 color: #ccc;
             }
 
-            .rPn input:focus, .rPn select:focus{
+            .rPn input:focus, .rPn select:focus, .rPnm input:focus, .rPnm select:focus{
                 outline: none;
                 color: #444;
                 border-color: #26a69d;
                 border-left-width: 35px;
             }
 
-            .rPn #icpn1{
+            .rPn #icpn1, .rPnm #micpn1{
                 color: #fff;
                 font-size: 1em;
                 position: absolute;
@@ -1751,7 +1748,7 @@
                 transition: all .1s ease-in;
             }
 
-            .rPn #icpn2{
+            .rPn #icpn2, .rPnm #micpn2{
                 color: #fff;
                 font-size: 1em;
                 position: absolute;
@@ -1762,7 +1759,7 @@
                 transition: all .1s ease-in;
             }
 
-            .rPn #icpn4{
+            .rPn #icpn4, .rPnm #micpn4{
                 color: #fff;
                 font-size: 1em;
                 position: absolute;
@@ -1773,7 +1770,7 @@
                 transition: all .1s ease-in;
             }
 
-            .rPn .ic{
+            .rPn .ic, .rPnm .ic{
                 background-color: #26a69d;
                 position: absolute;
                 padding-top: 5px;
@@ -2241,12 +2238,14 @@
 
         /*Empleados*/
             /*Modal*/
-                .contdbe1, .contdbe2, .contdhe, .contcte{
-                    margin-top: 20px;
-                    margin-bottom: 15px;
+                .contdbe1, .contdbe2, .contdhe, .contcte,
+                .contdbem1, .contdbem2, .contdhem, .contctem{
+                    margin-top: 30px;
+                    margin-bottom: 20px;
                 }
 
-                .rEmp1 input, .rEmp2 input, .rEmp2 select, .rEmp5 input, .rEmp5 select{
+                .rEmp1 input, .rEmp2 input, .rEmp2 select, .rEmp5 input, .rEmp5 select,
+                .rEmpm1 input, .rEmpm2 input, .rEmpm2 select, .rEmpm5 input, .rEmpm5 select{
                     display: block;
                     padding: 2px 5px;
                     width: 98%;
@@ -2258,7 +2257,8 @@
                     color: #ccc;
                 }
 
-                .rEmp3 input, .rEmp3 select, .rEmp4 select, .rEmp4 textarea{
+                .rEmp3 input, .rEmp3 select, .rEmp4 select, .rEmp4 textarea,
+                .rEmpm3 input, .rEmpm3 select, .rEmpm4 select, .rEmpm4 textarea{
                     display: block;
                     padding: 2px 5px;
                     width: 100%;
@@ -2272,14 +2272,18 @@
 
                 .rEmp1 input:focus, .rEmp2 input:focus, .rEmp2 select:focus,
                 .rEmp3 input:focus, .rEmp3 select:focus, .rEmp4 textarea:focus, 
-                .rEmp4 select:focus, .rEmp5 select:focus, .rEmp5 input:focus{
+                .rEmp4 select:focus, .rEmp5 select:focus, .rEmp5 input:focus,
+                .rEmpm1 input:focus, .rEmpm2 input:focus, .rEmpm2 select:focus,
+                .rEmpm3 input:focus, .rEmpm3 select:focus, .rEmpm4 textarea:focus, 
+                .rEmpm4 select:focus, .rEmpm5 select:focus, .rEmpm5 input:focus{
                     outline: none;
                     color: #444;
                     border-color: #26a69d;
                     border-left-width: 35px;
                 }
 
-                .rEmp1 .icemp, .rEmp2 .icemp, .rEmp3 .icemp, .rEmp5 .icemp{
+                .rEmp1 .icemp, .rEmp2 .icemp, .rEmp3 .icemp, .rEmp5 .icemp,
+                .rEmpm1 .icemp, .rEmpm2 .icemp, .rEmpm3 .icemp, .rEmpm5 .icemp{
                     color: #fff;
                     position: absolute;
                     left: 0;
@@ -2288,7 +2292,7 @@
                     font-size: 16px;
                 }
 
-                .rEmp4 .icemp{
+                .rEmp4 .icemp, .rEmpm4 .icemp{
                     color: #fff;
                     position: absolute;
                     left: 0;
@@ -2297,7 +2301,7 @@
                     font-size: 16px;
                 }
 
-                .rEmp2 .ic, .rEmp5 .ic{
+                .rEmp2 .ic, .rEmp5 .ic, .rEmpm2 .ic, .rEmpm5 .ic{
                     background-color: #26a69d;
                     position: absolute;
                     padding-top: 5px;
@@ -2316,7 +2320,7 @@
                     z-index: 1;
                 }
 
-                .rEmp3 .ic{
+                .rEmp3 .ic, .rEmpm3 .ic{
                     background-color: #26a69d;
                     position: absolute;
                     padding-top: 5px;
@@ -2335,7 +2339,7 @@
                     z-index: 1;
                 }
 
-                .rEmp4 .ic{
+                .rEmp4 .ic, .rEmpm4 .ic{
                     background-color: #26a69d;
                     position: absolute;
                     padding-top: 5px;

@@ -52,6 +52,7 @@
                         </div>
                     @endforeach
                 </div>
+                
                 <!-- Modal -->
                 @if($agregar)
                 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -95,6 +96,49 @@
                         </div>
                     </div>
                 </div> 
-               @endif 
+               @endif
+               
+                <!-- Modal Modificar -->
+                <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="myModalLabel2"><strong>Modificar Departamento</strong></h4>
+                            </div>
+                            <div class="modal-body">
+                                <form method="post" class="form-horizontal Validacion" action="">
+                                    {{ csrf_field() }}
+                                    <div class="container-fluid" id="contdpto">
+                                        <div class="row">
+                                            <div id="dptom">
+                                                <div class="col-md-8 col-md-offset-2">
+                                                    <div class="form-group row">
+                                                        <label for="nomDptom">Nombre del Departamento</label>
+                                                        <input type="text" name="textDptom" class="form-control" id="nomDptom"/><i class="fa fa-briefcase" id="micdp1"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-8 col-md-offset-2">
+                                                    <div class="form-group row">
+                                                        <label for="stDptom">Estatus del Departamento</label><span class="ic"><i class="fa fa-chevron-down"></i></span>
+                                                        <select name="comboDptom" class="form-control" id="stDptom">
+                                                            <option value="">-</option>
+                                                            <option value="1">Activo</option>
+                                                            <option value="2">Inactivo</option>
+                                                        </select><i class="fa fa-check" id="micdp2"></i>
+                                                    </div>
+                                                </div> 
+                                            </div> 
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="bttnMd" id="btnSv">Guardar <i class="fa fa-floppy-o"></i></button>
+                                        <button type="button" class="bttnMd" data-dismiss="modal" id="btnCs">Cerrar <i class="fa fa-times"></i></button>
+                                    </div>
+                                </form>
+                            </div>                           
+                        </div>
+                    </div>
+                </div> 
             </div>
     @endsection

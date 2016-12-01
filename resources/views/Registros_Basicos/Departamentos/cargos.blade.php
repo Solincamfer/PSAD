@@ -61,6 +61,7 @@
                         </div>
                     @endforeach
                 </div>
+                
                 <!-- Modal -->
                 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                     <div class="modal-dialog" role="document">
@@ -102,6 +103,51 @@
                                 </form>
                             </div>
                             
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Modal Modificar-->
+                <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="myModalLabel2"><strong>Modificar Cargo</strong></h4>
+                            </div>
+                            <div class="modal-body">
+
+                                <form method="post" class="form-horizontal Validacion" action="ajaxSubmit.php">
+                                    {{ csrf_field() }}
+                                    <div class="container-fluid" id="contcgo">
+
+                                        <div id="cgom">
+                                            <div class="col-md-8 col-md-offset-2">
+                                                <div class="form-group row">
+                                                    <label for="nomCgom">Nombre del cargo</label>
+                                                    <input type="text" class="form-control" name="textCgom" id="nomCgom" /><i class="fa fa-id-badge" id="miccg1"></i>                     
+                                                </div>
+                                            </div>
+                                            <div class="col-md-8 col-md-offset-2">
+                                                <div class="form-group row">
+                                                    <label for="stCgom">Estatus del Cargo</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
+                                                    <select id="stCgom" class="form-control" name="comboCgom">
+                                                        <option value="">-</option>
+                                                        <option value="1">Activo</option>
+                                                        <option value="2">Inactivo</option>
+                                                    </select><i class="fa fa-check" id="miccg2"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="bttnMd" id="btnSv">Guardar <i class="fa fa-floppy-o"></i></button>
+                                        <button type="button" class="bttnMd" data-dismiss="modal" id="btnCs">Cerrar <i class="fa fa-times"></i></button>
+                                    </div>
+                                </form>
+                            </div>
+
                         </div>
                     </div>
                 </div>

@@ -297,7 +297,7 @@
 							<div class="modal-content">
 								<div class="modal-header">
 									<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-									<h4 class="modal-title" id="myModalLabel2">Modificar</h4>
+									<h4 class="modal-title" id="myModalLabel2">Modificar nuevo cliente</h4>
 								</div>
 							<form method="post" class="form-horizontal Validacion" id="Formclientemd" action="/menu/registros/clientes/actualizar">
 									{{ csrf_field() }}	

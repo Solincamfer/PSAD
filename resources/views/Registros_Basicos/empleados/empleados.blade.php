@@ -127,6 +127,14 @@
                                                                </div>
                                                                <div class="col-md-10 col-md-offset-1">
                                                                    <div class="form-group row">
+                                                                       <label for="dptoEmp">Departamento</label><span class="ic"><i class="fa fa-chevron-down"></i></span>
+                                                                       <select name="dptoEmp" class="form-control" id="dptoEmp">
+                                                                           <option value="0">-</option>
+                                                                       </select><i class="fa fa-briefcase icemp"></i>
+                                                                   </div>
+                                                               </div>
+                                                               <div class="col-md-10 col-md-offset-1">
+                                                                   <div class="form-group row">
                                                                        <label for="cgoEmp">Cargo</label><span class="ic"><i class="fa fa-chevron-down"></i></span>
                                                                        <select name="cgoEmp" class="form-control" id="cgoEmp">
                                                                            <option value="0">-</option>
@@ -230,6 +238,216 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        
+                        <!-- Modal Modificar-->
+                        <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
+                        <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="myModalLabel2">Modificar Empleado</h4>
+                            </div>
+                            <div class="modal-body">
+                                <form action="">
+                                    {{ csrf_field() }}
+                                    <ul class="nav nav-tabs" role="tablist">
+                                        <li role="presentation" class="active"><a href="#dbem1" aria-controls="dbem1" role="tab" data-toggle="tab">Datos básic. Prim.</a></li>
+                                        <li role="presentation"><a href="#dbem2" aria-controls="dbem2" role="tab" data-toggle="tab">Datos básic. Sec.</a></li>
+                                        <li role="presentation"><a href="#dhem" aria-controls="dhem" role="tab" data-toggle="tab">Dir. de Habitación</a></li>
+                                        <li role="presentation"><a href="#ctoem" aria-controls="ctoem" role="tab" data-toggle="tab">Contactos</a></li>
+                                    </ul>
+                                    <div class="container-fluid">
+                                        <div class="tab-content">
+                                            <div role="tabpanel" class="tab-pane active" id="dbem1">
+                                                <div class="container-fluid contdbem1">
+                                                    <div class="row rEmpm1">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group row">
+                                                                <label for="nomEmpm1">1er Nombre</label>
+                                                                <input type="text" name="nomEmpm1" class="form-control" id="nomEmpm1"><i class="fa fa-user icemp"></i>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group row">
+                                                                <label for="nomEmpm2">2do Nombre</label>
+                                                                <input type="text" name="nomEmpm2" class="form-control" id="nomEmpm2"><i class="fa fa-user-plus icemp"></i>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group row">
+                                                                <label for="apellEmpm1">1er Apellido</label>
+                                                                <input type="text" name="apellEmpm1" class="form-control" id="apellEmpm1"><i class="fa fa-user icemp"></i>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group row">
+                                                                <label for="apellEmpm2">2do Apellido</label>
+                                                                <input type="text" name="apellEmpm2" class="form-control" id="apellEmpm2"><i class="fa fa-user-plus icemp"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div role="tabpanel" class="tab-pane" id="dbem2">
+                                                <div class="container-fluid contdbem2">
+                                                    <div class="row rEmpm2">
+                                                        <div class="col-md-10 col-md-offset-1">
+                                                            <label for="rifEmpm">Rif</label>
+                                                            <br>
+                                                            <div class="col-md-5">
+                                                                <div class="form-group row">
+                                                                    <span class="ic"><i class="fa fa-chevron-down"></i></span>
+                                                                    <select name="rifEmpm" class="form-control" id="selRifEmpm">
+                                                                        <option value="0">-</option>
+                                                                    </select><i class="fa fa-clipboard icemp"></i>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-7">
+                                                                <div class="form-group row">
+                                                                    <input type="tel" class="form-control" name="rifEmpm" id="numRifEmpm"><i class="fa fa-address-card icemp"></i>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-10 col-md-offset-1">
+                                                            <label for="ciEmpm">Documento de identidad</label>
+                                                            <br>
+                                                            <div class="col-md-5">
+                                                                <div class="form-group row">
+                                                                    <span class="ic"><i class="fa fa-chevron-down"></i></span>
+                                                                    <select name="ciEmpm" class="form-control" id="selCiEmpm">
+                                                                        <option value="0">-</option>
+                                                                    </select><i class="fa fa-clipboard icemp"></i>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-7">
+                                                                <div class="form-group row">
+                                                                    <input type="tel" class="form-control" name="ciEmpm" id="numCiEmpm"><i class="fa fa-address-card-o icemp"></i>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row rEmpm3">
+                                                        <div class="col-md-10 col-md-offset-1">
+                                                            <div class="form-group row">
+                                                                <label for="fnEmpm">Fecha de nacimiento</label><span class="ic"><i class="fa fa-chevron-down"></i></span>
+                                                                <input type="date" name="fnEmpm" class="form-control" id="fnEmpm"><i class="fa fa-calendar icemp"></i>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-10 col-md-offset-1">
+                                                            <div class="form-group row">
+                                                                <label for="dptoEmpm">Departamento</label><span class="ic"><i class="fa fa-chevron-down"></i></span>
+                                                                <select name="dptoEmpm" class="form-control" id="dptoEmpm">
+                                                                    <option value="0">-</option>
+                                                                </select><i class="fa fa-briefcase icemp"></i>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-10 col-md-offset-1">
+                                                            <div class="form-group row">
+                                                                <label for="cgoEmpm">Cargo</label><span class="ic"><i class="fa fa-chevron-down"></i></span>
+                                                                <select name="cgoEmpm" class="form-control" id="cgoEmpm">
+                                                                    <option value="0">-</option>
+                                                                </select><i class="fa fa-id-badge icemp"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div role="tabpanel" class="tab-pane" id="dhem">
+                                                <div class="container-fluid contdhem">
+                                                    <div class="row rEmpm4">
+                                                        <div class="form-group col-md-6">
+                                                            <label for="pdhem">País</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
+                                                            <select name="pdhem" class="form-control" id="pdhem">
+                                                                <option value="0">-</option>
+                                                            </select><i class="fa fa-globe icemp"></i>
+                                                        </div>
+                                                        <div class="form-group col-md-6">
+                                                            <label for="rgdhem">Región</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
+                                                            <select name="rgdhem" class="form-control" id="rgdhem">
+                                                                <option value="0">-</option>
+                                                            </select><i class="fa fa-map icemp"></i>
+                                                        </div>
+                                                        <div class="form-group col-md-6">
+                                                            <label for="edodhem">Estado</label><span class="ic"><i class="fa fa-chevron-down"></i></span>
+                                                            <select name="edodhem" class="form-control" id="edodhem">
+                                                                <option value="0">-</option>
+                                                            </select><i class="fa fa-map-pin icemp"></i>
+                                                        </div>
+                                                        <div class="form-group col-md-6">
+                                                            <label for="mundhem">Municipio</label><span class="ic"><i class="fa fa-chevron-down"></i></span>
+                                                            <select name="mundhem" class="form-control" id="mundhem">
+                                                                <option value="0">-</option>
+                                                            </select><i class="fa fa-map-signs icemp"></i>
+                                                        </div>
+                                                        <div class="form-group col-md-12">
+                                                            <label for="descpdhem">Descripcion de la dirección</label>
+                                                            <textarea type="text" name="descpdhem" class="form-control" id="descpdhem"></textarea><i class="fa fa-map-marker icemp"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div role="tabpanel" class="tab-pane" id="ctoem">
+                                                <div class="container-fluid contctem">
+                                                    <div class="row rEmpm5">
+                                                        <div class="col-md-10 col-md-offset-1">
+                                                            <label for="tlflclem">Teléfono Local</label>
+                                                            <br>
+                                                            <div class="col-md-5">
+                                                                <div class="form-group row">
+                                                                    <span class="ic"><i class="fa fa-chevron-down" ></i></span>
+                                                                    <select name="tlflclem" class="form-control" id="tlflclem">
+                                                                        <option value="0">-</option>
+                                                                    </select><i class="fa fa-hashtag icemp"></i>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-7">
+                                                                <div class="form-group row">
+                                                                    <input type="tel" class="form-control" id="numtlflclem"><i class="fa fa-phone icemp"></i>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-10 col-md-offset-1">
+                                                            <label for="tlfmvlem">Teléfono Móvil</label>
+                                                            <br>
+                                                            <div class="col-md-5">
+                                                                <div class="form-group row">
+                                                                    <span class="ic"><i class="fa fa-chevron-down" ></i></span>
+                                                                    <select name="tlfmvlem" class="form-control" id="tlfmvlem">
+                                                                        <option value="0">-</option>
+                                                                    </select><i class="fa fa-hashtag icemp"></i>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-7">
+                                                                <div class="form-group row">
+                                                                    <input type="tel" class="form-control" id="numtlfmvlem"><i class="fa fa-mobile icemp"></i>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-10 col-md-offset-1">
+                                                                <div class="form-group row">
+                                                                    <label for="mailem">Correo Electrónico</label>
+                                                                    <input type="text" name="mailem" class="form-control" id="mailem"><i class="fa fa-envelope icemp"></i>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="bttnMd" id="btnSvm">Guardar <i class="fa fa-floppy-o"></i></button>
+                                <button type="button" class="bttnMd" data-dismiss="modal" id="btnCsm">Cerrar <i class="fa fa-times"></i></button>
+                            </div>
+                        </div>
+                        </div>
                         </div>
                 </div>   
     @endsection

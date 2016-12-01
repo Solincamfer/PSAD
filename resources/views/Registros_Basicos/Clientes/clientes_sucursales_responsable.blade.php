@@ -84,8 +84,6 @@
                                             <div class="tab-content">
                                                 <div role="tabpanel" class="tab-pane active" id="dbrc1">
                                                     <div class="container-fluid" id="contrpbdbrc1">
-                                                        <center><u><p>DATOS BASICOS</p></u></center>
-                                                        <br>
                                                         <div class="row">
                                                             <div class="col-md-5 col-md-offset-1" id="rRpbc1">
                                                                 <div class="form-group">
@@ -132,8 +130,6 @@
                                                 </div>
                                                 <div role="tabpanel" class="tab-pane" id="ctorc">
                                                     <div class="container-fluid" id="contrpbdbrc3">
-                                                        <center><u><p>CONTACTOS</p></u></center>
-                                                        <br>
                                                         <div class="row">
                                                             <div class="col-md-8 col-md-offset-2" id="rRpbc9">           
                                                                 <div class="col-md-12">
@@ -214,8 +210,6 @@
                                             <div class="tab-content">
                                                 <div role="tabpanel" class="tab-pane active" id="dbrcm1">
                                                     <div class="container-fluid" id="contrpbdbrcm1">
-                                                        <center><u><p>DATOS BASICOS</p></u></center>
-                                                        <br>
                                                         <div class="row">                                            
                                                             <div class="col-md-5  col-md-offset-1" id="rRpbcm1">
                                                                 <div class="form-group">
@@ -263,8 +257,6 @@
                                                 
                                                 <div role="tabpanel" class="tab-pane" id="ctorcm">
                                                     <div class="container-fluid" id="contrpbdbrcm3">
-                                                        <center><u><p>CONTACTOS</p></u></center>
-                                                        <br>
                                                         <div class="row">
                                                             <div class="col-md-8 col-md-offset-2" id="rRpbcm9">         
                                                                 <div class="col-md-12">

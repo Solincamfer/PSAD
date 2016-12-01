@@ -92,8 +92,6 @@
                                                 <div class="tab-content">
                                                     <div role="tabpanel" class="tab-pane active" id="dbr1">
                                                         <div class="container-fluid" id="contrpbdbr1">
-                                                            <center><u><p>DATOS BASICOS</p></u></center>
-                                                            <br>
                                                             <div class="row">
                                                                 <div class="col-md-5  col-md-offset-1" id="rRpb1">
                                                                     <div class="form-group">
@@ -143,8 +141,6 @@
                                                     
                                                     <div role="tabpanel" class="tab-pane" id="ctor">
                                                         <div class="container-fluid" id="contrpbdbr3">
-                                                            <center><u><p>CONTACTOS</p></u></center>
-                                                            <br>
                                                             <div class="row">
                                                                 <div class="col-md-8 col-md-offset-2" id="rRpb9">         <div class="col-md-12">
                                                                         <label for="rifRpb">Telefono movil</label><span class="ic"><i class="fa fa-chevron-down"></i></span>
@@ -230,8 +226,6 @@
                                                 <div class="tab-content">
                                                     <div role="tabpanel" class="tab-pane active" id="modres1">
                                                         <div class="container-fluid" id="contrpbdbrm1">
-                                                            <center><u><p>DATOS BASICOS</p></u></center>
-                                                            <br>
                                                             <div class="row">
                                                                 <div class="col-md-5  col-md-offset-1" id="rRpbm1">
                                                                     <div class="form-group">
@@ -281,8 +275,6 @@
                                                     
                                                     <div role="tabpanel" class="tab-pane" id="modres2">
                                                         <div class="container-fluid" id="contrpbdbrm3">
-                                                            <center><u><p>CONTACTOS</p></u></center>
-                                                            <br>
                                                             <div class="row">
                                                                 <div class="col-md-8 col-md-offset-2" id="rRpbm9">         <div class="col-md-12">
                                                                         <label for="rifRpb">Telefono movil</label><span class="ic"><i class="fa fa-chevron-down"></i></span>

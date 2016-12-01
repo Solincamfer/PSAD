@@ -88,24 +88,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div id="rAs2">
-                                                <div class="col-md-6">
-                                                    <div class="form-group row">
-                                                        <label for="selTa">Tipo de Aplicación</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
-                                                        <select name="selTa" class="form-control" id="selTa">
-                                                            <option value="0">-</option>
-                                                        </select><i class="fa fa-tasks" id="icas3"></i>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group row">
-                                                        <label for="selMa">Marca de la Aplicación</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
-                                                        <select name="selMa" class="form-control" id="selMa">
-                                                            <option value="0">-</option>
-                                                        </select><i class="fa fa-apple" id="icas4"></i>
-                                                    </div>
-                                                </div>
-                                            </div>
                                             <div id="rAs3">
                                                 <div class="col-md-6">
                                                     <div class="form-group row">
@@ -143,7 +125,7 @@
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title" id="myModalLabel2">Agregar Aplicación</h4>
+                                    <h4 class="modal-title" id="myModalLabel2">Modificar Aplicación</h4>
                                 </div>
                                 <div class="modal-body">
                                     <form action="">
@@ -160,24 +142,6 @@
                                                     <div class="form-group row">
                                                         <label for="LicApm">Licencia de la Aplicación</label>
                                                         <input type="text" class="form-control" name="LicApm" id="LicApm"><i class="fa fa-barcode" id="micas2"></i>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div id="rAsm2">
-                                                <div class="col-md-6">
-                                                    <div class="form-group row">
-                                                        <label for="selTam">Tipo de Aplicación</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
-                                                        <select name="selTam" class="form-control" id="selTam">
-                                                            <option value="0">-</option>
-                                                        </select><i class="fa fa-tasks" id="micas3"></i>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group row">
-                                                        <label for="selMam">Marca de la Aplicación</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
-                                                        <select name="selMam" class="form-control" id="selMam">
-                                                            <option value="0">-</option>
-                                                        </select><i class="fa fa-apple" id="micas4"></i>
                                                     </div>
                                                 </div>
                                             </div>

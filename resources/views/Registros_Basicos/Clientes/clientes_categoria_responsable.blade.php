@@ -90,8 +90,6 @@
                                                 <div class="tab-content">
                                                     <div role="tabpanel" class="tab-pane active" id="p0">
                                                         <div class="container-fluid" id="contrpbdbr1">
-                                                            <center><u><p>DATOS BASICOS</p></u></center>
-                                                            <br>
                                                             <div class="row">
                                                                 <div class="col-md-5  col-md-offset-1" id="rRpb1">
                                                                     <div class="form-group">
@@ -139,8 +137,6 @@
                                                     
                                                     <div role="tabpanel" class="tab-pane" id="p1">
                                                         <div class="container-fluid" id="contrpbdbr3">
-                                                            <center><u><p>CONTACTOS</p></u></center>
-                                                            <br>
                                                             <div class="row">
                                                                 <div class="col-md-8 col-md-offset-2" id="rRpb9">         <div class="col-md-12">
                                                                         <label for="rifRpb">Telefono movil</label><span class="ic"><i class="fa fa-chevron-down"></i></span>
@@ -205,7 +201,7 @@
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title" id="myModalLabel2">Modificar Responsable - Cliente</h4>
+                                    <h4 class="modal-title" id="myModalLabel2">Modificar Categoría - Responsable</h4>
                                 </div>
 
                                 
@@ -220,8 +216,6 @@
                                                 <div class="tab-content">
                                                     <div role="tabpanel" class="tab-pane active" id="pp0">
                                                         <div class="container-fluid" id="contrpbdbrm1">
-                                                            <center><u><p>DATOS BASICOS</p></u></center>
-                                                            <br>
                                                             <div class="row">
                                                                 <div class="col-md-5  col-md-offset-1" id="rRpbm1">
                                                                     <div class="form-group">
@@ -271,8 +265,6 @@
                                                     
                                                     <div role="tabpanel" class="tab-pane" id="pp1">
                                                         <div class="container-fluid" id="contrpbdbrm3">
-                                                            <center><u><p>CONTACTOS</p></u></center>
-                                                            <br>
                                                             <div class="row">
                                                                 <div class="col-md-8 col-md-offset-2" id="rRpbm9">         <div class="col-md-12">
                                                                         <label for="rifRpb">Telefono movil</label><span class="ic"><i class="fa fa-chevron-down"></i></span>
