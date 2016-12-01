@@ -28,17 +28,17 @@
                             </div>
                         </div>
                         @foreach($consulta as $perfiles)
-                            <div class="contMd" style="">
+                            <div class="contMd" style="" id="registro{{$perfiles->id}}">
                                 <div class="icl">
                                    
                                 </div>
-                           
+                                 <input type="text" name="usuario{{$perfiles->id}}" value="{{$datosC3}}" id="usuario{{$perfiles->id}}">
 
                                  @if($datosC1==$perfiles->id)
-                                    <span class="ttlMd"><input type="radio" name="c_rsp" id="c_rsp" value="{{$perfiles->id}}" checked> 
+                                    <span class="ttlMd"><input type="radio" name="c_rsp" id="{{$perfiles->id}}" value="{{$perfiles->id}}" checked="checked"> 
                                     <label for="c_rsp"><strong>{{$perfiles->descripcion}}</strong></label></span>
                                 @else
-                                     <span class="ttlMd"><input type="radio" name="c_rsp" id="c_rsp" value="0" > 
+                                     <span class="ttlMd"><input type="radio" name="c_rsp" id="{{$perfiles->id}}" value="{{$perfiles->id}}" checked="false" > 
                                     <label for="c_rsp"><strong>{{$perfiles->descripcion}}</strong></label></span>
                                 @endif
 

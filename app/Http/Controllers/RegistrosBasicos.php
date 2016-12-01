@@ -253,7 +253,7 @@ public function empleados_perfiles($empleado_id)
 	$consulta=DB::table('perfiles')->join('usuarios','perfiles.id','=','usuarios.perfil_id')
 								   ->join('empleados','usuarios.id','=','empleados.id')
 								   ->select('empleados.nombre As nombreE','empleados.apellido As apellidoE',
-								   			'usuarios.n_usuario As usuarioE','perfiles.id As perfilE')
+								   			'usuarios.n_usuario As usuarioE','usuarios.id As idU','perfiles.id As perfilE')
 								   ->where('empleados.id',$empleado_id)->first();
 	
 
@@ -264,7 +264,8 @@ public function empleados_perfiles($empleado_id)
 						DB::table('perfiles')->get(),
 						$consulta->nombreE." ".$consulta->apellidoE,//extra
 						$consulta->perfilE,//datosC1
-						$consulta->usuarioE//datosC2
+						$consulta->usuarioE,//datosC2
+						$consulta->idU//datosC3
 						));
 }
 	

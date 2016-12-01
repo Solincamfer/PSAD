@@ -464,22 +464,22 @@ $(".modificarCliente").click(function(){
 /// PROTOTIPO DEL SELECTOR STATUS...
 $(".btnAcc").click(function(){
 		swal({
-		  title: "Habilitacion de Registros",
-		  text: "La modificacion de esta accion puede afectar la funcionalidad de otros recursos",
+		  title: "Are you sure?",
+		  text: "You will not be able to recover this imaginary file!",
 		  type: "warning",
 		  showCancelButton: true,
 		  confirmButtonColor: "#DD6B55",
-		  confirmButtonText: "Si, Ejecutar Accion!",
+		  confirmButtonText: "Yes, delete it!",
 		  closeOnConfirm: false
 		},
 		function(){
-		  swal("Accion Ejecutada!!", "La accion fue ejecutada con exito.", "success");
+		  swal("Deleted!", "Your imaginary file has been deleted.", "success");
 		});
-    	/*if ($(this).val()==1) {
+    	if ($(this).val()==1) {
     		alert($(this).val());
     	}else{
     		alert($(this).val());
-    	}*/
+    	}
 });
 
 $(".consultarSubmodulo").click(function(){
@@ -541,5 +541,41 @@ $("#btnLimipiarResponsable1").click(function(){
 });
 
 
+$('.ttlMd').change(function()//al cambiar el valor del radio button
+	{
 
+
+	//var registro=$(this).val();
+	//var id_radio=registro.data('id');//id del registro seleccionado
+    
+
+	// var radio=$(this).val();
+	// var id_radio=radio.data('id');
+
+	//var valor_checkeado=$('input:radio[name=c_rsp]:checked').attr('id');//valor del radio button (representa el id de un perfil)
+	//		var usuario=$("#usuario"+valor_radio).val();//id del usuario
+
+	//alert($(registro).val());
+		
+		swal({
+		  title: "Are you sure?",
+		  text: "You will not be able to recover this imaginary file!",
+		  type: "warning",
+		  showCancelButton: true,
+		  confirmButtonColor: "#DD6B55",
+		  confirmButtonText: "Yes, delete it!",
+		  closeOnConfirm: false
+		},
+		function(){
+		  swal("Deleted!", "Your imaginary file has been deleted.", "success");
+		});
+    	if ($(this).val()==1) {
+    		alert($(this).val());
+    	}else{
+    		alert($(this).val());
+    	}
+
+
+
+});
 
