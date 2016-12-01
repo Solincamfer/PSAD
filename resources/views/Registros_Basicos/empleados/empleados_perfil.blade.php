@@ -17,9 +17,16 @@
                   
                     
                     <div class="col-xs-5 col-sm-5 col-md-6 col-md-offset-3"> 
-                 <!--    @if($agregar)
-                        <button id="btnAdd" type="button" class="btnAdc col-md-offset-11" data-toggle="modal" data-target="#myModal" href="#myModal"><i class="fa fa-plus"></i> AGREGAR</button>
-                    @endif   --> 
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-2" align="left">
+                                    <a href="/menu/registros/empleados"><button id="btnBk" type="button" class="btnBk" href="#"><i class="fa fa-chevron-left"></i> VOLVER</button></a>
+                                </div>
+                                <div class="col-md-2 col-md-offset-3 pnlUs">
+                                     <span class="pnlttl"><i class="fa fa-user-circle"></i> Usuario</span>
+                                </div>
+                            </div>
+                        </div>
                         @foreach($consulta as $perfiles)
                             <div class="contMd" style="">
                                 <div class="icl">
