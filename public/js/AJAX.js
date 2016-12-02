@@ -464,22 +464,22 @@ $(".modificarCliente").click(function(){
 /// PROTOTIPO DEL SELECTOR STATUS...
 $(".btnAcc").click(function(){
 		swal({
-		  title: "Are you sure?",
-		  text: "You will not be able to recover this imaginary file!",
+		  title: "Habilitacion de Registros",
+		  text: "La mala gestion de los registros puede afectar otros recursos, Deseas realizar esta accion?",
 		  type: "warning",
 		  showCancelButton: true,
 		  confirmButtonColor: "#DD6B55",
-		  confirmButtonText: "Yes, delete it!",
+		  confirmButtonText: "Si, quiero hacerlo!",
 		  closeOnConfirm: false
 		},
 		function(){
-		  swal("Deleted!", "Your imaginary file has been deleted.", "success");
+		  swal("Accion Realizada", "La accion fue realizada con exito.", "success");
 		});
-    	if ($(this).val()==1) {
+    	/*if ($(this).val()==1) {
     		alert($(this).val());
     	}else{
     		alert($(this).val());
-    	}
+    	}*/
 });
 
 $(".consultarSubmodulo").click(function(){
@@ -542,4 +542,81 @@ $("#btnLimipiarResponsable1").click(function(){
 
 
 
+$('.ttlMd').change(function()//asignar perfil a un usuario 
+	{
+		var anterior=$('#valor_radio');//campo hidden con valor inicial del radio
+		var existe=anterior.length;
+		if((existe)>0)//si existe el campo hidden que contiene el valor inicial del radio
+			{
+			  var valor_radio=String(anterior.val());//obtiene el valor inicial del radio button
+			  //alert(valor_radio); 
+			}
+
+		var usuario=$('#valor_usuario').val();//usuario visualizado en pantalla
+		//alert(usuario);
+		var padre=$(this).parent('div').attr('id');//registro seleccionado
+		var perfil=$('#radio'+padre).val();//valor del radio button seleccionado
+
+		//var padre_=anterior.parent('div').attr('id');//perfil anterior
+	
+		swal({
+				title: "Asignacion de permisos",
+				text: "Esta seguro que desea asignar al usuario actual, los permisos contenidos en el perfil seleccionado ?",
+				type: "warning",
+				showCancelButton: true,
+				confirmButtonColor: "#207D07",
+				confirmButtonText: "Asignar permisos",
+				cancelButtonText: "No Asignar permisos",
+				closeOnConfirm: false,
+				closeOnCancel: false
+			 },
+
+			 function(isConfirm)
+			 {
+			 	if(isConfirm)//pasar peticion
+			 	{
+			 		var url= '/menu/registros/empleados/asignar/perfil';
+					var datos=[usuario,perfil];//datos para el controlad
+					$.get(url, {datos:datos}, function(actualizar)
+					{
+				
+					   	if(actualizar>0)
+						   	{
+						   		
+						   		swal("Perfil asignado", "Ha concedido al usuario actual los permisos asociados al perfil seleccionado", "success");
+						   		$('#valor_radio').val(datos[1]);//actualizar valor del radio button
+						   		
+						   	}
+					   	else
+						   	{
+						   		swal("Error Inesperado !!", "Comuniquese con el administrador", "error");
+						   	}
+				 	}
+				 	);
+			    	
+
+			 		 
+			 	}
+			 	else
+			 	{
+			 		if(existe==0)//si no existe
+			 		{
+			 			$('.ttlMd').prop('checked',false);//reinicia todos los radio button
+			 		}
+			 		else
+			 		{
+			 			$('#radio'+valor_radio).prop('checked',true);//regresa el radio button a su estado inicial
+			 			//alert($('#radio'+padre_).attr('value'));
+			 		}
+			 		
+			 		swal("Cancelado", "No se asignaron nuevos permisos para este usuario", "error");	
+			 	}
+
+			 }
+			);
+		
+
+
+
+});
 

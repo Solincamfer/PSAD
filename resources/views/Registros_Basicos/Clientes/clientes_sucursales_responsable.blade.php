@@ -76,7 +76,7 @@
                                 <form method="post" class="form-horizontal Validacion" action="">
                                     {{ csrf_field() }}
                                     <div class="modal-body">
-                                        <ul class="nav nav-tabs not-active" role="tablist" >
+                                        <ul class="nav nav-tabs" role="tablist" >
                                             <li role="presentation" class="active"><a href="#dbrc1" id="a1" aria-controls="dbrc1" role="tab" data-toggle="tab">Datos básicos</a></li>
                                             <li role="presentation"><a href="#ctorc" id="a3" aria-controls="ctor3" role="tab" data-toggle="tab" >Contactos</a></li>
                                         </ul>
@@ -202,7 +202,7 @@
 
                                 <form method="post" class="form-horizontal Validacion" action="">
                                     <div class="modal-body">
-                                        <ul class="nav nav-tabs not-active" role="tablist">
+                                        <ul class="nav nav-tabs" role="tablist">
                                             <li role="presentation" class="active"><a href="#dbrcm1" aria-controls="dbrcm1" role="tab" data-toggle="tab">Datos básicos</a></li>
                                             <li role="presentation"><a href="#ctorcm" aria-controls="ctorcm" role="tab" data-toggle="tab">Contactos</a></li>
                                         </ul>

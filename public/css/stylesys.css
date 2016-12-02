@@ -2282,13 +2282,15 @@
         /*Empleados*/
             /*Modal*/
                 .contdbe1, .contdbe2, .contdhe, .contcte,
-                .contdbem1, .contdbem2, .contdhem, .contctem{
+                .contdbem1, .contdbem2, .contdhem, .contctem, 
+                .contuser, .contuserm{
                     margin-top: 30px;
                     margin-bottom: 20px;
                 }
 
                 .rEmp1 input, .rEmp2 input, .rEmp2 select, .rEmp5 input, .rEmp5 select,
-                .rEmpm1 input, .rEmpm2 input, .rEmpm2 select, .rEmpm5 input, .rEmpm5 select{
+                .rEmpm1 input, .rEmpm2 input, .rEmpm2 select, .rEmpm5 input, .rEmpm5 select,
+                .rEmp6 input, .rEmp6 select, .rEmpm6 input, .rEmpm6 select{
                     display: block;
                     padding: 2px 5px;
                     width: 98%;
@@ -2318,7 +2320,9 @@
                 .rEmp4 select:focus, .rEmp5 select:focus, .rEmp5 input:focus,
                 .rEmpm1 input:focus, .rEmpm2 input:focus, .rEmpm2 select:focus,
                 .rEmpm3 input:focus, .rEmpm3 select:focus, .rEmpm4 textarea:focus, 
-                .rEmpm4 select:focus, .rEmpm5 select:focus, .rEmpm5 input:focus{
+                .rEmpm4 select:focus, .rEmpm5 select:focus, .rEmpm5 input:focus,
+                .rEmp6 input:focus, .rEmp6 select:focus, .rEmpm6 input:focus, 
+                .rEmpm6 select:focus{
                     outline: none;
                     color: #444;
                     border-color: #26a69d;
@@ -2326,7 +2330,8 @@
                 }
 
                 .rEmp1 .icemp, .rEmp2 .icemp, .rEmp3 .icemp, .rEmp5 .icemp,
-                .rEmpm1 .icemp, .rEmpm2 .icemp, .rEmpm3 .icemp, .rEmpm5 .icemp{
+                .rEmpm1 .icemp, .rEmpm2 .icemp, .rEmpm3 .icemp, .rEmpm5 .icemp,
+                .rEmp6 .icemp, .rEmpm6 .icemp{
                     color: #fff;
                     position: absolute;
                     left: 0;
@@ -2363,7 +2368,7 @@
                     z-index: 1;
                 }
 
-                .rEmp3 .ic, .rEmpm3 .ic{
+                .rEmp3 .ic, .rEmpm3 .ic, .rEmp6 .ic{
                     background-color: #26a69d;
                     position: absolute;
                     padding-top: 5px;
@@ -2400,3 +2405,19 @@
                     border: none;
                     z-index: 1;
                 }
+
+        /*Permiso*/
+            .pnlUs{
+                height: 40px;
+                width: 120px;
+                margin-top: 17px;
+                background: #333;
+                border-radius: 3px;
+                padding-top: 7px;
+                box-shadow: 5px 5px 15px 5px #999;
+            }
+
+            .pnlUs .pnlttl{
+                color: #e5e5e7;
+                font-size: 16px;
+            }

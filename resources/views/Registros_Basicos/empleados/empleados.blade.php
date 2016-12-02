@@ -15,17 +15,45 @@
                         </div>
 
                         <div class="col-xs-5 col-sm-5 col-md-6 col-md-offset-3" style=""> 
+                        @if($agregar)
                                 <button id="btnAdd" type="button" class="btnAdc col-md-offset-11" data-toggle="modal" data-target="#myModal" href="#myModal"><i class="fa fa-plus"></i> AGREGAR</button>
-                            @for($i=0; $i < 5; $i++)
+                        @endif
+
+                            @foreach($consulta as $empleado)
                                 <div class="contMd" style="">
                                     <div class="icl">
-                                        @for($j=0; $j < 5; $j++)
-                                            <button class="btnAcc" type="submit">Modificar</button>
-                                        @endfor
+                                        @foreach($acciones as $accion)
+                                          @if($accion->id!=78)
+                                             
+                                             @if($accion->data_toogle!="modal")
+                                                <span class="iclsp">
+                                                <a href="{{$accion->url.$empleado->id}}" class="tltp" data-ttl="{{$accion->descripcion}}">
+                                                <i class="{{$accion->clase_css}}"></i>
+                                               </a>
+                                              </span>
+                                             @elseif($accion->data_toogle=="modal")
+                                                <span class="iclsp">
+                                                  <a href="#myModal2" class="tltp modificarCliente" id="m{{$empleado->id}}" data-ttl="{{$accion->descripcion}}" data-toggle="modal" data-target="#myModal2"> 
+                                                  <i class="{{$accion->clase_css}}"></i>
+                                                  </a>
+                                               </span>
+                                             @endif
+                                          @elseif($accion->id==78)
+                                            @if($accion->status_ac==1)
+                                                  <div class="chbx">
+                                                    <input type="checkbox" class="btnAcc" name="inchbx1" id="{{'inchbx'. $empleado->id}}" value="{{$accion->status_ac}}" checked><label for="{{'inchbx'. $empleado->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
+                                                  </div>
+                                            @elseif($accion->staus_ac==0)
+                                              <div class="chbx">
+                                                <input type="checkbox" class="btnAcc" name="status" id="{{'inchbx'. $empleado->id}}" value="{{$accion->status_ac}}"><label for="{{'inchbx'. $empleado->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
+                                              </div>
+                                            @endif
+                                          @endif
+                                        @endforeach
                                     </div>
-                                <p class="ttlMd"><strong>REGISTRO</strong></p>
+                                <p class="ttlMd"><strong>{{$empleado->nombre."  ".$empleado->apellido}}</strong></p>
                                 </div>
-                            @endfor
+                            @endforeach
                         </div>
                         <!--    Registro -->
 
@@ -44,8 +72,9 @@
                                             <ul class="nav nav-tabs" role="tablist">
                                                 <li role="presentation" class="active"><a href="#dbe1" aria-controls="dbe1" role="tab" data-toggle="tab">Datos básic. Prim.</a></li>
                                                 <li role="presentation"><a href="#dbe2" aria-controls="dbe2" role="tab" data-toggle="tab">Datos básic. Sec.</a></li>
-                                                <li role="presentation"><a href="#dhe" aria-controls="dhe" role="tab" data-toggle="tab">Dir. de Habitación</a></li>
+                                                <li role="presentation"><a href="#dhe" aria-controls="dhe" role="tab" data-toggle="tab">Dir. de Hab.</a></li>
                                                 <li role="presentation"><a href="#ctoe" aria-controls="ctoe" role="tab" data-toggle="tab">Contactos</a></li>
+                                                <li role="presentation"><a href="#user" aria-controls="user" role="tab" data-toggle="tab">Usuario</a></li>
                                             </ul>
                                             <div class="container-fluid">
                                                 <div class="tab-content">
@@ -228,6 +257,35 @@
                                                            </div>
                                                        </div>
                                                     </div>
+                                                    
+                                                    <div role="tabpanel" class="tab-pane" id="user">
+                                                        <div class="container-fluid contuser">
+                                                            <div class="row rEmp6">
+                                                                <div class="col-md-8 col-md-offset-2">
+                                                                    <div class="form-group row">
+                                                                        <label for="nomUs">Nombre de Usuario</label>
+                                                                        <input type="text" class="form-control" name="nomUs" id="nomUs"><i class="fa fa-user-circle icemp"></i>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-8 col-md-offset-2">
+                                                                    <div class="form-group row">
+                                                                        <label for="pwUs1">Contraseña</label>
+                                                                        <input type="password" class="form-control" name="pwUs1" id="pwUs1"><i class="fa fa-lock icemp"></i>    
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-8 col-md-offset-2">
+                                                                    <div class="form-group row">
+                                                                        <label for="stUs">Estatus de Usuario</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
+                                                                        <select name="stUs" id="stUs" class="form-control">
+                                                                            <option value="0">-</option>
+                                                                            <option value="1">Activo</option>
+                                                                            <option value="2">Inactivo</option>
+                                                                        </select><i class="fa fa-check icemp"></i>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </form>
@@ -254,14 +312,15 @@
                                     <ul class="nav nav-tabs" role="tablist">
                                         <li role="presentation" class="active"><a href="#dbem1" aria-controls="dbem1" role="tab" data-toggle="tab">Datos básic. Prim.</a></li>
                                         <li role="presentation"><a href="#dbem2" aria-controls="dbem2" role="tab" data-toggle="tab">Datos básic. Sec.</a></li>
-                                        <li role="presentation"><a href="#dhem" aria-controls="dhem" role="tab" data-toggle="tab">Dir. de Habitación</a></li>
+                                        <li role="presentation"><a href="#dhem" aria-controls="dhem" role="tab" data-toggle="tab">Dir. de Hab.</a></li>
                                         <li role="presentation"><a href="#ctoem" aria-controls="ctoem" role="tab" data-toggle="tab">Contactos</a></li>
+                                        <li role="presentation"><a href="#userm" aria-controls="userm" role="tab" data-toggle="tab">Usuario</a></li>
                                     </ul>
                                     <div class="container-fluid">
                                         <div class="tab-content">
                                             <div role="tabpanel" class="tab-pane active" id="dbem1">
-                                                <div class="container-fluid contdbem1">
-                                                    <div class="row rEmpm1">
+                                                <div class="container-fluid contdbe1">
+                                                    <div class="row rEmp1">
                                                         <div class="col-md-6">
                                                             <div class="form-group row">
                                                                 <label for="nomEmpm1">1er Nombre</label>
@@ -291,8 +350,8 @@
                                             </div>
 
                                             <div role="tabpanel" class="tab-pane" id="dbem2">
-                                                <div class="container-fluid contdbem2">
-                                                    <div class="row rEmpm2">
+                                                <div class="container-fluid contdbe2">
+                                                    <div class="row rEmp2">
                                                         <div class="col-md-10 col-md-offset-1">
                                                             <label for="rifEmpm">Rif</label>
                                                             <br>
@@ -328,7 +387,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="row rEmpm3">
+                                                    <div class="row rEmp3">
                                                         <div class="col-md-10 col-md-offset-1">
                                                             <div class="form-group row">
                                                                 <label for="fnEmpm">Fecha de nacimiento</label><span class="ic"><i class="fa fa-chevron-down"></i></span>
@@ -356,8 +415,8 @@
                                             </div>
 
                                             <div role="tabpanel" class="tab-pane" id="dhem">
-                                                <div class="container-fluid contdhem">
-                                                    <div class="row rEmpm4">
+                                                <div class="container-fluid contdhe">
+                                                    <div class="row rEmp4">
                                                         <div class="form-group col-md-6">
                                                             <label for="pdhem">País</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
                                                             <select name="pdhem" class="form-control" id="pdhem">
@@ -391,8 +450,8 @@
                                             </div>
 
                                             <div role="tabpanel" class="tab-pane" id="ctoem">
-                                                <div class="container-fluid contctem">
-                                                    <div class="row rEmpm5">
+                                                <div class="container-fluid contcte">
+                                                    <div class="row rEmp5">
                                                         <div class="col-md-10 col-md-offset-1">
                                                             <label for="tlflclem">Teléfono Local</label>
                                                             <br>
@@ -433,6 +492,34 @@
                                                                     <label for="mailem">Correo Electrónico</label>
                                                                     <input type="text" name="mailem" class="form-control" id="mailem"><i class="fa fa-envelope icemp"></i>
                                                                 </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div role="tabpanel" class="tab-pane" id="userm">
+                                                <div class="container-fluid contuser">
+                                                    <div class="row rEmp6">
+                                                        <div class="col-md-8 col-md-offset-2">
+                                                            <div class="form-group row">
+                                                                <label for="nomUsm">Nombre de Usuario</label>
+                                                                <input type="text" class="form-control" name="nomUsm" id="nomUsm"><i class="fa fa-user-circle icemp"></i>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-8 col-md-offset-2">
+                                                            <div class="form-group row">
+                                                                <label for="pwUs1mm">Contraseña</label>
+                                                                <input type="password" class="form-control" name="pwUs1mm" id="pwUs1mm"><i class="fa fa-lock icemp"></i>    
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-8 col-md-offset-2">
+                                                            <div class="form-group row">
+                                                                <label for="stUsm">Estatus de Usuario</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
+                                                                <select name="stUsm" id="stUsm" class="form-control">
+                                                                    <option value="0">-</option>
+                                                                    <option value="1">Activo</option>
+                                                                    <option value="2">Inactivo</option>
+                                                                </select><i class="fa fa-check icemp"></i>
                                                             </div>
                                                         </div>
                                                     </div>

@@ -241,14 +241,43 @@ public function empleados()
 {
 	$datos=$this->cargar_header_sidebar_acciones();
 	$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(76,77,78),75);
-	return view ('Registros_Basicos\empleados\empleados',$this->datos_vista($datos,$acciones,array()));
+	return view ('Registros_Basicos\empleados\empleados',$this->datos_vista($datos,$acciones,DB::table('empleados')->get()));
 }
 
-public function empleados_usuarios()
+public function empleados_perfiles($empleado_id)
 {
+	
 	$datos=$this->cargar_header_sidebar_acciones();
 	$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(80,81,82),79);
-	return view ('Registros_Basicos\empleados\empleados_usuarios',$this->datos_vista($datos,$acciones,array()));
+	
+	$consulta=DB::table('perfiles')->join('usuarios','perfiles.id','=','usuarios.perfil_id')
+								   ->join('empleados','usuarios.id','=','empleados.id')
+								   ->select('usuarios.perfil_id As perfilE','usuarios.n_usuario As usuarioE','usuarios.id As usuarioId')
+								   ->where('empleados.id',$empleado_id)->first();
+	
+
+	
+
+	
+	return view ('Registros_Basicos\empleados\empleados_perfil',$this->datos_vista($datos,$acciones,
+						DB::table('perfiles')->get(),
+						$consulta->usuarioE,//extra
+						$consulta->perfilE,//datosC1
+						$consulta->usuarioId//datosC2
+					
+						));
+}
+
+public function empleados_asignar_perfil()
+{
+	$valores=Request::get('datos');//usuario [0] , perfil [1]
+	
+	$usuario=(int)$valores[0];
+	$perfil=(int)$valores[1];
+
+	$actualizacion=DB::table('usuarios')->where('id',$usuario)->update(['perfil_id'=>$perfil]);
+	return $actualizacion;
+	
 }
 	
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -274,6 +303,8 @@ public function perfiles_modificar($perfil_id)
 
 public function mostrar_submodulos()//muestra los submodulos asociados a un modulo
 {
+	
+	//
 	//$submodulos_=array();//submodulos que se mostraran en la vista
 	
 	$datos=Request::get('valores');//id del perfil para el cual se desea mostrar los submodulos
@@ -291,7 +322,7 @@ public function mostrar_submodulos()//muestra los submodulos asociados a un modu
 			array_push($submodulos_, $submodulo);//agrega los submodulos asociados al modulo_id
 		}
 	}*/
-	$submodulos_=DB::table('submodulos')->where('modulo_id',$datos[1])->get();
+	$submodulos_=DB::table('submodulos')->where(['modulo_id'=>$datos[1],'status_sm'=>1,'padre'=>1])->get();
 
 	return $submodulos_;
 }
