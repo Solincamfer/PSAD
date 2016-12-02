@@ -120,6 +120,7 @@ Route::group(['prefix'=>'/menu/registros','middleware'=>['v_menu']],function()
 				Route::match(['post','get'],'/clientes/actualizar',														['uses'=>'RegistrosBasicos@clientes_actualizar']);
 				Route::match(['post','get'],'/perfiles/submodulos',														['uses'=>'RegistrosBasicos@mostrar_submodulos']);
 				Route::match(['post','get'],'/perfiles/acciones',														['uses'=>'RegistrosBasicos@mostrar_acciones']);
+				Route::match(['post','get'],'/empleados/asignar/perfil',												['uses'=>'RegistrosBasicos@empleados_asignar_perfil']);
 				}
 			);
 

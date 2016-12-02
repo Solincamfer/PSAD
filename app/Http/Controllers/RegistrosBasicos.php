@@ -252,8 +252,7 @@ public function empleados_perfiles($empleado_id)
 	
 	$consulta=DB::table('perfiles')->join('usuarios','perfiles.id','=','usuarios.perfil_id')
 								   ->join('empleados','usuarios.id','=','empleados.id')
-								   ->select('empleados.nombre As nombreE','empleados.apellido As apellidoE',
-								   			'usuarios.n_usuario As usuarioE','usuarios.id As idU','perfiles.id As perfilE')
+								   ->select('usuarios.perfil_id As perfilE','usuarios.n_usuario As usuarioE','usuarios.id As usuarioId')
 								   ->where('empleados.id',$empleado_id)->first();
 	
 
@@ -262,11 +261,23 @@ public function empleados_perfiles($empleado_id)
 	
 	return view ('Registros_Basicos\empleados\empleados_perfil',$this->datos_vista($datos,$acciones,
 						DB::table('perfiles')->get(),
-						$consulta->nombreE." ".$consulta->apellidoE,//extra
+						$consulta->usuarioE,//extra
 						$consulta->perfilE,//datosC1
-						$consulta->usuarioE,//datosC2
-						$consulta->idU//datosC3
+						$consulta->usuarioId//datosC2
+					
 						));
+}
+
+public function empleados_asignar_perfil()
+{
+	$valores=Request::get('datos');//usuario [0] , perfil [1]
+	
+	$usuario=(int)$valores[0];
+	$perfil=(int)$valores[1];
+
+	$actualizacion=DB::table('usuarios')->where('id',$usuario)->update(['perfil_id'=>$perfil]);
+	return $actualizacion;
+	
 }
 	
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

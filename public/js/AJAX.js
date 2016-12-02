@@ -541,39 +541,80 @@ $("#btnLimipiarResponsable1").click(function(){
 });
 
 
-$('.ttlMd').change(function()//al cambiar el valor del radio button
+
+$('.ttlMd').change(function()//asignar perfil a un usuario 
 	{
+		var anterior=$('#valor_radio');//campo hidden con valor inicial del radio
+		var existe=anterior.length;
+		if((existe)>0)//si existe el campo hidden que contiene el valor inicial del radio
+			{
+			  var valor_radio=String(anterior.val());//obtiene el valor inicial del radio button
+			  //alert(valor_radio); 
+			}
 
+		var usuario=$('#valor_usuario').val();//usuario visualizado en pantalla
+		//alert(usuario);
+		var padre=$(this).parent('div').attr('id');//registro seleccionado
+		var perfil=$('#radio'+padre).val();//valor del radio button seleccionado
 
-	//var registro=$(this).val();
-	//var id_radio=registro.data('id');//id del registro seleccionado
-    
-
-	// var radio=$(this).val();
-	// var id_radio=radio.data('id');
-
-	//var valor_checkeado=$('input:radio[name=c_rsp]:checked').attr('id');//valor del radio button (representa el id de un perfil)
-	//		var usuario=$("#usuario"+valor_radio).val();//id del usuario
-
-	//alert($(registro).val());
-		
+		//var padre_=anterior.parent('div').attr('id');//perfil anterior
+	
 		swal({
-		  title: "Are you sure?",
-		  text: "You will not be able to recover this imaginary file!",
-		  type: "warning",
-		  showCancelButton: true,
-		  confirmButtonColor: "#DD6B55",
-		  confirmButtonText: "Yes, delete it!",
-		  closeOnConfirm: false
-		},
-		function(){
-		  swal("Deleted!", "Your imaginary file has been deleted.", "success");
-		});
-    	if ($(this).val()==1) {
-    		alert($(this).val());
-    	}else{
-    		alert($(this).val());
-    	}
+				title: "Asignacion de permisos",
+				text: "Esta seguro que desea asignar al usuario actual, los permisos contenidos en el perfil seleccionado ?",
+				type: "warning",
+				showCancelButton: true,
+				confirmButtonColor: "#207D07",
+				confirmButtonText: "Asignar permisos",
+				cancelButtonText: "No Asignar permisos",
+				closeOnConfirm: false,
+				closeOnCancel: false
+			 },
+
+			 function(isConfirm)
+			 {
+			 	if(isConfirm)//pasar peticion
+			 	{
+			 		var url= '/menu/registros/empleados/asignar/perfil';
+					var datos=[usuario,perfil];//datos para el controlad
+					$.get(url, {datos:datos}, function(actualizar)
+					{
+				
+					   	if(actualizar>0)
+						   	{
+						   		
+						   		swal("Perfil asignado", "Ha concedido al usuario actual los permisos asociados al perfil seleccionado", "success");
+						   		$('#valor_radio').val(datos[1]);//actualizar valor del radio button
+						   		
+						   	}
+					   	else
+						   	{
+						   		swal("Error Inesperado !!", "Comuniquese con el administrador", "error");
+						   	}
+				 	}
+				 	);
+			    	
+
+			 		 
+			 	}
+			 	else
+			 	{
+			 		if(existe==0)//si no existe
+			 		{
+			 			$('.ttlMd').prop('checked',false);//reinicia todos los radio button
+			 		}
+			 		else
+			 		{
+			 			$('#radio'+valor_radio).prop('checked',true);//regresa el radio button a su estado inicial
+			 			//alert($('#radio'+padre_).attr('value'));
+			 		}
+			 		
+			 		swal("Cancelado", "No se asignaron nuevos permisos para este usuario", "error");	
+			 	}
+
+			 }
+			);
+		
 
 
 
