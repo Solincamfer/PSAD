@@ -22,20 +22,23 @@
                             </div>
                         </div>
                         <div class="container centrado">
-                            <div class="row spm">
-                                <div class="col-md-3 dist1">
-                                    <div class="tlt1x">
-                                        <span>Modulos</span>
+                            <div class="row">
+                                <div class="col-md-3 spcm">
+                                    <div class="etqSideBack1"></div>
+                                    <div class="etqSideFront1">
+                                        <span class="spttl1">Modulos</span>
                                     </div>
                                 </div>
-                                <div class="col-md-3 dist2">
-                                    <div class="tlt1x">
-                                        <span>Submodulos</span>
+                                <div class="col-md-3 spcm">
+                                    <div class="etqSideBack1"></div>
+                                    <div class="etqSideFront1">
+                                        <span class="spttl2">Submodulos</span>
                                     </div>
                                 </div>
-                                <div class="col-md-3 dist3">
-                                    <div class="tlt1x">
-                                        <span>Acciones</span>
+                                <div class="col-md-3">
+                                    <div class="etqSideBack1"></div>
+                                    <div class="etqSideFront1">
+                                        <span class="spttl1">Acciones</span>
                                     </div>
                                 </div>
                             </div>

@@ -2087,7 +2087,7 @@
                 }
             
             .centrado{
-                margin-top: 20px;
+                margin-top: 30px;
                 margin-left: 25px;
                 width: 80%;
                 height: 390px;
@@ -2096,7 +2096,7 @@
             }
 
             .spm{
-                margin-top: 15px;
+                margin-top: 40px;
                 margin-bottom: -15px;
             }
 
@@ -2234,6 +2234,49 @@
                 text-align: center;
                 font-size: 20px;
                 padding: 5px;
+            }
+
+            .etqSideBack1{
+                position: absolute;
+                top: 0;
+                margin-left: 30px;
+                height: 0px;
+                width: 0px;
+                margin-top: -29.5px;
+                z-index: 0;
+                outline: none;
+                border-top: 30px solid transparent;
+                border-right: 20px solid #26A69D;
+            }
+
+            .etqSideFront1{
+                position: absolute;
+                top: 0;
+                margin-left: 50px;
+                height: 60px;
+                width: 210px;
+                margin-top: -29.5px;
+                background: #26A69D;
+                z-index: 1;
+                padding-top: 10px;
+                box-shadow: 5px -1px 10px 0px #444;
+            }
+            
+            .spcm{
+                margin-right: 90px;
+            }
+
+            .etqSideFront1 span{
+                color: #e5e5e7;
+                font-size: 25px;
+            }
+
+            .etqSideFront1 .spttl1{
+                margin-left: 68px;
+            }
+            
+            .etqSideFront1 .spttl2{
+                margin-left: 53px;
             }
 
         /*Empleados*/
