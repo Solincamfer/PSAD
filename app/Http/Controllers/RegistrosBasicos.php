@@ -294,7 +294,7 @@ public function perfiles()//ventana perfiles
 public function perfiles_modificar($perfil_id)
 {
 	$perfil=Perfil::find($perfil_id);
-	$modulos=$perfil->modulos; //trae los modulos asociados a un perfil
+	$modulos=DB::table('modulos')->where('status_m',1)->get();//$perfil->modulos; //trae los modulos asociados a un perfil
 
 	$datos=$this->cargar_header_sidebar_acciones();
 	$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(84,85),83);
