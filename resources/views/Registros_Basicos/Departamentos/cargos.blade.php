@@ -45,21 +45,23 @@
                                             </span>
                                         @endif
                                     @elseif($accion->descripcion=="Status")
-                                        @if($cargo->status_c==1)
+                                        @if($cargo->status==1)
                                             <div class="chbx">
-                                                <input type="checkbox" class="btnAcc" name="status" id="{{'inchbx'. $cargo->id}}" value="{{$accion->status_ac}}" checked><label for="{{'inchbx'. $cargo->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
+                                                <input type="checkbox" class="btnAcc" name="status" id="{{'inchbx'. $cargo->id}}" value="{{$cargo->status}}" checked><label for="{{'inchbx'. $cargo->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
                                             </div>
-                                        @elseif($cargo->status_c==0)
+                                        @elseif($cargo->status==0)
                                             <div class="chbx">
-                                                <input type="checkbox" class="btnAcc" name="status" id="{{'inchbx'. $cargo->id}}" value="{{$accion->status_ac}}"><label for="{{'inchbx'. $cargo->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
+                                                <input type="checkbox" class="btnAcc" name="status" id="{{'inchbx'. $cargo->id}}" value="{{$cargo->status}}"><label for="{{'inchbx'. $cargo->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
                                             </div>
                                         @endif
                                     @endif
                                 @endforeach
                             </div>
                             <p class="ttlMd"><strong>{{$cargo->nombre_c}}</strong></p>
+                            <input type="hidden"  name="{{'inchbx'. $cargo->id}}" id="Ntable"  value="{{$cargo->id}}">
                         </div>
                     @endforeach
+                      <input type="hidden"   name="TND"  value="1">
                 </div>
                 
                 <!-- Modal -->

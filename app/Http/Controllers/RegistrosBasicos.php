@@ -203,6 +203,35 @@ public function capturar_datos_responsables()
 	}
 
 
+	public function departamentos_ingresar()
+	{
+
+		$nombreD= strtoupper(Request::get('textDpto'));//nombre del departamento, llevado a mayusculas
+		$statusD= Request::get('comboDpto');//status del departamento 
+
+
+		$consulta=DB::table('departamentos')->where('nombre_d',$nombreD)->first();
+		
+
+		if (empty($consulta)) //si el registro no existe, se procede a ingresar los datos del departamento
+		{
+			 DB::table('departamentos')->insert
+					 	(
+
+					 		['nombre_d'=>$nombreD,'status'=>$statusD]
+					 	);
+		
+	
+			return ([true,$nombreD]);
+		}
+		else// si el registro existe se muestra el mensaje de que existe 
+		{
+			return ([false,$nombreD]);
+		}
+	
+
+	}
+
 
 
 	
@@ -974,9 +1003,35 @@ public function clientes_categoria($cliente_id)//listar categorias
 
 	
 
+/////////////////////////////configuraciones/////////////////////////////////////////////////
+public function cambio_registros()
+{
+	//[valor,registro,tabla]
 
+	$tablas=array("departamentos","cargos");//listado de las tablas de la base de datos
+	$valores=array(1,0);
 
+	$datos=Request::get('datos');
+	
+	$tabla=$tablas[(int)$datos[2]];
+	$valor=$valores[(int)$datos[0]];
+	$registro=(int)$datos[1];
 
+	$respuesta=0;
+
+	$consulta=DB::table($tabla)->where('id',$registro)->first();
+
+	if(empty($consulta)==false)//si consigue valores 
+	{
+		$consulta=DB::table($tabla)->where('id',$registro)
+								   ->update(['status'=>$valor]);	
+
+		$respuesta=count($consulta);
+	}
+	
+	return($respuesta);
+
+}
 
 
 

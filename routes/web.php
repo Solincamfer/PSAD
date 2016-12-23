@@ -31,7 +31,7 @@ Route::get('/', function () {
 Route::get('/login','InicioController@index'); //controlador
 Route::post( '/login/verificar','InicioController@verificar');
 Route::match(['post','get'],'/menu',['middleware'=>'v_menu','uses'=>'InicioController@iniciarMenu']);//Carga el menu personalizado por perfil //permite el ingreso solo de porseer sesion activa//actual redireccion
-
+Route::get('/menu/cambio/registros','RegistrosBasicos@cambio_registros'); //controlador
 
 //MODULO: REGISTROS BASICOS, rutas de los submodulos ingresadas al clickear en la sidebar o por url //cargaria las acciones disponibles para el perfil logueado
 
@@ -121,6 +121,7 @@ Route::group(['prefix'=>'/menu/registros','middleware'=>['v_menu']],function()
 				Route::match(['post','get'],'/perfiles/submodulos',														['uses'=>'RegistrosBasicos@mostrar_submodulos']);
 				Route::match(['post','get'],'/perfiles/acciones',														['uses'=>'RegistrosBasicos@mostrar_acciones']);
 				Route::match(['post','get'],'/empleados/asignar/perfil',												['uses'=>'RegistrosBasicos@empleados_asignar_perfil']);
+				Route::match(['post','get'],'/departamentos/registrar',                                                 ['uses'=>'RegistrosBasicos@departamentos_ingresar'] );
 				}
 			);
 

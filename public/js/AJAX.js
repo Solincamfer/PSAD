@@ -9,6 +9,43 @@
 ////////////////////////////////////////////////////////////////////////
 
 
+
+
+$('#btnSv').click(function()
+	{
+		var form=$('#formDepartamentos');
+		var url="/menu/registros/departamentos/registrar";
+		var data= form.serialize();
+		var post=$.post(url,data,function(resultado)
+					{
+						if (resultado[0]==false)
+						 	{
+
+						 		/*swal({
+  											title: "El departamento existe!!",
+  											text: "Departamento: "+ " " + resultado[1],
+  											type: "warning",
+  											timer:20000,
+  											showConfirmButton:false
+  											
+
+ 										
+									});*/
+
+								swal("l departamento existe", "You clicked the button!", "success");
+						 	}
+						 else if (resultado[0]==true)
+						 {
+						 	alert('epale');
+						 		setTimeout(function(){location.href = "/menu/registros/departamentos";},2200);
+						 }
+
+					});
+
+			
+	});
+
+
 /////Desavilitar accion="" para formularios submit
 $( "#log" ).submit(function( event ){
 	event.preventDefault();
@@ -462,7 +499,7 @@ $(".modificarCliente").click(function(){
 
 
 /// PROTOTIPO DEL SELECTOR STATUS...
-$(".btnAcc").click(function(){
+/*$(".btnAcc").click(function(){
 		swal({
 		  title: "Habilitacion de Registros",
 		  text: "La mala gestion de los registros puede afectar otros recursos, Deseas realizar esta accion?",
@@ -471,16 +508,16 @@ $(".btnAcc").click(function(){
 		  confirmButtonColor: "#DD6B55",
 		  confirmButtonText: "Si, quiero hacerlo!",
 		  closeOnConfirm: false
-		},
-		function(){
+		},*/
+		/*function(){
 		  swal("Accion Realizada", "La accion fue realizada con exito.", "success");
-		});
+		});*/
     	/*if ($(this).val()==1) {
     		alert($(this).val());
     	}else{
     		alert($(this).val());
     	}*/
-});
+//});
 
 $(".consultarSubmodulo").click(function(){
 				$(".consultarSubmodulo").css("color","grey");
@@ -549,15 +586,15 @@ $('.ttlMd').change(function()//asignar perfil a un usuario
 		if((existe)>0)//si existe el campo hidden que contiene el valor inicial del radio
 			{
 			  var valor_radio=String(anterior.val());//obtiene el valor inicial del radio button
-			  //alert(valor_radio); 
+		
 			}
 
 		var usuario=$('#valor_usuario').val();//usuario visualizado en pantalla
-		//alert(usuario);
+	
 		var padre=$(this).parent('div').attr('id');//registro seleccionado
 		var perfil=$('#radio'+padre).val();//valor del radio button seleccionado
 
-		//var padre_=anterior.parent('div').attr('id');//perfil anterior
+
 	
 		swal({
 				title: "Asignacion de permisos",
@@ -575,19 +612,19 @@ $('.ttlMd').change(function()//asignar perfil a un usuario
 			 {
 			 	if(isConfirm)//pasar peticion
 			 	{
-			 		var url= '/menu/registros/empleados/asignar/perfil';
+			 		var url= '/menu/registros/empleados/asignar/perfil';//ruta del controlador 
 					var datos=[usuario,perfil];//datos para el controlad
 					$.get(url, {datos:datos}, function(actualizar)
 					{
 				
-					   	if(actualizar>0)
+					   	if(actualizar>0)//si se realiza una actualizacion en la base de datos
 						   	{
 						   		
 						   		swal("Perfil asignado", "Ha concedido al usuario actual los permisos asociados al perfil seleccionado", "success");
 						   		$('#valor_radio').val(datos[1]);//actualizar valor del radio button
 						   		
 						   	}
-					   	else
+					   	else//si no se realiza ninguna consulta
 						   	{
 						   		swal("Error Inesperado !!", "Comuniquese con el administrador", "error");
 						   	}
@@ -597,7 +634,7 @@ $('.ttlMd').change(function()//asignar perfil a un usuario
 
 			 		 
 			 	}
-			 	else
+			 	else//si no se desea asignar el perfil
 			 	{
 			 		if(existe==0)//si no existe
 			 		{
@@ -620,3 +657,80 @@ $('.ttlMd').change(function()//asignar perfil a un usuario
 
 });
 
+$(".btnAcc").change(function()//cambio de status de loc check
+	{
+	/////// Valores para mensajes y cambio de status /////////////////
+		var estado=["Habilitar el Registro","Deshabilitar el Registro"];
+	 	var cambio=["habilitado","deshabilitado"];
+	 	var valores=[1,0];
+	 	var estados=[false,true];
+	 	var colores=["#207D07","#EE1919"];
+
+	////////////////////////////////////////////////////////////////////
+	 	
+		var name= $(this).attr("id");
+		var valor=$('#'+name).val();
+		var registro=$('input[name='+name+']').val();
+	 	var tabla=$('input[name=TND]').val();
+
+
+		
+		swal({
+				title: "Cambio de status",
+				text: "¿Esta seguro que desea "+estado[valor]+" seleccionado ?",
+				type: "warning",
+				showCancelButton: true,
+				confirmButtonColor:colores[valor],
+				confirmButtonText: estado[valor],
+				cancelButtonText: "Cancelar",
+				closeOnConfirm: false,
+				closeOnCancel: false
+			 },
+
+			 function(isConfirm)
+			 {
+			 	if(isConfirm)//pasar peticion
+			 	{
+			 		var url= '/menu/cambio/registros';//ruta del controlador 
+					var datos=[valor,registro,tabla];//datos para el controlad
+				
+					$.get(url, {datos:datos}, function(actualizar)
+					{
+						
+					   	if(actualizar>0)//si se realiza una actualizacion en la base de datos
+						   	{
+						   		
+						   		swal("Cambio de status", "El registro seleccionado fue "+cambio[valor]+" con exito", "success");
+						   		$('#'+name).val(valores[valor]);
+						   		
+						   	}
+					   	else //si no se realiza ninguna consulta
+						   	{
+						   		swal("Error Inesperado !!", "Comuniquese con el administrador", "error");
+						   		$('#'+name).prop('checked',estados[valor]);//estado inicial del check
+			 					$('#'+name).val(valor);//valor inicial del check
+						   	}
+				 	}
+				 	);
+			    	
+
+			 		 
+			 	}
+			 	else//si no se desea asignar el perfil
+			 	{
+			 		
+			 	
+			 			$('#'+name).prop('checked',estados[valor]);//estado inicial del check
+			 			$('#'+name).val(valor);//valor inicial del check
+			 			//alert($('#radio'+padre_).attr('value'));
+			 		
+			 		
+			 		swal("Cancelado", "No se realizo el cambio de status para el registro seleccionado", "error");	
+			 	}
+
+			 }
+			);
+		
+
+
+	});

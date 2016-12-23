@@ -13,7 +13,7 @@
 								<h1>Cliente Matriz</h1>
 							</div>
 						</div>
-					</div>
+					</div>hidden
 				<!-- Registro -->
 					<div class="col-xs-5 col-sm-5 col-md-6 col-md-offset-3" style=""> 
 						@if($agregar)

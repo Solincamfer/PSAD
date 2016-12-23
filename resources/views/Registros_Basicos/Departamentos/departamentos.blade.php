@@ -18,8 +18,11 @@
                     <button id="btnAdd" type="button" class="btnAdc col-md-offset-11" data-toggle="modal" data-target="#myModal" href="#myModal"><i class="fa fa-plus"></i> AGREGAR</button>
                 @endif   
                     @foreach($consulta as $departamento)
-                        <div class="contMd">
+
+                        <div class="contMd" >
+
                             <div class="icl">
+
                                 @foreach($acciones as $accion)
                                     @if($accion->descripcion!="Status" )
                                         @if($accion->data_toogle=="modal")
@@ -36,21 +39,27 @@
                                             </span>
                                         @endif
                                     @elseif($accion->descripcion=="Status" )
-                                        @if($departamento->status_d==1)
+                                        @if($departamento->status==1)
                                             <div class="chbx">
-                                                <input type="checkbox" class="btnAcc" name="status" id="{{'inchbx'. $departamento->id}}" value="{{$accion->status_ac}}" checked><label for="{{'inchbx'. $departamento->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
+                                                <input type="checkbox" class="btnAcc" name="status" id="{{'inchbx'. $departamento->id}}" value="{{$departamento->status}}" checked><label for="{{'inchbx'. $departamento->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
                                             </div>
-                                        @elseif($departamento->status_d==0)
+                                        @elseif($departamento->status==0)
                                             <div class="chbx">
-                                                <input type="checkbox" class="btnAcc" name="status" id="{{'inchbx'. $departamento->id}}" value="{{$accion->status_ac}}"><label for="{{'inchbx'. $departamento->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
+                                                <input type="checkbox" class="btnAcc" name="status" id="{{'inchbx'. $departamento->id}}" value="{{$departamento->status}}"><label for="{{'inchbx'. $departamento->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
                                             </div>
                                         @endif
                                     @endif
                                 @endforeach
+
                             </div>
                             <p class="ttlMd"><strong>{{$departamento->nombre_d}}</strong></p>
+                            <input type="hidden"  name="{{'inchbx'. $departamento->id}}" id="Ntable"  value="{{$departamento->id}}">
+
                         </div>
+
                     @endforeach
+                  <input type="hidden"   name="TND"  value="0">
+
                 </div>
                 
                 <!-- Modal -->
@@ -63,7 +72,7 @@
                                 <h4 class="modal-title" id="myModalLabel"><strong>Agregar Departamento</strong></h4>
                             </div>
                             <div class="modal-body">
-                                <form method="post" class="form-horizontal Validacion" action="">
+                                <form method="post" class="form-horizontal Validacion" id='formDepartamentos' >
                                     {{ csrf_field() }}
                                     <div class="container-fluid" id="contdpto">
                                         <div class="row">
@@ -80,7 +89,7 @@
                                                        <select name="comboDpto" class="form-control" id="stDpto">
                                                            <option value="">-</option>
                                                            <option value="1">Activo</option>
-                                                           <option value="2">Inactivo</option>
+                                                           <option value="0">Inactivo</option>
                                                        </select><i class="fa fa-check" id="icdp2"></i>
                                                    </div>
                                                </div> 
@@ -107,7 +116,7 @@
                                 <h4 class="modal-title" id="myModalLabel2"><strong>Modificar Departamento</strong></h4>
                             </div>
                             <div class="modal-body">
-                                <form method="post" class="form-horizontal Validacion" action="">
+                                <form method="post" class="form-horizontal Validacion" >
                                     {{ csrf_field() }}
                                     <div class="container-fluid" id="contdpto">
                                         <div class="row">
@@ -124,7 +133,7 @@
                                                         <select name="comboDptom" class="form-control" id="stDptom">
                                                             <option value="">-</option>
                                                             <option value="1">Activo</option>
-                                                            <option value="2">Inactivo</option>
+                                                            <option value="0">Inactivo</option>
                                                         </select><i class="fa fa-check" id="micdp2"></i>
                                                     </div>
                                                 </div> 

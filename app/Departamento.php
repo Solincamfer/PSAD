@@ -8,7 +8,7 @@ class Departamento extends Model
 {
     public $timestamps=false;
     protected $table="departamentos";
-    protected $fillable=['id','status_d','nombre_d',];
+    protected $fillable=['id','status','nombre_d',];
 
     public function cargos()
     {
