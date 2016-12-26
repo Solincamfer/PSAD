@@ -29,22 +29,25 @@
                                                </a>
                                            </span>
                                         @elseif($accion->id==85)
-                                             @if($perfiles->status_per==1)
+                                             @if($perfiles->status==1)
                                            <div class="chbx">
-                                               <input type="checkbox" class="btnAcc" name="status" id="{{'inchbx'. $perfiles->id}}" value="{{$accion->status_ac}}" checked><label for="{{'inchbx'. $perfiles->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
+                                               <input type="checkbox" class="btnAcc" name="status" id="{{'inchbx'. $perfiles->id}}" value="{{$perfiles->status}}" checked><label for="{{'inchbx'. $perfiles->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
                                            </div>
-                                           @elseif($perfiles->status_per==0)
+                                           @elseif($perfiles->status==0)
                                                <div class="chbx">
-                                                   <input type="checkbox" class="btnAcc" name="status" id="{{'inchbx'. $perfiles->id}}" value="{{$accion->status_ac}}"><label for="{{'inchbx'. $perfiles->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
+                                                   <input type="checkbox" class="btnAcc" name="status" id="{{'inchbx'. $perfiles->id}}" value="{{$perfiles->status}}"><label for="{{'inchbx'. $perfiles->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
                                                </div>
                                            @endif
                                         @endif
                                     @endforeach
                                 </div>
                                 <p class="ttlMd"><strong>{{$perfiles->descripcion}}</strong></p>
+
                             </div>
                         @endforeach
+                        <input type="hidden"   name="TND"  value="{{$extra}}">
                     </div>
+                    @if($agregar)
                     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
@@ -53,7 +56,8 @@
                                     <h4 class="modal-title" id="myModalLabel">Agregar Perfil</h4>
                                 </div>
                                 <div class="modal-body">
-                                    <form action="">
+                                    <form method="post" action="/menu/registros/perfiles/registrar">
+                                      {{ csrf_field() }}
                                         <div class="container-fluid contpfl">
                                            <div class="row">
                                                <div class="rPfl">
@@ -67,23 +71,25 @@
                                                       <div class="form-group row">
                                                           <label for="stPfl">Estatus del Perfil</label><span class="ic"><i class="fa fa-chevron-down"></i></span>
                                                           <select name="stPfl" id="stPfl" class="form-control">
-                                                              <option value="0">-</option>
+                                                              <option value="-">-</option>
                                                               <option value="1">Activo</option>
-                                                              <option value="2">Inactivo</option>
+                                                              <option value="0">Inactivo</option>
                                                           </select><i class="fa fa-check icpfl"></i>
                                                       </div>
                                                   </div> 
                                                </div>
                                            </div>
                                         </div>
-                                    </form>
+                                   
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="bttnMd" id="btnSv">Guardar <i class="fa fa-floppy-o"></i></button>
+                                    <button type="submit" class="bttnMd" id="btnSv">Guardar <i class="fa fa-floppy-o"></i></button>
                                     <button type="button" class="bttnMd" data-dismiss="modal" id="btnCs">Cerrar <i class="fa fa-times"></i></button>
                                 </div>
+                               </form>
                             </div>
                         </div>
                     </div>
+                  @endif
                 </div>   
     @endsection

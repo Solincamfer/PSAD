@@ -16,9 +16,9 @@ public $timestamps=false;
     {
         Schema::create('cargos', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('status_c')->default(0);
+            $table->integer('status')->default(0);
             $table->integer('departamento_id')->unsigned();
-            $table->string('nombre_c',100);
+            $table->string('descripcion',100);
            
             $table->foreign('departamento_id')->references('id')->on('departamentos')->onDelate('cascade');
         });

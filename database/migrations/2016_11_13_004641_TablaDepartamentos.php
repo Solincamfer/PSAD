@@ -17,7 +17,7 @@ class TablaDepartamentos extends Migration
         Schema::create('departamentos', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('status_d');
-            $table->string('nombre_d',100);
+            $table->string('descripcion',100);
            
             //$table->timestamps();
         });

@@ -9,17 +9,21 @@
 ////////////////////////////////////////////////////////////////////////
 
 
-
+/*
 
 $('#btnSv').click(function()
 	{
 		var form=$('#formDepartamentos');
-		var url="/menu/registros/departamentos/registrar";
+		var url="/menu/registros/departamentos/cargos/registrar";
 		var data= form.serialize();
+		alert('epale');
+
 		var post=$.post(url,data,function(resultado)
+		
 					{
+						
 						if (resultado[0]==false)
-						 	{
+						 	{*/
 
 						 		/*swal({
   											title: "El departamento existe!!",
@@ -31,20 +35,20 @@ $('#btnSv').click(function()
 
  										
 									});*/
-
-								swal("l departamento existe", "You clicked the button!", "success");
+/*
+								swal("el cargo existe", "You clicked the button!", "success");
 						 	}
 						 else if (resultado[0]==true)
 						 {
-						 	alert('epale');
-						 		setTimeout(function(){location.href = "/menu/registros/departamentos";},2200);
+						 	
+						 	setTimeout(function(){location.href = "/menu/registros/departamentos/cargos/"+resultado[2];},2200);
 						 }
 
 					});
 
 			
 	});
-
+*/
 
 /////Desavilitar accion="" para formularios submit
 $( "#log" ).submit(function( event ){
@@ -65,18 +69,34 @@ $('#log1').click(function(){
 			var url= 'login/verificar';
 			var data= form.serialize();
 			var posting = $.post( url, data,function(resultado){
-				if (resultado[0] == true) {
+				if (resultado[0] == true  ) {
 					//SWALLLL mensjes de alerta y sucesos
-					swal({
-						title:'Bienvenido',//Contenido del modal
-						text: '<p style="font-size: 2em;">'+resultado[1]+' '+resultado[2]+'</p>',
-						timer:2000,//Tiempo de retardo en ejecucion del modal
-						type: "success",
-						showConfirmButton:false,//Eliminar boton de confirmacion
-						html: true
-					});
-					//Retardo en ejecucion de ruta.
-					setTimeout(function(){location.href = "/menu";},2200); // 3000ms = 3s			
+
+							if(resultado[3]==1)
+							{
+								swal({
+									title:'Bienvenido',//Contenido del modal
+									text: '<p style="font-size: 2em;">'+resultado[1]+' '+resultado[2]+'</p>',
+									timer:2000,//Tiempo de retardo en ejecucion del modal
+									type: "success",
+									showConfirmButton:false,//Eliminar boton de confirmacion
+									html: true
+								});
+								//Retardo en ejecucion de ruta.
+								setTimeout(function(){location.href = "/menu";},2200); // 3000ms = 3s
+							}	
+						else if(resultado[3]==0)
+						{
+							swal({
+
+								title:'Perfil inhabilitado!!!.',//Contenido del modal
+								text: '<p style="font-size: 1.5em;">'+'Pongase en contacto con el administrador'+'</p>',
+								timer:2500,//Tiempo de retardo en ejecucion del modal
+								type: "error",
+								showConfirmButton:false,//Eliminar boton de confirmacion
+								html:true
+						});
+						}		
 				}else{
 					swal({
 						title:'Credenciales invalidos.',//Contenido del modal
@@ -657,31 +677,40 @@ $('.ttlMd').change(function()//asignar perfil a un usuario
 
 });
 
-$(".btnAcc").change(function()//cambio de status de loc check
+$(".btnAcc").change(function()//cambio de status de los check
 	{
 	/////// Valores para mensajes y cambio de status /////////////////
-		var estado=["Habilitar el Registro","Deshabilitar el Registro"];
+		var registros=['Departamento','Cargo','Perfil']
+		var estado=["Habilitar el ","Deshabilitar el "];
 	 	var cambio=["habilitado","deshabilitado"];
 	 	var valores=[1,0];
 	 	var estados=[false,true];
 	 	var colores=["#207D07","#EE1919"];
 
-	////////////////////////////////////////////////////////////////////
-	 	
+
+	//////////////////////////obtener registro a modificar //////////////////////////////////////////
+		var id=$(this).attr('id');//id del boton modificar seleccionado
+		var longitud=id.length;//longitud del  id de modificar
+		var indice=id.indexOf('x');//indice del ultimo caracter
+		var registro=id.slice(indice+1,longitud);//numero del registro a modificar 
+    	
+	/////////////////////////////////////////////////////////////////////////////////	
+
+
 		var name= $(this).attr("id");
 		var valor=$('#'+name).val();
-		var registro=$('input[name='+name+']').val();
+		//var registro=$('input[name='+name+']').val();
 	 	var tabla=$('input[name=TND]').val();
 
 
 		
 		swal({
 				title: "Cambio de status",
-				text: "¿Esta seguro que desea "+estado[valor]+" seleccionado ?",
+				text: "¿Desea "+estado[valor]+registros[tabla]+" Seleccionado ?",
 				type: "warning",
 				showCancelButton: true,
 				confirmButtonColor:colores[valor],
-				confirmButtonText: estado[valor],
+				confirmButtonText: estado[valor]+registros[tabla],
 				cancelButtonText: "Cancelar",
 				closeOnConfirm: false,
 				closeOnCancel: false
@@ -700,7 +729,7 @@ $(".btnAcc").change(function()//cambio de status de loc check
 					   	if(actualizar>0)//si se realiza una actualizacion en la base de datos
 						   	{
 						   		
-						   		swal("Cambio de status", "El registro seleccionado fue "+cambio[valor]+" con exito", "success");
+						   		swal("Cambio de status", "El "+registros[tabla]+ " seleccionado fue "+cambio[valor]+" con exito", "success");
 						   		$('#'+name).val(valores[valor]);
 						   		
 						   	}
@@ -725,7 +754,7 @@ $(".btnAcc").change(function()//cambio de status de loc check
 			 			//alert($('#radio'+padre_).attr('value'));
 			 		
 			 		
-			 		swal("Cancelado", "No se realizo el cambio de status para el registro seleccionado", "error");	
+			 		swal("Cancelado", "No se realizo el cambio de status para el "+registros[tabla]+" seleccionado", "error");	
 			 	}
 
 			 }
@@ -734,3 +763,71 @@ $(".btnAcc").change(function()//cambio de status de loc check
 
 
 	});
+
+
+
+
+
+
+
+
+
+
+/////////////////////modificar departamentos y cargos (mostrar datos del registro en el formulario) //////////////////////////
+
+$('.ModificaR').click(function()
+	{
+	
+
+		////////////// obtener registro a modificar ////////////////////
+		var id=$(this).attr('id');//id del boton modificar seleccionado
+		var longitud=id.length;//longitud del  id de modificar
+		var indice=id.indexOf('r');//indice del ultimo caracter
+		var registro=id.slice(indice+1,longitud);//numero del registro a modificar 
+    
+
+		//////////// obtener tabla a modificar ///////////////////////
+
+		var tabla=$('input[name=TND]').val();
+		
+
+		//////////////////////////////////////////////////////////////
+
+		var url= '/menu/modificar/registros';
+		var datos=[registro,tabla];//datos para el controlador (registro a modificar y tabla a modificar)
+				
+		$.get(url, {datos:datos}, function(actualizar)
+			{
+
+				if (actualizar!=false) 
+				{
+					
+					if (tabla==0)//datos del departamento
+					 {
+					 		
+					 	$('#nomDptom_').val(actualizar[0]);
+					 	$('#stDptom_').val(actualizar[1]);
+					 	$('#MIndexD').val(registro+'ß'+tabla);
+					 }
+					 else if (tabla==1) //datos del cargo
+					 {
+					 	$('#nomCgom_').val(actualizar[0]);
+					 	$('#stCgom_').val(actualizar[1]);
+					 	$('#MIndexC').val(registro+'ß'+tabla);
+
+					 }
+
+
+				}
+				else
+				{
+					swal("Error Inesperado !!", "Comuniquese con el administrador", "error");
+				}
+
+
+
+			});
+
+	});
+
+

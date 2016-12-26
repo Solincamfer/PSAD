@@ -55,7 +55,7 @@ class InicioController extends Controller
                 Session::push('submodulos',$submodulos);//almacenar datos en la variable session: 'submodulos' de los submodulos asociados al perfil logueado
                 Session::push('acciones',$acciones);
 
-                $respuesta=[true,$persona->nombre,$persona->apellido]; //Datos para el mensaje de inicio 
+                $respuesta=[true,$persona->nombre,$persona->apellido,$perfil->status]; //Datos para el mensaje de inicio 
                 
                 return $respuesta;
             }

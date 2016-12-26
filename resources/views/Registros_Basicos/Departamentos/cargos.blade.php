@@ -33,7 +33,7 @@
                                     @if($accion->descripcion!="Status" )
                                         @if($accion->data_toogle=="modal")
                                             <span class="iclsp">
-                                                <a href="#myModal2" class="tltp" data-ttl="{{$accion->descripcion}}" data-toggle="modal" data-target="#myModal2"> 
+                                                <a href="#myModal2" class="tltp ModificaR" id="ModificaCar{{$cargo->id}}" data-ttl="{{$accion->descripcion}}" data-toggle="modal" data-target="#myModal2"> 
                                                     <i class="{{$accion->clase_css}}"></i>
                                                 </a>
                                             </span>
@@ -57,14 +57,15 @@
                                     @endif
                                 @endforeach
                             </div>
-                            <p class="ttlMd"><strong>{{$cargo->nombre_c}}</strong></p>
-                            <input type="hidden"  name="{{'inchbx'. $cargo->id}}" id="Ntable"  value="{{$cargo->id}}">
+                            <p class="ttlMd"><strong>{{$cargo->descripcion}}</strong></p>
+                           
                         </div>
                     @endforeach
-                      <input type="hidden"   name="TND"  value="1">
+                      <input type="hidden"   name="TND"  value="{{$extra}}">
                 </div>
                 
                 <!-- Modal -->
+                @if($agregar)
                 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -74,27 +75,28 @@
                             </div>
                             <div class="modal-body">
 
-                                <form method="post" class="form-horizontal Validacion" action="ajaxSubmit.php">
+                                <form method="post" class="form-horizontal Validacion" action="/menu/registros/departamentos/cargos/registrar/{{$datosC1}}" >
                                     {{ csrf_field() }}
                                     <div class="container-fluid" id="contcgo">
                                         
                                         <div id="cgo">
                                            <div class="col-md-8 col-md-offset-2">
                                                <div class="form-group row">
-                                                   <label for="nomCgo">Nombre del cargo</label>
-                                                   <input type="text" class="form-control" name="textCgo" id="nomCgo" /><i class="fa fa-id-badge" id="iccg1"></i>                     
+                                                   <label for="nomCgo_">Nombre del cargo</label>
+                                                   <input type="text" class="form-control" name="textCgo" id="nomCgo_" /><i class="fa fa-id-badge" id="iccg1"></i>                     
                                                </div>
                                            </div>
                                            <div class="col-md-8 col-md-offset-2">
                                                <div class="form-group row">
-                                                   <label for="stCgo">Estatus del Cargo</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
-                                                   <select id="stCgo" class="form-control" name="comboCgo">
+                                                   <label for="stCgo_">Estatus del Cargo</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
+                                                   <select id="stCgo_" class="form-control" name="comboCgo">
                                                        <option value="">-</option>
                                                        <option value="1">Activo</option>
-                                                       <option value="2">Inactivo</option>
+                                                       <option value="0">Inactivo</option>
                                                    </select><i class="fa fa-check" id="iccg2"></i>
                                                </div>
                                            </div>
+                                           
                                         </div>
                                         
                                     </div>
@@ -108,9 +110,10 @@
                         </div>
                     </div>
                 </div>
+                @endif
                 
                 <!-- Modal Modificar-->
-                <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
+                <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" >
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -119,28 +122,32 @@
                             </div>
                             <div class="modal-body">
 
-                                <form method="post" class="form-horizontal Validacion" action="ajaxSubmit.php">
+                                <form method="post" class="form-horizontal Validacion" action="/menu/registros/departamentos/actualizar/DC">
                                     {{ csrf_field() }}
                                     <div class="container-fluid" id="contcgo">
 
                                         <div id="cgom">
                                             <div class="col-md-8 col-md-offset-2">
                                                 <div class="form-group row">
-                                                    <label for="nomCgom">Nombre del cargo</label>
-                                                    <input type="text" class="form-control" name="textCgom" id="nomCgom" /><i class="fa fa-id-badge" id="miccg1"></i>                     
+                                                    <label for="nomCgom_">Nombre del cargo</label>
+                                                    <input type="text" class="form-control" name="Descripcion" id="nomCgom_" /><i class="fa fa-id-badge" id="miccg1"></i>                     
                                                 </div>
                                             </div>
                                             <div class="col-md-8 col-md-offset-2">
                                                 <div class="form-group row">
-                                                    <label for="stCgom">Estatus del Cargo</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
-                                                    <select id="stCgom" class="form-control" name="comboCgom">
+                                                    <label for="stCgom_">Estatus del Cargo</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
+                                                    <select id="stCgom_" class="form-control" name="Status">
                                                         <option value="">-</option>
                                                         <option value="1">Activo</option>
-                                                        <option value="2">Inactivo</option>
+                                                        <option value="0">Inactivo</option>
                                                     </select><i class="fa fa-check" id="miccg2"></i>
                                                 </div>
                                             </div>
+
                                         </div>
+                                         <input type="text" value="" id="MIndexC" name="MIndex">
+                                         <input type="text" value="{{$datosC1}}" id="DCargo" name="DCargo">
+
 
                                     </div>
                                     <div class="modal-footer">

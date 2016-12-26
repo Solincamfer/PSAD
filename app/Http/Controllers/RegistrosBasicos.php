@@ -188,7 +188,7 @@ public function capturar_datos_responsables()
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
 		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(5,6),7);
-		return view('Registros_Basicos\Departamentos\cargos',$this->datos_vista($datos,$acciones,DB::table('cargos')->where('departamento_id',$departamento_id)->get()));
+		return view('Registros_Basicos\Departamentos\cargos',$this->datos_vista($datos,$acciones,DB::table('cargos')->where('departamento_id',$departamento_id)->get(),1,(int)$departamento_id));
 					
 	}
 
@@ -198,7 +198,7 @@ public function capturar_datos_responsables()
 		$datos=$this->cargar_header_sidebar_acciones();
 		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(1,2,3),4);
 		
-		return view('Registros_Basicos\Departamentos\departamentos',$this->datos_vista($datos,$acciones,DB::table('departamentos')->get()));
+		return view('Registros_Basicos\Departamentos\departamentos',$this->datos_vista($datos,$acciones,DB::table('departamentos')->get(),0));
 					
 	}
 
@@ -206,11 +206,11 @@ public function capturar_datos_responsables()
 	public function departamentos_ingresar()
 	{
 
-		$nombreD= strtoupper(Request::get('textDpto'));//nombre del departamento, llevado a mayusculas
-		$statusD= Request::get('comboDpto');//status del departamento 
+		$nombreD= ucwords(Request::get('textDpto'));//nombre del departamento, llevado a mayusculas
+		$statusD= (int)Request::get('comboDpto');//status del departamento 
 
 
-		$consulta=DB::table('departamentos')->where('nombre_d',$nombreD)->first();
+		$consulta=DB::table('departamentos')->where('descripcion',$nombreD)->first();
 		
 
 		if (empty($consulta)) //si el registro no existe, se procede a ingresar los datos del departamento
@@ -218,21 +218,109 @@ public function capturar_datos_responsables()
 			 DB::table('departamentos')->insert
 					 	(
 
-					 		['nombre_d'=>$nombreD,'status'=>$statusD]
+					 		['descripcion'=>$nombreD,'status'=>$statusD]
 					 	);
 		
 	
-			return ([true,$nombreD]);
+			//return ([true,$nombreD]);
 		}
 		else// si el registro existe se muestra el mensaje de que existe 
 		{
-			return ([false,$nombreD]);
+			//return ([false,$nombreD]);
 		}
-	
+	return redirect("/menu/registros/departamentos");
 
 	}
 
 
+
+	public function cargos_ingresar($departamento_id)
+	{
+		
+		$nombreC= ucwords(Request::get('textCgo'));//nombre del cargo
+		$statusC= (int)Request::get('comboCgo');//status del cargo
+		
+
+		$consulta=DB::table('cargos')->where('descripcion',$nombreC)->first();
+
+		if (empty($consulta)) //si el registro no existe, se procede a ingresar los datos del departamento
+		{
+			 DB::table('cargos')->insert
+					 	(
+
+					 		['status'=>$statusC,'descripcion'=>$nombreC,'departamento_id'=>$departamento_id]
+					 	);
+		
+	
+			//return ([true,$nombreC,$idDepartamento]);
+		}
+		else// si el registro existe se muestra el mensaje de que existe 
+		{
+			//return ([false,$nombreC,$idDepartamento]);
+		}
+	
+		return redirect("/menu/registros/departamentos/cargos/".(string)$departamento_id);
+
+
+	}
+
+
+	public function modificar_registrosCD()//modificar registros cargos departamentos (mostrar los datos del registro en el formulario)
+		{
+			$tablas=array("departamentos","cargos");//listado de las tablas de la base de datos
+			$datos=Request::get('datos');
+			$tabla=$tablas[(int)$datos[1]];//tabla donde se encuentra el registro a modificar
+			$registro=(int)$datos[0];//id del registro que desea modificarse
+
+			$consulta=DB::table($tabla)->where('id',$registro)->first();
+
+			if (empty($consulta)==false) //si la consulta regresa registros
+			{
+				$datos=array($consulta->descripcion,$consulta->status);
+			}
+			else
+			{
+				$datos=false;
+			}
+
+			return($datos);
+		}
+
+
+
+public function actualizar_registrosCD()//actualizar departamentos y cargos, segun lo agregado en el modal modificar
+{
+	
+	
+	$tablas=array("departamentos","cargos");//listado de las tablas de la base de datos
+	$rutas=array("/menu/registros/departamentos");
+
+	$tablaRegistro=Request::get('MIndex');// registro(0)-tabla(1)
+	$descripcion=ucwords(Request::get('Descripcion'));
+	$status=(int)Request::get('Status');
+	
+	
+	$index=(int)strpos($tablaRegistro,'ß');//indice del separador
+	$registro=(int)substr($tablaRegistro,0,$index);//registro a modificar
+	$indextabla=(int)trim(strrchr($tablaRegistro,'ß'),'ß');//tabla a modificar
+	$tabla=$tablas[$indextabla];//tabla donde se encuentra el registro a modificar
+	
+	if ($indextabla==1)
+	{
+		$departamento=(int)Request::get('DCargo');//departamento al cual pertenece el cargo a modificar
+		array_push($rutas,"/menu/registros/departamentos/cargos/".(string)$departamento);
+	}
+
+
+	$consulta=DB::table($tabla)->where('id',$registro)->first();
+	if(empty($consulta)==false)
+	{
+		$consulta=DB::table($tabla)->where('id',$registro)->update(['descripcion'=>$descripcion,'status'=>$status]);
+		
+	}
+	return redirect($rutas[$indextabla]);
+
+}
 
 	
 	
@@ -316,7 +404,31 @@ public function perfiles()//ventana perfiles
 {
 	$datos=$this->cargar_header_sidebar_acciones();
 	$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(84,85),83);
-	return view('Registros_Basicos\Perfiles\perfiles',$this->datos_vista($datos,$acciones,DB::table('perfiles')->get()));
+	return view('Registros_Basicos\Perfiles\perfiles',$this->datos_vista($datos,$acciones,DB::table('perfiles')->get(),2));
+}
+
+
+public function perfiles_insertar()
+{
+	$perfil=ucwords(Request::get('duPfl'));
+	$status=(int)Request::get('stPfl');
+
+	$consulta=DB::table('perfiles')->where('descripcion',$perfil)->first();
+
+	if (empty($consulta)) //si no existe el perfil
+	{
+		
+					 DB::table('perfiles')->insert
+					 	(
+
+					 		['descripcion'=>$perfil,'status'=>$status]
+					 	);
+		
+	
+	}
+
+	return redirect('/menu/registros/perfiles');
+
 }
 
 
@@ -1004,11 +1116,12 @@ public function clientes_categoria($cliente_id)//listar categorias
 	
 
 /////////////////////////////configuraciones/////////////////////////////////////////////////
-public function cambio_registros()
+
+public function cambio_registros()//cambio en los check de estatus para cada registro
 {
 	//[valor,registro,tabla]
 
-	$tablas=array("departamentos","cargos");//listado de las tablas de la base de datos
+	$tablas=array("departamentos","cargos","perfiles");//listado de las tablas de la base de datos
 	$valores=array(1,0);
 
 	$datos=Request::get('datos');
@@ -1036,6 +1149,7 @@ public function cambio_registros()
 
 
 
+	
 
 
 

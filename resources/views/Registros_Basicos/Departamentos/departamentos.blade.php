@@ -27,13 +27,13 @@
                                     @if($accion->descripcion!="Status" )
                                         @if($accion->data_toogle=="modal")
                                             <span class="iclsp">
-                                                <a href="#myModal2" class="tltp" data-ttl="{{$accion->descripcion}}" data-toggle="modal" data-target="#myModal2"> 
+                                                <a href="#myModal2" class="tltp ModificaR" id="ModificaDepar{{$departamento->id}}" data-ttl="{{$accion->descripcion}}" data-toggle="modal" data-target="#myModal2"> 
                                                     <i class="{{$accion->clase_css}}"></i>
                                                 </a>
                                             </span>
                                         @elseif($accion->data_toogle!="modal")
                                             <span class="iclsp">
-                                                <a href="{{$accion->url.$departamento->id}}" class="tltp" data-ttl="{{$accion->descripcion}}">
+                                                <a href="{{$accion->url.$departamento->id}}" class="tltp"  data-ttl="{{$accion->descripcion}}">
                                                     <i class="{{$accion->clase_css}}"></i>
                                                 </a>
                                             </span>
@@ -52,13 +52,13 @@
                                 @endforeach
 
                             </div>
-                            <p class="ttlMd"><strong>{{$departamento->nombre_d}}</strong></p>
-                            <input type="hidden"  name="{{'inchbx'. $departamento->id}}" id="Ntable"  value="{{$departamento->id}}">
+                            <p class="ttlMd"><strong>{{$departamento->descripcion}}</strong></p>
+                            
 
                         </div>
 
                     @endforeach
-                  <input type="hidden"   name="TND"  value="0">
+                  <input type="hidden"   name="TND"  value="{{$extra}}">
 
                 </div>
                 
@@ -72,7 +72,7 @@
                                 <h4 class="modal-title" id="myModalLabel"><strong>Agregar Departamento</strong></h4>
                             </div>
                             <div class="modal-body">
-                                <form method="post" class="form-horizontal Validacion" id='formDepartamentos' >
+                                <form method="post" class="form-horizontal Validacion" action="/menu/registros/departamentos/registrar" >
                                     {{ csrf_field() }}
                                     <div class="container-fluid" id="contdpto">
                                         <div class="row">
@@ -116,21 +116,21 @@
                                 <h4 class="modal-title" id="myModalLabel2"><strong>Modificar Departamento</strong></h4>
                             </div>
                             <div class="modal-body">
-                                <form method="post" class="form-horizontal Validacion" >
+                                <form method="post" class="form-horizontal Validacion" action="/menu/registros/departamentos/actualizar/DC">
                                     {{ csrf_field() }}
                                     <div class="container-fluid" id="contdpto">
                                         <div class="row">
                                             <div id="dptom">
                                                 <div class="col-md-8 col-md-offset-2">
                                                     <div class="form-group row">
-                                                        <label for="nomDptom">Nombre del Departamento</label>
-                                                        <input type="text" name="textDptom" class="form-control" id="nomDptom"/><i class="fa fa-briefcase" id="micdp1"></i>
+                                                        <label for="nomDptom_">Nombre del Departamento</label>
+                                                        <input type="text" name="Descripcion" class="form-control" id="nomDptom_"/><i class="fa fa-briefcase" id="micdp1"></i>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-8 col-md-offset-2">
                                                     <div class="form-group row">
-                                                        <label for="stDptom">Estatus del Departamento</label><span class="ic"><i class="fa fa-chevron-down"></i></span>
-                                                        <select name="comboDptom" class="form-control" id="stDptom">
+                                                        <label for="stDptom_">Estatus del Departamento</label><span class="ic"><i class="fa fa-chevron-down"></i></span>
+                                                        <select name="Status" class="form-control" id="stDptom_">
                                                             <option value="">-</option>
                                                             <option value="1">Activo</option>
                                                             <option value="0">Inactivo</option>
@@ -139,6 +139,8 @@
                                                 </div> 
                                             </div> 
                                         </div>
+                                        <input type="hidden" value="" id="MIndexD" name="MIndex">
+
                                     </div>
                                     <div class="modal-footer">
                                         <button type="submit" class="bttnMd" id="btnSv">Guardar <i class="fa fa-floppy-o"></i></button>
