@@ -145,8 +145,8 @@
                                             </div>
 
                                         </div>
-                                         <input type="text" value="" id="MIndexC" name="MIndex">
-                                         <input type="text" value="{{$datosC1}}" id="DCargo" name="DCargo">
+                                         <input type="hidden" value="" id="MIndexC" name="MIndex">
+                                         <input type="hidden" value="{{$datosC1}}" id="DCargo" name="DCargo">
 
 
                                     </div>
