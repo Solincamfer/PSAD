@@ -89,7 +89,7 @@ $('#log1').click(function(){
 						{
 							swal({
 
-								title:'Perfil inhabilitado!!!.',//Contenido del modal
+								title:'Perfil Inhabilitado!!!.',//Contenido del modal
 								text: '<p style="font-size: 1.5em;">'+'Pongase en contacto con el administrador'+'</p>',
 								timer:2500,//Tiempo de retardo en ejecucion del modal
 								type: "error",
