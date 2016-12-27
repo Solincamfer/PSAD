@@ -206,7 +206,7 @@ public function capturar_datos_responsables()
 	public function departamentos_ingresar()
 	{
 
-		$nombreD= ucwords(Request::get('textDpto'));//nombre del departamento, llevado a mayusculas
+		$nombreD= strtoupper(Request::get('textDpto'));//nombre del departamento, llevado a mayusculas
 		$statusD= (int)Request::get('comboDpto');//status del departamento 
 
 
@@ -237,7 +237,7 @@ public function capturar_datos_responsables()
 	public function cargos_ingresar($departamento_id)
 	{
 		
-		$nombreC= ucwords(Request::get('textCgo'));//nombre del cargo
+		$nombreC= strtoupper(Request::get('textCgo'));//nombre del cargo
 		$statusC= (int)Request::get('comboCgo');//status del cargo
 		
 
@@ -267,7 +267,7 @@ public function capturar_datos_responsables()
 
 	public function modificar_registrosCD()//modificar registros cargos departamentos (mostrar los datos del registro en el formulario)
 		{
-			$tablas=array("departamentos","cargos");//listado de las tablas de la base de datos
+			$tablas=array("departamentos","cargos","perfiles");//listado de las tablas de la base de datos
 			$datos=Request::get('datos');
 			$tabla=$tablas[(int)$datos[1]];//tabla donde se encuentra el registro a modificar
 			$registro=(int)$datos[0];//id del registro que desea modificarse
@@ -292,24 +292,31 @@ public function actualizar_registrosCD()//actualizar departamentos y cargos, seg
 {
 	
 	
-	$tablas=array("departamentos","cargos");//listado de las tablas de la base de datos
-	$rutas=array("/menu/registros/departamentos");
+	$tablas=array("departamentos","cargos","perfiles");//listado de las tablas de la base de datos
+	
 
 	$tablaRegistro=Request::get('MIndex');// registro(0)-tabla(1)
-	$descripcion=ucwords(Request::get('Descripcion'));
+	$descripcion=strtoupper(Request::get('Descripcion'));//ucwords convierte la primera en mayuscula
 	$status=(int)Request::get('Status');
-	
+	$dependencia=0;
 	
 	$index=(int)strpos($tablaRegistro,'ß');//indice del separador
 	$registro=(int)substr($tablaRegistro,0,$index);//registro a modificar
 	$indextabla=(int)trim(strrchr($tablaRegistro,'ß'),'ß');//tabla a modificar
 	$tabla=$tablas[$indextabla];//tabla donde se encuentra el registro a modificar
 	
-	if ($indextabla==1)
+	
+	if ($indextabla==1)//agrega ruta para los cargos relacionados con un departamento
 	{
-		$departamento=(int)Request::get('DCargo');//departamento al cual pertenece el cargo a modificar
-		array_push($rutas,"/menu/registros/departamentos/cargos/".(string)$departamento);
+		$dependencia=(int)Request::get('DCargo');//departamento al cual pertenece el cargo a modificar
 	}
+	
+	$rutas=array("departamentos"=>"/menu/registros/departamentos",
+				 "cargos"=>"/menu/registros/departamentos/cargos/".(string)$dependencia,
+				 "perfiles"=>"/menu/registros/perfiles"
+				 );
+
+
 
 
 	$consulta=DB::table($tabla)->where('id',$registro)->first();
@@ -318,7 +325,7 @@ public function actualizar_registrosCD()//actualizar departamentos y cargos, seg
 		$consulta=DB::table($tabla)->where('id',$registro)->update(['descripcion'=>$descripcion,'status'=>$status]);
 		
 	}
-	return redirect($rutas[$indextabla]);
+	return redirect($rutas[$tabla]);
 
 }
 
@@ -403,14 +410,18 @@ public function empleados_asignar_perfil()
 public function perfiles()//ventana perfiles
 {
 	$datos=$this->cargar_header_sidebar_acciones();
-	$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(84,85),83);
+	$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(84,85,86),83);
 	return view('Registros_Basicos\Perfiles\perfiles',$this->datos_vista($datos,$acciones,DB::table('perfiles')->get(),2));
 }
 
 
+
+
+
+
 public function perfiles_insertar()
 {
-	$perfil=ucwords(Request::get('duPfl'));
+	$perfil=strtoupper(Request::get('duPfl'));
 	$status=(int)Request::get('stPfl');
 
 	$consulta=DB::table('perfiles')->where('descripcion',$perfil)->first();
@@ -432,7 +443,7 @@ public function perfiles_insertar()
 }
 
 
-public function perfiles_modificar($perfil_id)
+public function perfiles_permisos($perfil_id)
 {
 	$perfil=Perfil::find($perfil_id);
 	$modulos=DB::table('modulos')->where('status_m',1)->get();//$perfil->modulos; //trae los modulos asociados a un perfil

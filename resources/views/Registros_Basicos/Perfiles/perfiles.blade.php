@@ -23,11 +23,20 @@
                                 <div class="icl">
                                     @foreach($acciones as $accion)
                                         @if($accion->id!=85)
-                                           <span class="iclsp">
-                                               <a href="{{$accion->url.$perfiles->id}}" class="tltp modificarperfil" id="m{{$perfiles->id}}" data-ttl="{{$accion->descripcion}}">
-                                                   <i class="{{$accion->clase_css}}"></i>                                                   
-                                               </a>
-                                           </span>
+                                              @if($accion->data_toogle=="modal")
+                                                    <span class="iclsp">
+                                                        <a href="#myModal2" class="tltp ModificaR" id="ModificaPer{{$perfiles->id}}" data-ttl="{{$accion->descripcion}}" data-toggle="modal" data-target="#myModal2"> 
+                                                             <i class="{{$accion->clase_css}}"></i>
+                                                       </a>
+                                                    </span>
+                                              @elseif($accion->data_toogle!="modal")
+                                                   <span class="iclsp">
+                                                       <a href="{{$accion->url.$perfiles->id}}" class="tltp modificarperfil" id="m{{$perfiles->id}}" data-ttl="{{$accion->descripcion}}">
+                                                           <i class="{{$accion->clase_css}}"></i>                                                   
+                                                       </a>
+                                                   </span>
+                                              @endif
+
                                         @elseif($accion->id==85)
                                              @if($perfiles->status==1)
                                            <div class="chbx">
@@ -48,7 +57,7 @@
                         <input type="hidden"   name="TND"  value="{{$extra}}">
                     </div>
                     @if($agregar)
-                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal fade" id="myModal"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -72,8 +81,8 @@
                                                           <label for="stPfl">Estatus del Perfil</label><span class="ic"><i class="fa fa-chevron-down"></i></span>
                                                           <select name="stPfl" id="stPfl" class="form-control">
                                                               <option value="-">-</option>
-                                                              <option value="1">Activo</option>
-                                                              <option value="0">Inactivo</option>
+                                                              <option value="1">ACTIVO</option>
+                                                              <option value="0">INACTIVO</option>
                                                           </select><i class="fa fa-check icpfl"></i>
                                                       </div>
                                                   </div> 
@@ -91,5 +100,52 @@
                         </div>
                     </div>
                   @endif
+
+                <!--   modal modificar -->
+                  <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myModalLabel2">Modificar Perfil</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <form method="post" action="/menu/registros/departamentos/actualizar/DC">
+                                      {{ csrf_field() }}
+                                        <div class="container-fluid contpfl">
+                                           <div class="row">
+                                               <div class="rPfl">
+                                                  <div class="col-md-8 col-md-offset-2">
+                                                      <div class="form-group row">
+                                                          <label for="duPfl_">Nombre del Perfil</label>
+                                                          <input type="text" class="form-control" name="Descripcion" id="duPfl_"><i class="fa fa-id-badge icpfl"></i>
+                                                      </div>
+                                                  </div>
+                                                  <div class="col-md-8 col-md-offset-2">
+                                                      <div class="form-group row">
+                                                          <label for="stPfl_">Estatus del Perfil</label><span class="ic"><i class="fa fa-chevron-down"></i></span>
+                                                          <select name="Status" id="stPfl_" class="form-control">
+                                                              <option value="-">-</option>
+                                                              <option value="1">ACTIVO</option>
+                                                              <option value="0">INACTIVO</option>
+                                                          </select><i class="fa fa-check icpfl"></i>
+                                                      </div>
+                                                  </div> 
+                                               </div>
+                                               <input type="hidden" value="" id="MIndexP" name="MIndex">
+                                           </div>
+                                        </div>
+                                      
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="bttnMd" id="btnSv">Guardar <i class="fa fa-floppy-o"></i></button>
+                                    <button type="button" class="bttnMd" data-dismiss="modal" id="btnCs">Cerrar <i class="fa fa-times"></i></button>
+                                </div>
+                                 
+                               </form>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>   
     @endsection

@@ -91,8 +91,8 @@
                                                    <label for="stCgo_">Estatus del Cargo</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
                                                    <select id="stCgo_" class="form-control" name="comboCgo">
                                                        <option value="">-</option>
-                                                       <option value="1">Activo</option>
-                                                       <option value="0">Inactivo</option>
+                                                       <option value="1">ACTIVO</option>
+                                                       <option value="0">INACTIVO</option>
                                                    </select><i class="fa fa-check" id="iccg2"></i>
                                                </div>
                                            </div>
@@ -138,8 +138,8 @@
                                                     <label for="stCgom_">Estatus del Cargo</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
                                                     <select id="stCgom_" class="form-control" name="Status">
                                                         <option value="">-</option>
-                                                        <option value="1">Activo</option>
-                                                        <option value="0">Inactivo</option>
+                                                        <option value="1">ACTIVO</option>
+                                                        <option value="0">INACTIVO</option>
                                                     </select><i class="fa fa-check" id="miccg2"></i>
                                                 </div>
                                             </div>

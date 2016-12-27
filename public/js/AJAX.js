@@ -773,11 +773,11 @@ $(".btnAcc").change(function()//cambio de status de los check
 
 
 
-/////////////////////modificar departamentos y cargos (mostrar datos del registro en el formulario) //////////////////////////
+/////////////////////modificar departamentos,cargos y perfiles (Muestra los datos del registro seleccionado en el modal modificar) //////////////////////////
 
 $('.ModificaR').click(function()
 	{
-	
+		//var rutas=['/menu/modificar/registros','/menu/modificar/registros','/menu/registros/perfiles/modificar'];
 
 		////////////// obtener registro a modificar ////////////////////
 		var id=$(this).attr('id');//id del boton modificar seleccionado
@@ -793,7 +793,7 @@ $('.ModificaR').click(function()
 
 		//////////////////////////////////////////////////////////////
 
-		var url= '/menu/modificar/registros';
+		var url= '/menu/modificar/registros';//rutas[tabla];
 		var datos=[registro,tabla];//datos para el controlador (registro a modificar y tabla a modificar)
 				
 		$.get(url, {datos:datos}, function(actualizar)
@@ -816,6 +816,14 @@ $('.ModificaR').click(function()
 					 	$('#MIndexC').val(registro+'ß'+tabla);
 
 					 }
+					 else if(tabla==2)//datos para un perfil
+					 {
+
+					 	$('#duPfl_').val(actualizar[0]);
+					 	$('#stPfl_').val(actualizar[1]);
+					 	$('#MIndexP').val(registro+'ß'+tabla);
+
+					 }
 
 
 				}
@@ -829,5 +837,3 @@ $('.ModificaR').click(function()
 			});
 
 	});
-
-
