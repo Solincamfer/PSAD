@@ -46,26 +46,32 @@
                                 <div class="col-md-3 dist">
                                     <div class="card1" id="targeta1">
                                         <ul>
-                                            @foreach($consulta as $modulos)
+                                            @foreach($consulta as $registros)
                                         
                                             <li>
                                                 <div class="container-fluid cont">
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                             <div class="tl1">
-                                                                <span>{{$modulos->descripcion}}</span>
+                                                                <span>{{$registros->moduloNom}}</span>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-1 col-md-push-2">
                                                             <div class="iclst">
-                                                                    <i class="fa fa-eye consultarSubmodulo" id="m{{$modulos->id}}"></i>
+                                                                    <i class="fa fa-eye consultarSubmodulo" id="m{{$registros->moduloId}}"></i>
                                                             </div>
-                                                            <input type="hidden" id="Perfilidm{{$modulos->id}}" value="{{$modulos->id}}">
+                                                            <input type="hidden" id="Perfilidm{{$registros->moduloId}}" value="{{$registros->moduloId}}">
                                                         </div>
                                                         <div class="col-md-2 col-md-push-3">
                                                             <div class="chbx1x">
-                                                                <input type="checkbox" value="None" id="cck" name="cck" checked><label for="cck"></label>
+                                                                @if($registros->status==1)
+                                                                    <input type="checkbox" value="{{$registros->status}}" class="configurarPer" id="cck{{$registros->registroId}}" name="cck{{$registros->registroId}}"checked><label for="cck{{$registros->registroId}}"></label>
+                                                                @elseif($registros->status==0)
+                                                                    <input type="checkbox" value="{{$registros->status}}" class="configurarPer" id="cck{{$registros->registroId}}" name="cck{{$registros->registroId}}" ><label for="cck{{$registros->registroId}}"></label>
+                                                                @endif
+
                                                             </div>
+                                                       
                                                         </div>
                                                     </div>
                                                 </div>

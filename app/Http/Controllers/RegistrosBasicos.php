@@ -309,7 +309,7 @@ public function actualizar_registrosCD()//actualizar departamentos y cargos, seg
 	if ($indextabla==1)//agrega ruta para los cargos relacionados con un departamento
 	{
 		$dependencia=(int)Request::get('DCargo');//departamento al cual pertenece el cargo a modificar
-		
+
 	}
 	
 	$rutas=array("departamentos"=>"/menu/registros/departamentos",
@@ -430,12 +430,13 @@ public function perfiles_insertar()
 	if (empty($consulta)) //si no existe el perfil
 	{
 		
-					 DB::table('perfiles')->insert
+					 $perfil_id=DB::table('perfiles')->insertGetId
 					 	(
 
 					 		['descripcion'=>$perfil,'status'=>$status]
 					 	);
-		
+
+		$this->perfil_inicial($perfil_id);//configuracion por defecto para un perfil
 	
 	}
 
@@ -447,12 +448,35 @@ public function perfiles_insertar()
 public function perfiles_permisos($perfil_id)
 {
 	$perfil=Perfil::find($perfil_id);
-	$modulos=DB::table('modulos')->where('status_m',1)->get();//$perfil->modulos; //trae los modulos asociados a un perfil
+	//$modulos=DB::table('modulos')->where('status_m',1)->get();//$perfil->modulos; //trae los modulos asociados a un perfil
 
+		
+	$registros=DB::table('perfiles')
+				  ->join('modulo_perfil','perfiles.id','=','modulo_perfil.perfil_id')
+				  ->join('modulos','modulo_perfil.modulo_id','=','modulos.id')
+
+				  ->select('perfiles.id AS perfilId','perfiles.descripcion AS perfilNom','perfiles.status AS perfilSta','modulo_perfil.status AS status','modulo_perfil.id AS registroId',
+				  		   'modulos.id AS moduloId','modulos.descripcion AS moduloNom','modulos.status_m AS moduloSta')
+				  ->where(['modulos.status_m'=>1,'perfiles.id'=>$perfil_id])->get();
+
+	$modulos=$perfil->modulos;
 	$datos=$this->cargar_header_sidebar_acciones();
 	$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(84,85),83);
-	return view('Registros_Basicos\Perfiles\perfiles_modificar',$this->datos_vista($datos,$acciones,$modulos,(int)$perfil_id));
+	return view('Registros_Basicos\Perfiles\perfiles_modificar',$this->datos_vista($datos,$acciones,$registros,(int)$perfil_id));
 }
+
+
+public function perfiles_configurar_modulo()
+{
+	$valores=[1,0];
+	$datos=(int)Request::get('datos');//solo el registro
+	$consulta=DB::table('modulo_perfil')->where('id',$datos)->first();
+	$actualizar=DB::table('modulo_perfil')->where('id',$datos)->update(["status"=>$valores[$consulta->status]]);
+
+	return($actualizar);
+}
+
+
 
 public function mostrar_submodulos()//muestra los submodulos asociados a un modulo
 {
@@ -1129,40 +1153,87 @@ public function clientes_categoria($cliente_id)//listar categorias
 
 /////////////////////////////configuraciones/////////////////////////////////////////////////
 
-public function cambio_registros()//cambio en los check de estatus para cada registro
-{
-	//[valor,registro,tabla]
+		public function cambio_registros()//cambio en los check de estatus para cada registro
+		{
+			//[valor,registro,tabla]
 
-	$tablas=array("departamentos","cargos","perfiles");//listado de las tablas de la base de datos
-	$valores=array(1,0);
+			$tablas=array("departamentos","cargos","perfiles");//listado de las tablas de la base de datos
+			$valores=array(1,0);
 
-	$datos=Request::get('datos');
-	
-	$tabla=$tablas[(int)$datos[2]];
-	$valor=$valores[(int)$datos[0]];
-	$registro=(int)$datos[1];
+			$datos=Request::get('datos');
+			
+			$tabla=$tablas[(int)$datos[2]];
+			$valor=$valores[(int)$datos[0]];
+			$registro=(int)$datos[1];
 
-	$respuesta=0;
+			$respuesta=0;
 
-	$consulta=DB::table($tabla)->where('id',$registro)->first();
+			$consulta=DB::table($tabla)->where('id',$registro)->first();
 
-	if(empty($consulta)==false)//si consigue valores 
-	{
-		$consulta=DB::table($tabla)->where('id',$registro)
-								   ->update(['status'=>$valor]);	
+			if(empty($consulta)==false)//si consigue valores 
+			{
+				$consulta=DB::table($tabla)->where('id',$registro)
+										   ->update(['status'=>$valor]);	
 
-		$respuesta=count($consulta);
-	}
-	
-	return($respuesta);
+				$respuesta=count($consulta);
+			}
+			
+			return($respuesta);
 
-}
-
-
-
-
-	
+		}
 
 
 
+		public function perfil_inicial($perfil_id)//configuracion basica para un perfil
+		{
+			$modulos=DB::table('modulos')->get();
+			$submodulos=DB::table('submodulos')->get();
+			$acciones=DB::table('acciones')->get();
+			$status=1;//valor por defecto (habilitado)
+
+			foreach ($modulos as $modulo) //configuracion de modulos para el el perfil
+			{
+				
+				$asignacion=DB::table('modulo_perfil')->insert
+				(
+					["perfil_id"=>$perfil_id,"modulo_id"=>$modulo->id,"status"=>$status]
+
+				);
+
+			}
+
+
+
+			foreach ($submodulos as $submodulo) //configuracion de modulos para el el perfil
+			{
+				
+				$asignacion=DB::table('perfil_submodulo')->insert
+				(
+					["perfil_id"=>$perfil_id,"submodulo_id"=>$submodulo->id,"status"=>$status]
+
+				);
+
+			}
+
+
+			foreach ($acciones as $accion) //configuracion de modulos para el el perfil
+			{
+				
+				$asignacion=DB::table('accion_perfil')->insert
+				(
+					["perfil_id"=>$perfil_id,"accion_id"=>$accion->id,"status"=>$status]
+
+				);
+
+			}
+
+
+
+		
+
+		}
+			
+
+
+		
 }

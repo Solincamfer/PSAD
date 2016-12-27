@@ -46,14 +46,19 @@ class InicioController extends Controller
                 
                 
                 $perfil=Perfil::find($datos['perfil']);
-                $modulos=$perfil->modulos;//obtener modulos asociados al perfil logueado
-                $submodulos=$perfil->submodulos;//obtener submodulos asociados al perfil logueado
-                $acciones=$perfil->acciones;
+                if ($perfil->status) //si el perfil esta habilitado  ///agregar la verificacion de status del usuario
+                    {
+                         $modulos=$perfil->modulos;//obtener modulos asociados al perfil logueado
+                         $submodulos=$perfil->submodulos;//obtener submodulos asociados al perfil logueado
+                         $acciones=$perfil->acciones;
+                       
+                         Session::push('sesion',$datos);//almacenar datos en la variable session:'sesion' del usuario logueado
+                         Session::push('modulos',$modulos);//almacenar datos en la variable session:'modulos' de los modulos asociados al perfil logueado
+                         Session::push('submodulos',$submodulos);//almacenar datos en la variable session: 'submodulos' de los submodulos asociados al perfil logueado
+                         Session::push('acciones',$acciones);
+
+                    }
                
-                Session::push('sesion',$datos);//almacenar datos en la variable session:'sesion' del usuario logueado
-                Session::push('modulos',$modulos);//almacenar datos en la variable session:'modulos' de los modulos asociados al perfil logueado
-                Session::push('submodulos',$submodulos);//almacenar datos en la variable session: 'submodulos' de los submodulos asociados al perfil logueado
-                Session::push('acciones',$acciones);
 
                 $respuesta=[true,$persona->nombre,$persona->apellido,$perfil->status]; //Datos para el mensaje de inicio 
                 
