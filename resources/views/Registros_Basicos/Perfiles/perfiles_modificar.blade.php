@@ -47,6 +47,7 @@
                                     <div class="card1" id="targeta1">
                                         <ul>
                                             @foreach($consulta as $modulos)
+                                        
                                             <li>
                                                 <div class="container-fluid cont">
                                                     <div class="row">

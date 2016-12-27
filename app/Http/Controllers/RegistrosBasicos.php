@@ -309,6 +309,7 @@ public function actualizar_registrosCD()//actualizar departamentos y cargos, seg
 	if ($indextabla==1)//agrega ruta para los cargos relacionados con un departamento
 	{
 		$dependencia=(int)Request::get('DCargo');//departamento al cual pertenece el cargo a modificar
+		
 	}
 	
 	$rutas=array("departamentos"=>"/menu/registros/departamentos",
