@@ -478,6 +478,27 @@ public function perfiles_configurar_modulo()
 
 
 
+public function perfiles_configurar_submodulo()
+{
+	$valores=[1,0];
+	$datos=(int)Request::get('datos');//solo el registro
+	$consulta=DB::table('perfil_submodulo')->where('id',$datos)->first();
+	$actualizar=DB::table('perfil_submodulo')->where('id',$datos)->update(["status"=>$valores[$consulta->status]]);
+
+	return($actualizar);
+}
+
+public function perfiles_configurar_accion()
+{
+	$valores=[1,0];
+	$datos=(int)Request::get('datos');//solo el registro
+	$consulta=DB::table('accion_perfil')->where('id',$datos)->first();
+	$actualizar=DB::table('accion_perfil')->where('id',$datos)->update(["status"=>$valores[$consulta->status]]);
+
+	return($actualizar);
+}
+
+
 public function mostrar_submodulos()//muestra los submodulos asociados a un modulo
 {
 	
@@ -485,23 +506,22 @@ public function mostrar_submodulos()//muestra los submodulos asociados a un modu
 	//$submodulos_=array();//submodulos que se mostraran en la vista
 	
 	$datos=Request::get('valores');//id del perfil para el cual se desea mostrar los submodulos
-	//$modulo_id=(int)Request::get('idModulo');//captura el id del modulo
 	
-	/*$perfil=Perfil::find($datos[0]);//ubica en la base de datos el perfil indicado por $perfil_id
+	$submodulos=DB::table('submodulos')
+					->join('perfil_submodulo','submodulos.id','=','perfil_submodulo.submodulo_id')
+					->join('perfiles','perfiles.id','=','perfil_submodulo.perfil_id')
 
-	
-	$submodulos=$perfil->submodulos;//captura los submodulos asociados al perfil
+					->select('submodulos.id AS submoduloId','submodulos.descripcion AS descripcion','submodulos.modulo_id AS padre',
+							 'submodulos.status_sm AS submoduloStatus','perfiles.id AS perfilId','perfiles.descripcion AS perfilDescripcion',
+							 'perfil_submodulo.id AS registro','perfil_submodulo.status AS Status')
+					->where(['submodulos.modulo_id'=>$datos[1],'perfiles.id'=>$datos[0],'submodulos.status_sm'=>1,'submodulos.padre'=>1])->get();
 
-	foreach ($submodulos as $submodulo) 
-	{
-		if($submodulo->modulo_id==$datos[1])
-		{
-			array_push($submodulos_, $submodulo);//agrega los submodulos asociados al modulo_id
-		}
-	}*/
-	$submodulos_=DB::table('submodulos')->where(['modulo_id'=>$datos[1],'status_sm'=>1,'padre'=>1])->get();
 
-	return $submodulos_;
+
+
+	//$submodulos_=DB::table('submodulos')->where(['modulo_id'=>$datos[1],'status_sm'=>1,'padre'=>1])->get();
+
+	return $submodulos;
 }
 
 
@@ -509,22 +529,22 @@ public function mostrar_acciones()
 {
 	$acciones_=array();
 	$datos=Request::get('valoresAcc');
-	//$perfil_id=(int)Request::get('idPerfil');
-	$acciones_=DB::table('acciones')->where('submodulo_id',$datos[1])->get();
-	/*$submodulo_id=(int)Request::get('idSubmodulo');
-	$perfil=Perfil::find($perfil_id);
-	$acciones=$perfil->acciones;
 
-	foreach($acciones as $accion)
-	{
-		if($accion->submodulo_id==$submodulo_id)
-		{
-			array_push($acciones_, $accion);
-		}
+	$acciones=DB::table('acciones')
+					->join('accion_perfil','acciones.id','=','accion_perfil.accion_id')
+					->join('perfiles','perfiles.id','=','accion_perfil.perfil_id')
 
-	}*/
+					->select('acciones.id AS accionId','acciones.descripcion AS descripcion','acciones.submodulo_id AS padre',
+							 'acciones.status_ac AS accionStatus','perfiles.id AS perfilId','perfiles.descripcion AS perfilDescripcion',
+							 'accion_perfil.id AS registro','accion_perfil.status AS Status')
+					->where(['acciones.submodulo_id'=>$datos[1],'perfiles.id'=>$datos[0],'acciones.status_ac'=>1])->get();
 
-  return $acciones_;
+
+
+	//$acciones_=DB::table('acciones')->where('submodulo_id',$datos[1])->get();
+	
+
+  return $acciones;
 }
 	
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

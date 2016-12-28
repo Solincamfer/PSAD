@@ -62,12 +62,12 @@
                                                             </div>
                                                             <input type="hidden" id="Perfilidm{{$registros->moduloId}}" value="{{$registros->moduloId}}">
                                                         </div>
-                                                        <div class="col-md-2 col-md-push-3">
+                                                        <div class="col-md-2 col-md-push-3" border>
                                                             <div class="chbx1x">
                                                                 @if($registros->status==1)
-                                                                    <input type="checkbox" value="{{$registros->status}}" class="configurarPer" id="cck{{$registros->registroId}}" name="cck{{$registros->registroId}}"checked><label for="cck{{$registros->registroId}}"></label>
+                                                                    <input type="checkbox" value="{{$registros->status}}" class="configurarPer" id="cckM{{$registros->registroId}}" name="cck{{$registros->registroId}}"checked><label for="cckM{{$registros->registroId}}"></label>
                                                                 @elseif($registros->status==0)
-                                                                    <input type="checkbox" value="{{$registros->status}}" class="configurarPer" id="cck{{$registros->registroId}}" name="cck{{$registros->registroId}}" ><label for="cck{{$registros->registroId}}"></label>
+                                                                    <input type="checkbox" value="{{$registros->status}}" class="configurarPer" id="cckM{{$registros->registroId}}" name="cck{{$registros->registroId}}" ><label for="cckM{{$registros->registroId}}"></label>
                                                                 @endif
 
                                                             </div>
