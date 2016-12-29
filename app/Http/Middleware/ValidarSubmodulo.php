@@ -19,7 +19,7 @@ class ValidarSubmodulo
     {
         $datos=Session::get('sesion');//obtener datos de la session 
         
-        $submodulo_asig=DB::table('perfil_submodulo')->where(['perfil_id'=>$datos[0]['perfil'],'submodulo_id'=>(int)$submodulo])->first();//si el modulo esta asignado al perfil logueado
+        $submodulo_asig=DB::table('perfil_submodulo')->where(['perfil_id'=>$datos[0]['perfil'],'submodulo_id'=>(int)$submodulo,'status'=>1])->first();//si el modulo esta asignado al perfil logueado
        
 
         if(empty($submodulo_asig)==false)//si esta asignado
