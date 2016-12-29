@@ -542,7 +542,7 @@ $(".modificarCliente").click(function(){
 $(".consultarSubmodulo").click(function(){
 
 				$(".consultarSubmodulo").css("color","grey");
-			    $(this).css("color","white");
+			    $(this).css("color","yellow");
 		///////////BUSCADO BOTON CLICKEADO/////////////	
 			ID = $(this).attr("id");///////ID DEL BOTTON MODIFICAR/////////	
 
@@ -584,7 +584,7 @@ $(".consultarSubmodulo").click(function(){
 
 			    $(".consultarAcciones").click(function(){
 			    $(".consultarAcciones").css("color","grey");
-			    $(this).css("color","white");
+			    $(this).css("color","yellow");
 
 			    ID = $(this).attr("id");
 			    idSubmodulo=$('#Accion'+ID).val();				
