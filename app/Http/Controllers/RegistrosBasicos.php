@@ -187,7 +187,7 @@ public function capturar_datos_responsables()
 	public function departamentos_cargos($departamento_id)//Inicializacion del submodulo: /departamentos/cargos
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
-		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(5,6),7);
+		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(5,6,87),7);
 		return view('Registros_Basicos\Departamentos\cargos',$this->datos_vista($datos,$acciones,DB::table('cargos')->where('departamento_id',$departamento_id)->get(),1,(int)$departamento_id));
 					
 	}
@@ -1258,7 +1258,7 @@ public function clientes_categoria($cliente_id)//listar categorias
 		public function pruebas_()
 		{
 			$perfil=DB::table('perfiles')->where('id',1)->first();
-			
+
 			$modulos=DB::table('modulos')->join('modulo_perfil','modulo_perfil.modulo_id','=','modulos.id')->select(
 				'modulos.id AS moduloId','modulos.descripcion AS descripcion','modulos.status_m AS moduloStatus',
 				'modulo_perfil.status AS status')->where(['modulo_perfil.perfil_id'=>$perfil->id])->get();
