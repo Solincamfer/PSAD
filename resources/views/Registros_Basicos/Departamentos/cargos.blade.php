@@ -40,7 +40,7 @@
                                         @elseif($accion->data_toogle!="modal")
 
                                             <span class="iclsp">
-                                                <a href="{{$accion->url}}" class="EliminarR" data-ttl="{{$accion->descripcion}}" id="EliminarCar">
+                                                <a href="{{$accion->url}}" class="EliminarR" data-ttl="{{$accion->descripcion}}" id="EliminarCar{{$cargo->id}}" data-ttl="{{$accion->descripcion}}" >
                                                     <i class="{{$accion->clase_css}}"></i>
                                                 </a>
                                             </span>
