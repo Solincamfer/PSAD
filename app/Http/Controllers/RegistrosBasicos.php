@@ -220,16 +220,14 @@ public function capturar_datos_responsables()
 
 					 		['descripcion'=>$nombreD,'status'=>$statusD]
 					 	);
-		
-	
-			//return ([true,$nombreD]);
+
+			$respuesta= 1;
 		}
 		else// si el registro existe se muestra el mensaje de que existe 
 		{
-			//return ([false,$nombreD]);
+			$respuesta= 0;
 		}
-	return redirect("/menu/registros/departamentos");
-
+		return $respuesta;
 	}
 
 

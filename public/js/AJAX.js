@@ -50,7 +50,7 @@ $('#btnSv').click(function()
 	});
 */
 
-/////Desavilitar accion="" para formularios submit
+/////Deshabilitar accion="" para formularios submit
 $( "#log" ).submit(function( event ){
 	event.preventDefault();
 	});
@@ -352,7 +352,7 @@ $(".modificarCliente").click(function(){
         		$('#innnn14').val(data[5]);
         		$('#innnn15').val(data[8]);
 
-        		///////Data para probar los campos resividos por el AJAX////->->->//alert(data);
+        		///////Data para probar los campos recibidos por el AJAX////->->->//alert(data);
     ///////////ASIGNACION AUTOMATICA DE LOS VALORES A LOS COMBO DEPENDIENTES PAISES DEL MODAL MODIFICAR/////////////
         		$("#inn1 option[value="+ data[11] +"]").attr("selected",true);
         		$("#innn11 option[value="+ data[21] +"]").attr("selected",true);
@@ -988,3 +988,46 @@ $('.configurarPer').change(function()
 
 
 	});
+///////////////////////// Validacion de registros iguales para Departamentos y Cargos/////////
+
+$('#btnSv').click(function(){
+	var form=$('#NewDep');
+	var url= '/menu/registros/departamentos/registrar';
+	var data= form.serialize();
+	var posting = $.get( url, data,function(resultado){
+		if (resultado == 1) {
+			//SWALLLL mensajes de alerta y sucesos
+			swal({
+				title:'Guardado Exitoso',//Contenido del modal
+				text: '<p style="font-size: 2em;">'+'El Registro Fue Guardado Exitosamente'+'</p>',
+				timer:2000,//Tiempo de retardo en ejecucion del modal
+				type: "success",
+				showConfirmButton:false,//Eliminar boton de confirmacion
+				html: true
+			});
+			//Retardo en ejecucion de ruta.
+			setTimeout(function(){location.href = "/menu/registros/departamentos";},2200); // 3000ms = 3s
+		}	
+		else if(resultado == 0){
+			swal({
+
+				title:'Registro Existente!!!.',//Contenido del modal
+				text: '<p style="font-size: 1.5em;">'+'Este registro ya esta presente en la Base de Datos'+'</p>',
+				timer:10000,//Tiempo de retardo en ejecucion del modal
+				type: "error",
+				showConfirmButton:true,//Eliminar boton de confirmacion
+				html:true
+			});
+		}						
+	});
+	posting.fail(function() {
+		swal({
+			title:'Error inesperado!!',//Contenido del modal
+			text: '<p style="font-size: 1.5em;">'+'Pongase en contacto con el administrador'+'</p>',
+			timer:2000,//Tiempo de retardo en ejecucion del modal
+			type: "error",
+			showConfirmButton:false,//Eliminar boton de confirmacion
+			html: true
+		});
+	});
+});

@@ -108,7 +108,6 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="submit" class="bttnMd" id="btnSv">Guardar <i class="fa fa-floppy-o"></i></button>
-                                       <!-- <button type="button" class="bttnMd" data-dismiss="modal" id="btnCs">Cerrar <i class="fa fa-times"></i></button> -->
                                     </div>
                                 </form>
                             </div>                           
