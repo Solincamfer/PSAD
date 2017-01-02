@@ -9,46 +9,6 @@
 ////////////////////////////////////////////////////////////////////////
 
 
-/*
-
-$('#btnSv').click(function()
-	{
-		var form=$('#formDepartamentos');
-		var url="/menu/registros/departamentos/cargos/registrar";
-		var data= form.serialize();
-		alert('epale');
-
-		var post=$.post(url,data,function(resultado)
-		
-					{
-						
-						if (resultado[0]==false)
-						 	{*/
-
-						 		/*swal({
-  											title: "El departamento existe!!",
-  											text: "Departamento: "+ " " + resultado[1],
-  											type: "warning",
-  											timer:20000,
-  											showConfirmButton:false
-  											
-
- 										
-									});*/
-/*
-								swal("el cargo existe", "You clicked the button!", "success");
-						 	}
-						 else if (resultado[0]==true)
-						 {
-						 	
-						 	setTimeout(function(){location.href = "/menu/registros/departamentos/cargos/"+resultado[2];},2200);
-						 }
-
-					});
-
-			
-	});
-*/
 
 /////Deshabilitar accion="" para formularios submit
 $( "#log" ).submit(function( event ){
@@ -988,7 +948,7 @@ $('.configurarPer').change(function()
 
 
 	});
-///////////////////////// Validacion de registros iguales para Departamentos y Cargos/////////
+///////////////////////// Validacion de registros iguales para Departamentos /////////
 
 $('#btnSv').click(function(){
 	var form=$('#NewDep');
@@ -1002,35 +962,31 @@ $('#btnSv').click(function(){
 				//SWALLLL mensajes de alerta y sucesos
 				swal({
 					title:'Guardado Exitoso',//Contenido del modal
-					text: '<p style="font-size: 2em;">'+'El Registro Fue Guardado Exitosamente'+'</p>',
-					timer:2000,//Tiempo de retardo en ejecucion del modal
+					text: 'El Registro Fue Guardado Exitosamente',
+					timer:3000,//Tiempo de retardo en ejecucion del modal
 					type: "success",
 					showConfirmButton:false,//Eliminar boton de confirmacion
-					html: true
 				});
 				//Retardo en ejecucion de ruta.
-				setTimeout(function(){location.href = "/menu/registros/departamentos";},2200); // 3000ms = 3s
+				//setTimeout(function(){location.href = "/menu/registros/departamentos";},2200); // 3000ms = 3s
 			}	
 			else {
 				swal({
 
 					title:'Registro Existente!!!.',//Contenido del modal
-					text: '<p style="font-size: 1.5em;">'+'Este registro ya esta presente en la Base de Datos'+'</p>',
-					timer:10000,//Tiempo de retardo en ejecucion del modal
+					text: 'Este registro ya esta presente en la Base de Datos',
+					timer:2500,//Tiempo de retardo en ejecucion del modal
 					type: "error",
-					showConfirmButton:true,//Eliminar boton de confirmacion
-					html:true
+					showConfirmButton:false,//Eliminar boton de confirmacion
 				});
 			}						
 		});
 		posting.fail(function() {
 			swal({
 				title:'Error inesperado!!',//Contenido del modal
-				text: '<p style="font-size: 1.5em;">'+'Pongase en contacto con el administrador'+'</p>',
-				timer:2000,//Tiempo de retardo en ejecucion del modal
+				text: 'Pongase en contacto con el administrador',
 				type: "error",
-				showConfirmButton:false,//Eliminar boton de confirmacion
-				html: true
+				showConfirmButton:true,//Eliminar boton de confirmacion
 			});
 		});
 	}

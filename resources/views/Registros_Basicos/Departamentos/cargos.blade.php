@@ -8,10 +8,10 @@
             <div class="contenido">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-3 ttlp">
+                        <div class="col-md-4 ttlp">
                             <h1>Departamentos - Cargos</h1>
                         </div>
-                        <div  class="col-md-2  col-md-offset-2 buscador">
+                        <div  class="col-md-2  col-md-offset-1 buscador">
                             <form action="" method="">
                                 <div class="input-group">
                                     <input type="search" class="form-control filtro" placeholder="Buscar Cargo...">

@@ -213,7 +213,7 @@ public function capturar_datos_responsables()
 		$consulta=DB::table('departamentos')->where('descripcion',$nombreD)->first();
 		
 
-		if (empty($consulta)==true) //si el registro no existe, se procede a ingresar los datos del departamento
+		if (empty($consulta)) //si el registro no existe, se procede a ingresar los datos del departamento
 		{
 			 DB::table('departamentos')->insert
 					 	(
@@ -222,9 +222,12 @@ public function capturar_datos_responsables()
 					 	);
 
 			$respuesta= 1;
-			return $respuesta;
+			
 		}
-		
+		else{
+			$respuesta= 0;
+		}
+		return (int)$respuesta;
 	}
 
 

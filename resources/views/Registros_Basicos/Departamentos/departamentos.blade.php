@@ -83,7 +83,7 @@
                                 <h4 class="modal-title" id="myModalLabel"><strong>Agregar Departamento</strong></h4>
                             </div>
                             <div class="modal-body">
-                                <form method="post" class="form-horizontal DepyCar" action="/menu/registros/departamentos/registrar" >
+                                <form method="post" class="form-horizontal DepyCar" id="NewDep" >
                                     {{ csrf_field() }}
                                     <div class="container-fluid" id="contdpto">
                                         <div class="row">
