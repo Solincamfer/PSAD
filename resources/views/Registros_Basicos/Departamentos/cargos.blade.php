@@ -11,6 +11,13 @@
                         <div class="col-md-3 ttlp">
                             <h1>Departamentos - Cargos</h1>
                         </div>
+                        <div  class="col-md-2  col-md-offset-2 buscador">
+                            <form action="" method="">
+                                <div class="input-group">
+                                    <input type="search" class="form-control filtro" placeholder="Buscar Cargo...">
+                                </div>
+                           </form> 
+                        </div>
                     </div>
                 </div>
                 <div class="col-xs-5 col-sm-5 col-md-6 col-md-offset-3" style="">
@@ -62,10 +69,14 @@
                            
                         </div>
                     @endforeach
+                    <div class="paginador">
+                        {{ $consulta->links() }}
+                    </div>
                       <input type="hidden"   name="TND"  value="{{$extra}}">
                 </div>
                 
-                <!-- Modal -->
+                <!-- Modal Agregar -->
+
                 @if($agregar)
                 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                     <div class="modal-dialog" role="document">
@@ -76,7 +87,7 @@
                             </div>
                             <div class="modal-body">
 
-                                <form method="post" class="form-horizontal Validacion" action="/menu/registros/departamentos/cargos/registrar/{{$datosC1}}" >
+                                <form method="post" class="form-horizontal DepyCar" action="/menu/registros/departamentos/cargos/registrar/{{$datosC1}}" >
                                     {{ csrf_field() }}
                                     <div class="container-fluid" id="contcgo">
                                         
@@ -90,8 +101,7 @@
                                            <div class="col-md-8 col-md-offset-2">
                                                <div class="form-group row">
                                                    <label for="stCgo_">Estatus del Cargo</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
-                                                   <select id="stCgo_" class="form-control" name="comboCgo">
-                                                       <option value="">-</option>
+                                                   <select id="stCgo_" class="form-control Empty" name="comboCgo">
                                                        <option value="1">ACTIVO</option>
                                                        <option value="0">INACTIVO</option>
                                                    </select><i class="fa fa-check" id="iccg2"></i>
@@ -103,7 +113,6 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="submit" class="bttnMd" id="btnSv">Guardar <i class="fa fa-floppy-o"></i></button>
-                                        <button type="button" class="bttnMd" data-dismiss="modal" id="btnCs">Cerrar <i class="fa fa-times"></i></button>
                                     </div>
                                 </form>
                             </div>
@@ -123,7 +132,7 @@
                             </div>
                             <div class="modal-body">
 
-                                <form method="post" class="form-horizontal Validacion" action="/menu/registros/departamentos/actualizar/DC">
+                                <form method="post" class="form-horizontal DepyCar" action="/menu/registros/departamentos/actualizar/DC">
                                     {{ csrf_field() }}
                                     <div class="container-fluid" id="contcgo">
 
@@ -138,7 +147,6 @@
                                                 <div class="form-group row">
                                                     <label for="stCgom_">Estatus del Cargo</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
                                                     <select id="stCgom_" class="form-control" name="Status">
-                                                        <option value="">-</option>
                                                         <option value="1">ACTIVO</option>
                                                         <option value="0">INACTIVO</option>
                                                     </select><i class="fa fa-check" id="miccg2"></i>
@@ -153,7 +161,6 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="submit" class="bttnMd" id="btnSv">Guardar <i class="fa fa-floppy-o"></i></button>
-                                        <button type="button" class="bttnMd" data-dismiss="modal" id="btnCs">Cerrar <i class="fa fa-times"></i></button>
                                     </div>
                                 </form>
                             </div>

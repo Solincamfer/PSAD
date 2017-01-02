@@ -9,14 +9,21 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-2 ttlp">
-                            <h1>Departamento</h1>
+                            <h1>Departamentos</h1>
+                        </div>
+                        <div  class="col-md-3  col-md-offset-2 buscador">
+                            <form action="" method="">
+                                <div class="input-group">
+                                    <input type="search" class="form-control filtro" placeholder="Buscar Departamento...">
+                                </div>
+                           </form> 
                         </div>
                     </div>
                 </div>
                 <div class="col-xs-5 col-sm-5 col-md-6 col-md-offset-3">
-                @if($agregar)
-                    <button id="btnAdd" type="button" class="btnAdc col-md-offset-11" data-toggle="modal" data-target="#myModal" href="#myModal"><i class="fa fa-plus"></i> AGREGAR</button>
-                @endif   
+                    @if($agregar)
+                        <button id="btnAdd" type="button" class="btnAdc col-md-offset-11" data-toggle="modal" data-target="#myModal" href="#myModal"><i class="fa fa-plus"></i> AGREGAR</button>
+                    @endif   
                     @foreach($consulta as $departamento)
 
                         <div class="contMd" >
@@ -58,11 +65,15 @@
                         </div>
 
                     @endforeach
+                    <div class="paginador">
+                        {{ $consulta->links() }}
+                    </div>
                   <input type="hidden"   name="TND"  value="{{$extra}}">
 
                 </div>
                 
-                <!-- Modal -->
+                <!-- Modal AGREGAR-->
+
                 @if($agregar)
                 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                     <div class="modal-dialog" role="document">
@@ -72,7 +83,7 @@
                                 <h4 class="modal-title" id="myModalLabel"><strong>Agregar Departamento</strong></h4>
                             </div>
                             <div class="modal-body">
-                                <form method="post" class="form-horizontal Validacion" action="/menu/registros/departamentos/registrar" >
+                                <form method="post" class="form-horizontal DepyCar" action="/menu/registros/departamentos/registrar" >
                                     {{ csrf_field() }}
                                     <div class="container-fluid" id="contdpto">
                                         <div class="row">
@@ -87,7 +98,6 @@
                                                    <div class="form-group row">
                                                        <label for="stDpto">Estatus del Departamento</label><span class="ic"><i class="fa fa-chevron-down"></i></span>
                                                        <select name="comboDpto" class="form-control" id="stDpto">
-                                                           <option value="">-</option>
                                                            <option value="1">Activo</option>
                                                            <option value="0">Inactivo</option>
                                                        </select><i class="fa fa-check" id="icdp2"></i>
@@ -98,7 +108,7 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="submit" class="bttnMd" id="btnSv">Guardar <i class="fa fa-floppy-o"></i></button>
-                                        <button type="button" class="bttnMd" data-dismiss="modal" id="btnCs">Cerrar <i class="fa fa-times"></i></button>
+                                       <!-- <button type="button" class="bttnMd" data-dismiss="modal" id="btnCs">Cerrar <i class="fa fa-times"></i></button> -->
                                     </div>
                                 </form>
                             </div>                           
@@ -116,7 +126,7 @@
                                 <h4 class="modal-title" id="myModalLabel2"><strong>Modificar Departamento</strong></h4>
                             </div>
                             <div class="modal-body">
-                                <form method="post" class="form-horizontal Validacion" action="/menu/registros/departamentos/actualizar/DC">
+                                <form method="post" class="form-horizontal DepyCar" action="/menu/registros/departamentos/actualizar/DC">
                                     {{ csrf_field() }}
                                     <div class="container-fluid" id="contdpto">
                                         <div class="row">
@@ -131,7 +141,6 @@
                                                     <div class="form-group row">
                                                         <label for="stDptom_">Estatus del Departamento</label><span class="ic"><i class="fa fa-chevron-down"></i></span>
                                                         <select name="Status" class="form-control" id="stDptom_">
-                                                            <option value="">-</option>
                                                             <option value="1">Activo</option>
                                                             <option value="0">Inactivo</option>
                                                         </select><i class="fa fa-check" id="micdp2"></i>
@@ -144,7 +153,6 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="submit" class="bttnMd" id="btnSv">Guardar <i class="fa fa-floppy-o"></i></button>
-                                        <button type="button" class="bttnMd" data-dismiss="modal" id="btnCs">Cerrar <i class="fa fa-times"></i></button>
                                     </div>
                                 </form>
                             </div>                           

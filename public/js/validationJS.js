@@ -142,7 +142,7 @@ $('.Validacion').bootstrapValidator({
             validators: {
                 notEmpty: {
                         ///////VALIDA CAMPO VACIO///////////
-                            message: 'Campo vacio.'
+                            message: 'Campo vacío.'
                         }
             }
         },
@@ -152,7 +152,7 @@ $('.Validacion').bootstrapValidator({
             err: '#messageContainer',
             validators: {
                 notEmpty: {///////VALIDA CAMPO VACIO///////////
-                            message: 'Campo vacio.'
+                            message: 'Campo vacío.'
                         },
             
             regexp: {///////VALIDA CAMPO SOLO LETRAS///////////
@@ -167,7 +167,7 @@ $('.Validacion').bootstrapValidator({
             err: '#messageContainer',
             validators: {
                 notEmpty: {///////VALIDA CAMPO VACIO///////////
-                            message: 'Campo vacio.'
+                            message: 'Campo vacío.'
                         },
                 emailAddress: {///////VALIDA CAMPO TIPO EMAIL@///////////
                     message: 'Solo email'
@@ -180,16 +180,16 @@ $('.Validacion').bootstrapValidator({
             err: '#messageContainer',
             validators: {
                 notEmpty: {///////VALIDA CAMPO VACIO///////////
-                            message: 'Campo vacio.'
+                            message: 'Campo vacío.'
                         },
                 regexp: {///////VALIDA CAMPO SOLO NUMEROS///////////
                             regexp: /^[0-9]+$/,
-                            message: 'Solo numeros'                            
+                            message: 'Solo números'                            
                         },
                 stringLength: {///////VALIDA CAMPO CANTIDAD DE CARACTERES///////////
                             min: 10,
                             max: 10,
-                            message: '10 numeros.'
+                            message: '10 números.'
                         }
             }
         },
@@ -199,16 +199,16 @@ $('.Validacion').bootstrapValidator({
             err: '#messageContainer',
             validators: {
                 notEmpty: {///////VALIDA CAMPO VACIO///////////
-                            message: 'Campo vacio.'
+                            message: 'Cámpo vacío.'
                         },
                 regexp: {///////VALIDA CAMPO SOLO NUMEROS///////////
                             regexp: /^[0-9]+$/,
-                            message: 'Solo numeros'
+                            message: 'Solo números'
                         },
                 stringLength: {///////VALIDA CAMPO CANTIDAD DE CARACTERES///////////
                             min: 7,
                             max: 7,
-                            message: '7 numeros.'
+                            message: 'El teléfono debe contener 7 números.'
                         }
             }
         },
@@ -218,21 +218,84 @@ $('.Validacion').bootstrapValidator({
             err: '#messageContainer',
             validators: {
                 notEmpty: {///////VALIDA CAMPO VACIO///////////
-                            message: 'Campo vacio.'
+                            message: 'Cámpo vacío.'
                         },
                 regexp: {///////VALIDA CAMPO SOLO NUMEROS///////////
                             regexp: /^[0-9]+$/,
-                            message: 'Solo numeros'                            
+                            message: 'Solo números'                            
                         },
                 stringLength: {///////VALIDA CAMPO CANTIDAD DE CARACTERES///////////
                             min: 8,
                             max: 9,
-                            message: 'Entre 8 o 9 numeros.'
+                            message: 'Entre 8 o 9 números.'
                         }
             }
         }
     }
 
+});
+$('.DepyCar').bootstrapValidator({
+    feedbackIcons: {
+         valid: 'glyphicon glyphicon-ok',
+         invalid: 'glyphicon glyphicon-remove',
+         validating: 'glyphicon glyphicon-refresh'
+    },
+    fields: {
+       textDpto: {
+            validators: {
+                notEmpty: {
+                     message: 'Campo Vacío'
+                },
+                regexp: {///////VALIDA CAMPO SOLO LETRAS///////////
+                        regexp: /^[a-z A-Z]+$/,
+                        message: 'Sólo letras'                            
+                },
+            }
+        },
+        comboDpto:{
+            validators: {
+                notEmpty: {
+                     message: 'Campo Vacío'
+                },
+            }
+        },
+        textCgo: {
+            validators: {
+                notEmpty: {
+                     message: 'Campo Vacío'
+                },
+                regexp: {///////VALIDA CAMPO SOLO LETRAS///////////
+                        regexp: /^[a-z A-Z]+$/,
+                        message: 'Sólo letras'                            
+                },
+            }
+        },
+        comboCgo:{
+            validators: {
+                notEmpty: {
+                     message: 'Campo Vacío'
+                },
+            }
+        },
+        Descripcion: {
+            validators: {
+                notEmpty: {
+                     message: 'Campo Vacío'
+                },
+                regexp: {///////VALIDA CAMPO SOLO LETRAS///////////
+                        regexp: /^[a-z A-Z]+$/,
+                        message: 'Sólo letras'                            
+                },
+            }
+        },
+        Status:{
+            validators: {
+                notEmpty: {
+                     message: 'Campo Vacío'
+                },
+            }
+        },
+    }
 });
 };
 });
