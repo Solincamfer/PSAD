@@ -994,40 +994,44 @@ $('#btnSv').click(function(){
 	var form=$('#NewDep');
 	var url= '/menu/registros/departamentos/registrar';
 	var data= form.serialize();
-	var posting = $.get( url, data,function(resultado){
-		if (resultado == 1) {
-			//SWALLLL mensajes de alerta y sucesos
+	var dep = $('#nomDpto').val();
+	var estatus = $('#stDpto').val();
+	if (dep != '' && estatus != ''){
+		var posting = $.post( url, data,function(resultado){
+			if (resultado == 1) {
+				//SWALLLL mensajes de alerta y sucesos
+				swal({
+					title:'Guardado Exitoso',//Contenido del modal
+					text: '<p style="font-size: 2em;">'+'El Registro Fue Guardado Exitosamente'+'</p>',
+					timer:2000,//Tiempo de retardo en ejecucion del modal
+					type: "success",
+					showConfirmButton:false,//Eliminar boton de confirmacion
+					html: true
+				});
+				//Retardo en ejecucion de ruta.
+				setTimeout(function(){location.href = "/menu/registros/departamentos";},2200); // 3000ms = 3s
+			}	
+			else {
+				swal({
+
+					title:'Registro Existente!!!.',//Contenido del modal
+					text: '<p style="font-size: 1.5em;">'+'Este registro ya esta presente en la Base de Datos'+'</p>',
+					timer:10000,//Tiempo de retardo en ejecucion del modal
+					type: "error",
+					showConfirmButton:true,//Eliminar boton de confirmacion
+					html:true
+				});
+			}						
+		});
+		posting.fail(function() {
 			swal({
-				title:'Guardado Exitoso',//Contenido del modal
-				text: '<p style="font-size: 2em;">'+'El Registro Fue Guardado Exitosamente'+'</p>',
+				title:'Error inesperado!!',//Contenido del modal
+				text: '<p style="font-size: 1.5em;">'+'Pongase en contacto con el administrador'+'</p>',
 				timer:2000,//Tiempo de retardo en ejecucion del modal
-				type: "success",
+				type: "error",
 				showConfirmButton:false,//Eliminar boton de confirmacion
 				html: true
 			});
-			//Retardo en ejecucion de ruta.
-			setTimeout(function(){location.href = "/menu/registros/departamentos";},2200); // 3000ms = 3s
-		}	
-		else if(resultado == 0){
-			swal({
-
-				title:'Registro Existente!!!.',//Contenido del modal
-				text: '<p style="font-size: 1.5em;">'+'Este registro ya esta presente en la Base de Datos'+'</p>',
-				timer:10000,//Tiempo de retardo en ejecucion del modal
-				type: "error",
-				showConfirmButton:true,//Eliminar boton de confirmacion
-				html:true
-			});
-		}						
-	});
-	posting.fail(function() {
-		swal({
-			title:'Error inesperado!!',//Contenido del modal
-			text: '<p style="font-size: 1.5em;">'+'Pongase en contacto con el administrador'+'</p>',
-			timer:2000,//Tiempo de retardo en ejecucion del modal
-			type: "error",
-			showConfirmButton:false,//Eliminar boton de confirmacion
-			html: true
 		});
-	});
+	}
 });
