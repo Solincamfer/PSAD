@@ -957,26 +957,26 @@ $('#btnSv').click(function(){
 	var dep = $('#nomDpto').val();
 	var estatus = $('#stDpto').val();
 	if (dep != '' && estatus != ''){
-		var posting = $.post( url, data,function(resultado){
+		var posting = $.get(url, data,function(resultado){
 			if (resultado == 1) {
 				//SWALLLL mensajes de alerta y sucesos
 				swal({
 					title:'Guardado Exitoso',//Contenido del modal
-					text: 'El Registro Fue Guardado Exitosamente',
-					timer:3000,//Tiempo de retardo en ejecucion del modal
+					text: 'El Departamento fue Guardado Exitosamente',
 					type: "success",
+					timer:1000,
 					showConfirmButton:false,//Eliminar boton de confirmacion
 				});
 				//Retardo en ejecucion de ruta.
-				//setTimeout(function(){location.href = "/menu/registros/departamentos";},2200); // 3000ms = 3s
+				setTimeout(function(){location.href = "/menu/registros/departamentos";},1200); // 3000ms = 3s
 			}	
 			else {
 				swal({
 
 					title:'Registro Existente!!!.',//Contenido del modal
-					text: 'Este registro ya esta presente en la Base de Datos',
-					timer:2500,//Tiempo de retardo en ejecucion del modal
+					text: 'Este departamento ya existe',
 					type: "error",
+					timer:1000,
 					showConfirmButton:false,//Eliminar boton de confirmacion
 				});
 			}						
