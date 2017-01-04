@@ -201,7 +201,7 @@ $('.configurarPer').change(function()
     	////////////////////////////////////////////////////////////////////////
     	
 
-
+    	//alert(vista_submodulos);
    		var url= '/menu/registros/perfiles/configurar/modulo';//rutas[tabla];
 		var datos=registro;//datos para el controlador (registro a modificar y tabla a modificar)*/
 		$.get(url, {datos:datos}, function(configurar)
@@ -211,6 +211,15 @@ $('.configurarPer').change(function()
 				{
 					
 					swal("Error Inesperado !!", "Comuniquese con el administrador", "error");
+				}
+				else
+				{
+					if (vista_submodulos==true) //sila vista de submodulos esta visible
+						{
+
+								
+						}
+
 				}
 				
 

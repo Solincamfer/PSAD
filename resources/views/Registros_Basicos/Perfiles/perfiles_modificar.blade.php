@@ -65,9 +65,9 @@
                                                         <div class="col-md-2 col-md-push-3" border>
                                                             <div class="chbx1x">
                                                                 @if($registros->status==1)
-                                                                    <input type="checkbox" value="{{$registros->status}}" class="configurarPer" id="cckM{{$registros->registroId}}" name="cck{{$registros->registroId}}"checked><label for="cckM{{$registros->registroId}}"></label>
+                                                                    <input type="checkbox" value="{{$registros->status}}" class="configurarPer" id="cckM{{$registros->registroId}}" name="cck{{$registros->moduloId}}"checked><label for="cckM{{$registros->registroId}}"></label>
                                                                 @elseif($registros->status==0)
-                                                                    <input type="checkbox" value="{{$registros->status}}" class="configurarPer" id="cckM{{$registros->registroId}}" name="cck{{$registros->registroId}}" ><label for="cckM{{$registros->registroId}}"></label>
+                                                                    <input type="checkbox" value="{{$registros->status}}" class="configurarPer" id="cckM{{$registros->registroId}}" name="cck{{$registros->moduloId}}" ><label for="cckM{{$registros->registroId}}"></label>
                                                                 @endif
 
                                                             </div>
