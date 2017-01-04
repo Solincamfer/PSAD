@@ -20,7 +20,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-5 col-sm-5 col-md-6 col-md-offset-3" style="">
+                <div class="col-xs-5 col-sm-5 col-md-6 col-md-offset-3">
                     @if($agregar) 
                         <div class="container">
                             <div class="row">
@@ -87,7 +87,8 @@
                             </div>
                             <div class="modal-body">
 
-                                <form method="post" class="form-horizontal DepyCar" action="/menu/registros/departamentos/cargos/registrar/{{$datosC1}}" >
+                                <form method="post" class="form-horizontal DepyCar" id="NewCarg" >
+                                    <input type="hidden"   name="depID" id="depID" value="{{$datosC1}}">
                                     {{ csrf_field() }}
                                     <div class="container-fluid" id="contcgo">
                                         
@@ -102,17 +103,16 @@
                                                <div class="form-group row">
                                                    <label for="stCgo_">Estatus del Cargo</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
                                                    <select id="stCgo_" class="form-control Empty" name="comboCgo">
-                                                       <option value="1">ACTIVO</option>
-                                                       <option value="0">INACTIVO</option>
+                                                        <option value="">-</option>
+                                                        <option value="1">ACTIVO</option>
+                                                        <option value="0">INACTIVO</option>
                                                    </select><i class="fa fa-check" id="iccg2"></i>
                                                </div>
                                            </div>
-                                           
                                         </div>
-                                        
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="submit" class="bttnMd" id="btnSv">Guardar <i class="fa fa-floppy-o"></i></button>
+                                        <button type="submit" id="saveCargo" class="bttnMd" >Guardar <i class="fa fa-floppy-o"></i></button>
                                     </div>
                                 </form>
                             </div>
@@ -160,7 +160,7 @@
 
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="submit" class="bttnMd" id="btnSv">Guardar <i class="fa fa-floppy-o"></i></button>
+                                        <button type="submit" class="bttnMd" id="btnSv1">Guardar <i class="fa fa-floppy-o"></i></button>
                                     </div>
                                 </form>
                             </div>

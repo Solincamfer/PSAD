@@ -246,10 +246,6 @@ $('.DepyCar').bootstrapValidator({
                 notEmpty: {
                      message: 'Campo Vacío'
                 },
-                regexp: {///////VALIDA CAMPO SOLO LETRAS///////////
-                        regexp: /^[a-z A-Z]+$/,
-                        message: 'Sólo letras'                            
-                },
             }
         },
         comboDpto:{
@@ -264,10 +260,6 @@ $('.DepyCar').bootstrapValidator({
                 notEmpty: {
                      message: 'Campo Vacío'
                 },
-                regexp: {///////VALIDA CAMPO SOLO LETRAS///////////
-                        regexp: /^[a-z A-Z]+$/,
-                        message: 'Sólo letras'                            
-                },
             }
         },
         comboCgo:{
@@ -281,10 +273,6 @@ $('.DepyCar').bootstrapValidator({
             validators: {
                 notEmpty: {
                      message: 'Campo Vacío'
-                },
-                regexp: {///////VALIDA CAMPO SOLO LETRAS///////////
-                        regexp: /^[a-z A-Z]+$/,
-                        message: 'Sólo letras'                            
                 },
             }
         },

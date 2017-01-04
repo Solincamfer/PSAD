@@ -864,7 +864,7 @@ input::-webkit-input-placeholder {
             padding: 10px;
         }
 
-        #btnSv, #btnSvm{
+        .bttnMd{
             background: #26a69d;
         }
 

@@ -17,6 +17,12 @@ $( "#log" ).submit(function( event ){
 $( "#Formcliente" ).submit(function( event ){
 	event.preventDefault();
 	});
+$( "#NewDep" ).submit(function( event ){
+	event.preventDefault();
+	});
+$( "#NewCarg" ).submit(function( event ){
+	event.preventDefault();
+	});
 
 ////////////////////
 ////Validacion + permisologia + AJAX del boton submit de la vista LOGIN////
@@ -976,7 +982,51 @@ $('#btnSv').click(function(){
 					title:'Registro Existente!!!.',//Contenido del modal
 					text: 'Este departamento ya existe',
 					type: "error",
+					timer:2000,
+					showConfirmButton:false,//Eliminar boton de confirmacion
+				});
+			}						
+		});
+		posting.fail(function() {
+			swal({
+				title:'Error inesperado!!',//Contenido del modal
+				text: 'Pongase en contacto con el administrador',
+				type: "error",
+				showConfirmButton:true,//Eliminar boton de confirmacion
+			});
+		});
+	}
+});
+
+///////////////////////// Validacion de registros iguales para Cargos /////////
+$('#saveCargo').click(function(){
+	var form=$('#NewCarg');
+	var iddep= $('#depID').val();
+	var url= '/menu/registros/departamentos/cargos/registrar/'+iddep;
+	var data= form.serialize();
+	var Carg = $('#nomCgo_').val();
+	var estatus = $('#stCgo_').val();
+	if (Carg != '' && estatus != ''){
+		var posting = $.get(url, data,function(resultado){
+			if (resultado == 1) {
+				//SWALLLL mensajes de alerta y sucesos
+				swal({
+					title:'Guardado Exitoso',//Contenido del modal
+					text: 'El Cargo fue Guardado Exitosamente',
+					type: "success",
 					timer:1000,
+					showConfirmButton:false,//Eliminar boton de confirmacion
+				});
+				//Retardo en ejecucion de ruta.
+				setTimeout(function(){location.href = "/menu/registros/departamentos/cargos/"+iddep;},1200); // 3000ms = 3s
+			}	
+			else {
+				swal({
+
+					title:'Registro Existente!!!.',//Contenido del modal
+					text: 'Este Cargo ya existe',
+					type: "error",
+					timer:2000,
 					showConfirmButton:false,//Eliminar boton de confirmacion
 				});
 			}						

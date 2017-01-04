@@ -83,7 +83,7 @@
                                 <h4 class="modal-title" id="myModalLabel"><strong>Agregar Departamento</strong></h4>
                             </div>
                             <div class="modal-body">
-                                <form method="post" class="form-horizontal DepyCar" id="NewDep" >
+                                <form method="post" class="form-horizontal DepyCar" id="NewDep">
                                     {{ csrf_field() }}
                                     <div class="container-fluid" id="contdpto">
                                         <div class="row">
@@ -98,8 +98,9 @@
                                                    <div class="form-group row">
                                                        <label for="stDpto">Estatus del Departamento</label><span class="ic"><i class="fa fa-chevron-down"></i></span>
                                                        <select name="comboDpto" class="form-control" id="stDpto">
-                                                           <option value="1">Activo</option>
-                                                           <option value="0">Inactivo</option>
+                                                            <option value="">-</option>
+                                                            <option value="1">Activo</option>
+                                                            <option value="0">Inactivo</option>
                                                        </select><i class="fa fa-check" id="icdp2"></i>
                                                    </div>
                                                </div> 
@@ -107,7 +108,7 @@
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="bttnMd" id="btnSv">Guardar <i class="fa fa-floppy-o"></i></button>
+                                        <button type="submit" class="bttnMd" id="btnSv">Guardar <i class="fa fa-floppy-o"></i></button>
                                     </div>
                                 </form>
                             </div>                           
