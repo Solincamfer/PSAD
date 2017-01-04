@@ -1,7 +1,14 @@
 
+var vista_submodulos=false;//true cuando la vista de submodulos esta activa
+var vista_acciones=false;//true cuando la vista de acciones esta activa
+
 
 $(".consultarSubmodulo").click(function(){
+				
+				
 
+				
+				
 				$(".consultarSubmodulo").css("color","grey");
 			    $(this).css("color","yellow");
 		///////////BUSCADO BOTON CLICKEADO/////////////	
@@ -17,6 +24,18 @@ $(".consultarSubmodulo").click(function(){
 		///////////PASANDO VARIABLE Y CARGANDO LISTADO CORRESPONDIENTE A LA SELECCION PREVIA Y ESPERANDO DATA COMO RESPUESTA/////////////			        	
 			$.get("/menu/registros/perfiles/submodulos", {valores:valores}, function(data){
 
+				if (data.length>0) //verifica que hayn submodulos para el modulo seleccionado
+				{
+					vista_submodulos=true;//la vista para de los sbmodulos asociada a n modulo se encuentra activa
+					vista_acciones=false;//las vista de acciones se encuentra inactiva
+				}
+				else  //en caso de no encontrar submodulos para el modulo seleccionado
+				{
+					vista_submodulos=false;//la vista para de los sbmodulos asociada a n modulo se encuentra inactiva
+					vista_acciones=false;//las vista de acciones se encuentra inactiva
+
+				}
+
 				$( ".limpiarul1" ).remove();
 				$( ".limpiarul2" ).remove();
 
@@ -27,12 +46,12 @@ $(".consultarSubmodulo").click(function(){
 			   
 			   if(item.Status==1)//agregar check de status cuando el submodulo esta asignado para el perfil
 			   {
-			  		 $('#checklist'+item.submoduloId).append(' <input type="checkbox" value="'+item.Status+'" class="configurarSub" id="cckS'+item.registro+'" name="cckS'+item.registro+'" checked><label for="cckS'+item.registro+'"></label> ');
+			  		 $('#checklist'+item.submoduloId).append(' <input type="checkbox" value="'+item.Status+'" class="configurarSub" id="cckS'+item.registro+'" name="cckS'+item.padre+'" checked><label for="cckS'+item.registro+'"></label> ');
 			   
 			   }
 			   else if(item.Status==0)//agregar check de status cuando el submodulo no esta signado para el perfil
 			   {
-			   		  $('#checklist'+item.submoduloId).append(' <input type="checkbox" value="'+item.Status+'"  class="configurarSub"  id="cckS'+item.registro+'" name="cckS'+item.registro+'" ><label for="cckS'+item.registro+'"></label> ');
+			   		  $('#checklist'+item.submoduloId).append(' <input type="checkbox" value="'+item.Status+'"  class="configurarSub"  id="cckS'+item.registro+'" name="cckS'+item.padre+'" ><label for="cckS'+item.registro+'"></label> ');
 
 			   }
 
@@ -168,3 +187,35 @@ $(".consultarSubmodulo").click(function(){
 		
 			
 });
+
+
+
+$('.configurarPer').change(function()
+	{
+		
+		////////////// obtener registro a modificar ////////////////////
+		var id=$(this).attr('id');//id del boton modificar seleccionado
+		var longitud=id.length;//longitud del  id de modificar
+		var indice=id.indexOf('M');//indice del ultimo caracter
+		var registro=id.slice(indice+1,longitud);//numero del registro a modificar 
+    	////////////////////////////////////////////////////////////////////////
+    	
+
+
+   		var url= '/menu/registros/perfiles/configurar/modulo';//rutas[tabla];
+		var datos=registro;//datos para el controlador (registro a modificar y tabla a modificar)*/
+		$.get(url, {datos:datos}, function(configurar)
+			{
+				
+				if(configurar==0)
+				{
+					
+					swal("Error Inesperado !!", "Comuniquese con el administrador", "error");
+				}
+				
+
+
+			});
+
+
+	});

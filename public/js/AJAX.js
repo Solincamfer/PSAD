@@ -732,35 +732,6 @@ $('.ModificaR').click(function()
 	});
 
 
-$('.configurarPer').change(function()
-	{
-		
-		////////////// obtener registro a modificar ////////////////////
-		var id=$(this).attr('id');//id del boton modificar seleccionado
-		var longitud=id.length;//longitud del  id de modificar
-		var indice=id.indexOf('M');//indice del ultimo caracter
-		var registro=id.slice(indice+1,longitud);//numero del registro a modificar 
-    	////////////////////////////////////////////////////////////////////////
-    	
-
-
-   		var url= '/menu/registros/perfiles/configurar/modulo';//rutas[tabla];
-		var datos=registro;//datos para el controlador (registro a modificar y tabla a modificar)*/
-		$.get(url, {datos:datos}, function(configurar)
-			{
-				
-				if(configurar==0)
-				{
-					
-					swal("Error Inesperado !!", "Comuniquese con el administrador", "error");
-				}
-				
-
-
-			});
-
-
-	});
 ///////////////////////// Validacion de registros iguales para Departamentos /////////
 
 $('#btnSv').click(function(){
