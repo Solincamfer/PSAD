@@ -23,6 +23,7 @@
                        </div>
                    </div>
                    @endif
+                   @foreach($consulta as $planes)
                         <div class="contMd" style="">
                             <div class="icl">
                                 @foreach($acciones as $accion)
@@ -53,9 +54,9 @@
                                     @endif
                                 @endforeach
                             </div>
-                        <p class="ttlMd"><strong>REGISTRO</strong></p>
+                            <p class="ttlMd"><strong>{{$planes->nombreP}}</strong></p>
                         </div>
-                  
+                    @endforeach
                 </div>
                 <!-- Modal -->
                 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
