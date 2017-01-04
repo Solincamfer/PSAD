@@ -87,7 +87,7 @@
                             </div>
                             <div class="modal-body">
 
-                                <form method="post" class="form-horizontal DepyCar" id="NewCarg" >
+                                <form method="post" class="form-horizontal DepCarPer" id="NewCarg" >
                                     <input type="hidden"   name="depID" id="depID" value="{{$datosC1}}">
                                     {{ csrf_field() }}
                                     <div class="container-fluid" id="contcgo">
@@ -132,7 +132,7 @@
                             </div>
                             <div class="modal-body">
 
-                                <form method="post" class="form-horizontal DepyCar" action="/menu/registros/departamentos/actualizar/DC">
+                                <form method="post" class="form-horizontal DepCarPer" action="/menu/registros/departamentos/actualizar/DC">
                                     {{ csrf_field() }}
                                     <div class="container-fluid" id="contcgo">
 

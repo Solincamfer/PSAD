@@ -234,13 +234,15 @@ $('.Validacion').bootstrapValidator({
     }
 
 });
-$('.DepyCar').bootstrapValidator({
+///////////////////////////////////// VALIDACION PARA DEPARTAMENTOS, CARGOS, PERFILES
+$('.DepCarPer').bootstrapValidator({
     feedbackIcons: {
          valid: 'glyphicon glyphicon-ok',
          invalid: 'glyphicon glyphicon-remove',
          validating: 'glyphicon glyphicon-refresh'
     },
     fields: {
+/////////////////////////////// AGREGAR DEPARTAMENTOS //////////////////////////////////
        textDpto: {
             validators: {
                 notEmpty: {
@@ -255,6 +257,7 @@ $('.DepyCar').bootstrapValidator({
                 },
             }
         },
+////////////////////////////////////// AGREGAR CARGOS //////////////////////////////////
         textCgo: {
             validators: {
                 notEmpty: {
@@ -269,6 +272,22 @@ $('.DepyCar').bootstrapValidator({
                 },
             }
         },
+//////////////////////////////////// AGREGAR PERFILES ///////////////////////////////////
+        duPfl: {
+            validators: {
+                notEmpty: {
+                     message: 'Campo Vacío'
+                },
+            }
+        },
+        stPfl:{
+            validators: {
+                notEmpty: {
+                     message: 'Campo Vacío'
+                },
+            }
+        },
+//////////////////////////////////// MODIFICAR DEPARTAMENTOS, CARGOS, PERFILES //////////////
         Descripcion: {
             validators: {
                 notEmpty: {

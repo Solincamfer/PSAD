@@ -410,7 +410,7 @@ public function perfiles()//ventana perfiles
 {
 	$datos=$this->cargar_header_sidebar_acciones();
 	$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(84,85,86),83);
-	return view('Registros_Basicos\Perfiles\perfiles',$this->datos_vista($datos,$acciones,DB::table('perfiles')->get(),2));
+	return view('Registros_Basicos\Perfiles\perfiles',$this->datos_vista($datos,$acciones,DB::table('perfiles')->paginate(11),2));
 }
 
 
@@ -435,10 +435,12 @@ public function perfiles_insertar()
 					 	);
 
 		$this->perfil_inicial($perfil_id);//configuracion por defecto para un perfil
-	
+		$respuesta=1;
 	}
-
-	return redirect('/menu/registros/perfiles');
+	else{
+		$respuesta=0;
+	}
+	return $respuesta;
 
 }
 

@@ -83,7 +83,7 @@
                                 <h4 class="modal-title" id="myModalLabel"><strong>Agregar Departamento</strong></h4>
                             </div>
                             <div class="modal-body">
-                                <form method="post" class="form-horizontal DepyCar" id="NewDep">
+                                <form method="post" class="form-horizontal DepCarPer" id="NewDep">
                                     {{ csrf_field() }}
                                     <div class="container-fluid" id="contdpto">
                                         <div class="row">
@@ -126,7 +126,7 @@
                                 <h4 class="modal-title" id="myModalLabel2"><strong>Modificar Departamento</strong></h4>
                             </div>
                             <div class="modal-body">
-                                <form method="post" class="form-horizontal DepyCar" action="/menu/registros/departamentos/actualizar/DC">
+                                <form method="post" class="form-horizontal DepCarPer" action="/menu/registros/departamentos/actualizar/DC">
                                     {{ csrf_field() }}
                                     <div class="container-fluid" id="contdpto">
                                         <div class="row">

@@ -23,6 +23,10 @@ $( "#NewDep" ).submit(function( event ){
 $( "#NewCarg" ).submit(function( event ){
 	event.preventDefault();
 	});
+$( "#NewPerfil" ).submit(function( event ){
+	event.preventDefault();
+	});
+
 
 ////////////////////
 ////Validacion + permisologia + AJAX del boton submit de la vista LOGIN////
@@ -483,28 +487,6 @@ $(".modificarCliente").click(function(){
 
 	});
 
-
-/// PROTOTIPO DEL SELECTOR STATUS...
-/*$(".btnAcc").click(function(){
-		swal({
-		  title: "Habilitacion de Registros",
-		  text: "La mala gestion de los registros puede afectar otros recursos, Deseas realizar esta accion?",
-		  type: "warning",
-		  showCancelButton: true,
-		  confirmButtonColor: "#DD6B55",
-		  confirmButtonText: "Si, quiero hacerlo!",
-		  closeOnConfirm: false
-		},*/
-		/*function(){
-		  swal("Accion Realizada", "La accion fue realizada con exito.", "success");
-		});*/
-    	/*if ($(this).val()==1) {
-    		alert($(this).val());
-    	}else{
-    		alert($(this).val());
-    	}*/
-//});
-
 $(".consultarSubmodulo").click(function(){
 
 				$(".consultarSubmodulo").css("color","grey");
@@ -757,10 +739,6 @@ $('.ttlMd').change(function()//asignar perfil a un usuario
 
 			 }
 			);
-		
-
-
-
 });
 
 $(".btnAcc").change(function()//cambio de status de los check
@@ -1025,6 +1003,48 @@ $('#saveCargo').click(function(){
 
 					title:'Registro Existente!!!.',//Contenido del modal
 					text: 'Este Cargo ya existe',
+					type: "error",
+					timer:2000,
+					showConfirmButton:false,//Eliminar boton de confirmacion
+				});
+			}						
+		});
+		posting.fail(function() {
+			swal({
+				title:'Error inesperado!!',//Contenido del modal
+				text: 'Pongase en contacto con el administrador',
+				type: "error",
+				showConfirmButton:true,//Eliminar boton de confirmacion
+			});
+		});
+	}
+});
+///////////////////////// Validacion de registros iguales para Perfiles /////////
+$('#savePerfil').click(function(){
+	var form=$('#NewPerfil');
+	var url= '/menu/registros/perfiles/registrar';
+	var data= form.serialize();
+	var Perf = $('#duPfl').val();
+	var estatus = $('#stPfl').val();
+	if (Perf != '' && estatus != ''){
+		var posting = $.get(url, data,function(resultado){
+			if (resultado == 1) {
+				//SWALLLL mensajes de alerta y sucesos
+				swal({
+					title:'Guardado Exitoso',//Contenido del modal
+					text: 'El Perfil fue Guardado Exitosamente',
+					type: "success",
+					timer:1000,
+					showConfirmButton:false,//Eliminar boton de confirmacion
+				});
+				//Retardo en ejecucion de ruta.
+				setTimeout(function(){location.href = "/menu/registros/perfiles";},1200); // 3000ms = 3s
+			}	
+			else {
+				swal({
+
+					title:'Registro Existente!!!.',//Contenido del modal
+					text: 'Este Perfil ya existe',
 					type: "error",
 					timer:2000,
 					showConfirmButton:false,//Eliminar boton de confirmacion

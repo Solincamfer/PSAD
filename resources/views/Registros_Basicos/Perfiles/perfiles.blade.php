@@ -11,6 +11,13 @@
                             <div class="col-md-2 ttlp">
                                 <h1>Perfil</h1>
                             </div>
+                            <div  class="col-md-3  col-md-offset-2 buscador">
+                            <form action="" method="">
+                                <div class="input-group">
+                                    <input type="search" class="form-control filtro" placeholder="Buscar Perfil...">
+                                </div>
+                           </form> 
+                        </div>
                         </div>
                     </div>
                     
@@ -54,8 +61,14 @@
 
                             </div>
                         @endforeach
+                        <div class="paginador">
+                          {{ $consulta->links() }}
+                        </div>
                         <input type="hidden"   name="TND"  value="{{$extra}}">
                     </div>
+
+          <!--   Modal Agregar --> 
+
                     @if($agregar)
                     <div class="modal fade" id="myModal"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                         <div class="modal-dialog" role="document">
@@ -65,7 +78,7 @@
                                     <h4 class="modal-title" id="myModalLabel">Agregar Perfil</h4>
                                 </div>
                                 <div class="modal-body">
-                                    <form method="post" action="/menu/registros/perfiles/registrar">
+                                    <form method="post" class="DepCarPer" id="NewPerfil">
                                       {{ csrf_field() }}
                                         <div class="container-fluid contpfl">
                                            <div class="row">
@@ -80,7 +93,7 @@
                                                       <div class="form-group row">
                                                           <label for="stPfl">Estatus del Perfil</label><span class="ic"><i class="fa fa-chevron-down"></i></span>
                                                           <select name="stPfl" id="stPfl" class="form-control">
-                                                              <option value="-">-</option>
+                                                              <option value="">-</option>
                                                               <option value="1">ACTIVO</option>
                                                               <option value="0">INACTIVO</option>
                                                           </select><i class="fa fa-check icpfl"></i>
@@ -92,8 +105,7 @@
                                    
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="submit" class="bttnMd" id="btnSv">Guardar <i class="fa fa-floppy-o"></i></button>
-                                    <button type="button" class="bttnMd" data-dismiss="modal" id="btnCs">Cerrar <i class="fa fa-times"></i></button>
+                                    <button type="submit" class="bttnMd" id="savePerfil">Guardar <i class="fa fa-floppy-o"></i></button>
                                 </div>
                                </form>
                             </div>
@@ -110,7 +122,7 @@
                                     <h4 class="modal-title" id="myModalLabel2">Modificar Perfil</h4>
                                 </div>
                                 <div class="modal-body">
-                                    <form method="post" action="/menu/registros/departamentos/actualizar/DC">
+                                    <form method="post" action="/menu/registros/departamentos/actualizar/DC" class="DepCarPer">
                                       {{ csrf_field() }}
                                         <div class="container-fluid contpfl">
                                            <div class="row">
@@ -139,7 +151,6 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="submit" class="bttnMd" id="btnSv">Guardar <i class="fa fa-floppy-o"></i></button>
-                                    <button type="button" class="bttnMd" data-dismiss="modal" id="btnCs">Cerrar <i class="fa fa-times"></i></button>
                                 </div>
                                  
                                </form>
