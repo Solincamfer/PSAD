@@ -24,7 +24,7 @@
                    </div>
                    @endif
                    @foreach($consulta as $planes)
-                        <div class="contMd" style="">
+                        <div class="contMd">
                             <div class="icl">
                                 @foreach($acciones as $accion)
                                     @if($accion->descripcion!="Status")
@@ -42,13 +42,13 @@
                                             </span>
                                         @endif
                                     @elseif($accion->descripcion=="Status")
-                                        @if($accion->status_ac==1)
+                                        @if($planes->status==1)
                                             <div class="chbx">
-                                                <input type="checkbox" class="btnAcc" name="inchbx1" id="inchbx1" value="{{$accion->status_ac}}" checked><label for="inchbx1" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
+                                                <input type="checkbox" class="btnAcc" name="status" id="{{'inchbx'. $planes->id}}" value="{{$planes->status}}" checked><label for="{{'inchbx'. $planes->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
                                             </div>
-                                        @elseif($accion->staus_ac==0)
+                                        @elseif($planes->status==0)
                                             <div class="chbx">
-                                                <input type="checkbox" class="btnAcc" name="status" id="inchbx2" value="{{$accion->status_ac}}"><label for="inchbx2" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
+                                                <input type="checkbox" class="btnAcc" name="status" id="{{'inchbx'. $planes->id}}" value="{{$planes->status}}"><label for="{{'inchbx'. $planes->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
                                             </div>
                                         @endif
                                     @endif
@@ -57,6 +57,7 @@
                             <p class="ttlMd"><strong>{{$planes->nombreP}}</strong></p>
                         </div>
                     @endforeach
+                    <input type="hidden"   name="TND"  value="{{$extra}}">
                 </div>
                 <!-- Modal -->
                 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

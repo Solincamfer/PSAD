@@ -339,7 +339,7 @@ public function planes_servicios()
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
 		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(65,66,67),64);
-		return view ('Registros_Basicos\PlaneS\planes',$this->datos_vista($datos,$acciones,DB::table('planes')->paginate(11)));
+		return view ('Registros_Basicos\PlaneS\planes',$this->datos_vista($datos,$acciones,DB::table('planes')->paginate(11),3));
 
 		
 	}
@@ -1206,7 +1206,7 @@ public function clientes_categoria($cliente_id)//listar categorias
 		{
 			//[valor,registro,tabla]
 
-			$tablas=array("departamentos","cargos","perfiles");//listado de las tablas de la base de datos
+			$tablas=array("departamentos","cargos","perfiles","planes");//listado de las tablas de la base de datos
 			$valores=array(1,0);
 
 			$datos=Request::get('datos');

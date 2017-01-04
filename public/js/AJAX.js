@@ -573,7 +573,7 @@ $('.ttlMd').change(function()//asignar perfil a un usuario
 $(".btnAcc").change(function()//cambio de status de los check
 	{
 	/////// Valores para mensajes y cambio de status /////////////////
-		var registros=['Departamento','Cargo','Perfil']
+		var registros=['Departamento','Cargo','Perfil','Plan']
 		var estado=["Habilitar el ","Deshabilitar el "];
 	 	var cambio=["habilitado","deshabilitado"];
 	 	var valores=[1,0];
@@ -592,9 +592,7 @@ $(".btnAcc").change(function()//cambio de status de los check
 
 		var name= $(this).attr("id");
 		var valor=$('#'+name).val();
-		//var registro=$('input[name='+name+']').val();
 	 	var tabla=$('input[name=TND]').val();
-
 
 		
 		swal({
