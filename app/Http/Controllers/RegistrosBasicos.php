@@ -355,6 +355,34 @@ public function planes_servicios()
 
 		
 	}
+
+
+
+public function servicios()
+{
+	
+	// tablas:
+	
+	// planes (utilizada para almacenar los planes creados en el sistema )
+	// tablas para los servicios, se encuentran relacionadas con la tabla planes por medio de la clave foranea llamada : plan_id . que referencia el id de cada registro
+	
+	// horarios
+	// respuestas 
+	// telefonicos
+	// remotos
+	// presenciales
+
+
+	// modelos:
+	// plan
+
+	// horario
+	// respuesta
+	// presencial
+	// telefonico
+	// remoto
+
+}
 	
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////// submodulos empleados /////////////////////////////////////////////////////////////////
