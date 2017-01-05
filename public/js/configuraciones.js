@@ -38,8 +38,23 @@ function actualizar_status (datos) //actualiza el status de un modulo en la base
 	})
 }
 
+function cheks_activos(input__) 
+{
+	var contadorChekAct=0;
+	$.each(input__,function(i)//recorre los inputs de la tarjeta de submodulos para buscar los checks
+					
+					{
+						if ($(this).attr('type')=='checkbox')
+						{
+							if($(this).prop('checked')==true)
+							{
+								contadorChekAct+=1;//cuenta los check activos
+							}
+						}
+					})
 
-
+return contadorChekAct;
+}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -186,28 +201,15 @@ $(".consultarSubmodulo").click(function(){
 			{
 				
 				var valores=[1,0];
-				var contadorChek=0;//obtiene la cantidad de checks pertenecientes a submodulos
+			
 				var contadorChekAct=0;//cuenta los chek de submodulos que estan activos
 
 				
-				////////////////////////obtener checks de submodulos////////////////////////////////
+				////////////////////////obtener checks de submodulos y contar los checks que estan activos ////////////////////////////////
 
 				var submodulos_=document.getElementById("targeta2");//elementos de la tarjeta de submodulos
 				var input__=submodulos_.getElementsByTagName("input");//obtiene los input inmersos en la tarjeta de submodulos
-
-				$.each(input__,function(i)//recorre los inputs de la tarjeta de submodulos para buscar los checks
-					
-					{
-						if ($(this).attr('type')=='checkbox')
-						{
-							contadorChek+=1;//cuenta los checks de la tarjeta de submodulos
-							if($(this).prop('checked')==true)
-							{
-								contadorChekAct+=1;//cuenta los check activos
-							}
-						}
-					})
-
+				contadorChekAct=cheks_activos(input__); 
 				
 				////////////////////////////////////////////////////////////////////////////////////
 
@@ -286,7 +288,7 @@ $(".consultarSubmodulo").click(function(){
 														actualizar_status(id_registro);
 
 													}
-													else if ((($('#'+name).prop('checked')==false)&&($(this).prop('checked')==true))&&(contadorChekAct==0)) 
+													else if ((($('#'+name).prop('checked')==false)&&($(this).prop('checked')==true))&&(contadorChekAct==0)) //si se desactiva el ultimo submodulo perteneciente a un modulo y esta se encuentra activo
 													{
 
 														$(this).prop('checked',false);//se checkea el modulo padre
