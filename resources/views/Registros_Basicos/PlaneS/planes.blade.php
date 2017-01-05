@@ -69,7 +69,10 @@
                     </div>
                     <input type="hidden"   name="TND"  value="{{$extra}}">
                 </div>
-                <!-- Modal -->
+
+
+                <!-- MODAL AGREGAR -->
+
                 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -78,7 +81,7 @@
                                 <h4 class="modal-title" id="myModalLabel">Agregar Plan</h4>
                             </div>
                             <div class="modal-body">
-                                <form method="post" id="NewPlan">
+                                <form method="post" id="NewPlan" class="form-horizontal DepCarPer">
                                     {{ csrf_field() }}
                                     <div class="container-fluid" id="contpn">
                                         <div class="rPn">
@@ -98,7 +101,7 @@
                                                 <div class="form-group row">
                                                     <label for="stPn">Estatus del Plan</label><span class="ic"><i class="fa fa-chevron-down"></i></span>
                                                     <select name="stPn" id="stPn">
-                                                        <option value="0">-</option>
+                                                        <option value="">-</option>
                                                         <option value="1">Activo</option>
                                                         <option value="2">Inactivo</option>
                                                     </select><i class="fa fa-check" id="icpn4"></i>
@@ -109,7 +112,7 @@
                                 </form>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="bttnMd" id="savePlan">Guardar <i class="fa fa-floppy-o"></i></button>
+                                <button type="submit" class="bttnMd" id="savePlan">Guardar <i class="fa fa-floppy-o"></i></button>
                             </div>
                         </div>
                     </div>
@@ -144,7 +147,7 @@
                                                 <div class="form-group row">
                                                     <label for="stPnm">Estatus del Plan</label><span class="ic"><i class="fa fa-chevron-down"></i></span>
                                                     <select name="stPnm" id="stPnm">
-                                                        <option value="0">-</option>
+                                                        <option value="">-</option>
                                                         <option value="1">Activo</option>
                                                         <option value="2">Inactivo</option>
                                                     </select><i class="fa fa-check" id="micpn4"></i>
@@ -155,8 +158,7 @@
                                 </form>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="bttnMd" id="btnSvm">Guardar <i class="fa fa-floppy-o"></i></button>
-                                <button type="button" class="bttnMd" data-dismiss="modal" id="btnCsm">Cerrar <i class="fa fa-times"></i></button>
+                                <button type="submit" class="bttnMd" id="btnSvm">Guardar <i class="fa fa-floppy-o"></i></button>
                             </div>
                         </div>
                     </div>

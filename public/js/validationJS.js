@@ -128,181 +128,207 @@ function CantidadTabs(nombreId){
 Validar();
 function Validar(){
 //////////////VALIDACIONES DE INPUT, SELECT, TEXTAREAS, POR CLASES ASIGNADAS//////////////////////////
-$('.Validacion').bootstrapValidator({
-        feedbackIcons: {
-                valid: 'glyphicon glyphicon-ok',
-                invalid: 'glyphicon glyphicon-remove',
-                validating: 'glyphicon glyphicon-refresh'
-            },
-    fields: {
-        texts: {
-            // EL SELECTOR ES EL NOMBRE DE LA CLASE CON QUE LLAMARAS ESTA VALIDACION EN HTML///
-            selector: '.userEmail',
-            err: '#messageContainer',
-            validators: {
-                notEmpty: {
-                        ///////VALIDA CAMPO VACIO///////////
-                            message: 'Campo vacío.'
-                        }
-            }
-        },
-        nombres: {
-            // EL SELECTOR ES EL NOMBRE DE LA CLASE CON QUE LLAMARAS ESTA VALIDACION EN HTML///
-            selector: '.usernombres',
-            err: '#messageContainer',
-            validators: {
-                notEmpty: {///////VALIDA CAMPO VACIO///////////
-                            message: 'Campo vacío.'
-                        },
-            
-            regexp: {///////VALIDA CAMPO SOLO LETRAS///////////
-                            regexp: /^[a-z A-Z]+$/,
-                            message: 'Solo letras'                            
-                        }
-                    }
-        },
-        emails: {
-            // EL SELECTOR ES EL NOMBRE DE LA CLASE CON QUE LLAMARAS ESTA VALIDACION EN HTML///
-            selector: '.typeEmail',
-            err: '#messageContainer',
-            validators: {
-                notEmpty: {///////VALIDA CAMPO VACIO///////////
-                            message: 'Campo vacío.'
-                        },
-                emailAddress: {///////VALIDA CAMPO TIPO EMAIL@///////////
-                    message: 'Solo email'
+    $('.Validacion').bootstrapValidator({
+            feedbackIcons: {
+                    valid: 'glyphicon glyphicon-ok',
+                    invalid: 'glyphicon glyphicon-remove',
+                    validating: 'glyphicon glyphicon-refresh'
+                },
+        fields: {
+            texts: {
+                // EL SELECTOR ES EL NOMBRE DE LA CLASE CON QUE LLAMARAS ESTA VALIDACION EN HTML///
+                selector: '.userEmail',
+                err: '#messageContainer',
+                validators: {
+                    notEmpty: {
+                            ///////VALIDA CAMPO VACIO///////////
+                                message: 'Campo vacío.'
                             }
-            }
-        },
-        Rifnumbers: {
-            // EL SELECTOR ES EL NOMBRE DE LA CLASE CON QUE LLAMARAS ESTA VALIDACION EN HTML///
-            selector: '.typeRifNumber',
-            err: '#messageContainer',
-            validators: {
-                notEmpty: {///////VALIDA CAMPO VACIO///////////
-                            message: 'Campo vacío.'
-                        },
-                regexp: {///////VALIDA CAMPO SOLO NUMEROS///////////
-                            regexp: /^[0-9]+$/,
-                            message: 'Solo números'                            
-                        },
-                stringLength: {///////VALIDA CAMPO CANTIDAD DE CARACTERES///////////
-                            min: 10,
-                            max: 10,
-                            message: '10 números.'
+                }
+            },
+            nombres: {
+                // EL SELECTOR ES EL NOMBRE DE LA CLASE CON QUE LLAMARAS ESTA VALIDACION EN HTML///
+                selector: '.usernombres',
+                err: '#messageContainer',
+                validators: {
+                    notEmpty: {///////VALIDA CAMPO VACIO///////////
+                                message: 'Campo vacío.'
+                            },
+                
+                regexp: {///////VALIDA CAMPO SOLO LETRAS///////////
+                                regexp: /^[a-z A-Z]+$/,
+                                message: 'Solo letras'                            
+                            }
                         }
-            }
-        },
-        Tlfnumbers: {
-            // EL SELECTOR ES EL NOMBRE DE LA CLASE CON QUE LLAMARAS ESTA VALIDACION EN HTML///
-            selector: '.typeTlfNumber',
-            err: '#messageContainer',
-            validators: {
-                notEmpty: {///////VALIDA CAMPO VACIO///////////
-                            message: 'Cámpo vacío.'
-                        },
-                regexp: {///////VALIDA CAMPO SOLO NUMEROS///////////
-                            regexp: /^[0-9]+$/,
-                            message: 'Solo números'
-                        },
-                stringLength: {///////VALIDA CAMPO CANTIDAD DE CARACTERES///////////
-                            min: 7,
-                            max: 7,
-                            message: 'El teléfono debe contener 7 números.'
-                        }
-            }
-        },
-        DocumentNumbers: {
-            // EL SELECTOR ES EL NOMBRE DE LA CLASE CON QUE LLAMARAS ESTA VALIDACION EN HTML///
-            selector: '.typeCiNumber',
-            err: '#messageContainer',
-            validators: {
-                notEmpty: {///////VALIDA CAMPO VACIO///////////
-                            message: 'Cámpo vacío.'
-                        },
-                regexp: {///////VALIDA CAMPO SOLO NUMEROS///////////
-                            regexp: /^[0-9]+$/,
-                            message: 'Solo números'                            
-                        },
-                stringLength: {///////VALIDA CAMPO CANTIDAD DE CARACTERES///////////
-                            min: 8,
-                            max: 9,
-                            message: 'Entre 8 o 9 números.'
-                        }
+            },
+            emails: {
+                // EL SELECTOR ES EL NOMBRE DE LA CLASE CON QUE LLAMARAS ESTA VALIDACION EN HTML///
+                selector: '.typeEmail',
+                err: '#messageContainer',
+                validators: {
+                    notEmpty: {///////VALIDA CAMPO VACIO///////////
+                                message: 'Campo vacío.'
+                            },
+                    emailAddress: {///////VALIDA CAMPO TIPO EMAIL@///////////
+                        message: 'Solo email'
+                                }
+                }
+            },
+            Rifnumbers: {
+                // EL SELECTOR ES EL NOMBRE DE LA CLASE CON QUE LLAMARAS ESTA VALIDACION EN HTML///
+                selector: '.typeRifNumber',
+                err: '#messageContainer',
+                validators: {
+                    notEmpty: {///////VALIDA CAMPO VACIO///////////
+                                message: 'Campo vacío.'
+                            },
+                    regexp: {///////VALIDA CAMPO SOLO NUMEROS///////////
+                                regexp: /^[0-9]+$/,
+                                message: 'Solo números'                            
+                            },
+                    stringLength: {///////VALIDA CAMPO CANTIDAD DE CARACTERES///////////
+                                min: 10,
+                                max: 10,
+                                message: '10 números.'
+                            }
+                }
+            },
+            Tlfnumbers: {
+                // EL SELECTOR ES EL NOMBRE DE LA CLASE CON QUE LLAMARAS ESTA VALIDACION EN HTML///
+                selector: '.typeTlfNumber',
+                err: '#messageContainer',
+                validators: {
+                    notEmpty: {///////VALIDA CAMPO VACIO///////////
+                                message: 'Cámpo vacío.'
+                            },
+                    regexp: {///////VALIDA CAMPO SOLO NUMEROS///////////
+                                regexp: /^[0-9]+$/,
+                                message: 'Solo números'
+                            },
+                    stringLength: {///////VALIDA CAMPO CANTIDAD DE CARACTERES///////////
+                                min: 7,
+                                max: 7,
+                                message: 'El teléfono debe contener 7 números.'
+                            }
+                }
+            },
+            DocumentNumbers: {
+                // EL SELECTOR ES EL NOMBRE DE LA CLASE CON QUE LLAMARAS ESTA VALIDACION EN HTML///
+                selector: '.typeCiNumber',
+                err: '#messageContainer',
+                validators: {
+                    notEmpty: {///////VALIDA CAMPO VACIO///////////
+                                message: 'Cámpo vacío.'
+                            },
+                    regexp: {///////VALIDA CAMPO SOLO NUMEROS///////////
+                                regexp: /^[0-9]+$/,
+                                message: 'Solo números'                            
+                            },
+                    stringLength: {///////VALIDA CAMPO CANTIDAD DE CARACTERES///////////
+                                min: 8,
+                                max: 9,
+                                message: 'Entre 8 o 9 números.'
+                            }
+                }
             }
         }
-    }
 
-});
-///////////////////////////////////// VALIDACION PARA DEPARTAMENTOS, CARGOS, PERFILES
-$('.DepCarPer').bootstrapValidator({
-    feedbackIcons: {
-         valid: 'glyphicon glyphicon-ok',
-         invalid: 'glyphicon glyphicon-remove',
-         validating: 'glyphicon glyphicon-refresh'
-    },
-    fields: {
-/////////////////////////////// AGREGAR DEPARTAMENTOS //////////////////////////////////
-       textDpto: {
-            validators: {
-                notEmpty: {
-                     message: 'Campo Vacío'
-                },
-            }
+    });
+///////////////////////////////////// VALIDACION PARA DEPARTAMENTOS, CARGOS, PERFILES, PLANES
+    $('.DepCarPer').bootstrapValidator({
+        feedbackIcons: {
+             valid: 'glyphicon glyphicon-ok',
+             invalid: 'glyphicon glyphicon-remove',
+             validating: 'glyphicon glyphicon-refresh'
         },
-        comboDpto:{
-            validators: {
-                notEmpty: {
-                     message: 'Campo Vacío'
-                },
-            }
-        },
-////////////////////////////////////// AGREGAR CARGOS //////////////////////////////////
-        textCgo: {
-            validators: {
-                notEmpty: {
-                     message: 'Campo Vacío'
-                },
-            }
-        },
-        comboCgo:{
-            validators: {
-                notEmpty: {
-                     message: 'Campo Vacío'
-                },
-            }
-        },
-//////////////////////////////////// AGREGAR PERFILES ///////////////////////////////////
-        duPfl: {
-            validators: {
-                notEmpty: {
-                     message: 'Campo Vacío'
-                },
-            }
-        },
-        stPfl:{
-            validators: {
-                notEmpty: {
-                     message: 'Campo Vacío'
-                },
-            }
-        },
-//////////////////////////////////// MODIFICAR DEPARTAMENTOS, CARGOS, PERFILES //////////////
-        Descripcion: {
-            validators: {
-                notEmpty: {
-                     message: 'Campo Vacío'
-                },
-            }
-        },
-        Status:{
-            validators: {
-                notEmpty: {
-                     message: 'Campo Vacío'
-                },
-            }
-        },
-    }
-});
-};
+        fields: {
+    /////////////////////////////// AGREGAR DEPARTAMENTOS //////////////////////////////////
+           textDpto: {
+                validators: {
+                    notEmpty: {
+                         message: 'Campo Vacío'
+                    },
+                }
+            },
+            comboDpto:{
+                validators: {
+                    notEmpty: {
+                         message: 'Campo Vacío'
+                    },
+                }
+            },
+    ////////////////////////////////////// AGREGAR CARGOS //////////////////////////////////
+            textCgo: {
+                validators: {
+                    notEmpty: {
+                         message: 'Campo Vacío'
+                    },
+                }
+            },
+            comboCgo:{
+                validators: {
+                    notEmpty: {
+                         message: 'Campo Vacío'
+                    },
+                }
+            },
+    //////////////////////////////////// AGREGAR PERFILES ///////////////////////////////////
+            duPfl: {
+                validators: {
+                    notEmpty: {
+                         message: 'Campo Vacío'
+                    },
+                }
+            },
+            stPfl:{
+                validators: {
+                    notEmpty: {
+                         message: 'Campo Vacío'
+                    },
+                }
+            },
+    //////////////////////////////////// AGREGAR PLANES ///////////////////////////////////
+            nomPn: {
+                validators: {
+                    notEmpty: {
+                         message: 'Campo Vacío'
+                    },
+                }
+            },
+            porDes:{
+                validators: {
+                    notEmpty: {
+                        message: 'Campo Vacío'
+                    },
+                    regexp: {///////VALIDA CAMPO SOLO NUMEROS///////////
+                        regexp: /^[0-99]+$/,
+                        message: 'Numero solo de 0 a 99'                            
+                    },
+                }
+            },
+            stPn: {
+                validators: {
+                    notEmpty: {
+                         message: 'Campo Vacío'
+                    },
+                }
+            },
+    //////////////////////////////////// MODIFICAR DEPARTAMENTOS, CARGOS, PERFILES //////////////
+            Descripcion: {
+                validators: {
+                    notEmpty: {
+                         message: 'Campo Vacío'
+                    },
+                }
+            },
+            Status:{
+                validators: {
+                    notEmpty: {
+                         message: 'Campo Vacío'
+                    },
+                }
+            },
+        }
+    });
+}
 });

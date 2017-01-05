@@ -868,9 +868,10 @@ $('#savePlan').click(function(){
 	var url= '/menu/registros/planes/registrar';
 	var data= form.serialize();
 	var Plan = $('#nomPn').val();
-	var estatus = $('#porDes').val();
 	var desc = $('#stPn').val();
-	if (Plan != '' && estatus != '' && desc != ''){
+	var estatus = $('#porDes').val();
+	
+	if (Plan != '' && desc != '' && estatus != ''){
 		var posting = $.get(url, data,function(resultado){
 			if (resultado == 1) {
 				//SWALLLL mensajes de alerta y sucesos
