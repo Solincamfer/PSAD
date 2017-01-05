@@ -80,8 +80,8 @@
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                 <h4 class="modal-title" id="myModalLabel">Agregar Plan</h4>
                             </div>
-                            <div class="modal-body">
-                                <form method="post" id="NewPlan" class="form-horizontal DepCarPer">
+                            <form method="post" id="NewPlan" action="" class="form-horizontal DepCarPer">
+                                <div class="modal-body">
                                     {{ csrf_field() }}
                                     <div class="container-fluid" id="contpn">
                                         <div class="rPn">
@@ -94,7 +94,7 @@
                                             <div class="col-md-8 col-md-offset-2">
                                                <div class="form-group row">
                                                    <label for="porDes">Porcentaje de descuento</label>
-                                                   <input type="number" name="porDes" id="porDes"><i class="fa fa-percent" id="icpn2"></i>
+                                                   <input type="text" name="porDes" id="porDes"><i class="fa fa-percent" id="icpn2"></i>
                                                </div>
                                             </div>
                                             <div class="col-md-8 col-md-offset-2">
@@ -108,12 +108,13 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="submit" class="bttnMd" id="savePlan">Guardar <i class="fa fa-floppy-o"></i></button>
-                            </div>
+                                    </div>        
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="bttnMd" id="savePlan">Guardar <i class="fa fa-floppy-o"></i>
+                                    </button>  
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>

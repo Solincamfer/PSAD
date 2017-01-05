@@ -300,10 +300,16 @@ function Validar(){
                     notEmpty: {
                         message: 'Campo Vacío'
                     },
-                    regexp: {///////VALIDA CAMPO SOLO NUMEROS///////////
-                        regexp: /^[0-99]+$/,
-                        message: 'Numero solo de 0 a 99'                            
+                    regexp: {
+                        regexp: /^[0-9.]+$/,
+                        message: 'El porcentaje debe estar expresado en números'                            
                     },
+                    between: {
+                        min: 0,
+                        max: 99.99,
+                        message: 'El porcentaje de descuento debe estar entre 0 y 99'
+                    },
+                    
                 }
             },
             stPn: {
