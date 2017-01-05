@@ -82,7 +82,7 @@
                                 </div>
                                 <div class="col-md-3 dist">
                                     <div class="card1" id="targeta2">                                        
-                                         <ul>
+                                         <ul >
                                              
                                          </ul>
                                     </div>
