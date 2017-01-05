@@ -500,7 +500,8 @@ public function perfiles_configurar_modulo()
 	$datos=(int)Request::get('datos');//solo el registro
 	$consulta=DB::table('modulo_perfil')->where('id',$datos)->first();
 	$actualizar=DB::table('modulo_perfil')->where('id',$datos)->update(["status"=>$valores[$consulta->status]]);
-
+	$actualiza_submodulos=DB::table('perfil_submodulo')->join('submodulos','perfil_submodulo.submodulo_id','=','submodulos.id')->where('submodulos.modulo_id',$consulta->modulo_id)->update(['perfil_submodulo.status'=>$valores[$consulta->status]]);
+	
 	return($actualizar);
 }
 

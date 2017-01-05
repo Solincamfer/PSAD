@@ -228,7 +228,7 @@ $('.configurarPer').change(function()
 				}
 				else
 				{
-					if (vista_submodulos==true) //sila vista de submodulos esta visible
+					if (vista_submodulos==true) //si la vista de submodulos esta visible
 						{
 
 							
@@ -247,8 +247,8 @@ $('.configurarPer').change(function()
 											{
 												$(this).prop("checked",false);//se desativa
 												$(this).val(0);
-												var name=$(this).attr("id");
-												$('#'+name).trigger('change');//dispara el evento change para los checks
+												//var name=$(this).attr("id");
+												//$('#'+name).trigger('change');//dispara el evento change para los checks
 											}
 									}
 								else if ($(this).attr("type")=="checkbox" && valor==0) //se procede a activar
@@ -257,8 +257,8 @@ $('.configurarPer').change(function()
 											{
 												$(this).prop("checked",true);//se activa
 												$(this).val(1);
-												var name=$(this).attr("id");
-												$('#'+name).trigger('change');//dispra el evento change para los checks
+												//var name=$(this).attr("id");
+												//$('#'+name).trigger('change');//dispara el evento change para los checks
 											}
 									}
 			    			}) 
@@ -266,6 +266,16 @@ $('.configurarPer').change(function()
 							
 
 						}
+						/*else if(vista_submodulos==false)//si la vista de los submodulos no esta activa se hace la actualizacion por debajo
+						{
+							var url="menu/registros/perfiles/check_modulosSubmodulos"
+							$.get(url, {datos:registro}, function(configurar)
+							{
+
+
+							});
+			
+						}*/
 
 				}
 				
