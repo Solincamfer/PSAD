@@ -210,12 +210,22 @@ $('.configurarPer').change(function()
 		var indice=id.indexOf('M');//indice del ultimo caracter
 		var registro=id.slice(indice+1,longitud);//numero del registro a modificar 
     	////////////////////////////////////////////////////////////////////////
-    	
 
-    	//var valor=$(this).prop('checked');//valor true/false dl check seleccionado
+    	////////////////////////////obtener id del modulo///////////////////////
+
+    	var modulo_id=$(this).attr('name');
+    	var longitud=modulo_id.length;
+    	var indice=modulo_id.indexOf('k')
+		
+		modulo_id=modulo_id.slice(indice+1,longitud);//id del modulo padre
+
+
+        //////////////////////////////////////////////////////////////////////////
+
+
     	var valor=$(this).val();//valor inicial del check
     	$(this).val(valores[valor]);
-    	//alert($(this).val());
+
    		var url= '/menu/registros/perfiles/configurar/modulo';//rutas[tabla];
 		var datos=registro;//datos para el controlador (registro a modificar y tabla a modificar)*/
 		$.get(url, {datos:datos}, function(configurar)
@@ -240,27 +250,44 @@ $('.configurarPer').change(function()
 							$.each(input, function(i) 
 							{
 								
-								if ($(this).attr("type")=="checkbox" && valor==1) //si esta activo se procede a desactivar
+								
+									
+
+								if (($(this).attr("type")=="checkbox" )) //si esta activo se procede a desactivar
 									{
+											var moduloPadre_id=$(this).attr('name');
+									    	var longitud=moduloPadre_id.length;
+									    	var indice=moduloPadre_id.indexOf('S');
+											
+											moduloPadre_id=moduloPadre_id.slice(indice+1,longitud);//id del modulo padre
 										
-										if ($(this).prop("checked")==true)//si esta activo el check de submodulos
-											{
-												$(this).prop("checked",false);//se desativa
-												$(this).val(0);
-												//var name=$(this).attr("id");
-												//$('#'+name).trigger('change');//dispara el evento change para los checks
-											}
+
+										if ((valor==1)&&(moduloPadre_id==modulo_id))
+
+										{
+										
+											if ($(this).prop("checked")==true)//si esta activo el check de submodulos
+												{
+													$(this).prop("checked",false);//se desativa
+													$(this).val(0);
+													//var name=$(this).attr("id");
+													//$('#'+name).trigger('change');//dispara el evento change para los checks
+												}
+											
+										}
+										else if((valor==0)&&(moduloPadre_id==modulo_id))
+										{
+
+											if ($(this).prop("checked")==false)
+												{
+
+													$(this).prop("checked",true);//se activa
+													$(this).val(1);
+												}
+										}
+										
 									}
-								else if ($(this).attr("type")=="checkbox" && valor==0) //se procede a activar
-									{
-										if ($(this).prop("checked")==false)//si esta inactivo el check de submodulos
-											{
-												$(this).prop("checked",true);//se activa
-												$(this).val(1);
-												//var name=$(this).attr("id");
-												//$('#'+name).trigger('change');//dispara el evento change para los checks
-											}
-									}
+								
 			    			}) 
 				
 							
