@@ -343,6 +343,31 @@ public function planes_servicios()
 
 		
 	}
+public function planes_ingresar(){
+	$nombreP= strtoupper(Request::get('nomPn'));//nombre del Plan, llevado a mayusculas
+	$descuento= (int)Request::get('porDes');//Porcentaje de descuento del plan 
+	$statusP= (int)Request::get('stPn');//status del Plan 
+
+
+	$consulta=DB::table('planes')->where('nombreP',$nombreP)->first();
+	
+
+	if (empty($consulta)) //si el registro no existe, se procede a ingresar los datos del departamento
+	{
+		 DB::table('planes')->insert
+				 	(
+
+				 		['nombreP'=>$nombreP,'descuento'=>$descuento,'status'=>$statusP]
+				 	);
+
+		$respuesta= 1;
+		
+	}
+	else{
+		$respuesta= 0;
+	}
+	return (int)$respuesta;
+}
 	
 
 

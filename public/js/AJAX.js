@@ -26,6 +26,9 @@ $( "#NewCarg" ).submit(function( event ){
 $( "#NewPerfil" ).submit(function( event ){
 	event.preventDefault();
 	});
+$( "#NewPlan" ).submit(function( event ){
+	event.preventDefault();
+	});
 
 
 ////////////////////
@@ -843,6 +846,49 @@ $('#savePerfil').click(function(){
 
 					title:'Registro Existente!!!.',//Contenido del modal
 					text: 'Este Perfil ya existe',
+					type: "error",
+					timer:2000,
+					showConfirmButton:false,//Eliminar boton de confirmacion
+				});
+			}						
+		});
+		posting.fail(function() {
+			swal({
+				title:'Error inesperado!!',//Contenido del modal
+				text: 'Pongase en contacto con el administrador',
+				type: "error",
+				showConfirmButton:true,//Eliminar boton de confirmacion
+			});
+		});
+	}
+});
+///////////////////////// Validacion de registros iguales para Planes /////////
+$('#savePlan').click(function(){
+	var form=$('#NewPlan');
+	var url= '/menu/registros/planes/registrar';
+	var data= form.serialize();
+	var Plan = $('#nomPn').val();
+	var estatus = $('#porDes').val();
+	var desc = $('#stPn').val();
+	if (Plan != '' && estatus != '' && desc != ''){
+		var posting = $.get(url, data,function(resultado){
+			if (resultado == 1) {
+				//SWALLLL mensajes de alerta y sucesos
+				swal({
+					title:'Guardado Exitoso',//Contenido del modal
+					text: 'El Plan fue Guardado Exitosamente',
+					type: "success",
+					timer:1000,
+					showConfirmButton:false,//Eliminar boton de confirmacion
+				});
+				//Retardo en ejecucion de ruta.
+				setTimeout(function(){location.href = "/menu/registros/planeservicios";},1200); // 3000ms = 3s
+			}	
+			else {
+				swal({
+
+					title:'Registro Existente!!!.',//Contenido del modal
+					text: 'Este Plan ya existe',
 					type: "error",
 					timer:2000,
 					showConfirmButton:false,//Eliminar boton de confirmacion

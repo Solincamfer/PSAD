@@ -8,8 +8,15 @@
             <div class="contenido">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-4 ttlp">
+                        <div class="col-md-2 ttlp">
                             <h1>Planes</h1>
+                        </div>
+                        <div  class="col-md-3  col-md-offset-2 buscador">
+                            <form action="" method="">
+                                <div class="input-group">
+                                    <input type="search" class="form-control filtro" placeholder="Buscar Planes...">
+                                </div>
+                           </form> 
                         </div>
                     </div>
                 </div>
@@ -57,6 +64,9 @@
                             <p class="ttlMd"><strong>{{$planes->nombreP}}</strong></p>
                         </div>
                     @endforeach
+                    <div class="paginador">
+                        {{ $consulta->links() }}
+                    </div>
                     <input type="hidden"   name="TND"  value="{{$extra}}">
                 </div>
                 <!-- Modal -->
@@ -68,7 +78,7 @@
                                 <h4 class="modal-title" id="myModalLabel">Agregar Plan</h4>
                             </div>
                             <div class="modal-body">
-                                <form action="">
+                                <form method="post" id="NewPlan">
                                     {{ csrf_field() }}
                                     <div class="container-fluid" id="contpn">
                                         <div class="rPn">
@@ -99,8 +109,7 @@
                                 </form>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="bttnMd" id="btnSv">Guardar <i class="fa fa-floppy-o"></i></button>
-                                <button type="button" class="bttnMd" data-dismiss="modal" id="btnCs">Cerrar <i class="fa fa-times"></i></button>
+                                <button type="button" class="bttnMd" id="savePlan">Guardar <i class="fa fa-floppy-o"></i></button>
                             </div>
                         </div>
                     </div>

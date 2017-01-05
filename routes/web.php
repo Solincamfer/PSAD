@@ -131,6 +131,9 @@ Route::group(['prefix'=>'/menu/registros','middleware'=>['v_menu']],function()
 				Route::match(['post','get'],'/perfiles/configurar/modulo',                                              ['uses'=>'RegistrosBasicos@perfiles_configurar_modulo']); 
 				Route::match(['post','get'],'/perfiles/configurar/submodulo',                                           ['uses'=>'RegistrosBasicos@perfiles_configurar_submodulo']);
 				Route::match(['post','get'],'/perfiles/configurar/accion',                                          	['uses'=>'RegistrosBasicos@perfiles_configurar_accion']);  
+
+				/*//////////////////////Planes y servicios//////////////////////////////////////////*/
+				Route::match(['post','get'],'/planes/registrar',                                                      ['uses'=>'RegistrosBasicos@planes_ingresar']); 
 				}
 			);
 
