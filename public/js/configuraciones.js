@@ -1,6 +1,51 @@
+//////////////////////////////////////////////// variables globales /////////////////////////////////////////////
 
 var vista_submodulos=false;//true cuando la vista de submodulos esta activa
 var vista_acciones=false;//true cuando la vista de acciones esta activa
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+///////////////////////////////////////funciones definidas para luego ser utilizadas /////////////////////////////
+
+function obtener_valor(indice,cadena)//indice: caracter/letra para cortar, cadena: valor del name o del id
+{
+		
+	var indice=indice;
+	var cadena=cadena;
+	var longitud=cadena.length;//longitud de la cadena
+	var indice=cadena.indexOf(indice);//indice del caracter que indica el inicio de los numeros
+	var valor=cadena.slice(indice+1,longitud);//valor obtenido
+
+	return valor;
+}//funcion que se encarga de extraer el valor numerico contenido en una cadena
+
+
+function actualizar_status (datos) //actualiza el status de un modulo en la base de datos
+{
+	
+	var datos=datos;
+	var url="/menu/registros/perfiles/configurar/modulo_";
+	$.get(url, {datos:datos}, function(configurar)//va al contrololador para modificar status del modulo
+	{
+		if(configurar==0)//si no recibe valores del controlador
+			{
+																											
+				swal("Error Inesperado !!", "Comuniquese con el administrador", "error");
+			}
+
+	})
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
 
 
 $(".consultarSubmodulo").click(function(){
@@ -139,23 +184,52 @@ $(".consultarSubmodulo").click(function(){
 
         	$('.configurarSub').change(function()//configurar submodulos
 			{
+				
 				var valores=[1,0];
+				var contadorChek=0;//obtiene la cantidad de checks pertenecientes a submodulos
+				var contadorChekAct=0;//cuenta los chek de submodulos que estan activos
+
+				
+				////////////////////////obtener checks de submodulos////////////////////////////////
+
+				var submodulos_=document.getElementById("targeta2");//elementos de la tarjeta de submodulos
+				var input__=submodulos_.getElementsByTagName("input");//obtiene los input inmersos en la tarjeta de submodulos
+
+				$.each(input__,function(i)//recorre los inputs de la tarjeta de submodulos para buscar los checks
+					
+					{
+						if ($(this).attr('type')=='checkbox')
+						{
+							contadorChek+=1;//cuenta los checks de la tarjeta de submodulos
+							if($(this).prop('checked')==true)
+							{
+								contadorChekAct+=1;//cuenta los check activos
+							}
+						}
+					})
+
+				
+				////////////////////////////////////////////////////////////////////////////////////
+
+
 			
-				////////////// obtener registro a modificar ////////////////////
-				var id=$(this).attr('id');//id del boton modificar seleccionado
-				var longitud=id.length;//longitud del  id de modificar
-				var indice=id.indexOf('S');//indice del ultimo caracter
-				var registro=id.slice(indice+1,longitud);//numero del registro a modificar 
+				////////////// obtener registro a modificar en la tabla perfil_submodulo////////////////////
+
+				var id=$(this).attr('id');//id del del check de submodulos seleccionados
+				var registro=obtener_valor('S',id);//S es el caracter cortante en el campo id de los check de submodulos//id del registro en la tabla perfil_submodulo
+				
 		    	////////////////////////////////////////////////////////////////////////
+
 		    	var valor=$(this).val();//valor inicial del check
 		    	$('#'+id).val(valores[valor]);//cambio de valor para el check, asignacion del nuevo valor
-		    	////////////////////obtener valor del modulo padre///////////////////////////////////
 
-		   		var modulo_id=$(this).attr('name');
-		    	var longitud=id.length;
-				var indice=id.indexOf('S');
-				modulo_id=modulo_id.slice(indice+1,longitud);//id del mpodulo padre que posee el submodulo seleccionado 
-				var name=$(this).attr('id');
+		    	
+		    	////////////////////obtener id del  modulo padre///////////////////////////////////
+
+				var modulo_id=$(this).attr('name');//el atributo name del check tiene concatenado el id del modulo padre
+				var modulo_id=obtener_valor('S',modulo_id);//extraccion del id del modulo padre el cual posee el submodulo como clave foranea
+				
+				var name=$(this).attr('id');//obteniendo id del check actual de submodulos
 
 		    	////////////////////////////////////////////////////////////////////////////////////////
 
@@ -171,70 +245,77 @@ $(".consultarSubmodulo").click(function(){
 						}
 						else
 						{
-							if (vista_submodulos==true) 
+							if (vista_submodulos==true) //si la vista de submodulos se encuentra activa en la pantalla
 								{
-									var modulos_=document.getElementById("targeta1");//obtener el listado de submodulos creados
-									var input=modulos_.getElementsByTagName("input");//obtener elementos de la etiqueta input
-									
+									var modulos_=document.getElementById("targeta1");//obtener el listado de los modulos creados
+									var input=modulos_.getElementsByTagName("input");//obtener elementos que poseen la etiqueta input dentro de la tajeta de modulos
+									var checks=[];
 
 									
-									$.each(input, function(i) 
+									$.each(input,function(i)//obtiene los  input  check de la tarjeta para modulos
 									{
-										if($(this).attr('type')=="checkbox")
-										{
 
+										if($(this).attr('type')=='checkbox')
+										{
+											checks.push($(this));//va llenando en arreglo de los cheks para los modulos
+										}
+									})
+
+									
+									
+									$.each(checks, function(i) //contiene los checks usados en la targeta de modulos (recorre los modulos para comparar con la clave foranea del submodulo seleccionado)
+									{
+			
+											var moduloPadre_id=$(this).attr('name');//cadena que posee conccatenada el valor del id del modulo
+									    	moduloPadre_id=obtener_valor('k',moduloPadre_id);//obtener el id del modulo seleccionado
 											
-											var moduloPadre_id=$(this).attr('name');
-									    	var longitud=moduloPadre_id.length;
-									    	var indice=moduloPadre_id.indexOf('k');
-											moduloPadre_id=moduloPadre_id.slice(indice+1,longitud);//id del modulo padre
 											
-											if (modulo_id==moduloPadre_id) //si se activa el submodulo 
+											
+											if (modulo_id==moduloPadre_id) //si el submodulo tiene como clave foranea el id del modulo de turno
 												{
-													if (($('#'+name).prop('checked')==true)&&($(this).prop('checked')==false)) 
+													if (($('#'+name).prop('checked')==true)&&($(this).prop('checked')==false)) //si el submodulo es checkeado y el modulo padre se encuenttra inactivo
 													{
 
-														/*alert($(this).prop('checked'));//status del modulo padre
-														alert($('#'+name).prop('checked'));//status del submodulo seleccionado//stattus */
-														//alert('modulo padre desactivado');
-														$(this).prop('checked',true);
-														$(this).val(valores[$(this).val()]);//cambio de valor para el check
-
-
-														///////////////////////////actualizar el modulo en la base de datos ////////////
+														$(this).prop('checked',true);//se checkea el modulo padre
+														$(this).val(valores[$(this).val()]);//cambio de valor para el check, se le coloca 1 "activo"
 
 														
-														var id_registro= $(this).attr('id');
-														var longitud=id_registro.length;
-									    				var indice=id_registro.indexOf('M');
-														id_registro=id_registro.slice(indice+1,longitud);//id del modulo padre
-											
-														var url="/menu/registros/perfiles/configurar/modulo_";
-												
-														$.get(url, {datos:id_registro}, function(configurar)
-														{
-																
-															if(configurar==0)//si no recibe valores del controlador
-															{
-																
-																swal("Error Inesperado !!", "Comuniquese con el administrador", "error");
-															}
+														///////////////////////////actualizar el modulo en la base de datos ////////////
+														
+														var id_registro=obtener_valor('M',$(this).attr('id'));//id del registro que ocupa en la tabla modulo_perfil el cual se usa solo para actualizar en la base de datos el valor de status perteneciente al check de modulos
+														actualizar_status(id_registro);
 
-														})
 													}
+													else if ((($('#'+name).prop('checked')==false)&&($(this).prop('checked')==true))&&(contadorChekAct==0)) 
+													{
+
+														$(this).prop('checked',false);//se checkea el modulo padre
+														$(this).val(valores[$(this).val()]);
+
+														///////////////////////////actualizar el modulo en la base de datos ////////////
+														
+														var id_registro=obtener_valor('M',$(this).attr('id'));//id del registro que ocupa en la tabla modulo_perfil el cual se usa solo para actualizar en la base de datos el valor de status perteneciente al check de modulos
+														actualizar_status(id_registro);
+														
+
+													}
+
+
+
 												}
 
-										}
+										//}
+
+									})//fin del each)
 
 
-									})
-								}
+								}//fin de validacion para saber si la vista de submodulos esta activa
 
-						}
+						}//fin del else que se inicia si se regresan valores del metodo get
 						
 
 
-					});
+					});//fin del metodo get
 
 
 
@@ -244,7 +325,7 @@ $(".consultarSubmodulo").click(function(){
 
 
 
-			});
+			});//fin de la funcion de cnfigurar submodulos
 	      
 
         	
@@ -267,6 +348,7 @@ $('.configurarPer').change(function()
 		
 		var valores=[1,0];
 		var estados=[true,false];
+
 		////////////// obtener registro a modificar ////////////////////
 		var id=$(this).attr('id');//id del boton modificar seleccionado
 		var longitud=id.length;//longitud del  id de modificar
