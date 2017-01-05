@@ -148,7 +148,16 @@ $(".consultarSubmodulo").click(function(){
 				var registro=id.slice(indice+1,longitud);//numero del registro a modificar 
 		    	////////////////////////////////////////////////////////////////////////
 		    	var valor=$(this).val();//valor inicial del check
+		    	$('#'+id).val(valores[valor]);//cambio de valor para el check, asignacion del nuevo valor
+		    	////////////////////obtener valor del modulo padre///////////////////////////////////
 
+		   		var modulo_id=$(this).attr('name');
+		    	var longitud=id.length;
+				var indice=id.indexOf('S');
+				modulo_id=modulo_id.slice(indice+1,longitud);//id del mpodulo padre que posee el submodulo seleccionado 
+				var name=$(this).attr('id');
+
+		    	////////////////////////////////////////////////////////////////////////////////////////
 
 		   		var url= '/menu/registros/perfiles/configurar/submodulo';//rutas[tabla];
 				var datos=registro;//datos para el controlador (registro a modificar y tabla a modificar)*/
@@ -164,7 +173,61 @@ $(".consultarSubmodulo").click(function(){
 						{
 							if (vista_submodulos==true) 
 								{
-									$('#'+id).val(valores[valor]);//cambio de valor para el check, asignacion del nuevo valor
+									var modulos_=document.getElementById("targeta1");//obtener el listado de submodulos creados
+									var input=modulos_.getElementsByTagName("input");//obtener elementos de la etiqueta input
+									
+
+									
+									$.each(input, function(i) 
+									{
+										if($(this).attr('type')=="checkbox")
+										{
+
+											
+											var moduloPadre_id=$(this).attr('name');
+									    	var longitud=moduloPadre_id.length;
+									    	var indice=moduloPadre_id.indexOf('k');
+											moduloPadre_id=moduloPadre_id.slice(indice+1,longitud);//id del modulo padre
+											
+											if (modulo_id==moduloPadre_id) //si se activa el submodulo 
+												{
+													if (($('#'+name).prop('checked')==true)&&($(this).prop('checked')==false)) 
+													{
+
+														/*alert($(this).prop('checked'));//status del modulo padre
+														alert($('#'+name).prop('checked'));//status del submodulo seleccionado//stattus */
+														//alert('modulo padre desactivado');
+														$(this).prop('checked',true);
+														$(this).val(valores[$(this).val()]);//cambio de valor para el check
+
+
+														///////////////////////////actualizar el modulo en la base de datos ////////////
+
+														
+														var id_registro= $(this).attr('id');
+														var longitud=id_registro.length;
+									    				var indice=id_registro.indexOf('M');
+														id_registro=id_registro.slice(indice+1,longitud);//id del modulo padre
+											
+														var url="/menu/registros/perfiles/configurar/modulo_";
+												
+														$.get(url, {datos:id_registro}, function(configurar)
+														{
+																
+															if(configurar==0)//si no recibe valores del controlador
+															{
+																
+																swal("Error Inesperado !!", "Comuniquese con el administrador", "error");
+															}
+
+														})
+													}
+												}
+
+										}
+
+
+									})
 								}
 
 						}
@@ -224,7 +287,7 @@ $('.configurarPer').change(function()
 
 
     	var valor=$(this).val();//valor inicial del check
-    	$(this).val(valores[valor]);
+    	$(this).val(valores[valor]);//cambio de valor para el check
 
    		var url= '/menu/registros/perfiles/configurar/modulo';//rutas[tabla];
 		var datos=registro;//datos para el controlador (registro a modificar y tabla a modificar)*/
@@ -261,10 +324,12 @@ $('.configurarPer').change(function()
 											
 											moduloPadre_id=moduloPadre_id.slice(indice+1,longitud);//id del modulo padre
 										
-
+											
 										if ((valor==1)&&(moduloPadre_id==modulo_id))
 
 										{
+											/*var nombre=document.getElementsByName("cck"+moduloPadre_id);
+											alert($(nombre).attr('id'));//id del check padre*/
 										
 											if ($(this).prop("checked")==true)//si esta activo el check de submodulos
 												{
@@ -277,6 +342,9 @@ $('.configurarPer').change(function()
 										}
 										else if((valor==0)&&(moduloPadre_id==modulo_id))
 										{
+
+											/*var nombre=document.getElementsByName("cck"+moduloPadre_id);
+											alert($(nombre).attr('id'));//id del check padre*/
 
 											if ($(this).prop("checked")==false)
 												{
@@ -293,16 +361,7 @@ $('.configurarPer').change(function()
 							
 
 						}
-						/*else if(vista_submodulos==false)//si la vista de los submodulos no esta activa se hace la actualizacion por debajo
-						{
-							var url="menu/registros/perfiles/check_modulosSubmodulos"
-							$.get(url, {datos:registro}, function(configurar)
-							{
-
-
-							});
-			
-						}*/
+						
 
 				}
 				

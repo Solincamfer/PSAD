@@ -519,7 +519,7 @@ public function perfiles_permisos($perfil_id)
 }
 
 
-public function perfiles_configurar_modulo()
+public function perfiles_configurar_modulo()//usado cuando se activa o desactiva un check/afecta al modulo y a los submodulos
 {
 	$valores=[1,0];
 	$datos=(int)Request::get('datos');//solo el registro
@@ -530,6 +530,17 @@ public function perfiles_configurar_modulo()
 	return($actualizar);
 }
 
+
+
+public function perfiles_configurar_solo_modulo()//activa el submodulo cuando se selecciona un submodulo y se encuentra desactivado
+{
+
+	$valores=[0,1];
+	$datos=(int)Request::get('datos');//solo registro
+	$consulta=DB::table('modulo_perfil')->where('id',$datos)->first();
+	$actualizar=DB::table('modulo_perfil')->where('id',$datos)->update(["status"=>1]);
+	return($actualizar);
+}
 
 
 public function perfiles_configurar_submodulo()
