@@ -38,7 +38,7 @@ function actualizar_status (datos) //actualiza el status de un modulo en la base
 	})
 }
 
-function cheks_activos(input__) 
+function cheks_activos(input__) //cuenta los checks de submodulos que se encuentran activos
 {
 	var contadorChekAct=0;
 	$.each(input__,function(i)//recorre los inputs de la tarjeta de submodulos para buscar los checks
