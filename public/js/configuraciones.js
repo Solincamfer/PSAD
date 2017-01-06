@@ -69,8 +69,8 @@ $(".consultarSubmodulo").click(function(){
 
 				
 				
-				$(".consultarSubmodulo").css("color","grey");
-			    $(this).css("color","yellow");
+		$(".consultarSubmodulo").css("color","grey");
+		$(this).css("color","yellow");
 		///////////BUSCADO BOTON CLICKEADO/////////////	
 			ID = $(this).attr("id");///////ID DEL BOTTON MODIFICAR/////////	
 
@@ -130,8 +130,21 @@ $(".consultarSubmodulo").click(function(){
 			    idSubmodulo=$('#Accion'+ID).val();				
 				valoresAcc=[idPerfil,idSubmodulo];
 				$.get("/menu/registros/perfiles/acciones", {valoresAcc:valoresAcc}, function(data1){
+					
+					if (data.length>0) //verifica que hayn submodulos para el modulo seleccionado
+					{
+						vista_submodulos=true;//la vista para de los sbmodulos asociada a n modulo se encuentra activa
+						vista_acciones=true;//las vista de acciones asociada al submodulo de turno se encuentra activa
+					}
+					else  //en caso de no encontrar submodulos para el modulo seleccionado
+					{
+						vista_submodulos=true;//la vista para los sbmodulos asociada al modulo de  se encuentra inactiva
+						vista_acciones=false;//las vista de acciones se encuentra inactiva
+
+					}
 					$( ".limpiarul2" ).remove();
-					$.each(data1, function(i, item) {
+					$.each(data1, function(i, item) 
+					{
 						$('#targeta3 ul').append('<li class="limpiarul2" style="display:none;"><div class="container-fluid cont"><div class="row"><div class="col-md-6"><div class="tl1"><span>'+item.descripcion+'</span></div></div><div class="col-md-1 col-md-push-2"><div class="iclst"></div><input type="hidden" id="Accio2nn'+item.accionId+'" value="'+item.accionId+'"></div><div class="col-md-2 col-md-push-3"><div class="chbx1x" id="checklistA'+item.accionId+'">   </div></div></div></div></li>');
 			    		 
 			    		 if(item.Status==1)//agregar check de status cuando el submodulo esta asignado para el perfil
