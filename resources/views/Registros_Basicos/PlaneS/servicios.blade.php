@@ -24,21 +24,27 @@
                             <div class="col-md-10 col-md-offset-2 spc">
                                 <div class="row espFil">
                                     <input type="hidden" id="plan" value="{{$extra}}">
-                                    <a id="" type="button" class="btn tltpcd m_Servicio" data-ttl="Horarios" data-toggle="modal" data-target="#myModal1" href="#myModal1">
+
+<!-- //////  TARJETA DE HORARIOS  //////-->
+                                    <a id="s1" type="button" class="btn tltpcd m_Servicio " data-ttl="Horarios" data-toggle="modal" data-target="#myModal1" href="#myModal1">
                                         <div class="col-md-2 hh">
                                             <div class="col-md-8 col-md-offset-2">
                                                 <img src="{{asset('img/passage-of-time.png')}}" alt="" class="im">
                                             </div>
                                         </div>
                                     </a>
-                                    <a id="" type="button" class="btn tltpcd" data-ttl="Soporte Presencial" data-toggle="modal" data-target="#myModal2" href="#myModal2">
+
+<!-- //////  TARJETA DE SOPORTE PRESENCIAL  //////-->
+                                    <a id="s2" type="button" class="btn tltpcd m_Servicio" data-ttl="Soporte Presencial" data-toggle="modal" data-target="#myModal2" href="#myModal2">
                                         <div class="col-md-2 sp">
                                             <div class="col-md-8 col-md-offset-2">
                                                 <img src="{{asset('img/lifeline-signal.png')}}" alt="" class="im">
                                             </div>
                                         </div>
                                     </a>
-                                    <a id="" type="button" class="btn tltpcd" data-ttl="Soporte Remoto" data-toggle="modal" data-target="#myModal3" href="#myModal3">
+
+<!-- //////  TARJETA DE SOPORTE REMOTO  //////-->
+                                    <a id="s3" type="button" class="btn tltpcd m_Servicio" data-ttl="Soporte Remoto" data-toggle="modal" data-target="#myModal3" href="#myModal3">
                                         <div class="col-md-2 sr">
                                             <div class="col-md-8 col-md-offset-2">
                                                 <img src="{{asset('img/shopping-support-online.png')}}" alt="" class="im">
@@ -47,7 +53,9 @@
                                     </a>
                                 </div>
                                 <div class="row espFil">
-                                    <a id="" type="button" class="btn tltpcd" data-ttl="Soporte telefónico" data-toggle="modal" data-target="#myModal4" href="#myModal4">
+
+<!-- //////  TARJETA DE SOPORTE TELEFONICO  //////-->     
+                                    <a id="s4" type="button" class="btn tltpcd m_Servicio" data-ttl="Soporte telefónico" data-toggle="modal" data-target="#myModal4" href="#myModal4">
                                         <div class="col-md-2 st">
                                             <div class="col-md-8 col-md-offset-2">
                                                 <img src="{{asset('img/technical-support.png')}}" alt="" class="im">
@@ -55,13 +63,17 @@
                                         
                                         </div>
                                     </a>
-                                    <a id="" class="btn tltpcd" data-ttl="Tiempo de Respuesta" data-toggle="modal" data-target="#myModal5" href="#myModal5">
+
+<!-- //////  TARJETA DE TIEMPO DE RESPUESTA  //////-->
+                                    <a id="s5" class="btn tltpcd m_Servicio" data-ttl="Tiempo de Respuesta" data-toggle="modal" data-target="#myModal5" href="#myModal5">
                                         <div class="col-md-2 tr">
                                             <div class="col-md-8 col-md-offset-2">
                                                 <img src="{{asset('img/technical-service-van.png')}}" alt="" class="im">
                                             </div>
                                         </div>
                                     </a>
+
+<!-- //////  TARJETA DE MANTENIMIENTO  //////-->
                                     <a id="" class="btn tltpcd2" data-ttl="Mantenimiento">
                                         <div class="col-md-2">
                                             <div class="contcd">
@@ -85,7 +97,7 @@
                             </div>
                         </div>
 
-                        <!--Modal Horarios-->
+<!-- //////  MODAL HORARIOS  //////-->
                         <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
@@ -93,20 +105,20 @@
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                         <h4 class="modal-title" id="myModalLabel1">Modificar Servicio "Horarios"</h4>
                                     </div>
-                                    <div class="modal-body">
-                                        <form action="">
+                                    <form action="">
+                                        <div class="modal-body">
                                             <div class="container-fluid contsr1">
                                                 <div class="rSrv">
                                                     <div class="col-md-5 col-md-offset-1">
                                                         <div class="form-group row icc">
                                                             <label for="">Tiempo de inicio</label>
-                                                            <input type="time"><i class="fa fa-clock-o"></i>
+                                                            <input type="time" id="horaI"><i class="fa fa-clock-o"></i>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-5">
                                                         <div class="form-group row icc">
                                                             <label for="">Tiempo final</label>
-                                                            <input type="time"><i class="fa fa-clock-o"></i>
+                                                            <input type="time" id="horaF"><i class="fa fa-clock-o"></i>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-10 col-md-offset-1">
@@ -117,38 +129,51 @@
                                                     <div class="col-md-5 col-md-offset-1">
                                                         <div class="form-group row icc">   
                                                             <span class="down"><i class="fa fa-chevron-down" id="i1"></i></span>
-                                                            <select name="" id="">
-                                                                <option value="0">Desde</option>
+                                                            <select name="" id="diaI">
+                                                                <option value=""> - </option>
+                                                                <option value="Lunes">Lunes</option>
+                                                                <option value="Martes">Martes</option>
+                                                                <option value="Miercoles">Miercoles</option>
+                                                                <option value="Jueves">Jueves</option>
+                                                                <option value="Viernes">Viernes</option>
+                                                                <option value="Sabado">Sabado</option>
+                                                                <option value="Domingo">Domingo</option>
                                                             </select><i class="fa fa-calendar"></i>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-5">
                                                         <div class="form-group row icc">
                                                             <span class="down"><i class="fa fa-chevron-down" id="i2"></i></span> 
-                                                            <select name="" id="">
-                                                                <option value="0">Hasta</option>
+                                                            <select name="" id="diaF">
+                                                                <option value=""> - </option>
+                                                                <option value="Lunes">Lunes</option>
+                                                                <option value="Martes">Martes</option>
+                                                                <option value="Miercoles">Miercoles</option>
+                                                                <option value="Jueves">Jueves</option>
+                                                                <option value="Viernes">Viernes</option>
+                                                                <option value="Sabado">Sabado</option>
+                                                                <option value="Domingo">Domingo</option>
                                                             </select><i class="fa fa-calendar"></i>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-5 col-md-offset-1">
                                                         <div class="form-group row icc">
-                                                            <label for="">Precio</label>
-                                                            <input type="number"><i class="fa fa-money"></i>
+                                                            <label for="precio">Precio</label>
+                                                            <input type="number" id="precio"><i class="fa fa-money"></i>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </form>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="bttnMd" id="btnSv">Guardar <i class="fa fa-floppy-o"></i></button>
-                                        <button type="button" class="bttnMd" data-dismiss="modal" id="btnCs">Cerrar <i class="fa fa-times"></i></button>
-                                    </div>
+                                        </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="bttnMd" id="btnSv">Guardar <i class="fa fa-floppy-o"></i></button>
+                                            </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
 
-                        <!--Modal Soporte Presencial-->
+<!-- //////  MODAL SOPORTE PRESENCIAL  //////-->
                         <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
@@ -163,16 +188,16 @@
                                                     <div class="col-md-10 col-md-offset-1">
                                                         <fieldset class="fst">
                                                             <legend>Opciones Soporte Presencial</legend>
-                                                            <label class="flb"><input type="radio" name="radio" id="stpc">Soporte presencial contabilizada</label>
+                                                            <label class="flb"><input type="radio" name="radio" id="stpc" value="contabilizado">Soporte presencial contabilizada</label>
                                                             <div class="form-group row icc2">
                                                                 <input class="desact" type="number" placeholder="Cantidad de visitas mensuales" id="cvm"><i class="fa fa-laptop"></i>
                                                             </div>
-                                                            <label class="flb"><input type="radio" name="radio" id="rppe">Respuesta presencial por emergencia</label>
+                                                            <label class="flb"><input type="radio" name="radio" id="rppe" value="emergencia">Respuesta presencial por emergencia</label>
                                                         </fieldset>
                                                     </div>
                                                     <div class="col-md-8 col-md-offset-2">
                                                         <div class="form-group row icc3">
-                                                            <input type="number" placeholder="Precio"><i class="fa fa-money"></i>
+                                                            <input type="number" placeholder="Precio" id="precioP"><i class="fa fa-money"></i>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -181,13 +206,12 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="bttnMd" id="btnSv">Guardar <i class="fa fa-floppy-o"></i></button>
-                                        <button type="button" class="bttnMd" data-dismiss="modal" id="btnCs">Cerrar <i class="fa fa-times"></i></button>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <!--Soporte Remoto-->
+<!-- //////  MODAL SOPORTE REMOTO //////-->
                         <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel3">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
@@ -204,14 +228,14 @@
                                                             <legend>Opciones Soporte Remoto</legend>
                                                             <label class="radio-inline flb"><input type="radio" name="radio" id="strc">Soporte remoto contabilizado</label>
                                                             <div class="form-group row icc2">
-                                                                <input class="desact" type="number" placeholder="Cantidad de conexiones Remotas" id="ccr"><i class="fa fa-desktop"></i>
+                                                                <input class="desact" type="number" placeholder="Cantidad de conexiones Remotas" id="ccr"><i class="fa fa-desktop cstr"></i>
                                                             </div>
-                                                            <label class="radio-inline flb"><input type="radio" name="radio" id="stri">Soporte remoto ilimitado</label>
+                                                            <label class="radio-inline flb"><input type="radio" name="radio" id="stri" checked="checked">Soporte remoto ilimitado</label>
                                                         </fieldset>
                                                     </div>
                                                     <div class="col-md-8 col-md-offset-2">
                                                         <div class="form-group row icc3">
-                                                            <input type="number" placeholder="Precio"><i class="fa fa-money"></i>
+                                                            <input type="number" class="" id="precioR" placeholder="Precio"><i class="fa fa-money"></i>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -220,13 +244,12 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="bttnMd" id="btnSv">Guardar <i class="fa fa-floppy-o"></i></button>
-                                        <button type="button" class="bttnMd" data-dismiss="modal" id="btnCs">Cerrar <i class="fa fa-times"></i></button>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <!--Soporte telefónico-->
+<!-- //////  MODAL SOPORTE TELEFONICO  //////-->
                         <div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel4">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
@@ -243,14 +266,14 @@
                                                             <legend>Opciones Soporte Telefónico</legend>
                                                             <label class="radio-inline flb"><input type="radio" name="radio" id="sttc">Soporte telefónico contabilizado</label>
                                                             <div class="form-group row icc2">
-                                                                <input class="desact" type="number" placeholder="Cantidad de llamadas semanales" id="clls"><i class="fa fa-phone"></i>
+                                                                <input class="desact" type="number" placeholder="Cantidad de llamadas semanales" id="cstt"><i class="fa fa-phone"></i>
                                                             </div>
                                                             <label class="radio-inline flb"><input type="radio" name="radio" id="stti">Soporte telefónico ilimitada</label>
                                                         </fieldset>
                                                     </div>
                                                     <div class="col-md-8 col-md-offset-2">
                                                         <div class="form-group row icc3">
-                                                            <input type="number" placeholder="Precio"><i class="fa fa-money"></i>
+                                                            <input type="number" id="precioT" placeholder="Precio"><i class="fa fa-money"></i>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -259,13 +282,12 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="bttnMd" id="btnSv">Guardar <i class="fa fa-floppy-o"></i></button>
-                                        <button type="button" class="bttnMd" data-dismiss="modal" id="btnCs">Cerrar <i class="fa fa-times"></i></button>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <!--Tiempo de Respuesta-->
+<!-- //////  MODAL TIEMPO DE RESPUESTA //////-->
                         <div class="modal fade" id="myModal5" tabindex="-1" role="dialog" aria-labelledby="myModalLabel5">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
@@ -280,12 +302,12 @@
                                                     <div class="col-md-8 col-md-offset-2">
                                                             <label class="flb" for="">Tiempo de Respuesta("Horas")</label>
                                                             <div class="form-group row icc4">
-                                                                <input type="number" placeholder="No Maximo a"><i class="fa fa-wrench"></i>
+                                                                <input type="number" id="tr" placeholder="No Maximo a"><i class="fa fa-wrench"></i>
                                                             </div>
                                                     </div>
                                                     <div class="col-md-8 col-md-offset-2">
                                                         <div class="form-group row icc3">
-                                                            <input type="number" placeholder="Precio"><i class="fa fa-money"></i>
+                                                            <input type="number" id="precioTR" placeholder="Precio"><i class="fa fa-money"></i>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -294,7 +316,6 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="bttnMd" id="btnSv">Guardar <i class="fa fa-floppy-o"></i></button>
-                                        <button type="button" class="bttnMd" data-dismiss="modal" id="btnCs">Cerrar <i class="fa fa-times"></i></button>
                                     </div>
                                 </div>
                             </div>

@@ -909,16 +909,40 @@ $('#savePlan').click(function(){
 
 ///////////////////////////// Asociacion de Servicios a Plan ///////////////////////
 $(".m_Servicio").click(function(){
-
-	///////////BUSCADO BOTON CLICKEADO/////////////	
-		ID = $(this).attr("id");///////ID DEL BOTTON MODIFICAR/////////
-		var idplan=$('#plan').val();
-	///////////PASANDO VARIABLE Y CARGANDO LISTADO CORRESPONDIENTE A LA SELECCION PREVIA Y ESPERANDO DATA COMO RESPUESTA/////////////			        	
-		$.get("/menu/registros/planes/consultarservicios",{datos:idplan}, function(data){
-    ///////////ASIGNANDO LOS VALORES DEL ARRAY A LOS IMPUT CORRESPONDIENTES DEL MODAL MODIFICAR/////////////	
-    		alert(data)
-    		//$('#CatM1').val(data[0]);
-    		//$('#CatM2').val(data[1]);
-    		//->->->//alert(data);///////Data para probar los campos resividos por el AJAX//
-       });
+	ID = $(this).attr("id");
+	idplan=$('#plan').val();	
+	datos=[ID,idplan];		        	
+	$.get("/menu/registros/planes/consultarservicios",{datos:datos}, function(data){
+		if (data[0]== 's1') {
+			$('#horaI').val(data[1]);
+			$('#horaF').val(data[2]);
+			$('#diaI').val(data[3]);
+			$('#diaF').val(data[4]);
+			$('#precio').val(data[5]);
+			//alert(data[1])
+		}
+		else if(data[0]== 's2'){
+			$('#stpc').prop(data[1]);
+			$('#cvm').val(data[2]);
+			$('#precioP').val(data[3]);
+			//alert(data[1])
+		}
+		else if (data[0]== 's3'){
+			$('#strc').prop(data[1]);
+			$('#cstr').val(data[2]);
+			$('#precioR').val(data[3]);
+			//alert(data[1])
+		}
+		else if (data[0]== 's4') {
+			$('#sttc').prop(data[1]);
+			$('#cstt').val(data[2]);
+			$('#precioT').val(data[3]);
+			//alert(data[1])
+		}
+		else if (data[0]== 's5') {
+			$('#tr').val(data[1]);
+			$('#precioTR').val(data[2]);
+			//alert(data[1])
+		}
+   });
 });

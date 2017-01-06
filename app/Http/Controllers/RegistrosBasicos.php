@@ -380,31 +380,38 @@ public function planes_servicios_servicios($id_plan)
 	}
 
 public function valores_servicios(){
-	
-	$idplan=Request::get('datos');
-	$consulta=DB::table('horarios')->where('plan_id',$idplan)->first();
-	
-	// tablas:
-	
-	// planes (utilizada para almacenar los planes creados en el sistema )
-	// tablas para los servicios, se encuentran relacionadas con la tabla planes por medio de la clave foranea llamada : plan_id . que referencia el id de cada registro
-	
-	// horarios
-	// respuestas 
-	// telefonicos
-	// remotos
-	// presenciales
+	$id= Request::get('datos');
+	$tablas=	array(	's1' => 'horarios',
+				  		's2' => 'presenciales',
+				  		's3' => 'remotos',
+				  		's4' => 'telefonicos',
+				  		's5' => 'respuestas'
+				);
+	$consulta=DB::table($tablas[$id[0]])->where('plan_id',$id[1])->first();
+	if ($id[0] == 's1' && count($consulta) == 1) {
+		$respuesta= array(	's1',
+							$consulta->horaI,
+							$consulta->horaF,
+							$consulta->diaI,
+							$consulta->diaF,
+							$consulta->precio
+					);
+	}
+	elseif ($id[0] == 's2' || $id[0] == 's3' || $id[0] == 's4' && count($consulta) == 1) {
+		$respuesta= array(	$id[0],
+							$consulta->etiqueta,
+							$consulta->valor,
+							$consulta->precio,
+					);
+	}
+	elseif ($id[0] == 's5' && count($consulta) == 1) {
+		$respuesta= array(	's5',
+							$consulta->maximo,
+							$consulta->precio
+					);
+	}
 
-
-	// modelos:
-	// plan
-
-	// horario
-	// respuesta
-	// presencial
-	// telefonico
-	// remoto
-return $consulta->precio;
+return $respuesta;
 }
 	
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
