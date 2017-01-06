@@ -345,36 +345,25 @@ $(".consultarSubmodulo").click(function(){
 
 
 
-$('.configurarPer').change(function()
+$('.configurarPer').change(function()//configuracion en los modulos
 	{
 		
 		var valores=[1,0];
-		var estados=[true,false];
 
 		////////////// obtener registro a modificar ////////////////////
-		var id=$(this).attr('id');//id del boton modificar seleccionado
-		var longitud=id.length;//longitud del  id de modificar
-		var indice=id.indexOf('M');//indice del ultimo caracter
-		var registro=id.slice(indice+1,longitud);//numero del registro a modificar 
+		var registro=obtener_valor('M',$(this).attr('id'));//obtener el registro a modificar en la tabla modulo_perfil
     	////////////////////////////////////////////////////////////////////////
 
     	////////////////////////////obtener id del modulo///////////////////////
-
-    	var modulo_id=$(this).attr('name');
-    	var longitud=modulo_id.length;
-    	var indice=modulo_id.indexOf('k')
-		
-		modulo_id=modulo_id.slice(indice+1,longitud);//id del modulo padre
-
+		var modulo_id=obtener_valor('k',$(this).attr('name'));//obtener el id del modulo seleccionado(se encuentra concatenado en su atributo name)
 
         //////////////////////////////////////////////////////////////////////////
-
-
-    	var valor=$(this).val();//valor inicial del check
+		var name=$(this).attr('id');//obtiene el id del check de modulos clickeado para ser usado mas adelante
+		var valor=$(this).val();//valor inicial del check
     	$(this).val(valores[valor]);//cambio de valor para el check
 
-   		var url= '/menu/registros/perfiles/configurar/modulo';//rutas[tabla];
-		var datos=registro;//datos para el controlador (registro a modificar y tabla a modificar)*/
+   		var url= '/menu/registros/perfiles/configurar/modulo';
+		var datos=registro;
 		$.get(url, {datos:datos}, function(configurar)
 			{
 				
@@ -388,49 +377,33 @@ $('.configurarPer').change(function()
 					if (vista_submodulos==true) //si la vista de submodulos esta visible
 						{
 
-							
 							var submodulos_=document.getElementById("targeta2");//obtener el listado de submodulos creados
 							var input=submodulos_.getElementsByTagName("input");//obtener elementos de la etiqueta input
 							
-
-							
-							$.each(input, function(i) 
+							$.each(input, function(i) //eac que recorre los check de submodulos 
 							{
-								
-								
-									
 
 								if (($(this).attr("type")=="checkbox" )) //si esta activo se procede a desactivar
 									{
-											var moduloPadre_id=$(this).attr('name');
-									    	var longitud=moduloPadre_id.length;
-									    	var indice=moduloPadre_id.indexOf('S');
-											
-											moduloPadre_id=moduloPadre_id.slice(indice+1,longitud);//id del modulo padre
 										
+										var moduloPadre_id=obtener_valor('S',$(this).attr('name'));//obtener el id del modulo pare que poseen los check de submodulos concatenados en su name
 											
-										if ((valor==1)&&(moduloPadre_id==modulo_id))
+										if (($('#'+name).prop('checked')==false)&&(moduloPadre_id==modulo_id))//si el check de modulos se deshabilita , la variable valor reflija el valor inicial del check de modulos
 
 										{
-											/*var nombre=document.getElementsByName("cck"+moduloPadre_id);
-											alert($(nombre).attr('id'));//id del check padre*/
-										
-											if ($(this).prop("checked")==true)//si esta activo el check de submodulos
+											
+											if ($(this).prop("checked")==true)//desactiva los submodulos activos relacionados con el modulo seleccionado
 												{
 													$(this).prop("checked",false);//se desativa
 													$(this).val(0);
-													//var name=$(this).attr("id");
-													//$('#'+name).trigger('change');//dispara el evento change para los checks
+													
 												}
 											
 										}
-										else if((valor==0)&&(moduloPadre_id==modulo_id))
+										else if(($('#'+name).prop('checked')==true)&&(moduloPadre_id==modulo_id))//si el check de modulos se habilita
 										{
 
-											/*var nombre=document.getElementsByName("cck"+moduloPadre_id);
-											alert($(nombre).attr('id'));//id del check padre*/
-
-											if ($(this).prop("checked")==false)
+											if ($(this).prop("checked")==false)//activa los check de los submodulos desactivados que estan relacionados con el modulo seleccionado
 												{
 
 													$(this).prop("checked",true);//se activa
