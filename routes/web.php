@@ -42,8 +42,7 @@ Route::get('/menu/modificar/registros','RegistrosBasicos@modificar_registrosCD')
 
 
 
-Route::group(['prefix'=>'/menu/registros','middleware'=>['v_menu']],function()
-				{
+Route::group(['prefix'=>'/menu/registros','middleware'=>['v_menu']],function(){
 
 			
 				Route::match(['post','get'],'/departamentos',														['middleware'=>'validar_sm:2','uses'=>'RegistrosBasicos@departamentos']);
@@ -98,7 +97,7 @@ Route::group(['prefix'=>'/menu/registros','middleware'=>['v_menu']],function()
 
 				Route::match(['post','get'],'/clientes/registrar',                   		 							['uses'=> 'RegistrosBasicos@clientes_registrar']);//select 
 			
-				Route::match(['post','get'],'/planeservicios/servicios',												['uses'=> 'RegistrosBasicos@planes_servicios_servicios']);
+				Route::match(['post','get'],'/planeservicios/servicios/{plan_id}',												['uses'=> 'RegistrosBasicos@planes_servicios_servicios']);
 
 				Route::match(['post','get'],'/clientes/modificar',             											['uses'=>'RegistrosBasicos@clientes_modificar']);
 				
@@ -135,8 +134,9 @@ Route::group(['prefix'=>'/menu/registros','middleware'=>['v_menu']],function()
 
 				/*//////////////////////Planes y servicios//////////////////////////////////////////*/
 				Route::match(['post','get'],'/planes/registrar',                                                      ['uses'=>'RegistrosBasicos@planes_ingresar']); 
-				}
-			);
+
+				Route::match(['post','get'],'/planes/consultarservicios',                                                      ['uses'=>'RegistrosBasicos@valores_servicios']); 
+			});
 
 
 				

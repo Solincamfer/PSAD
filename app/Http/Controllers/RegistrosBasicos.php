@@ -370,21 +370,19 @@ public function planes_ingresar(){
 }
 	
 
-
-
-	public function planes_servicios_servicios()
+public function planes_servicios_servicios($id_plan)
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
 		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(73,74),72);
-		return view ('Registros_Basicos\PlaneS\servicios',$this->datos_vista($datos,$acciones,array()));
+		return view ('Registros_Basicos\PlaneS\servicios',$this->datos_vista($datos,$acciones,array(),$id_plan));
 
 		
 	}
 
-
-
-public function servicios()
-{
+public function valores_servicios(){
+	
+	$idplan=Request::get('datos');
+	$consulta=DB::table('horarios')->where('plan_id',$idplan)->first();
 	
 	// tablas:
 	
@@ -406,7 +404,7 @@ public function servicios()
 	// presencial
 	// telefonico
 	// remoto
-
+return $consulta->precio;
 }
 	
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

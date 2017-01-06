@@ -37,13 +37,13 @@
                                     @if($accion->descripcion!="Status")
                                         @if($accion->data_toogle=="modal")
                                             <span class="iclsp">
-                                                <a href="#myModal2" class="tltp" data-ttl="{{$accion->descripcion}}" data-toggle="modal" data-target="#myModal2"> 
+                                                <a href="#myModal2" class="tltp modificarPlanes" data-ttl="{{$accion->descripcion}}" data-toggle="modal" data-target="#myModal2"> 
                                                     <i class="{{$accion->clase_css}}"></i>
                                                 </a>
                                             </span>
                                         @elseif($accion->data_toogle!="modal")
                                             <span class="iclsp">
-                                                <a href="{{$accion->url}}" class="tltp" data-ttl="{{$accion->descripcion}}">
+                                                <a href="{{$accion->url.$planes->id}}" class="tltp" data-ttl="{{$accion->descripcion}}">
                                                     <i class="{{$accion->clase_css}}"></i>
                                                 </a>
                                             </span>

@@ -906,3 +906,19 @@ $('#savePlan').click(function(){
 		});
 	}
 });
+
+///////////////////////////// Asociacion de Servicios a Plan ///////////////////////
+$(".m_Servicio").click(function(){
+
+	///////////BUSCADO BOTON CLICKEADO/////////////	
+		ID = $(this).attr("id");///////ID DEL BOTTON MODIFICAR/////////
+		var idplan=$('#plan').val();
+	///////////PASANDO VARIABLE Y CARGANDO LISTADO CORRESPONDIENTE A LA SELECCION PREVIA Y ESPERANDO DATA COMO RESPUESTA/////////////			        	
+		$.get("/menu/registros/planes/consultarservicios",{datos:idplan}, function(data){
+    ///////////ASIGNANDO LOS VALORES DEL ARRAY A LOS IMPUT CORRESPONDIENTES DEL MODAL MODIFICAR/////////////	
+    		alert(data)
+    		//$('#CatM1').val(data[0]);
+    		//$('#CatM2').val(data[1]);
+    		//->->->//alert(data);///////Data para probar los campos resividos por el AJAX//
+       });
+});
