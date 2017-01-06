@@ -533,10 +533,10 @@ public function perfiles_configurar_modulo()//usado cuando se activa o desactiva
 public function perfiles_configurar_solo_modulo()//activa el submodulo cuando se selecciona un submodulo y se encuentra desactivado
 {
 
-	$valores=[0,1];
+	$valores=[1,0];
 	$datos=(int)Request::get('datos');//solo registro
 	$consulta=DB::table('modulo_perfil')->where('id',$datos)->first();
-	$actualizar=DB::table('modulo_perfil')->where('id',$datos)->update(["status"=>1]);
+	$actualizar=DB::table('modulo_perfil')->where('id',$datos)->update(["status"=>$valores[$consulta->status]]);
 	return($actualizar);
 }
 
