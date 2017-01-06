@@ -531,11 +531,16 @@ public function perfiles_configurar_modulo()//usado cuando se activa o desactiva
 	$consulta=DB::table('modulo_perfil')->where('id',$datos)->first();
 	$actualizar=DB::table('modulo_perfil')->where('id',$datos)->update(["status"=>$valores[$consulta->status]]);
 	$actualiza_submodulos=DB::table('perfil_submodulo')->join('submodulos','perfil_submodulo.submodulo_id','=','submodulos.id')->where('submodulos.modulo_id',$consulta->modulo_id)->update(['perfil_submodulo.status'=>$valores[$consulta->status]]);
+	$submodulos=DB::table('submodulos')->where('modulo_id',$consulta->modulo_id)->get();//obtiene los submodulos asociados al modulo afectado
+	$acciones=array();
 	
-	return($actualizar);
+	foreach ($submodulos as $submodulo) 
+	{
+		$actualiza_acciones=DB::table('acciones')->join('accion_perfil','accion_perfil.accion_id','=','acciones.id')->where('acciones.submodulo_id',$submodulo->id)->update(['accion_perfil.status'=>$valores[$consulta->status]]);
+	}
+	return ($actualizar);
+
 }
-
-
 
 public function perfiles_configurar_solo_modulo()//activa el submodulo cuando se selecciona un submodulo y se encuentra desactivado
 {
