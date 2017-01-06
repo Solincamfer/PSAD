@@ -56,6 +56,74 @@ function cheks_activos(input__) //cuenta los checks de submodulos que se encuent
 return contadorChekAct;
 }
 
+
+function extraer_elementos(padre)
+{
+	var padre=padre;
+	var modulos_=document.getElementById(padre);//obtener el listado de los modulos creados
+	var input=modulos_.getElementsByTagName("input");//obtener elementos que poseen la etiqueta input dentro de la tajeta de modulos
+	var checks=[];
+
+	$.each(input, function(i)
+	{
+		if ($(this).attr('type')=='checkbox') 
+		{
+			checks.push($(this));
+		}
+	})
+
+ return checks;
+}
+
+function checks_acciones (padre,condicion) 
+{
+	var padre=padre;
+	var condicion=condicion;
+	var checks=[];
+	if(condicion==true)
+	{
+		checks=extraer_elementos(padre);
+	}
+
+	return checks;
+}
+
+
+function actualizar_checks_acciones (checks,submoduloId,estado, vista)
+ {
+		var submoduloId=submoduloId;
+		var estado=estado;
+		var vista=vista;
+		$.each(checks, function(i)
+			{
+				var padre_acc=obtener_valor('A',$(this).attr('name'));
+				if (padre_acc==submoduloId && vista==true)
+					{
+
+						if(estado==0)//desactivar
+							{
+								if ($(this).prop("checked")==true)
+									{
+										$(this).prop("checked",false);
+										$(this).val(0);
+																	
+									}
+							}
+						else if(estado==1)//activar
+							{
+							if ($(this).prop("checked")==false)
+								{
+									$(this).prop("checked",true);
+									$(this).val(1);
+																
+								}
+							}
+					}
+
+			})
+											
+
+}
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -106,12 +174,12 @@ $(".consultarSubmodulo").click(function(){
 			   
 			   if(item.Status==1)//agregar check de status cuando el submodulo esta asignado para el perfil
 			   {
-			  		 $('#checklist'+item.submoduloId).append(' <input type="checkbox" value="'+item.Status+'" class="configurarSub" id="cckS'+item.registro+'" name="cckS'+item.padre+'" checked><label for="cckS'+item.registro+'"></label> ');
+			  		 $('#checklist'+item.submoduloId).append(' <input type="checkbox" value="'+item.Status+'" class="configurarSub" data-submoduloId="'+item.submoduloId+'" id="cckS'+item.registro+'" name="cckS'+item.padre+'" checked><label for="cckS'+item.registro+'"></label> ');
 			   
 			   }
 			   else if(item.Status==0)//agregar check de status cuando el submodulo no esta signado para el perfil
 			   {
-			   		  $('#checklist'+item.submoduloId).append(' <input type="checkbox" value="'+item.Status+'"  class="configurarSub"  id="cckS'+item.registro+'" name="cckS'+item.padre+'" ><label for="cckS'+item.registro+'"></label> ');
+			   		  $('#checklist'+item.submoduloId).append(' <input type="checkbox" value="'+item.Status+'"  class="configurarSub"  data-submoduloId="'+item.submoduloId+'" id="cckS'+item.registro+'" name="cckS'+item.padre+'" ><label for="cckS'+item.registro+'"></label> ');
 
 			   }
 
@@ -149,12 +217,12 @@ $(".consultarSubmodulo").click(function(){
 			    		 
 			    		 if(item.Status==1)//agregar check de status cuando el submodulo esta asignado para el perfil
 			  				 {
-			  		 			$('#checklistA'+item.accionId).append(' <input type="checkbox" value="'+item.Status+'" class="configurarAcc" id="cckA'+item.registro+'" name="cckA'+item.registro+'" checked><label for="cckA'+item.registro+'"></label> ');
+			  		 			$('#checklistA'+item.accionId).append(' <input type="checkbox" value="'+item.Status+'" class="configurarAcc" id="cckA'+item.registro+'" name="cckA'+item.padre+'" checked><label for="cckA'+item.registro+'"></label> ');
 			   
 			  				 }
 			  			 else if(item.Status==0)//agregar check de status cuando el submodulo no esta signado para el perfil
 			   				{
-			   		  			$('#checklistA'+item.accionId).append(' <input type="checkbox" value="'+item.Status+'"  class="configurarAcc"  id="cckA'+item.registro+'" name="cckA'+item.registro+'" ><label for="cckA'+item.registro+'"></label> ');
+			   		  			$('#checklistA'+item.accionId).append(' <input type="checkbox" value="'+item.Status+'"  class="configurarAcc"  id="cckA'+item.registro+'" name="cckA'+item.padre+'" ><label for="cckA'+item.registro+'"></label> ');
 
 			  				 }
 
@@ -262,21 +330,8 @@ $(".consultarSubmodulo").click(function(){
 						{
 							if (vista_submodulos==true) //si la vista de submodulos se encuentra activa en la pantalla
 								{
-									var modulos_=document.getElementById("targeta1");//obtener el listado de los modulos creados
-									var input=modulos_.getElementsByTagName("input");//obtener elementos que poseen la etiqueta input dentro de la tajeta de modulos
-									var checks=[];
 
-									
-									$.each(input,function(i)//obtiene los  input  check de la tarjeta para modulos
-									{
-
-										if($(this).attr('type')=='checkbox')
-										{
-											checks.push($(this));//va llenando en arreglo de los cheks para los modulos
-										}
-									})
-
-									
+									var checks=extraer_elementos("targeta1");//obtiene los checks que se encuentran en la tarjeta de modulos
 									
 									$.each(checks, function(i) //contiene los checks usados en la targeta de modulos (recorre los modulos para comparar con la clave foranea del submodulo seleccionado)
 									{
@@ -390,17 +445,16 @@ $('.configurarPer').change(function()//configuracion en los modulos
 					if (vista_submodulos==true) //si la vista de submodulos esta visible
 						{
 
-							var submodulos_=document.getElementById("targeta2");//obtener el listado de submodulos creados
-							var input=submodulos_.getElementsByTagName("input");//obtener elementos de la etiqueta input
+							var checks=extraer_elementos("targeta2");//extrae los checks que se encuentran en la tarjeta de submodulos
+							var checks_ac=false;
 							
-							$.each(input, function(i) //eac que recorre los check de submodulos 
+							$.each(checks, function(i) //each que recorre los check de submodulos 
 							{
 
-								if (($(this).attr("type")=="checkbox" )) //si esta activo se procede a desactivar
-									{
 										
-										var moduloPadre_id=obtener_valor('S',$(this).attr('name'));//obtener el id del modulo pare que poseen los check de submodulos concatenados en su name
-											
+										var moduloPadre_id=obtener_valor('S',$(this).attr('name'));//obtener el id del modulo padre que poseen los check de submodulos concatenados en su name
+										var submoduloId=$(this).attr('data-submoduloId');//id del submodulo consultado	
+										
 										if (($('#'+name).prop('checked')==false)&&(moduloPadre_id==modulo_id))//si el check de modulos se deshabilita , la variable valor reflija el valor inicial del check de modulos
 
 										{
@@ -411,8 +465,11 @@ $('.configurarPer').change(function()//configuracion en los modulos
 													$(this).val(0);
 													
 												}
-											
-										}
+
+												checks_ac=checks_acciones ("targeta3",vista_acciones); //obtiene los checks de la vista de acciones
+												actualizar_checks_acciones (checks_ac,submoduloId,0,vista_acciones);//actualiza el estado de los checks de acciones
+
+																					}
 										else if(($('#'+name).prop('checked')==true)&&(moduloPadre_id==modulo_id))//si el check de modulos se habilita
 										{
 
@@ -422,10 +479,15 @@ $('.configurarPer').change(function()//configuracion en los modulos
 													$(this).prop("checked",true);//se activa
 													$(this).val(1);
 												}
+
+
+												checks_ac=checks_acciones ("targeta3",vista_acciones); //obtiene los checks de la vista de acciones
+												actualizar_checks_acciones (checks_ac,submoduloId,1,vista_acciones);//actualiza el estado de los checks de acciones
+
+											
 										}
 										
-									}
-								
+									
 			    			}) 
 				
 							
