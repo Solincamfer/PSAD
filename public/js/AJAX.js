@@ -922,8 +922,14 @@ $(".m_Servicio").click(function(){
 			//alert(data[1])
 		}
 		else if(data[0]== 's2'){
-			$('#stpc').prop(data[1]);
-			$('#cvm').val(data[2]);
+			if (data[1]== 'contabilizado') {
+				$('#stpc').prop('checked',true);
+				$('.icc2').append('<input class="" type="number" placeholder="Cantidad de visitas mensuales" id="p1" value="'+data[2]+'"><i class="fa fa-laptop"></i>');
+			}
+			else{
+				$('#stpe').prop('checked',true);
+				$('.icc2').append('<input class="" type="hidden" id="p2" value="'+data[2]+'"><i class="fa fa-laptop"></i>');
+			}
 			$('#precioP').val(data[3]);
 			//alert(data[1])
 		}
