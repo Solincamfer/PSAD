@@ -527,25 +527,40 @@ public function perfiles_permisos($perfil_id)
 }
 
 
-public function perfiles_configurar_modulo()//usado cuando se activa o desactiva un check/afecta al modulo y a los submodulos
+public function perfiles_configurar_moduloDependencias()//usado cuando se activa o desactiva un check/afecta al modulo y a los submodulos
 {
-	$valores=[1,0];
-	$datos=(int)Request::get('datos');//solo el registro
-	$consulta=DB::table('modulo_perfil')->where('id',$datos)->first();
-	$actualizar=DB::table('modulo_perfil')->where('id',$datos)->update(["status"=>$valores[$consulta->status]]);
-	$actualiza_submodulos=DB::table('perfil_submodulo')->join('submodulos','perfil_submodulo.submodulo_id','=','submodulos.id')->where('submodulos.modulo_id',$consulta->modulo_id)->update(['perfil_submodulo.status'=>$valores[$consulta->status]]);
-	$submodulos=DB::table('submodulos')->where('modulo_id',$consulta->modulo_id)->get();//obtiene los submodulos asociados al modulo afectado
-	$acciones=array();
 	
-	foreach ($submodulos as $submodulo) 
+	/*Controlador empleado cuando se checkea un check de modulos en la ventana permisos para actualizar el status de un modulo y de sus dependencias
+		actualiza el status de los submodulos asociados al modulo seleccionado y al perfil seleccionado actualmente, lo mismo pasa con los submodulos y las acciones.
+
+		*las variables actualizar son solo contadores, ya que cada una obtiene el numero de registros que actualiza la sentencia update
+		*el perfil actual es obtenido de la primera consulta, donde con el id del registro a modificar en la tabla (perfil_modulos) obtengo el id,perfil_id y modulo_id
+	
+	*/
+
+	$valores=[1,0];
+	$c=array();
+	$actualizar=0;
+	$datos=Request::get('datos');
+	$modulo=DB::table('modulo_perfil')->where('id',$datos)->first();
+	$actualizar_m=DB::table('modulo_perfil')->where('id',$datos)->update(['status'=>$valores[$modulo->status]]);
+	$actualizar_s=DB::table('perfil_submodulo')->join('submodulos','perfil_submodulo.submodulo_id','=','submodulos.id')->where(['submodulos.modulo_id'=>$modulo->modulo_id,'perfil_submodulo.perfil_id'=>$modulo->perfil_id])->where(['submodulos.status_sm'=>1,'submodulos.padre'=>1])->update(['perfil_submodulo.status'=>$valores[$modulo->status]]);
+	$submodulos=DB::table('submodulos')->where('modulo_id',$modulo->modulo_id)->where(['status_sm'=>1,'padre'=>1])->get();
+	$actualizar_ac=0;
+	
+	foreach ($submodulos as $submodulo) //recorre cada submodulo asociado al perfil y al modulo seleccionado, actualizando sus acciones
 	{
-		$actualiza_acciones=DB::table('acciones')->join('accion_perfil','accion_perfil.accion_id','=','acciones.id')->where('acciones.submodulo_id',$submodulo->id)->update(['accion_perfil.status'=>$valores[$consulta->status]]);
+		$actualizar_ac=$actualizar_ac+DB::table('acciones')->join('accion_perfil','accion_perfil.accion_id','=','acciones.id')->where(['acciones.submodulo_id'=>$submodulo->id,'accion_perfil.perfil_id'=>$modulo->perfil_id])->where('accion_perfil.status','<>',$valores[$modulo->status])->update(['accion_perfil.status'=>$valores[$modulo->status]]);
+		
 	}
-	return ($actualizar);
+
+	return(($actualizar_m+$actualizar_s+$actualizar_ac));//cantidad de actualizaciones realizadas
 
 }
 
-public function perfiles_configurar_solo_modulo()//activa el submodulo cuando se selecciona un submodulo y se encuentra desactivado
+
+
+public function perfiles_configurar_modulo()//lo activa el submodulo, cuando el modulo padre esta desactivado o activado y no hay submodulos asociados activos
 {
 
 	$valores=[1,0];
@@ -555,6 +570,16 @@ public function perfiles_configurar_solo_modulo()//activa el submodulo cuando se
 	return($actualizar);
 }
 
+
+public function perfiles_configurar_submoduloDependencias()
+{
+	$valores=[1,0];
+	$datos=(int)Request::get('datos');//solo el registro
+	$consulta=DB::table('perfil_submodulo')->where('id',$datos)->first();
+	$actualizar=DB::table('perfil_submodulo')->where('id',$datos)->update(["status"=>$valores[$consulta->status]]);
+
+	return($actualizar);
+}
 
 public function perfiles_configurar_submodulo()
 {
@@ -1335,21 +1360,10 @@ public function clientes_categoria($cliente_id)//listar categorias
 
 		public function pruebas_()
 		{
-			$perfil=DB::table('perfiles')->where('id',1)->first();
-
-			$modulos=DB::table('modulos')->join('modulo_perfil','modulo_perfil.modulo_id','=','modulos.id')->select(
-				'modulos.id AS moduloId','modulos.descripcion AS descripcion','modulos.status_m AS moduloStatus',
-				'modulo_perfil.status AS status')->where(['modulo_perfil.perfil_id'=>$perfil->id])->get();
-
-			  $submodulos=DB::table('submodulos')->join('perfil_submodulo','perfil_submodulo.submodulo_id','=','submodulos.id')->select(
-                                                                   'submodulos.id AS submoduloId','submodulos.descripcion AS descripcion','submodulos.status_sm AS submoduloStatus','submodulos.modulo_id AS padre','submodulos.padre AS sidebar','submodulos.ruta AS ruta_',
-                                                                   'perfil_submodulo.status AS status')->where(['perfil_submodulo.perfil_id'=>$perfil->id,'submodulos.status_sm'=>1,'perfil_submodulo.status'=>1])->get();
-			
-			  $acciones=DB::table('acciones')->join('accion_perfil','accion_perfil.accion_id','=','acciones.id')->select(
-			  	'acciones.status_ac AS status_ac','acciones.descripcion AS descripcion','acciones.url AS url','acciones.clase_css AS clase_css','acciones.data_toogle AS data_toogle','acciones.submodulo_id as submodulo_id','accion_perfil.status AS status')->where(['acciones.status_ac'=>1,'accion_perfil.status'=>1,'accion_perfil.perfil_id'=>$perfil->id])->get();
 
 
-			dd($acciones);
+			$actualizar=DB::table('cargos')->where('descripcion','TAYUPO')->update(['descripcion'=>'TAYUPO']);
+			echo $actualizar;
 		}
 		
 }
