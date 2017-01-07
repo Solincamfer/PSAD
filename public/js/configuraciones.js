@@ -434,7 +434,7 @@ $('.configurarPer').change(function()//configuracion en los modulos
 		var datos=registro;
 		$.get(url, {datos:datos}, function(configurar)
 			{
-				
+				alert(configurar);
 				if(configurar==0)
 				{
 					
