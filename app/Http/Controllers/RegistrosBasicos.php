@@ -388,25 +388,30 @@ public function valores_servicios(){
 				  		's5' => 'respuestas'
 				);
 	$consulta=DB::table($tablas[$id[0]])->where('plan_id',$id[1])->first();
-	if ($id[0] == 's1' && count($consulta) == 1) {
-		$respuesta= array(	$consulta->horaI,
-							$consulta->horaF,
-							$consulta->diaI,
-							$consulta->diaF,
-							$consulta->precio
-					);
+	if (count($consulta) == 1) {
+		if ($id[0] == 's1') {
+			$respuesta= array(	$consulta->horaI,
+								$consulta->horaF,
+								$consulta->diaI,
+								$consulta->diaF,
+								$consulta->precio
+						);
+		}
+		elseif ($id[0] == 's2' || $id[0] == 's3' || $id[0] == 's4') {
+				$respuesta= array(	$consulta->etiqueta,
+									$consulta->valor,
+									$consulta->precio,
+							);
+		}	
+		elseif ($id[0] == 's5') {
+			$respuesta= array(	's5',
+								$consulta->maximo,
+								$consulta->precio
+						);
+		}
 	}
-	elseif ($id[0] == 's2' || $id[0] == 's3' || $id[0] == 's4' && count($consulta) == 1) {
-		$respuesta= array(	$consulta->etiqueta,
-							$consulta->valor,
-							$consulta->precio,
-					);
-	}
-	elseif ($id[0] == 's5' && count($consulta) == 1) {
-		$respuesta= array(	's5',
-							$consulta->maximo,
-							$consulta->precio
-					);
+	elseif (count($consulta) == 0){
+		$respuesta = array('1' => '' );
 	}
 
 return $respuesta;

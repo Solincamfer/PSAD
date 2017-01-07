@@ -188,11 +188,11 @@
                                                     <div class="col-md-10 col-md-offset-1">
                                                         <fieldset class="fst">
                                                             <legend>Opciones Soporte Presencial</legend>
-                                                            <label class="flb"><input type="radio" name="radio" id="stpc" value="contabilizado">Soporte presencial contabilizada</label>
+                                                            <label class="flb"><input type="radio" name="radio" id="stpc" value="contabilizado">Soporte presencial contabilizado</label>
                                                             <div class="form-group row icc2">
                                                     
                                                             </div>
-                                                            <label class="flb"><input type="radio" name="radio" id="stpe" value="emergencia">Respuesta presencial por emergencia</label>
+                                                            <label class="flb"><input type="radio" name="radio" id="stpe" value="ilimitado">Respuesta presencial por emergencia</label>
                                                         </fieldset>
                                                     </div>
                                                     <div class="col-md-8 col-md-offset-2">
@@ -226,11 +226,9 @@
                                                     <div class="col-md-10 col-md-offset-1 mrk">
                                                         <fieldset class="fst">
                                                             <legend>Opciones Soporte Remoto</legend>
-                                                            <label class="radio-inline flb"><input type="radio" name="radio" id="strc">Soporte remoto contabilizado</label>
-                                                            <div class="form-group row icc2">
-                                                                <input class="desact" type="number" placeholder="Cantidad de conexiones Remotas" id="ccr"><i class="fa fa-desktop cstr"></i>
-                                                            </div>
-                                                            <label class="radio-inline flb"><input type="radio" name="radio" id="stri" checked="checked">Soporte remoto ilimitado</label>
+                                                            <label class="radio-inline flb"><input type="radio" name="radio" id="strc" value="contabilizado">Soporte remoto contabilizado</label>
+                                                            <div class="form-group row icc2"></div>  
+                                                            <label class="radio-inline flb"><input type="radio" name="radio" id="stri" checked="checked" value="ilimitado">Soporte remoto ilimitado</label>
                                                         </fieldset>
                                                     </div>
                                                     <div class="col-md-8 col-md-offset-2">
@@ -264,11 +262,10 @@
                                                     <div class="col-md-10 col-md-offset-1">
                                                         <fieldset class="fst">
                                                             <legend>Opciones Soporte Telefónico</legend>
-                                                            <label class="radio-inline flb"><input type="radio" name="radio" id="sttc">Soporte telefónico contabilizado</label>
+                                                            <label class="radio-inline flb"><input type="radio" name="radio" id="sttc" value="contabilizado">Soporte telefónico contabilizado</label>
                                                             <div class="form-group row icc2">
-                                                                <input class="desact" type="number" placeholder="Cantidad de llamadas semanales" id="cstt"><i class="fa fa-phone"></i>
                                                             </div>
-                                                            <label class="radio-inline flb"><input type="radio" name="radio" id="stti">Soporte telefónico ilimitada</label>
+                                                            <label class="radio-inline flb"><input type="radio" name="radio" id="stti" value="ilimitado">Soporte telefónico ilimitado</label>
                                                         </fieldset>
                                                     </div>
                                                     <div class="col-md-8 col-md-offset-2">

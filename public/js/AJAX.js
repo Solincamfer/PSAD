@@ -921,20 +921,7 @@ $(".m_Servicio").click(function(){
 			$('#precio').val(data[4]);
 		}
 		else if(ID== 's2'){
-			$("input[name=radio]").change(function () {	 
-					if($(this).val() == 'contabilizado'){
-						$('#p2').remove();
-						$('.icc2').append('<input class="campo" type="number" id="p1" value="'+data[1]+'"><i id="ic1" class="fa fa-laptop"></i>');
-					}
-					else if($(this).val() == 'emergencia'){
-						$('#p1').remove();
-						$('#ic1').remove();
-						$('.icc2').append('<input class="campo" type="hidden" id="p2" value="'+data[1]+'">');
-					}
-					
-					//$('#stpe').prop('checked',true);
-					
-			});
+			mostrar(data[1],1,2);
 			/*if (data[0]== 'contabilizado') {
 				$('#stpc').prop('checked',true);
 				$('.icc2').append('<input class="campo" type="number" placeholder="Cantidad de visitas mensuales" id="p1" value="'+data[1]+'"><i class="fa fa-laptop"></i>');
@@ -950,22 +937,40 @@ $(".m_Servicio").click(function(){
 			}*/
 			$('#precioP').val(data[2]);
 		}
-		else if (data[0]== 's3'){
-			$('#strc').prop(data[1]);
-			$('#cstr').val(data[2]);
-			$('#precioR').val(data[3]);
+		else if (ID == 's3'){
+			mostrar(data[1],3,4)
+			/*$('#strc').prop(data[1]);
+			$('#cstr').val(data[2]);*/
+			$('#precioR').val(data[2]);
 			//alert(data[1])
 		}
-		else if (data[0]== 's4') {
-			$('#sttc').prop(data[1]);
-			$('#cstt').val(data[2]);
-			$('#precioT').val(data[3]);
+		else if (ID == 's4') {
+			mostrar(data[1],5,6)
+			/*$('#sttc').prop(data[1]);
+			$('#cstt').val(data[2]);*/
+			$('#precioT').val(data[2]);
 			//alert(data[1])
 		}
 		else if (data[0]== 's5') {
 			$('#tr').val(data[1]);
 			$('#precioTR').val(data[2]);
 			//alert(data[1])
+		}
+
+		function mostrar(datos,id1,id2){
+
+			$("input[name=radio]").change(function () {	 
+					if($(this).val() == 'contabilizado'){
+						$('#'+id2).remove();
+						$('.icc2').append('<input class="campo" type="number" id="'+id1+'" value="'+datos+'"><i id="ic1" class="fa fa-laptop"></i>');
+					}
+					else if($(this).val() == 'ilimitado'){
+						$('#'+id1).remove();
+						$('#ic1').remove();
+						$('.icc2').append('<input class="campo" type="hidden" id="'+id2+'" value="0">');
+					}
+					
+			});
 		}
    });
 });
