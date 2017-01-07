@@ -22,11 +22,11 @@ function obtener_valor(indice,cadena)//indice: caracter/letra para cortar, caden
 }//funcion que se encarga de extraer el valor numerico contenido en una cadena
 
 
-function actualizar_status (datos) //actualiza el status de un modulo en la base de datos
+function actualizar_status (datos,ruta) //actualiza el status de un modulo en la base de datos
 {
 	
 	var datos=datos;
-	var url="/menu/registros/perfiles/configurar/modulo_";
+	var url=ruta;
 	$.get(url, {datos:datos}, function(configurar)//va al contrololador para modificar status del modulo
 	{
 		if(configurar==0)//si no recibe valores del controlador
@@ -318,9 +318,11 @@ $(".consultarSubmodulo").click(function(){
 
 		   		var url= '/menu/registros/perfiles/configurar/submodulo';//rutas[tabla];
 				var datos=registro;//datos para el controlador (registro a modificar y tabla a modificar)*/
+				var submoduloId=$(this).attr('data-submoduloId');
 				$.get(url, {datos:datos}, function(configurar)
 					{
 						
+						alert(configurar);
 						if(configurar==0)//si no recibe valores del controlador
 						{
 							
@@ -353,7 +355,7 @@ $(".consultarSubmodulo").click(function(){
 														///////////////////////////actualizar el modulo en la base de datos ////////////
 														
 														var id_registro=obtener_valor('M',$(this).attr('id'));//id del registro que ocupa en la tabla modulo_perfil el cual se usa solo para actualizar en la base de datos el valor de status perteneciente al check de modulos
-														actualizar_status(id_registro);
+														actualizar_status(id_registro,"/menu/registros/perfiles/configurar/modulo_");
 
 													}
 													else if ((($('#'+name).prop('checked')==false)&&($(this).prop('checked')==true))&&(contadorChekAct==0)) //si se desactiva el ultimo submodulo perteneciente a un modulo y esta se encuentra activo
@@ -365,7 +367,7 @@ $(".consultarSubmodulo").click(function(){
 														///////////////////////////actualizar el modulo en la base de datos ////////////
 														
 														var id_registro=obtener_valor('M',$(this).attr('id'));//id del registro que ocupa en la tabla modulo_perfil el cual se usa solo para actualizar en la base de datos el valor de status perteneciente al check de modulos
-														actualizar_status(id_registro);
+														actualizar_status(id_registro,"/menu/registros/perfiles/configurar/modulo_");
 														
 
 													}
@@ -377,7 +379,52 @@ $(".consultarSubmodulo").click(function(){
 										//}
 
 									})//fin del each)
+								
+								if (vista_acciones==true) 
+								{
+									var checks_acc=checks_acciones ("targeta3",vista_acciones);
+									var submoduloPadre=false;
+									$.each(checks_acc, function(i)
+									{
+										submoduloPadre=obtener_valor('A',$(this).attr('name'));
+										if(submoduloPadre==submoduloId)
+										{
+											if (($('#'+name).prop('checked')==true)&&($(this).prop('checked')==false)) //si el submodulo es checkeado y el modulo padre se encuenttra inactivo
+													{
 
+														$(this).prop('checked',true);//se checkea el modulo padre
+														$(this).val(valores[$(this).val()]);//cambio de valor para el check, se le coloca 1 "activo"
+
+														
+														///////////////////////////actualizar el modulo en la base de datos ////////////
+														
+														var id_registro=obtener_valor('A',$(this).attr('id'));//id del registro que ocupa en la tabla modulo_perfil el cual se usa solo para actualizar en la base de datos el valor de status perteneciente al check de modulos
+														//actualizar_status(id_registro,"/menu/registros/perfiles/configurar/accion");
+
+													}
+													else if (($('#'+name).prop('checked')==false)&&($(this).prop('checked')==true)) //si se desactiva el ultimo submodulo perteneciente a un modulo y esta se encuentra activo
+													{
+
+														$(this).prop('checked',false);//se checkea el modulo padre
+														$(this).val(valores[$(this).val()]);
+
+														///////////////////////////actualizar el modulo en la base de datos ////////////
+														
+														var id_registro=obtener_valor('A',$(this).attr('id'));//id del registro que ocupa en la tabla modulo_perfil el cual se usa solo para actualizar en la base de datos el valor de status perteneciente al check de modulos
+														//actualizar_status(id_registro,"/menu/registros/perfiles/configurar/accion");
+														
+
+													}
+
+
+
+										}
+
+
+
+									})
+
+								}
 
 								}//fin de validacion para saber si la vista de submodulos esta activa
 
