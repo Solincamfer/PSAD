@@ -913,25 +913,42 @@ $(".m_Servicio").click(function(){
 	idplan=$('#plan').val();	
 	datos=[ID,idplan];		        	
 	$.get("/menu/registros/planes/consultarservicios",{datos:datos}, function(data){
-		if (data[0]== 's1') {
-			$('#horaI').val(data[1]);
-			$('#horaF').val(data[2]);
-			$('#diaI').val(data[3]);
-			$('#diaF').val(data[4]);
-			$('#precio').val(data[5]);
-			//alert(data[1])
+		if (ID == 's1') {
+			$('#horaI').val(data[0]);
+			$('#horaF').val(data[1]);
+			$('#diaI').val(data[2]);
+			$('#diaF').val(data[3]);
+			$('#precio').val(data[4]);
 		}
-		else if(data[0]== 's2'){
-			if (data[1]== 'contabilizado') {
+		else if(ID== 's2'){
+			$("input[name=radio]").change(function () {	 
+					if($(this).val() == 'contabilizado'){
+						$('#p2').remove();
+						$('.icc2').append('<input class="campo" type="number" id="p1" value="'+data[1]+'"><i id="ic1" class="fa fa-laptop"></i>');
+					}
+					else if($(this).val() == 'emergencia'){
+						$('#p1').remove();
+						$('#ic1').remove();
+						$('.icc2').append('<input class="campo" type="hidden" id="p2" value="'+data[1]+'">');
+					}
+					
+					//$('#stpe').prop('checked',true);
+					
+			});
+			/*if (data[0]== 'contabilizado') {
 				$('#stpc').prop('checked',true);
-				$('.icc2').append('<input class="" type="number" placeholder="Cantidad de visitas mensuales" id="p1" value="'+data[2]+'"><i class="fa fa-laptop"></i>');
+				$('.icc2').append('<input class="campo" type="number" placeholder="Cantidad de visitas mensuales" id="p1" value="'+data[1]+'"><i class="fa fa-laptop"></i>');
+				
 			}
-			else{
-				$('#stpe').prop('checked',true);
-				$('.icc2').append('<input class="" type="hidden" id="p2" value="'+data[2]+'"><i class="fa fa-laptop"></i>');
-			}
-			$('#precioP').val(data[3]);
-			//alert(data[1])
+			else if(data[0]== 'emergencia'){
+				$("input[name=radio]").change(function () {	 
+					$( ".campo" ).remove();
+					$('#stpc').prop('checked',true);
+					$('.icc2').append('<input class="campo" type="number" placeholder="Cantidad de visitas mensuales" id="p1" value="'+data[1]+'"><i class="fa fa-laptop"></i>');
+					data[1]='contabilizado';
+				});
+			}*/
+			$('#precioP').val(data[2]);
 		}
 		else if (data[0]== 's3'){
 			$('#strc').prop(data[1]);
@@ -952,3 +969,4 @@ $(".m_Servicio").click(function(){
 		}
    });
 });
+
