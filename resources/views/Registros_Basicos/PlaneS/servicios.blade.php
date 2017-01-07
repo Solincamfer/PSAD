@@ -190,9 +190,9 @@
                                                             <legend>Opciones Soporte Presencial</legend>
                                                             <label class="flb"><input type="radio" name="radio" id="stpc" value="contabilizado">Soporte presencial contabilizada</label>
                                                             <div class="form-group row icc2">
-                                                                <input class="desact" type="number" placeholder="Cantidad de visitas mensuales" id="cvm"><i class="fa fa-laptop"></i>
+                                                    
                                                             </div>
-                                                            <label class="flb"><input type="radio" name="radio" id="rppe" value="emergencia">Respuesta presencial por emergencia</label>
+                                                            <label class="flb"><input type="radio" name="radio" id="stpe" value="emergencia">Respuesta presencial por emergencia</label>
                                                         </fieldset>
                                                     </div>
                                                     <div class="col-md-8 col-md-offset-2">

@@ -389,8 +389,7 @@ public function valores_servicios(){
 				);
 	$consulta=DB::table($tablas[$id[0]])->where('plan_id',$id[1])->first();
 	if ($id[0] == 's1' && count($consulta) == 1) {
-		$respuesta= array(	's1',
-							$consulta->horaI,
+		$respuesta= array(	$consulta->horaI,
 							$consulta->horaF,
 							$consulta->diaI,
 							$consulta->diaF,
@@ -398,8 +397,7 @@ public function valores_servicios(){
 					);
 	}
 	elseif ($id[0] == 's2' || $id[0] == 's3' || $id[0] == 's4' && count($consulta) == 1) {
-		$respuesta= array(	$id[0],
-							$consulta->etiqueta,
+		$respuesta= array(	$consulta->etiqueta,
 							$consulta->valor,
 							$consulta->precio,
 					);
