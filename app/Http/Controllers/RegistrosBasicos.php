@@ -398,10 +398,10 @@ public function valores_servicios(){
 						);
 		}
 		elseif ($id[0] == 's2' || $id[0] == 's3' || $id[0] == 's4') {
-				$respuesta= array(	$consulta->etiqueta,
-									$consulta->valor,
-									$consulta->precio,
-							);
+			$respuesta= array(	$consulta->etiqueta,
+								$consulta->valor,
+								$consulta->precio,
+						);
 		}	
 		elseif ($id[0] == 's5') {
 			$respuesta= array(	's5',
