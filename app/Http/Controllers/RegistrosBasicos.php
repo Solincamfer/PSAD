@@ -575,10 +575,11 @@ public function perfiles_configurar_submoduloDependencias()
 {
 	$valores=[1,0];
 	$datos=(int)Request::get('datos');//solo el registro
-	$consulta=DB::table('perfil_submodulo')->where('id',$datos)->first();
-	$actualizar=DB::table('perfil_submodulo')->where('id',$datos)->update(["status"=>$valores[$consulta->status]]);
+	$submodulo=DB::table('perfil_submodulo')->where('id',$datos)->first();
+	$actualizar_s=DB::table('perfil_submodulo')->where('id',$datos)->update(["status"=>$valores[$submodulo->status]]);
+	$actualizar_ac=DB::table('acciones')->join('accion_perfil','accion_perfil.accion_id','=','acciones.id')->where(['acciones.submodulo_id'=>$submodulo->submodulo_id,'accion_perfil.perfil_id'=>$submodulo->perfil_id])->where('accion_perfil.status','<>',$valores[$submodulo->status])->update(['accion_perfil.status'=>$valores[$submodulo->status]]);
 
-	return($actualizar);
+	return($actualizar_s+$actualizar_ac);
 }
 
 public function perfiles_configurar_submodulo()
