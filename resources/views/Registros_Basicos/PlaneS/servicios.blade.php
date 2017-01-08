@@ -197,7 +197,7 @@
                                                     </div>
                                                     <div class="col-md-8 col-md-offset-2">
                                                         <div class="form-group row icc3">
-                                                            <label>Precio</label><input type="number" placeholder="Precio" id="precioP"><i class="fa fa-money"></i>
+                                                            <input type="number" placeholder="Precio" id="precioP"><i class="fa fa-money"></i>
                                                         </div>
                                                     </div>
                                                 </div>

@@ -922,12 +922,14 @@ $(".m_Servicio").click(function(){
 		}
 		else if(ID== 's2'){
 			if (data[0] == 'contabilizado') {
+				//$('.campo').remove();
 				$('#stpc').prop('checked', true)
 				$('.icc2').append('<input class="campo" type="number" id="p1" value="'+data[1]+'"><i id="ic1" class="fa fa-laptop"></i>');
 			}
-			else if(data[0] == 'emergencia'){
+			else if(data[0] == 'ilimitado'){
+				//$('.campo').remove();
 				$('#stpe').prop('checked', true)
-				$('.icc2').append('<input class="campo" type="hidden" id="p2" value="'+data[1]+'">');
+				$('.icc2').append('<input class="campo" type="hidden" id="p2" value="0">');
 			}				
 			$('#precioP').val(data[2]);
 			valor= $("input[name=radio1]:checked").val();
@@ -936,7 +938,7 @@ $(".m_Servicio").click(function(){
 					$('#p2').remove();
 					$('.icc2').append('<input class="campo" type="number" id="p1" value="'+data[1]+'"><i id="ic1" class="fa fa-laptop"></i>');
 				}
-				else if ($("input[name=radio1]:checked").val()=='emergencia'){
+				else if ($("input[name=radio1]:checked").val()=='ilimitado'){
 					$('#p1').remove();
 					$('#ic1').remove();
 					$('.icc2').append('<input class="campo" type="hidden" id="p2" value="0">');
