@@ -1192,7 +1192,7 @@ public function clientes_categoria($cliente_id)//listar categorias
 	public function clientes_sucursales_plan()
 		{
 			$datos=$this->cargar_header_sidebar_acciones();
-			$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(35,36,37),34);
+			$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(34,37),false);///reisar vista para boton agregar
 			return view ('Registros_Basicos\Clientes\clientes_sucursales_plan',$this->datos_vista($datos,$acciones,array()));
 							
 		}
