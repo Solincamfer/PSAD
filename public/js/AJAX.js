@@ -29,6 +29,9 @@ $( "#NewPerfil" ).submit(function( event ){
 $( "#NewPlan" ).submit(function( event ){
 	event.preventDefault();
 	});
+/*$( "#NewHorario" ).submit(function( event ){
+	event.preventDefault();
+	});*/
 
 
 ////////////////////
@@ -908,10 +911,13 @@ $('#savePlan').click(function(){
 });
 
 ///////////////////////////// Asociacion de Servicios a Plan ///////////////////////
-$(".m_Servicio").click(function(){
+var valorP;
+var valorR; 
+var valorT;
+$(".m_Servicio").click(function modificar(){
 	ID = $(this).attr("id");
 	idplan=$('#plan').val();	
-	datos=[ID,idplan];		        	
+	datos=[ID,idplan];	        	
 	$.get("/menu/registros/planes/consultarservicios",{datos:datos}, function(data){
 		if (ID == 's1') {
 			$('#horaI').val(data[0]);
@@ -922,53 +928,176 @@ $(".m_Servicio").click(function(){
 		}
 		else if(ID== 's2'){
 			if (data[0] == 'contabilizado') {
-				//$('.campo').remove();
+				$('.campo').remove();
+				$('#ic1').remove();
 				$('#stpc').prop('checked', true)
-				$('.icc2').append('<input class="campo" type="number" id="p1" value="'+data[1]+'"><i id="ic1" class="fa fa-laptop"></i>');
+				$('.icc2').append('<input class="campo" type="number" id="p1" placeholder="Cantidad de soportes Presenciales" value="'+data[1]+'"><i id="ic1" class="fa fa-laptop"></i>');
+				
 			}
 			else if(data[0] == 'ilimitado'){
-				//$('.campo').remove();
+				$('.campo').remove();
+				$('#ic1').remove();
 				$('#stpe').prop('checked', true)
 				$('.icc2').append('<input class="campo" type="hidden" id="p2" value="0">');
-			}				
-			$('#precioP').val(data[2]);
-			valor= $("input[name=radio1]:checked").val();
-			$("input[name=radio1]").change(function () {
-				if ($("input[name=radio1]:checked").val()=='contabilizado') {
-					$('#p2').remove();
-					$('.icc2').append('<input class="campo" type="number" id="p1" value="'+data[1]+'"><i id="ic1" class="fa fa-laptop"></i>');
-				}
-				else if ($("input[name=radio1]:checked").val()=='ilimitado'){
-					$('#p1').remove();
-					$('#ic1').remove();
-					$('.icc2').append('<input class="campo" type="hidden" id="p2" value="0">');
-				}
-			});
+			}	
+			else{
+				$('.campo').remove();
+				$('#ic1').remove();
+				$('#stpc').prop('checked', true)
+				$('.icc2').append('<input class="campo" type="number" id="p1" placeholder="Cantidad de soportes Presenciales" value=""><i id="ic1" class="fa fa-laptop"></i>');
+			}			
+			$('#precioP').val(data[2]);	
+			valorP= data[1];
+
 		}
 		else if (ID == 's3'){
+			if (data[0] == 'contabilizado') {
+				$('.campo').remove();
+				$('#ic1').remove();
+				$('#strc').prop('checked', true)
+				$('.icc5').append('<input class="campo" type="number" id="p1" placeholder="Cantidad de soportes Remotos" value="'+data[1]+'"><i id="ic1" class="fa fa-laptop"></i>');
+			}
+			else if(data[0] == 'ilimitado'){
+				$('.campo').remove();
+				$('#ic1').remove();
+				$('#stri').prop('checked', true)
+				$('.icc5').append('<input class="campo" type="hidden" id="p2" value="0">');
+			}	
+			else{
+				$('.campo').remove();
+				$('#ic1').remove();
+				$('#strc').prop('checked', true)
+				$('.icc5').append('<input class="campo" type="number" id="p1" placeholder="Cantidad de soportes Remotos" value=""><i id="ic1" class="fa fa-laptop"></i>');
+			}			
 
 			$('#precioR').val(data[2]);
+			valorR= data[1];
 		}
 		else if (ID == 's4') {
+			if (data[0] == 'contabilizado') {
+				$('.campo').remove();
+				$('#ic1').remove();
+				$('#sttc').prop('checked', true)
+				$('.icc4').append('<input class="campo" type="number" id="p1" placeholder="Cantidad de soportes Telefónicos" value="'+data[1]+'"><i id="ic1" class="fa fa-laptop"></i>');
+			}
+			else if(data[0] == 'ilimitado'){
+				$('.campo').remove();
+				$('#ic1').remove();
+				$('#stti').prop('checked', true)
+				$('.icc4').append('<input class="campo" type="hidden" id="p2" value="0">');
+			}	
+			else{
+				$('.campo').remove();
+				$('#ic1').remove();
+				$('#sttc').prop('checked', true)
+				$('.icc4').append('<input class="campo" type="number" id="p1" placeholder="Cantidad de soportes Telefónicos" value=""><i id="ic1" class="fa fa-laptop"></i>');
+			}	
 
 			$('#precioT').val(data[2]);
+			valorT= data[1];
 		}
 		else if (data[0]== 's5') {
 			$('#tr').val(data[1]);
 			$('#precioTR').val(data[2]);
 		}
-		/*$("input[name=radio2]").change(function () {	 
-					if($(this).val() == 'contabilizado'){
-						$('#p2').remove();
-						$('.icc2').append('<input class="campo" type="number" id="p1" value="'+data[1]+'"><i id="ic1" class="fa fa-laptop"></i>');
-					}
-					else if($(this).val() == 'ilimitado'){
-						$('#p1').remove();
-						$('#ic1').remove();
-						$('.icc2').append('<input class="campo" type="hidden" id="p2" value="0">');
-					}
-					
-			});*/
-   });
+    });
 });
 
+
+/////////////////////////// CAMBIOS DE VALORES DE CHECK PARA LOS SERVICIOS SERVICIOS ///////////////////////////////////////
+
+$("input[name=radio1]").change(function () {
+	if (valorP==0) {
+		valorP = '';
+	}
+	if ($("input[name=radio1]:checked").val()=='contabilizado') {
+		$('#p2').remove();
+		$('.icc2').append('<input class="campo" type="number" id="p1"  placeholder="Cantidad de Soportes Presenciales"  value="'+valorP+'"><i id="ic1" class="fa fa-laptop"></i>');
+	}
+	else if ($("input[name=radio1]:checked").val()=='ilimitado'){
+		$('#p1').remove();
+		$('#ic1').remove();
+		$('.icc2').append('<input class="campo" type="hidden" id="p2" value="0">');
+	}
+});
+
+$("input[name=radio2]").change(function () {
+	if (valorR==0) {
+		valorR = '';
+	}
+	if ($("input[name=radio2]:checked").val()=='contabilizado') {
+		$('#p2').remove();
+		$('.icc5').append('<input class="campo" type="number" id="p1"  placeholder="Cantidad de Soportes Remotos"  value="'+valorR+'"><i id="ic1" class="fa fa-laptop"></i>');
+	}
+	else if ($("input[name=radio2]:checked").val()=='ilimitado'){
+		$('#p1').remove();
+		$('#ic1').remove();
+		$('.icc5').append('<input class="campo" type="hidden" id="p2" value="0">');
+	}
+});
+
+$("input[name=radio3]").change(function () {
+	if (valorT==0) {
+		valorT = '';
+	}
+	if ($("input[name=radio3]:checked").val()=='contabilizado') {
+		$('#p2').remove();
+		$('.icc4').append('<input class="campo" type="number" id="p1"  placeholder="Cantidad de Soportes Telefónicos"  value="'+valorT+'"><i id="ic1" class="fa fa-laptop"></i>');
+	}
+	else if ($("input[name=radio3]:checked").val()=='ilimitado'){
+		$('#p1').remove();
+		$('#ic1').remove();
+		$('.icc4').append('<input class="campo" type="hidden" id="p2" value="0">');
+	}
+});
+
+//////////////////////////////// INSERTAR VALORES EN BD PARA CADA SERVICIO ///////////////////////////
+
+/*$('#saveHorario').click(function(){
+	var form=$('#NewHorario');
+	idplan=$('#plan').val();	
+	var url= '/menu/registros/planes/servicios/insertar';
+	var data='vincen'
+	alert (data[0])
+	var inicio = $('#horaI').val();
+	var final = $('#horaF').val();
+	var diaI = $('#diaI').val();
+	var diaF = $('#diaF').val();
+	var precio= $('#precio').val();
+	
+	if (inicio != '' && final != '' && diaI != '' && diaF != '' && precio != ''){
+		var posting = $.post(url,data,function(resultado){
+			alert(resultado)
+			if (resultado == 1) {
+				//SWALLLL mensajes de alerta y sucesos
+				swal({
+					title:'Guardado Exitoso',//Contenido del modal
+					text: 'El Horario fue Guardado Exitosamente para este Plan',
+					type: "success",
+					timer:1000,
+					showConfirmButton:false,//Eliminar boton de confirmacion
+				});
+				//Retardo en ejecucion de ruta.
+				setTimeout(function(){location.href = "/menu/registros/planeservicios";},1200); // 3000ms = 3s
+			}	
+			else {
+				swal({
+
+					title:'Registro Existente!!!.',//Contenido del modal
+					text: 'Este Plan ya existe',
+					type: "error",
+					timer:2000,
+					showConfirmButton:false,//Eliminar boton de confirmacion
+				});
+			}						
+		});
+		posting.fail(function() {
+			swal({
+				title:'Error inesperado!!',//Contenido del modal
+				text: 'Pongase en contacto con el administrador',
+				type: "error",
+				showConfirmButton:true,//Eliminar boton de confirmacion
+			});
+		});
+	}
+});*/

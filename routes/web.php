@@ -135,7 +135,8 @@ Route::group(['prefix'=>'/menu/registros','middleware'=>['v_menu']],function(){
 				/*//////////////////////Planes y servicios//////////////////////////////////////////*/
 				Route::match(['post','get'],'/planes/registrar',                                                      ['uses'=>'RegistrosBasicos@planes_ingresar']); 
 
-				Route::match(['post','get'],'/planes/consultarservicios',                                                      ['uses'=>'RegistrosBasicos@valores_servicios']); 
+				Route::match(['post','get'],'/planes/consultarservicios',                                                      ['uses'=>'RegistrosBasicos@insertar_servicios']); 
+				Route::match(['post','get'],'/planes/servicios/insertar',                                                      ['uses'=>'RegistrosBasicos@valores_servicios']); 
 			});
 
 
