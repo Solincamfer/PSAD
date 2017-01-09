@@ -21,34 +21,36 @@
                     </div>
                 </div>
                 <div class="col-xs-5 col-sm-5 col-md-6 col-md-offset-3" style=""> 
-                   @if($agregar)
+                  
                    <div class="container">
                        <div class="row">
+                        @if($agregar)
                            <div class="col-md-offset-6">
                                <button id="btnAdd" type="button" class="btnAdc" data-toggle="modal" data-target="#myModal" href="#myModal"><i class="fa fa-plus"></i> AGREGAR</button> 
                            </div>
+                        @endif
                        </div>
                    </div>
-                   @endif
+                 
                    @foreach($consulta as $planes)
                         <div class="contMd">
                             <div class="icl">
                                 @foreach($acciones as $accion)
-                                    @if($accion->descripcion!="Status")
-                                        @if($accion->data_toogle=="modal")
+                                    @if($accion->id!=66)
+                                        @if($accion->id==65)
                                             <span class="iclsp">
                                                 <a href="#myModal2" class="tltp modificarPlanes" data-ttl="{{$accion->descripcion}}" data-toggle="modal" data-target="#myModal2"> 
                                                     <i class="{{$accion->clase_css}}"></i>
                                                 </a>
                                             </span>
-                                        @elseif($accion->data_toogle!="modal")
+                                        @elseif($accion->id!=65)
                                             <span class="iclsp">
                                                 <a href="{{$accion->url.$planes->id}}" class="tltp" data-ttl="{{$accion->descripcion}}">
                                                     <i class="{{$accion->clase_css}}"></i>
                                                 </a>
                                             </span>
                                         @endif
-                                    @elseif($accion->descripcion=="Status")
+                                    @elseif($accion->id==66)
                                         @if($planes->status==1)
                                             <div class="chbx">
                                                 <input type="checkbox" class="btnAcc" name="status" id="{{'inchbx'. $planes->id}}" value="{{$planes->status}}" checked><label for="{{'inchbx'. $planes->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>

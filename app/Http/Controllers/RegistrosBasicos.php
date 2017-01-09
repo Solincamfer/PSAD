@@ -373,7 +373,7 @@ public function planes_ingresar(){
 public function planes_servicios_servicios($id_plan)
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
-		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(73,74),72);
+		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(73,74),72);//identificar acciones para la vista de servicios
 		return view ('Registros_Basicos\PlaneS\servicios',$this->datos_vista($datos,$acciones,array(),$id_plan));
 
 		
