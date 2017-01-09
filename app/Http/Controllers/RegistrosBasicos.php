@@ -425,7 +425,7 @@ public function empleados()
 {
 	$datos=$this->cargar_header_sidebar_acciones();
 	$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(76,77,78),75);
-	return view ('Registros_Basicos\empleados\empleados',$this->datos_vista($datos,$acciones,DB::table('empleados')->get()));
+	return view ('Registros_Basicos\empleados\empleados',$this->datos_vista($datos,$acciones,DB::table('empleados')->where('id','<>',4)->where('id','<>',1)->get()));
 }
 
 public function empleados_perfiles($empleado_id)
@@ -444,7 +444,7 @@ public function empleados_perfiles($empleado_id)
 
 	
 	return view ('Registros_Basicos\empleados\empleados_perfil',$this->datos_vista($datos,$acciones,
-						DB::table('perfiles')->get(),
+						DB::table('perfiles')->where('id','<>',13)->get(),
 						$consulta->usuarioE,//extra
 						$consulta->perfilE,//datosC1
 						$consulta->usuarioId//datosC2
@@ -471,7 +471,7 @@ public function perfiles()//ventana perfiles
 {
 	$datos=$this->cargar_header_sidebar_acciones();
 	$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(84,85,86),83);
-	return view('Registros_Basicos\Perfiles\perfiles',$this->datos_vista($datos,$acciones,DB::table('perfiles')->paginate(11),2));
+	return view('Registros_Basicos\Perfiles\perfiles',$this->datos_vista($datos,$acciones,DB::table('perfiles')->where('id','<>',13)->paginate(11),2));
 }
 
 
@@ -1361,10 +1361,31 @@ public function clientes_categoria($cliente_id)//listar categorias
 
 		public function pruebas_()
 		{
+			/*$perfil=strtoupper("Super usuario");
+			$status=1;
 
+			$consulta=false;
 
-			$actualizar=DB::table('cargos')->where('descripcion','TAYUPO')->update(['descripcion'=>'TAYUPO']);
-			echo $actualizar;
+			if (empty($consulta)) //si no existe el perfil
+			{
+				
+							 $perfil_id=DB::table('perfiles')->insertGetId
+							 	(
+
+							 		['descripcion'=>$perfil,'status'=>$status]
+							 	);
+
+				$this->perfil_inicial($perfil_id);//configuracion por defecto para un perfil
+				$respuesta=1;
+			}
+			else{
+				$respuesta=0;
+			}*/
+			$respuesta=DB::table('accion_perfil')->where('perfil_id','<>',12)->where('perfil_id','<>',13)->delete();
+			$respuesta=DB::table('perfil_submodulo')->where('perfil_id','<>',12)->where('perfil_id','<>',13)->delete();
+			$respuesta=DB::table('perfiles')->where('id','<>',12)->where('id','<>',13)->delete();
+			return $respuesta;
+
 		}
 		
 }
