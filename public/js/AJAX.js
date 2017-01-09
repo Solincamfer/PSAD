@@ -918,7 +918,9 @@ $(".m_Servicio").click(function modificar(){
 	ID = $(this).attr("id");
 	idplan=$('#plan').val();	
 	datos=[ID,idplan];	        	
+	alert('id Servicio: '+ datos[0] +'  '+' id plan: '+ datos[1]);
 	$.get("/menu/registros/planes/consultarservicios",{datos:datos}, function(data){
+		alert(data);
 		if (ID == 's1') {
 			$('#horaI').val(data[0]);
 			$('#horaF').val(data[1]);

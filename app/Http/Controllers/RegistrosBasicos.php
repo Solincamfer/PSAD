@@ -381,6 +381,7 @@ public function planes_servicios_servicios($id_plan)
 
 public function valores_servicios(){
 	$id= Request::get('datos');
+	//dd($id);
 	$tablas=	array(	's1' => 'horarios',
 				  		's2' => 'presenciales',
 				  		's3' => 'remotos',
@@ -1381,10 +1382,49 @@ public function clientes_categoria($cliente_id)//listar categorias
 			else{
 				$respuesta=0;
 			}*/
-			$respuesta=DB::table('accion_perfil')->where('perfil_id','<>',12)->where('perfil_id','<>',13)->delete();
+			/*$respuesta=DB::table('accion_perfil')->where('perfil_id','<>',12)->where('perfil_id','<>',13)->delete();
 			$respuesta=DB::table('perfil_submodulo')->where('perfil_id','<>',12)->where('perfil_id','<>',13)->delete();
 			$respuesta=DB::table('perfiles')->where('id','<>',12)->where('id','<>',13)->delete();
+			return $respuesta;*/
+
+				$id= ['s4',1];
+				$tablas=	array(	's1' => 'horarios',
+							  		's2' => 'presenciales',
+							  		's3' => 'remotos',
+							  		's4' => 'telefonicos',
+							  		's5' => 'respuestas'
+							);
+				$consulta=DB::table($tablas[$id[0]])->where('plan_id',$id[1])->first();
+				dd($consulta);
+				if (count($consulta) == 1) {
+					if ($id[0] == 's1') {
+						$respuesta= array(	$consulta->horaI,
+											$consulta->horaF,
+											$consulta->diaI,
+											$consulta->diaF,
+											$consulta->precio
+									);
+					}
+					elseif ($id[0] == 's2' || $id[0] == 's3' || $id[0] == 's4') {
+						$respuesta= array(	$consulta->etiqueta,
+											$consulta->valor,
+											$consulta->precio,
+									);
+					}	
+					elseif ($id[0] == 's5') {
+						$respuesta= array(	's5',
+											$consulta->maximo,
+											$consulta->precio
+									);
+					}
+				}
+				elseif (count($consulta) == 0){
+					$respuesta = array('1' => '' );
+				}
+
+			//dd($respuesta);
 			return $respuesta;
+
 
 		}
 		
