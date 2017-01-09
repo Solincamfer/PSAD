@@ -217,12 +217,12 @@ $(".consultarSubmodulo").click(function(){
 			    		 
 			    		 if(item.Status==1)//agregar check de status cuando el submodulo esta asignado para el perfil
 			  				 {
-			  		 			$('#checklistA'+item.accionId).append(' <input type="checkbox" value="'+item.Status+'" class="configurarAcc" id="cckA'+item.registro+'" name="cckA'+item.padre+'" checked><label for="cckA'+item.registro+'"></label> ');
+			  		 			$('#checklistA'+item.accionId).append(' <input type="checkbox" data-dependencia="'+item.dependencia+'" data-accion="'+item.accionId+'" value="'+item.Status+'" class="configurarAcc" id="cckA'+item.registro+'" name="cckA'+item.padre+'" checked><label for="cckA'+item.registro+'"></label> ');
 			   
 			  				 }
 			  			 else if(item.Status==0)//agregar check de status cuando el submodulo no esta signado para el perfil
 			   				{
-			   		  			$('#checklistA'+item.accionId).append(' <input type="checkbox" value="'+item.Status+'"  class="configurarAcc"  id="cckA'+item.registro+'" name="cckA'+item.padre+'" ><label for="cckA'+item.registro+'"></label> ');
+			   		  			$('#checklistA'+item.accionId).append(' <input type="checkbox" data-dependencia="'+item.dependencia+'"   data-accion="'+item.accionId+'"  value="'+item.Status+'"  class="configurarAcc"  id="cckA'+item.registro+'" name="cckA'+item.padre+'" ><label for="cckA'+item.registro+'"></label> ');
 
 			  				 }
 

@@ -639,7 +639,7 @@ public function mostrar_acciones()
 					->join('perfiles','perfiles.id','=','accion_perfil.perfil_id')
 
 					->select('acciones.id AS accionId','acciones.descripcion AS descripcion','acciones.submodulo_id AS padre',
-							 'acciones.status_ac AS accionStatus','perfiles.id AS perfilId','perfiles.descripcion AS perfilDescripcion',
+							 'acciones.status_ac AS accionStatus','acciones.accion_id AS dependencia','acciones.ventana AS ventana','perfiles.id AS perfilId','perfiles.descripcion AS perfilDescripcion',
 							 'accion_perfil.id AS registro','accion_perfil.status AS Status')
 					->where(['acciones.submodulo_id'=>$datos[1],'perfiles.id'=>$datos[0],'acciones.status_ac'=>1])->get();
 
