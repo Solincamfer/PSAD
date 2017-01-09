@@ -103,7 +103,7 @@
                                                     <select name="stPn" id="stPn">
                                                         <option value="">-</option>
                                                         <option value="1">Activo</option>
-                                                        <option value="2">Inactivo</option>
+                                                        <option value="0">Inactivo</option>
                                                     </select><i class="fa fa-check" id="icpn4"></i>
                                                 </div>
                                             </div>
@@ -150,7 +150,7 @@
                                                     <select name="stPnm" id="stPnm">
                                                         <option value="">-</option>
                                                         <option value="1">Activo</option>
-                                                        <option value="2">Inactivo</option>
+                                                        <option value="0">Inactivo</option>
                                                     </select><i class="fa fa-check" id="micpn4"></i>
                                                 </div>
                                             </div>

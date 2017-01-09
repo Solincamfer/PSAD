@@ -105,20 +105,21 @@
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                         <h4 class="modal-title" id="myModalLabel1">Modificar Servicio "Horarios"</h4>
                                     </div>
-                                    <form action="">
+                                    <form action="/menu/registros/planes/servicios/insertar" method="post" id="NewHorario">
+                                        {{ csrf_field() }}  
                                         <div class="modal-body">
                                             <div class="container-fluid contsr1">
                                                 <div class="rSrv">
                                                     <div class="col-md-5 col-md-offset-1">
                                                         <div class="form-group row icc">
                                                             <label for="">Tiempo de inicio</label>
-                                                            <input type="time" id="horaI"><i class="fa fa-clock-o"></i>
+                                                            <input type="time" id="horaI" name="horaI"><i class="fa fa-clock-o"></i>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-5">
                                                         <div class="form-group row icc">
                                                             <label for="">Tiempo final</label>
-                                                            <input type="time" id="horaF"><i class="fa fa-clock-o"></i>
+                                                            <input type="time" id="horaF" name="horaF"><i class="fa fa-clock-o"></i>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-10 col-md-offset-1">
@@ -129,7 +130,7 @@
                                                     <div class="col-md-5 col-md-offset-1">
                                                         <div class="form-group row icc">   
                                                             <span class="down"><i class="fa fa-chevron-down" id="i1"></i></span>
-                                                            <select name="" id="diaI">
+                                                            <select name="diaI" id="diaI">
                                                                 <option value=""> - </option>
                                                                 <option value="Lunes">Lunes</option>
                                                                 <option value="Martes">Martes</option>
@@ -144,7 +145,7 @@
                                                     <div class="col-md-5">
                                                         <div class="form-group row icc">
                                                             <span class="down"><i class="fa fa-chevron-down" id="i2"></i></span> 
-                                                            <select name="" id="diaF">
+                                                            <select name="diaF" id="diaF">
                                                                 <option value=""> - </option>
                                                                 <option value="Lunes">Lunes</option>
                                                                 <option value="Martes">Martes</option>
@@ -159,14 +160,14 @@
                                                     <div class="col-md-5 col-md-offset-1">
                                                         <div class="form-group row icc">
                                                             <label for="precio">Precio</label>
-                                                            <input type="number" id="precio"><i class="fa fa-money"></i>
+                                                            <input type="number" id="precio" name="precio"><i class="fa fa-money"></i>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="bttnMd" id="btnSv">Guardar <i class="fa fa-floppy-o"></i></button>
+                                                <button type="submit" class="bttnMd" id="saveHorario">Guardar <i class="fa fa-floppy-o"></i></button>
                                             </div>
                                     </form>
                                 </div>
@@ -227,7 +228,9 @@
                                                         <fieldset class="fst">
                                                             <legend>Opciones Soporte Remoto</legend>
                                                             <label class="radio-inline flb"><input type="radio" name="radio2" id="strc" value="contabilizado">Soporte remoto contabilizado</label>
-                                                            <div class="form-group row icc3"></div>  
+                                                            <div class="form-group row icc5">
+                                                                
+                                                            </div>  
                                                             <label class="radio-inline flb"><input type="radio" name="radio2" id="stri" value="ilimitado">Soporte remoto ilimitado</label>
                                                         </fieldset>
                                                     </div>
@@ -264,6 +267,7 @@
                                                             <legend>Opciones Soporte Telefónico</legend>
                                                             <label class="radio-inline flb"><input type="radio" name="radio3" id="sttc" value="contabilizado">Soporte telefónico contabilizado</label>
                                                             <div class="form-group row icc4">
+
                                                             </div>
                                                             <label class="radio-inline flb"><input type="radio" name="radio3" id="stti" value="ilimitado">Soporte telefónico ilimitado</label>
                                                         </fieldset>
@@ -298,7 +302,7 @@
                                                 <div class="rSrv">
                                                     <div class="col-md-8 col-md-offset-2">
                                                             <label class="flb" for="">Tiempo de Respuesta("Horas")</label>
-                                                            <div class="form-group row icc4">
+                                                            <div class="form-group row icc3">
                                                                 <input type="number" id="tr" placeholder="No Maximo a"><i class="fa fa-wrench"></i>
                                                             </div>
                                                     </div>
