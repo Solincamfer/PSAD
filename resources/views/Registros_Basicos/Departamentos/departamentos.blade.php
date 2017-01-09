@@ -152,7 +152,7 @@
 
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="submit" class="bttnMd" id="btnSv">Guardar <i class="fa fa-floppy-o"></i></button>
+                                        <button type="submit" class="bttnMd" id="btnSvD">Guardar <i class="fa fa-floppy-o"></i></button>
                                     </div>
                                 </form>
                             </div>                           

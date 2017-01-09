@@ -122,7 +122,7 @@
                                     <h4 class="modal-title" id="myModalLabel2">Modificar Perfil</h4>
                                 </div>
                                 <div class="modal-body">
-                                    <form method="post" action="/menu/registros/departamentos/actualizar/DC" class="DepCarPer">
+                                    <form method="post" action="/menu/registros/departamentos/actualizar/DC" class="">
                                       {{ csrf_field() }}
                                         <div class="container-fluid contpfl">
                                            <div class="row">
@@ -150,7 +150,7 @@
                                       
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="submit" class="bttnMd" id="btnSv">Guardar <i class="fa fa-floppy-o"></i></button>
+                                    <button type="submit" class="bttnMd" id="btnSvP">Guardar <i class="fa fa-floppy-o"></i></button>
                                 </div>
                                  
                                </form>

@@ -105,7 +105,7 @@
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                         <h4 class="modal-title" id="myModalLabel1">Modificar Servicio "Horarios"</h4>
                                     </div>
-                                    <form action="/menu/registros/planes/servicios/insertar" method="post" id="NewHorario">
+                                    <form action="/menu/registros/planes/servicios/insertar" method="post" id="NewHorario" name="nuevo">
                                         {{ csrf_field() }}  
                                         <div class="modal-body">
                                             <div class="container-fluid contsr1">

@@ -29,9 +29,9 @@ $( "#NewPerfil" ).submit(function( event ){
 $( "#NewPlan" ).submit(function( event ){
 	event.preventDefault();
 	});
-/*$( "#NewHorario" ).submit(function( event ){
+$( "#NewHorario" ).submit(function( event ){
 	event.preventDefault();
-	});*/
+	});
 
 
 ////////////////////
@@ -914,13 +914,11 @@ $('#savePlan').click(function(){
 var valorP;
 var valorR; 
 var valorT;
-$(".m_Servicio").click(function modificar(){
+$(".m_Servicio").click(function(){
 	ID = $(this).attr("id");
 	idplan=$('#plan').val();	
 	datos=[ID,idplan];	        	
-	alert('id Servicio: '+ datos[0] +'  '+' id plan: '+ datos[1]);
 	$.get("/menu/registros/planes/consultarservicios",{datos:datos}, function(data){
-		alert(data);
 		if (ID == 's1') {
 			$('#horaI').val(data[0]);
 			$('#horaF').val(data[1]);
@@ -1055,21 +1053,22 @@ $("input[name=radio3]").change(function () {
 
 //////////////////////////////// INSERTAR VALORES EN BD PARA CADA SERVICIO ///////////////////////////
 
-/*$('#saveHorario').click(function(){
+$('#saveHorario').click(function(){
 	var form=$('#NewHorario');
 	idplan=$('#plan').val();	
 	var url= '/menu/registros/planes/servicios/insertar';
-	var data='vincen'
-	alert (data[0])
+	var datos= form.serialize();
+	var vincen = 'vincen';
 	var inicio = $('#horaI').val();
 	var final = $('#horaF').val();
 	var diaI = $('#diaI').val();
 	var diaF = $('#diaF').val();
 	var precio= $('#precio').val();
+	var formulario =[inicio,final,diaI,diaF,precio];
+	var datos = [formulario,idplan,'s1'];
 	
 	if (inicio != '' && final != '' && diaI != '' && diaF != '' && precio != ''){
-		var posting = $.post(url,data,function(resultado){
-			alert(resultado)
+		var posting = $.get(url,{datos:datos},function(resultado){
 			if (resultado == 1) {
 				//SWALLLL mensajes de alerta y sucesos
 				swal({
@@ -1080,7 +1079,7 @@ $("input[name=radio3]").change(function () {
 					showConfirmButton:false,//Eliminar boton de confirmacion
 				});
 				//Retardo en ejecucion de ruta.
-				setTimeout(function(){location.href = "/menu/registros/planeservicios";},1200); // 3000ms = 3s
+				//setTimeout(function(){location.href = "/menu/registros/planeservicios";},1200); // 3000ms = 3s
 			}	
 			else {
 				swal({
@@ -1102,4 +1101,4 @@ $("input[name=radio3]").change(function () {
 			});
 		});
 	}
-});*/
+});

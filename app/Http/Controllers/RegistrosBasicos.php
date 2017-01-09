@@ -417,6 +417,28 @@ public function valores_servicios(){
 
 return $respuesta;
 }
+
+public function insertar_servicios(){
+	$datos=Request::get('datos');
+	if($datos[2]=='s1'){
+		DB::table('horarios')->insert
+				 	(
+
+				 		['plan_id'=>$datos[1],
+				 		'horaI'=> $datos[0][0],
+				 		'horaF'=> $datos[0][1],
+				 		'diaI' => $datos[0][2],
+				 		'diaF' => $datos[0][3],
+				 		'precio'=>$datos[0][4],
+
+				 		]
+				 	);
+
+		$respuesta= 1;
+
+	}
+	return $respuesta;
+}
 	
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////// submodulos empleados /////////////////////////////////////////////////////////////////
