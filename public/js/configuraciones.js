@@ -38,10 +38,10 @@ function actualizar_status (datos,ruta) //actualiza el status de un modulo en la
 	})
 }
 
-function cheks_activos(input__) //cuenta los checks de submodulos que se encuentran activos
+function cheks_activos(input__) //cuenta los checks que se encuentrar activos
 {
 	var contadorChekAct=0;
-	$.each(input__,function(i)//recorre los inputs de la tarjeta de submodulos para buscar los checks
+	$.each(input__,function(i)//recorre los inputs para buscar los checks
 					
 					{
 						if ($(this).attr('type')=='checkbox')
@@ -239,16 +239,14 @@ $(".consultarSubmodulo").click(function(){
 
 				$('.configurarAcc').change(function()//configurar submodulos
 			{
-				
+				var valores=[1,0];
 			
-				////////////// obtener registro a modificar ////////////////////
-				var id=$(this).attr('id');//id del boton modificar seleccionado
-				var longitud=id.length;//longitud del  id de modificar
-				var indice=id.indexOf('A');//indice del ultimo caracter
-				var registro=id.slice(indice+1,longitud);//numero del registro a modificar 
+				
+				var registro=obtener_valor('A',$(this).attr('id'));
 		    	////////////////////////////////////////////////////////////////////////
-		    	
-
+		    	var submoduloPadre=obtener_valor('A',$(this).attr('name'));
+		    	////////////////////////////////////////////////////////////////////////
+		    	var status=$(this).prop('checked');
 		   		var url= '/menu/registros/perfiles/configurar/accion';//rutas[tabla];
 				var datos=registro;//datos para el controlador (registro a modificar y tabla a modificar)*/
 				$.get(url, {datos:datos}, function(configurar)
@@ -258,6 +256,73 @@ $(".consultarSubmodulo").click(function(){
 						{
 							
 							swal("Error Inesperado !!", "Comuniquese con el administrador", "error");
+						}
+						else
+						{
+							
+							var checks_acc=checks_acciones("targeta3",vista_acciones); //checks de acciones
+							var acciones_activas=cheks_activos(checks_acc);//cantidad de acciones hablitadas
+							var status_check=" ";
+							var comparacion=" ";
+														//status refleja el estado del check de la accion false esta deshabilitada // true esta habilitada
+							if (acciones_activas==0 && status==false) {status_check=false;comparacion=true;alert('se desactivo la ultima accion')}//si se desactiva la ultima
+							else if(acciones_activas==1 && status==true){status_check=true;comparacion=false;alert('se activo la primera accion')}//si se activa la primera
+							
+							var checks_sub=checks_acciones("targeta2",vista_submodulos);//obtiene los submodulos
+							var submoduloId=false;
+							var moduloPadre=false;
+							var modulo=false;
+							  $.each(checks_sub, function(i)
+							  {
+							  	submoduloId=$(this).attr('data-submoduloId');//id del submodulo
+							  	if (submoduloPadre==submoduloId) //si se localiza el submodulo padre de la accion
+							  		{	
+							  			moduloPadre=obtener_valor('S',$(this).attr('name'));//id del modulo padre
+							  			modulo=document.getElementsByName('cck'+moduloPadre);
+
+							  			if ((status_check==false && $(this).prop('checked')==true)&&(acciones_activas==0))
+							  			{
+							  				$(this).prop('checked',false);
+							  				$(this).val(valores[$(this).val()]);
+							  				//alert('debe desactivarse el submodulo: '+$(this).attr('data-submoduloId'));
+							  				actualizar_status (obtener_valor('S',$(this).attr('id')),'/menu/registros/perfiles/configurar/submodulo_');
+							  				
+							  				checks_sub=checks_acciones("targeta2",vista_submodulos);
+							  				var submodulos_activos=cheks_activos(checks_sub);//cantidad de submodulos activos
+							  		 		if(submodulos_activos==0 && $(modulo).prop('checked')==true)
+							  		 		{
+							  		 			$(modulo).prop('checked',false);
+							  		 			$(modulo).val(valores[$(modulo).val()]);
+							  		 			alert($(modulo).attr('id'));
+							  		 			actualizar_status(obtener_valor('M',$(modulo).attr('id')),'/menu/registros/perfiles/configurar/modulo_');
+							  		 		}
+
+							  			}
+							  			else if(status_check==true && $(this).prop('checked')==false)
+							  			{
+							  				$(this).prop('checked',true);
+							  				$(this).val(valores[$(this).val()]);
+							  				actualizar_status (obtener_valor('S',$(this).attr('id')),'/menu/registros/perfiles/configurar/submodulo_');
+							  				
+							  				checks_sub=checks_acciones("targeta2",vista_submodulos);
+							  				var submodulos_activos=cheks_activos(checks_sub);//cantidad de submodulos activos
+							  		 		if(submodulos_activos==1 && $(modulo).prop('checked')==false)
+							  		 		{
+							  		 			$(modulo).prop('checked',true);
+							  		 			$(modulo).val(valores[$(modulo).val()]);
+							  		 			alert($(modulo).attr('id'));
+							  		 			actualizar_status(obtener_valor('M',$(modulo).attr('id')),'/menu/registros/perfiles/configurar/modulo_');
+							  		 		}
+
+							  				//alert('debe activarse el submodulo: '+$(this).attr('data-submoduloId'));
+							  				
+							  			}
+							  		}
+
+							  })
+					
+						
+
 						}
 						
 
