@@ -31,19 +31,23 @@
                         @foreach($consulta as $perfiles)
                             <div class="contMd" style="" id="{{$perfiles->id}}">
                                 <div class="icl">
-                                   
-                                </div>
+                                  @foreach($acciones as $accion) 
+                                 </div>
                                  
 
-                                 @if($datosC1==$perfiles->id)
-                                    <span class="ttlMd"> <input type="radio" name="c_rsp" id="radio{{$perfiles->id}}" value="{{$perfiles->id}}" checked> 
-                                    <label for="c_rsp"><strong>{{$perfiles->descripcion}}</strong></label></span>
-                                    <input type="hidden" name="perfil" value="{{$perfiles->id}}" id="valor_radio">
-                                @else
-                                     <span class="ttlMd"><input type="radio" name="c_rsp" id="radio{{$perfiles->id}}" value="{{$perfiles->id}}"  > 
-                                    <label for="c_rsp"><strong>{{$perfiles->descripcion}}</strong></label></span>
-                                @endif
-
+                                     @if($datosC1==$perfiles->id)
+                                        @if($accion->id==79)
+                                            <span class="ttlMd"> <input type="radio" name="c_rsp" id="radio{{$perfiles->id}}" value="{{$perfiles->id}}" checked> 
+                                        @endif
+                                        <label for="c_rsp"><strong>{{$perfiles->descripcion}}</strong></label></span>
+                                        <input type="hidden" name="perfil" value="{{$perfiles->id}}" id="valor_radio">
+                                    @else
+                                         @if($accion->id==79)
+                                             <span class="ttlMd"><input type="radio" name="c_rsp" id="radio{{$perfiles->id}}" value="{{$perfiles->id}}"  > 
+                                        @endif
+                                        <label for="c_rsp"><strong>{{$perfiles->descripcion}}</strong></label></span>
+                                    @endif
+                                    @endforeach
                             </div>
                         @endforeach
                     </div>

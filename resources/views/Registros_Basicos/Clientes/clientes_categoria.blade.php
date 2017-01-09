@@ -14,44 +14,46 @@
                             </div>
                         </div>
                         <div class="col-xs-5 col-sm-5 col-md-6 col-md-offset-3" style=""> 
-                        @if($agregar)
+                       
                             <div class="container">
                                 <div class="row">
                                     <div class="col-md-2" align="left">
                                         <a href="/menu/registros/clientes"><button id="btnBk" type="button" class="btnBk" href="#"><i class="fa fa-chevron-left"></i> VOLVER</button></a>
                                     </div>
-                                    <div class="col-md-2 col-md-offset-3">
-                                        <button id="btnAdd" type="button" class="btnAd" data-toggle="modal" data-target="#myModal" href="#myModal"><i class="fa fa-plus"></i> AGREGAR</button> 
-                                    </div>
+                                     @if($agregar)
+                                        <div class="col-md-2 col-md-offset-3">
+                                            <button id="btnAdd" type="button" class="btnAd" data-toggle="modal" data-target="#myModal" href="#myModal"><i class="fa fa-plus"></i> AGREGAR</button> 
+                                        </div>
+                                     @endif 
                                 </div>
                             </div>
-                        @endif   
+                         
                         @foreach($consulta as $categoria)   
                                 <div class="contMd" style="">
                                    <div class="icl">
                                        @foreach($acciones as $accion)
-                                           @if($accion->descripcion!="Status")
-                                               @if($accion->data_toogle=="modal")
+                                           @if($accion->id!=18)
+                                               @if($accion->id==16)
                                                    <span class="iclsp">
                                                        <a href="#myModal2" class="tltp modificarCategoria" data-ttl="{{$accion->descripcion}}" data-toggle="modal" id="m{{$categoria->id}}" data-target="#myModal2">
                                                            <i class="{{$accion->clase_css}}"></i>
                                                        </a>
                                                     </span>
-                                               @elseif($accion->data_toogle!="modal")
+                                               @elseif($accion->id!=16)
                                                     <span class="iclsp">
                                                         <a href="{{$accion->url.$categoria->id}}" class="tltp" data-ttl="{{$accion->descripcion}}">
                                                            <i class="{{$accion->clase_css}}"></i>
                                                         </a>
                                                     </span>
                                                @endif
-                                           @elseif($accion->descripcion=="Status")
-                                               @if($accion->status_ac==1)
+                                           @elseif($accion->id==18)
+                                               @if($categoria->status==1)
                                                    <div class="chbx">
-                                                       <input type="checkbox" class="btnAcc" name="status" id="{{'inchbx'. $categoria->id}}" value="{{$accion->status_ac}}" checked><label for="{{'inchbx'. $categoria->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
+                                                       <input type="checkbox" class="btnAcc" name="status" id="{{'inchbx'. $categoria->id}}" value="{{$categoria->status}}" checked><label for="{{'inchbx'. $categoria->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
                                                    </div>
-                                                @elseif($accion->staus_ac==0)
+                                                @elseif($categoria->status==0)
                                                    <div class="chbx">
-                                                       <input type="checkbox" class="btnAcc" name="status" id="{{'inchbx'. $categoria->id}}" value="{{$accion->status_ac}}"><label for="{{'inchbx'. $categoria->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
+                                                       <input type="checkbox" class="btnAcc" name="status" id="{{'inchbx'. $categoria->id}}" value="{{$categoria->status}}"><label for="{{'inchbx'. $categoria->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
                                                    </div>
                                                @endif
                                            @endif

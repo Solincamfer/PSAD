@@ -30,26 +30,26 @@
                             <div class="contMd" style="">
                                <div class="icl">
                                    @foreach($acciones as $accion)
-                                       @if($accion->descripcion!="Status")
-                                           @if($accion->data_toogle=="modal")
+                                       @if($accion->id!=22)
+                                           @if($accion->id==23)
                                            <span class="iclsp">
                                                <a href="#myModal2" class="tltp modificarResponsable_clinete" data-ttl="{{$accion->descripcion}}" data-toggle="modal" data-target="#myModal2" id="m{{$responsable->id}}">
                                                    <i class="{{$accion->clase_css}}"></i>
                                                </a>
                                            </span>
-                                           @elseif($accion->data_toogle!="modal")
+                                           @elseif($accion->id!=23)
                                            <span class="iclsp">
                                                <a href="{{$accion->url}}" class="tltp" data-ttl="{{$accion->descripcion}}">
                                                    <i class="{{$accion->clase_css}}"></i>
                                                </a>
                                            </span>
                                            @endif
-                                       @elseif($accion->descripcion=="Status")
+                                       @elseif($accion->id==22)
                                            @if($accion->status_ac==1)
                                            <div class="chbx">
                                                <input type="checkbox" class="btnAcc" name="status" id="{{'inchbx'. $responsable->id}}" value="{{$accion->status_ac}}" checked><label for="{{'inchbx'. $responsable->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
                                            </div>
-                                           @elseif($accion->staus_ac==0)
+                                           @elseif($accion->status_ac==0)
                                                <div class="chbx">
                                                    <input type="checkbox" class="btnAcc" name="status" id="{{'inchbx'. $responsable->id}}" value="{{$accion->status_ac}}"><label for="{{'inchbx'. $responsable->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
                                                </div>

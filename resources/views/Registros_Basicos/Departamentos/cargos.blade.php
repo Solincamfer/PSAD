@@ -21,30 +21,32 @@
                     </div>
                 </div>
                 <div class="col-xs-5 col-sm-5 col-md-6 col-md-offset-3">
-                    @if($agregar) 
+                
                         <div class="container">
                             <div class="row">
                                 <div class="col-md-2" align="left">
                                     <a href="/menu/registros/departamentos"><button id="btnBk" type="button" class="btnBk" href="#"><i class="fa fa-chevron-left"></i> VOLVER</button></a>
                                 </div>
+                            @if($agregar)
                                 <div class="col-md-2 col-md-offset-3">
                                     <button id="btnAdd" type="button" class="btnAd" data-toggle="modal" data-target="#myModal" href="#myModal"><i class="fa fa-plus"></i> AGREGAR</button> 
                                 </div>
+                            @endif
                             </div>
                         </div>
-                    @endif
+
                     @foreach($consulta as $cargo)
                         <div class="contMd" style="">
                             <div class="icl">
                                 @foreach($acciones as $accion)
-                                    @if($accion->descripcion!="Status" )
-                                        @if($accion->data_toogle=="modal")
+                                    @if($accion->id!=5 )
+                                        @if($accion->id==6)
                                             <span class="iclsp">
                                                 <a href="#myModal2" class="tltp ModificaR" id="ModificaCar{{$cargo->id}}" data-ttl="{{$accion->descripcion}}" data-toggle="modal" data-target="#myModal2"> 
                                                     <i class="{{$accion->clase_css}}"></i>
                                                 </a>
                                             </span>
-                                        @elseif($accion->data_toogle!="modal")
+                                        @elseif($accion->id!=6)
 
                                             <span class="iclsp">
                                                 <a href="{{$accion->url}}" class="EliminarR" data-ttl="{{$accion->descripcion}}" id="EliminarCar{{$cargo->id}}" data-ttl="{{$accion->descripcion}}" >
@@ -52,7 +54,7 @@
                                                 </a>
                                             </span>
                                         @endif
-                                    @elseif($accion->descripcion=="Status")
+                                    @elseif($accion->id==5)
                                         @if($cargo->status==1)
                                             <div class="chbx">
                                                 <input type="checkbox" class="btnAcc" name="status" id="{{'inchbx'. $cargo->id}}" value="{{$cargo->status}}" checked><label for="{{'inchbx'. $cargo->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>

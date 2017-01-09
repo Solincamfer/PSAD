@@ -416,25 +416,6 @@ public function valores_servicios(){
 
 return $respuesta;
 }
-
-public function insertar_servicios(){
-	$idplan = Request::get('data');
-	$idservicio = Request::get('data[2]');
-	/*if ($idservicio == 'S1') {
-		$consulta=DB::table('horarios')->where('plan_id',$idplan)->first();
-		if (count($consulta) == '1') {
-			/*DB::table('horarios')->insert
-				 	(
-
-				 		[	'plan_id'=>$id[1],
-				 			'horaI'=>$id[0]->name,
-				 			'status'=>$statusP]
-				 	);
-		return $respuesta=1;
-		}
-	}*/
-	return $idplan;
-}
 	
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////// submodulos empleados /////////////////////////////////////////////////////////////////
@@ -451,7 +432,7 @@ public function empleados_perfiles($empleado_id)
 {
 	
 	$datos=$this->cargar_header_sidebar_acciones();
-	$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(80,81,82),79);
+	$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(79),false);
 	
 	$consulta=DB::table('perfiles')->join('usuarios','perfiles.id','=','usuarios.perfil_id')
 								   ->join('empleados','usuarios.id','=','empleados.id')
@@ -1229,7 +1210,7 @@ public function clientes_categoria($cliente_id)//listar categorias
 	public function clientes_sucursales_equipos()//
 		{
 			$datos=$this->cargar_header_sidebar_acciones();
-			$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(42,43,44),41);
+			$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(42,43,44,49),41);
 			return view ('Registros_Basicos\Clientes\clientes_sucursales_equipos',$this->datos_vista($datos,$acciones,array()));
 							
 		}
@@ -1237,7 +1218,7 @@ public function clientes_categoria($cliente_id)//listar categorias
 	public function clientes_sucursales_equipos_componentes()
 		{
 			$datos=$this->cargar_header_sidebar_acciones();
-			$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(46,47,48,49),45);
+			$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(46,47,48),45);
 			return view ('Registros_Basicos\Clientes\clientes_sucursales_equipos_componentes',$this->datos_vista($datos,$acciones,array()));
 							
 		}

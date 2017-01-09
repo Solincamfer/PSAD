@@ -14,44 +14,46 @@
                             </div>
                         </div>
                         <div class="col-xs-5 col-sm-5 col-md-6 col-md-offset-3" style="">
-                            @if($agregar) 
+                            
                                 <div class="container">
                                     <div class="row">
                                         <div class="col-md-2" align="left">
                                             <a href="/menu/registros/clientes/categoria"><button id="btnBk" type="button" class="btnBk" href="#"><i class="fa fa-chevron-left"></i> VOLVER</button></a>
                                         </div>
-                                        <div class="col-md-2 col-md-offset-3">
-                                            <button id="btnAdd" type="button" class="btnAd" data-toggle="modal" data-target="#myModal" href="#myModal"><i class="fa fa-plus"></i> AGREGAR</button> 
-                                        </div>
+                                        @if($agregar) 
+                                            <div class="col-md-2 col-md-offset-3">
+                                                <button id="btnAdd" type="button" class="btnAd" data-toggle="modal" data-target="#myModal" href="#myModal"><i class="fa fa-plus"></i> AGREGAR</button> 
+                                            </div>
+                                        @endif
                                     </div>
                                 </div>
-                            @endif
+                          
                             @foreach($consulta as $sucursal)
                                 <div class="contMd" style="">
                                     <div class="icl">
                                         @foreach($acciones as $accion)
                                             @if($accion->id!=30)
-                                                @if($accion->data_toogle=="modal")
+                                                @if($accion->id==25)
                                                     <span class="iclsp">
                                                         <a href="#myModal2" class="tltp" data-ttl="{{$accion->descripcion}}" data-toggle="modal" data-target="#myModal2"> 
                                                             <i class="{{$accion->clase_css}}"></i>
                                                         </a>
                                                     </span>
-                                                @elseif($accion->data_toogle!="modal")
+                                                @elseif($accion->id!=25)
                                                     <span class="iclsp">
                                                         <a href="{{$accion->url}}" class="tltp" data-ttl="{{$accion->descripcion}}">
                                                             <i class="{{$accion->clase_css}}"></i>
                                                         </a>
                                                     </span>
                                                 @endif
-                                            @elseif($accion->id=30)
-                                                @if($accion->status_ac==1)
+                                            @elseif($accion->id==30)
+                                                @if($sucursal->status==1)
                                                     <div class="chbx">
-                                                        <input type="checkbox" class="btnAcc" name="status" id="{{'inchbx'. $accion->id}}" value="{{$accion->status_ac}}" checked><label for="{{'inchbx'. $accion->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
+                                                        <input type="checkbox" class="btnAcc" name="status" id="{{'inchbx'. $sucursal->id}}" value="{{$sucursal->status}}" checked><label for="{{'inchbx'. $sucursal->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
                                                     </div>
-                                                @elseif($accion->status_ac==0)
+                                                @elseif($sucursal->status)
                                                     <div class="chbx">
-                                                        <input type="checkbox" class="btnAcc" name="status" id="{{'inchbx'. $accion->id}}" value="{{$accion->status_ac}}"><label for="{{'inchbx'. $accion->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
+                                                        <input type="checkbox" class="btnAcc" name="status" id="{{'inchbx'. $sucursal->id}}" value="{{$sucursal->status}}"><label for="{{'inchbx'. $sucursal->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
                                                     </div>
                                                 @endif
                                             @endif

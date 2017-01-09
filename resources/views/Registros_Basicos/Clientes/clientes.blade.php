@@ -13,7 +13,7 @@
 								<h1>Cliente Matriz</h1>
 							</div>
 						</div>
-					</div>hidden
+					</div>
 				<!-- Registro -->
 					<div class="col-xs-5 col-sm-5 col-md-6 col-md-offset-3" style=""> 
 						@if($agregar)
@@ -24,28 +24,28 @@
 								<div class="icl">
 									
 									@foreach($acciones as $accion)
-										@if($accion->descripcion!="Status")
-											@if($accion->data_toogle=="modal")
+										@if($accion->id!=12)
+											@if($accion->id==9)
 											<span class="iclsp">
 												<a href="#myModal2" class="tltp modificarCliente" id="m{{$clientes->id}}" data-ttl="{{$accion->descripcion}}" data-toggle="modal" data-target="#myModal2"> 
 													<i class="{{$accion->clase_css}}"></i>
 												</a>
 											</span>
-											@elseif($accion->data_toogle!="modal")
+											@elseif($accion->id!=9)
 											<span class="iclsp">
 												<a href="{{$accion->url.$clientes->id}}" class="tltp" data-ttl="{{$accion->descripcion}}">
 													<i class="{{$accion->clase_css}}"></i>
 												</a>
 											</span>
 											@endif
-										@elseif($accion->descripcion=="Status")
-											@if($accion->status_ac==1)
+										@elseif($accion->id==12)
+											@if($clientes->status==1)
 												<div class="chbx">
-													<input type="checkbox" class="btnAcc" name="inchbx1" id="{{'inchbx'. $clientes->id}}" value="{{$accion->status_ac}}" checked><label for="{{'inchbx'. $clientes->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
+													<input type="checkbox" class="btnAcc" name="status" id="{{'inchbx'. $clientes->id}}" value="{{$clientes->status}}" checked><label for="{{'inchbx'. $clientes->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
 												</div>
-											@elseif($accion->staus_ac==0)
+											@elseif($clientes->status==0)
 												<div class="chbx">
-													<input type="checkbox" class="btnAcc" name="status" id="{{'inchbx'. $clientes->id}}" value="{{$accion->status_ac}}"><label for="{{'inchbx'. $clientes->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
+													<input type="checkbox" class="btnAcc" name="status" id="{{'inchbx'. $clientes->id}}" value="{{$clientes->status}}"><label for="{{'inchbx'. $clientes->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
 												</div>
 											@endif
 											

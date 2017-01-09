@@ -30,13 +30,13 @@
                                 <div class="icl">
                                     @foreach($acciones as $accion)
                                         @if($accion->id!=85)
-                                              @if($accion->data_toogle=="modal")
+                                              @if($accion->id==84)
                                                     <span class="iclsp">
                                                         <a href="#myModal2" class="tltp ModificaR" id="ModificaPer{{$perfiles->id}}" data-ttl="{{$accion->descripcion}}" data-toggle="modal" data-target="#myModal2"> 
                                                              <i class="{{$accion->clase_css}}"></i>
                                                        </a>
                                                     </span>
-                                              @elseif($accion->data_toogle!="modal")
+                                              @elseif($accion->id!=84)
                                                    <span class="iclsp">
                                                        <a href="{{$accion->url.$perfiles->id}}" class="tltp modificarperfil" id="m{{$perfiles->id}}" data-ttl="{{$accion->descripcion}}">
                                                            <i class="{{$accion->clase_css}}"></i>                                                   
