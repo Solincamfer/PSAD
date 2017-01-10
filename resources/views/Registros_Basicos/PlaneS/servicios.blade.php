@@ -105,7 +105,7 @@
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                         <h4 class="modal-title" id="myModalLabel1">Modificar Servicio "Horarios"</h4>
                                     </div>
-                                    <form action="/menu/registros/planes/servicios/insertar" method="post" id="NewHorario" name="nuevo">
+                                    <form action="/menu/registros/planes/servicios/insertar" method="post" id="NewHorario" class="NewServicio">
                                         {{ csrf_field() }}  
                                         <div class="modal-body">
                                             <div class="container-fluid contsr1">
@@ -160,7 +160,7 @@
                                                     <div class="col-md-5 col-md-offset-1">
                                                         <div class="form-group row icc">
                                                             <label for="precio">Precio</label>
-                                                            <input type="number" id="precio" name="precio"><i class="fa fa-money"></i>
+                                                            <input type="text" id="precio" name="precio"><i class="fa fa-money"></i>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -182,32 +182,33 @@
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                         <h4 class="modal-title" id="myModalLabel2">Modificar Servicio "Soporte Presencial"</h4>
                                     </div>
-                                    <div class="modal-body">
-                                        <form action="">
+                                    <form method="post" id="NewPresencial" class="NewServicio">
+                                        <div class="modal-body">
                                             <div class="container-fluid contsr">
                                                 <div class="rSrv">
                                                     <div class="col-md-10 col-md-offset-1">
                                                         <fieldset class="fst">
                                                             <legend>Opciones Soporte Presencial</legend>
-                                                            <label class="flb"><input type="radio" name="radio1" id="stpc" value="contabilizado">Soporte presencial contabilizado</label>
+                                                            <label class="flb"><input type="radio" name="radio1" id="stpc"  value="contabilizado">Soporte presencial contabilizado</label>
                                                             <div class="form-group row icc2">
                                                     
                                                             </div>
-                                                            <label class="flb"><input type="radio" name="radio1" id="stpe" value="ilimitado">Respuesta presencial por emergencia</label>
+                                                            <label class="flb"><input type="radio" name="radio1" id="stpe"  value="ilimitado">Respuesta presencial por emergencia</label>
                                                         </fieldset>
                                                     </div>
                                                     <div class="col-md-8 col-md-offset-2">
                                                         <div class="form-group row icc3">
-                                                            <input type="number" placeholder="Precio" id="precioP"><i class="fa fa-money"></i>
+                                                            <input type="number" placeholder="Precio" id="precioP" name="precioP"><i class="fa fa-money"></i>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </form>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="bttnMd" id="btnSv">Guardar <i class="fa fa-floppy-o"></i></button>
-                                    </div>
+                                        
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" class="bttnMd" id="savePresencial">Guardar <i class="fa fa-floppy-o"></i></button>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -220,8 +221,8 @@
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                         <h4 class="modal-title" id="myModalLabel3">Modificar Servicio "Soporte Remoto"</h4>
                                     </div>
-                                    <div class="modal-body">
-                                        <form action="">
+                                    <form method="post" id="NewRemoto" class="NewServicio">
+                                        <div class="modal-body">
                                             <div class="container-fluid contsr">
                                                 <div class="rSrv">
                                                     <div class="col-md-10 col-md-offset-1 mrk">
@@ -240,12 +241,12 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="bttnMd" id="btnSv">Guardar <i class="fa fa-floppy-o"></i></button>
-                                    </div>
+                                            </div> 
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="bttnMd" id="saveRemoto">Guardar <i class="fa fa-floppy-o"></i></button>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -259,7 +260,7 @@
                                         <h4 class="modal-title" id="myModalLabel4">Modificar Servicio "Soporte Telefónico"</h4>
                                     </div>
                                     <div class="modal-body">
-                                        <form action="">
+                                        <form id="NewTelefonico" class="NewServicio">
                                             <div class="container-fluid contsr">
                                                 <div class="rSrv">
                                                     <div class="col-md-10 col-md-offset-1">
@@ -282,7 +283,7 @@
                                         </form>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="bttnMd" id="btnSv">Guardar <i class="fa fa-floppy-o"></i></button>
+                                        <button type="button" class="bttnMd" id="saveTelefonico">Guardar <i class="fa fa-floppy-o"></i></button>
                                     </div>
                                 </div>
                             </div>
@@ -296,8 +297,8 @@
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                         <h4 class="modal-title" id="myModalLabel5">Modificar Servicio "Tiempo de Respuesta"</h4>
                                     </div>
-                                    <div class="modal-body">
-                                        <form action="">
+                                    <form action="" id="NewTR" class="NewServicio">
+                                        <div class="modal-body">
                                             <div class="container-fluid contsr">
                                                 <div class="rSrv">
                                                     <div class="col-md-8 col-md-offset-2">
@@ -313,11 +314,11 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </form>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="bttnMd" id="btnSv">Guardar <i class="fa fa-floppy-o"></i></button>
-                                    </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="bttnMd" id="saveTR">Guardar <i class="fa fa-floppy-o"></i></button>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>

@@ -439,6 +439,60 @@ public function insertar_servicios(){
 		$respuesta= 1;
 
 	}
+	elseif($datos[2]=='s2'){
+		DB::table('presenciales')->where('plan_id','=',$datos[1])->delete();
+		DB::table('presenciales')->insert
+				 	(
+
+				 		[	'plan_id'=>$datos[1],
+				 			'etiqueta'=> $datos[0][0],
+				 			'valor'=> $datos[0][1],
+				 			'precio' => $datos[0][2],
+				 		]
+				 	);
+		$respuesta= 1;
+	}
+	elseif($datos[2]=='s3'){
+		DB::table('remotos')->where('plan_id','=',$datos[1])->delete();
+		DB::table('remotos')->insert
+				 	(
+
+				 		[	'plan_id'=>$datos[1],
+				 			'etiqueta'=> $datos[0][0],
+				 			'valor'=> $datos[0][1],
+				 			'precio' => $datos[0][2],
+				 		]
+				 	);
+		$respuesta= 1;
+	}
+	elseif($datos[2]=='s4'){
+		DB::table('telefonicos')->where('plan_id','=',$datos[1])->delete();
+		DB::table('telefonicos')->insert
+				 	(
+
+				 		[	'plan_id'=>$datos[1],
+				 			'etiqueta'=> $datos[0][0],
+				 			'valor'=> $datos[0][1],
+				 			'precio' => $datos[0][2],
+				 		]
+				 	);
+		$respuesta= 1;
+	}
+	elseif($datos[2]=='s5'){
+		DB::table('respuestas')->where('plan_id','=',$datos[1])->delete();
+		DB::table('respuestas')->insert
+				 	(
+
+				 		[	'plan_id'=>$datos[1],
+				 			'maximo'=> $datos[0][0],
+				 			'precio' => $datos[0][1],
+				 		]
+				 	);
+		$respuesta= 1;
+	}
+	else{
+		$respuesta= 0;
+	}
 	return $respuesta;
 }
 	

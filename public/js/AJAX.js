@@ -29,10 +29,9 @@ $( "#NewPerfil" ).submit(function( event ){
 $( "#NewPlan" ).submit(function( event ){
 	event.preventDefault();
 	});
-$( "#NewHorario" ).submit(function( event ){
+$( ".NewServicio" ).submit(function( event ){
 	event.preventDefault();
 	});
-
 
 ////////////////////
 ////Validacion + permisologia + AJAX del boton submit de la vista LOGIN////
@@ -1004,7 +1003,7 @@ $(".m_Servicio").click(function(){
 });
 
 
-/////////////////////////// CAMBIOS DE VALORES DE CHECK PARA LOS SERVICIOS SERVICIOS ///////////////////////////////////////
+/////////////////////////// CAMBIOS DE VALORES DE CHECK PARA LOS SERVICIOS ///////////////////////////////////////
 
 $("input[name=radio1]").change(function () {
 	if (valorP==0) {
@@ -1051,14 +1050,11 @@ $("input[name=radio3]").change(function () {
 	}
 });
 
-//////////////////////////////// INSERTAR VALORES EN BD PARA CADA SERVICIO ///////////////////////////
+//////////////////////////////// INSERTAR VALORES EN BD PARA SERVICIO DE HORARIOS ///////////////////////////
 
 $('#saveHorario').click(function(){
-	var form=$('#NewHorario');
 	idplan=$('#plan').val();	
 	var url= '/menu/registros/planes/servicios/insertar';
-	var datos= form.serialize();
-	var vincen = 'vincen';
 	var inicio = $('#horaI').val();
 	var final = $('#horaF').val();
 	var diaI = $('#diaI').val();
@@ -1075,7 +1071,7 @@ $('#saveHorario').click(function(){
 					title:'Guardado Exitoso',//Contenido del modal
 					text: 'El Horario fue Guardado Exitosamente para este Plan',
 					type: "success",
-					timer:1000,
+					timer:1600,
 					showConfirmButton:false,//Eliminar boton de confirmacion
 				});
 				//Retardo en ejecucion de ruta.
@@ -1084,8 +1080,189 @@ $('#saveHorario').click(function(){
 			else {
 				swal({
 
-					title:'Registro Existente!!!.',//Contenido del modal
-					text: 'Este Plan ya existe',
+					title:'Servicio Corrupto!!!.',//Contenido del modal
+					text: 'Este Servicio presenta errores, comuniquese con el administrador',
+					type: "error",
+					timer:2000,
+					showConfirmButton:false,//Eliminar boton de confirmacion
+				});
+			}						
+		});
+		posting.fail(function() {
+			swal({
+				title:'Error inesperado!!',//Contenido del modal
+				text: 'Pongase en contacto con el administrador',
+				type: "error",
+				showConfirmButton:true,//Eliminar boton de confirmacion
+			});
+		});
+	}
+});
+//////////////////////////////// INSERTAR VALORES EN BD PARA SERVICIO DE SOPORTES PRESENCIALES ///////////////////////////
+
+$('#savePresencial').click(function(){
+	idplan=$('#plan').val();	
+	var url= '/menu/registros/planes/servicios/insertar';
+	var etiqueta = $("input[name=radio1]:checked").val();
+	var valor = $('#NewPresencial .campo').val();
+	var precio= $('#precioP').val();
+	var formulario =[etiqueta,valor,precio];
+	var datos = [formulario,idplan,'s2'];
+	
+	if (etiqueta != '' && valor != '' && precio != ''){
+		var posting = $.get(url,{datos:datos},function(resultado){
+			if (resultado == 1) {
+				//SWALLLL mensajes de alerta y sucesos
+				swal({
+					title:'Guardado Exitoso',//Contenido del modal
+					text: 'El Servicio de Soporte Presencial fue Guardado Exitosamente para este Plan',
+					type: "success",
+					timer:1600,
+					showConfirmButton:false,//Eliminar boton de confirmacion
+				});
+				//Retardo en ejecucion de ruta.
+				//setTimeout(function(){location.href = "/menu/registros/planeservicios";},1200); // 3000ms = 3s
+			}	
+			else {
+				swal({
+
+					title:'Servicio Corrupto!!!.',//Contenido del modal
+					text: 'Este Servicio presenta errores, comuniquese con el administrador',
+					type: "error",
+					timer:2000,
+					showConfirmButton:false,//Eliminar boton de confirmacion
+				});
+			}						
+		});
+		posting.fail(function() {
+			swal({
+				title:'Error inesperado!!',//Contenido del modal
+				text: 'Pongase en contacto con el administrador',
+				type: "error",
+				showConfirmButton:true,//Eliminar boton de confirmacion
+			});
+		});
+	}
+});
+//////////////////////////////// INSERTAR VALORES EN BD PARA SERVICIO DE SOPORTES REMOTOS ///////////////////////////
+$('#saveRemoto').click(function(){
+	idplan=$('#plan').val();	
+	var url= '/menu/registros/planes/servicios/insertar';
+	var etiqueta = $("input[name=radio2]:checked").val();
+	var valor = $('#NewRemoto .campo').val();
+	var precio= $('#precioR').val();
+	var formulario =[etiqueta,valor,precio];
+	var datos = [formulario,idplan,'s3'];
+	
+	if (etiqueta != '' && valor != '' && precio != ''){
+		var posting = $.get(url,{datos:datos},function(resultado){
+			if (resultado == 1) {
+				//SWALLLL mensajes de alerta y sucesos
+				swal({
+					title:'Guardado Exitoso',//Contenido del modal
+					text: 'El Servicio de Soporte Remoto fue Guardado Exitosamente para este Plan',
+					type: "success",
+					timer:1600,
+					showConfirmButton:false,//Eliminar boton de confirmacion
+				});
+				//Retardo en ejecucion de ruta.
+				//setTimeout(function(){location.href = "/menu/registros/planeservicios";},1200); // 3000ms = 3s
+			}	
+			else {
+				swal({
+
+					title:'Servicio Corrupto!!!.',//Contenido del modal
+					text: 'Este Servicio presenta errores, comuniquese con el administrador',
+					type: "error",
+					timer:2000,
+					showConfirmButton:false,//Eliminar boton de confirmacion
+				});
+			}						
+		});
+		posting.fail(function() {
+			swal({
+				title:'Error inesperado!!',//Contenido del modal
+				text: 'Pongase en contacto con el administrador',
+				type: "error",
+				showConfirmButton:true,//Eliminar boton de confirmacion
+			});
+		});
+	}
+});
+//////////////////////////////// INSERTAR VALORES EN BD PARA SERVICIO DE SOPORTES TELEFONICOS ///////////////////////////
+$('#saveTelefonico').click(function(){
+	idplan=$('#plan').val();	
+	var url= '/menu/registros/planes/servicios/insertar';
+	var etiqueta = $("input[name=radio3]:checked").val();
+	var valor = $('#NewTelefonico .campo').val();
+	var precio= $('#precioT').val();
+	var formulario =[etiqueta,valor,precio];
+	var datos = [formulario,idplan,'s4'];
+	
+	if (etiqueta != '' && valor != '' && precio != ''){
+		var posting = $.get(url,{datos:datos},function(resultado){
+			if (resultado == 1) {
+				//SWALLLL mensajes de alerta y sucesos
+				swal({
+					title:'Guardado Exitoso',//Contenido del modal
+					text: 'El Servicio de Soporte Telefónico fue Guardado Exitosamente para este Plan',
+					type: "success",
+					timer:1600,
+					showConfirmButton:false,//Eliminar boton de confirmacion
+				});
+				//Retardo en ejecucion de ruta.
+				//setTimeout(function(){location.href = "/menu/registros/planeservicios";},1200); // 3000ms = 3s
+			}	
+			else {
+				swal({
+
+					title:'Servicio Corrupto!!!.',//Contenido del modal
+					text: 'Este Servicio presenta errores, comuniquese con el administrador',
+					type: "error",
+					timer:2000,
+					showConfirmButton:false,//Eliminar boton de confirmacion
+				});
+			}						
+		});
+		posting.fail(function() {
+			swal({
+				title:'Error inesperado!!',//Contenido del modal
+				text: 'Pongase en contacto con el administrador',
+				type: "error",
+				showConfirmButton:true,//Eliminar boton de confirmacion
+			});
+		});
+	}
+});
+//////////////////////////////// INSERTAR VALORES EN BD PARA SERVICIO DE TIEMPO DE RESPUESTA /////////////////////////
+$('#saveTR').click(function(){
+	idplan=$('#plan').val();	
+	var url= '/menu/registros/planes/servicios/insertar';
+	var etiqueta = $("input[name=radio3]:checked").val();
+	var maximo = $('#tr').val();
+	var precio= $('#precioTR').val();
+	var formulario =[maximo,precio];
+	var datos = [formulario,idplan,'s5'];
+	
+	if (maximo != '' && precio != ''){
+		var posting = $.get(url,{datos:datos},function(resultado){
+			if (resultado == 1) {
+				//SWALLLL mensajes de alerta y sucesos
+				swal({
+					title:'Guardado Exitoso',//Contenido del modal
+					text: 'El Servicio de Tiempo de Respuesta fue Guardado Exitosamente para este Plan',
+					type: "success",
+					timer:2000,
+					showConfirmButton:false,//Eliminar boton de confirmacion
+				});
+				//Retardo en ejecucion de ruta.
+				//setTimeout(function(){location.href = "/menu/registros/planeservicios";},1200); // 3000ms = 3s
+			}	
+			else {
+				swal({
+
+					title:'Servicio Corrupto!!!.',//Contenido del modal
+					text: 'Este Servicio presenta errores, comuniquese con el administrador',
 					type: "error",
 					timer:2000,
 					showConfirmButton:false,//Eliminar boton de confirmacion

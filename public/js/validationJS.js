@@ -234,7 +234,7 @@ function Validar(){
         }
 
     });
-///////////////////////////////////// VALIDACION PARA DEPARTAMENTOS, CARGOS, PERFILES, PLANES
+///////////////////////////////////// VALIDACION PARA DEPARTAMENTOS, CARGOS, PERFILES, PLANES ////////////////
     $('.DepCarPer').bootstrapValidator({
         feedbackIcons: {
              valid: 'glyphicon glyphicon-ok',
@@ -334,6 +334,59 @@ function Validar(){
                     },
                 }
             },
+        }
+    });
+///////////////////////////////////  ASOCIAR SERVICIOS A PLANES ///////////////////////////////////////////////
+    $('.NewServicio').bootstrapValidator({
+        feedbackIcons: {
+             valid: 'glyphicon glyphicon-ok',
+             invalid: 'glyphicon glyphicon-remove',
+             validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+    /////////////////////////////// AGREGAR HORARIO //////////////////////////////////
+           horaI: {
+                validators: {
+                    notEmpty: {
+                         message: 'Campo Vacío'
+                    },
+                }
+            },
+            horaF:{
+                validators: {
+                    notEmpty: {
+                         message: 'Campo Vacío'
+                    },
+                }
+            },
+            diaI:{
+                validators: {
+                    notEmpty: {
+                         message: 'Campo Vacío'
+                    },
+                }
+            },
+            diaF:{
+                validators: {
+                    notEmpty: {
+                         message: 'Campo Vacío'
+                    },
+                }
+            },
+            precio:{
+                validators: {
+                    notEmpty: {
+                         message: 'Campo Vacío'
+                    },
+                    regexp: {
+                            regexp: /^[1-9]+$/,
+                            message: 'Sólo Números Positivos,<br>(Use el "." para expresar decimales)'                            
+                    },
+                }
+            },
+    ////////////////////////////////////// AGREGAR SOPORTE PRESENCIAL //////////////////////////////////
+
+   
         }
     });
 }
