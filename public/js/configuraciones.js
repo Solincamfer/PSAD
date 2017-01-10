@@ -125,11 +125,13 @@ function actualizar_checks_acciones (checks,submoduloId,estado, vista)
 
 }
 
-function BuscarPadre(idDependencia,condicion) 
+function BuscarPadre(idDependencia,condicion,cambio) 
 {
 	var idDependencia=idDependencia;
 	var condicion=condicion;
 	var buscar=true;
+	var padres=[]
+
 	var elemento=$("input[data-accion="+idDependencia+"]");
 	var valores=[1,0];
 
@@ -140,17 +142,27 @@ function BuscarPadre(idDependencia,condicion)
 
 			if (condicion==true) //identifica si debe activarse
 			{
-				$(elemento).prop('checked',true);
-				$(elemento).val(valores[$(elemento).val()]);id=
-				actualizar_status (obtener_valor('A',$(elemento).attr('id')),'/menu/registros/perfiles/configurar/accion');
-				alert('Entro True');
+				if(cambio==1)
+				{
+					$(elemento).prop('checked',true);
+					$(elemento).val(valores[$(elemento).val()]);id=
+					actualizar_status (obtener_valor('A',$(elemento).attr('id')),'/menu/registros/perfiles/configurar/accion');
+					alert('Entro True Buscar padre');
+				}
+				padres.push($(elemento));
+
 			}
 			else if(condicion==false)//identifica si debe desactivarse
 			{
-				$(elemento).prop('checked',false);
-				$(elemento).val(valores[$(elemento).val()]);
-				actualizar_status (obtener_valor('A',$(elemento).attr('id')),'/menu/registros/perfiles/configurar/accion');
-				alert('Entro False');
+				
+				if(cambio==1)
+				{
+					$(elemento).prop('checked',false);
+					$(elemento).val(valores[$(elemento).val()]);
+					actualizar_status (obtener_valor('A',$(elemento).attr('id')),'/menu/registros/perfiles/configurar/accion');
+					alert('Entro False Buscar padre');
+				}
+				padres.push($(elemento));
 			}
 
 
@@ -175,20 +187,25 @@ function BuscarPadre(idDependencia,condicion)
 	}
 	while(buscar==true);
 
-
+ return padres;
 }
 
 
-function BuscarHijos(acciones,idAccion,condicion) 
+function BuscarHijos(acciones,padres,condicion) 
 {
 	 var valores=[1,0];
 	 var acciones=acciones;
 	 var idAccion=idAccion;
 	 var condicion=condicion;
+	 var padre=false;
 
+	 
+$.each(padres, function(i) 
+{
+	  padre=$(this).attr('data-accion');
 	  $.each(acciones, function(i) 
 	  {
-	  	if(($(this).attr('data-dependencia')==idAccion) && ($(this).attr('data-accion')!=idAccion))
+	  	if(($(this).attr('data-dependencia')==padre) && ($(this).attr('data-accion')!=padre))
 	  	{
 	  		if($(this).prop('checked')!=condicion)
 	  		{
@@ -200,6 +217,7 @@ function BuscarHijos(acciones,idAccion,condicion)
 
 
 	  })
+})
 			    
 
 
@@ -219,7 +237,7 @@ $(".consultarSubmodulo").click(function(){
 				
 				
 		$(".consultarSubmodulo").css("color","grey");
-		$(this).css("color","yellow");
+		$(this).css("color","white");
 		///////////BUSCADO BOTON CLICKEADO/////////////	
 			ID = $(this).attr("id");///////ID DEL BOTTON MODIFICAR/////////	
 
@@ -273,7 +291,7 @@ $(".consultarSubmodulo").click(function(){
 
 			    $(".consultarAcciones").click(function(){
 			    $(".consultarAcciones").css("color","grey");
-			    $(this).css("color","yellow");
+			    $(this).css("color","white");
 
 			    ID = $(this).attr("id");
 			    idSubmodulo=$('#Accion'+ID).val();				
@@ -294,7 +312,7 @@ $(".consultarSubmodulo").click(function(){
 					$( ".limpiarul2" ).remove();
 					$.each(data1, function(i, item) 
 					{
-						$('#targeta3 ul').append('<li class="limpiarul2" style="display:none;" ><div class="container-fluid cont"><div class="row"><div class="col-md-6"><div class="tl1"><span>'+item.descripcion+'</span></div></div><div class="col-md-1 col-md-push-2"><div class="iclst"></div><input type="hidden" id="Accio2nn'+item.accionId+'" value="'+item.accionId+'"></div><div class="col-md-2 col-md-push-3"><div class="chbx1x" id="checklistA'+item.accionId+'">   </div></div></div></div></li>');
+						$('#targeta3 ul').append('<li class="limpiarul2" style="display:none;" id="AC'+item.accionId+'"    ><div class="container-fluid cont"><div class="row"><div class="col-md-6"><div class="tl1"><span>'+item.descripcion+'</span></div></div><div class="col-md-1 col-md-push-2"><div class="iclst"></div><input type="hidden" id="Accio2nn'+item.accionId+'" value="'+item.accionId+'"></div><div class="col-md-2 col-md-push-3"><div class="chbx1x" id="checklistA'+item.accionId+'">   </div></div></div></div></li>');
 			    		 
 			    		 if(item.Status==1)//agregar check de status cuando el submodulo esta asignado para el perfil
 			  				 {
@@ -304,15 +322,15 @@ $(".consultarSubmodulo").click(function(){
 			  			 else if(item.Status==0)//agregar check de status cuando el submodulo no esta signado para el perfil
 			   				{
 			   		  			$('#checklistA'+item.accionId).append(' <input type="checkbox" data-dependencia="'+item.dependencia+'"   data-accion="'+item.accionId+'"  value="'+item.Status+'"  class="configurarAcc"  id="cckA'+item.registro+'" name="cckA'+item.padre+'" ><label for="cckA'+item.registro+'"></label> ');
-
+ 
 			  				 }
 			  			
-			  			/*if(item.ventana==1)
+			  			if(item.ventana==1)
 			  			{
 
-			  				$('.limpiarul2').css({"backgroundColor":"#BFC0AD","color":"#000000"});
+			  				$('#'+'AC'+item.accionId).css({"backgroundColor":"#645F5F","color":"#FFFFFF"});
 			  			}
-			  			else if(item.ventana==0)
+			  			/*else if(item.ventana==0)
 			  			{
 			  				$('.limpiarul2').css({"backgroundColor":"#222","color":"#E5E5E7"});
 			  			}*/
@@ -341,6 +359,7 @@ $(".consultarSubmodulo").click(function(){
 		   		var url= '/menu/registros/perfiles/configurar/accion';//rutas[tabla];
 				var datos=registro;//datos para el controlador (registro a modificar y tabla a modificar)*/
 				var idAccion=$(this).attr('data-accion');//id de la accion actual
+				var accion=$(this);
 				var accionDependiente=$(this).attr('data-dependencia');//id de la accion que depende 
 				$.get(url, {datos:datos}, function(configurar)
 					{
@@ -365,43 +384,47 @@ $(".consultarSubmodulo").click(function(){
 							var submoduloId=false;
 							var moduloPadre=false;
 							var modulo=false;
-							var accion=false;//id de las acciones consultadas
+							
 
 
 
 
 
 						/////////////////////////////////////////////////////////Dependencia de acciones ////////////////////////////////////////////////////////////////////////////////////
-						if(accionDependiente!=idAccion && status==true)//status refleja el status de laccion checkeada//si se habilita una accion que depende de otra y es la primera accion en habilitarse
+						if(accionDependiente!=idAccion && status==true)//status refleja el status de laccion checkeada//si se habilita una accion que depende de otra y es la primera accion en habilitarse(puede ser padre o hijo)
 						{
 								
-								if(acciones_activas==1)//si ees la primera accion y esta depende otra//se activa la accion padre
+								if(acciones_activas>=1)//si es la primera accion o ya existen varias y esta depende otra//se activa la accion padre
 								{
-									BuscarPadre(accionDependiente,true); 
-								}
-						}
-						else if(accionDependiente!=idAccion && status==false)//status refleja el status de laccion checkeada//si se deshabilita una accion que depende de otra y es la penultima accion en deshabilitarse
-						{
-								if(acciones_activas==1)//si la que queda es una dependiente
-								{
-									BuscarPadre(accionDependiente,false); 
+									var padres=BuscarPadre(accionDependiente,true,1); //busca habilitar su padre
+									BuscarHijos(checks_acc,[accion],true);//busca habilitar sus posibles hijos
 								}
 
 						}
-						else if(accionDependiente==idAccion && status==false)//busca si se deshabilita una accion padre
+						else if(accionDependiente!=idAccion && status==false)//status refleja el status de laccion checkeada//si se deshabilita una accion que depende de otra y es la penultima accion en deshabilitarse 
+						{
+								if(acciones_activas>=1)//si la que queda es una dependiente
+								{
+									var padres=BuscarPadre(accionDependiente,false,0); //busca deshabilitar su posible padre
+									BuscarHijos(checks_acc, [accion],false);//busca deshabilitar sus posibles hijos
+								}
+
+						}
+						
+						else if(accionDependiente==idAccion && status==false)//busca si se deshabilita una accion padre (solo puede ser padre o no, nunca hijo)
 						{
 							if(acciones_activas>=1)//si queda una o mas acciones activas
 							{
-								BuscarHijos(checks_acc,idAccion,false);//deshabilitar acciones 
+								BuscarHijos(checks_acc,[accion],false);//deshabilitar acciones 
 							}
 
 
 						}
-						else if(accionDependiente==idAccion && status==true)//busca si se habilita una accion padre 
+						else if(accionDependiente==idAccion && status==true)//busca si se habilita una accion padre (solo puede ser padre o no nunca hijo)
 						{
-							if(acciones_activas>=1)//si se habilita y hay una o mas acciones activas
+							if(acciones_activas>=1)//si se habilita y hay una o mas acciones dependientes inactivas
 							{
-								BuscarHijos(checks_acc,idAccion,true);//habilitar
+								BuscarHijos(checks_acc,[accion],true);//habilitar
 							}
 
 
@@ -754,3 +777,4 @@ $('.configurarPer').change(function()//configuracion en los modulos
 
 
 	});
+
