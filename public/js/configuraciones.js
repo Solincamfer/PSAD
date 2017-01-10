@@ -124,6 +124,54 @@ function actualizar_checks_acciones (checks,submoduloId,estado, vista)
 											
 
 }
+
+function ActualizarDependencias (idDependencia,condicion) 
+{
+	var idDependencia=idDependencia;
+	var condicion=condicion;
+	var buscar=true;
+	var elemento=$("input[data-accion="+idDependencia+"]");
+
+	do
+	{
+		if($(elemento).prop('checked')!=condicion)//verifica si la dependencia debe cambiar su propiedad checked
+		{
+
+			if (condicion==true) //identifica si debe activarse
+			{
+				$(elemento).prop('checked',true);
+			}
+			else (condicion==false)//identifica si debe desactivarse
+			{
+				$(elemento).prop('checked',false);
+			}
+
+
+
+		}
+			var dependencia=$(elemento).attr('data-dependencia');
+			alert('dependencia: '+dependencia+'  idAccion: '+$(elemento).attr('data-accion'));
+
+		if ($(elemento).attr('data-accion')==dependencia) 
+		{
+			buscar=false;
+
+		}
+		else
+		{
+
+			idDependencia=$(elemento).attr('data-dependencia');
+			elemento=$("input[data-accion="+idDependencia+"]");
+
+		}
+
+	}
+	while(buscar==true);
+
+
+}
+
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -241,7 +289,7 @@ $(".consultarSubmodulo").click(function(){
 			{
 				var valores=[1,0];
 			
-				
+				var activar_submodulo=false;
 				var registro=obtener_valor('A',$(this).attr('id'));
 		    	////////////////////////////////////////////////////////////////////////
 		    	var submoduloPadre=obtener_valor('A',$(this).attr('name'));
@@ -249,6 +297,8 @@ $(".consultarSubmodulo").click(function(){
 		    	var status=$(this).prop('checked');
 		   		var url= '/menu/registros/perfiles/configurar/accion';//rutas[tabla];
 				var datos=registro;//datos para el controlador (registro a modificar y tabla a modificar)*/
+				var idAccion=$(this).attr('data-accion');//id de la accion actual
+				var accionDependiente=$(this).attr('data-dependencia');//id de la accion que depende 
 				$.get(url, {datos:datos}, function(configurar)
 					{
 						
@@ -272,6 +322,39 @@ $(".consultarSubmodulo").click(function(){
 							var submoduloId=false;
 							var moduloPadre=false;
 							var modulo=false;
+							var accion=false;//id de las acciones consultadas
+
+
+
+
+
+						/////////////////////////////////////////////////////////ver status de acciones ////////////////////////////////////////////////////////////////////////////////////
+						if(accionDependiente!=idAccion)//verifica que la accion dependa de otra para estar activa
+						{
+								accion
+
+								if (acciones_activas==0)//si no hay acciones activas debe desactivarse la accion padre
+								{
+
+									ActualizarDependencias (accionDependiente,false); 
+
+								}
+								else if(acciones_activas==1)//si ees la primera debe activarse la accion
+								{
+									 
+
+									/*var condicion=true;
+									alert('debe activarse la accion '+accionDependiente);
+									alert($("input[data-accion="+accionDependiente+"]").prop('checked',condicion));*/
+
+									ActualizarDependencias (accionDependiente,true); 
+								}
+						}
+						///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+							//////////////////////////////////////////verificar status del submodulo padre y el modulo padre //////////////////////////////////////////
+
 							  $.each(checks_sub, function(i)
 							  {
 							  	submoduloId=$(this).attr('data-submoduloId');//id del submodulo
@@ -319,9 +402,7 @@ $(".consultarSubmodulo").click(function(){
 							  			}
 							  		}
 
-							  })
-					
-						
+							  })//each 
 
 						}
 						
