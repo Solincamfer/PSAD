@@ -125,12 +125,13 @@ function actualizar_checks_acciones (checks,submoduloId,estado, vista)
 
 }
 
-function ActualizarDependencias (idDependencia,condicion) 
+function BuscarPadre(idDependencia,condicion) 
 {
 	var idDependencia=idDependencia;
 	var condicion=condicion;
 	var buscar=true;
 	var elemento=$("input[data-accion="+idDependencia+"]");
+	var valores=[1,0];
 
 	do
 	{
@@ -140,10 +141,16 @@ function ActualizarDependencias (idDependencia,condicion)
 			if (condicion==true) //identifica si debe activarse
 			{
 				$(elemento).prop('checked',true);
+				$(elemento).val(valores[$(elemento).val()]);id=
+				actualizar_status (obtener_valor('A',$(elemento).attr('id')),'/menu/registros/perfiles/configurar/accion');
+				alert('Entro True');
 			}
-			else (condicion==false)//identifica si debe desactivarse
+			else if(condicion==false)//identifica si debe desactivarse
 			{
 				$(elemento).prop('checked',false);
+				$(elemento).val(valores[$(elemento).val()]);
+				actualizar_status (obtener_valor('A',$(elemento).attr('id')),'/menu/registros/perfiles/configurar/accion');
+				alert('Entro False');
 			}
 
 
@@ -157,7 +164,7 @@ function ActualizarDependencias (idDependencia,condicion)
 			buscar=false;
 
 		}
-		else
+		else if ($(elemento).attr('data-accion')!=dependencia) 
 		{
 
 			idDependencia=$(elemento).attr('data-dependencia');
@@ -171,6 +178,32 @@ function ActualizarDependencias (idDependencia,condicion)
 
 }
 
+
+function BuscarHijos(acciones,idAccion,condicion) 
+{
+	 var valores=[1,0];
+	 var acciones=acciones;
+	 var idAccion=idAccion;
+	 var condicion=condicion;
+
+	  $.each(acciones, function(i) 
+	  {
+	  	if(($(this).attr('data-dependencia')==idAccion) && ($(this).attr('data-accion')!=idAccion))
+	  	{
+	  		if($(this).prop('checked')!=condicion)
+	  		{
+	  			$(this).prop('checked',condicion);
+	  			$(this).val(valores[$(this).val()]);
+	  			actualizar_status (obtener_valor('A',$(this).attr('id')),'/menu/registros/perfiles/configurar/accion');
+	  		}
+	  	}
+
+
+	  })
+			    
+
+
+}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -261,11 +294,11 @@ $(".consultarSubmodulo").click(function(){
 					$( ".limpiarul2" ).remove();
 					$.each(data1, function(i, item) 
 					{
-						$('#targeta3 ul').append('<li class="limpiarul2" style="display:none;"><div class="container-fluid cont"><div class="row"><div class="col-md-6"><div class="tl1"><span>'+item.descripcion+'</span></div></div><div class="col-md-1 col-md-push-2"><div class="iclst"></div><input type="hidden" id="Accio2nn'+item.accionId+'" value="'+item.accionId+'"></div><div class="col-md-2 col-md-push-3"><div class="chbx1x" id="checklistA'+item.accionId+'">   </div></div></div></div></li>');
+						$('#targeta3 ul').append('<li class="limpiarul2" style="display:none;" ><div class="container-fluid cont"><div class="row"><div class="col-md-6"><div class="tl1"><span>'+item.descripcion+'</span></div></div><div class="col-md-1 col-md-push-2"><div class="iclst"></div><input type="hidden" id="Accio2nn'+item.accionId+'" value="'+item.accionId+'"></div><div class="col-md-2 col-md-push-3"><div class="chbx1x" id="checklistA'+item.accionId+'">   </div></div></div></div></li>');
 			    		 
 			    		 if(item.Status==1)//agregar check de status cuando el submodulo esta asignado para el perfil
 			  				 {
-			  		 			$('#checklistA'+item.accionId).append(' <input type="checkbox" data-dependencia="'+item.dependencia+'" data-accion="'+item.accionId+'" value="'+item.Status+'" class="configurarAcc" id="cckA'+item.registro+'" name="cckA'+item.padre+'" checked><label for="cckA'+item.registro+'"></label> ');
+			  		 			$('#checklistA'+item.accionId).append(' <input type="checkbox" data-dependencia="'+item.dependencia+'" data-accion="'+item.accionId+'"  value="'+item.Status+'" class="configurarAcc" id="cckA'+item.registro+'" name="cckA'+item.padre+'" checked><label for="cckA'+item.registro+'"></label> ');
 			   
 			  				 }
 			  			 else if(item.Status==0)//agregar check de status cuando el submodulo no esta signado para el perfil
@@ -273,6 +306,16 @@ $(".consultarSubmodulo").click(function(){
 			   		  			$('#checklistA'+item.accionId).append(' <input type="checkbox" data-dependencia="'+item.dependencia+'"   data-accion="'+item.accionId+'"  value="'+item.Status+'"  class="configurarAcc"  id="cckA'+item.registro+'" name="cckA'+item.padre+'" ><label for="cckA'+item.registro+'"></label> ');
 
 			  				 }
+			  			
+			  			/*if(item.ventana==1)
+			  			{
+
+			  				$('.limpiarul2').css({"backgroundColor":"#BFC0AD","color":"#000000"});
+			  			}
+			  			else if(item.ventana==0)
+			  			{
+			  				$('.limpiarul2').css({"backgroundColor":"#222","color":"#E5E5E7"});
+			  			}*/
 
 
 
@@ -328,33 +371,48 @@ $(".consultarSubmodulo").click(function(){
 
 
 
-						/////////////////////////////////////////////////////////ver status de acciones ////////////////////////////////////////////////////////////////////////////////////
-						if(accionDependiente!=idAccion)//verifica que la accion dependa de otra para estar activa
+						/////////////////////////////////////////////////////////Dependencia de acciones ////////////////////////////////////////////////////////////////////////////////////
+						if(accionDependiente!=idAccion && status==true)//status refleja el status de laccion checkeada//si se habilita una accion que depende de otra y es la primera accion en habilitarse
 						{
-								accion
-
-								if (acciones_activas==0)//si no hay acciones activas debe desactivarse la accion padre
+								
+								if(acciones_activas==1)//si ees la primera accion y esta depende otra//se activa la accion padre
 								{
-
-									ActualizarDependencias (accionDependiente,false); 
-
+									BuscarPadre(accionDependiente,true); 
 								}
-								else if(acciones_activas==1)//si ees la primera debe activarse la accion
+						}
+						else if(accionDependiente!=idAccion && status==false)//status refleja el status de laccion checkeada//si se deshabilita una accion que depende de otra y es la penultima accion en deshabilitarse
+						{
+								if(acciones_activas==1)//si la que queda es una dependiente
 								{
-									 
-
-									/*var condicion=true;
-									alert('debe activarse la accion '+accionDependiente);
-									alert($("input[data-accion="+accionDependiente+"]").prop('checked',condicion));*/
-
-									ActualizarDependencias (accionDependiente,true); 
+									BuscarPadre(accionDependiente,false); 
 								}
+
+						}
+						else if(accionDependiente==idAccion && status==false)//busca si se deshabilita una accion padre
+						{
+							if(acciones_activas>=1)//si queda una o mas acciones activas
+							{
+								BuscarHijos(checks_acc,idAccion,false);//deshabilitar acciones 
+							}
+
+
+						}
+						else if(accionDependiente==idAccion && status==true)//busca si se habilita una accion padre 
+						{
+							if(acciones_activas>=1)//si se habilita y hay una o mas acciones activas
+							{
+								BuscarHijos(checks_acc,idAccion,true);//habilitar
+							}
+
+
 						}
 						///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 							//////////////////////////////////////////verificar status del submodulo padre y el modulo padre //////////////////////////////////////////
 
+							 checks_acc=checks_acciones("targeta3",vista_acciones);
+							 acciones_activas=cheks_activos(checks_acc);
 							  $.each(checks_sub, function(i)
 							  {
 							  	submoduloId=$(this).attr('data-submoduloId');//id del submodulo
@@ -363,7 +421,7 @@ $(".consultarSubmodulo").click(function(){
 							  			moduloPadre=obtener_valor('S',$(this).attr('name'));//id del modulo padre
 							  			modulo=document.getElementsByName('cck'+moduloPadre);
 
-							  			if ((status_check==false && $(this).prop('checked')==true)&&(acciones_activas==0))
+							  			if (($(this).prop('checked')==true)&&(acciones_activas==0))
 							  			{
 							  				$(this).prop('checked',false);
 							  				$(this).val(valores[$(this).val()]);
@@ -381,7 +439,7 @@ $(".consultarSubmodulo").click(function(){
 							  		 		}
 
 							  			}
-							  			else if(status_check==true && $(this).prop('checked')==false)
+							  			else if( $(this).prop('checked')==false && acciones_activas>=1)
 							  			{
 							  				$(this).prop('checked',true);
 							  				$(this).val(valores[$(this).val()]);
