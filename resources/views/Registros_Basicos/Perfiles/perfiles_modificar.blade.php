@@ -19,6 +19,9 @@
                                 <div class="col-md-2" align="left">
                                     <a href="/menu/registros/perfiles/"><button id="btnBk" type="button" class="btnBk" href="#"><i class="fa fa-chevron-left"></i> VOLVER</button></a>
                                 </div>
+                              <!--   <div class="col-md-2 col-md-offset-3 pnlUs">
+                                     <span class="pnlttl"><i class="fa fa-user-circle"></i> {{$datosC1}}</span>
+                                </div> -->
                             </div>
                         </div>
                         <div class="container centrado">

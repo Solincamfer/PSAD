@@ -374,7 +374,7 @@ public function planes_ingresar(){
 public function planes_servicios_servicios($id_plan)
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
-		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(73,74),72);//identificar acciones para la vista de servicios
+		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(),false);//identificar acciones para la vista de servicios
 		return view ('Registros_Basicos\PlaneS\servicios',$this->datos_vista($datos,$acciones,array(),$id_plan));
 
 		
@@ -543,7 +543,7 @@ public function empleados_perfiles($empleado_id)
 {
 	
 	$datos=$this->cargar_header_sidebar_acciones();
-	$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(79),false);
+	$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(),false);
 	
 	$consulta=DB::table('perfiles')->join('usuarios','perfiles.id','=','usuarios.perfil_id')
 								   ->join('empleados','usuarios.id','=','empleados.id')
@@ -634,7 +634,7 @@ public function perfiles_permisos($perfil_id)
 	$modulos=$perfil->modulos;
 	$datos=$this->cargar_header_sidebar_acciones();
 	$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(84,85),83);
-	return view('Registros_Basicos\Perfiles\perfiles_modificar',$this->datos_vista($datos,$acciones,$registros,(int)$perfil_id));
+	return view('Registros_Basicos\Perfiles\perfiles_modificar',$this->datos_vista($datos,$acciones,$registros,(int)$perfil_id,$perfil->descripcion));
 }
 
 
@@ -752,7 +752,7 @@ public function mostrar_acciones()
 					->select('acciones.id AS accionId','acciones.ventana AS ventana','acciones.descripcion AS descripcion','acciones.submodulo_id AS padre',
 							 'acciones.status_ac AS accionStatus','acciones.accion_id AS dependencia','acciones.ventana AS ventana','perfiles.id AS perfilId','perfiles.descripcion AS perfilDescripcion',
 							 'accion_perfil.id AS registro','accion_perfil.status AS Status')
-					->where(['acciones.submodulo_id'=>$datos[1],'perfiles.id'=>$datos[0],'acciones.status_ac'=>1])->get();
+					->where(['acciones.submodulo_id'=>$datos[1],'perfiles.id'=>$datos[0],'acciones.status_ac'=>1])->orderBy('orden', 'asc')->get();
 
 
 
@@ -1303,7 +1303,7 @@ public function clientes_categoria($cliente_id)//listar categorias
 	public function clientes_sucursales_plan()
 		{
 			$datos=$this->cargar_header_sidebar_acciones();
-			$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(34,37),false);///reisar vista para boton agregar
+			$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(37),false);///reisar vista para boton agregar
 			return view ('Registros_Basicos\Clientes\clientes_sucursales_plan',$this->datos_vista($datos,$acciones,array()));
 							
 		}
@@ -1492,48 +1492,13 @@ public function clientes_categoria($cliente_id)//listar categorias
 			else{
 				$respuesta=0;
 			}*/
-			/*$respuesta=DB::table('accion_perfil')->where('perfil_id','<>',12)->where('perfil_id','<>',13)->delete();
-			$respuesta=DB::table('perfil_submodulo')->where('perfil_id','<>',12)->where('perfil_id','<>',13)->delete();
+			//$respuesta=DB::table('acciones')->where('id','=',72)->orWhere('id','=',73)->orWhere('id','=',74)->delete();
+			$respuesta=DB::table('acciones')->where('id','=',34)->delete();
+			
+			echo count($respuesta);
+			/*$respuesta=DB::table('perfil_submodulo')->where('perfil_id','<>',12)->where('perfil_id','<>',13)->delete();
 			$respuesta=DB::table('perfiles')->where('id','<>',12)->where('id','<>',13)->delete();
 			return $respuesta;*/
-
-				$id= ['s4',1];
-				$tablas=	array(	's1' => 'horarios',
-							  		's2' => 'presenciales',
-							  		's3' => 'remotos',
-							  		's4' => 'telefonicos',
-							  		's5' => 'respuestas'
-							);
-				$consulta=DB::table($tablas[$id[0]])->where('plan_id',$id[1])->first();
-				dd($consulta);
-				if (count($consulta) == 1) {
-					if ($id[0] == 's1') {
-						$respuesta= array(	$consulta->horaI,
-											$consulta->horaF,
-											$consulta->diaI,
-											$consulta->diaF,
-											$consulta->precio
-									);
-					}
-					elseif ($id[0] == 's2' || $id[0] == 's3' || $id[0] == 's4') {
-						$respuesta= array(	$consulta->etiqueta,
-											$consulta->valor,
-											$consulta->precio,
-									);
-					}	
-					elseif ($id[0] == 's5') {
-						$respuesta= array(	's5',
-											$consulta->maximo,
-											$consulta->precio
-									);
-					}
-				}
-				elseif (count($consulta) == 0){
-					$respuesta = array('1' => '' );
-				}
-
-			//dd($respuesta);
-			return $respuesta;
 
 
 		}
