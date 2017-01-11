@@ -198,6 +198,7 @@ function BuscarHijos(acciones,padres,condicion)
 	 var idAccion=idAccion;
 	 var condicion=condicion;
 	 var padre=false;
+	 var hijos=[];
 
 	 
 $.each(padres, function(i) 
@@ -212,16 +213,39 @@ $.each(padres, function(i)
 	  			$(this).prop('checked',condicion);
 	  			$(this).val(valores[$(this).val()]);
 	  			actualizar_status (obtener_valor('A',$(this).attr('id')),'/menu/registros/perfiles/configurar/accion');
+	  			hijos.push($(this));
 	  		}
+	  		
 	  	}
 
 
 	  })
 })
-			    
+	return hijos;		    
 
 
 }
+
+
+function acciones_padre(padre,acciones) 
+	{
+							
+		var padre=padre;
+		var acciones=acciones;
+		var activos=0;
+		$.each(acciones, function(i)
+		{
+			if ($(this).attr('data-dependencia')==padre) 
+				{
+					if(($(this).attr('data-accion')!=padre)&&($(this).prop('checked')==true))
+					{
+						activos+=1;
+					}
+				}
+
+		})	
+		return activos;
+	}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -384,6 +408,8 @@ $(".consultarSubmodulo").click(function(){
 							var submoduloId=false;
 							var moduloPadre=false;
 							var modulo=false;
+							var padre=false;
+							var hijos=false;
 							
 
 
@@ -396,18 +422,32 @@ $(".consultarSubmodulo").click(function(){
 								
 								if(acciones_activas>=1)//si es la primera accion o ya existen varias y esta depende otra//se activa la accion padre
 								{
-									var padres=BuscarPadre(accionDependiente,true,1); //busca habilitar su padre
+									var padres=BuscarPadre(accionDependiente,true,1); //busca habilitar su padre/puedo pasar el array de padre y buscarHijos puede buscar los hijos de cada uno 
 									BuscarHijos(checks_acc,[accion],true);//busca habilitar sus posibles hijos
 								}
 
 						}
 						else if(accionDependiente!=idAccion && status==false)//status refleja el status de laccion checkeada//si se deshabilita una accion que depende de otra y es la penultima accion en deshabilitarse 
 						{
-								if(acciones_activas>=1)//si la que queda es una dependiente
-								{
-									var padres=BuscarPadre(accionDependiente,false,0); //busca deshabilitar su posible padre
-									BuscarHijos(checks_acc, [accion],false);//busca deshabilitar sus posibles hijos
-								}
+								
+							
+							padre=$("input[data-accion="+$(accion).attr('data-dependencia')+"]");
+
+							if(acciones_padre($(padre).attr('data-accion'),checks_acc)==0)
+							{
+								$(padre).prop('checked',false);
+								$(padre).val(valores[$(padre).val()]);
+								actualizar_status (obtener_valor('A',$(padre).attr('id')),'/menu/registros/perfiles/configurar/accion');
+							}
+
+							hijos=BuscarHijos(checks_acc, [accion],false);//busca deshabilitar sus posibles hijos
+							
+							//checks_acc=checks_acciones("targeta3",vista_acciones);
+
+							while(hijos.length>0)
+							{
+								hijos=BuscarHijos(checks_acc, [accion],false);
+							}
 
 						}
 						
@@ -415,7 +455,12 @@ $(".consultarSubmodulo").click(function(){
 						{
 							if(acciones_activas>=1)//si queda una o mas acciones activas
 							{
-								BuscarHijos(checks_acc,[accion],false);//deshabilitar acciones 
+								hijos=BuscarHijos(checks_acc,[accion],false);//deshabilitar acciones 
+								alert('hijos: '+hijos);
+								while(hijos.length>0)
+								{
+									hijos=BuscarHijos(checks_acc, [accion],false);
+								}
 							}
 
 
@@ -425,6 +470,12 @@ $(".consultarSubmodulo").click(function(){
 							if(acciones_activas>=1)//si se habilita y hay una o mas acciones dependientes inactivas
 							{
 								BuscarHijos(checks_acc,[accion],true);//habilitar
+								hijos=BuscarHijos(checks_acc,[accion],true);//deshabilitar acciones 
+								alert('hijos: '+hijos);
+								while(hijos.length>0)
+								{
+									hijos=BuscarHijos(checks_acc, [accion],true);
+								}
 							}
 
 
@@ -438,9 +489,11 @@ $(".consultarSubmodulo").click(function(){
 							 acciones_activas=cheks_activos(checks_acc);
 							  $.each(checks_sub, function(i)
 							  {
+							  	alert('buscando submodulo');
 							  	submoduloId=$(this).attr('data-submoduloId');//id del submodulo
 							  	if (submoduloPadre==submoduloId) //si se localiza el submodulo padre de la accion
 							  		{	
+							  			alert("encontro el submodulo, el numero de acciones activas  es :  "+acciones_activas);
 							  			moduloPadre=obtener_valor('S',$(this).attr('name'));//id del modulo padre
 							  			modulo=document.getElementsByName('cck'+moduloPadre);
 
