@@ -380,7 +380,7 @@ function Validar(){
                     },
                     regexp: {
                             regexp: /^[1-9]+$/,
-                            message: 'Sólo Números Positivos,<br>(Use el "." para expresar decimales)'                            
+                            message: 'Sólo Números Positivos'                            
                     },
                 }
             },

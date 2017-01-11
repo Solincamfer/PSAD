@@ -182,8 +182,9 @@
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                         <h4 class="modal-title" id="myModalLabel2">Modificar Servicio "Soporte Presencial"</h4>
                                     </div>
-                                    <form method="post" id="NewPresencial" class="NewServicio">
+                                    <form method="post" id="NewPresencial" class="NewServicio1">
                                         <div class="modal-body">
+                                            {{ csrf_field() }}  
                                             <div class="container-fluid contsr">
                                                 <div class="rSrv">
                                                     <div class="col-md-10 col-md-offset-1">

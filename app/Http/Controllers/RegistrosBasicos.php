@@ -495,6 +495,38 @@ public function insertar_servicios(){
 	}
 	return $respuesta;
 }
+///////////////////////////////////////CARGAR DATOS EN EL MODAL ///////////////////////////////////////////////
+
+public planes_mostrar_datos(){
+}
+
+////////////////////////////////////// MODIFICAR PLANES ///////////////////////////////////////////////////////
+public function planes_modificar(){
+	$datos=Request::get('datos');
+	$nombreP= strtoupper($datos[0][0]);//nombre del Plan, llevado a mayusculas
+	$descuento= $datos[0][1];//Porcentaje de descuento del plan 
+	$statusP= (int)$datos[0][2];;//status del Plan 
+
+
+	$consulta=DB::table('planes')->where('nombreP',$nombreP)->where('id','<>',$datos[1])->first();
+	
+
+	if (empty($consulta)) //si el registro no existe, se procede a ingresar los datos del departamento
+	{
+		 DB::table('planes')->insert
+				 	(
+
+				 		['nombreP'=>$nombreP,'descuento'=>$descuento,'status'=>$statusP]
+				 	);
+
+		$respuesta= 1;
+		
+	}
+	else{
+		$respuesta= 0;
+	}
+	return (int)$respuesta;
+}
 	
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////// submodulos empleados /////////////////////////////////////////////////////////////////

@@ -32,6 +32,9 @@ $( "#NewPlan" ).submit(function( event ){
 $( ".NewServicio" ).submit(function( event ){
 	event.preventDefault();
 	});
+$( "#modificarPlan" ).submit(function( event ){
+	event.preventDefault();
+	});
 
 ////////////////////
 ////Validacion + permisologia + AJAX del boton submit de la vista LOGIN////
@@ -864,7 +867,7 @@ $('#savePerfil').click(function(){
 		});
 	}
 });
-///////////////////////// Validacion de registros iguales para Planes /////////
+///////////////////////// Validacion de registros iguales para Planes ///////////////////////////////////////
 $('#savePlan').click(function(){
 	var form=$('#NewPlan');
 	var url= '/menu/registros/planes/registrar';
@@ -908,8 +911,32 @@ $('#savePlan').click(function(){
 		});
 	}
 });
+$('.NewServicio1').bootstrapValidator({
+    feedbackIcons: {
+         valid: 'glyphicon glyphicon-ok',
+         invalid: 'glyphicon glyphicon-remove',
+         validating: 'glyphicon glyphicon-refresh'
+    },
+    fields: {
+////////////////////////////////////// AGREGAR SOPORTE PRESENCIAL //////////////////////////////////
+       campo: {
+            validators: {
+                notEmpty: {
+                     message: 'Campo Vacío'
+                },
+            }
+        },
+        precioP:{
+            validators: {
+                notEmpty: {
+                     message: 'Campo Vacío'
+                },
+            }
+        },   
+    }
+});
 
-///////////////////////////// Asociacion de Servicios a Plan ///////////////////////
+////////////////////////////////////// Asociacion de Servicios a Plan /////////////////////////////////
 var valorP;
 var valorR; 
 var valorT;
@@ -930,14 +957,14 @@ $(".m_Servicio").click(function(){
 				$('.campo').remove();
 				$('#ic1').remove();
 				$('#stpc').prop('checked', true)
-				$('.icc2').append('<input class="campo" type="number" id="p1" placeholder="Cantidad de soportes Presenciales" value="'+data[1]+'"><i id="ic1" class="fa fa-laptop"></i>');
+				$('.icc2').append('<input class="campo" name="campo" type="number" id="p1" placeholder="Cantidad de soportes Presenciales" value="'+data[1]+'"><i id="ic1" class="fa fa-laptop"></i>');
 				
 			}
 			else if(data[0] == 'ilimitado'){
 				$('.campo').remove();
 				$('#ic1').remove();
 				$('#stpe').prop('checked', true)
-				$('.icc2').append('<input class="campo" type="hidden" id="p2" value="0">');
+				$('.icc2').append('<input class="campo" name="campo" type="hidden" id="p2" value="0">');
 			}	
 			else{
 				$('.campo').remove();
@@ -1011,12 +1038,12 @@ $("input[name=radio1]").change(function () {
 	}
 	if ($("input[name=radio1]:checked").val()=='contabilizado') {
 		$('#p2').remove();
-		$('.icc2').append('<input class="campo" type="number" id="p1"  placeholder="Cantidad de Soportes Presenciales"  value="'+valorP+'"><i id="ic1" class="fa fa-laptop"></i>');
+		$('.icc2').append('<input class="campo" name="campo" type="number" id="p1"  placeholder="Cantidad de Soportes Presenciales"  value="'+valorP+'"><i id="ic1" class="fa fa-laptop"></i>');
 	}
 	else if ($("input[name=radio1]:checked").val()=='ilimitado'){
 		$('#p1').remove();
 		$('#ic1').remove();
-		$('.icc2').append('<input class="campo" type="hidden" id="p2" value="0">');
+		$('.icc2').append('<input class="campo" name="campo" type="hidden" id="p2" value="0">');
 	}
 });
 
@@ -1279,3 +1306,98 @@ $('#saveTR').click(function(){
 		});
 	}
 });
+/////////////////////   CARGA DE DATOS EN EL MODAL DE MODIFICAR PLANES    //////////////////////////
+
+$('.modificarPlanes').click(function()
+	{
+		//var rutas=['/menu/modificar/registros','/menu/modificar/registros','/menu/registros/perfiles/modificar'];
+
+		////////////// obtener registro a modificar ////////////////////
+		var datos=$(this).attr('data-id');////////////// id del boton modificar seleccionado ///////////////
+		var url= '/menu/registros/planes/actualizar';//rutas[tabla];
+				
+		$.get(url, {datos:datos}, function(actualizar)
+			{
+
+				if (actualizar!=false) 
+				{
+					
+					if (tabla==0)//datos del departamento
+					 {
+					 		
+					 	$('#nomDptom_').val(actualizar[0]);
+					 	$('#stDptom_').val(actualizar[1]);
+					 	$('#MIndexD').val(registro+'ß'+tabla);
+					 }
+					 else if (tabla==1) //datos del cargo
+					 {
+					 	$('#nomCgom_').val(actualizar[0]);
+					 	$('#stCgom_').val(actualizar[1]);
+					 	$('#MIndexC').val(registro+'ß'+tabla);
+
+					 }
+					 else if(tabla==2)//datos para un perfil
+					 {
+
+					 	$('#duPfl_').val(actualizar[0]);
+					 	$('#stPfl_').val(actualizar[1]);
+					 	$('#MIndexP').val(registro+'ß'+tabla);
+
+					 }
+
+
+				}
+				else
+				{
+					swal("Error Inesperado !!", "Comuniquese con el administrador", "error");
+				}
+
+				*/
+
+	});
+///////////////////////////////////////  MODIFICACION DE PLANES ////////////////////////////////////////////
+$('#actualizarPlan').click(function(){
+	var url= '/menu/registros/planes/modificar';
+	var plan = $('#nomPnm').val();
+	var desc = $('#porDesm').val();
+	var estatus = $('stPnm').val();
+	var campos = [plan,desc,estatus];
+	var plan_ID = $('input[name=TND]').val();
+	var datos = [campos,plan_ID]
+	
+	if (plan != '' && desc != '' && estatus != ''){
+		var posting = $.get(url, data,function(resultado){
+			if (resultado == 1) {
+				//SWALLLL mensajes de alerta y sucesos
+				swal({
+					title:'Guardado Exitoso',//Contenido del modal
+					text: 'El Plan fue Modificado Exitosamente',
+					type: "success",
+					timer:1000,
+					showConfirmButton:false,//Eliminar boton de confirmacion
+				});
+				//Retardo en ejecucion de ruta.
+				setTimeout(function(){location.href = "/menu/registros/planeservicios";},1200); // 3000ms = 3s
+			}	
+			else {
+				swal({
+
+					title:'Registro Existente!!!.',//Contenido del modal
+					text: 'Este Plan ya existe',
+					type: "error",
+					timer:2000,
+					showConfirmButton:false,//Eliminar boton de confirmacion
+				});
+			}						
+		});
+		posting.fail(function() {
+			swal({
+				title:'Error inesperado!!',//Contenido del modal
+				text: 'Pongase en contacto con el administrador',
+				type: "error",
+				showConfirmButton:true,//Eliminar boton de confirmacion
+			});
+		});
+	}
+});
+

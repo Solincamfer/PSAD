@@ -39,7 +39,7 @@
                                     @if($accion->id!=66)
                                         @if($accion->id==65)
                                             <span class="iclsp">
-                                                <a href="#myModal2" class="tltp modificarPlanes" data-ttl="{{$accion->descripcion}}" data-toggle="modal" data-target="#myModal2"> 
+                                                <a href="#myModal2" class="tltp modificarPlanes" data-ttl="{{$accion->descripcion}}" data-id="{{$planes->id}}" data-toggle="modal" data-target="#myModal2"> 
                                                     <i class="{{$accion->clase_css}}"></i>
                                                 </a>
                                             </span>
@@ -64,6 +64,7 @@
                                 @endforeach
                             </div>
                             <p class="ttlMd"><strong>{{$planes->nombreP}}</strong></p>
+
                         </div>
                     @endforeach
                     <div class="paginador">
@@ -130,7 +131,7 @@
                                 <h4 class="modal-title" id="myModalLabel2">Modificar Plan</h4>
                             </div>
                             <div class="modal-body">
-                                <form action="">
+                                <form id="mPlan">
                                     {{ csrf_field() }}
                                     <div class="container-fluid" id="contpn">
                                         <div class="rPnm">
@@ -161,7 +162,7 @@
                                 </form>
                             </div>
                             <div class="modal-footer">
-                                <button type="submit" class="bttnMd" id="btnSvm">Guardar <i class="fa fa-floppy-o"></i></button>
+                                <button type="submit" class="bttnMd" id="actualizarPlan">Guardar <i class="fa fa-floppy-o"></i></button>
                             </div>
                         </div>
                     </div>
