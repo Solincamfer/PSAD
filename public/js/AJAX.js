@@ -32,7 +32,7 @@ $( "#NewPlan" ).submit(function( event ){
 $( ".NewServicio" ).submit(function( event ){
 	event.preventDefault();
 	});
-$( "#modificarPlan" ).submit(function( event ){
+$( "#mPlan" ).submit(function( event ){
 	event.preventDefault();
 	});
 
@@ -1310,80 +1310,53 @@ $('#saveTR').click(function(){
 
 $('.modificarPlanes').click(function()
 	{
-		//var rutas=['/menu/modificar/registros','/menu/modificar/registros','/menu/registros/perfiles/modificar'];
 
 		////////////// obtener registro a modificar ////////////////////
 		var datos=$(this).attr('data-id');////////////// id del boton modificar seleccionado ///////////////
 		var url= '/menu/registros/planes/actualizar';//rutas[tabla];
 				
-		$.get(url, {datos:datos}, function(actualizar)
-			{
-
-				if (actualizar!=false) 
-				{
+		$.get(url, {datos:datos}, function(actualizar){
+			if (actualizar[4] == 1){
 					
-					if (tabla==0)//datos del departamento
-					 {
-					 		
-					 	$('#nomDptom_').val(actualizar[0]);
-					 	$('#stDptom_').val(actualizar[1]);
-					 	$('#MIndexD').val(registro+'ß'+tabla);
-					 }
-					 else if (tabla==1) //datos del cargo
-					 {
-					 	$('#nomCgom_').val(actualizar[0]);
-					 	$('#stCgom_').val(actualizar[1]);
-					 	$('#MIndexC').val(registro+'ß'+tabla);
+			 	$('#nomPnm').val(actualizar[0]);
+			 	$('#porDesm').val(actualizar[1]);
+			 	$('#stPnm').val(actualizar[2]);
+			 	$('#id_registro').val(actualizar[3]);
+			}
+			else{
+				swal("Error Inesperado !!", "Comuniquese con el administrador", "error");
+			}  
+		});
 
-					 }
-					 else if(tabla==2)//datos para un perfil
-					 {
-
-					 	$('#duPfl_').val(actualizar[0]);
-					 	$('#stPfl_').val(actualizar[1]);
-					 	$('#MIndexP').val(registro+'ß'+tabla);
-
-					 }
-
-
-				}
-				else
-				{
-					swal("Error Inesperado !!", "Comuniquese con el administrador", "error");
-				}
-
-				*/
-
-	});
+});
 ///////////////////////////////////////  MODIFICACION DE PLANES ////////////////////////////////////////////
 $('#actualizarPlan').click(function(){
 	var url= '/menu/registros/planes/modificar';
 	var plan = $('#nomPnm').val();
 	var desc = $('#porDesm').val();
-	var estatus = $('stPnm').val();
+	var estatus = $('#stPnm').val();
 	var campos = [plan,desc,estatus];
-	var plan_ID = $('input[name=TND]').val();
-	var datos = [campos,plan_ID]
-	
+	var ID_registro = $('#id_registro').val();
+	var datos = [campos,ID_registro]
 	if (plan != '' && desc != '' && estatus != ''){
-		var posting = $.get(url, data,function(resultado){
+		var posting = $.get(url,{datos:datos},function(resultado){
 			if (resultado == 1) {
 				//SWALLLL mensajes de alerta y sucesos
 				swal({
-					title:'Guardado Exitoso',//Contenido del modal
-					text: 'El Plan fue Modificado Exitosamente',
+					title:'Actualizacion Exitosa',//Contenido del modal
+					text: 'El Plan fue actualizado Exitosamente',
 					type: "success",
-					timer:1000,
+					timer:1600,
 					showConfirmButton:false,//Eliminar boton de confirmacion
 				});
 				//Retardo en ejecucion de ruta.
-				setTimeout(function(){location.href = "/menu/registros/planeservicios";},1200); // 3000ms = 3s
+				setTimeout(function(){location.href = "/menu/registros/planeservicios";},1800); // 3000ms = 3s
 			}	
 			else {
 				swal({
 
 					title:'Registro Existente!!!.',//Contenido del modal
-					text: 'Este Plan ya existe',
+					text: 'Este Plan ya Existe, Revise el nombre del Plan',
 					type: "error",
 					timer:2000,
 					showConfirmButton:false,//Eliminar boton de confirmacion

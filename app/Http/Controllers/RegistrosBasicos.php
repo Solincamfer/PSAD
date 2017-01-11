@@ -495,37 +495,50 @@ public function insertar_servicios(){
 	}
 	return $respuesta;
 }
-///////////////////////////////////////CARGAR DATOS EN EL MODAL ///////////////////////////////////////////////
+///////////////////////////////////////   CARGAR DATOS EN EL MODAL MODIFICAR PLAN  //////////////////////////////
 
-public planes_mostrar_datos(){
+public function planes_mostrar_datos(){
+	$id=Request::get('datos');
+	$consulta=DB::table('planes')->where('id','=',$id)->first();
+	if (count($consulta)==1) {
+		$respuesta = 	array(	$consulta->nombreP,
+								$consulta->descuento,
+								$consulta->status,
+								$consulta->id,
+								1
+						);
+	}
+	else{
+		$respuesta = 0;	
+	}
+	return $respuesta; 
 }
-
 ////////////////////////////////////// MODIFICAR PLANES ///////////////////////////////////////////////////////
+
 public function planes_modificar(){
+
 	$datos=Request::get('datos');
 	$nombreP= strtoupper($datos[0][0]);//nombre del Plan, llevado a mayusculas
 	$descuento= $datos[0][1];//Porcentaje de descuento del plan 
 	$statusP= (int)$datos[0][2];;//status del Plan 
 
-
-	$consulta=DB::table('planes')->where('nombreP',$nombreP)->where('id','<>',$datos[1])->first();
+	$consulta=DB::table('planes')->where('id','<>',$datos[1])->where('nombreP',$nombreP)->get();
 	
 
-	if (empty($consulta)) //si el registro no existe, se procede a ingresar los datos del departamento
+	if (count($consulta)==0) //si el registro no existe con otro id, se procede a modificar los datos del plan
 	{
-		 DB::table('planes')->insert
-				 	(
-
-				 		['nombreP'=>$nombreP,'descuento'=>$descuento,'status'=>$statusP]
-				 	);
-
+		$actualizacion=DB::table('planes')->where('id',$datos[1])->update([	'nombreP'=>$nombreP,
+																			'descuento'=>$descuento,
+																			'status'=>$statusP
+																		]);
+						
 		$respuesta= 1;
 		
 	}
 	else{
 		$respuesta= 0;
 	}
-	return (int)$respuesta;
+	return $respuesta;
 }
 	
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1470,37 +1483,53 @@ public function clientes_categoria($cliente_id)//listar categorias
 		}
 			
 
-		public function pruebas_()
-		{
-			/*$perfil=strtoupper("Super usuario");
-			$status=1;
+	public function pruebas_(){
 
-			$consulta=false;
+				/*$perfil=strtoupper("Super usuario");
+				$status=1;
 
-			if (empty($consulta)) //si no existe el perfil
-			{
+				$consulta=false;
+
+				if (empty($consulta)) //si no existe el perfil
+				{
+					
+								 $perfil_id=DB::table('perfiles')->insertGetId
+								 	(
+
+								 		['descripcion'=>$perfil,'status'=>$status]
+								 	);
+
+					$this->perfil_inicial($perfil_id);//configuracion por defecto para un perfil
+					$respuesta=1;
+				}
+				else{
+					$respuesta=0;
+				}*/
+				//$respuesta=DB::table('acciones')->where('id','=',72)->orWhere('id','=',73)->orWhere('id','=',74)->delete();
+				//$respuesta=DB::table('acciones')->where('id','=',34)->delete();
 				
-							 $perfil_id=DB::table('perfiles')->insertGetId
-							 	(
+				//echo count($respuesta);
+				/*$respuesta=DB::table('perfil_submodulo')->where('perfil_id','<>',12)->where('perfil_id','<>',13)->delete();
+				$respuesta=DB::table('perfiles')->where('id','<>',12)->where('id','<>',13)->delete();
+				return $respuesta;*/
 
-							 		['descripcion'=>$perfil,'status'=>$status]
-							 	);
+				//$consulta1=DB::table('planes')->where('nombreP','PLAN PREMIUN');
+				//$consulta=DB::table('planes')->where('id','<>',2)->where('nombreP','PLAN PREMIUN')->get();
+		/*if (empty($consulta)) //si el registro no existe, se procede a ingresar los datos del departamento
+		{
+			 DB::table('planes')->insert
+					 	(
 
-				$this->perfil_inicial($perfil_id);//configuracion por defecto para un perfil
-				$respuesta=1;
-			}
-			else{
-				$respuesta=0;
-			}*/
-			//$respuesta=DB::table('acciones')->where('id','=',72)->orWhere('id','=',73)->orWhere('id','=',74)->delete();
-			$respuesta=DB::table('acciones')->where('id','=',34)->delete();
+					 		['nombreP'=>$nombreP,'descuento'=>$descuento,'status'=>$statusP]
+					 	);
+							
+			$respuesta= 1;
 			
-			echo count($respuesta);
-			/*$respuesta=DB::table('perfil_submodulo')->where('perfil_id','<>',12)->where('perfil_id','<>',13)->delete();
-			$respuesta=DB::table('perfiles')->where('id','<>',12)->where('id','<>',13)->delete();
-			return $respuesta;*/
-
-
 		}
+		else{
+			$respuesta= 0;
+		}*/
+		//return dd($consulta);
+	}
 		
 }

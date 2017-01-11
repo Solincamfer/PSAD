@@ -130,41 +130,43 @@
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                 <h4 class="modal-title" id="myModalLabel2">Modificar Plan</h4>
                             </div>
-                            <div class="modal-body">
-                                <form id="mPlan">
-                                    {{ csrf_field() }}
-                                    <div class="container-fluid" id="contpn">
-                                        <div class="rPnm">
-                                            <div class="col-md-8 col-md-offset-2">
-                                                <div class="form-group row">
-                                                    <label for="nomPnm">Nombre del plan</label>
-                                                    <input type="text" name="nomPnm" id="nomPnm"><i class="fa fa-cubes" id="micpn1"></i>
+                            <form id="mPlan">
+                                <div class="modal-body">
+                                        {{ csrf_field() }}
+                                        <input type="hidden" id="id_registro" value="">
+                                        <div class="container-fluid" id="contpn">
+                                            <div class="rPnm">
+                                                <div class="col-md-8 col-md-offset-2">
+                                                    <div class="form-group row">
+                                                        <label for="nomPnm">Nombre del plan</label>
+                                                        <input type="text" name="nomPnm" id="nomPnm"><i class="fa fa-cubes" id="micpn1"></i>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-md-8 col-md-offset-2">
-                                                <div class="form-group row">
-                                                    <label for="porDesm">Porcentaje de descuento</label>
-                                                    <input type="number" name="porDesm" id="porDesm"><i class="fa fa-percent" id="micpn2"></i>
+                                                <div class="col-md-8 col-md-offset-2">
+                                                    <div class="form-group row">
+                                                        <label for="porDesm">Porcentaje de descuento</label>
+                                                        <input type="number" name="porDesm" id="porDesm"><i class="fa fa-percent" id="micpn2"></i>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-md-8 col-md-offset-2">
-                                                <div class="form-group row">
-                                                    <label for="stPnm">Estatus del Plan</label><span class="ic"><i class="fa fa-chevron-down"></i></span>
-                                                    <select name="stPnm" id="stPnm">
-                                                        <option value="">-</option>
-                                                        <option value="1">Activo</option>
-                                                        <option value="0">Inactivo</option>
-                                                    </select><i class="fa fa-check" id="micpn4"></i>
+                                                <div class="col-md-8 col-md-offset-2">
+                                                    <div class="form-group row">
+                                                        <label for="stPnm">Estatus del Plan</label><span class="ic"><i class="fa fa-chevron-down"></i></span>
+                                                        <select name="stPnm" id="stPnm">
+                                                            <option value="">-</option>
+                                                            <option value="1">Activo</option>
+                                                            <option value="0">Inactivo</option>
+                                                        </select><i class="fa fa-check" id="micpn4"></i>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </form>
+                                    
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="bttnMd" id="actualizarPlan">Guardar <i class="fa fa-floppy-o"></i></button>
+                                </div>
                             </div>
-                            <div class="modal-footer">
-                                <button type="submit" class="bttnMd" id="actualizarPlan">Guardar <i class="fa fa-floppy-o"></i></button>
-                            </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
