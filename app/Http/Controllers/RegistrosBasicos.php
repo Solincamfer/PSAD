@@ -287,45 +287,56 @@ public function capturar_datos_responsables()
 
 
 
-public function actualizar_registrosCD()//actualizar departamentos y cargos, segun lo agregado en el modal modificar
-{
-	
+public function actualizar_registrosCD(){     //actualizar departamentos y cargos, segun lo agregado en el modal modificar
 	
 	$tablas=array("departamentos","cargos","perfiles");//listado de las tablas de la base de datos
-	
-
-	$tablaRegistro=Request::get('MIndex');// registro(0)-tabla(1)
-	$descripcion=strtoupper(Request::get('Descripcion'));//ucwords convierte la primera en mayuscula
-	$status=(int)Request::get('Status');
+	$datos=Request::get('datos');
+	$tablaRegistro=$datos[2];// registro(0)-tabla(1)
+	$descripcion=strtoupper($datos[0]);//ucwords convierte la primera en mayuscula
+	$status=(int)$datos[1];
 	$dependencia=0;
-	
+
 	$index=(int)strpos($tablaRegistro,'ß');//indice del separador
 	$registro=(int)substr($tablaRegistro,0,$index);//registro a modificar
 	$indextabla=(int)trim(strrchr($tablaRegistro,'ß'),'ß');//tabla a modificar
 	$tabla=$tablas[$indextabla];//tabla donde se encuentra el registro a modificar
 	
 	
-	if ($indextabla==1)//agrega ruta para los cargos relacionados con un departamento
-	{
-		$dependencia=(int)Request::get('DCargo');//departamento al cual pertenece el cargo a modificar
+	if ($indextabla==1){ 
+	  //agrega ruta para los cargos relacionados con un departamento
+		$dependencia=(int)$datos[3];//departamento al cual pertenece el cargo a modificar
 
 	}
 	
-	$rutas=array("departamentos"=>"/menu/registros/departamentos",
-				 "cargos"=>"/menu/registros/departamentos/cargos/".(string)$dependencia,
-				 "perfiles"=>"/menu/registros/perfiles"
-				 );
 
-
-
-
-	$consulta=DB::table($tabla)->where('id',$registro)->first();
-	if(empty($consulta)==false)
-	{
+	$consulta=DB::table($tabla)->where('id','<>',$registro)->where('descripcion',$descripcion)->get();
+	if(count($consulta)==0){
+		
 		$consulta=DB::table($tabla)->where('id',$registro)->update(['descripcion'=>$descripcion,'status'=>$status]);
 		
+		if ($tabla =='departamentos') {
+			$respuesta= array (	1,
+							'/menu/registros/departamentos',
+							'Departamento'
+						);
+		}
+		elseif($tabla =='cargos'){
+			$respuesta= array(	1,
+							"/menu/registros/departamentos/cargos/".(string)$dependencia,
+							"Cargo"
+						);
+		}
+		elseif ($tabla =='perfiles') {
+			$respuesta= array(	1,
+							"/menu/registros/perfiles",
+							"Perfil"
+						);
+		}
 	}
-	return redirect($rutas[$tabla]);
+	else{
+		$respuesta=0;
+	}
+	return $respuesta;
 
 }
 
@@ -379,7 +390,7 @@ public function planes_servicios_servicios($id_plan)
 
 		
 	}
-
+///////////////////////// CARGAR DATOS EN LOS MODALES DE SERVICIOS ASOCIADOS A UN PLAN ///////////////////////////////////////
 public function valores_servicios(){
 	$id= Request::get('datos');
 	//dd($id);
@@ -418,6 +429,8 @@ public function valores_servicios(){
 
 return $respuesta;
 }
+
+////////////////////////// INSERTAR Y ACTUALIZAR REGISTROS DE LOS SERVICIOS ASOCIADOS A UN PLAN //////////////////////////////
 
 public function insertar_servicios(){
 	$datos=Request::get('datos');

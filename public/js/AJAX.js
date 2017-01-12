@@ -35,7 +35,9 @@ $( ".NewServicio" ).submit(function( event ){
 $( "#mPlan" ).submit(function( event ){
 	event.preventDefault();
 	});
-
+$(".DepCarPer").submit(function( event ){
+	event.preventDefault();
+	});
 ////////////////////
 ////Validacion + permisologia + AJAX del boton submit de la vista LOGIN////
 $('#log1').click(function(){
@@ -737,6 +739,53 @@ $('.ModificaR').click(function()
 
 	});
 
+////////////////////    ACTUALIZAR REGISTROS Y VALIDACION DE REGISTROS IGUALES PARA PERFILES, DPTOS Y CARGOS //////////////////
+
+
+$('#mDepCarPer').click(function(){
+	var desc = $('.descripcion').val();
+	var status = $('.status').val();
+	var registro_tabla = $('input[name=MIndex]').val();
+	var dep_id= $('#DCargo').val();
+	var datos = [desc,status,registro_tabla,dep_id]
+	var url= "/menu/registros/departamentos/actualizar/DC";
+	if (desc != '' && status != ''){
+		var posting = $.get(url,{datos:datos},function(resultado){
+			//alert(resultado)
+			if (resultado[0] == 1) {
+				//SWALLLL mensajes de alerta y sucesos
+				swal({
+					title:'Guardado Exitoso',//Contenido del modal
+					text: 'El '+resultado[2]+' fue Guardado Exitosamente',
+					type: "success",
+					timer:1000,
+					showConfirmButton:false,//Eliminar boton de confirmacion
+				});
+				//Retardo en ejecucion de ruta.
+				setTimeout(function(){location.href =resultado[1];},1200); // 3000ms = 3s
+			}	
+			else if(resultado==0) {
+				swal({
+
+					title:'Registro Existente!!!.',//Contenido del modal
+					text: 'Este Registro ya existe en nuestra base de datos',
+					type: "error",
+					timer:2000,
+					showConfirmButton:false,//Eliminar boton de confirmacion
+				});
+			}					
+		});
+		posting.fail(function() {
+			swal({
+				title:'Error inesperado!!',//Contenido del modal
+				text: 'Pongase en contacto con el administrador',
+				type: "error",
+				showConfirmButton:true,//Eliminar boton de confirmacion
+			});
+		});
+	}
+});
+
 
 ///////////////////////// Validacion de registros iguales para Departamentos /////////
 
@@ -825,7 +874,7 @@ $('#saveCargo').click(function(){
 		});
 	}
 });
-///////////////////////// Validacion de registros iguales para Perfiles /////////
+////////////////////////////////////////// Validacion de registros iguales para Perfiles ///////////////////////////////////////
 $('#savePerfil').click(function(){
 	var form=$('#NewPerfil');
 	var url= '/menu/registros/perfiles/registrar';
@@ -867,7 +916,7 @@ $('#savePerfil').click(function(){
 		});
 	}
 });
-///////////////////////// Validacion de registros iguales para Planes ///////////////////////////////////////
+/////////////////////////////////////   Validacion de registros iguales para Planes //////////////////////////////////////////
 $('#savePlan').click(function(){
 	var form=$('#NewPlan');
 	var url= '/menu/registros/planes/registrar';
@@ -910,30 +959,6 @@ $('#savePlan').click(function(){
 			});
 		});
 	}
-});
-$('.NewServicio1').bootstrapValidator({
-    feedbackIcons: {
-         valid: 'glyphicon glyphicon-ok',
-         invalid: 'glyphicon glyphicon-remove',
-         validating: 'glyphicon glyphicon-refresh'
-    },
-    fields: {
-////////////////////////////////////// AGREGAR SOPORTE PRESENCIAL //////////////////////////////////
-       campo: {
-            validators: {
-                notEmpty: {
-                     message: 'Campo Vacío'
-                },
-            }
-        },
-        precioP:{
-            validators: {
-                notEmpty: {
-                     message: 'Campo Vacío'
-                },
-            }
-        },   
-    }
 });
 
 ////////////////////////////////////// Asociacion de Servicios a Plan /////////////////////////////////
@@ -1030,7 +1055,7 @@ $(".m_Servicio").click(function(){
 });
 
 
-/////////////////////////// CAMBIOS DE VALORES DE CHECK PARA LOS SERVICIOS ///////////////////////////////////////
+///////////////////////////////////// CAMBIOS DE VALORES DE CHECK PARA LOS SERVICIOS   /////////////////////////////////////////////////
 
 $("input[name=radio1]").change(function () {
 	if (valorP==0) {
@@ -1329,7 +1354,7 @@ $('.modificarPlanes').click(function()
 		});
 
 });
-///////////////////////////////////////  MODIFICACION DE PLANES ////////////////////////////////////////////
+////////////////////////////////////////////////  MODIFICACION DE PLANES ////////////////////////////////////////////////////
 $('#actualizarPlan').click(function(){
 	var url= '/menu/registros/planes/modificar';
 	var plan = $('#nomPnm').val();
@@ -1374,3 +1399,4 @@ $('#actualizarPlan').click(function(){
 	}
 });
 
+///////////////////////////////////////////////// VALIDACION PARA REGISTROS IGUALES 

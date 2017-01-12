@@ -133,8 +133,7 @@
                                 <h4 class="modal-title" id="myModalLabel2"><strong>Modificar Cargo</strong></h4>
                             </div>
                             <div class="modal-body">
-
-                                <form method="post" class="form-horizontal DepCarPer" action="/menu/registros/departamentos/actualizar/DC">
+                                <form class="form-horizontal DepCarPer" >
                                     {{ csrf_field() }}
                                     <div class="container-fluid" id="contcgo">
 
@@ -142,13 +141,13 @@
                                             <div class="col-md-8 col-md-offset-2">
                                                 <div class="form-group row">
                                                     <label for="nomCgom_">Nombre del cargo</label>
-                                                    <input type="text" class="form-control" name="Descripcion" id="nomCgom_" /><i class="fa fa-id-badge" id="miccg1"></i>                     
+                                                    <input type="text" class="form-control descripcion" name="Descripcion" id="nomCgom_" /><i class="fa fa-id-badge " id="miccg1"></i>                     
                                                 </div>
                                             </div>
                                             <div class="col-md-8 col-md-offset-2">
                                                 <div class="form-group row">
                                                     <label for="stCgom_">Estatus del Cargo</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
-                                                    <select id="stCgom_" class="form-control" name="Status">
+                                                    <select id="stCgom_" class="form-control status" name="Status">
                                                         <option value="1">ACTIVO</option>
                                                         <option value="0">INACTIVO</option>
                                                     </select><i class="fa fa-check" id="miccg2"></i>
@@ -162,11 +161,10 @@
 
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="submit" class="bttnMd" id="btnSv1">Guardar <i class="fa fa-floppy-o"></i></button>
+                                        <button type="submit" class="bttnMd" id="mDepCarPer">Guardar <i class="fa fa-floppy-o"></i></button>
                                     </div>
                                 </form>
                             </div>
-
                         </div>
                     </div>
                 </div>
