@@ -1423,6 +1423,13 @@ public function clientes_categoria($cliente_id)//listar categorias
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
 		return view('Registros_Basicos\Datos_Complementarios\datos',$this->datos_vista_($datos));
+		return 'Hola Mundo!!!!';
+	}
+
+	public function tipo_equipos(){
+
+		$datos=$this->cargar_header_sidebar_acciones();
+		return view('Registros_Basicos\Datos_Complementarios\tipoequipos',$this->datos_vista_($datos));
 	}
 
 	public function datos_tipo_equipos()

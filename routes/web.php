@@ -143,7 +143,10 @@ Route::group(['prefix'=>'/menu/registros','middleware'=>['v_menu']],function(){
 
 				Route::match(['post','get'],'/planes/consultarservicios',                                               ['uses'=>'RegistrosBasicos@valores_servicios']);        
 				Route::match(['post','get'],'/planes/servicios/insertar',                                               ['uses'=>'RegistrosBasicos@insertar_servicios']);        
-				Route::match(['post','get'],'/datos',                                              						 ['uses'=>'RegistrosBasicos@datos_complementarios']);        
+				
+			////////////////////////// DATOS COMPLEMENTARIOS  ////////////////////////////////////////////////
+				Route::match(['post','get'],'/datos',                                              						 ['uses'=>'RegistrosBasicos@datos_complementarios']);
+				Route::match(['post','get'],'/datos/tipoequipo',                                              						 ['uses'=>'RegistrosBasicos@tipo_equipos']);          
 				Route::match(['post','get'],'/datos/consulta',                                              			['uses'=>'RegistrosBasicos@datos_tipo_equipos']);        
 			});
 
