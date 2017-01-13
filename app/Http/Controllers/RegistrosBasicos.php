@@ -65,6 +65,19 @@ class RegistrosBasicos extends Controller
 
 
 	
+	public function datos_vista_($datos_session)
+	{
+		$valores_vista=array(
+								'modulos'=>$datos_session['modulos'],//side bar
+								'submodulos'=>$datos_session['submodulos'],//side bar
+								'nombre'=>$datos_session['nombre'],//header
+								'apellido'=>$datos_session['apellido'],//header
+
+			);
+
+		return($valores_vista);
+	}
+
 
 	public function datos_vista($datos_session,$datos_acciones,$consulta,$extra=" ",$datosC1=" ",$datosC2=" ",$datosC3=" ",$datosC4=" ")//asocia en un vector los datos que deben pasarse a una vista
 	{
