@@ -1421,9 +1421,10 @@ public function clientes_categoria($cliente_id)//listar categorias
 
 	public function datos_complementarios()
 	{
-		$datos=$this->cargar_header_sidebar_acciones();
-		return view('Registros_Basicos\Datos_Complementarios\datos',$this->datos_vista_($datos));
-		return 'Hola Mundo!!!!';
+		$datos=$this->cargar_header_sidebar_acciones();//
+		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(88,89,90,91),false);
+		return view('Registros_Basicos\Datos_Complementarios\datos',$this->datos_vista($datos,$acciones,array()));// $datos (datos de la sesion ) $acciones(acciones para la vista) //array() consulta proveniente de la base d datos
+		
 	}
 
 	public function tipo_equipos(){
