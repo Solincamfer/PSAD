@@ -1403,6 +1403,64 @@ public function clientes_categoria($cliente_id)//listar categorias
 
 
 
+//////////////////////////////////////////////////////////Datos complementarios////////////////////////////////////////////////////////////////////
+
+
+	public function datos_complementarios()
+	{
+		$datos=$this->cargar_header_sidebar_acciones();
+		return view('Registros_Basicos\Datos_Complementarios\datos',$this->datos_vista_($datos));
+	}
+
+	public function datos_tipo_equipos()
+	{
+		$datos=strtoupper(Request::get('datos'));
+		$existe=0;
+		$registros=array();
+		$consulta=DB::table('tequipos')->where('descripcion',$datos)->first();
+		
+		$aux=false;
+
+		if (empty($consulta)==false) //si existe muestra el registro de primero
+		{
+			$existe=1;
+			$id=$consulta->id;
+			$consulta=DB::table('tequipos')->get();
+			foreach ($consulta as $registro) 
+			{
+				if($registro->id!=$id)
+				{
+					array_push($registros,$registro);
+				}
+				else if($registro->id==$id)
+				{
+					array_unshift($registros,$registro);
+				}
+			}
+
+		}
+		else if(empty($consulta)==true)//si no existe
+		{
+			$consulta=DB::table('tequipos')->insertGetId(['descripcion'=>$datos]);
+			$registros=DB::table('tequipos')->orderBy('id', 'desc')->get();	
+
+		}
+
+		return([$existe,$registros]);
+
+	}
+
+
+	public function datos_tipo_marcasload()
+	{
+
+		$equipo_id=1;//id del equipo consutado
+		$consulta=DB::table('emarcas')->join('emarca_tequipo','emarcas.id','=','emarca_tequipo.emarca_id')->where(['emarca_tequipo.tequipo_id'=>$id])->get();
+
+		
+	}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 
 

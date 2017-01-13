@@ -261,7 +261,7 @@ function acciones_padre(padre,acciones)
 $(".consultarSubmodulo").click(function(){
 				
 				
-
+                   
 				
 				
 		$(".consultarSubmodulo").css("color","grey");
@@ -297,7 +297,7 @@ $(".consultarSubmodulo").click(function(){
 	    ///////////ASIGNANDO LOS VALORES DEL ARRAY A LOS IMPUT CORRESPONDIENTES DEL MODAL MODIFICAR/////////////	
 			    $.each(data, function(i, item) {
 			    
-			    	$('#targeta2 ul').append('<li class="limpiarul1" style="display:none;"><div class="container-fluid cont"><div class="row"><div class="col-md-6"><div class="tl1"><span>'+item.descripcion+'</span></div></div><div class="col-md-1 col-md-push-2"><div class="iclst"><i class="fa fa-eye consultarAcciones" id="n'+item.submoduloId+'"></i></div><input type="hidden" id="Accionn'+item.submoduloId+'" value="'+item.submoduloId+'"></div><div class="col-md-2 col-md-push-3"><div class="chbx1x" id="checklist'+item.submoduloId+'"></div></div></div></div></li>');
+			    	$('#targeta2 ul').append('<li class="limpiarul1" style="display:none;"><div class="container-fluid cont"><div class="row"><div class="col-md-6"><div class="tl1"><span>'+item.descripcion+'</span></div></div><div class="col-md-1 col-md-push-2"><div class="iclst"><i class="fa fa-eye consultarAcciones" id="n'+item.submoduloId+'"></i></div><input type="hidden" id="Accionn'+item.submoduloId+'" value="'+item.submoduloId+'"></div><div class="col-md-2 col-md-push-3"><div class="chbx1x" id="checklist'+item.submoduloId+'"> </div></div></div></div></li>');
 			   
 			   if(item.Status==1)//agregar check de status cuando el submodulo esta asignado para el perfil
 			   {
@@ -868,4 +868,54 @@ $('.configurarPer').change(function()//configuracion en los modulos
 
 
 	});
+
+$('#tpE').keypress(function(e)
+{
+	if(e.which==13 && $('#tpE').val().length>0)
+	{
+		alert('tecla enter');
+
+
+		var datos=$('#tpE').val();//descripcion del tipo de equipo
+		$.get("/menu/registros/datos/consulta", {datos:datos}, function(data)
+		{
+			if(data)
+			{
+
+					if(data[0]==0)//si es cero el equipo no existe
+					{
+						alert ('el equipo no existe, fue agregado  ');//lo regresa de primero
+					}
+					else if(data[0]==1)//si es 1 el equipo existe
+					{
+						alert('el equipo existe  '+data);//lo regresa de primero
+					}
+				$('#tarjetaEquipos_ li').remove();
+				$.each(data[1], function(i, item)
+					 {
+			    
+			    		$('#tarjetaEquipos_ ul').append('<li class="lista__"><div class="container-fluid  "><div class="row nuevo"><div class="col-md-6"><div class="tl1"><span>'+item.descripcion+'</span></div></div><div class="col-md-1 col-md-push-2"><div class="iclst"><i class="fa fa-eye consultarMarcas" id="marC'+item.id+'"></i></div><input type="hidden" id=" " value=" "></div><div class="col-md-2 col-md-push-3"  border><div class="iclst id="checklistE'+item.id+'"><i class="fa fa-trash-o consultarSubmodulo" id=""></i></div>   </div></div></div></li>');
+
+			    		// 	 if(item.relacion==1)//agregar check de status cuando el submodulo esta asignado para el perfil
+			  				//  {
+			  		 	// 		$('#checklistE'+item.id).append(' <input type="checkbox"   value="1" class="Etipos" id="requiP'+item.id+'" name="rel'+item.id+'" checked><label for="requiP'+item.id+'"></label> ');
+			   
+			  				//  }
+			  			 // else if(item.relacion==0)//agregar check de status cuando el submodulo no esta signado para el perfil
+			   			// 	{
+			   		 //  			 $('#checklistE'+item.id).append(' <input type="checkbox"   value="0"  class="Etipos"  id="requiP'+item.id+'" name="rel'+item.id+'" ><label for="requiP'+item.id+'"></label> ');
+ 
+			  				//  }
+                                            
+					})
+			}
+		})	
+	}
+});
+	$(".consultarMarcas").click(function()
+	{
+	alert('hola')
+
+	});
+//	$(".consultarMarcas").css("color","grey");
 
