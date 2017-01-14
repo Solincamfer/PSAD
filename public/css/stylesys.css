@@ -2550,22 +2550,90 @@ input::-webkit-input-placeholder {
                 font-size: 16px;
             }
 /*//////////////////////////datos complementarios////////////////////////////////////////////////////////////*/
-        #encabezado{font-size:30px }
-        .busQ{margin-left: 48px;margin-top: 20px;}
-        /*.tarjeta1{background-color: #FFFFFF;margin-left: 40px;}*/
-        .tarjeta1{
-                height: 250px;
-                margin-left: 40px;
-                position: absolute;
-                left: 0;
-                padding: 0;
-                width: 280px;
-                background: #E5E5E7;
-                overflow-y: scroll;
-                box-shadow: 10px 10px 15px 1px #222;
+    
+        /*///////////////////////TARJETAS DE GESTION//////////////////////////////////*/
+    .separador {
+        margin-top: 110px;
+    }
+    .tge,.tgme,.tgmc,.tgmp{
+        height: 150px;
+        width: 150px;
+        margin-right: 10px;
+        box-shadow: 4px 5px 15px 1px rgba(0, 0, 0, 0.3);
+        transition: all .3s ease;
+        border-radius: 20px;
+    }
+
+    .tge .im,.tgme .im,.tgmc .im,.tgmp .im{
+        height: 80px;
+        width: 100px;
+        position: absolute;
+        left: 0;
+        margin-top: 30px;
+        margin-left: -10px;
+    } 
+
+    .tge:hover{
+                background: rgba(93, 109, 126, .4);
             }
-        .registro{margin-left: 1px;}
-        
-        .nuevo{background-color: #333;color:#FFFFFF;}
-        .lista__{ background-color:  #333;border-bottom: 1px solid #26A69D;border-top: 1px solid #26A69D;}
+
+    .tge{
+        background: #566573;
+    }
+     .tgme:hover{
+                background: rgba(96, 54, 166, .4);
+            }
+
+    .tgme{
+        background: #6027A6;
+    }
+
+    .tgmc:hover{
+                background: rgba(233, 255, 123, .4);
+            }
+
+    .tgmc{
+        background: #E9FF51;
+    }
+    .tgmp:hover{
+                background: rgba(255,52, 39, .4);
+            }
+
+    .tgmp{
+        background: #91002E;
+    }
+
+    #encabezado{
+        font-size:30px
+    }
+
+    .busQ{
+        margin-left: 48px;
+        margin-top: 20px;
+    }
+
+    .tarjeta1{
+            height: 250px;
+            margin-left: 40px;
+            position: absolute;
+            left: 0;
+            padding: 0;
+            width: 280px;
+            background: #E5E5E7;
+            overflow-y: scroll;
+            box-shadow: 10px 10px 15px 1px #222;
+        }
+    .registro{
+        margin-left: 1px;
+    }
+
+    .nuevo{
+        background-color: #333;
+        color:#FFFFFF;
+    }
+
+    .lista__{ 
+        background-color:  #333;
+        border-bottom: 1px solid #26A69D;
+        border-top: 1px solid #26A69D;}
     
