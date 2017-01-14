@@ -202,7 +202,8 @@ public function capturar_datos_responsables()
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
 		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(5,6,87),7);
-		return view('Registros_Basicos\Departamentos\cargos',$this->datos_vista($datos,$acciones,DB::table('cargos')->where('departamento_id',$departamento_id)->paginate(11),1,(int)$departamento_id));
+		$nombre=DB::table('departamentos')->where('id',$departamento_id)->value('descripcion');
+		return view('Registros_Basicos\Departamentos\cargos',$this->datos_vista($datos,$acciones,DB::table('cargos')->where('departamento_id',$departamento_id)->paginate(11),1,(int)$departamento_id,$nombre));
 					
 	}
 
@@ -399,7 +400,8 @@ public function planes_servicios_servicios($id_plan)
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
 		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(),false);//identificar acciones para la vista de servicios
-		return view ('Registros_Basicos\PlaneS\servicios',$this->datos_vista($datos,$acciones,array(),$id_plan));
+		$nombre=DB::table('planes')->where('id',$id_plan)->value('nombreP');
+		return view ('Registros_Basicos\PlaneS\servicios',$this->datos_vista($datos,$acciones,array(),$id_plan,$nombre));
 
 		
 	}

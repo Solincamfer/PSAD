@@ -9,7 +9,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-4 ttlp">
-                            <h1>Departamentos - Cargos</h1>
+                            <h1>{{$datosC2}} - Cargos</h1>
                         </div>
                         <div  class="col-md-2  col-md-offset-1 buscador">
                             <form action="" method="">

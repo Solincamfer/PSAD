@@ -8,8 +8,8 @@
                     <div class="contenido">
                         <div class="container">
                             <div class="row">
-                                <div class="col-md-2 ttlp">
-                                    <h1>Perfil</h1>
+                                <div class="col-md-4 ttlp">
+                                    <h1>{{$datosC1}} - Permisos</h1>
                                 </div>
                                 <input type="hidden" value="{{$extra}}" id="idPerfil">
                             </div>

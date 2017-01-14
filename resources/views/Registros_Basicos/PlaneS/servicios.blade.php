@@ -9,7 +9,7 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col-md-4 ttlp">
-                                    <h1>Servicios</h1>
+                                    <h1>{{$datosC1}} - Servicios</h1>
                                 </div>
                             </div>
                         </div>
