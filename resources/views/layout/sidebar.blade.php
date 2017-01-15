@@ -7,7 +7,9 @@
 				<ul class="submenu">
 				@foreach($submodulos as $submodulo)
 					@if( ($submodulo->padre==$modulo->moduloId)  )
-						<li class="c"><a href="{{$submodulo->ruta}}">{{$submodulo->descripcion}}</a></li>
+						<li class="c">
+							<a href="{{$submodulo->ruta}}">{{$submodulo->descripcion}}</a>
+						</li>
 					@endif
 				@endforeach
 		       </ul>

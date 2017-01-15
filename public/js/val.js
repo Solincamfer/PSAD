@@ -61,7 +61,9 @@ $(function(){
         });
     }
     var accordion = new Accordion($('.accordion'), false);
-    
+
+///////////////////////// MENSAJE DE CIERRE DE SESION ///////////////////////////////////////////////////////
+
     $('.cs').click(function(){
         var url = "/login"; 
         swal({
