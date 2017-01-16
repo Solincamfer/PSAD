@@ -110,7 +110,7 @@
             position: absolute;
             top: 0;
             margin-top: 8.5px;
-            margin-left: 50px;
+            margin-left: 10px;
             width: 40%;
             height: auto;
         }
@@ -243,7 +243,7 @@
                 transition: all 0.4s ease;
             }
 
-            .accordion li i.fa-chevron-circle-left {
+            .accordion li i.fa-chevron-circle-right {
                 right: 12px;
                 left: auto;
                 font-size: 16px;
@@ -256,11 +256,11 @@
             .accordion li.open i {
                 color: #26a69d;
             }
-            .accordion li.open i.fa-chevron-circle-left {
-                -webkit-transform: rotate(-90deg);
-                -ms-transform: rotate(-90deg);
-                -o-transform: rotate(-90deg);
-                transform: rotate(-90deg);
+            .accordion li.open i.fa-chevron-circle-right {
+                -webkit-transform: rotate(90deg);
+                -ms-transform: rotate(90deg);
+                -o-transform: rotate(90deg);
+                transform: rotate(90deg);
             }
 
             /*Submenu*/

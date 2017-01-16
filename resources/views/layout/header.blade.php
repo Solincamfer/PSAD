@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-md-3">
                 <span>
-                    <i class="fa fa-bars" id="ico"></i>
+                    <!--<i class="fa fa-bars" id="ico"></i> -->
                     <img src="{{asset('img/PSAD_logo1.png')}}" alt="" class="img">
                 </span>
             </div>

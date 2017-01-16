@@ -62,6 +62,7 @@ class InicioController extends Controller
                          ////////////////////////////////consulta para los submodulos///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                          $submodulos=DB::table('submodulos')->join('perfil_submodulo','perfil_submodulo.submodulo_id','=','submodulos.id')->select(
                                                                    'submodulos.id AS submoduloId','submodulos.descripcion AS descripcion','submodulos.status_sm AS submoduloStatus','submodulos.modulo_id AS padre','submodulos.ruta AS ruta',
+                                                                       'submodulos.url AS url', 
                                                                    'perfil_submodulo.status AS status')->where(['perfil_submodulo.perfil_id'=>$perfil->id,'submodulos.status_sm'=>1,'perfil_submodulo.status'=>1,'submodulos.padre'=>1])->get();
                         
 

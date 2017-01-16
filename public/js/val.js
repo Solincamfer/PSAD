@@ -1,8 +1,22 @@
-$(function(){
+$(document).ready(function(){
 
-//$('#login').click(function() {
-//  $('#AccesoTrue').toggleClass( "visible" );
-//});
+/////////////////////////// MANTENER ACTIVO EL LINK DEL SIDEBAR //////////////////////////////////////////////
+    ruta=window.location.pathname;
+    uso = ruta.substring(16);
+    cortar = uso.split("/", 1);
+
+    $(".c").each(function (index) 
+        { 
+        if(cortar == $(this).attr('data-activo')){
+             $(this).addClass("activo");
+             $(this).parent().css("display","block")
+
+        }
+    });
+
+    $('#login').click(function() {
+    $('#AccesoTrue').toggleClass( "visible" );
+    });
     $('#log2').click(function(event){
         $('#log')[0].reset();               
     });
@@ -24,9 +38,11 @@ $(function(){
     });
     
     //Funcionalidad del menu en el sidebar
-    var Accordion = function(el, multiple) {
+
+   var Accordion = function(el, multiple) {
         this.el = el || {};
         this.multiple = multiple || false;
+        
 
         // Variables privadas
         var links = this.el.find('.link');
@@ -60,7 +76,7 @@ $(function(){
             }
         });
     }
-    var accordion = new Accordion($('.accordion'), false);
+    var accordion = new Accordion($('.accordion'), true);
 
 ///////////////////////// MENSAJE DE CIERRE DE SESION ///////////////////////////////////////////////////////
 
@@ -81,31 +97,7 @@ $(function(){
                 $(location).attr('href',url);
         });  
     });
-    
-    //Soporte presencial
-    $('#stpc').on('click',function(){
-        $('#cvm').removeClass('desact');
-    });
-    $('#rppe').on('click', function(){
-        $('#cvm').addClass('desact');  
-    });
-    
-    //Soporte Remoto
-    $('#strc').on('click',function(){
-        $('#ccr').removeClass('desact');
-    });
-    $('#stri').on('click', function(){
-        $('#ccr').addClass('desact');  
-    });
-    
-    //Soporte Telefónico
-    $('#sttc').on('click',function(){
-        $('#clls').removeClass('desact');
-    });
-    $('#stti').on('click', function(){
-        $('#clls').addClass('desact');  
-    });
-    
+        
     //Funcion que rota la Tarjeta mantenimiento
     $('.side').on('click', function(){
         $('.cardrt').toggleClass('actcd');  
