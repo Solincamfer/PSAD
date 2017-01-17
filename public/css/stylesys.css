@@ -2550,8 +2550,34 @@ input::-webkit-input-placeholder {
                 font-size: 16px;
             }
 /*//////////////////////////datos complementarios////////////////////////////////////////////////////////////*/
-    
-        /*///////////////////////TARJETAS DE GESTION//////////////////////////////////*/
+   #encabezado{font-size:30px }
+        .busQ{margin-left: 48px;margin-top: 20px;}
+        /*.tarjeta1{background-color: #FFFFFF;margin-left: 40px;}*/
+        .tarjeta1{
+                height: 250px;
+                margin-left: 40px;
+                position: absolute;
+                left: 0;
+                padding: 0;
+                width: 280px;
+                background: #E5E5E7;
+                overflow-y: scroll;
+                box-shadow: 10px 10px 15px 1px #222;
+            }
+        .registro{margin-left: 1px;}
+        
+        .nuevo{background-color: #333;color:#FFFFFF;}
+        .lista__{ background-color:  #333;border-bottom: 1px solid #26A69D;border-top: 1px solid #26A69D;}
+        .mensaje_{color: #000000;background-color: #B0DDF5;}
+        p.mensaje_{margin-left: 40px;}  
+      
+
+
+
+
+
+
+/*///////////////////////TARJETAS DE GESTION//////////////////////////////////*/
     .separador {
         margin-top: 95px;
     }

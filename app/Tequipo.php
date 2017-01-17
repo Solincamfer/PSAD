@@ -16,4 +16,9 @@ class Tequipo extends Model
     	return $this->belongsToMany('App\Emarca');
     }
 
+ public function Ecomponentes()
+ {
+ 	return $this->belongsToMany('App\Ecomponente');
+ }
+
 }

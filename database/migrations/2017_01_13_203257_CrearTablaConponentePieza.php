@@ -19,7 +19,7 @@ class CrearTablaConponentePieza extends Migration
             $table->integer('ecomponente_id')->unsigned();
             $table->integer('epieza_id')->unsigned();
             $table->foreign('ecomponente_id')->references('id')->on('ecomponentes');
-            $table->foreign('epieza_id')->reference('id')->on('epiezas');
+            $table->foreign('epieza_id')->references('id')->on('epiezas');
             
         });
     }

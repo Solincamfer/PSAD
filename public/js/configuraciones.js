@@ -4,7 +4,301 @@ var vista_submodulos=false;//true cuando la vista de submodulos esta activa
 var vista_acciones=false;//true cuando la vista de acciones esta activa
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////// funciones para datos cmplementarios ////////////////////////////////////////////
 
+function busqueda_dinamica() 
+{
+	
+	$('.BUSE').keyup(function()//buscador en tiempo real
+{
+
+	
+		var idTarjetas=['tarjetaEquipos_','tarjetaComponentes_'];
+		
+		var expresion=$(this).val();//captura los elementos de la caja de texto
+		var indice_tabla=$(this).attr('data-inputbus');
+		var dependencia=$(this).attr('data-dependencia');
+		
+
+		var url="/menu/registros/datos/consulta_dinamica";
+		if (indice_tabla==0)
+		{
+
+			$('#tarjetaComponentes_ li').remove();
+			$('#tarjetaComponentes_ p').remove();
+			$('#inputComponente input').remove();
+		}
+
+		var datos=[expresion,indice_tabla,dependencia];
+
+		$.get(url, {datos:datos}, function(data)
+			{
+				
+				
+				if (data) 
+				{
+
+					if (data.length>0) //si regresa registros desde la base de datos
+					{
+					
+						$('#'+idTarjetas[indice_tabla]+' p').remove();//remover parrafos
+						$('#'+idTarjetas[indice_tabla]+' li').remove();//remover registros 
+
+						$.each(data, function(i, item)
+							 {
+					    
+					    		$('#'+idTarjetas[indice_tabla] +' ul').append('<li class="lista__"><div class="container-fluid  "><div class="row nuevo"><div class="col-md-6"><div class="tl1"><span>'+item.descripcion+'</span></div></div><div class="col-md-1 col-md-push-2"><div class="iclst"><i class="fa fa-eye consultarComponentes" id="marC'+item.id+'" data-tequipo="'+item.id+'"></i></div><input type="hidden" id=" " value=" "></div><div class="col-md-2 col-md-push-3"  border><div class="iclst id="checklistE'+item.id+'"><i class="fa fa-trash-o consultarSubmodulo" id=""></i></div>   </div></div></div></li>');
+
+					    	
+		                                            
+							})
+						consultar_componentes();//muestra los componentes asociados a un tipo de equipo 
+					}
+				else
+					{
+								$('#'+idTarjetas[indice_tabla]+' p').remove();//remover parrafos
+								$('#'+idTarjetas[indice_tabla]+' li').remove();//remover registros 
+								$('#'+idTarjetas[indice_tabla]).append('<div class="container mensaje_"><p> 0 Resultados para: '+expresion+' </p><p>Presione Enter para gurdar</p></div>');
+
+
+					}
+
+				}
+			})
+});
+
+
+
+}
+
+
+function buscador_componentes()
+{
+
+		$('#tpEP').keypress(function(e)//insertar componente
+									{
+
+										if (e.which==13 && $(this).val().length>0) //si no esta vacio
+										{
+											var datos=[$(this).val(),$(this).attr('data-dependencia')];
+											$.get("/menu/registros/datos/consulta_comp_", {datos:datos}, function(data)
+												{
+
+											
+													if (data[1]==0 || data[1]==1) 
+													{
+														if (data[1]==0) 
+														{
+															swal({
+
+																	title:'El componente fue creado con exito!!!.',
+																	text: '<p style="font-size: 1.5em;">'+'Solo debe insertar piezas para el'+'</p>',
+																	timer:2500,//Tiempo de retardo en ejecucion del modal
+																	type: "success",
+																	showConfirmButton:false,//Eliminar boton de confirmacion
+																	html:true
+																});
+														}
+														else if(data[1]==1 && data[2]==0)
+														{
+															swal({
+
+																	title:'El componente se encuentra creado !!!.',//Contenido del modal
+																	text: '<p style="font-size: 1.5em;">'+'Solo debe insertar piezas para el'+'</p>',
+																	timer:2500,//Tiempo de retardo en ejecucion del modal
+																	type: "error",
+																	showConfirmButton:false,//Eliminar boton de confirmacion
+																	html:true
+																});
+
+														}
+
+														$('#tarjetaComponentes_ li').remove();
+														$.each(data[0], function(i, item)
+												 			{
+										    
+											    					//$('#tarjetaComponentes_').append(' <p>"'+item.componenteId+'"</p>');
+											    					$('#tarjetaComponentes_ ul').append('<li class="lista__"><div class="container-fluid  "><div class="row nuevo"><div class="col-md-6"><div class="tl1"><span>'+item.descripcion+'</span></div></div><div class="col-md-1 col-md-push-2"><div class="iclst"><i class="fa fa-eye consultarPiezas" id="pieZ'+item.componenteId+'" data-ecomponente="'+item.componenteId+'"></i></div><input type="hidden" id=" " value=" "></div><div class="col-md-2 col-md-push-3"  border><div class="iclst id="checklistE'+item.componenteId+'"><i class="fa fa-trash-o consultarPiezas_" id=""></i></div>   </div></div></div></li>');
+
+
+										    	
+							                                            
+															})
+
+														consultar_pieza();
+													} 
+												else
+												{
+													swal({
+
+															title:'ERROR INESPERADO!!!.',//Contenido del modal
+															text: '<p style="font-size: 1.5em;">'+'Comuniquese con el administrador'+'</p>',
+															timer:2500,//Tiempo de retardo en ejecucion del modal
+															type: "error",
+															showConfirmButton:false,//Eliminar boton de confirmacion
+															html:true
+														
+														});
+
+												}
+
+													
+												})
+
+
+										}
+
+									
+									});
+
+}
+
+
+function consultar_componentes(argument) //consulta los componetes asociados a un tipo de equipo
+{
+
+		$('.consultarComponentes').click(function()//consultar componentes del equipo seleccionado
+				{
+					var datos=$(this).attr('data-tequipo');
+					
+					$.get("/menu/registros/datos/consulta_comp", {datos:datos}, function(data)
+					{
+						
+
+						if(data)
+						{
+								
+
+								if (data[1]==0) 
+								{
+									$('#inputComponente input').remove();
+									$('#inputComponente').append('<input type="search" placeholder="Buscar " class="BUSE" id="tpEP" data-inputbus="1" data-dependencia="'+data[2]+'" >');
+									$('#tarjetaComponentes_ p').remove();
+									$('#tarjetaComponentes_ li').remove();
+
+									swal({
+
+											title:'El equipo no posee componentes!!!.',//Contenido del modal
+											text: '<p style="font-size: 1.5em;">'+'Debe insertar componentes para el'+'</p>',
+											timer:2500,//Tiempo de retardo en ejecucion del modal
+											type: "error",
+											showConfirmButton:false,//Eliminar boton de confirmacion
+											html:true
+									})
+
+									consultar_pieza();
+									buscador_componentes();//buscador de componentes
+									busqueda_dinamica();
+								}
+								else if (data[1]==1) 
+								{
+									
+									$('#inputComponente input').remove();
+									$('#inputComponente').append('<input type="search" placeholder="Buscar " class="BUSE" id="tpEP" data-inputbus="1" data-dependencia="'+data[2]+'" >');
+									$('#tarjetaComponentes_ p').remove();
+									$('#tarjetaComponentes_ li').remove();
+									$.each(data[0], function(i, item)
+							 			{
+					    
+					    					//$('#tarjetaComponentes_').append(' <p>"'+item.componenteId+'"</p>');
+					    					$('#tarjetaComponentes_ ul').append('<li class="lista__"><div class="container-fluid  "><div class="row nuevo"><div class="col-md-6"><div class="tl1"><span>'+item.descripcion+'</span></div></div><div class="col-md-1 col-md-push-2"><div class="iclst"><i class="fa fa-eye consultarPiezas" id="pieZ'+item.componenteId+'" data-ecomponente="'+item.componenteId+'"></i></div><input type="hidden" id=" " value=" "></div><div class="col-md-2 col-md-push-3"  border><div class="iclst id="checklistE'+item.componenteId+'"><i class="fa fa-trash-o consultarPiezas_" id=""></i></div>   </div></div></div></li>');
+
+
+					    	
+		                                            
+										})
+									consultar_pieza();
+									buscador_componentes();//buscador de componentes
+									busqueda_dinamica();
+									
+
+
+								}
+							}
+						else
+						{
+							swal({
+
+								title:'ERROR INESPERADO!!!.',//Contenido del modal
+								text: '<p style="font-size: 1.5em;">'+'Comuniquese con el administrador'+'</p>',
+								timer:2500,//Tiempo de retardo en ejecucion del modal
+								type: "error",
+								showConfirmButton:false,//Eliminar boton de confirmacion
+								html:true
+							});
+
+						}
+						
+					})
+						
+						
+
+
+
+				});
+
+	
+}
+
+function consultar_pieza () 
+{
+	
+	$('.consultarPiezas').click(function()
+			{
+					var idComponente=$(this).attr('data-ecomponente');
+					$.get("/menu/registros/datos/consulta_comp_pieza", {datos:idComponente}, function(data)
+					{
+							
+						if (data[1]==0 ||data[1]==1) //si regresa valores el controlador
+						{
+
+								if (data[1]==0) 
+								{
+
+									alert('no posee piezas '+data[1]);
+
+								}	
+								else if(data[1]==1)
+								{
+
+									alert('posee piezas asociadas '+data[1]);
+								}
+
+
+									alert(data[0])
+									$('#inputPiezas input').remove();
+									$('#inputPiezas').append('<input type="search" placeholder="Buscar Pieza " class="BUSE" id="Tepieza" data-ecomponente="'+data[2]+'" >');
+
+									$('#tarjetaPiezas_ li').remove();
+									$.each(data[0], function(i, item)
+							 			{
+					    
+					    					//$('#tarjetaComponentes_').append(' <p>"'+item.componenteId+'"</p>');
+					    					$('#tarjetaPiezas_ ul').append('<li class="lista__"><div class="container-fluid  "><div class="row nuevo"><div class="col-md-6"><div class="tl1"><span>'+item.descripcion+'</span></div></div><div class="col-md-1 col-md-push-2"><div class="iclst"><i class="fa fa-eye consultarPiezas" id="pieZ'+item.piezaId+'" data-ecomponente="'+item.piezaId+'"></i></div><input type="hidden" id=" " value=" "></div><div class="col-md-2 col-md-push-3"  border><div class="iclst id="checklistE'+item.piezaId+'"><i class="fa fa-trash-o consultarPiezas_" id=""></i></div>   </div></div></div></li>');
+
+
+					    	
+		                                            
+										})
+
+
+						}
+
+					})
+
+
+
+
+
+		//alert($(this).attr('data-ecomponente'));
+
+
+			})
+
+
+
+}
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 ///////////////////////////////////////funciones definidas para luego ser utilizadas /////////////////////////////
@@ -869,53 +1163,75 @@ $('.configurarPer').change(function()//configuracion en los modulos
 
 	});
 
-$('#tpE').keypress(function(e)
+
+
+
+
+
+
+
+$('.BUSE').keypress(function(e)//insertar tipo de equipo
 {
-	if(e.which==13 && $('#tpE').val().length>0)
+	if(e.which==13 && $(this).val().length>0)//al presionar enter
 	{
-		alert('tecla enter');
+		
 
-
-		var datos=$('#tpE').val();//descripcion del tipo de equipo
+	
+		var datos=$(this).val();//descripcion del tipo de equipo
 		$.get("/menu/registros/datos/consulta", {datos:datos}, function(data)
 		{
-			if(data)
+			if(data)//si retorana datos desde el controlador 
 			{
 
-					if(data[0]==0)//si es cero el equipo no existe
+					if(data[0]==0 && data[2]==0)//el equipo fue agregado
 					{
-						alert ('el equipo no existe, fue agregado  ');//lo regresa de primero
-					}
-					else if(data[0]==1)//si es 1 el equipo existe
-					{
-						alert('el equipo existe  '+data);//lo regresa de primero
-					}
-				$('#tarjetaEquipos_ li').remove();
-				$.each(data[1], function(i, item)
-					 {
-			    
-			    		$('#tarjetaEquipos_ ul').append('<li class="lista__"><div class="container-fluid  "><div class="row nuevo"><div class="col-md-6"><div class="tl1"><span>'+item.descripcion+'</span></div></div><div class="col-md-1 col-md-push-2"><div class="iclst"><i class="fa fa-eye consultarMarcas" id="marC'+item.id+'"></i></div><input type="hidden" id=" " value=" "></div><div class="col-md-2 col-md-push-3"  border><div class="iclst id="checklistE'+item.id+'"><i class="fa fa-trash-o consultarSubmodulo" id=""></i></div>   </div></div></div></li>');
+						swal({
 
-			    		// 	 if(item.relacion==1)//agregar check de status cuando el submodulo esta asignado para el perfil
-			  				//  {
-			  		 	// 		$('#checklistE'+item.id).append(' <input type="checkbox"   value="1" class="Etipos" id="requiP'+item.id+'" name="rel'+item.id+'" checked><label for="requiP'+item.id+'"></label> ');
-			   
-			  				//  }
-			  			 // else if(item.relacion==0)//agregar check de status cuando el submodulo no esta signado para el perfil
-			   			// 	{
-			   		 //  			 $('#checklistE'+item.id).append(' <input type="checkbox"   value="0"  class="Etipos"  id="requiP'+item.id+'" name="rel'+item.id+'" ><label for="requiP'+item.id+'"></label> ');
- 
-			  				//  }
-                                            
-					})
+								title:'El equipo fue creado con exito!!!.',//Contenido del modal
+								text: '<p style="font-size: 1.5em;">'+'Solo debe insertar componentes para el'+'</p>',
+								timer:2500,//Tiempo de retardo en ejecucion del modal
+								type: "success",
+								showConfirmButton:false,//Eliminar boton de confirmacion
+								html:true
+						});
+					}
+					else if(data[0]==1 && data[2]==0)
+					{
+						swal({
+
+								title:'El equipo se encuentra creado!!!.',//Contenido del modal
+								text: '<p style="font-size: 1.5em;">'+'Solo debe insertar componentes para el'+'</p>',
+								timer:2500,//Tiempo de retardo en ejecucion del modal
+								type: "error",
+								showConfirmButton:false,//Eliminar boton de confirmacion
+								html:true
+						});
+					}
+				
+					consultar_componentes();
 			}
+		else
+		{
+					swal({
+
+								title:'ERROR INESPERADO!!!.',//Contenido del modal
+								text: '<p style="font-size: 1.5em;">'+'Comuniquese con el administrador'+'</p>',
+								timer:2500,//Tiempo de retardo en ejecucion del modal
+								type: "error",
+								showConfirmButton:false,//Eliminar boton de confirmacion
+								html:true
+						});
+		}
+
+		
+
+		
+			
 		})	
 	}
 });
-	$(".consultarMarcas").click(function()
-	{
-	alert('hola')
+	
 
-	});
-//	$(".consultarMarcas").css("color","grey");
 
+
+busqueda_dinamica();

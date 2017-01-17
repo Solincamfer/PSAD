@@ -1463,53 +1463,186 @@ public function clientes_categoria($cliente_id)//listar categorias
 		return view('Registros_Basicos\Datos_Complementarios\tipoequipos',$this->datos_vista_($datos));
 	}
 
-	public function datos_tipo_equipos()
-	{
-		$datos=strtoupper(Request::get('datos'));
-		$existe=0;
-		$registros=array();
-		$consulta=DB::table('tequipos')->where('descripcion',$datos)->first();
-		
-		$aux=false;
+	
 
-		if (empty($consulta)==false) //si existe muestra el registro de primero
-		{
+	public function datos_tipo_equipos()//insertar buscar tipo de equipo 
+	{
+		$descripcionEq=strtoupper(Request::get('datos'));
+		$consEq=DB::table('tequipos')->where('descripcion',$descripcionEq)->first();
+		$registros=array();
+		$existe=0;
+		$asociado=0;
+		$tequipoId=0;
+
+
+
+		if (empty($consEq)==false)//si existe
+		 {
 			$existe=1;
-			$id=$consulta->id;
-			$consulta=DB::table('tequipos')->get();
-			foreach ($consulta as $registro) 
+
+
+			$equipoComp=DB::table('ecomponente_tequipo')->where('tequipo_id',$consEq->id)->first();
+			
+			if (count($equipoComp)!=0) //si posee componentes asociados
 			{
-				if($registro->id!=$id)
-				{
-					array_push($registros,$registro);
-				}
-				else if($registro->id==$id)
-				{
-					array_unshift($registros,$registro);
-				}
+				$asociado=1;
+			}
+		
+
+		}
+		else if (empty($consEq)==true)//si no existe
+		{
+			$tequipoId=DB::table('tequipos')->insertGetId(['descripcion'=>$descripcionEq]);//obtiene el ide del equipo
+			$registros=DB::table('tequipos')->orderBy('id', 'desc')->get();			
+		}	
+		
+		return([$existe,$registros,$asociado,$tequipoId]);
+	}
+
+
+
+
+
+	public function datos_tequipo_componente()//carga los componetes relacionados a un equipo
+	{
+
+		$idEquipo=Request::get('datos');//id del tipo de equipo consultado 
+		$consulta=0;
+		$consComEqp=DB::table('ecomponentes')->join('ecomponente_tequipo','ecomponentes.id','=','ecomponente_tequipo.ecomponente_id')
+											 ->select('ecomponentes.id AS componenteId','ecomponentes.descripcion AS descripcion')
+											 ->where('ecomponente_tequipo.tequipo_id','=',$idEquipo)->orderBy('ecomponentes.id', 'asc')->get();
+		
+
+		
+		if (count($consComEqp)!=0) //si no es vacia
+		{
+			$consulta=1;
+		}
+
+		return([$consComEqp,$consulta,$idEquipo]);
+		
+	}
+
+
+
+	public function insertar_componente_()//insertar componentes
+	{
+		$datos=Request::get('datos');//[0]->descripcion del componente, [1]->id del tequipo
+		$equipoId=(int)$datos[1];
+		$descripcionCom=strtoupper($datos[0]);
+		$registros=array();
+		$existe=0;
+		$asociado=0;
+
+		
+		$consComEqp=DB::table('ecomponentes')->join('ecomponente_tequipo','ecomponentes.id','=','ecomponente_tequipo.ecomponente_id')
+											 ->select('ecomponentes.id AS id','ecomponentes.descripcion AS descripcion')
+											 ->where('ecomponente_tequipo.tequipo_id','=',$equipoId)->where('ecomponentes.descripcion','=',$descripcionCom)->first();
+
+			
+		
+		
+		if (count($consComEqp)!=0) //si existe
+		{
+			
+			$piezas=DB::table('ecomponente_epieza')->where('ecomponente_id',$consComEqp->id)->first();
+			$existe=1;
+			if (count($piezas)!=0) 
+			{
+				$asociado=1;
 			}
 
+
 		}
-		else if(empty($consulta)==true)//si no existe
+		else if (count($consComEqp)==0)//si no existe
 		{
-			$consulta=DB::table('tequipos')->insertGetId(['descripcion'=>$datos]);
-			$registros=DB::table('tequipos')->orderBy('id', 'desc')->get();	
 
+			$consComEqp=DB::table('ecomponentes')->insertGetId(['descripcion'=>$descripcionCom]);//obtiene el id del componete ingresado
+			$registros=DB::table('ecomponente_tequipo')->insert(['ecomponente_tequipo.ecomponente_id'=>$consComEqp,'ecomponente_tequipo.tequipo_id'=>$equipoId]);//se asocia el componente con el equipo crrespondiente
+			
 		}
-
-		return([$existe,$registros]);
-
-	}
-
-
-	public function datos_tipo_marcasload()
-	{
-
-		$equipo_id=1;//id del equipo consutado
-		$consulta=DB::table('emarcas')->join('emarca_tequipo','emarcas.id','=','emarca_tequipo.emarca_id')->where(['emarca_tequipo.tequipo_id'=>$id])->get();
 
 		
+		return([$registros,$existe,$asociado]);
+
 	}
+
+
+
+
+	public function datos_componentes_piezas()//(Piezas pertenecientes a un componete )consultadas por el boton 
+	{
+		$componenteId=Request::get('datos');//id del componente
+		$piezas=DB::table('epiezas')->join('ecomponente_epieza','epiezas.id','=','ecomponente_epieza.epieza_id')
+									->select('epiezas.id AS piezaId','epiezas.descripcion AS descripcion')
+									->where('ecomponente_epieza.ecomponente_id','=',$componenteId)
+									->orderBy('epiezas.id','desc')->get();
+		$existe=0;
+
+		if (count($piezas)!=0) //si existen piezas
+		{
+			
+			$existe=1;
+			
+		}
+
+
+		return([$piezas,$existe,$componenteId]);
+		
+	}
+
+
+	
+
+	public function datos_consulta_dinamica( )//tipo de equipo, componente y pieza
+	{
+		
+
+		$datos=Request::get('datos');
+		$patron=strtoupper($datos[0]);
+
+		$tabla=(int)$datos[1];//tabla donde se hara la consulta
+
+		$dependencia=(int)$datos[2];//id de la dependencia 
+		
+		$patron='/'.$patron.'/';//comienza por el patron
+
+		$registros=array();
+		
+
+		if ($tabla==0) //tipo de equipos
+		{
+			$consulta=DB::table('tequipos')->orderBy('id','desc')->get();//tipos de equipos
+		}
+		else if ($tabla==1)//componentes de un tipo de equipo
+		{
+			$consulta=DB::table('ecomponentes')->join('ecomponente_tequipo','ecomponentes.id','=','ecomponente_tequipo.ecomponente_id')
+											 	->select('ecomponentes.id AS id','ecomponentes.descripcion AS descripcion')->where('ecomponente_tequipo.tequipo_id','=',$dependencia)->orderBy('ecomponentes.id', 'asc')->get();
+		}
+		else if($tabla==2)//piezas de un componente
+		{
+			$consulta=DB::table('epiezas')->join('ecomponente_epieza','epiezas.id','=','ecomponente_epieza.epieza_id')
+									->select('epiezas.id AS piezaId','epiezas.descripcion AS descripcion')
+									->where('ecomponente_epieza.ecomponente_id','=',$dependencia)
+									->orderBy('epiezas.id','desc')->get();
+
+		}
+
+		
+		foreach ($consulta as $registro) 
+		{
+			if (preg_match($patron, $registro->descripcion)) 
+			{
+				
+				array_push($registros,$registro);
+
+			}
+		}
+
+		return($registros);
+
+	}
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
