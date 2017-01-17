@@ -20,7 +20,7 @@
 							<button id="btnAdd" type="button" class="btnAdc col-md-offset-11" data-toggle="modal" data-target="#myModal" href="#myModal"><i class="fa fa-plus"></i> AGREGAR</button>
 						@endif
 						@foreach($consulta as $clientes)
-							<div class="contMd" style="">
+							<div class="contMd">
 								<div class="icl">
 									
 									@foreach($acciones as $accion)

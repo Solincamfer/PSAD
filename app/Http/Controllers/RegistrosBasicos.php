@@ -79,7 +79,7 @@ class RegistrosBasicos extends Controller
 	}
 
 
-	public function datos_vista($datos_session,$datos_acciones,$consulta,$extra=" ",$datosC1=" ",$datosC2=" ",$datosC3=" ",$datosC4=" ")//asocia en un vector los datos que deben pasarse a una vista
+	public function datos_vista($datos_session,$datos_acciones,$consulta,$extra=" ",$datosC1=" ",$datosC2=" ",$datosC3=" ",$datosC4=" ",$datosC5=" ")//asocia en un vector los datos que deben pasarse a una vista
 	{
 		$valores_vista=array(
 								'modulos'=>$datos_session['modulos'],//side bar
@@ -93,7 +93,8 @@ class RegistrosBasicos extends Controller
 								'datosC1'=>$datosC1,
 								'datosC2'=>$datosC2,
 								'datosC3'=>$datosC3,
-								'datosC4'=>$datosC4
+								'datosC4'=>$datosC4,
+								'datosC5'=>$datosC5,
 
 
 								);
@@ -575,9 +576,17 @@ public function planes_modificar(){
 
 public function empleados()
 {
+		$tipoR=DB::table('tipos')->where('numero_c',1)->get();
+		$tipoD=DB::table('tipos')->where('numero_c',5)->get();
+		$paises=DB::table('paises')->get();
+		$codigoC=DB::table('tipos')->where('numero_c',2)->get();
+		$codigoL=DB::table('tipos')->where('numero_c',3)->get();
+		$departamentos=DB::table('departamentos')->where('status',1)->get();
+
+
 	$datos=$this->cargar_header_sidebar_acciones();
 	$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(76,77,78),75);
-	return view ('Registros_Basicos\empleados\empleados',$this->datos_vista($datos,$acciones,DB::table('empleados')->where('id','<>',5)->get()));
+	return view ('Registros_Basicos\empleados\empleados',$this->datos_vista($datos,$acciones,DB::table('empleados')->where('id','<>',5)->get(),$tipoR,$tipoD,$paises,$codigoC,$codigoL,$departamentos));
 }
 
 public function empleados_perfiles($empleado_id)
@@ -614,6 +623,25 @@ public function empleados_asignar_perfil()
 	$actualizacion=DB::table('usuarios')->where('id',$usuario)->update(['perfil_id'=>$perfil]);
 	return $actualizacion;
 	
+}
+
+public function cargar_modal_agregar(){
+	$parametro= Request::get('datos');
+	$id=$parametro[0];
+	
+	if ($id==1) {
+		$consulta = DB::table('cargos')->where('departamento_id',$parametro[1])->where('status',1)->get();
+	}
+	elseif ($id==2) {
+		$consulta = DB::table('regiones')->where('pais_id',$parametro[1])->get();
+	}
+	elseif ($id==3) {
+		$consulta = DB::table('estados')->where('region_id',$parametro[1])->get();
+	}
+	elseif ($id==4) {
+		$consulta = DB::table('municipios')->where('estado_id',$parametro[1])->get();
+	}
+	return $consulta;
 }
 	
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

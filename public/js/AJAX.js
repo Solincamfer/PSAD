@@ -309,7 +309,7 @@ $("#ippp3").change(function(){
 	$( ".limpiarppp2" ).remove();			
 });
 /////////////////////////////////
-///////////LLENADO DEL MODAL MODIFICAR REGISTRO MEDIANTE SU BOTON SUBMIT/////////////	
+///////////LLENADO DEL MODAL MODIFICAR REGISTRO MEDIANTE EL BOTON MODIFICAR/////////////	
 $(".modificarCliente").click(function(){
 	///////////BUSCADO BOTON CLICKEADO/////////////	
 		ID = $(this).attr("id");			
@@ -1399,4 +1399,59 @@ $('#actualizarPlan').click(function(){
 	}
 });
 
-///////////////////////////////////////////////// VALIDACION PARA REGISTROS IGUALES 
+/////////////////////////////////////// COMBOS DEPENDIENTES DEL MODAL DE AGREGAR EMPLEADO /////////////////////////////////
+
+$("#dptoEmp").change(function(){
+        elegido=$(this).val();
+        var vector=elegido;
+        id=1;
+        datos=[id,elegido]
+        $.get("/menu/registros/empleados/consulta",{ datos:datos }, function(data){
+        	$.each(data, function(i, item) {
+        		///////////AGREGAR OPCION SEGUN SELECCION DE DEPARTAMENTO/////////////	
+        		$('#cgoEmp').append('<option class="opcion" value="'+item.id+'">'+item.descripcion+'</option>');
+			})        
+        });          
+	$( ".opcion" ).remove();			
+});
+
+$("#pdhe").change(function(){	
+    elegido=$(this).val();
+    id=2;
+    var datos=[id,elegido];
+    $.get("/menu/registros/empleados/consulta",{ datos:datos }, function(data){
+    	$.each(data, function(i, item) {
+    		///////////AGREGAR OPCION SEGUN CANTIDAD DE VALORES HABILITADOS/////////////	
+    		$('#rgdhe').append('<option class="region" value="'+item.id+'">'+item.descripcion+'</option>');
+		})        
+    }); 
+    $( ".region" ).remove();
+    $( ".estado" ).remove();       
+    $( ".municipio" ).remove();      
+});
+
+$("#rgdhe").change(function(){	
+    elegido=$(this).val();
+    id=3;
+    var datos=[id,elegido];
+    $.get("/menu/registros/empleados/consulta",{ datos:datos }, function(data){
+    	$.each(data, function(i, item) {
+    		///////////AGREGAR OPCION SEGUN CANTIDAD DE VALORES HABILITADOS/////////////	
+    		$('#edodhe').append('<option class="estado" value="'+item.id+'">'+item.descripcion+'</option>');
+		})        
+    }); 
+    $( ".estado" ).remove();  
+    $( ".municipio" ).remove();           
+});
+$("#edodhe").change(function(){	
+    elegido=$(this).val();
+    id=4;
+    var datos=[id,elegido];
+    $.get("/menu/registros/empleados/consulta",{ datos:datos }, function(data){
+    	$.each(data, function(i, item) {
+    		///////////AGREGAR OPCION SEGUN CANTIDAD DE VALORES HABILITADOS/////////////	
+    		$('#mundhe').append('<option class="municipio" value="'+item.id+'">'+item.descripcion+'</option>');
+		})        
+    }); 
+    $( ".municipio" ).remove();           
+});
