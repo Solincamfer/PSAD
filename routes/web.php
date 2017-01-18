@@ -147,12 +147,13 @@ Route::group(['prefix'=>'/menu/registros','middleware'=>['v_menu']],function(){
 ////////////////////////// DATOS COMPLEMENTARIOS  ////////////////////////////////////////////////
 	Route::match(['post','get'],'/datos',                                              						['uses'=>'RegistrosBasicos@datos_complementarios']);
 	Route::match(['post','get'],'/datos/tipoequipo',                                              			['uses'=>'RegistrosBasicos@tipo_equipos']);          
-	Route::match(['post','get'],'/datos/consulta',                                              			['uses'=>'RegistrosBasicos@datos_tipo_equipos']);
-	
+	Route::match(['post','get'],'/datos/consulta',                                              			['uses'=>'RegistrosBasicos@datos_tipo_equipos']);   
 	Route::match(['post','get'],'/datos/consulta_comp',                                              		['uses'=>'RegistrosBasicos@datos_tequipo_componente']);    
 	Route::match(['post','get'],'/datos/consulta_comp_',                                              		['uses'=>'RegistrosBasicos@insertar_componente_']);          
 	Route::match(['post','get'],'/datos/consulta_comp_pieza',                                              	['uses'=>'RegistrosBasicos@datos_componentes_piezas']);   
 	Route::match(['post','get'],'/datos/consulta_dinamica',                                              	['uses'=>'RegistrosBasicos@datos_consulta_dinamica']);   
+	Route::match(['post','get'],'/datos/consulta_insertar_pieza',                                           ['uses'=>'RegistrosBasicos@insertar_piezas']);   
+	Route::match(['post','get'],'/datos/eliminar_pieza',		                                            ['uses'=>'RegistrosBasicos@eliminar_piezas']);   
 		
 
 

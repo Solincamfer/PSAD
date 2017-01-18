@@ -6,27 +6,228 @@ var vista_acciones=false;//true cuando la vista de acciones esta activa
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////// funciones para datos cmplementarios ////////////////////////////////////////////
 
+
+
+
+function limpiarTarjetas (tarjetas) //retira los resultados de las tarjetas que se le indiquen
+{
+	var tarjetas=tarjetas;
+	var id=false;
+	$.each(tarjetas, function(i)
+	{
+		id=$(this).attr('id');
+		$('#'+id+' li').remove();
+		$('#'+id+' p').remove();
+		//$('#'+id+' input').remove();
+
+	})
+}
+
+
+
+function limpiarInputs (tarjetas) //retira los inputs de busqueda
+{
+	var tarjetas=tarjetas;
+	var id=false;
+	$.each(tarjetas, function(i)
+	{
+		id=$(this).attr('id');
+		$('#'+id+' input').remove();
+	
+
+	})
+}
+
+
+
+function eliminarpiezas() 
+{
+
+	
+
+	$('.EliminarPieza').click(function()
+	{
+
+		var url='/menu/registros/datos/eliminar_pieza';
+		var datos=[$(this).attr('data-registro'),$(this).attr('data-registro_')];//id del registro en la tabla intermedia //id del registro en la tabla (epiezas)
+				
+
+				$.get(url, {datos:datos}, function(data)
+				{
+					if(data)
+					{
+
+						if (data!=0) 
+						{
+
+							swal({
+
+								title:'Eliminacion completa!!!.',//Contenido del modal
+								text: '<p style="font-size: 1.5em;">'+'La pieza fue eliminada con exito'+'</p>',
+								timer:2500,//Tiempo de retardo en ejecucion del modal
+								type: "success",
+								showConfirmButton:false,//Eliminar boton de confirmacion
+								html:true
+														
+							});
+							$( '#Tepieza' ).trigger( 'keyup' );
+
+						}
+						else
+						{
+							swal({
+
+								title:'ERROR INESPERADO!!!.',//Contenido del modal
+								text: '<p style="font-size: 1.5em;">'+'Comuniquese con el administrador'+'</p>',
+								timer:2500,//Tiempo de retardo en ejecucion del modal
+								type: "error",
+								showConfirmButton:false,//Eliminar boton de confirmacion
+								html:true
+														
+							});
+
+						}
+
+
+					}
+					else
+					{
+
+						swal({
+
+								title:'ERROR INESPERADO!!!.',//Contenido del modal
+								text: '<p style="font-size: 1.5em;">'+'Comuniquese con el administrador'+'</p>',
+								timer:2500,//Tiempo de retardo en ejecucion del modal
+								type: "error",
+								showConfirmButton:false,//Eliminar boton de confirmacion
+								html:true
+														
+							});
+
+
+					}
+
+				})
+
+
+
+		//alert('Tabla intermedia:  '+$(this).attr('data-registro')+'  Tabla original: '+$(this).attr('data-registro_'));
+	});
+	
+}
+
+
+function insertar_piezas () 
+{
+	$('#Tepieza').keypress(function(tecla) //return($asociar,$existe);
+	{
+			
+			if (tecla.which==13 && $(this).val().length>0) //si no esta vacio
+										{
+											
+											var datos=[$(this).val(),$(this).attr('data-dependencia')];
+											$.get("/menu/registros/datos/consulta_insertar_pieza", {datos:datos}, function(data)
+												{
+
+											
+													if (data[1]==0 || data[1]==1) 
+													{
+														alert(data);
+														if (data[1]==0) //si la pieza se agrego 
+														{
+															swal({
+
+																	title:'Insercion exitosa!!!.',
+																	text: '<p style="font-size: 1.5em;">'+'La pieza fue agregada con exito'+'</p>',
+																	timer:2500,//Tiempo de retardo en ejecucion del modal
+																	type: "success",
+																	showConfirmButton:false,//Eliminar boton de confirmacion
+																	html:true
+																});
+															eliminarpiezas(); 
+														}
+														else if(data[1]==1 && data[0]==0)
+														{
+															swal({
+
+																	title:'La pieza existe !!!.',//Contenido del modal
+																	text: '<p style="font-size: 1.5em;">'+'Ya se encuentra registrada'+'</p>',
+																	timer:2500,//Tiempo de retardo en ejecucion del modal
+																	type: "error",
+																	showConfirmButton:false,//Eliminar boton de confirmacion
+																	html:true
+																});
+															eliminarpiezas(); 
+
+														}
+
+														
+													} 
+												else
+												{
+													swal({
+
+															title:'ERROR INESPERADO!!!.',//Contenido del modal
+															text: '<p style="font-size: 1.5em;">'+'Comuniquese con el administrador'+'</p>',
+															timer:2500,//Tiempo de retardo en ejecucion del modal
+															type: "error",
+															showConfirmButton:false,//Eliminar boton de confirmacion
+															html:true
+														
+														});
+
+												}
+
+													
+												})
+
+
+										}
+
+		
+	});
+}
+
 function busqueda_dinamica() 
 {
 	
 	$('.BUSE').keyup(function()//buscador en tiempo real
 {
 
+		//alert('Dependencia: '+ $(this).attr('data-dependencia')+' indice tabla: '+$(this).attr('data-inputbus'));
+		var idTarjetas=['tarjetaEquipos_','tarjetaComponentes_','tarjetaPiezas_'];
+		var botonOjoid=['Tequipo','Componente'];//guarda los id para el boton prewiew
+		var botonOjoClase=['consultarComponentes','consultarPiezas'];//guarda las clases
+		var botonEliminarId=['EliminarEq','EliminarCom','EliminarPie'];//id del boton eliminar
+		var botonEliminarClase=['EliminarEquipo','EliminarComponente','EliminarPieza'];//clase para el boton eliminar
+		var tarjetaPreviewId=['_tarjetaEquipos_','_tarjetaComponentes_','_tarjetaPiezas_'];//tarjetas para el boton preview (ojo)
+		var tarjetaEliminarId=['EliminarEquipo_','EliminarComponente_','EliminarPieza_'];
 	
-		var idTarjetas=['tarjetaEquipos_','tarjetaComponentes_'];
 		
 		var expresion=$(this).val();//captura los elementos de la caja de texto
-		var indice_tabla=$(this).attr('data-inputbus');
+		var indice_tabla=$(this).attr('data-inputbus');//tabla que se esta consultando
 		var dependencia=$(this).attr('data-dependencia');
+		var registro=false;//usado como id de la tabla intermedia para borrar
+		var registro_=false;//usado como id de la tabla principal para borar
 		
 
 		var url="/menu/registros/datos/consulta_dinamica";
-		if (indice_tabla==0)
+		
+		if (indice_tabla==0)//resultado de busqueda de componentes para un equipo
 		{
 
-			$('#tarjetaComponentes_ li').remove();
-			$('#tarjetaComponentes_ p').remove();
-			$('#inputComponente input').remove();
+			limpiarTarjetas ([$('#tarjetaComponentes_'),$('#tarjetaPiezas_')]) ;
+			limpiarInputs([$('#inputComponente'),$('#inputPiezas')]);
+			
+		
+
+		}
+		else if (indice_tabla==1)
+		{
+			limpiarTarjetas ([$('#tarjetaPiezas_')]) ;
+			limpiarInputs([$('#inputPiezas')]);
+		
+
 		}
 
 		var datos=[expresion,indice_tabla,dependencia];
@@ -40,19 +241,37 @@ function busqueda_dinamica()
 
 					if (data.length>0) //si regresa registros desde la base de datos
 					{
-					
+						
 						$('#'+idTarjetas[indice_tabla]+' p').remove();//remover parrafos
 						$('#'+idTarjetas[indice_tabla]+' li').remove();//remover registros 
+					
 
 						$.each(data, function(i, item)
 							 {
 					    
-					    		$('#'+idTarjetas[indice_tabla] +' ul').append('<li class="lista__"><div class="container-fluid  "><div class="row nuevo"><div class="col-md-6"><div class="tl1"><span>'+item.descripcion+'</span></div></div><div class="col-md-1 col-md-push-2"><div class="iclst"><i class="fa fa-eye consultarComponentes" id="marC'+item.id+'" data-tequipo="'+item.id+'"></i></div><input type="hidden" id=" " value=" "></div><div class="col-md-2 col-md-push-3"  border><div class="iclst id="checklistE'+item.id+'"><i class="fa fa-trash-o consultarSubmodulo" id=""></i></div>   </div></div></div></li>');
+					    		
+					    		if (indice_tabla==0) //si se esta trabajando con la vista de equipos
+					    		{
+					    			registro=item.id;//registro: representa el id de la tabla intermedia
+					    		}
+					    	else if (indice_tabla==1 || indice_tabla==2) //si se esta trabajando con la vista de componentes
+					    		{
+					    			registro=item.registro;
+					    		}
 
-					    	
+
+					    		$('#'+idTarjetas[indice_tabla] +' ul').append('<li class="lista__"><div class="container-fluid  "><div class="row nuevo"><div class="col-md-6"><div class="tl1"><span>'+item.descripcion+'</span></div></div><div class="col-md-1 col-md-push-2"><div class="iclst" id="'+tarjetaPreviewId[indice_tabla]+item.id+'">      </div></div><div class="col-md-2 col-md-push-3"  border><div class="iclst id="'+tarjetaEliminarId[indice_tabla]+item.id+'"><i class="fa fa-trash-o '+botonEliminarClase[indice_tabla]+'" id="'+botonEliminarId[indice_tabla]+item.id+'"  data-registro="'+registro+'" data-registro_="'+item.id+'"></i></div>   </div></div></div></li>');
+
+					    		if (indice_tabla!=2) //agrega el boton preview para las vistas de: equipos y componentes
+					    		{
+
+					    			$('#'+tarjetaPreviewId[indice_tabla]+item.id).append('<i class="fa fa-eye '+botonOjoClase[indice_tabla]+'" id="'+botonOjoid[indice_tabla]+item.id+'" data-dependencia="'+item.id+'"></i>');
+					    		}
 		                                            
 							})
 						consultar_componentes();//muestra los componentes asociados a un tipo de equipo 
+						consultar_pieza();//crea en memoria la funcion para consultar piezas
+						eliminarpiezas() 
 					}
 				else
 					{
@@ -72,13 +291,13 @@ function busqueda_dinamica()
 }
 
 
-function buscador_componentes()
+function buscador_componentes()//insertar componentes
 {
 
-		$('#tpEP').keypress(function(e)//insertar componente
+		$('#tpEP').keypress(function(tecla)//insertar componente
 									{
 
-										if (e.which==13 && $(this).val().length>0) //si no esta vacio
+										if (tecla.which==13 && $(this).val().length>0) //si no esta vacio
 										{
 											var datos=[$(this).val(),$(this).attr('data-dependencia')];
 											$.get("/menu/registros/datos/consulta_comp_", {datos:datos}, function(data)
@@ -154,12 +373,13 @@ function buscador_componentes()
 }
 
 
+
 function consultar_componentes(argument) //consulta los componetes asociados a un tipo de equipo
 {
 
 		$('.consultarComponentes').click(function()//consultar componentes del equipo seleccionado
 				{
-					var datos=$(this).attr('data-tequipo');
+					var datos=$(this).attr('data-dependencia');
 					
 					$.get("/menu/registros/datos/consulta_comp", {datos:datos}, function(data)
 					{
@@ -201,7 +421,7 @@ function consultar_componentes(argument) //consulta los componetes asociados a u
 							 			{
 					    
 					    					//$('#tarjetaComponentes_').append(' <p>"'+item.componenteId+'"</p>');
-					    					$('#tarjetaComponentes_ ul').append('<li class="lista__"><div class="container-fluid  "><div class="row nuevo"><div class="col-md-6"><div class="tl1"><span>'+item.descripcion+'</span></div></div><div class="col-md-1 col-md-push-2"><div class="iclst"><i class="fa fa-eye consultarPiezas" id="pieZ'+item.componenteId+'" data-ecomponente="'+item.componenteId+'"></i></div><input type="hidden" id=" " value=" "></div><div class="col-md-2 col-md-push-3"  border><div class="iclst id="checklistE'+item.componenteId+'"><i class="fa fa-trash-o consultarPiezas_" id=""></i></div>   </div></div></div></li>');
+					    					$('#tarjetaComponentes_ ul').append('<li class="lista__"><div class="container-fluid  "><div class="row nuevo"><div class="col-md-6"><div class="tl1"><span>'+item.descripcion+'</span></div></div><div class="col-md-1 col-md-push-2"><div class="iclst" id="_tarjetaComponentes_"><i class="fa fa-eye consultarPiezas" id="Componente'+item.id+'" data-dependencia="'+item.id+'"></i></div></div><div class="col-md-2 col-md-push-3"  border><div class="iclst id="EliminarComponente_'+item.id+'"><i class="fa fa-trash-o EliminarComponente" id="EliminarCom'+item.id+'" data-registro="'+item.registro+'" data-registro_="'+item.id+'"></i></div>   </div></div></div></li>');
 
 
 					    	
@@ -245,7 +465,7 @@ function consultar_pieza ()
 	
 	$('.consultarPiezas').click(function()
 			{
-					var idComponente=$(this).attr('data-ecomponente');
+					var idComponente=$(this).attr('data-dependencia');//id del componente
 					$.get("/menu/registros/datos/consulta_comp_pieza", {datos:idComponente}, function(data)
 					{
 							
@@ -267,21 +487,23 @@ function consultar_pieza ()
 
 									alert(data[0])
 									$('#inputPiezas input').remove();
-									$('#inputPiezas').append('<input type="search" placeholder="Buscar Pieza " class="BUSE" id="Tepieza" data-ecomponente="'+data[2]+'" >');
+									$('#inputPiezas').append('<input type="search" placeholder="Buscar Pieza " class="BUSE" id="Tepieza" data-inputbus="2" data-dependencia="'+data[2]+'" >');
 
 									$('#tarjetaPiezas_ li').remove();
 									$.each(data[0], function(i, item)
 							 			{
 					    
 					    					//$('#tarjetaComponentes_').append(' <p>"'+item.componenteId+'"</p>');
-					    					$('#tarjetaPiezas_ ul').append('<li class="lista__"><div class="container-fluid  "><div class="row nuevo"><div class="col-md-6"><div class="tl1"><span>'+item.descripcion+'</span></div></div><div class="col-md-1 col-md-push-2"><div class="iclst"><i class="fa fa-eye consultarPiezas" id="pieZ'+item.piezaId+'" data-ecomponente="'+item.piezaId+'"></i></div><input type="hidden" id=" " value=" "></div><div class="col-md-2 col-md-push-3"  border><div class="iclst id="checklistE'+item.piezaId+'"><i class="fa fa-trash-o consultarPiezas_" id=""></i></div>   </div></div></div></li>');
+					    					$('#tarjetaPiezas_ ul').append('<li class="lista__"><div class="container-fluid  "><div class="row nuevo"><div class="col-md-6"><div class="tl1"><span>'+item.descripcion+'</span></div></div><div class="col-md-1 col-md-push-2"><div class="iclst" id="_tarjetaPiezas_">    </div></div><div class="col-md-2 col-md-push-3"  border><div class="iclst id="EliminarPieza_'+item.id+'"><i class="fa fa-trash-o EliminarPieza" id="EliminarPieza'+item.id+'" data-registro="'+item.registro+'" data-registro_="'+item.id+'"></i></div>   </div></div></div></li>');
 
 
 					    	
 		                                            
 										})
 
-
+							busqueda_dinamica();
+							insertar_piezas ();
+							eliminarpiezas() 
 						}
 
 					})
@@ -1170,9 +1392,9 @@ $('.configurarPer').change(function()//configuracion en los modulos
 
 
 
-$('.BUSE').keypress(function(e)//insertar tipo de equipo
+$('#tpE').keypress(function(tecla)//insertar tipo de equipo
 {
-	if(e.which==13 && $(this).val().length>0)//al presionar enter
+	if(tecla.which==13 && $(this).val().length>0)//al presionar enter
 	{
 		
 
@@ -1234,4 +1456,6 @@ $('.BUSE').keypress(function(e)//insertar tipo de equipo
 
 
 
-busqueda_dinamica();
+
+busqueda_dinamica();//realiza la busqueda dinamica
+consultar_componentes();//muestra los componentes asociados a un equipo

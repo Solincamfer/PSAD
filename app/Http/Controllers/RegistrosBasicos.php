@@ -1569,13 +1569,15 @@ public function clientes_categoria($cliente_id)//listar categorias
 		
 	}
 
-	public function tipo_equipos(){
+	public function tipo_equipos()
+	{
 
 		$datos=$this->cargar_header_sidebar_acciones();
-		return view('Registros_Basicos\Datos_Complementarios\tipoequipos',$this->datos_vista_($datos));
+		
+		return view('Registros_Basicos\Datos_Complementarios\tipoequipos',$this->datos_vista_($datos,DB::table('tequipos')->orderBy('id','desc')->get()));
 	}
 
-	
+
 
 	public function datos_tipo_equipos()//insertar buscar tipo de equipo 
 	{
@@ -1621,7 +1623,7 @@ public function clientes_categoria($cliente_id)//listar categorias
 		$idEquipo=Request::get('datos');//id del tipo de equipo consultado 
 		$consulta=0;
 		$consComEqp=DB::table('ecomponentes')->join('ecomponente_tequipo','ecomponentes.id','=','ecomponente_tequipo.ecomponente_id')
-											 ->select('ecomponentes.id AS componenteId','ecomponentes.descripcion AS descripcion')
+											 ->select('ecomponentes.id AS id','ecomponentes.descripcion AS descripcion')
 											 ->where('ecomponente_tequipo.tequipo_id','=',$idEquipo)->orderBy('ecomponentes.id', 'asc')->get();
 		
 
@@ -1680,13 +1682,62 @@ public function clientes_categoria($cliente_id)//listar categorias
 	}
 
 
+	public function insertar_piezas()
+	{
+		$datos=Request::get('datos');
+		$componenteId=(integer)$datos[1];//oobtiene el id del componente con el cual debe relacionarce la pieza insertada
+		$piezaDescripcion=strtoupper($datos[0]);//obtiene la descripcion de la pieza que se desea agregar
+		$existe=0;//no existe y fue agregado
+		$asociar=0;//se encuentra asociada a un componente
+		$piezas=DB::table('epiezas')->join('ecomponente_epieza','epiezas.id','=','ecomponente_epieza.epieza_id')
+									->select('epiezas.id AS id','epiezas.descripcion AS descripcion')
+									->where('ecomponente_epieza.ecomponente_id','=',$componenteId)->where('epiezas.descripcion','=',$piezaDescripcion)->orderBy('epiezas.id','desc')->get();
+
+		
+		if (count($piezas)!=0)//si existe 
+		{
+			$existe=1;
+
+		}
+		else
+		{
+			$pieza=DB::table('epiezas')->insertGetId(['descripcion'=>$piezaDescripcion]);//obtiene el id de la pieza que fue insertada
+			$asociar=DB::table('ecomponente_epieza')->insert(['ecomponente_epieza.ecomponente_id'=>$componenteId,'ecomponente_epieza.epieza_id'=>$pieza]);//insercion en la tabla intermedia 
+			$existe=0;
+
+		}
 
 
-	public function datos_componentes_piezas()//(Piezas pertenecientes a un componete )consultadas por el boton 
+		
+		return([$asociar,$existe]);
+
+	}
+
+
+
+	public function eliminar_piezas()
+	{
+		
+		$datos=Request::get('datos');
+		$tablaIntermedia=(integer)$datos[0];
+		$tablaPiezas=(integer)$datos[1];
+		$eliminado=0;
+		$inter=DB::table('ecomponente_epieza')->where('ecomponente_epieza.epieza_id','=',$tablaIntermedia)->delete();
+		$original=DB::table('epiezas')->where('epiezas.id','=',$tablaPiezas)->delete();
+
+		if ($inter!=0 && $original) 
+		{
+			$existe=1;
+		}
+		return($existe);
+	}
+
+
+	public function datos_componentes_piezas()//(Piezas pertenecientes a un componete )consultadas por el boton , usadas para la busqueda
 	{
 		$componenteId=Request::get('datos');//id del componente
 		$piezas=DB::table('epiezas')->join('ecomponente_epieza','epiezas.id','=','ecomponente_epieza.epieza_id')
-									->select('epiezas.id AS piezaId','epiezas.descripcion AS descripcion')
+									->select('epiezas.id AS id','epiezas.descripcion AS descripcion','ecomponente_epieza.id AS registro')
 									->where('ecomponente_epieza.ecomponente_id','=',$componenteId)
 									->orderBy('epiezas.id','desc')->get();
 		$existe=0;
@@ -1729,12 +1780,12 @@ public function clientes_categoria($cliente_id)//listar categorias
 		else if ($tabla==1)//componentes de un tipo de equipo
 		{
 			$consulta=DB::table('ecomponentes')->join('ecomponente_tequipo','ecomponentes.id','=','ecomponente_tequipo.ecomponente_id')
-											 	->select('ecomponentes.id AS id','ecomponentes.descripcion AS descripcion')->where('ecomponente_tequipo.tequipo_id','=',$dependencia)->orderBy('ecomponentes.id', 'asc')->get();
+											 	->select('ecomponentes.id AS id','ecomponentes.descripcion AS descripcion','ecomponente_tequipo.id AS registro')->where('ecomponente_tequipo.tequipo_id','=',$dependencia)->orderBy('ecomponentes.id', 'asc')->get();
 		}
 		else if($tabla==2)//piezas de un componente
 		{
 			$consulta=DB::table('epiezas')->join('ecomponente_epieza','epiezas.id','=','ecomponente_epieza.epieza_id')
-									->select('epiezas.id AS piezaId','epiezas.descripcion AS descripcion')
+									->select('epiezas.id AS id','epiezas.descripcion AS descripcion','ecomponente_epieza.id AS registro')
 									->where('ecomponente_epieza.ecomponente_id','=',$dependencia)
 									->orderBy('epiezas.id','desc')->get();
 
