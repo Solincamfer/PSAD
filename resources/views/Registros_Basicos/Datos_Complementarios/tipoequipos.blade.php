@@ -17,7 +17,7 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col-md-2" align="left">
-                                    <a href="/menu/registros/datos"><button id="btnBk" type="button" class="btnBk" href="#"><i class="fa fa-chevron-left"></i> VOLVER</button></a>
+                                    <a href="#"><button id="btnBk" type="button" class="btnBk" href="#"><i class="fa fa-chevron-left"></i> VOLVER</button></a>
                                 </div>
                             
                             </div>
@@ -35,7 +35,7 @@
                                     </div>
                                      <div class="row ">
                                          <div class="col-md-3 spcm">
-                                           <div class="busQ"><input class="tipoEI" type="search" placeholder="Buscar" id="tpE"></div>
+                                           <div class="busQ"><input  type="search" placeholder="Buscar" class="BUSE" id="tpE" data-inputbus="0" data-dependencia="0"></div>
                                         </div> 
                                     </div>
                                    
@@ -44,22 +44,22 @@
                                 <div class="col-md-3 spcm">
                                     <div class="etqSideBack1"></div>
                                     <div class="etqSideFront1">
-                                        <span class="spttl2">Marca</span>
+                                        <span class="spttl2">Componente</span>
                                     </div>
                                      <div class="row ">
                                          <div class="col-md-3 spcm">
-                                           <div class="busQ"><input type="search" placeholder="Buscar"></div>
+                                           <div class="busQ" id="inputComponente">  </div>
                                         </div> 
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="etqSideBack1"></div>
                                     <div class="etqSideFront1">
-                                        <span class="spttl1">Modelo</span>
+                                        <span class="spttl1">Pieza</span>
                                     </div>
                                     <div class="row ">
                                          <div class="col-md-3 spcm">
-                                           <div class="busQ"><input type="search" placeholder="Buscar "></div>
+                                           <div class="busQ" id="inputPiezas"><!-- <input type="search" placeholder="Buscar " class="BUSE" id="tpEP" data-ecomponente="0" > --></div>
                                         </div> 
                                     </div>
                                 </div>
@@ -69,46 +69,7 @@
                                     <div class="tarjeta1" id="tarjetaEquipos_">
                                         
                                           <ul>
-                                           
-                                        <!-- 
-                                            <li>
-                                                <div class="container-fluid ">
-                                                    <div class="row nuevo">
-                                                        <div class="col-md-6">
-                                                            <div class="tl1">
-                                                                <span>Registro--1asasa aasasa</span>
-
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-1 col-md-push-2">
-                                                            <div class="iclst">
-                                                                    <i class="fa fa-eye consultarSubmodulo" id=""></i>
-                                                            </div>
-                                                            <input type="hidden" id=" " value=" ">
-                                                        </div>
-                                                        <div class="col-md-2 col-md-push-3" id="checklistE" border>
-                                                           
-
-
-
-                                                            <div class="chbx1x">
-                                               
-                                                                    <input type="checkbox" value="1" class="configurarPer" id="cckM" name="cck"checked><label for="cckM"></label>
-                                                         
-                                                              
-                                                               
-
-                                                         </div>
-                                                         <div class="col-md-2 col-md-push-3>
-                                                            <div class="eliminar">
-                                                                    <i class=" fa fa-trash-o " id=""></i>
-                                                            </div>
-                                                         </div>
-                                                       
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </li> -->
+                                        
                                             
                                           
                                         </ul>
@@ -117,31 +78,23 @@
                                        
                                 </div>
                                 <div class="col-md-4 ">
-                                     <div class="col-md-12 tarjeta1">
+                                     <div class=" tarjeta1" id="tarjetaComponentes_">
+                                       <ul>
+                                           
+
+                                       </ul>
                                         
-                                        <div class="row">
-                                            <div class="col-md-6 registro">
-                                              <!--   <p>aaaaaaaaaa</p> -->
-
-                                            </div>
-                                            <div class="col-md-3 registro">
-                                              <!--   <p>bbbb</p> -->
-
-                                            </div>
-                                            <div class="col-md-3 registro">
-                                               <!--  <p>c</p> -->
-
-                                            </div>
-
-                                        </div>
-                                        <!--  <p>hiashaishaihsa sashaishahsiahsais ashiahsiahsia sia sahsiahsiha is ais aishaishiashais aisia jkdjfjdkfjdf dfjdf dkfjdk fkdjfkdjfkj fdkjfdk fjdkfjd fkdfj dkfjdkfj dfkdf jdkfjdkfjdkf dkfjdkfjdkf dfkd fkdjfkdjf</p> -->
                                     </div>
 
                                 </div>
                                 <div class="col-md-4 ">
-                                    <div class="tarjeta1">
+                                    <div class="tarjeta1" id="tarjetaPiezas_">
                                         
-                                        <!--  <p>hiashaishaihsa sashaishahsiahsais ashiahsiahsia sia sahsiahsiha is ais aishaishiashais aisia jkdjfjdkfjdf dfjdf dkfjdk fkdjfkdjfkj fdkjfdk fjdkfjd fkdfj dkfjdkfj dfkdf jdkfjdkfjdkf dkfjdkfjdkf dfkd fkdjfkdjf</p> -->
+                                        <ul>
+                                            
+
+                                        </ul>
+
                                     </div>
                                 </div>
                             </div>
