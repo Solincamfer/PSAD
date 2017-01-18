@@ -643,6 +643,49 @@ public function cargar_modal_agregar(){
 	}
 	return $consulta;
 }
+
+public function insertar_empleado(){
+
+	$nombre1=Request::get('nomEmp1');
+	$nombre2=Request::get('nomEmp2');
+	$apellido1=Request::get('apellEmp1');
+	$apellido2=Request::get('apellEmp2');
+	$tiporif= Request::get('TrifEmp');
+	$rif= Request::get('rifEmp');
+	$tipocedula= Request::get('TciEmp');
+	$cedula= Request::get('ciEmp');
+	//$fechanac= formatear fecha Request::get('fnEmp');
+	$departamento= Request::get('dptoEmp');
+	$cargo = Request::get('cgoEmp');
+	$pais = Request::get('pdhe');
+	$region = Request::get('rgdhe');
+	$estado = Request::get('edodhe');
+	$municipio = Request::get('mundhe');
+	$direccion=Request::get('descpdhe');
+	$codigoL= Request::get('tlflcle');
+	$numeroL= Request::get('numerol');
+	$codigoC= Request::get('tlfmvle');
+	$numeroC= Request::get('numeroc');
+	$correoE= Request::get('maile');
+	$usuario= Request::get('nomUs');
+	$password= Request::get('pwUs1');
+	$estatus= Request::get('status');
+	$consultac= DB::table('cedulas')->where('numero',$cedula)->first();
+	$consultar= DB::table('rifs')->where('numero',$rif)->first();
+	if(count($consultac)==0 and count($consultar)==0 ){
+		/* DB::table('empleados')->insert
+					 	(
+
+					 		['razon_s'=>$razonS,'nombre_c'=>$nombreC,'rif_id'=>$idR,'tipo_id'=>$tipoC,'direccion_id'=>$iddF,'direccion__id'=>$iddC,'contacto_id'=>$idC]
+					 	);*/
+		$respuesta=1;
+	}
+	else{
+		$respuesta=0;
+	}
+
+	return $nombre2;
+}
 	
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////submodulo perfiles///////////////////////////////////////////////////////////////////////

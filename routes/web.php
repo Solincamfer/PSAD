@@ -151,7 +151,7 @@ Route::group(['prefix'=>'/menu/registros','middleware'=>['v_menu']],function(){
 
 //////////////////////////////	EMPLEADOS ////////////////////////////////////////////////////////	
 	Route::match(['post','get'],'/empleados/consulta',                                              			['uses'=>'RegistrosBasicos@cargar_modal_agregar']);	
-
+	Route::match(['post','get'],'/empleados/agregar',                                              			['uses'=>'RegistrosBasicos@insertar_empleado']);	
 });
 
 

@@ -13,31 +13,34 @@
 /////Deshabilitar accion="" para formularios submit
 $( "#log" ).submit(function( event ){
 	event.preventDefault();
-	});
+});
 $( "#Formcliente" ).submit(function( event ){
 	event.preventDefault();
-	});
+});
 $( "#NewDep" ).submit(function( event ){
 	event.preventDefault();
-	});
+});
 $( "#NewCarg" ).submit(function( event ){
 	event.preventDefault();
-	});
+});
 $( "#NewPerfil" ).submit(function( event ){
 	event.preventDefault();
-	});
+});
 $( "#NewPlan" ).submit(function( event ){
 	event.preventDefault();
-	});
+});
 $( ".NewServicio" ).submit(function( event ){
 	event.preventDefault();
-	});
+});
 $( "#mPlan" ).submit(function( event ){
 	event.preventDefault();
-	});
+});
 $(".DepCarPer").submit(function( event ){
 	event.preventDefault();
-	});
+});
+$("#NewEmp").submit(function(event){
+	event.preventDefault();
+});
 ////////////////////
 ////Validacion + permisologia + AJAX del boton submit de la vista LOGIN////
 $('#log1').click(function(){
@@ -1449,9 +1452,55 @@ $("#edodhe").change(function(){
     var datos=[id,elegido];
     $.get("/menu/registros/empleados/consulta",{ datos:datos }, function(data){
     	$.each(data, function(i, item) {
-    		///////////AGREGAR OPCION SEGUN CANTIDAD DE VALORES HABILITADOS/////////////	
+    		
+	////////////////////AGREGAR OPCION SEGUN CANTIDAD DE VALORES HABILITADOS////////////////////////////
+
     		$('#mundhe').append('<option class="municipio" value="'+item.id+'">'+item.descripcion+'</option>');
 		})        
     }); 
     $( ".municipio" ).remove();           
 });
+
+/////////////////////////////// VALIDAR E INSERTAR REGISTROS PARA EMPLEADOS /////////////////////////////
+
+$("#saveEmpl").click(function(){
+	url= "/menu/registros/empleados/agregar"
+	var form = $("#NewEmp");
+	nombre=$('#nomEmp1').val();
+	datos = form.serialize();
+	alert (datos)
+	var posting = $.get(url,{datos:datos},function(resultado){
+		alert(resultado)
+		/*if (resultado == 1) {
+			//SWALLLL mensajes de alerta y sucesos
+			swal({
+				title:'Guardado Exitoso',//Contenido del modal
+				text: 'El Empleado fue guardado Exitosamente',
+				type: "success",
+				timer:1600,
+				showConfirmButton:false,//Eliminar boton de confirmacion
+			});
+			//Retardo en ejecucion de ruta.
+			setTimeout(function(){location.href = "/menu/registros/empleados/";},1800); // 3000ms = 3s
+		}	
+		else {
+			swal({
+
+				title:'Registro Existente!!!.',//Contenido del modal
+				text: 'Ya existe un empleado con esa Cédula o RIF, Revise estos datos',
+				type: "error",
+				timer:2000,
+				showConfirmButton:false,//Eliminar boton de confirmacion
+			});
+		}	*/					
+	//});
+	/*posting.fail(function() {
+		swal({
+			title:'Error inesperado!!',//Contenido del modal
+			text: 'Pongase en contacto con el administrador',
+			type: "error",
+			showConfirmButton:true,//Eliminar boton de confirmacion
+		});*/
+	});
+});
+

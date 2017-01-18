@@ -65,7 +65,7 @@
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                         <h4 class="modal-title" id="myModalLabel">Agregar Empleado</h4>
                                     </div>
-                                    <form action="">
+                                    <form id="NewEmp">
                                       <div class="modal-body">
                                             {{ csrf_field() }}
                                             <ul class="nav nav-tabs" role="tablist">
@@ -118,7 +118,7 @@
                                                                         <div class="form-group row">
                                                                           
                                                                             <span class="ic"><i class="fa fa-chevron-down"></i></span>
-                                                                            <select name="rifEmp" class="form-control" id="selRifEmp">
+                                                                            <select name="TrifEmp" class="form-control" id="selRifEmp">
                                                                                 <option value="0">-</option>
                                                                                 @foreach ($extra as $rif)
                                                                                   <option value="{{$rif->id}}">{{$rif->descripcion}}</option>
@@ -139,7 +139,7 @@
                                                                     <div class="col-md-5">
                                                                         <div class="form-group row">
                                                                             <span class="ic"><i class="fa fa-chevron-down"></i></span>
-                                                                            <select name="ciEmp" class="form-control" id="selCiEmp">
+                                                                            <select name="TciEmp" class="form-control" id="selCiEmp">
                                                                                 <option value="0">-</option>
                                                                                 @foreach ($datosC1 as $cedula)
                                                                                   <option value="{{$cedula->id}}">{{$cedula->descripcion}}</option>
@@ -241,7 +241,7 @@
                                                                    </div>
                                                                    <div class="col-md-7">
                                                                        <div class="form-group row">
-                                                                           <input type="tel" class="form-control" id="numtlflcle"><i class="fa fa-phone icemp"></i>
+                                                                           <input type="tel" name="numerol"class="form-control" id="numtlflcle"><i class="fa fa-phone icemp"></i>
                                                                        </div>
                                                                    </div>
                                                                </div>
@@ -261,7 +261,7 @@
                                                                    </div>
                                                                    <div class="col-md-7">
                                                                        <div class="form-group row">
-                                                                           <input type="tel" class="form-control" id="numtlfmvle"><i class="fa fa-mobile icemp"></i>
+                                                                           <input type="tel" name="numeroc" class="form-control" id="numtlfmvle"><i class="fa fa-mobile icemp"></i>
                                                                        </div>
                                                                    </div>
                                                                </div>
@@ -295,7 +295,7 @@
                                                                 <div class="col-md-8 col-md-offset-2">
                                                                     <div class="form-group row">
                                                                         <label for="stUs">Estatus de Usuario</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
-                                                                        <select name="stUs" id="stUs" class="form-control">
+                                                                        <select name="status" id="stUs" class="form-control">
                                                                             <option value="0">-</option>
                                                                             <option value="1">Activo</option>
                                                                             <option value="2">Inactivo</option>
@@ -309,7 +309,7 @@
                                             </div> 
                                       </div>
                                       <div class="modal-footer">
-                                        <button type="button" class="bttnMd" id="btnSv">Guardar <i class="fa fa-floppy-o"></i></button>
+                                        <button type="submit" class="bttnMd" id="saveEmpl">Guardar <i class="fa fa-floppy-o"></i></button>
                                       </div>
                                     </form>
                                 </div>
