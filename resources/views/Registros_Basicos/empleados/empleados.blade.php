@@ -33,7 +33,7 @@
                                               </span>
                                              @elseif($accion->id==76)
                                                 <span class="iclsp">
-                                                  <a href="#myModal2" class="tltp modificarCliente" id="m{{$empleado->id}}" data-ttl="{{$accion->descripcion}}" data-toggle="modal" data-target="#myModal2"> 
+                                                  <a href="#myModal2" class="tltp modificarEmpleado" id="m{{$empleado->id}}" data-ttl="{{$accion->descripcion}}" data-registro="{{$empleado->id}}" data-toggle="modal" data-target="#myModal2"> 
                                                   <i class="{{$accion->clase_css}}"></i>
                                                   </a>
                                                </span>
@@ -65,7 +65,7 @@
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                         <h4 class="modal-title" id="myModalLabel">Agregar Empleado</h4>
                                     </div>
-                                    <form id="NewEmp">
+                                    <form id="NewEmp" >
                                       <div class="modal-body">
                                             {{ csrf_field() }}
                                             <ul class="nav nav-tabs" role="tablist">
@@ -176,7 +176,7 @@
                                                                    <div class="form-group row">
                                                                        <label for="cgoEmp">Cargo</label><span class="ic"><i class="fa fa-chevron-down"></i></span>
                                                                        <select name="cgoEmp" class="form-control" id="cgoEmp">
-                                                                           <option value="0">-</option>
+                                                                           <option value="">-</option>
                                                                        </select><i class="fa fa-id-badge icemp"></i>
                                                                    </div>
                                                                </div>
@@ -296,9 +296,9 @@
                                                                     <div class="form-group row">
                                                                         <label for="stUs">Estatus de Usuario</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
                                                                         <select name="status" id="stUs" class="form-control">
-                                                                            <option value="0">-</option>
+                                                                            <option value="">-</option>
                                                                             <option value="1">Activo</option>
-                                                                            <option value="2">Inactivo</option>
+                                                                            <option value="0">Inactivo</option>
                                                                         </select><i class="fa fa-check icemp"></i>
                                                                     </div>
                                                                 </div>
@@ -316,7 +316,8 @@
                             </div>
                         </div>
                         
-                        <!-- Modal Modificar-->
+  <!-- ///////////////// MODAL DE MODIFICAR EMPLEADO ////////////////////////-->
+  
                         <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
                         <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -325,7 +326,7 @@
                                 <h4 class="modal-title" id="myModalLabel2">Modificar Empleado</h4>
                             </div>
                             <div class="modal-body">
-                                <form action="">
+                                <form action="" id="updateEmp">
                                     {{ csrf_field() }}
                                     <ul class="nav nav-tabs" role="tablist">
                                         <li role="presentation" class="active"><a href="#dbem1" aria-controls="dbem1" role="tab" data-toggle="tab">Datos básic. Prim.</a></li>
@@ -377,7 +378,10 @@
                                                                 <div class="form-group row">
                                                                     <span class="ic"><i class="fa fa-chevron-down"></i></span>
                                                                     <select name="rifEmpm" class="form-control" id="selRifEmpm">
-                                                                        <option value="0">-</option>
+                                                                        <option value="">-</option>
+                                                                        @foreach ($extra as $rif)
+                                                                          <option value="{{$rif->id}}">{{$rif->descripcion}}</option>
+                                                                        @endforeach
                                                                     </select><i class="fa fa-clipboard icemp"></i>
                                                                 </div>
                                                             </div>
@@ -394,7 +398,10 @@
                                                                 <div class="form-group row">
                                                                     <span class="ic"><i class="fa fa-chevron-down"></i></span>
                                                                     <select name="ciEmpm" class="form-control" id="selCiEmpm">
-                                                                        <option value="0">-</option>
+                                                                        <option value="">-</option>
+                                                                        @foreach ($datosC1 as $cedula)
+                                                                          <option value="{{$cedula->id}}">{{$cedula->descripcion}}</option>
+                                                                        @endforeach
                                                                     </select><i class="fa fa-clipboard icemp"></i>
                                                                 </div>
                                                             </div>
@@ -416,7 +423,10 @@
                                                             <div class="form-group row">
                                                                 <label for="dptoEmpm">Departamento</label><span class="ic"><i class="fa fa-chevron-down"></i></span>
                                                                 <select name="dptoEmpm" class="form-control" id="dptoEmpm">
-                                                                    <option value="0">-</option>
+                                                                    <option value="">-</option>
+                                                                    @foreach ($datosC5 as $departamentos)
+                                                                      <option value="{{$departamentos->id}}">{{$departamentos->descripcion}}</option>
+                                                                    @endforeach
                                                                 </select><i class="fa fa-briefcase icemp"></i>
                                                             </div>
                                                         </div>
@@ -424,7 +434,7 @@
                                                             <div class="form-group row">
                                                                 <label for="cgoEmpm">Cargo</label><span class="ic"><i class="fa fa-chevron-down"></i></span>
                                                                 <select name="cgoEmpm" class="form-control" id="cgoEmpm">
-                                                                    <option value="0">-</option>
+                                                                    <option value="">-</option>
                                                                 </select><i class="fa fa-id-badge icemp"></i>
                                                             </div>
                                                         </div>
@@ -438,25 +448,28 @@
                                                         <div class="form-group col-md-6">
                                                             <label for="pdhem">País</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
                                                             <select name="pdhem" class="form-control" id="pdhem">
-                                                                <option value="0">-</option>
+                                                                <option value="">-</option>
+                                                                @foreach ($datosC2 as $pais)
+                                                                  <option value="{{$pais->id}}">{{$pais->descripcion}}</option>
+                                                                @endforeach
                                                             </select><i class="fa fa-globe icemp"></i>
                                                         </div>
                                                         <div class="form-group col-md-6">
                                                             <label for="rgdhem">Región</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
                                                             <select name="rgdhem" class="form-control" id="rgdhem">
-                                                                <option value="0">-</option>
+                                                                <option value="">-</option>
                                                             </select><i class="fa fa-map icemp"></i>
                                                         </div>
                                                         <div class="form-group col-md-6">
                                                             <label for="edodhem">Estado</label><span class="ic"><i class="fa fa-chevron-down"></i></span>
                                                             <select name="edodhem" class="form-control" id="edodhem">
-                                                                <option value="0">-</option>
+                                                                <option value="">-</option>
                                                             </select><i class="fa fa-map-pin icemp"></i>
                                                         </div>
                                                         <div class="form-group col-md-6">
                                                             <label for="mundhem">Municipio</label><span class="ic"><i class="fa fa-chevron-down"></i></span>
                                                             <select name="mundhem" class="form-control" id="mundhem">
-                                                                <option value="0">-</option>
+                                                                <option value="">-</option>
                                                             </select><i class="fa fa-map-signs icemp"></i>
                                                         </div>
                                                         <div class="form-group col-md-12">
@@ -477,7 +490,10 @@
                                                                 <div class="form-group row">
                                                                     <span class="ic"><i class="fa fa-chevron-down" ></i></span>
                                                                     <select name="tlflclem" class="form-control" id="tlflclem">
-                                                                        <option value="0">-</option>
+                                                                        <option value="">-</option>
+                                                                        @foreach ($datosC4 as $tl)
+                                                                          <option value="{{$tl->id}}">{{$tl->descripcion}}</option>
+                                                                        @endforeach
                                                                     </select><i class="fa fa-hashtag icemp"></i>
                                                                 </div>
                                                             </div>
@@ -494,7 +510,10 @@
                                                                 <div class="form-group row">
                                                                     <span class="ic"><i class="fa fa-chevron-down" ></i></span>
                                                                     <select name="tlfmvlem" class="form-control" id="tlfmvlem">
-                                                                        <option value="0">-</option>
+                                                                        <option value="">-</option>
+                                                                        @foreach ($datosC3 as $tc)
+                                                                          <option value="{{$tc->id}}">{{$tc->descripcion}}</option>
+                                                                        @endforeach
                                                                     </select><i class="fa fa-hashtag icemp"></i>
                                                                 </div>
                                                             </div>
@@ -534,9 +553,9 @@
                                                             <div class="form-group row">
                                                                 <label for="stUsm">Estatus de Usuario</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
                                                                 <select name="stUsm" id="stUsm" class="form-control">
-                                                                    <option value="0">-</option>
+                                                                    <option value="">-</option>
                                                                     <option value="1">Activo</option>
-                                                                    <option value="2">Inactivo</option>
+                                                                    <option value="0">Inactivo</option>
                                                                 </select><i class="fa fa-check icemp"></i>
                                                             </div>
                                                         </div>
@@ -545,12 +564,12 @@
                                             </div>
                                         </div>
                                     </div>
+                                  </div>
+                                  <div class="modal-footer">
+                                      <button type="button" class="bttnMd" id="btnSvm">Guardar <i class="fa fa-floppy-o"></i></button>
+                                  </div>
                                 </form>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="bttnMd" id="btnSvm">Guardar <i class="fa fa-floppy-o"></i></button>
-                                <button type="button" class="bttnMd" data-dismiss="modal" id="btnCsm">Cerrar <i class="fa fa-times"></i></button>
-                            </div>
+                            
                         </div>
                         </div>
                         </div>

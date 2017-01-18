@@ -105,7 +105,7 @@ Route::group(['prefix'=>'/menu/registros','middleware'=>['v_menu']],function(){
 	
 	Route::match(['post','get'],'/clientes/modificar/responsable',											['uses'=>'RegistrosBasicos@clientes_modificar_responsables']);
 
-	Route::match(['post','get'],'/prueba',						  										    ['uses'=>'RegistrosBasicos@agregar_accion']);
+	Route::match(['post','get'],'/prueba',						  										    ['uses'=>'RegistrosBasicos@pruebas_']);
 
 	Route::match(['post','get'],'/clientes/categoria/agregar/{cliente_id}',						   			['uses'=>'RegistrosBasicos@clientes_categoria_agregar']);
 	Route::match(['post','get'],'/clientes/responsables/actualizar/{cliente_id}',				 			['uses'=>'RegistrosBasicos@clientes_actualizar_responsable']);
@@ -161,6 +161,9 @@ Route::group(['prefix'=>'/menu/registros','middleware'=>['v_menu']],function(){
 //////////////////////////////	EMPLEADOS ////////////////////////////////////////////////////////	
 	Route::match(['post','get'],'/empleados/consulta',                                              			['uses'=>'RegistrosBasicos@cargar_modal_agregar']);	
 	Route::match(['post','get'],'/empleados/agregar',                                              			['uses'=>'RegistrosBasicos@insertar_empleado']);	
+	Route::match(['post','get'],'/empleados/modificar',                                              			['uses'=>'RegistrosBasicos@cargar_modal_modificar']);
+	Route::match(['post','get'],'/empleados/cargar',                                              			['uses'=>'RegistrosBasicos@cargar_combos']);
+	Route::match(['post','get'],'/empleados/actualizar',                                              			['uses'=>'RegistrosBasicos@cargar_modal_modificar']);		
 });
 
 

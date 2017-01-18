@@ -41,6 +41,9 @@ $(".DepCarPer").submit(function( event ){
 $("#NewEmp").submit(function(event){
 	event.preventDefault();
 });
+$('#updateEmp').submit(function(event){
+	event.preventDefault();
+});
 ////////////////////
 ////Validacion + permisologia + AJAX del boton submit de la vista LOGIN////
 $('#log1').click(function(){
@@ -1468,10 +1471,8 @@ $("#saveEmpl").click(function(){
 	var form = $("#NewEmp");
 	nombre=$('#nomEmp1').val();
 	datos = form.serialize();
-	alert (datos)
-	var posting = $.get(url,{datos:datos},function(resultado){
-		alert(resultado)
-		/*if (resultado == 1) {
+	var posting = $.post(url,datos,function(resultado){
+		if (resultado == 1) {
 			//SWALLLL mensajes de alerta y sucesos
 			swal({
 				title:'Guardado Exitoso',//Contenido del modal
@@ -1487,20 +1488,141 @@ $("#saveEmpl").click(function(){
 			swal({
 
 				title:'Registro Existente!!!.',//Contenido del modal
-				text: 'Ya existe un empleado con esa Cédula o RIF, Revise estos datos',
+				text: 'La Cédula, el Rif, o el Usuario ya estan asociados a un empleado, Revise estos datos',
 				type: "error",
-				timer:2000,
+				timer:3000,
 				showConfirmButton:false,//Eliminar boton de confirmacion
 			});
-		}	*/					
-	//});
-	/*posting.fail(function() {
+		}					
+	});
+	posting.fail(function() {
 		swal({
 			title:'Error inesperado!!',//Contenido del modal
 			text: 'Pongase en contacto con el administrador',
 			type: "error",
 			showConfirmButton:true,//Eliminar boton de confirmacion
-		});*/
+		});
 	});
 });
 
+/////////////////////////////// CARGAR DATOS EN MODAL DE MODIFICAR EMPLEADO /////////////////////////////
+$(".modificarEmpleado").click(function(){
+	var parametro=$(this).attr('data-registro');
+	datos=[1,parametro]
+	$.get("/menu/registros/empleados/modificar",{datos:datos},function(respuesta){
+		$('#nomEmpm1').val(respuesta[0]);
+		$('#nomEmpm2').val(respuesta[1]);
+		$('#apellEmpm1').val(respuesta[2]);
+		$('#apellEmpm2').val(respuesta[3]);
+		$('#selRifEmpm').val(respuesta[4]);
+		$('#numRifEmpm').val(respuesta[5]);
+		$('#selCiEmpm').val(respuesta[6]);
+		$('#numCiEmpm').val(respuesta[7]);
+		$('#fnEmpm').val(respuesta[8]);
+		$('#dptoEmpm').val(respuesta[9]);
+
+		$("#dptoEmpm option:selected").each(function () {			
+            elegido=$(this).val();
+            var opcion=[1,elegido];
+			$.get("/menu/registros/empleados/cargar",{opcion:opcion}, function(data){
+		    	$.each(data, function(i, item) {
+		    		$('#cgoEmpm').append('<option class="cargos" value="'+item.id+'">'+item.descripcion+'</option>');
+				}); 
+			});    
+	    }); 
+
+	    $('#cgoEmpm > option[value="'+respuesta[10]+'"]').attr('selected', 'selected');
+	});
+});
+
+
+/*
+    ///////////VERIFCAR SI LA VARIABLE PAIS EXISTE EN EL VECTOR/////////////
+        		if ($(data[11]).empty) {
+        			///////////RECORRER OPTION DEL COMBO DEPENDIENTE Y REGRESAR VALORES SEGU SELECCIONADO/////////////
+	        			$("#inn1 option:selected").each(function () {			
+			    		var name=$('#inn1').attr("name");
+			            elegido=$(this).val();
+			            var vector=[name,elegido];
+			        ///////////PASANDO VARIABLE Y CARGANDO LISTADO CORRESPONDIENTE A LA SELECCION PREVIA Y ESPERANDO DATA COMO RESPUESTA/////////////	
+			            $.get("/menu/registros/clientes/registrar", { vector: vector }, function(data){
+			            	$.each(data, function(i, item) {
+			            		$('#inn2').append('<option class="limpiarnn0" value="'+item.id+'">'+item.descripcion+'</option>');
+							})        
+			            });  
+			        });	
+	        		///////////LIMPIAR COMBOS DEPENDIENTES DE ESTE/////////////
+        			$('#inn2 option:selected').val(data[13]);  
+        			$('#inn2 option:selected').html(data[14]); 
+        			$("#inn2 option:selected").each(function () {			
+			    		var name=$('#inn2').attr("name");
+			            elegido=$(this).val();
+			            var vector=[name,elegido];
+			         ///////////PASANDO VARIABLE Y CARGANDO LISTADO CORRESPONDIENTE A LA SELECCION PREVIA Y ESPERANDO DATA COMO RESPUESTA/////////////	
+			            $.get("/menu/registros/clientes/registrar", { vector: vector }, function(data){
+			            	$.each(data, function(i, item) {
+			            		$('#inn3').append('<option class="limpiarnn1" value="'+item.id+'">'+item.descripcion+'</option>');
+							})        
+			            });  
+			        });	
+			        ///////////LIMPIAR COMBOS DEPENDIENTES DE ESTE/////////////
+			        $('#inn3 option:selected').val(data[15]);  
+        			$('#inn3 option:selected').html(data[16]); 
+        			$("#inn3 option:selected").each(function () {			
+			    		var name=$('#inn3').attr("name");
+			            elegido=$(this).val();
+			            var vector=[name,elegido];
+			         ///////////PASANDO VARIABLE Y CARGANDO LISTADO CORRESPONDIENTE A LA SELECCION PREVIA Y ESPERANDO DATA COMO RESPUESTA/////////////	
+			            $.get("/menu/registros/clientes/registrar", { vector: vector }, function(data){
+			            	$.each(data, function(i, item) {
+			            		$('#inn4').append('<option class="limpiarnn2" value="'+item.id+'">'+item.descripcion+'</option>');
+							})        
+			            });   
+			        });	
+			        ///////////LIMPIAR COMBOS DEPENDIENTES DE ESTE/////////////
+			        $('#inn4 option:selected').val(data[17]);  
+        			$('#inn4 option:selected').html(data[18]); 
+        		}
+        		if ($(data[21]).empty) {
+	        			$("#innn11 option:selected").each(function () {			
+			    		var name=$('#innn11').attr("name");
+			            elegido=$(this).val();
+			            var vector=[name,elegido];
+			         ///////////PASANDO VARIABLE Y CARGANDO LISTADO CORRESPONDIENTE A LA SELECCION PREVIA Y ESPERANDO DATA COMO RESPUESTA/////////////	
+			           $.get("/menu/registros/clientes/registrar", { vector: vector }, function(data){
+			            	$.each(data, function(i, item) {
+			            		$('#innn12').append('<option class="limpiarnn0" value="'+item.id+'">'+item.descripcion+'</option>');
+							})        
+			            });  
+			        });	
+        			$('#innn12 option:selected').val(data[23]);  
+        			$('#innn12 option:selected').html(data[24]); 
+        			$("#innn12 option:selected").each(function () {			
+			    		var name=$('#innn12').attr("name");
+			            elegido=$(this).val();
+			            var vector=[name,elegido];
+			         ///////////PASANDO VARIABLE Y CARGANDO LISTADO CORRESPONDIENTE A LA SELECCION PREVIA Y ESPERANDO DATA COMO RESPUESTA/////////////	
+			           $.get("/menu/registros/clientes/registrar", { vector: vector }, function(data){
+			            	$.each(data, function(i, item) {
+			            		$('#innn13').append('<option class="limpiarnn1" value="'+item.id+'">'+item.descripcion+'</option>');
+							})        
+			            });  
+			        });	
+			        $('#innn13 option:selected').val(data[25]);  
+        			$('#innn13 option:selected').html(data[26]);
+        			$("#innn13 option:selected").each(function () {			
+			    		var name=$('#innn13').attr("name");
+			            elegido=$(this).val();
+			            var vector=[name,elegido];
+			         ///////////PASANDO VARIABLE Y CARGANDO LISTADO CORRESPONDIENTE A LA SELECCION PREVIA Y ESPERANDO DATA COMO RESPUESTA/////////////	
+			          $.get("/menu/registros/clientes/registrar", { vector: vector }, function(data){
+			            	$.each(data, function(i, item) {
+			            		$('#innn14').append('<option class="limpiarnn2" value="'+item.id+'">'+item.descripcion+'</option>');
+							})        
+			            });  
+			        });	
+			        $('#innn14 option:selected').val(data[27]);  
+        			$('#innn14 option:selected').html(data[28]); 
+        		}         
+        });			
+	});	*/

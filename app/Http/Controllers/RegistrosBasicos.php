@@ -586,7 +586,7 @@ public function empleados()
 
 	$datos=$this->cargar_header_sidebar_acciones();
 	$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(76,77,78),75);
-	return view ('Registros_Basicos\empleados\empleados',$this->datos_vista($datos,$acciones,DB::table('empleados')->where('id','<>',5)->get(),$tipoR,$tipoD,$paises,$codigoC,$codigoL,$departamentos));
+	return view ('Registros_Basicos\empleados\empleados',$this->datos_vista($datos,$acciones,DB::table('empleados')->where('id','<>',3)->get(),$tipoR,$tipoD,$paises,$codigoC,$codigoL,$departamentos));
 }
 
 public function empleados_perfiles($empleado_id)
@@ -596,7 +596,7 @@ public function empleados_perfiles($empleado_id)
 	$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(),false);
 	
 	$consulta=DB::table('perfiles')->join('usuarios','perfiles.id','=','usuarios.perfil_id')
-								   ->join('empleados','usuarios.id','=','empleados.id')
+								   ->join('empleados','usuarios.id','=','empleados.usuario_id')
 								   ->select('usuarios.perfil_id As perfilE','usuarios.n_usuario As usuarioE','usuarios.id As usuarioId')
 								   ->where('empleados.id',$empleado_id)->first();
 	
@@ -605,7 +605,7 @@ public function empleados_perfiles($empleado_id)
 
 	
 	return view ('Registros_Basicos\empleados\empleados_perfil',$this->datos_vista($datos,$acciones,
-						DB::table('perfiles')->where('id','<>',13)->get(),
+						DB::table('perfiles')->where('id','<>',13)->where('id','<>',16)->get(),
 						$consulta->usuarioE,//extra
 						$consulta->perfilE,//datosC1
 						$consulta->usuarioId//datosC2
@@ -654,7 +654,7 @@ public function insertar_empleado(){
 	$rif= Request::get('rifEmp');
 	$tipocedula= Request::get('TciEmp');
 	$cedula= Request::get('ciEmp');
-	//$fechanac= formatear fecha Request::get('fnEmp');
+	$fechanac= Request::get('fnEmp');
 	$departamento= Request::get('dptoEmp');
 	$cargo = Request::get('cgoEmp');
 	$pais = Request::get('pdhe');
@@ -670,21 +670,90 @@ public function insertar_empleado(){
 	$usuario= Request::get('nomUs');
 	$password= Request::get('pwUs1');
 	$estatus= Request::get('status');
-	$consultac= DB::table('cedulas')->where('numero',$cedula)->first();
-	$consultar= DB::table('rifs')->where('numero',$rif)->first();
-	if(count($consultac)==0 and count($consultar)==0 ){
-		/* DB::table('empleados')->insert
-					 	(
+	$consultac= DB::table('cedulas')->where('numero',$cedula)->where('rol','empleado')->first();
+	$consultar= DB::table('rifs')->where('numero',$rif)->where('rol','empleado')->first();
+	$consultau= DB::table('usuarios')->where('n_usuario',$usuario)->first();
+	if(count($consultac)==0 and count($consultar)==0 and count($consultau)==0){
 
-					 		['razon_s'=>$razonS,'nombre_c'=>$nombreC,'rif_id'=>$idR,'tipo_id'=>$tipoC,'direccion_id'=>$iddF,'direccion__id'=>$iddC,'contacto_id'=>$idC]
-					 	);*/
+		//////////////////// INSERTAR DATOS EN TABLAS CORRESPONDIENTES ///////////////////////////////////////
+
+		$idR= DB::table('rifs')->insertGetId//insertar rif 
+						(
+							['numero'=>$rif,'tipo_id'=>$tiporif,'rol'=>'empleado']
+						);
+		$idC= DB::table('cedulas')->insertGetId//insertar rif 
+						(
+							['numero'=>$cedula,'tipo_id'=>$tipocedula,'rol'=>'empleado']
+						);
+		$idd= DB::table('direcciones')->insertGetId//insertar rif 
+						(
+							['descripcion'=>$direccion,'municipio_id'=>$municipio,'pais_id'=>$pais, 'region_id'=>$region, 'estado_id'=>$estado ]
+						);
+		$idCO= DB::table('contactos')->insertGetId
+						(
+							['tipo_id'=>$codigoL,'tipo__id'=>$codigoC,'telefono_m'=>$numeroC,'telefono_f'=>$numeroL,'correo'=>$correoE]
+						);
+		$idU= DB::table('usuarios')->insertGetId
+						(
+							['n_usuario'=>$usuario,'clave'=>$password,'status'=>$estatus,'perfil_id'=>(int)16]
+						);
+
+		DB::table('empleados')->insert
+						(
+							['nombre'=>$nombre1,'nombre_'=>$nombre2,'apellido'=>$apellido1,'apellido_'=>$apellido2,'fechaN'=>$fechanac,'cedula_id'=>$idC,'rif_id'=>$idR,'departamento_id'=>$departamento,'cargo_id'=>$cargo,'direccion_id'=>$idd,'contacto_id'=>$idCO,'usuario_id'=>$idU]
+						);
+
 		$respuesta=1;
 	}
 	else{
 		$respuesta=0;
 	}
 
-	return $nombre2;
+	return $respuesta;
+}
+
+public function cargar_modal_modificar(){
+	$id=Request::get('datos');
+	if ($id[0]==1) {
+		$consulta=DB::table('empleados')
+		->join('rifs','empleados.rif_id','=','rifs.id')
+		->join('cedulas','empleados.cedula_id','=','cedulas.id')
+		->join('departamentos','empleados.departamento_id','=','departamentos.id')
+		->join('cargos','empleados.cargo_id','=','cargos.id')
+		->join('direcciones','empleados.direccion_id','=','direcciones.id')
+		->join('paises','paises.id','=','direcciones.pais_id')
+		->join('regiones','regiones.id','=','direcciones.region_id')
+		->join('estados','estados.id','=','direcciones.estado_id')
+		->join('municipios','municipios.id','=','direcciones.municipio_id')
+		->join('contactos','empleados.contacto_id','=','contactos.id')
+		->join('usuarios','empleados.usuario_id','=','usuarios.id')
+
+		->select('empleados.nombre As nombre','empleados.nombre_ As nombre_','empleados.apellido As apellido','empleados.apellido_ As apellido_','rifs.tipo_id As tipo_r','rifs.numero As numeroR','cedulas.tipo_id As tipo_c','cedulas.numero As numeroC','empleados.fechaN As fnacimiento','departamentos.id As departamento','cargos.id As idcargo','cargos.descripcion As cargo','paises.id As idpais','paises.descripcion As pais','regiones.id As idregion','regiones.descripcion As region','estados.id As idestado','estados.descripcion As estado','municipios.id As idmunicipio','municipios.descripcion As municipios','direcciones.id As iddireccion','direcciones.descripcion As direccion','contactos.tipo_id As codigoC','contactos.tipo__id As codigoL','contactos.telefono_m As movil','contactos.telefono_f As local','contactos.correo As email','usuarios.n_usuario As usuario','usuarios.clave As password','usuarios.status As status')
+
+		->where('empleados.id',$id[1])->first();
+		$respuesta= array(	$consulta->nombre,
+							$consulta->nombre_,
+							$consulta->apellido,
+							$consulta->apellido_,
+							$consulta->tipo_r,
+							$consulta->numeroR,
+							$consulta->tipo_c,
+							$consulta->numeroC,
+							$consulta->fnacimiento,
+							$consulta->departamento,
+							$consulta->idcargo,
+							);
+	}
+	return $respuesta;
+}
+
+public function cargar_combos(){
+	$id=Request::get('opcion');
+	if($id[0]==1){
+		
+		$respuesta = DB::table('cargos')->where('departamento_id',$id[1])->where('status',1)->get();
+	}
+	return $respuesta;
 }
 	
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -694,7 +763,7 @@ public function perfiles()//ventana perfiles
 {
 	$datos=$this->cargar_header_sidebar_acciones();
 	$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(84,85,86),83);
-	return view('Registros_Basicos\Perfiles\perfiles',$this->datos_vista($datos,$acciones,DB::table('perfiles')->where('id','<>',13)->paginate(11),2));
+	return view('Registros_Basicos\Perfiles\perfiles',$this->datos_vista($datos,$acciones,DB::table('perfiles')->where('id','<>',13)->where('id','<>',16)->paginate(11),2));
 }
 
 
@@ -1842,56 +1911,29 @@ public function crear_accion($status_ac=1,$descripcion=" ",$url=" ",$data_toogle
 
 //////////////////////////////////////////////pruebas ////////////////////////////////////////////////			
 
-	public function pruebas_(){
+public function pruebas_(){
+	$consulta=DB::table('empleados')
+		->join('rifs','empleados.rif_id','=','rifs.id')
+		->join('cedulas','empleados.cedula_id','=','cedulas.id')
+		->join('departamentos','empleados.departamento_id','=','departamentos.id')
+		->join('cargos','empleados.cargo_id','=','cargos.id')
+		->join('direcciones','empleados.direccion_id','=','direcciones.id')
+		->join('paises','paises.id','=','direcciones.pais_id')
+		->join('regiones','regiones.id','=','direcciones.region_id')
+		->join('estados','estados.id','=','direcciones.estado_id')
+		->join('municipios','municipios.id','=','direcciones.municipio_id')
+		->join('contactos','empleados.contacto_id','=','contactos.id')
+		->join('usuarios','empleados.usuario_id','=','usuarios.id')
 
-				/*$perfil=strtoupper("Super usuario");
-				$status=1;
+		->select('empleados.nombre As nombre','empleados.nombre_ As nombre_','empleados.apellido As apellido','empleados.apellido_ As apellido_','rifs.tipo_id as tipo_r','rifs.numero As numeroR','cedulas.tipo_id As tipo_c','cedulas.numero As numeroC','empleados.fechaN As fnacimiento','departamentos.id As departamento','cargos.id As idcargo','cargos.descripcion As cargo','paises.id As idpais','paises.descripcion As pais','regiones.id As idregion','regiones.descripcion As region','estados.id As idestado','estados.descripcion As estado','municipios.id As idmunicipio','municipios.descripcion As municipios','direcciones.id As iddireccion','direcciones.descripcion As direccion','contactos.tipo_id As codigoC','contactos.tipo__id As codigoL','contactos.telefono_m As movil','contactos.telefono_f As local','contactos.correo As email','usuarios.n_usuario As usuario','usuarios.clave As password','usuarios.status As status')
 
-				$consulta=false;
-
-				if (empty($consulta)) //si no existe el perfil
-				{
-					
-								 $perfil_id=DB::table('perfiles')->insertGetId
-								 	(
-
-								 		['descripcion'=>$perfil,'status'=>$status]
-								 	);
-
-					$this->perfil_inicial($perfil_id);//configuracion por defecto para un perfil
-					$respuesta=1;
-				}
-				else{
-					$respuesta=0;
-				}*/
-				//$respuesta=DB::table('acciones')->where('id','=',72)->orWhere('id','=',73)->orWhere('id','=',74)->delete();
-				//$respuesta=DB::table('acciones')->where('id','=',34)->delete();
-				
-				//echo count($respuesta);
-				/*$respuesta=DB::table('perfil_submodulo')->where('perfil_id','<>',12)->where('perfil_id','<>',13)->delete();
-				$respuesta=DB::table('perfiles')->where('id','<>',12)->where('id','<>',13)->delete();
-				return $respuesta;*/
-
-				//$consulta1=DB::table('planes')->where('nombreP','PLAN PREMIUN');
-				//$consulta=DB::table('planes')->where('id','<>',2)->where('nombreP','PLAN PREMIUN')->get();
-		/*if (empty($consulta)) //si el registro no existe, se procede a ingresar los datos del departamento
-		{
-			 DB::table('planes')->insert
-					 	(
-
-					 		['nombreP'=>$nombreP,'descuento'=>$descuento,'status'=>$statusP]
-					 	);
-							
-			$respuesta= 1;
-			
-		}
-		else{
-			$respuesta= 0;
-		}*/
-		//return dd($consulta);
-		$this->agregar_accion();
-
-
-	}
-		
+		->where('empleados.id',1)->first();
+		$respuesta= array(	
+							$consulta->nombre,
+							$consulta->nombre_,
+							$consulta->apellido,
+							$consulta->apellido_,
+					);
+	return $respuesta;
 }
+};
