@@ -27,7 +27,7 @@
                                         @endif
                                     </div>
                                 </div>
-                         
+                         @foreach($consulta as $equipo)
                                 <div class="contMd" style="">
                                     <div class="icl">
                                         @foreach($acciones as $accion)
@@ -40,7 +40,7 @@
                                                     </span>
                                                 @elseif($accion->id!=42)
                                                     <span class="iclsp">
-                                                        <a href="{{$accion->url}}" class="tltp" data-ttl="{{$accion->descripcion}}">
+                                                        <a href="{{$accion->url.$equipo->id}}" class="tltp" data-ttl="{{$accion->descripcion}}">
                                                             <i class="{{$accion->clase_css}}"></i>
                                                         </a>
                                                     </span>
@@ -58,9 +58,9 @@
                                             @endif
                                         @endforeach
                                     </div>
-                                    <p class="ttlMd"><strong>REGISTRO</strong></p>
+                                    <p class="ttlMd"><strong>{{$equipo->descripcion}}</strong></p>
                                 </div>
-                          
+                          @endforeach
                         </div>
                         <!--Registro -->
 

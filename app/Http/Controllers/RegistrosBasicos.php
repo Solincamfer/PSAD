@@ -1436,8 +1436,7 @@ public function clientes_categoria($cliente_id)//listar categorias
 ////////////////////////////////////////////sucursales/////////////////////////////////////////////////////////////////////////
 
 
-
-	public function clientes_sucursales($categoria_id)//lista las sucursales asociadas a un cliente matriz
+public function clientes_sucursales($categoria_id)//lista las sucursales asociadas a un cliente matriz
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
 		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(25,26,27,28,29,30),24);//acciones 
@@ -1509,31 +1508,31 @@ public function clientes_categoria($cliente_id)//listar categorias
 		{
 			$datos=$this->cargar_header_sidebar_acciones();
 			$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(42,43,44,49),41);
-			return view ('Registros_Basicos\Clientes\clientes_sucursales_equipos',$this->datos_vista($datos,$acciones,array()));
+			return view ('Registros_Basicos\Clientes\clientes_sucursales_equipos',$this->datos_vista($datos,$acciones,DB::table('equipos')->paginate(11)));
 							
 		}
 
-	public function clientes_sucursales_equipos_componentes()
+	public function clientes_sucursales_equipos_componentes($equipo_id)
 		{
 			$datos=$this->cargar_header_sidebar_acciones();
 			$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(46,47,48),45);
-			return view ('Registros_Basicos\Clientes\clientes_sucursales_equipos_componentes',$this->datos_vista($datos,$acciones,array()));
+			return view ('Registros_Basicos\Clientes\clientes_sucursales_equipos_componentes',$this->datos_vista($datos,$acciones,DB::table('componentes')->where('equipo_id',$equipo_id)->paginate(11)));
 							
 		}
 
-	public function clientes_sucursales_equipos_aplicaciones()//crear formulario
+	public function clientes_sucursales_equipos_aplicaciones($equipo_id)//crear formulario
 		{
 			$datos=$this->cargar_header_sidebar_acciones();
 			$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(51,52),50);
-			return view ('Registros_Basicos\Clientes\clientes_sucursales_equipos_componentes_aplicaciones',$this->datos_vista($datos,$acciones,array()));
+			return view ('Registros_Basicos\Clientes\clientes_sucursales_equipos_componentes_aplicaciones',$this->datos_vista($datos,$acciones,DB::table('aplicaciones')->where('equipo_id',$equipo_id)->paginate(11),$equipo_id));
 							
 		}
 	
-		public function clientes_sucursales_equipos_piezas()//crear formulario
+		public function clientes_sucursales_equipos_piezas($componente_id)//crear formulario
 		{
 			$datos=$this->cargar_header_sidebar_acciones();
 			$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(54,55),53);
-			return view ('Registros_Basicos\Clientes\clientes_sucursales_equipos_componentes_piezas',$this->datos_vista($datos,$acciones,array()));
+			return view ('Registros_Basicos\Clientes\clientes_sucursales_equipos_componentes_piezas',$this->datos_vista($datos,$acciones,DB::table('piezas')->where('componente_id',$componente_id)->paginate(11),$componente_id));
 							
 		}
 
@@ -1552,6 +1551,8 @@ public function clientes_categoria($cliente_id)//listar categorias
 			$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(61,62,63),60);
 			return view ('Registros_Basicos\Clientes\clientes_sucursales_usuarios_perfil',$this->datos_vista($datos,$acciones,array()));
 		}
+
+
 
 
 	

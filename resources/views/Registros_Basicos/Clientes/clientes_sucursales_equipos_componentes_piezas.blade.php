@@ -27,7 +27,7 @@
                                     @endif
                                 </div>
                             </div>
-                            
+                            @foreach($consulta as $pieza)
                             <div class="contMd" style="">
                                 <div class="icl">
                                     @foreach($acciones as $accion)
@@ -58,8 +58,9 @@
                                         @endif
                                     @endforeach
                                 </div>
-                                <p class="ttlMd"><strong>REGISTRO</strong></p>
+                                <p class="ttlMd"><strong>{{$pieza->descripcion}}</strong></p>
                             </div>
+                            @endforeach
                         </div>
                         <!-- 	Registro -->
 
