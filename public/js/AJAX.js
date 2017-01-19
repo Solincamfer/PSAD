@@ -361,7 +361,7 @@ $(".modificarCliente").click(function(){
 			        });	
 	        		///////////LIMPIAR COMBOS DEPENDIENTES DE ESTE/////////////
         			$('#inn2 option:selected').val(data[13]);  
-        			$('#inn2 option:selected').html(data[14]); 
+        			//$('#inn2 option:selected').html(data[14]); 
         			$("#inn2 option:selected").each(function () {			
 			    		var name=$('#inn2').attr("name");
 			            elegido=$(this).val();
@@ -455,7 +455,7 @@ $(".modificarCliente").click(function(){
         		$('#RpMdaa4').val(data[9]);
         		$('#RpMdaa5').val(data[11]);
 
-        		///////Data para probar los campos resividos por el AJAX////->->->//alert(data);
+        		///////Data para probar los campos rescibidos por el AJAX////->->->//alert(data);
 	       });
 
 	});
@@ -1521,17 +1521,34 @@ $(".modificarEmpleado").click(function(){
 		$('#fnEmpm').val(respuesta[8]);
 		$('#dptoEmpm').val(respuesta[9]);
 
+		$('.cargos').remove();
+
 		$("#dptoEmpm option:selected").each(function () {			
             elegido=$(this).val();
             var opcion=[1,elegido];
 			$.get("/menu/registros/empleados/cargar",{opcion:opcion}, function(data){
 		    	$.each(data, function(i, item) {
 		    		$('#cgoEmpm').append('<option class="cargos" value="'+item.id+'">'+item.descripcion+'</option>');
+		    		$('#cgoEmpm').val(respuesta[10]); 
 				}); 
-			});    
-	    }); 
-
-	    $('#cgoEmpm > option[value="'+respuesta[10]+'"]').attr('selected', 'selected');
+			}); 
+	    });
+	    $("#dptoEmpm").change(function(){
+	    	$('.cargos').remove();
+	        elegido=$(this).val();
+	        var vector=elegido;
+	        id=1;
+	        datos=[id,elegido]
+	        $.get("/menu/registros/empleados/consulta",{ datos:datos }, function(data){
+	        	$.each(data, function(i, item) {
+	        		///////////AGREGAR OPCION SEGUN SELECCION DE DEPARTAMENTO/////////////	
+	        		$('#cgoEmpm').append('<option class="cargos" value="'+item.id+'">'+item.descripcion+'</option>');
+				})        
+        });          
+					
+});
+	    //alert (respuesta[11])
+	    //$('#cgoEmpm option:selected').html(respuesta[11]); 
 	});
 });
 

@@ -742,6 +742,7 @@ public function cargar_modal_modificar(){
 							$consulta->fnacimiento,
 							$consulta->departamento,
 							$consulta->idcargo,
+							$consulta->cargo
 							);
 	}
 	return $respuesta;
