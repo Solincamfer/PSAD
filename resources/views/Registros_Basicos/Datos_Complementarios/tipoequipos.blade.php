@@ -69,9 +69,24 @@
                                     <div class="tarjeta1" id="tarjetaEquipos_">
                                         
                                           <ul>
-                                        
-                                            
-                                          
+                                                @foreach($consulta as $equipo)
+                                                        <li class="lista__">
+                                                            <div class="container-fluid  ">
+                                                                <div class="row nuevo">
+                                                                    <div class="col-md-6">
+                                                                        <div class="tl1"><span>{{$equipo->descripcion}}</span></div>
+                                                                    </div>
+
+                                                                    <div class="col-md-1 col-md-push-2">
+                                                                        <div class="iclst" id="_tarjetaEquipos_"> <i class="fa fa-eye consultarComponentes" id="Tequipo{{$equipo->id}}" data-dependencia="{{$equipo->id}}"></i>     </div>
+                                                                    </div>
+                                                                    <div class="col-md-2 col-md-push-3"  border>
+                                                                        <div class="iclst" id="EliminarEquipo_{{$equipo->id}}"><i class="fa fa-trash-o EliminarEquipo" id="EliminarEq{{$equipo->id}}" data-registro="{{$equipo->id}}" data-registro_="{{$equipo->id}}"></i></div>   
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                @endforeach                                  
                                         </ul>
 
                                     </div>

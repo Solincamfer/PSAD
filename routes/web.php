@@ -154,7 +154,9 @@ Route::group(['prefix'=>'/menu/registros','middleware'=>['v_menu']],function(){
 	Route::match(['post','get'],'/datos/consulta_dinamica',                                              	['uses'=>'RegistrosBasicos@datos_consulta_dinamica']);   
 	Route::match(['post','get'],'/datos/consulta_insertar_pieza',                                           ['uses'=>'RegistrosBasicos@insertar_piezas']);   
 	Route::match(['post','get'],'/datos/eliminar_pieza',		                                            ['uses'=>'RegistrosBasicos@eliminar_piezas']);   
-		
+/////////////////////////Agregadas el jueves 19/01/2017//////////////////////////////////////////////////////////////////////////////////////// 
+			
+	Route::match(['post','get'],'/datos/eliminar_componente',                                              	['uses'=>'RegistrosBasicos@eliminar_componentes']);	
 
 
 

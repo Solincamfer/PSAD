@@ -65,13 +65,14 @@ class RegistrosBasicos extends Controller
 
 
 	
-	public function datos_vista_($datos_session)
+		public function datos_vista_($datos_session,$consulta)
 	{
 		$valores_vista=array(
 								'modulos'=>$datos_session['modulos'],//side bar
 								'submodulos'=>$datos_session['submodulos'],//side bar
 								'nombre'=>$datos_session['nombre'],//header
 								'apellido'=>$datos_session['apellido'],//header
+								'consulta'=>$consulta
 
 			);
 
@@ -1713,6 +1714,43 @@ public function clientes_categoria($cliente_id)//listar categorias
 		return([$asociar,$existe]);
 
 	}
+
+
+public function eliminar_componentes()
+	{
+		
+		$datos=Request::get('datos');
+		$idTablaTequipoEcom=(integer)$datos[0];//tabla ecomponentes-tequipo
+		$idTablaEcomponentes=(integer)$datos[1];//tabla componentes
+		$eliminado=0;
+
+		/////////////////////////////////////////// eliminar relacion con piezas ////////////////////////////////
+		$intermediaPiezas=DB::table('ecomponente_epieza')->where('ecomponente_epieza.ecomponente_id','=',$idTablaEcomponentes)->get();//obtiene la relacion de piezas
+		$eliminado=DB::table('ecomponente_epieza')->where('ecomponente_epieza.ecomponente_id','=',$idTablaEcomponentes)->delete();//borra la relacion (componente-piezas)
+		
+			
+		foreach ($intermediaPiezas as $comP) //borra cada una de las piezas
+			{
+				$eliminado=$eliminado+(DB::table('epiezas')->where('epiezas.id','=',$comP->epieza_id)->delete());//borra cada una de las piezas asociadas
+			}
+		
+
+		////////////////////////////////////////eliminar relacion con tequipos ////////////////////////////////////////////////////////////////
+		
+			$eliminado=DB::table('ecomponente_tequipo')->where('ecomponente_tequipo.ecomponente_id','=',$idTablaEcomponentes)->delete();//borra la relacion equipo-componentes
+
+			if($eliminado!=0)//eliminar el componente
+			{
+				$eliminado=DB::table('ecomponentes')->where('ecomponentes.id','=',$idTablaEcomponentes)->delete();
+			}
+		
+
+		
+		return($eliminado);
+
+
+	}
+
 
 
 

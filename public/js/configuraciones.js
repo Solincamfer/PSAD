@@ -39,6 +39,80 @@ function limpiarInputs (tarjetas) //retira los inputs de busqueda
 }
 
 
+function eliminarComponentes() 
+{
+	$('.EliminarComponente').click(function()
+	{
+
+		//alert('Tabla intermedia componente-equipo: '+$(this).attr('data-registro')+'  tabla componentes: '+$(this).attr('data-registro_'));
+		var url='/menu/registros/datos/eliminar_componente';
+		var datos=[$(this).attr('data-registro'),$(this).attr('data-registro_')];//id del registro en la tabla intermedia (ecomponente_tequipo) //id del registro en la tabla (epiezas)
+				
+			$.get(url, {datos:datos}, function(data)
+				{
+
+					if (data) 
+					{
+
+						alert(data);
+						if(data>0)
+						{
+
+							limpiarTarjetas([$('#tarjetaPiezas_')]);
+							limpiarInputs([$('#inputPiezas')]);
+							$( '#tpEP' ).trigger( 'keyup' );
+
+							swal({
+
+								title:'Eliminacion completa!!!.',//Contenido del modal
+								text: '<p style="font-size: 1.5em;">'+'El  componente eliminado junto con todas sus piezas asociadas'+'</p>',
+								timer:2500,//Tiempo de retardo en ejecucion del modal
+								type: "success",
+								showConfirmButton:false,//Eliminar boton de confirmacion
+								html:true
+														
+							});
+
+						}
+						else if(data==0)
+						{
+
+							swal({
+
+								title:'ERROR AL ELIMINAR EL COMPONENTE!!',//Contenido del modal
+								text: '<p style="font-size: 1.5em;">'+'Comuniquese con el administrador'+'</p>',
+								timer:2500,//Tiempo de retardo en ejecucion del modal
+								type: "error",
+								showConfirmButton:false,//Eliminar boton de confirmacion
+								html:true
+														
+							});
+						}
+
+					}
+					else
+					{
+						swal({
+
+								title:'ERROR INESPERADO!!!.',//Contenido del modal
+								text: '<p style="font-size: 1.5em;">'+'Comuniquese con el administrador'+'</p>',
+								timer:2500,//Tiempo de retardo en ejecucion del modal
+								type: "error",
+								showConfirmButton:false,//Eliminar boton de confirmacion
+								html:true
+														
+							});
+
+					}
+
+
+				})
+
+	});
+
+	
+}
+
 
 function eliminarpiezas() 
 {
@@ -271,7 +345,8 @@ function busqueda_dinamica()
 							})
 						consultar_componentes();//muestra los componentes asociados a un tipo de equipo 
 						consultar_pieza();//crea en memoria la funcion para consultar piezas
-						eliminarpiezas() 
+						eliminarpiezas(); 
+						//eliminarComponentes();
 					}
 				else
 					{
@@ -430,6 +505,7 @@ function consultar_componentes(argument) //consulta los componetes asociados a u
 									consultar_pieza();
 									buscador_componentes();//buscador de componentes
 									busqueda_dinamica();
+									eliminarComponentes();
 									
 
 
