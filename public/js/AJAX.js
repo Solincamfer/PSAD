@@ -1521,20 +1521,20 @@ $(".modificarEmpleado").click(function(){
 		$('#fnEmpm').val(respuesta[8]);
 		$('#dptoEmpm').val(respuesta[9]);
 
-		$('.cargos').remove();
+		$('.opciones').remove();
 
 		$("#dptoEmpm option:selected").each(function () {			
             elegido=$(this).val();
             var opcion=[1,elegido];
 			$.get("/menu/registros/empleados/cargar",{opcion:opcion}, function(data){
 		    	$.each(data, function(i, item) {
-		    		$('#cgoEmpm').append('<option class="cargos" value="'+item.id+'">'+item.descripcion+'</option>');
+		    		$('#cgoEmpm').append('<option class="opciones" value="'+item.id+'">'+item.descripcion+'</option>');
 		    		$('#cgoEmpm').val(respuesta[10]); 
 				}); 
 			}); 
 	    });
 	    $("#dptoEmpm").change(function(){
-	    	$('.cargos').remove();
+	    	$('.opciones').remove();
 	        elegido=$(this).val();
 	        var vector=elegido;
 	        id=1;
@@ -1542,13 +1542,21 @@ $(".modificarEmpleado").click(function(){
 	        $.get("/menu/registros/empleados/consulta",{ datos:datos }, function(data){
 	        	$.each(data, function(i, item) {
 	        		///////////AGREGAR OPCION SEGUN SELECCION DE DEPARTAMENTO/////////////	
-	        		$('#cgoEmpm').append('<option class="cargos" value="'+item.id+'">'+item.descripcion+'</option>');
+	        		$('#cgoEmpm').append('<option class="opciones" value="'+item.id+'">'+item.descripcion+'</option>');
 				})        
-        });          
-					
-});
-	    //alert (respuesta[11])
-	    //$('#cgoEmpm option:selected').html(respuesta[11]); 
+        	}); 			
+		});
+		$('#pdhem').val(respuesta[11]); 
+		$("#pdhem option:selected").each(function () {			
+            elegido=$(this).val();
+            var opcion=[2,elegido];
+			$.get("/menu/registros/empleados/cargar",{opcion:opcion}, function(data){
+		    	$.each(data, function(i, item) {
+		    		$('#rgdhem').append('<option class="opciones" value="'+item.id+'">'+item.descripcion+'</option>');
+		    		$('#rgdhem').val(respuesta[12]); 
+				}); 
+			}); 
+	    }); 
 	});
 });
 

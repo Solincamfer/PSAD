@@ -743,7 +743,8 @@ public function cargar_modal_modificar(){
 							$consulta->fnacimiento,
 							$consulta->departamento,
 							$consulta->idcargo,
-							$consulta->cargo
+							$consulta->idpais,
+							$consulta->idregion,
 							);
 	}
 	return $respuesta;
@@ -754,6 +755,9 @@ public function cargar_combos(){
 	if($id[0]==1){
 		
 		$respuesta = DB::table('cargos')->where('departamento_id',$id[1])->where('status',1)->get();
+	}
+	elseif($id[0]==2){
+		$respuesta = DB::table('regiones')->where('pais_id',$id[1])->get();
 	}
 	return $respuesta;
 }
