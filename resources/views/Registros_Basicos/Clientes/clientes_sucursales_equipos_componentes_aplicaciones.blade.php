@@ -35,7 +35,7 @@
                                         @if($accion->id==51)
                                             <span class="iclsp">
                                                 <a href="#myModal2" class="tltp" data-ttl="{{$accion->descripcion}}" data-toggle="modal" data-target="#myModal2"> 
-                                                    <i class="{{$accion->clase_css}}"></i>
+                                                    <i class="{{$accion->clase_css}} _ModificarAplicacion_" data-aplicacion="{{$aplicacion->id}}"></i>
                                                 </a>
                                             </span>
                                         @elseif($accion->id!=51)
@@ -61,6 +61,9 @@
                             <p class="ttlMd"><strong>{{$aplicacion->descripcion}}</strong></p>
                         </div>
                         @endforeach
+                         <div class="paginador">
+                             {{ $consulta->links() }}
+                        </div>
                     </div>
                     <!--    Registro -->
 
@@ -161,9 +164,9 @@
                                                     <div class="form-group row">
                                                         <label for="selStApm">Estatus de Aplicación</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
                                                         <select name="selStApm" class="form-control" id="selStApm">
-                                                            <option value="0">-</option>
+                                                            <option value=" ">-</option>
                                                             <option value="1">Activo</option>
-                                                            <option value="2">Inactivo</option>
+                                                            <option value="0">Inactivo</option>
                                                         </select><i class="fa fa-check" id="micas6"></i>
                                                     </div>
                                                 </div>
