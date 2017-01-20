@@ -1518,7 +1518,8 @@ public function clientes_sucursales($categoria_id)//lista las sucursales asociad
 			$datos=$this->cargar_header_sidebar_acciones();
 			$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(42,43,44,49),41);
 			$consulta=DB::table('sucursales')->where('id',$sucursal_id)->first();
-			return view ('Registros_Basicos\Clientes\clientes_sucursales_equipos',$this->datos_vista($datos,$acciones,DB::table('equipos')->where('sucursal_id',$sucursal_id)->paginate(11),$sucursal_id,$consulta->categoria_id));
+			$tipoEquipo=DB::table('tequipos')->get();
+			return view ('Registros_Basicos\Clientes\clientes_sucursales_equipos',$this->datos_vista($datos,$acciones,DB::table('equipos')->where('sucursal_id',$sucursal_id)->paginate(11),$sucursal_id,$consulta->categoria_id,$tipoEquipo));
 							
 		}
 
