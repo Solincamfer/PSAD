@@ -2223,7 +2223,7 @@ input::-webkit-input-placeholder {
             }
 
             .spm{
-                margin-top: 25px;
+                margin-top: 15px;
                 margin-bottom: -15px;
             }
 
@@ -2551,7 +2551,7 @@ input::-webkit-input-placeholder {
             }
 /*//////////////////////////datos complementarios////////////////////////////////////////////////////////////*/
    #encabezado{font-size:30px }
-        .busQ{margin-left: 48px;margin-top: 20px;}
+        .busQ{margin-left: 48px;margin-top: 25px;}
         /*.tarjeta1{background-color: #FFFFFF;margin-left: 40px;}*/
         .tarjeta1{
                 height: 250px;
@@ -2657,9 +2657,29 @@ input::-webkit-input-placeholder {
         background-color: #333;
         color:#FFFFFF;
     }
+    .nuevo:hover{
+        background-color: #26A69D;
+        color:#000;
+    }
 
     .lista__{ 
         background-color:  #333;
         border-bottom: 1px solid #26A69D;
         border-top: 1px solid #26A69D;}
-    
+
+    .gestionar{
+        cursor: pointer;
+    }
+    .gestionar:hover{
+        color:#000;
+    }
+    .gestionar:active{
+        color:white;
+    }
+    .BUSE{
+        margin-left: 28px;
+    }
+    .BUSE:focus { 
+    outline: none !important;
+   /* border-color: #719ECE;*/
+}

@@ -211,7 +211,7 @@ function insertar_piezas ()
 														{
 															swal({
 
-																	title:'Insercion exitosa!!!.',
+																	title:'Guardado exitoso!!!.',
 																	text: '<p style="font-size: 1.5em;">'+'La pieza fue agregada con exito'+'</p>',
 																	timer:2500,//Tiempo de retardo en ejecucion del modal
 																	type: "success",
@@ -334,12 +334,12 @@ function busqueda_dinamica()
 					    		}
 
 
-					    		$('#'+idTarjetas[indice_tabla] +' ul').append('<li class="lista__"><div class="container-fluid  "><div class="row nuevo"><div class="col-md-6"><div class="tl1"><span>'+item.descripcion+'</span></div></div><div class="col-md-1 col-md-push-2"><div class="iclst" id="'+tarjetaPreviewId[indice_tabla]+item.id+'">      </div></div><div class="col-md-2 col-md-push-3"  border><div class="iclst id="'+tarjetaEliminarId[indice_tabla]+item.id+'"><i class="fa fa-trash-o '+botonEliminarClase[indice_tabla]+'" id="'+botonEliminarId[indice_tabla]+item.id+'"  data-registro="'+registro+'" data-registro_="'+item.id+'"></i></div>   </div></div></div></li>');
+					    		$('#'+idTarjetas[indice_tabla] +' ul').append('<li class="lista__"><div class="container-fluid  "><div class="row nuevo"><div class="col-md-6"><div class="tl1"><span>'+item.descripcion+'</span></div></div><div class="col-md-1 col-md-push-3"><div class="iclst" id="'+tarjetaPreviewId[indice_tabla]+item.id+'">      </div></div><div class="col-md-2 col-md-push-3"  border><div class="iclst id="'+tarjetaEliminarId[indice_tabla]+item.id+'"><i class="fa fa-trash-o '+botonEliminarClase[indice_tabla]+' gestionar" id="'+botonEliminarId[indice_tabla]+item.id+'"  data-registro="'+registro+'" data-registro_="'+item.id+'"></i></div>   </div></div></div></li>');
 
 					    		if (indice_tabla!=2) //agrega el boton preview para las vistas de: equipos y componentes
 					    		{
 
-					    			$('#'+tarjetaPreviewId[indice_tabla]+item.id).append('<i class="fa fa-eye '+botonOjoClase[indice_tabla]+'" id="'+botonOjoid[indice_tabla]+item.id+'" data-dependencia="'+item.id+'"></i>');
+					    			$('#'+tarjetaPreviewId[indice_tabla]+item.id).append('<i class="fa fa-eye '+botonOjoClase[indice_tabla]+' gestionar" id="'+botonOjoid[indice_tabla]+item.id+'" data-dependencia="'+item.id+'"></i>');
 					    		}
 		                                            
 							})
@@ -352,7 +352,7 @@ function busqueda_dinamica()
 					{
 								$('#'+idTarjetas[indice_tabla]+' p').remove();//remover parrafos
 								$('#'+idTarjetas[indice_tabla]+' li').remove();//remover registros 
-								$('#'+idTarjetas[indice_tabla]).append('<div class="container mensaje_"><p> 0 Resultados para: '+expresion+' </p><p>Presione Enter para gurdar</p></div>');
+								$('#'+idTarjetas[indice_tabla]).append('<div class="container mensaje_"><p> 0 Resultados para: '+expresion+' </p><p>Presione Enter para guardar</p></div>');
 
 
 					}
@@ -412,7 +412,7 @@ function buscador_componentes()//insertar componentes
 												 			{
 										    
 											    					//$('#tarjetaComponentes_').append(' <p>"'+item.componenteId+'"</p>');
-											    					$('#tarjetaComponentes_ ul').append('<li class="lista__"><div class="container-fluid  "><div class="row nuevo"><div class="col-md-6"><div class="tl1"><span>'+item.descripcion+'</span></div></div><div class="col-md-1 col-md-push-2"><div class="iclst"><i class="fa fa-eye consultarPiezas" id="pieZ'+item.componenteId+'" data-ecomponente="'+item.componenteId+'"></i></div><input type="hidden" id=" " value=" "></div><div class="col-md-2 col-md-push-3"  border><div class="iclst id="checklistE'+item.componenteId+'"><i class="fa fa-trash-o consultarPiezas_" id=""></i></div>   </div></div></div></li>');
+											    					$('#tarjetaComponentes_ ul').append('<li class="lista__"><div class="container-fluid  "><div class="row nuevo"><div class="col-md-6"><div class="tl1"><span>'+item.descripcion+'</span></div></div><div class="col-md-1 col-md-push-3"><div class="iclst"><i class="fa fa-eye consultarPiezas gestionar" id="pieZ'+item.componenteId+'" data-ecomponente="'+item.componenteId+'"></i></div><input type="hidden" id=" " value=" "></div><div class="col-md-2 col-md-push-3"  border><div class="iclst id="checklistE'+item.componenteId+'"><i class="fa fa-trash-o consultarPiezas_ gestionar" id=""></i></div>   </div></div></div></li>');
 
 
 										    	
@@ -454,6 +454,8 @@ function consultar_componentes(argument) //consulta los componetes asociados a u
 
 		$('.consultarComponentes').click(function()//consultar componentes del equipo seleccionado
 				{
+					$('.consultarComponentes').css("color","grey");
+					$(this).css("color","white");
 					var datos=$(this).attr('data-dependencia');
 					
 					$.get("/menu/registros/datos/consulta_comp", {datos:datos}, function(data)
@@ -496,7 +498,7 @@ function consultar_componentes(argument) //consulta los componetes asociados a u
 							 			{
 					    
 					    					//$('#tarjetaComponentes_').append(' <p>"'+item.componenteId+'"</p>');
-					    					$('#tarjetaComponentes_ ul').append('<li class="lista__"><div class="container-fluid  "><div class="row nuevo"><div class="col-md-6"><div class="tl1"><span>'+item.descripcion+'</span></div></div><div class="col-md-1 col-md-push-2"><div class="iclst" id="_tarjetaComponentes_"><i class="fa fa-eye consultarPiezas" id="Componente'+item.id+'" data-dependencia="'+item.id+'"></i></div></div><div class="col-md-2 col-md-push-3"  border><div class="iclst id="EliminarComponente_'+item.id+'"><i class="fa fa-trash-o EliminarComponente" id="EliminarCom'+item.id+'" data-registro="'+item.registro+'" data-registro_="'+item.id+'"></i></div>   </div></div></div></li>');
+					    					$('#tarjetaComponentes_ ul').append('<li class="lista__"><div class="container-fluid  "><div class="row nuevo"><div class="col-md-6"><div class="tl1"><span>'+item.descripcion+'</span></div></div><div class="col-md-1 col-md-push-3"><div class="iclst" id="_tarjetaComponentes_"><i class="fa fa-eye consultarPiezas gestionar" id="Componente'+item.id+'" data-dependencia="'+item.id+'"></i></div></div><div class="col-md-2 col-md-push-3"  border><div class="iclst id="EliminarComponente_'+item.id+'"><i class="fa fa-trash-o EliminarComponente gestionar" id="EliminarCom'+item.id+'" data-registro="'+item.registro+'" data-registro_="'+item.id+'"></i></div>   </div></div></div></li>');
 
 
 					    	
@@ -541,6 +543,8 @@ function consultar_pieza ()
 	
 	$('.consultarPiezas').click(function()
 			{
+				$('.consultarPiezas').css("color","grey");
+				$(this).css("color","white");
 					var idComponente=$(this).attr('data-dependencia');//id del componente
 					$.get("/menu/registros/datos/consulta_comp_pieza", {datos:idComponente}, function(data)
 					{
@@ -551,17 +555,17 @@ function consultar_pieza ()
 								if (data[1]==0) 
 								{
 
-									alert('no posee piezas '+data[1]);
+									//alert('no posee piezas '+data[1]);
 
 								}	
 								else if(data[1]==1)
 								{
 
-									alert('posee piezas asociadas '+data[1]);
+									//alert('posee piezas asociadas '+data[1]);
 								}
 
 
-									alert(data[0])
+									//alert(data[0])
 									$('#inputPiezas input').remove();
 									$('#inputPiezas').append('<input type="search" placeholder="Buscar Pieza " class="BUSE" id="Tepieza" data-inputbus="2" data-dependencia="'+data[2]+'" >');
 
@@ -570,7 +574,7 @@ function consultar_pieza ()
 							 			{
 					    
 					    					//$('#tarjetaComponentes_').append(' <p>"'+item.componenteId+'"</p>');
-					    					$('#tarjetaPiezas_ ul').append('<li class="lista__"><div class="container-fluid  "><div class="row nuevo"><div class="col-md-6"><div class="tl1"><span>'+item.descripcion+'</span></div></div><div class="col-md-1 col-md-push-2"><div class="iclst" id="_tarjetaPiezas_">    </div></div><div class="col-md-2 col-md-push-3"  border><div class="iclst id="EliminarPieza_'+item.id+'"><i class="fa fa-trash-o EliminarPieza" id="EliminarPieza'+item.id+'" data-registro="'+item.registro+'" data-registro_="'+item.id+'"></i></div>   </div></div></div></li>');
+					    					$('#tarjetaPiezas_ ul').append('<li class="lista__"><div class="container-fluid  "><div class="row nuevo"><div class="col-md-6"><div class="tl1"><span>'+item.descripcion+'</span></div></div><div class="col-md-1 col-md-push-2"><div class="iclst" id="_tarjetaPiezas_">    </div></div><div class="col-md-2 col-md-push-3"  border><div class="iclst id="EliminarPieza_'+item.id+'"><i class="fa fa-trash-o EliminarPieza gestionar" id="EliminarPieza'+item.id+'" data-registro="'+item.registro+'" data-registro_="'+item.id+'"></i></div>   </div></div></div></li>');
 
 
 					    	

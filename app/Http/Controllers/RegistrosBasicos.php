@@ -1602,6 +1602,29 @@ public function clientes_sucursales($categoria_id)//lista las sucursales asociad
 		return view('Registros_Basicos\Datos_Complementarios\tipoequipos',$this->datos_vista_($datos,DB::table('tequipos')->orderBy('id','desc')->get()));
 	}
 
+	public function marca_equipos()
+	{
+
+		$datos=$this->cargar_header_sidebar_acciones();
+		
+		return view('Registros_Basicos\Datos_Complementarios\marcaequipos',$this->datos_vista_($datos,DB::table('tequipos')->orderBy('id','desc')->get()));
+	}
+
+	public function marca_componentes()
+	{
+
+		$datos=$this->cargar_header_sidebar_acciones();
+		
+		return view('Registros_Basicos\Datos_Complementarios\marcacomponentes',$this->datos_vista_($datos,DB::table('tequipos')->orderBy('id','desc')->get()));
+	}
+
+	public function marca_piezas()
+	{
+
+		$datos=$this->cargar_header_sidebar_acciones();
+		
+		return view('Registros_Basicos\Datos_Complementarios\marcapiezas',$this->datos_vista_($datos,DB::table('tequipos')->orderBy('id','desc')->get()));
+	}
 
 
 	public function datos_tipo_equipos()//insertar buscar tipo de equipo 

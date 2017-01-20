@@ -30,7 +30,7 @@
                                     <div class="row">
                                          <div class="etqSideBack1"></div>
                                          <div class="etqSideFront1">
-                                            <span class="tiposE" >Tipo de Equipo</span>
+                                            <span class="tiposE" >Equipos</span>
                                         </div>
                                     </div>
                                      <div class="row ">
@@ -44,7 +44,7 @@
                                 <div class="col-md-3 spcm">
                                     <div class="etqSideBack1"></div>
                                     <div class="etqSideFront1">
-                                        <span class="spttl2">Componente</span>
+                                        <span class="spttl2">Marca</span>
                                     </div>
                                      <div class="row ">
                                          <div class="col-md-3 spcm">
@@ -55,7 +55,7 @@
                                 <div class="col-md-3">
                                     <div class="etqSideBack1"></div>
                                     <div class="etqSideFront1">
-                                        <span class="spttl1">Pieza</span>
+                                        <span class="spttl1">Modelo</span>
                                     </div>
                                     <div class="row ">
                                          <div class="col-md-3 spcm">
@@ -73,15 +73,15 @@
                                                         <li class="lista__">
                                                             <div class="container-fluid  ">
                                                                 <div class="row nuevo">
-                                                                    <div class="col-md-6 ">
+                                                                    <div class="col-md-6">
                                                                         <div class="tl1"><span>{{$equipo->descripcion}}</span></div>
                                                                     </div>
 
-                                                                    <div class="col-md-1 col-md-push-3">
-                                                                        <div class="iclst" id="_tarjetaEquipos_"> <i class="fa fa-eye consultarComponentes gestionar" id="Tequipo{{$equipo->id}}" data-dependencia="{{$equipo->id}}"></i>     </div>
+                                                                    <div class="col-md-1 col-md-push-2">
+                                                                        <div class="iclst" id="_tarjetaEquipos_"> <i class="fa fa-eye consultarComponentes" id="Tequipo{{$equipo->id}}" data-dependencia="{{$equipo->id}}"></i>     </div>
                                                                     </div>
                                                                     <div class="col-md-2 col-md-push-3"  border>
-                                                                        <div class="iclst" id="EliminarEquipo_{{$equipo->id}}"><i class="fa fa-trash-o EliminarEquipo gestionar" id="EliminarEq{{$equipo->id}}" data-registro="{{$equipo->id}}" data-registro_="{{$equipo->id}}"></i></div>   
+                                                                        <div class="iclst" id="EliminarEquipo_{{$equipo->id}}"><i class="fa fa-trash-o EliminarEquipo" id="EliminarEq{{$equipo->id}}" data-registro="{{$equipo->id}}" data-registro_="{{$equipo->id}}"></i></div>   
                                                                     </div>
                                                                 </div>
                                                             </div>
