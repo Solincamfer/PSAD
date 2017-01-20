@@ -1606,6 +1606,7 @@ $(".modificarEmpleado").click(function(){
 	});
 });
 
+
 });
 /*
     ///////////VERIFCAR SI LA VARIABLE PAIS EXISTE EN EL VECTOR/////////////
