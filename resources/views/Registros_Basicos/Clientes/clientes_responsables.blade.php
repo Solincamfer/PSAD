@@ -14,18 +14,20 @@
                             </div>
                         </div>
                         <div class="col-xs-5 col-sm-5 col-md-6 col-md-offset-3" style=""> 
-                        @if($agregar)
+                       
                             <div class="container">
                                 <div class="row">
                                     <div class="col-md-2" align="left">
-                                        <a href="#"><button id="btnBk" type="button" class="btnBk"><i class="fa fa-chevron-left"></i> VOLVER</button></a>
+                                        <a href="/menu/registros/clientes"><button id="btnBk" type="button" class="btnBk"><i class="fa fa-chevron-left"></i> VOLVER</button></a>
                                     </div>
+                                     @if($agregar)
                                     <div class="col-md-2 col-md-offset-3">
                                         <button id="btnAdd" type="button" class="btnAd" data-toggle="modal" data-target="#myModal" href="#myModal"><i class="fa fa-plus"></i> AGREGAR</button> 
                                     </div>
+                                @endif 
                                 </div>
                             </div>
-                        @endif 
+                        
                         @foreach($consulta as $responsable)
                             <div class="contMd" style="">
                                 <div class="icl">
