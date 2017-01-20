@@ -1348,7 +1348,7 @@ public function clientes_categoria($cliente_id)//listar categorias
 		{
 
 			DB::table('categorias')->insert
-			(['nombre'=>$nombreC,'status_c'=>$statusC,'cliente_id'=>$id]);
+			(['nombre'=>$nombreC,'status'=>$statusC,'cliente_id'=>$id]);
 			
 		}
 		return redirect('/menu/registros/clientes/categoria/'.(string)$id);
