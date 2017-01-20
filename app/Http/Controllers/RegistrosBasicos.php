@@ -1568,6 +1568,91 @@ public function clientes_sucursales($categoria_id)//lista las sucursales asociad
 	
 	
 	
+		
+			///////////////////////////////////javascript//////////////////////////////////////
+		public function btn_modificar_pieza()
+		{
+			$piezaId=Request::get('datos');
+			$registro=DB::table('piezas')->where('id',$piezaId)->first();
+			$retorno=0;
+			if (count($registro)!=0) 
+			{
+				$retorno=array($registro->descripcion,$registro->serial,$registro->marca,$registro->modelo,$registro->status,$registro->componente_id);
+				
+			}
+
+			return($retorno);
+		}
+
+		public function btn_modificar_componente()
+		{
+			$componenteId=Request::get('datos');
+			$registro=DB::table('componentes')->where('id',$componenteId)->first();
+			$retorno=0;
+			if (count($registro)!=0) 
+			{
+				$retorno=array($registro->descripcion,$registro->serial,$registro->marca,$registro->modelo,$registro->status,$registro->equipo_id);
+				
+			}
+
+			return($retorno);
+		}
+
+		public function btn_modificar_aplicacion()
+		{
+			$aplicacionId=Request::get('datos');
+			$registro=DB::table('aplicaciones')->where('id',$aplicacionId)->first();
+			$retorno=0;
+			if (count($registro)!=0) 
+			{
+				$retorno=array($registro->descripcion,$registro->licencia,$registro->version,$registro->status,$registro->equipo_id);
+				
+			}
+
+			return($retorno);
+		}
+
+		public function btn_modificar_equipo()
+		{
+			$equipoId=Request::get('datos');
+			$registro=DB::table('equipos')->where('id',$equipoId)->first();
+			$retorno=0;
+			if (count($registro)!=0) 
+			{
+				$retorno=array($registro->descripcion,$registro->tipo,$registro->marca,$registro->modelo,$registro->serial,$registro->status,$registro->sucursal_id);
+				
+			}
+
+			return($retorno);
+		}
+
+		public function select_equipos()
+		{
+			$tablas=array("tequipos");
+			$intermedias=array("emarca_tequipo");
+			$datos=Request::get('datos');
+			$descripcionEq=$datos[0];
+			$tabla=$datos[1];
+			$registros=0;
+
+
+			//////////////////buscar la descripcion en la tabla/////////////////
+			
+			if ($tabla==0) 
+			{
+				$id=DB::table('tequipos')->where('descripcion',$descripcionEq)->first();//ya tengo el id
+				$marcas=array();
+				$dependencias=DB::table('emarca_tequipo')->where('tequipo_id',$id->id)->get();//obtiene el id de las marcas
+				foreach ($dependencias as $marca) 
+				{
+					array_push($marcas,DB::table('emarcas')->where('id',$marca->emarca_id)->first());
+				}
+				$registros=$marcas;
+			}
+		
+			return($registros);
+
+		}
 
 
 
