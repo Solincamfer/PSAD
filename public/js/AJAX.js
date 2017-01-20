@@ -8,7 +8,7 @@
 /////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
 
-
+$( document ).ready(function() {
 
 /////Deshabilitar accion="" para formularios submit
 $( "#log" ).submit(function( event ){
@@ -361,7 +361,7 @@ $(".modificarCliente").click(function(){
 			        });	
 	        		///////////LIMPIAR COMBOS DEPENDIENTES DE ESTE/////////////
         			$('#inn2 option:selected').val(data[13]);  
-        			//$('#inn2 option:selected').html(data[14]); 
+        			$('#inn2 option:selected').html(data[14]); 
         			$("#inn2 option:selected").each(function () {			
 			    		var name=$('#inn2').attr("name");
 			            elegido=$(this).val();
@@ -1506,6 +1506,7 @@ $("#saveEmpl").click(function(){
 });
 
 /////////////////////////////// CARGAR DATOS EN MODAL DE MODIFICAR EMPLEADO /////////////////////////////
+
 $(".modificarEmpleado").click(function(){
 	var parametro=$(this).attr('data-registro');
 	datos=[1,parametro]
@@ -1522,7 +1523,11 @@ $(".modificarEmpleado").click(function(){
 		$('#dptoEmpm').val(respuesta[9]);
 
 		$('.opciones').remove();
-
+		$( ".region" ).remove();
+		$( ".estado" ).remove(); 
+		$( ".municipio" ).remove(); 
+		
+//////////////////////// CARGANDO CAMPO DE CARGOS ///////////////////////////////////////////////////////
 		$("#dptoEmpm option:selected").each(function () {			
             elegido=$(this).val();
             var opcion=[1,elegido];
@@ -1541,26 +1546,67 @@ $(".modificarEmpleado").click(function(){
 	        datos=[id,elegido]
 	        $.get("/menu/registros/empleados/consulta",{ datos:datos }, function(data){
 	        	$.each(data, function(i, item) {
-	        		///////////AGREGAR OPCION SEGUN SELECCION DE DEPARTAMENTO/////////////	
 	        		$('#cgoEmpm').append('<option class="opciones" value="'+item.id+'">'+item.descripcion+'</option>');
 				})        
         	}); 			
 		});
 		$('#pdhem').val(respuesta[11]); 
+		
+////////////////////////// CARGANDO CAMPO DE REGIONES /////////////////////////////////////////////////////
+		
 		$("#pdhem option:selected").each(function () {			
             elegido=$(this).val();
             var opcion=[2,elegido];
 			$.get("/menu/registros/empleados/cargar",{opcion:opcion}, function(data){
 		    	$.each(data, function(i, item) {
-		    		$('#rgdhem').append('<option class="opciones" value="'+item.id+'">'+item.descripcion+'</option>');
+		    		$('#rgdhem').append('<option class="region" value="'+item.id+'">'+item.descripcion+'</option>');
 		    		$('#rgdhem').val(respuesta[12]); 
 				}); 
 			}); 
-	    }); 
+	    });
+	    $("#pdhem").change(function(){	
+	    	$( ".region" ).remove();
+		    $( ".estado" ).remove();       
+		    $( ".municipio" ).remove();     
+		    elegido=$(this).val();
+		    id=2;
+		    var datos=[id,elegido];
+		    $.get("/menu/registros/empleados/consulta",{ datos:datos }, function(data){
+		    	$.each(data, function(i, item) {
+		    		$('#rgdhem').append('<option class="region" value="'+item.id+'">'+item.descripcion+'</option>');
+				});        
+			});  
+		});
+	     
+//////////////////////////////// CARGANDO CAMPO DE ESTADOS ///////////////////////////////////////////////
+		$("#rgdhem option:selected").each(function () {			
+            elegido=$(this).val();
+            alert(elegido)
+            opcion=[3,elegido];
+			$.get("/menu/registros/empleados/cargar",{opcion:opcion}, function(data){
+		    	$.each(data, function(i, item) {
+		    		$('#edodhem').append('<option class="estado" value="'+item.id+'">'+item.descripcion+'</option>');
+		    		$('#edodhem').val(respuesta[13]); 
+				});
+			}); 
+	    });
+	    $("#rgdhem").change(function(){	
+		    $( ".estado" ).remove();       
+		    $( ".municipio" ).remove();     
+		    elegido=$(this).val();
+		    id=3;
+		    var datos=[id,elegido];
+		    $.get("/menu/registros/empleados/consulta",{ datos:datos }, function(data){
+		    	$.each(data, function(i, item) {
+		    		$('#edodhem').append('<option class="estado" value="'+item.id+'">'+item.descripcion+'</option>');
+				});        
+			});  
+		});
+	     
 	});
 });
 
-
+});
 /*
     ///////////VERIFCAR SI LA VARIABLE PAIS EXISTE EN EL VECTOR/////////////
         		if ($(data[11]).empty) {

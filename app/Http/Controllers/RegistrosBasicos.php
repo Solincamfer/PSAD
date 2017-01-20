@@ -745,6 +745,7 @@ public function cargar_modal_modificar(){
 							$consulta->idcargo,
 							$consulta->idpais,
 							$consulta->idregion,
+							$consulta->idestado,
 							);
 	}
 	return $respuesta;
@@ -758,6 +759,9 @@ public function cargar_combos(){
 	}
 	elseif($id[0]==2){
 		$respuesta = DB::table('regiones')->where('pais_id',$id[1])->get();
+	}
+	elseif($id[0]==3){
+		$respuesta = DB::table('estados')->where('region_id',$id[1])->get();
 	}
 	return $respuesta;
 }
