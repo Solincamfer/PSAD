@@ -1562,6 +1562,42 @@ public function clientes_sucursales($categoria_id)//lista las sucursales asociad
 			return view ('Registros_Basicos\Clientes\clientes_sucursales_usuarios_perfil',$this->datos_vista($datos,$acciones,array()));
 		}
 
+		public function consultar_plan(){
+			$id=Request::get('plan');
+			
+			$plan=DB::table('planes')->where('id',$id)->first();
+			$horario=DB::table('horarios')->where('plan_id',$id)->first();
+			$soporteP=DB::table('presenciales')->where('plan_id',$id)->first();
+			$soporteR=DB::table('remotos')->where('plan_id',$id)->first();
+			$soporteT=DB::table('telefonicos')->where('plan_id',$id)->first();
+			$respuesta=DB::table('respuestas')->where('plan_id',$id)->first();
+			$descuento=$plan->descuento;
+			$precioH = $horario->precio;
+			$precioP = $soporteP->precio;
+			$precioR = $soporteR->precio;
+			$precioT = $soporteT->precio;
+			$precioRE = $respuesta->precio;
+			$precioSD=  $precioH+$precioP+$precioR+$precioT+$precioRE;
+			$precio = ($precioSD * $descuento) /100;
+			$pt=$precioSD - $precio;
+			$datos = 	array(	$horario->horaI,
+								$horario->horaF,
+								$horario->diaI,
+								$horario->diaF,
+								$soporteP->etiqueta,
+								$soporteP->valor,
+								$soporteR->etiqueta,
+								$soporteR->valor,
+								$soporteT->etiqueta,
+								$soporteT->valor,
+								$respuesta->maximo,
+								$precio,
+								$plan->nombreP
+						);
+			return $datos;
+		}
+
+
 
 
 

@@ -1581,7 +1581,7 @@ $(".modificarEmpleado").click(function(){
 //////////////////////////////// CARGANDO CAMPO DE ESTADOS ///////////////////////////////////////////////
 		$("#rgdhem option:selected").each(function () {			
             elegido=$(this).val();
-            alert(elegido)
+            //alert(elegido)
             opcion=[3,elegido];
 			$.get("/menu/registros/empleados/cargar",{opcion:opcion}, function(data){
 		    	$.each(data, function(i, item) {
@@ -1606,6 +1606,16 @@ $(".modificarEmpleado").click(function(){
 	});
 });
 
+////////////////// CARGANDO MODAL DE SERVICIOS OFERTADOS POR EL PLAN (SUBMODULO-CLIENTES) /////
+$(".tltp").click(function(){
+	var plan=$(this).attr('data-id');
+	//alert(plan);
+	$('.lista').remove();
+	 $.get("/menu/registros/clientes/consultaplan",{plan:plan}, function(respuesta){
+	 	$(".servicios").append('<ul class="lista"><li>Hora de Inicio: '+respuesta[0]+'</li><li>Hora de Finalización: '+respuesta[1]+'</li><li>Días de Servicio: '+respuesta[2]+' - '+respuesta[3]+'</li><li>Tipo de Soporte Presencial: '+respuesta[4]+'</li><li>Soportes Presenciales/mes: '+respuesta[5]+'</li><li>Tipo de Soporte Remoto: '+respuesta[6]+'</li><li>Soportes Remotos/mes: '+respuesta[7]+'</li><li>Tipo de Soporte Telefónico: '+respuesta[8]+'</li><li>Soportes Telefónicos/mes: '+respuesta[9]+'</li><li>Tiempo Máximo de Atención: '+respuesta[10]+' horas</li><li class="precio"> BsF. '+respuesta[11]+'</li></ul>');
+	 $('.titulo').html(respuesta[12]);
+	 });
+});
 
 });
 /*

@@ -2682,4 +2682,13 @@ input::-webkit-input-placeholder {
     .BUSE:focus { 
     outline: none !important;
    /* border-color: #719ECE;*/
+    }   
+.precio{
+    color: #000;
+    font-size: 35px;
+    margin-left:80px;
+    margin-top: 20px;
+}
+.bttminimizar{
+    background-color:#68d1bc;
 }

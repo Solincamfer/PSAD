@@ -170,7 +170,8 @@ Route::group(['prefix'=>'/menu/registros','middleware'=>['v_menu']],function(){
 	Route::match(['post','get'],'/empleados/modificar',                                              			['uses'=>'RegistrosBasicos@cargar_modal_modificar']);
 	Route::match(['post','get'],'/empleados/cargar',                                              			['uses'=>'RegistrosBasicos@cargar_combos']);
 	Route::match(['post','get'],'/empleados/actualizar',                                              			['uses'=>'RegistrosBasicos@cargar_modal_modificar']);		
-});
 
+//////////////////////////// CLIENTES /////////////////////////////////////////////////////////////
 
-				
+	Route::match(['post','get'],'/clientes/consultaplan',						   	['uses'=>'RegistrosBasicos@consultar_plan']);
+});					
