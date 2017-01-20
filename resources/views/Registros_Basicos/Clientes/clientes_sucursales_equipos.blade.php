@@ -61,6 +61,9 @@
                                     <p class="ttlMd"><strong>{{$equipo->descripcion}}</strong></p>
                                 </div>
                           @endforeach
+                        <div class="paginador">
+                             {{ $consulta->links() }}
+                        </div>
                         </div>
                         <!--Registro -->
 
