@@ -4,6 +4,12 @@ var vista_submodulos=false;//true cuando la vista de submodulos esta activa
 var vista_acciones=false;//true cuando la vista de acciones esta activa
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////funciones para clientes///////////////////////////////////////////////////////////////
+
+
+
+
+
 ///////////////////////////// funciones para datos cmplementarios ////////////////////////////////////////////
 
 
@@ -1539,3 +1545,204 @@ $('#tpE').keypress(function(tecla)//insertar tipo de equipo
 
 busqueda_dinamica();//realiza la busqueda dinamica
 consultar_componentes();//muestra los componentes asociados a un equipo
+
+
+
+//////////////////////////////////////////clientes//////////////////////////////////////////////////////////
+
+$('._ModificarPieza_').click(function()
+	{
+		var url="/menu/registros/clientes/modificar_pieza";
+		var piezaId=$(this).attr('data-pieza');
+		$.get(url, {datos:piezaId}, function(data)
+		{
+
+
+			if (data!=0) 
+			{
+				//alert('consulta positiva');
+				$('#nomPzm').val(data[0]);
+				$('#serPzm').val(data[1]);
+				$('#selMpm').append('<option value="1" selected="selected">'+data[2]+'</option>');
+				$('#selMpzm').append('<option value="1" selected="selected">'+data[3]+'</option>');
+				$('#selStPzm').val(data[4]);
+
+			}
+			else
+			{
+
+				swal({
+
+								title:'ERROR INESPERADO!!!.',//Contenido del modal
+								text: '<p style="font-size: 1.5em;">'+'Comuniquese con el administrador'+'</p>',
+								timer:2500,//Tiempo de retardo en ejecucion del modal
+								type: "error",
+								showConfirmButton:false,//Eliminar boton de confirmacion
+								html:true
+						});
+			}
+		})
+
+
+	})
+
+$('._ModificarComponente_').click(function()
+	{
+		var url="/menu/registros/clientes/modificar_componente";
+		var componenteId=$(this).attr('data-componente');
+		
+		$.get(url, {datos:componenteId}, function(data)
+		{
+
+
+			if (data!=0) 
+			{
+				
+				$('#nomCompm').val(data[0]);
+				$('#serCmm').val(data[1]);
+				$('#selMcmm').append('<option value="1" selected="selected">'+data[2]+'</option>');
+				$('#selMcmmo').append('<option value="1" selected="selected">'+data[3]+'</option>');
+				$('#selStCmm').val(data[4]);
+
+			}
+			else
+			{
+
+				swal({
+
+								title:'ERROR INESPERADO!!!.',//Contenido del modal
+								text: '<p style="font-size: 1.5em;">'+'Comuniquese con el administrador'+'</p>',
+								timer:2500,//Tiempo de retardo en ejecucion del modal
+								type: "error",
+								showConfirmButton:false,//Eliminar boton de confirmacion
+								html:true
+						});
+			}
+		})
+
+
+	});
+
+$('._ModificarAplicacion_').click(function()
+	{
+		var url="/menu/registros/clientes/modificar_aplicacion";
+		var aplicacionId=$(this).attr('data-aplicacion');
+		
+	
+		$.get(url, {datos:aplicacionId}, function(data)
+		{
+
+
+			if (data!=0) 
+			{
+				
+				$('#nomApm').val(data[0]);
+				$('#LicApm').val(data[1]);
+				$('#selMapm').append('<option value="1" selected="selected">'+data[2]+'</option>');
+				$('#selMcmmo').append('<option value="1" selected="selected">'+data[3]+'</option>');
+				$('#selStApm').val(data[3]);
+
+			}
+			else
+			{
+
+				swal({
+
+								title:'ERROR INESPERADO!!!.',//Contenido del modal
+								text: '<p style="font-size: 1.5em;">'+'Comuniquese con el administrador'+'</p>',
+								timer:2500,//Tiempo de retardo en ejecucion del modal
+								type: "error",
+								showConfirmButton:false,//Eliminar boton de confirmacion
+								html:true
+						});
+			}
+		})
+
+
+	});
+
+
+$('._ModificarEquipo_').click(function()
+	{
+		var url="/menu/registros/clientes/modificar_equipo";
+		var equipoId=$(this).attr('data-equipo');
+		
+		alert(equipoId);
+		$.get(url, {datos:equipoId}, function(data)
+		{
+
+
+			if (data!=0) 
+			{
+				
+				
+				 $('#nomEqm').val(data[0]);
+				 $('#tpEqm').val(data[1]);
+				 $('#mkEqm').val(data[2]);
+				 $('#modEqm').val(data[3]);
+				 
+				$('#duPflm').val(data[4]);
+				$('#stPflm').val(data[5])
+				// $('#selMapm').append('<option value="1" selected="selected">'+data[2]+'</option>');
+				// $('#selMcmmo').append('<option value="1" selected="selected">'+data[3]+'</option>');
+				// $('#selStApm').val(data[3]);
+
+			}
+			else
+			{
+
+				swal({
+
+								title:'ERROR INESPERADO!!!.',//Contenido del modal
+								text: '<p style="font-size: 1.5em;">'+'Comuniquese con el administrador'+'</p>',
+								timer:2500,//Tiempo de retardo en ejecucion del modal
+								type: "error",
+								showConfirmButton:false,//Eliminar boton de confirmacion
+								html:true
+						});
+			}
+		})
+
+
+	});
+
+$('#_tpEq').change(function()
+	{
+		
+		$('#mkEq option').remove();
+		var descripcion=$(this).val();
+		var tabla=$(this).attr('data-tipo');
+		var url="/menu/registros/clientes/consultar_select";
+		
+		var datos=[descripcion,tabla];
+		
+		
+		$.get(url, {datos:datos}, function(data)
+		{
+			
+			if(data!=0)
+			{
+
+				
+				$.each(data, function(i,item)
+				{
+					$('#mkEq').append('<option value="'+item.descripcion+'" >'+item.descripcion+'</option>');
+				})
+			}
+			else
+			{
+				swal({
+
+								title:'ERROR INESPERADO!!!.',//Contenido del modal
+								text: '<p style="font-size: 1.5em;">'+'Comuniquese con el administrador'+'</p>',
+								timer:2500,//Tiempo de retardo en ejecucion del modal
+								type: "error",
+								showConfirmButton:false,//Eliminar boton de confirmacion
+								html:true
+						});	
+
+			}
+
+		})
+
+	});

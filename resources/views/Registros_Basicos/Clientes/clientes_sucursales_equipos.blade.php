@@ -35,7 +35,7 @@
                                                 @if($accion->id==42)
                                                     <span class="iclsp">
                                                         <a href="#myModal2" class="tltp" data-ttl="{{$accion->descripcion}}" data-toggle="modal" data-target="#myModal2"> 
-                                                            <i class="{{$accion->clase_css}}"></i>
+                                                            <i class="{{$accion->clase_css}} _ModificarEquipo_" data-equipo="{{$equipo->id}}"></i>
                                                         </a>
                                                     </span>
                                                 @elseif($accion->id!=42)
@@ -86,11 +86,13 @@
                                                    </div>
                                                    <div class="col-md-8 col-md-offset-2">
                                                        <div class="form-group row">
-                                                           <label for="tpEq">Tipo de equipo</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
-                                                           <select name="tpEq" id="tpEq" class="form-control userEmail">
+                                                           <label for="_tpEq">Tipo de equipo</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
+                                                           <select name="_tpEq" id="_tpEq" class="form-control userEmail" data-tipo="0">
                                                                <option value="">-</option>
-                                                               <option value="1">Activo</option>
-                                                               <option value="2">Inactivo</option>
+                                                               @foreach($datosC2 as $tipoEquipo)
+                                                                    <option value="{{$tipoEquipo->descripcion}}" >{{$tipoEquipo->descripcion}}</option>
+                                                               @endforeach
+                                                              
                                                            </select><i class="fa fa-desktop" id="ice2"></i>
                                                        </div>
                                                    </div>
@@ -101,8 +103,7 @@
                                                             <label for="mkEq">Marca de equipo</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
                                                             <select name="mkEq" id="mkEq" class="form-control userEmail">
                                                                 <option value="">-</option>
-                                                                <option value="1">Activo</option>
-                                                                <option value="2">Inactivo</option>
+                                                                
                                                             </select><i class="fa fa-apple" id="ice3"></i>
                                                         </div>
                                                     </div>
@@ -170,8 +171,8 @@
                                                             <label for="tpEq">Tipo de equipo</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
                                                             <select name="tpEq" id="tpEqm" class="form-control userEmail">
                                                                 <option value="">-</option>
-                                                                <option value="1">Activo</option>
-                                                                <option value="2">Inactivo</option>
+                                                                <option value="DESKTOP">Desktop</option>
+                                                                <option value="LAPTOP">Laptop</option>
                                                             </select><i class="fa fa-desktop" id="mice2"></i>
                                                         </div>
                                                     </div>
@@ -182,8 +183,9 @@
                                                             <label for="mkEq">Marca de equipo</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
                                                             <select name="mkEq" id="mkEqm" class="form-control userEmail">
                                                                 <option value="">-</option>
-                                                                <option value="1">Activo</option>
-                                                                <option value="2">Inactivo</option>
+                                                                <option value="HP">HP</option>
+                                                                <option value="SIRAGON">Siragon</option>
+                                                                <option value="DELL">Dell</option>
                                                             </select><i class="fa fa-apple" id="mice3"></i>
                                                         </div>
                                                     </div>
@@ -192,8 +194,9 @@
                                                             <label for="modEq">Modelo de equipo</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
                                                             <select name="modEq" id="modEqm" class="form-control userEmail">
                                                                 <option value="">-</option>
-                                                                <option value="1">Activo</option>
-                                                                <option value="2">Inactivo</option>
+                                                                <option value="1111">1111</option>
+                                                                <option value="2222">2222</option>
+                                                                <option value="3333">3333</option>
                                                             </select><i class="fa fa-laptop" id="mice4"></i>
                                                         </div>
                                                     </div> 
@@ -211,7 +214,7 @@
                                                             <select name="stPfl" id="stPflm" class="form-control userEmail">
                                                                 <option value="">-</option>
                                                                 <option value="1">Activo</option>
-                                                                <option value="2">Inactivo</option>
+                                                                <option value="0">Inactivo</option>
                                                             </select><i class="fa fa-check" id="mice6"></i>
                                                         </div>
                                                     </div>

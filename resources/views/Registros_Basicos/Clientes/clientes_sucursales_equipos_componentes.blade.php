@@ -35,7 +35,7 @@
                                                 @if($accion->id==46)
                                                     <span class="iclsp">
                                                         <a href="#myModal2" class="tltp" data-ttl="{{$accion->descripcion}}" data-toggle="modal" data-target="#myModal2"> 
-                                                            <i class="{{$accion->clase_css}}"></i>
+                                                            <i class="{{$accion->clase_css}} _ModificarComponente_" data-componente="{{$componente->id}}"></i>
                                                         </a>
                                                     </span>
                                                 @elseif($accion->id!=46)
@@ -188,7 +188,7 @@
                                                             <select name="selStCmm" class="form-control userEmail" id="selStCmm">
                                                                 <option value="">-</option>
                                                                 <option value="1">Activo</option>
-                                                                <option value="2">Inactivo</option>
+                                                                <option value="0">Inactivo</option>
                                                             </select><i class="fa fa-check" id="miccp6"></i>
                                                         </div>
                                                     </div>
