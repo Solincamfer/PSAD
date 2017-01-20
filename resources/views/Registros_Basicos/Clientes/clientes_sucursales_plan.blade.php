@@ -14,15 +14,15 @@
                            </div>
                        </div>
                        <div class="col-xs-5 col-sm-5 col-md-6 col-md-offset-3"> 
-                           @if($agregar!=false) 
+                          
                                <div class="container">
                                    <div class="row">
                                        <div class="col-md-2" align="left">
-                                           <a href="/menu/registros/clientes/categorias/sucursales"><button id="btnBk" type="button" class="btnBk" href="#"><i class="fa fa-chevron-left"></i> VOLVER</button></a>
+                                           <a href="/menu/registros/clientes/categorias/sucursales/{{$datosC1}}"><button id="btnBk" type="button" class="btnBk" href="#"><i class="fa fa-chevron-left"></i> VOLVER</button></a>
                                        </div>
                                    </div>
                                </div>
-                           @endif
+                          @foreach($consulta as $plan)
                                <div class="contMd">
                                    <div class="icl">
                                        @foreach($acciones as $accion)
@@ -35,9 +35,9 @@
                                            @endif
                                        @endforeach
                                    </div>
-                                   <span class="ttlMd"><input type="radio" name="planes" id="" value=""> <label for="planes"><strong>REGISTRO</strong></label></span>
+                                   <span class="ttlMd"><input type="radio" name="planes" id="" value=""> <label for="planes"><strong>{{$plan->nombreP}}</strong></label></span>
                                </div>
-                       
+                       @endforeach
                        </div>
                    </div>   
    @endsection

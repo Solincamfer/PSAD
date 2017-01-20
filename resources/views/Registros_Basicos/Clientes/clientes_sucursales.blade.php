@@ -18,7 +18,7 @@
                                 <div class="container">
                                     <div class="row">
                                         <div class="col-md-2" align="left">
-                                            <a href="/menu/registros/clientes/categoria"><button id="btnBk" type="button" class="btnBk" href="#"><i class="fa fa-chevron-left"></i> VOLVER</button></a>
+                                            <a href="/menu/registros/clientes/categoria/{{$clienteId}}"><button id="btnBk" type="button" class="btnBk" href="#"><i class="fa fa-chevron-left"></i> VOLVER</button></a>
                                         </div>
                                         @if($agregar) 
                                             <div class="col-md-2 col-md-offset-3">
@@ -41,7 +41,7 @@
                                                     </span>
                                                 @elseif($accion->id!=25)
                                                     <span class="iclsp">
-                                                        <a href="{{$accion->url}}" class="tltp" data-ttl="{{$accion->descripcion}}">
+                                                        <a href="{{$accion->url.$sucursal->id}}" class="tltp" data-ttl="{{$accion->descripcion}}">
                                                             <i class="{{$accion->clase_css}}"></i>
                                                         </a>
                                                     </span>

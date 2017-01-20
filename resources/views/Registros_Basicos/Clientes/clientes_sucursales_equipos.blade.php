@@ -18,7 +18,7 @@
                                 <div class="container">
                                     <div class="row">
                                         <div class="col-md-2" align="left">
-                                            <a href="/menu/registros/clientes/categorias/sucursales"><button id="btnBk" type="button" class="btnBk" href="#"><i class="fa fa-chevron-left"></i> VOLVER</button></a>
+                                            <a href="/menu/registros/clientes/categorias/sucursales/{{$datosC1}}"><button id="btnBk" type="button" class="btnBk" href="#"><i class="fa fa-chevron-left"></i> VOLVER</button></a>
                                         </div>
                                         @if($agregar)
                                             <div class="col-md-2 col-md-offset-3">

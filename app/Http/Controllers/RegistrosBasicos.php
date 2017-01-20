@@ -80,7 +80,7 @@ class RegistrosBasicos extends Controller
 	}
 
 
-	public function datos_vista($datos_session,$datos_acciones,$consulta,$extra=" ",$datosC1=" ",$datosC2=" ",$datosC3=" ",$datosC4=" ",$datosC5=" ")//asocia en un vector los datos que deben pasarse a una vista
+	public function datos_vista($datos_session,$datos_acciones,$consulta,$extra=" ",$datosC1=" ",$datosC2=" ",$datosC3=" ",$datosC4=" ",$datosC5=" ",$datosC6=" ")//asocia en un vector los datos que deben pasarse a una vista
 	{
 		$valores_vista=array(
 								'modulos'=>$datos_session['modulos'],//side bar
@@ -953,6 +953,7 @@ public function mostrar_acciones()
   return $acciones;
 }
 	
+	
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /////////////////////////////////// submodulo clientes////////////////////////////////////////////////////////////////////////
@@ -1379,6 +1380,7 @@ public function clientes_categoria($cliente_id)//listar categorias
 	
 	public function clientes_categoria_responsable($categoria_id)//listar responsables de una categoria
 	{
+		$categoria=$categoria_id;
 		$datos=$this->cargar_header_sidebar_acciones();
 		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(22,23),21);
 		$responsablesC=DB::table('categoria_persona')->where('categoria_id',$categoria_id)->first();
@@ -1391,6 +1393,7 @@ public function clientes_categoria($cliente_id)//listar categorias
 
 			$id=0;//cuando la categoria no tiene responsable asignado
 		}
+		$consulta=DB::table('categorias')->where('categorias.id',$categoria)->first();
 		return view ('Registros_Basicos\Clientes\clientes_categoria_responsable',$this->datos_vista($datos,$acciones,DB::table('categorias')->join('clientes','clientes.id','=','categorias.cliente_id')
 								   ->join('personas','personas.cliente_id','=','clientes.id')
 								   ->select('personas.id','personas.p_nombre','personas.p_apellido')
@@ -1399,7 +1402,7 @@ public function clientes_categoria($cliente_id)//listar categorias
 								   $categoria_id,
 								   DB::table('tipos')->where('numero_c',5)->get(),//tipos de cedula $datosC2
 								   DB::table('tipos')->where('numero_c',2)->get(),//tipos de codigo de celular $datosC3
-								   DB::table('tipos')->where('numero_c',3)->get()));//tipos dle codigos loca
+								   DB::table('tipos')->where('numero_c',3)->get(),$consulta->cliente_id));//tipos dle codigos loca
 						
 	}
 
@@ -1482,19 +1485,21 @@ public function clientes_sucursales($categoria_id)//lista las sucursales asociad
 	}
 
 
-	public function clientes_sucursales_responsable()
+	public function clientes_sucursales_responsable($sucursal_id)
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
 		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(32,33),31);
-		return view ('Registros_Basicos\Clientes\clientes_sucursales_responsable',$this->datos_vista($datos,$acciones,array()));
+		$consulta=DB::table('sucursales')->where('id',$sucursal_id)->first();
+		return view ('Registros_Basicos\Clientes\clientes_sucursales_responsable',$this->datos_vista($datos,$acciones,array(),$sucursal_id,$consulta->categoria_id));
 						
 	}
 
-	public function clientes_sucursales_plan()
+	public function clientes_sucursales_plan($sucursal_id)
 		{
 			$datos=$this->cargar_header_sidebar_acciones();
 			$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(37),false);///reisar vista para boton agregar
-			return view ('Registros_Basicos\Clientes\clientes_sucursales_plan',$this->datos_vista($datos,$acciones,array()));
+			$consulta=DB::table('sucursales')->where('id',$sucursal_id)->first();
+			return view ('Registros_Basicos\Clientes\clientes_sucursales_plan',$this->datos_vista($datos,$acciones,DB::table('planes')->paginate(11),$sucursal_id,$consulta->categoria_id));
 							
 		}
 		
@@ -1508,11 +1513,12 @@ public function clientes_sucursales($categoria_id)//lista las sucursales asociad
 		}
 
 
-	public function clientes_sucursales_equipos()//
+	public function clientes_sucursales_equipos($sucursal_id)//
 		{
 			$datos=$this->cargar_header_sidebar_acciones();
 			$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(42,43,44,49),41);
-			return view ('Registros_Basicos\Clientes\clientes_sucursales_equipos',$this->datos_vista($datos,$acciones,DB::table('equipos')->paginate(11)));
+			$consulta=DB::table('sucursales')->where('id',$sucursal_id)->first();
+			return view ('Registros_Basicos\Clientes\clientes_sucursales_equipos',$this->datos_vista($datos,$acciones,DB::table('equipos')->where('sucursal_id',$sucursal_id)->paginate(11),$sucursal_id,$consulta->categoria_id));
 							
 		}
 
@@ -1520,7 +1526,7 @@ public function clientes_sucursales($categoria_id)//lista las sucursales asociad
 		{
 			$datos=$this->cargar_header_sidebar_acciones();
 			$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(46,47,48),45);
-			return view ('Registros_Basicos\Clientes\clientes_sucursales_equipos_componentes',$this->datos_vista($datos,$acciones,DB::table('componentes')->where('equipo_id',$equipo_id)->paginate(11)));
+			return view ('Registros_Basicos\Clientes\clientes_sucursales_equipos_componentes',$this->datos_vista($datos,$acciones,DB::table('componentes')->where('equipo_id',$equipo_id)->paginate(11),$equipo_id));
 							
 		}
 
@@ -1541,7 +1547,7 @@ public function clientes_sucursales($categoria_id)//lista las sucursales asociad
 		}
 
 
-		public function clientes_sucursales_usuarios()
+		public function clientes_sucursales_usuarios($sucursal_id)
 			{
 				$datos=$this->cargar_header_sidebar_acciones();
 				$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(57,58,59),56);
@@ -1555,6 +1561,14 @@ public function clientes_sucursales($categoria_id)//lista las sucursales asociad
 			$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(61,62,63),60);
 			return view ('Registros_Basicos\Clientes\clientes_sucursales_usuarios_perfil',$this->datos_vista($datos,$acciones,array()));
 		}
+
+
+
+
+	
+	
+	
+
 
 
 
