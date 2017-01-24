@@ -35,7 +35,7 @@
                                          @endif
                                      @endforeach
                                  </div>
-                                 <span class="ttlMd"><input type="radio" name="planes" id="" value=""> <label for="planes"><strong>{{$plan->nombreP}}</strong></label></span>
+                                 <span class="ttlMd1"><input type="radio" name="planes" id="" value=""> <label for="planes"><strong>{{$plan->nombreP}}</strong></label></span>
                              </div>
                      @endforeach
                       </div>

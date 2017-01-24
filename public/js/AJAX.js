@@ -1613,7 +1613,7 @@ $(".tltp").click(function(){
 	$('.lista').remove();
 	 $.get("/menu/registros/clientes/consultaplan",{plan:plan}, function(respuesta){
 	 	$(".servicios").append('<ul class="lista"><li>Hora de Inicio: '+respuesta[0]+'</li><li>Hora de Finalización: '+respuesta[1]+'</li><li>Días de Servicio: '+respuesta[2]+' - '+respuesta[3]+'</li><li>Tipo de Soporte Presencial: '+respuesta[4]+'</li><li>Soportes Presenciales/mes: '+respuesta[5]+'</li><li>Tipo de Soporte Remoto: '+respuesta[6]+'</li><li>Soportes Remotos/mes: '+respuesta[7]+'</li><li>Tipo de Soporte Telefónico: '+respuesta[8]+'</li><li>Soportes Telefónicos/mes: '+respuesta[9]+'</li><li>Tiempo Máximo de Atención: '+respuesta[10]+' horas</li><li class="precio"> BsF. '+respuesta[11]+'</li></ul>');
-	 $('.titulo').html(respuesta[12]);
+	 $('.titulo').html('Plan: '+respuesta[12]);
 	 });
 });
 
