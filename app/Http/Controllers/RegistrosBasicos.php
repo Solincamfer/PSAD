@@ -1361,7 +1361,7 @@ public function clientes_categoria($cliente_id)//listar categorias
 	{
 		$categoria_id=(int)Request::get('idCategoria');
 		$categorias=DB::table('categorias')->where('id',$categoria_id)->first();//buscar categoria por id
-		return array($categorias->nombre,$categorias->status_c,$categorias->cliente_id);
+		return array($categorias->nombre,$categorias->status,$categorias->cliente_id);
 		
 	}
 
@@ -1371,7 +1371,7 @@ public function clientes_categoria($cliente_id)//listar categorias
 		$statusC=(int)Request::get('stCat');
 		$categoria_id=(int)Request::get('Categoriaid');
 
-		DB::table('categorias')->where('id',$categoria_id)->update(['nombre'=>$nombreC,'status_c'=>$statusC]);
+		DB::table('categorias')->where('id',$categoria_id)->update(['nombre'=>$nombreC,'status'=>$statusC]);
 
 		return redirect('/menu/registros/clientes/categoria/'.(string)$cliente_id);
 	}
@@ -2169,29 +2169,27 @@ public function crear_accion($status_ac=1,$descripcion=" ",$url=" ",$data_toogle
 
 //////////////////////////////////////////////pruebas ////////////////////////////////////////////////			
 
-public function pruebas_(){
-	$consulta=DB::table('empleados')
-		->join('rifs','empleados.rif_id','=','rifs.id')
-		->join('cedulas','empleados.cedula_id','=','cedulas.id')
-		->join('departamentos','empleados.departamento_id','=','departamentos.id')
-		->join('cargos','empleados.cargo_id','=','cargos.id')
-		->join('direcciones','empleados.direccion_id','=','direcciones.id')
-		->join('paises','paises.id','=','direcciones.pais_id')
-		->join('regiones','regiones.id','=','direcciones.region_id')
-		->join('estados','estados.id','=','direcciones.estado_id')
-		->join('municipios','municipios.id','=','direcciones.municipio_id')
-		->join('contactos','empleados.contacto_id','=','contactos.id')
-		->join('usuarios','empleados.usuario_id','=','usuarios.id')
+	public function pruebas_()
+	{
+		
 
-		->select('empleados.nombre As nombre','empleados.nombre_ As nombre_','empleados.apellido As apellido','empleados.apellido_ As apellido_','rifs.tipo_id as tipo_r','rifs.numero As numeroR','cedulas.tipo_id As tipo_c','cedulas.numero As numeroC','empleados.fechaN As fnacimiento','departamentos.id As departamento','cargos.id As idcargo','cargos.descripcion As cargo','paises.id As idpais','paises.descripcion As pais','regiones.id As idregion','regiones.descripcion As region','estados.id As idestado','estados.descripcion As estado','municipios.id As idmunicipio','municipios.descripcion As municipios','direcciones.id As iddireccion','direcciones.descripcion As direccion','contactos.tipo_id As codigoC','contactos.tipo__id As codigoL','contactos.telefono_m As movil','contactos.telefono_f As local','contactos.correo As email','usuarios.n_usuario As usuario','usuarios.clave As password','usuarios.status As status')
+		//  $actualizar=DB::table('accion_perfil')->where('accion_id',88)->delete();
+		//  $actualizar=DB::table('accion_perfil')->where('accion_id',89)->delete();
+		//  $actualizar=DB::table('accion_perfil')->where('accion_id',90)->delete();
+		//  $actualizar=DB::table('accion_perfil')->where('accion_id',91)->delete();
+		 
+		//  $perfiles=DB::table('perfiles')->get();
 
-		->where('empleados.id',1)->first();
-		$respuesta= array(	
-							$consulta->nombre,
-							$consulta->nombre_,
-							$consulta->apellido,
-							$consulta->apellido_,
-					);
-	return $respuesta;
+		// $acciones=array(88,89,90,91);//acciones a relacionar
+		// foreach ($perfiles as $perfil) 
+		// {
+		// 	foreach ($acciones as $accion) 
+		// 	{
+		// 		DB::table('accion_perfil')->insert(['perfil_id'=>$perfil->id,'accion_id'=>$accion]);
+		// 	}
+		// }
+
+
+
+	}
 }
-};

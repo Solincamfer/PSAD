@@ -464,6 +464,7 @@ $(".modificarCliente").click(function(){
 	$(".modificarCategoria").click(function(){
 
 		///////////BUSCADO BOTON CLICKEADO/////////////	
+			
 			ID = $(this).attr("id");///////ID DEL BOTTON MODIFICAR/////////
 			idCategoria=$('#idcateg'+ID).val();///////TRAER VALOR DEL ID DEL BOTTON MODIFICAR/////////
 			$('#Categoriaid').val(idCategoria);///////ID DEL BOTTON MODIFICAR IGUALADA AL VALOR DEL CAMPO CORRESPONDIENTE AL ID SELECCIONADO/////////	
@@ -585,6 +586,10 @@ $('.ttlMd').change(function()//asignar perfil a un usuario
 			 }
 			);
 });
+
+
+$(".btnResp").change(function(){alert('hola');});
+
 
 $(".btnAcc").change(function()//cambio de status de los check
 	{
