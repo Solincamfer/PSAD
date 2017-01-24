@@ -1361,7 +1361,7 @@ public function clientes_categoria($cliente_id)//listar categorias
 	{
 		$categoria_id=(int)Request::get('idCategoria');
 		$categorias=DB::table('categorias')->where('id',$categoria_id)->first();//buscar categoria por id
-		return array($categorias->nombre,$categorias->status_c,$categorias->cliente_id);
+		return array($categorias->nombre,$categorias->status,$categorias->cliente_id);
 		
 	}
 
@@ -1371,7 +1371,7 @@ public function clientes_categoria($cliente_id)//listar categorias
 		$statusC=(int)Request::get('stCat');
 		$categoria_id=(int)Request::get('Categoriaid');
 
-		DB::table('categorias')->where('id',$categoria_id)->update(['nombre'=>$nombreC,'status_c'=>$statusC]);
+		DB::table('categorias')->where('id',$categoria_id)->update(['nombre'=>$nombreC,'status'=>$statusC]);
 
 		return redirect('/menu/registros/clientes/categoria/'.(string)$cliente_id);
 	}

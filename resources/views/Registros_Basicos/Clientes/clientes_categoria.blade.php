@@ -136,7 +136,7 @@
                                                                 <select name="stCat" class="form-control userEmail" id="CatM2">
                                                                     <option value="">-</option>
                                                                     <option value="1">Activo</option>
-                                                                    <option value="2">Inactivo</option>
+                                                                    <option value="0">Inactivo</option>
                                                                 </select><i class="fa fa-check" id="micct2"></i>
                                                                 <input type="hidden" name="Categoriaid" id="Categoriaid">
                                                             </div>
