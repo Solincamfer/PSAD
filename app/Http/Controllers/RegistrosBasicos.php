@@ -2173,21 +2173,21 @@ public function crear_accion($status_ac=1,$descripcion=" ",$url=" ",$data_toogle
 	{
 		
 
-		//  $actualizar=DB::table('accion_perfil')->where('accion_id',88)->delete();
-		//  $actualizar=DB::table('accion_perfil')->where('accion_id',89)->delete();
-		//  $actualizar=DB::table('accion_perfil')->where('accion_id',90)->delete();
-		//  $actualizar=DB::table('accion_perfil')->where('accion_id',91)->delete();
+		  /*$actualizar=DB::table('accion_perfil')->where('accion_id',88)->delete();
+		  $actualizar=DB::table('accion_perfil')->where('accion_id',89)->delete();
+		  $actualizar=DB::table('accion_perfil')->where('accion_id',90)->delete();
+		  $actualizar=DB::table('accion_perfil')->where('accion_id',91)->delete();
 		 
-		//  $perfiles=DB::table('perfiles')->get();
+		  $perfiles=DB::table('perfiles')->get();
 
-		// $acciones=array(88,89,90,91);//acciones a relacionar
-		// foreach ($perfiles as $perfil) 
-		// {
-		// 	foreach ($acciones as $accion) 
-		// 	{
-		// 		DB::table('accion_perfil')->insert(['perfil_id'=>$perfil->id,'accion_id'=>$accion]);
-		// 	}
-		// }
+		 $acciones=array(88,89,90,91);//acciones a relacionar
+		 foreach ($perfiles as $perfil) 
+		 {
+		 	foreach ($acciones as $accion) 
+		 	{
+		 		DB::table('accion_perfil')->insert(['perfil_id'=>$perfil->id,'accion_id'=>$accion]);
+		 	}
+		 }*/
 
 
 
