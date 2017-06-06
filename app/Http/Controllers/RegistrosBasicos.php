@@ -992,7 +992,8 @@ public function clientes()//inicializacion del submodulo: clientes
 															 'estados'=>$estados,
 															 'municipios'=>$municipios,
 															 'codigoC'=>$codigoC,
-															 'codigoL'=>$codigoL
+															 'codigoL'=>$codigoL,
+															 'extra'=>4
 
 
 

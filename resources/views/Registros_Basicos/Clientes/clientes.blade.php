@@ -57,7 +57,7 @@
 								<input type="hidden" name="idcliente{{$clientes->id}}" value="{{$clientes->id}}" id="idClientem{{$clientes->id}}">
 							</div>
 						@endforeach
-						
+						<input type="hidden"   name="TND"  value="{{$extra}}">
 					</div>
 
 				<!-- 	Registro -->
