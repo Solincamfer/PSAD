@@ -1331,7 +1331,7 @@ public function clientes_categoria($cliente_id)//vista de categorias de un clien
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
 		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(16,17,18,19),20);
-		return view ('Registros_Basicos\Clientes\clientes_categoria',$this->datos_vista($datos,$acciones,DB::table('categorias')->where('cliente_id',$cliente_id)->get(),$cliente_id));
+		return view ('Registros_Basicos\Clientes\clientes_categoria',$this->datos_vista($datos,$acciones,DB::table('categorias')->where('cliente_id',$cliente_id)->get(),$cliente_id,5));
 						
 	}
 
@@ -1481,7 +1481,8 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 															 'codigoC'=>$codigoC,
 															 'codigoL'=>$codigoL,
 															 'clienteId'=>$consulta_->cliente_id,
-															 'categoriaId'=>$categoria_id]);
+															 'categoriaId'=>$categoria_id,
+															 'extra'=>6]);
 
 						
 	}
@@ -1525,7 +1526,7 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 			$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(42,43,44,49),41);
 			$consulta=DB::table('sucursales')->where('id',$sucursal_id)->first();
 			$tipoEquipo=DB::table('tequipos')->get();
-			return view ('Registros_Basicos\Clientes\clientes_sucursales_equipos',$this->datos_vista($datos,$acciones,DB::table('equipos')->where('sucursal_id',$sucursal_id)->paginate(11),$sucursal_id,$consulta->categoria_id,$tipoEquipo));
+			return view ('Registros_Basicos\Clientes\clientes_sucursales_equipos',$this->datos_vista($datos,$acciones,DB::table('equipos')->where('sucursal_id',$sucursal_id)->paginate(11),$sucursal_id,$consulta->categoria_id,$tipoEquipo,7));
 							
 		}
 
@@ -1533,7 +1534,7 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 		{
 			$datos=$this->cargar_header_sidebar_acciones();
 			$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(46,47,48),45);
-			return view ('Registros_Basicos\Clientes\clientes_sucursales_equipos_componentes',$this->datos_vista($datos,$acciones,DB::table('componentes')->where('equipo_id',$equipo_id)->paginate(11),$equipo_id));
+			return view ('Registros_Basicos\Clientes\clientes_sucursales_equipos_componentes',$this->datos_vista($datos,$acciones,DB::table('componentes')->where('equipo_id',$equipo_id)->paginate(11),$equipo_id,8));
 							
 		}
 
@@ -1541,7 +1542,7 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 		{
 			$datos=$this->cargar_header_sidebar_acciones();
 			$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(51,52),50);
-			return view ('Registros_Basicos\Clientes\clientes_sucursales_equipos_componentes_aplicaciones',$this->datos_vista($datos,$acciones,DB::table('aplicaciones')->where('equipo_id',$equipo_id)->paginate(11),$equipo_id));
+			return view ('Registros_Basicos\Clientes\clientes_sucursales_equipos_componentes_aplicaciones',$this->datos_vista($datos,$acciones,DB::table('aplicaciones')->where('equipo_id',$equipo_id)->paginate(11),$equipo_id,10));
 							
 		}
 	
@@ -1549,7 +1550,7 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 		{
 			$datos=$this->cargar_header_sidebar_acciones();
 			$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(54,55),53);
-			return view ('Registros_Basicos\Clientes\clientes_sucursales_equipos_componentes_piezas',$this->datos_vista($datos,$acciones,DB::table('piezas')->where('componente_id',$componente_id)->paginate(11),$componente_id));
+			return view ('Registros_Basicos\Clientes\clientes_sucursales_equipos_componentes_piezas',$this->datos_vista($datos,$acciones,DB::table('piezas')->where('componente_id',$componente_id)->paginate(11),$componente_id,9));
 							
 		}
 
@@ -2037,7 +2038,7 @@ public function eliminar_componentes()
 		{
 			//[valor,registro,tabla]
 
-			$tablas=array("departamentos","cargos","perfiles","planes","clientes");//listado de las tablas de la base de datos
+			$tablas=array("departamentos","cargos","perfiles","planes","clientes","categorias","sucursales","equipos","componentes","piezas","aplicaciones");//listado de las tablas de la base de datos
 			$valores=array(1,0);
 
 			$datos=Request::get('datos');

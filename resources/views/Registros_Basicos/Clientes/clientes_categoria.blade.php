@@ -63,6 +63,7 @@
                                     <input type="hidden" name="idcateg{{$categoria->id}}" value="{{$categoria->id}}" id="idcategm{{$categoria->id}}">
                                 </div>
                           @endforeach
+							<input type="hidden" name="TND" value="{{$datosC1}}">
                         </div>
                         <!-- 	Registro -->
 

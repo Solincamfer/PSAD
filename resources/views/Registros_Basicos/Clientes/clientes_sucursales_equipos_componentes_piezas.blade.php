@@ -64,6 +64,7 @@
                               <div class="paginador">
                                     {{ $consulta->links() }}
                               </div>
+							<input type="hidden" name="TND" value="{{$datosC1}}">
                         </div>
                         <!-- 	Registro -->
 

@@ -594,7 +594,7 @@ $(".btnResp").change(function(){alert('hola');});
 $(".btnAcc").change(function()//cambio de status de los check
 	{
 	/////// Valores para mensajes y cambio de status /////////////////
-		var registros=['Departamento','Cargo','Perfil','Plan','Cliente'];
+		var registros=['Departamento','Cargo','Perfil','Plan','Cliente','Categoria','Sucursal','Equipo','Componente','Pieza','Aplicacion'];
 		var estado=["Habilitar el ","Deshabilitar el "];
 	 	var cambio=["habilitado","deshabilitado"];
 	 	var valores=[1,0];

@@ -46,13 +46,13 @@
                                                     </span>
                                                 @endif
                                             @elseif($accion->id==43)
-                                                @if($accion->status_ac==1)
+                                                @if($equipo->status==1)
                                                     <div class="chbx">
-                                                        <input type="checkbox" class="btnAcc" name="status" id="{{'inchbx'. $accion->id}}" value="{{$accion->status_ac}}" checked><label for="{{'inchbx'. $accion->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
+                                                        <input type="checkbox" class="btnAcc" name="status" id="{{'inchbx'. $equipo->id}}" value="{{$equipo->status}}" checked><label for="{{'inchbx'. $equipo->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
                                                     </div>
-                                                @elseif($accion->status_ac==0)
+                                                @elseif($equipo->status==0)
                                                     <div class="chbx">
-                                                        <input type="checkbox" class="btnAcc" name="status" id="{{'inchbx'. $accion->id}}" value="{{$accion->status_ac}}"><label for="{{'inchbx'. $accion->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
+                                                        <input type="checkbox" class="btnAcc" name="status" id="{{'inchbx'. $equipo->id}}" value="{{$equipo->status}}"><label for="{{'inchbx'. $equipo->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
                                                     </div>
                                                 @endif
                                             @endif
@@ -64,6 +64,7 @@
                         <div class="paginador">
                              {{ $consulta->links() }}
                         </div>
+						<input type="hidden" name="TND" value="{{$datosC3}}">
                         </div>
                         <!--Registro -->
 

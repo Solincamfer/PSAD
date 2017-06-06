@@ -40,18 +40,18 @@
                                                         </a>
                                                     </span>
                                                 @elseif($accion->id!=25)
-                                                    <span class="iclsp">
-                                                        <a href="{{$accion->url.$sucursal->id}}" class="tltp" data-ttl="{{$accion->descripcion}}">
-                                                            <i class="{{$accion->clase_css}}"></i>
-                                                        </a>
-                                                    </span>
+														<span class="iclsp">
+															<a href="{{$accion->url.$sucursal->id}}" class="tltp" data-ttl="{{$accion->descripcion}}">
+																<i class="{{$accion->clase_css}}"></i>
+															</a>
+														</span>
                                                 @endif
                                             @elseif($accion->id==30)
                                                 @if($sucursal->status==1)
                                                     <div class="chbx">
                                                         <input type="checkbox" class="btnAcc" name="status" id="{{'inchbx'. $sucursal->id}}" value="{{$sucursal->status}}" checked><label for="{{'inchbx'. $sucursal->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
                                                     </div>
-                                                @elseif($sucursal->status)
+                                                @elseif($sucursal->status==0)
                                                     <div class="chbx">
                                                         <input type="checkbox" class="btnAcc" name="status" id="{{'inchbx'. $sucursal->id}}" value="{{$sucursal->status}}"><label for="{{'inchbx'. $sucursal->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
                                                     </div>
@@ -62,6 +62,7 @@
                                     <p class="ttlMd"><strong>{{$sucursal->razon_s}}</strong></p>
                                 </div>
                           @endforeach
+						  <input type="hidden" name="TND" value="{{$extra}}">
                         </div>
                         <!--Registro -->
 

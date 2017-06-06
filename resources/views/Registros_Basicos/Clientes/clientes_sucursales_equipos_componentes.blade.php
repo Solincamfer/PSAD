@@ -46,13 +46,13 @@
                                                     </span>
                                                 @endif
                                             @elseif($accion->id==47)
-                                                @if($accion->status_ac==1)
+                                                @if($componente->status==1)
                                                     <div class="chbx">
-                                                        <input type="checkbox" class="btnAcc" name="status" id="{{'inchbx'. $accion->id}}" value="{{$accion->status_ac}}" checked><label for="{{'inchbx'. $accion->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
+                                                        <input type="checkbox" class="btnAcc" name="status" id="{{'inchbx'. $componente->id}}" value="{{$componente->status}}" checked><label for="{{'inchbx'. $componente->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
                                                     </div>
-                                                @elseif($accion->staus_ac==0)
+                                                @elseif($componente->status==0)
                                                     <div class="chbx">
-                                                        <input type="checkbox" class="btnAcc" name="status" id="{{'inchbx'. $accion->id}}" value="{{$accion->status_ac}}"><label for="{{'inchbx'. $accion->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
+                                                        <input type="checkbox" class="btnAcc" name="status" id="{{'inchbx'. $componente->id}}" value="{{$componente->status}}"><label for="{{'inchbx'. $componente->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
                                                     </div>
                                                 @endif
                                             @endif
@@ -61,9 +61,10 @@
                                     <p class="ttlMd"><strong>{{$componente->descripcion}}</strong></p>
                                 </div>
                             @endforeach
-                              <div class="paginador">
+                            <div class="paginador">
                                 {{ $consulta->links() }}
                             </div>
+							<input type="hidden" name="TND" value="{{$datosC1}}">
                         </div>
                         <!--Registro-->
 
