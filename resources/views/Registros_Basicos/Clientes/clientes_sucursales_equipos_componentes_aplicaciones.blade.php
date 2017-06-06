@@ -9,7 +9,7 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-md-4 ttlp">
-                                <h1>Componentes - Pieza</h1>
+                                <h1>Equipos - Aplicaciones</h1>
                             </div>
                         </div>
                     </div>
@@ -46,13 +46,13 @@
                                             </span>
                                         @endif
                                     @elseif($accion->id==52)
-                                        @if($accion->status_ac==1)
+                                        @if($aplicacion->status==1)
                                             <div class="chbx">
-                                                <input type="checkbox" class="btnAcc" name="status" id="{{'inchbx'. $accion->id}}" value="{{$accion->status_ac}}" checked><label for="{{'inchbx'. $accion->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
+                                                <input type="checkbox" class="btnAcc" name="status" id="{{'inchbx'. $aplicacion->id}}" value="{{$aplicacion->status}}" checked><label for="{{'inchbx'. $aplicacion->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
                                             </div>
-                                        @elseif($accion->staus_ac==0)
+                                        @elseif($aplicacion->status==0)
                                             <div class="chbx">
-                                                <input type="checkbox" class="btnAcc" name="status" id="{{'inchbx'. $accion->id}}" value="{{$accion->status_ac}}"><label for="{{'inchbx'. $accion->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
+                                                <input type="checkbox" class="btnAcc" name="status" id="{{'inchbx'. $aplicacion->id}}" value="{{$aplicacion->status}}"><label for="{{'inchbx'. $aplicacion->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
                                             </div>
                                         @endif
                                     @endif
@@ -64,6 +64,7 @@
                          <div class="paginador">
                              {{ $consulta->links() }}
                         </div>
+                        
                     </div>
                     <!--    Registro -->
 

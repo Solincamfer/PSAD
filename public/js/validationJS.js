@@ -187,9 +187,9 @@ function Validar(){
                                 message: 'Solo números'                            
                             },
                     stringLength: {///////VALIDA CAMPO CANTIDAD DE CARACTERES///////////
-                                min: 10,
-                                max: 10,
-                                message: '10 números.'
+                                min: 7,
+                                max: 9,
+                                message: 'Mínimo 7 números, Máximo 9 números.'
                             }
                 }
             },

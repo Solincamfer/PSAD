@@ -96,6 +96,7 @@ class RegistrosBasicos extends Controller
 								'datosC3'=>$datosC3,
 								'datosC4'=>$datosC4,
 								'datosC5'=>$datosC5,
+								'datosC6'=>$datosC6
 
 
 								);
@@ -145,7 +146,7 @@ public function capturar_datos_responsables()
 	{
 		
 		$idC=DB::table('cedulas')->insertGetId//cedula del cliente
-		(['numero'=>$formulario['cedula'],'tipo_id'=>$formulario['tipoCedula']]);
+		(['numero'=>$formulario['cedula'],'rol'=>'cliente','tipo_id'=>$formulario['tipoCedula']]);
 
 		$idCo=DB::table('contactos')->insertGetId//contacto del responsable
 		(['tipo_id'=>$formulario['codigoC'],'tipo__id'=>$formulario['codigoL'],'telefono_m'=>$formulario['numeroC'],'telefono_f'=>$formulario['numeroL'],'correo'=>$formulario['correo']]);
@@ -1085,7 +1086,7 @@ public function clientes()//inicializacion del submodulo: clientes
 		
 				$idR= DB::table('rifs')->insertGetId//insertar rif 
 						(
-							['numero'=>$numeroR,'tipo_id'=>$tipoR]
+							['numero'=>$numeroR,'rol'=>'cliente','tipo_id'=>$tipoR]
 						);
 
 					
@@ -1325,7 +1326,7 @@ public function clientes_modificar()//metodo que consulta los datos de un client
 ////////////////////////////////////categorias de un cliente matriz //////////////////////////////////////////////////////////
 
 
-public function clientes_categoria($cliente_id)//listar categorias
+public function clientes_categoria($cliente_id)//vista de categorias de un cliente matriz
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
 		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(16,17,18,19),20);
@@ -1443,7 +1444,7 @@ public function clientes_categoria($cliente_id)//listar categorias
 ////////////////////////////////////////////sucursales/////////////////////////////////////////////////////////////////////////
 
 
-public function clientes_sucursales($categoria_id)//lista las sucursales asociadas a un cliente matriz
+public function clientes_sucursales($categoria_id)//vista de sucursales de una categoria,lista las sucursales asociadas a un cliente matriz
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
 		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(25,26,27,28,29,30),24);//acciones 
@@ -1490,7 +1491,11 @@ public function clientes_sucursales($categoria_id)//lista las sucursales asociad
 		$datos=$this->cargar_header_sidebar_acciones();
 		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(32,33),31);
 		$consulta=DB::table('sucursales')->where('id',$sucursal_id)->first();
-		return view ('Registros_Basicos\Clientes\clientes_sucursales_responsable',$this->datos_vista($datos,$acciones,array(),$sucursal_id,$consulta->categoria_id));
+		return view 
+		(
+			'Registros_Basicos\Clientes\clientes_sucursales_responsable',
+			$this->datos_vista($datos,$acciones,array(),$sucursal_id,$consulta->categoria_id)
+		);
 						
 	}
 
@@ -1513,7 +1518,7 @@ public function clientes_sucursales($categoria_id)//lista las sucursales asociad
 		}
 
 
-	public function clientes_sucursales_equipos($sucursal_id)//
+	public function clientes_sucursales_equipos($sucursal_id)//vista de equipos de una sucursal
 		{
 			$datos=$this->cargar_header_sidebar_acciones();
 			$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(42,43,44,49),41);
@@ -1523,7 +1528,7 @@ public function clientes_sucursales($categoria_id)//lista las sucursales asociad
 							
 		}
 
-	public function clientes_sucursales_equipos_componentes($equipo_id)
+	public function clientes_sucursales_equipos_componentes($equipo_id)//vista de componentes de un equipo
 		{
 			$datos=$this->cargar_header_sidebar_acciones();
 			$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(46,47,48),45);
@@ -1531,7 +1536,7 @@ public function clientes_sucursales($categoria_id)//lista las sucursales asociad
 							
 		}
 
-	public function clientes_sucursales_equipos_aplicaciones($equipo_id)//crear formulario
+	public function clientes_sucursales_equipos_aplicaciones($equipo_id)//vista de aplicaciones de un equipo
 		{
 			$datos=$this->cargar_header_sidebar_acciones();
 			$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(51,52),50);
@@ -1539,7 +1544,7 @@ public function clientes_sucursales($categoria_id)//lista las sucursales asociad
 							
 		}
 	
-		public function clientes_sucursales_equipos_piezas($componente_id)//crear formulario
+		public function clientes_sucursales_equipos_piezas($componente_id)//vista de piezas de un componente
 		{
 			$datos=$this->cargar_header_sidebar_acciones();
 			$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(54,55),53);
@@ -2031,7 +2036,7 @@ public function eliminar_componentes()
 		{
 			//[valor,registro,tabla]
 
-			$tablas=array("departamentos","cargos","perfiles","planes");//listado de las tablas de la base de datos
+			$tablas=array("departamentos","cargos","perfiles","planes","clientes");//listado de las tablas de la base de datos
 			$valores=array(1,0);
 
 			$datos=Request::get('datos');
