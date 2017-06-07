@@ -102,5 +102,19 @@ $(document).ready(function(){
     $('.side').on('click', function(){
         $('.cardrt').toggleClass('actcd');  
     });
+    
+    //Funcion para abrir y cerrar el campo busqueda
+    var srch = 0;
+    $('.bttn-search').on('click', function(){
+        if(srch == 0){
+            $('#scnt').addClass('abrir01');
+            $('#scnt').removeClass('search-cont');
+            srch = 1;
+        }else{
+            $('#scnt').addClass('search-cont');
+            $('#scnt').removeClass('abrir01');
+            srch = 0;
+        }
+    });
 });
 

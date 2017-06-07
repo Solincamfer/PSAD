@@ -6,17 +6,22 @@
             @include('layout/header')
                 @include('layout/sidebar')
                     <div class="contenido">
-                        <div class="container">
+                        <div class="container-fluid">
                             <div class="row">
                                 <div class="col-md-4 ttlp">
                                     <h1>Componentes - Pieza</h1>
                                 </div>
-                                <div  class="col-md-4 col-md-offset-3 search">
-                                    <form action="" method="">
-                                        <div class="input-group">
-                                            <input type="search" class="form-control filtro" placeholder="Buscar Pieza..."><span class="fa fa-search"></span>
-                                        </div>
-                                    </form> 
+                                <div  class="col-md-4 col-md-offset-1">
+                                    <div class="search-cont" id="scnt">
+                                        <form action="" method="">
+                                            <div class="input-group sci">
+                                                <input type="search" class="form-control filtro" placeholder="Buscar pieza..."><span class="fa fa-search"></span>
+                                            </div>
+                                        </form> 
+                                        <a class="bttn-search">
+                                            <span class="fa fa-search"></span>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>

@@ -742,44 +742,117 @@
 
  /* Buscadores*/
 
-input[type=search]{
-    width: 100%;
+.search-cont {
+    overflow: hidden;
+    float: right;
+    height: 3em;
+    width: 3em;
+    background: #333;
+    border-radius: 2em;
+    box-shadow: 0 0 5px #444;
+    -moz-transition: all 0.35s ease;
+    -webkit-transition: all 0.35s ease;
+    transition: all 0.35s ease;
 }
 
-.search input{
-    display: block;
-    padding: 5px 20px;
-    width: 100%;
-    margin-left: 20px;
-    border: 1px solid #ddd;
-    transition: border-width .2s ease;
+.abrir01 {
+    width: 23em;
+    border-radius: 5px 2em 2em 5px;
+    overflow: hidden;
+    float: right;
+    height: 3em;
+    cursor: pointer;
+    background: #333;
+    box-shadow: 0 0 5px #444;
+    -moz-transition: all 0.35s ease;
+    -webkit-transition: all 0.35s ease;
+    transition: all 0.35s ease;
+}
+
+.abrir01 .sci input{
+    display: inline-block;
+    width: 19em;
+    padding: 5px;
+    opacity: 1;
+}
+
+.sci input{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    float: left;
+    width: 0em;
+    height: 2em;
+    margin: 0.50em;
+    margin-right: -4.5em;
     border-radius: 2px;
     color: #ccc;
+    background: #fff;
+    color: #ccc;
+    font-size: 1em;
+    font-weight: 600;
+    padding: 0px;
+    border: 0;
+    border-radius: 5px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2) inset;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
+    transition: all 0.25s ease-in;
+    -moz-transition: all 0.25s ease-in;
+    -webkit-transition: all 0.25s ease-in;
+    opacity: 0;
 }
 
-.search input + span.fa{
+.sci input + span.fa{
     font-size: 1em;
     position: absolute;
-    margin-top: 7px;
-    left: 0;
+    margin-top: 15px;
+    left: -30px;
     color: #fff;
     transition: all .1s ease-in;
     opacity: 0;
     z-index: 3;
 }
 
-.search input:focus{
+.sci input:focus{
     outline: none;
     color: #444;
-    border-color: #26a69d;
+    border: 1px solid #26a69d;
     border-left-width: 35px;
+    box-shadow: 0 -1px 1px rgba(255, 255, 255, 0.25), 0 1px 5px rgba(0, 0, 0, 0.15);
 }
 
-.search input:focus + span.fa{
+.sci input:focus + span.fa{
     opacity: 1;
-    left: 30px;
+    left: 17px;
     transition: all .25s ease-out;
-    z-index: 3;
+}
+
+.bttn-search {
+    position: absolute;
+    top: -2px;
+    right: 14px;
+    float: right;
+    width: 2.3em;
+    height: 2.3em;
+    margin: 0.125em;
+    background: #333;
+    text-align: center;
+    font-size: 1.25em;
+    color: #fff;
+    border-radius: 50%;
+    box-shadow: 0 -1px 1px rgba(255, 255, 255, 0.25), 0 1px 1px rgba(0, 0, 0, 0.25);
+    text-shadow: 0 -2px 1px rgba(0, 0, 0, 0.3);
+    z-index: 5;
+}
+
+.bttn-search span{
+    margin-top: 0.5em;
+    font-size: 1em;
+}
+
+.bttn-search:hover {
+    color: #fff;
+    background: #26a69d;
 }
 
 /**Identificadores**/
