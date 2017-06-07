@@ -11,12 +11,12 @@
                         <div class="col-md-2 ttlp">
                             <h1>Planes</h1>
                         </div>
-                        <div  class="col-md-3  col-md-offset-2 buscador">
+                        <div  class="col-md-4 col-md-offset-5 search">
                             <form action="" method="">
                                 <div class="input-group">
-                                    <input type="search" class="form-control filtro" placeholder="Buscar Planes...">
+                                    <input type="search" class="form-control filtro" placeholder="Buscar plan..."><span class="fa fa-search"></span>
                                 </div>
-                           </form> 
+                            </form> 
                         </div>
                     </div>
                 </div>
