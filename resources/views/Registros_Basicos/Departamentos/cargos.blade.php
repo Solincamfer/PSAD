@@ -11,12 +11,12 @@
                         <div class="col-md-4 ttlp">
                             <h1>{{$datosC2}} - Cargos</h1>
                         </div>
-                        <div  class="col-md-2  col-md-offset-1 buscador">
+                        <div  class="col-md-4 col-md-offset-3 search">
                             <form action="" method="">
                                 <div class="input-group">
-                                    <input type="search" class="form-control filtro" placeholder="Buscar Cargo...">
+                                    <input type="search" class="form-control filtro" placeholder="Buscar Cargo..."><span class="fa fa-search"></span>
                                 </div>
-                           </form> 
+                            </form> 
                         </div>
                     </div>
                 </div>

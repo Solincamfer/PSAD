@@ -11,6 +11,13 @@
                                 <div class="col-md-2 ttlp">
                                     <h1>Empleados</h1>
                                 </div>
+                                <div  class="col-md-4 col-md-offset-5 search">
+                                    <form action="" method="">
+                                        <div class="input-group">
+                                            <input type="search" class="form-control filtro" placeholder="Buscar empleado..."><span class="fa fa-search"></span>
+                                        </div>
+                                    </form> 
+                                </div>
                             </div>
                         </div>
 

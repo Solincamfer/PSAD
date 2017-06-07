@@ -11,6 +11,13 @@
                                 <div class="col-md-4 ttlp">
                                     <h1>Componentes - Pieza</h1>
                                 </div>
+                                <div  class="col-md-4 col-md-offset-3 search">
+                                    <form action="" method="">
+                                        <div class="input-group">
+                                            <input type="search" class="form-control filtro" placeholder="Buscar Pieza..."><span class="fa fa-search"></span>
+                                        </div>
+                                    </form> 
+                                </div>
                             </div>
                         </div>
                         <div class="col-xs-5 col-sm-5 col-md-6 col-md-offset-3" style=""> 
