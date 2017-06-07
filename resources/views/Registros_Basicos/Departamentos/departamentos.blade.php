@@ -11,14 +11,12 @@
                         <div class="col-md-2 ttlp">
                             <h1>Departamentos</h1>
                         </div>
-                        <div  class="col-md-6">
-                           <div class="search">
+                        <div  class="col-md-4 col-md-offset-5 search">
                                <form action="" method="">
                                    <div class="input-group">
                                        <input type="search" class="form-control filtro" placeholder="Buscar Departamento..."><span class="fa fa-search"></span>
                                    </div>
                                </form> 
-                           </div>
                         </div>
                     </div>
                 </div>

@@ -742,10 +742,15 @@
 
  /* Buscadores*/
 
+input[type=search]{
+    width: 100%;
+}
+
 .search input{
     display: block;
     padding: 5px 20px;
     width: 100%;
+    margin-left: 20px;
     border: 1px solid #ddd;
     transition: border-width .2s ease;
     border-radius: 2px;
@@ -772,7 +777,7 @@
 
 .search input:focus + span.fa{
     opacity: 1;
-    left: 10px;
+    left: 30px;
     transition: all .25s ease-out;
     z-index: 3;
 }
