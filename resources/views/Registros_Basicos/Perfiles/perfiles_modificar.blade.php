@@ -6,22 +6,21 @@
             @include('layout/header')
                 @include('layout/sidebar')
                     <div class="contenido">
-                        <div class="container">
+                        <div class="container-fluid">
                             <div class="row">
                                 <div class="col-md-4 ttlp">
                                     <h1>{{$datosC1}} - Permisos</h1>
                                 </div>
                                 <input type="hidden" value="{{$extra}}" id="idPerfil">
                             </div>
-                        </div>
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-2" align="left">
-                                    <a href="/menu/registros/perfiles/"><button id="btnBk" type="button" class="btnBk" href="#"><i class="fa fa-chevron-left"></i> VOLVER</button></a>
+                            <div class="row sep-div">
+                                <div class="col-md-2">
+                                    <a href="/menu/registros/perfiles/">
+                                        <div class="bttn-volver">
+                                            <button id="btnBk" type="button" href="#" class="bttn-vol"><span class="fa fa-chevron-left"></span><span class="txt-bttn">VOLVER</span></button>
+                                        </div>
+                                    </a>
                                 </div>
-                              <!--   <div class="col-md-2 col-md-offset-3 pnlUs">
-                                     <span class="pnlttl"><i class="fa fa-user-circle"></i> {{$datosC1}}</span>
-                                </div> -->
                             </div>
                         </div>
                         <div class="container centrado">

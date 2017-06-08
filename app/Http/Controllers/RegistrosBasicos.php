@@ -588,7 +588,7 @@ public function empleados()
 
 	$datos=$this->cargar_header_sidebar_acciones();
 	$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(76,77,78),75);
-	return view ('Registros_Basicos\empleados\empleados',$this->datos_vista($datos,$acciones,DB::table('empleados')->where('id','<>',3)->get(),$tipoR,$tipoD,$paises,$codigoC,$codigoL,$departamentos));
+	return view ('Registros_Basicos\empleados\empleados',$this->datos_vista($datos,$acciones,DB::table('empleados')->where('id','<>',3)->get(),$tipoR,$tipoD,$paises,$codigoC,$codigoL,$departamentos,11));
 }
 
 public function empleados_perfiles($empleado_id)
@@ -2038,7 +2038,7 @@ public function eliminar_componentes()
 		{
 			//[valor,registro,tabla]
 
-			$tablas=array("departamentos","cargos","perfiles","planes","clientes","categorias","sucursales","equipos","componentes","piezas","aplicaciones");//listado de las tablas de la base de datos
+			$tablas=array("departamentos","cargos","perfiles","planes","clientes","categorias","sucursales","equipos","componentes","piezas","aplicaciones","empleados");//listado de las tablas de la base de datos
 			$valores=array(1,0);
 
 			$datos=Request::get('datos');

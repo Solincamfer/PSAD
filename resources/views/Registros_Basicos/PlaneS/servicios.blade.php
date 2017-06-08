@@ -6,20 +6,23 @@
             @include('layout/header')
                 @include('layout/sidebar')
                     <div class="contenido">
-                        <div class="container">
+                        <div class="container-fluid">
                             <div class="row">
                                 <div class="col-md-4 ttlp">
                                     <h1>{{$datosC1}} - Servicios</h1>
                                 </div>
                             </div>
-                        </div>
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-2" align="left">
-                                    <a href="/menu/registros/planeservicios/"><button id="btnBk" type="button" class="btnBk" href="#"><i class="fa fa-chevron-left"></i> VOLVER</button></a>
+                            <div class="row sep-div1">
+                                <div class="col-md-2">
+                                    <a href="/menu/registros/planeservicios/">
+                                        <div class="bttn-volver">
+                                            <button id="btnBk" type="button" href="#" class="bttn-vol"><span class="fa fa-chevron-left"></span><span class="txt-bttn">VOLVER</span></button>
+                                        </div>
+                                    </a>
                                 </div>
                             </div>
                         </div>
+                        
                         <div class="container">
                             <div class="col-md-10 col-md-offset-2 spc">
                                 <div class="row espFil">

@@ -6,12 +6,21 @@
             @include('layout/header')
                 @include('layout/sidebar')
                     <div class="contenido">
-                        <div class="container">
+                        <div class="container-fluid">
                             <div class="row">
                                 <div class="col-md-4 ttlp">
                                     <h1>Usuario - En construcción <i class="fa fa-"></i></h1>
                                 </div>
                             </div>
+                            <!--<div class="row sep-div">
+                                <div class="col-md-2">
+                                    <a href="/menu/registros/clientes/categorias/sucursales/{{$datosC1}}">
+                                        <div class="bttn-volver">
+                                            <button id="btnBk" type="button" href="#" class="bttn-vol"><span class="fa fa-chevron-left"></span><span class="txt-bttn">VOLVER</span></button>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>-->
                         </div>
                         <div class="col-xs-5 col-sm-5 col-md-6 col-md-offset-3"> 
                            @if($agregar)
@@ -43,7 +52,7 @@
                                     @endforeach
                                     <p class="ttlMd"><strong>REGISTRO</strong></p>
                                 </div>-->
-                          <div class="const">
+                          <div class="const" style="margin-top: 4em;">
                               
                           </div>
                         </div>

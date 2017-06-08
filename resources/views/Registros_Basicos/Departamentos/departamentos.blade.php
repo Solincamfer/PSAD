@@ -11,24 +11,30 @@
                         <div class="col-md-2 ttlp">
                             <h1>Departamentos</h1>
                         </div>
-                        <div  class="col-md-4 col-md-offset-3">
-                              <div class="search-cont" id="scnt">
-                                  <form action="" method="">
-                                      <div class="input-group sci">
-                                          <input type="search" class="form-control filtro" placeholder="Buscar Departamento..."><span class="fa fa-search"></span>
-                                      </div>
-                                  </form> 
-                                  <a class="bttn-search">
-                                      <span class="fa fa-search"></span>
-                                  </a>
-                              </div>
+                    </div>
+                    <div class="row sep-div">
+                        <div class="col-md-2 despl-bttn">
+                        @if($agregar)
+                            <div class="bttn-agregar">
+                                <button id="btnAdd" type="button" class="bttn-agr" data-toggle="modal" data-target="#myModal" href="#myModal"><span class="fa fa-plus"></span><span class="txt-bttn">AGREGAR</span></button>
+                            </div>
+                        @endif 
+                        </div>
+                        <div  class="col-md-4 despl-bttn">
+                            <div class="search-cont" id="scnt">
+                                <form action="" method="">
+                                    <div class="input-group sci">
+                                        <input type="search" class="form-control filtro" placeholder="Buscar departamento..."><span class="fa fa-search"></span>
+                                    </div>
+                                </form> 
+                                <a class="bttn-search">
+                                    <span class="fa fa-search"></span>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-5 col-sm-5 col-md-6 col-md-offset-3">
-                    @if($agregar)
-                        <button id="btnAdd" type="button" class="btnAdc col-md-offset-11" data-toggle="modal" data-target="#myModal" href="#myModal"><i class="fa fa-plus"></i> AGREGAR</button>
-                    @endif   
+                <div class="col-xs-5 col-sm-5 col-md-6 col-md-offset-3">  
                     @foreach($consulta as $departamento)
 
                         <div class="contMd" >

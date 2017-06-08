@@ -11,7 +11,16 @@
                                 <div class="col-md-2 ttlp">
                                     <h1>Empleados</h1>
                                 </div>
-                                <div  class="col-md-4 col-md-offset-3">
+                            </div>
+                            <div class="row sep-div">
+                                <div class="col-md-2 despl-bttn">
+                                    @if($agregar)
+                                    <div class="bttn-agregar">
+                                        <button id="btnAdd" type="button" class="bttn-agr" data-toggle="modal" data-target="#myModal" href="#myModal"><span class="fa fa-plus"></span><span class="txt-bttn">AGREGAR</span></button>
+                                    </div>
+                                    @endif 
+                                </div>
+                                <div  class="col-md-4 despl-bttn">
                                     <div class="search-cont" id="scnt">
                                         <form action="" method="">
                                             <div class="input-group sci">
@@ -27,9 +36,6 @@
                         </div>
 
                         <div class="col-xs-5 col-sm-5 col-md-6 col-md-offset-3" style=""> 
-                        @if($agregar)
-                                <button id="btnAdd" type="button" class="btnAdc col-md-offset-11" data-toggle="modal" data-target="#myModal" href="#myModal"><i class="fa fa-plus"></i> AGREGAR</button>
-                        @endif
 
                             @foreach($consulta as $empleado)
                                 <div class="contMd" style="">
@@ -66,6 +72,7 @@
                                 <p class="ttlMd"><strong>{{$empleado->nombre."  ".$empleado->apellido}}</strong></p>
                                 </div>
                             @endforeach
+                            <input type="hidden" name="TND" value="{{$datosC6}}">
                         </div>
                         <!--    Registro -->
 

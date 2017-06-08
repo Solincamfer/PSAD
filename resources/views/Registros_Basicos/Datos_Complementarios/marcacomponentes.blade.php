@@ -6,20 +6,21 @@
             @include('layout/header')
                 @include('layout/sidebar')
                     <div class="contenido">
-                        <div class="container ">
+                        <div class="container-fluid">
                             <div class="row">
                                 <div class="col-md-3 ttlp">
                                     <h1 id="encabezado">Datos Complementarios</h1>
                                 </div>
                                 <input type="hidden" value="" id="idPerfil">
                             </div>
-                        </div>
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-2" align="left">
-                                    <a href="/menu/registros/datos/"><button id="btnBk" type="button" class="btnBk" href="#"><i class="fa fa-chevron-left"></i> VOLVER</button></a>
+                            <div class="row sep-div">
+                                <div class="col-md-2">
+                                    <a href="/menu/registros/datos/">
+                                        <div class="bttn-volver">
+                                            <button id="btnBk" type="button" href="#" class="bttn-vol"><span class="fa fa-chevron-left"></span><span class="txt-bttn">Volver</span></button>
+                                        </div>
+                                    </a>
                                 </div>
-                            
                             </div>
                         </div>
 

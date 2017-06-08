@@ -6,26 +6,31 @@
             @include('layout/header')
                 @include('layout/sidebar')
                 <div class="contenido">
-                    <div class="container">
+                    <div class="container-fluid">
                         <div class="row">
                             <div class="col-md-4 ttlp">
                                 <h1>Categoría - Responsable</h1>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-xs-5 col-sm-5 col-md-6 col-md-offset-3" style=""> 
-                    @if($agregar)
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-2" align="left">
-                                    <a href="/menu/registros/clientes/categoria/{{$datosC5}}"><button id="btnBk" type="button" class="btnBk" href="#"><i class="fa fa-chevron-left"></i> VOLVER</button></a>
+                        <div class="row sep-div">
+                            <div class="col-md-2 despl-bttn">
+                                @if($agregar)
+                                <div class="bttn-agregar">
+                                    <button id="btnAdd" type="button" class="bttn-agr" data-toggle="modal" data-target="#myModal" href="#myModal"><span class="fa fa-plus"></span><span class="txt-bttn">AGREGAR</span></button>
                                 </div>
-                                <div class="col-md-2 col-md-offset-3">
-                                    <button id="btnAdd" type="button" class="btnAd" data-toggle="modal" data-target="#myModal" href="#myModal"><i class="fa fa-plus"></i> AGREGAR</button> 
-                                </div>
+                                @endif 
+                            </div>
+                            <div class="col-md-2 despl-bttn">
+                                <a href="/menu/registros/clientes/categoria/{{$datosC5}}">
+                                    <div class="bttn-volver">
+                                        <button id="btnBk" type="button" href="#" class="bttn-vol"><span class="fa fa-chevron-left"></span><span class="txt-bttn">VOLVER</span></button>
+                                    </div>
+                                </a>
                             </div>
                         </div>
-                    @endif
+                    </div>
+                    <div class="col-xs-5 col-sm-5 col-md-6 col-md-offset-3" style=""> 
+                    
                     @foreach($consulta as $responsable)
                             <div class="contMd" style="">
                                <div class="icl">

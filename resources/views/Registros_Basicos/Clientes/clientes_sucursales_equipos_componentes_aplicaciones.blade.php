@@ -11,7 +11,16 @@
                             <div class="col-md-4 ttlp">
                                 <h1>Equipos - Aplicaciones</h1>
                             </div>
-                            <div  class="col-md-4 col-md-offset-1">
+                        </div>
+                        <div class="row sep-div">
+                            <div class="col-md-2 despl-bttn">
+                                @if($agregar)
+                                <div class="bttn-agregar">
+                                    <button id="btnAdd" type="button" class="bttn-agr" data-toggle="modal" data-target="#myModal" href="#myModal"><span class="fa fa-plus"></span><span class="txt-bttn">AGREGAR</span></button>
+                                </div>
+                                @endif 
+                            </div>
+                            <div  class="col-md-4 despl-bttn">
                                 <div class="search-cont" id="scnt">
                                     <form action="" method="">
                                         <div class="input-group sci">
@@ -23,22 +32,17 @@
                                     </a>
                                 </div>
                             </div>
+                            <div class="col-md-2 despl-bttn">
+                                <a href="/menu/registros/clientes/categoria/sucursal/equipos/{{$extra}}">
+                                    <div class="bttn-volver">
+                                        <button id="btnBk" type="button" href="#" class="bttn-vol"><span class="fa fa-chevron-left"></span><span class="txt-bttn">VOLVER</span></button>
+                                    </div>
+                                </a>
+                            </div>
                         </div>
                     </div>
                     <div class="col-xs-5 col-sm-5 col-md-6 col-md-offset-3" style=""> 
                        
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-2" align="left">
-                                    <a href="/menu/registros/clientes/categoria/sucursal/equipos/{{$extra}}"><button id="btnBk" type="button" class="btnBk" href="#"><i class="fa fa-chevron-left"></i> VOLVER</button></a>
-                                </div>
-                                 @if($agregar)
-                                    <div class="col-md-2 col-md-offset-3">
-                                        <button id="btnAdd" type="button" class="btnAd" data-toggle="modal" data-target="#myModal" href="#myModal"><i class="fa fa-plus"></i> AGREGAR</button> 
-                                    </div>
-                                 @endif
-                            </div>
-                        </div>
                        @foreach($consulta as $aplicacion)
                         <div class="contMd" style="">
                             <div class="icl">

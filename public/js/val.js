@@ -109,10 +109,12 @@ $(document).ready(function(){
         if(srch == 0){
             $('#scnt').addClass('abrir01');
             $('#scnt').removeClass('search-cont');
+            $(this).css('background','#26A69D');
             srch = 1;
         }else{
             $('#scnt').addClass('search-cont');
             $('#scnt').removeClass('abrir01');
+            $(this).css('background','');
             srch = 0;
         }
     });

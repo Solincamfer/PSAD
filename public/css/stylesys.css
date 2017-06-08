@@ -67,7 +67,9 @@
         outline: none;
     }
 
-    .btn, .btn:focus, .btn:active{
+    .btn, .btn:focus, .btn:active, .bttn-agr,
+    .bttn-vol, .bttn-agr:focus, .bttn-agr:active,
+    .bttn-vol:focus, .bttn-vol:active{
         border: none;
         outline: none;  
     }
@@ -829,12 +831,12 @@
 
 .bttn-search {
     position: absolute;
-    top: -2px;
-    right: 14px;
+    top: 1px;
+    right: 16px;
     float: right;
     width: 2.3em;
     height: 2.3em;
-    margin: 0.125em;
+    margin: 0;
     background: #333;
     text-align: center;
     font-size: 1.25em;
@@ -853,6 +855,65 @@
 .bttn-search:hover {
     color: #fff;
     background: #26a69d;
+}
+ /*Botones volver y agregar*/
+
+.sep-div{
+    margin: 1.5em 0px;    
+}
+
+.sep-div1{
+    margin-top: 1.5em;   
+}
+
+.despl-bttn{
+    width: auto; 
+    float: right; 
+    right: 20em;
+}
+
+.bttn-agr, .bttn-vol{
+    font-family: 'Ubuntu Condensed', sans-serif;
+    width: 3em;
+    height: 3em;
+    border-radius: 50px;
+    background: #333;
+    display: inline-block;
+    white-space: nowrap;
+    border: none;
+    color: #fff;
+    box-sizing: border-box;
+    padding: 13px 0px 10px 15px;
+    font-size: 1em;
+    font-weight: bold;
+    transition: all .25s ease;
+    box-shadow: 2px 3px 5px 1px rgba(0, 0, 0, .2);
+    text-decoration: none;
+}
+
+.bttn-agr span.fa, .bttn-vol span.fa{
+    margin: 0px 20px 0px 3px;
+    font-size: 18px;
+    transition: margin .4s ease;
+    color: #fff;
+}
+
+.bttn-agr .txt-bttn, .bttn-vol .txt-bttn{
+    opacity: 0;
+    display: none;
+}
+
+.bttn-agr:hover, .bttn-vol:hover {
+    width: 8em;
+}
+
+.bttn-agr:hover span.fa, .bttn-vol:hover span.fa{
+    margin: 0 10px 0 -15px;
+}
+
+.bttn-agr:hover .txt-bttn, .bttn-vol:hover .txt-bttn{
+    opacity: 1;
+    display: inline-block;
 }
 
 /**Identificadores**/
@@ -2603,16 +2664,17 @@
 
         /*Permiso*/
             .pnlUs{
-                height: 40px;
-                width: 120px;
-                margin-top: 17px;
+                height: 3em;
+                width: 7em;
+                margin-top: 0px;
                 background: #333;
                 border-radius: 3px;
-                padding-top: 7px;
-                box-shadow: 5px 5px 15px 5px #999;
+                padding-top: 12px;
+                box-shadow: 2px 2px 15px 0px #444;
             }
 
             .pnlUs .pnlttl{
+                padding-left: 15px;
                 color: #e5e5e7;
                 font-size: 16px;
             }
