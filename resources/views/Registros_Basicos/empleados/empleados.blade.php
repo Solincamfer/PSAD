@@ -57,13 +57,13 @@
                                                </span>
                                              @endif
                                           @elseif($accion->id==78)
-                                            @if($accion->status_ac==1)
+                                            @if($empleado->status==1)
                                                   <div class="chbx">
-                                                    <input type="checkbox" class="btnAcc" name="inchbx1" id="{{'inchbx'. $empleado->id}}" value="{{$accion->status_ac}}" checked><label for="{{'inchbx'. $empleado->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
+                                                    <input type="checkbox" class="btnAcc" name="inchbx1" id="{{'inchbx'. $empleado->id}}" value="{{$empleado->status}}" checked><label for="{{'inchbx'. $empleado->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
                                                   </div>
-                                            @elseif($accion->staus_ac==0)
+                                            @elseif($empleado->status==0)
                                               <div class="chbx">
-                                                <input type="checkbox" class="btnAcc" name="status" id="{{'inchbx'. $empleado->id}}" value="{{$accion->status_ac}}"><label for="{{'inchbx'. $empleado->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
+                                                <input type="checkbox" class="btnAcc" name="status" id="{{'inchbx'. $empleado->id}}" value="{{$empleado->status}}"><label for="{{'inchbx'. $empleado->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
                                               </div>
                                             @endif
                                           @endif
