@@ -36,7 +36,7 @@
                                     </div>
                                      <div class="row ">
                                          <div class="col-md-3 spcm">
-                                           <div class="busQ"><input  type="search" placeholder="Buscar" class="BUSE" id="tpE" data-inputbus="0" data-dependencia="0"></div>
+                                           <div class="busQ"><input  type="search" placeholder="Buscar" class="BUSE" id="tpE" data-inputbus="0" data-dependencia="0"><span class="fa fa-search"></span></div>
                                         </div> 
                                     </div>
                                    
@@ -49,7 +49,7 @@
                                     </div>
                                      <div class="row ">
                                          <div class="col-md-3 spcm">
-                                           <div class="busQ" id="inputComponente">  </div>
+                                             <div class="busQ" id="inputComponente"><!--<span class="fa fa-search"></span>--></div>
                                         </div> 
                                     </div>
                                 </div>
@@ -60,7 +60,7 @@
                                     </div>
                                     <div class="row ">
                                          <div class="col-md-3 spcm">
-                                           <div class="busQ" id="inputPiezas"><!-- <input type="search" placeholder="Buscar " class="BUSE" id="tpEP" data-ecomponente="0" > --></div>
+                                             <div class="busQ" id="inputPiezas"><!-- <input type="search" placeholder="Buscar " class="BUSE" id="tpEP" data-ecomponente="0" ><span class="fa fa-search"></span>--></div>
                                         </div> 
                                     </div>
                                 </div>
