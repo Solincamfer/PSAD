@@ -40,6 +40,17 @@ class RegistrosBasicos extends Controller
 	
 	
 	
+	public function obtener_acciones_submodulo($submodulo_id,$vista)
+	{
+		$acc_=array();
+		$acciones_sub=DB::table('acciones')->where(['submodulo_id'=>$submodulo_id,'vista'=>$vista])->get();//obtiene las acciones para una vista
+		
+		foreach($acciones_sub as $acc) 
+		{
+			array_push($acc_, $acc->id);
+		}
+		return($acc_);
+	}
 	public function cargar_acciones_submodulo_perfil($acciones_perfil,$acciones_sm,$accion_agregar)//obtiene las acciones para un submodulo, asociadas a un perfil
 	{
 		
@@ -203,10 +214,12 @@ public function capturar_datos_responsables()
 
 	public function departamentos_cargos($departamento_id)//Inicializacion del submodulo: /departamentos/cargos
 	{
+		$boton_agregar=7;
 		$datos=$this->cargar_header_sidebar_acciones();
-		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(5,6,87),7);
+		$acc=$this->obtener_acciones_submodulo(2,2);//obtiene las acciones de un submodulo
+		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],$acc,$boton_agregar);//obtiene las opciones validas para la vista
 		$nombre=DB::table('departamentos')->where('id',$departamento_id)->value('descripcion');
-		return view('Registros_Basicos\Departamentos\cargos',$this->datos_vista($datos,$acciones,DB::table('cargos')->where('departamento_id',$departamento_id)->paginate(11),1,(int)$departamento_id,$nombre));
+		return view('Registros_Basicos\Departamentos\cargos',$this->datos_vista($datos,$acciones,DB::table('cargos')->where('departamento_id',$departamento_id)->paginate(4),1,(int)$departamento_id,$nombre));
 					
 	}
 

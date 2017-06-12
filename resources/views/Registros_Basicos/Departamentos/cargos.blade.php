@@ -24,7 +24,7 @@
                             <div class="search-cont" id="scnt">
                                 <form action="" method="">
                                     <div class="input-group sci">
-                                        <input type="search" class="form-control filtro" placeholder="Buscar cargo..."><span class="fa fa-search"></span>
+                                        <input type="search" class="form-control filtro" placeholder="Buscar cargo..." data-tabla="cargos" data-submodulo="2" data-vista="2" id="busCar"><span class="fa fa-search"></span>
                                     </div>
                                 </form> 
                                 <a class="bttn-search">
@@ -41,45 +41,44 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-5 col-sm-5 col-md-6 col-md-offset-3">
+                <div class="col-xs-5 col-sm-5 col-md-6 col-md-offset-3" >
+                <div id="areaResultados">
+                        @foreach($consulta as $cargo)
+                            <div class="contMd" >
+                                <div class="icl">
+                                    @foreach($acciones as $accion)
 
-                    @foreach($consulta as $cargo)
-                        <div class="contMd" style="">
-                            <div class="icl">
-                                @foreach($acciones as $accion)
-                                    @if($accion->id!=5 )
-                                        @if($accion->id==6)
-                                            <span class="iclsp">
-                                                <a href="#myModal2" class="tltp ModificaR" id="ModificaCar{{$cargo->id}}" data-ttl="{{$accion->descripcion}}" data-toggle="modal" data-target="#myModal2"> 
-                                                    <i class="{{$accion->clase_css}}"></i>
-                                                </a>
-                                            </span>
-                                        @elseif($accion->id!=6)
+                                        @if($accion->desci!='status' && $accion->desci!='radio')
+                                            @if($accion->desci=='modificar')
+                                                <span class="{{$accion->clase_cont}}">
+                                                    <a href="{{$accion->url}}" class="{{$accion->clase_elem}}" id="{{$accion->identificador.$cargo->id}}" data-ttl="{{$accion->descripcion}}" data-toggle="modal" data-target="{{$accion->url}}"> 
+                                                        <i class="{{$accion->clase_css}}"></i>
+                                                    </a>
+                                                </span>
+                                            @elseif($accion->desci!='modificar')
 
-                                            <span class="iclsp">
-                                                <a href="{{$accion->url}}" class="EliminarR" data-ttl="{{$accion->descripcion}}" id="EliminarCar{{$cargo->id}}" data-ttl="{{$accion->descripcion}}" >
-                                                    <i class="{{$accion->clase_css}}"></i>
-                                                </a>
-                                            </span>
+                                                <span class="{{$accion->clase_cont}}">
+                                                    <a href="{{$accion->url}}" class="{{$accion->clase_elem}}" data-ttl="{{$accion->descripcion}}" id="{{$accion->identificador.$cargo->id}}"  >
+                                                        <i class="{{$accion->clase_css}}"></i>
+                                                    </a>
+                                                </span>
+                                            @endif
+                                        @elseif($accion->desci=='status' || $accion->desci=='radio')
+                                            @if($accion->desci=='status')
+                                                <div class="{{$accion->clase_cont}}">
+                                                     <input type="checkbox" class="{{$accion->clase_elem}}" name="status" id="{{'inchbx'. $cargo->id}}" value="{{$cargo->status}}" {{$cargo->condicion}}><label for="{{'inchbx'. $cargo->id}}"  data-ttl="{{$accion->descripcion}}"></label>
+                                                </div>
+                                               
+                                            @endif
                                         @endif
-                                    @elseif($accion->id==5)
-                                        @if($cargo->status==1)
-                                            <div class="chbx">
-                                                <input type="checkbox" class="btnAcc" name="status" id="{{'inchbx'. $cargo->id}}" value="{{$cargo->status}}" checked><label for="{{'inchbx'. $cargo->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
-                                            </div>
-                                        @elseif($cargo->status==0)
-                                            <div class="chbx">
-                                                <input type="checkbox" class="btnAcc" name="status" id="{{'inchbx'. $cargo->id}}" value="{{$cargo->status}}"><label for="{{'inchbx'. $cargo->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
-                                            </div>
-                                        @endif
-                                    @endif
-                                @endforeach
+                                    @endforeach
                             </div>
                             <p class="ttlMd"><strong>{{$cargo->descripcion}}</strong></p>
                            
                         </div>
                     @endforeach
-                    <div class="paginador">
+                    </div>
+                    <div class="paginador" id="paginador">
                         {{ $consulta->links() }}
                     </div>
                       <input type="hidden"   name="TND"  value="{{$extra}}">

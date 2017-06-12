@@ -21,7 +21,7 @@
                                         <a id="" type="button" class="btn tltpcd" data-ttl="{{$accion->descripcion}}" href="{{$accion->url}}">
                                             <div class="{{$accion->clase_css}}">
                                                 <div class="col-md-8 col-md-offset-2">
-                                                    <img src="{{asset($accion->data_toogle)}}" alt="" class="im">
+                                                    <img src="{{asset($accion->identificador)}}" alt="" class="im">
                                                 </div>
                                             </div>
                                         </a>

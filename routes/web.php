@@ -33,7 +33,7 @@ Route::post( '/login/verificar','InicioController@verificar');
 Route::match(['post','get'],'/menu',['middleware'=>'v_menu','uses'=>'InicioController@iniciarMenu']);//Carga el menu personalizado por perfil //permite el ingreso solo de porseer sesion activa//actual redireccion
 Route::get('/menu/cambio/registros','RegistrosBasicos@cambio_registros'); //check de status
 Route::get('/menu/modificar/registros','RegistrosBasicos@modificar_registrosCD'); //modificar registros
-
+Route::get('/buscarRegistros','Buscador@buscarRegistros'); //modificar registros
 
 //MODULO: REGISTROS BASICOS, rutas de los submodulos ingresadas al clickear en la sidebar o por url //cargaria las acciones disponibles para el perfil logueado
 
@@ -104,7 +104,7 @@ Route::group(['prefix'=>'/menu/registros','middleware'=>['v_menu']],function(){
 	
 	Route::match(['post','get'],'/clientes/modificar/responsable',											['uses'=>'RegistrosBasicos@clientes_modificar_responsables']);
 
-	Route::match(['post','get'],'/prueba',						  										    ['uses'=>'RegistrosBasicos@pruebas_']);
+	Route::match(['post','get'],'/prueba',						  										    ['uses'=>'Buscador@buscarRegistros']);
 
 	Route::match(['post','get'],'/clientes/categoria/agregar/{cliente_id}',						   			['uses'=>'RegistrosBasicos@clientes_categoria_agregar']);
 	Route::match(['post','get'],'/clientes/responsables/actualizar/{cliente_id}',				 			['uses'=>'RegistrosBasicos@clientes_actualizar_responsable']);

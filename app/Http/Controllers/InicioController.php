@@ -72,7 +72,7 @@ class InicioController extends Controller
                          ///////////////////////////////  consulta para las acciones///////////////////////////////////////////////////////////////////////////////////////////////////
 
                          $acciones=DB::table('acciones')->join('accion_perfil','accion_perfil.accion_id','=','acciones.id')->select(
-                                                               'acciones.id AS id','acciones.status_ac AS status_ac','acciones.descripcion AS descripcion','acciones.url AS url','acciones.clase_css AS clase_css','acciones.data_toogle AS data_toogle','acciones.submodulo_id as submodulo_id','accion_perfil.status AS status')->where(['acciones.status_ac'=>1,'accion_perfil.status'=>1,'accion_perfil.perfil_id'=>$perfil->id])->get();
+                                                               'acciones.id AS id','acciones.status_ac AS status_ac','acciones.descripcion AS descripcion','acciones.url AS url','acciones.clase_css AS clase_css','acciones.submodulo_id as submodulo_id','accion_perfil.status AS status','acciones.desci as desci','acciones.clase_elem as clase_elem','acciones.identificador as identificador','acciones.clase_cont as clase_cont','acciones.vista as vista')->where(['acciones.status_ac'=>1,'accion_perfil.status'=>1,'accion_perfil.perfil_id'=>$perfil->id])->get();
 
                          /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
