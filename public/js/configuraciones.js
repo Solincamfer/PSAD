@@ -475,7 +475,7 @@ function consultar_componentes(argument) //consulta los componetes asociados a u
 								if (data[1]==0) 
 								{
 									$('#inputComponente input').remove();
-                                    $('#inputComponente').append('<input type="search" placeholder="Buscar " class="BUSE" id="tpEP" data-inputbus="1" data-dependencia="'+data[2]+'" ><span class="fa fa-search"></span>');
+                                    $('#inputComponente').append('<input type="search" placeholder="Buscar" class="BUSE" id="tpEP" data-inputbus="1" data-dependencia="'+data[2]+'" ><span class="fa fa-search"></span>');
 									$('#tarjetaComponentes_ p').remove();
 									$('#tarjetaComponentes_ li').remove();
 
@@ -497,7 +497,7 @@ function consultar_componentes(argument) //consulta los componetes asociados a u
 								{
 									
 									$('#inputComponente input').remove();
-                                    $('#inputComponente').append('<input type="search" placeholder="Buscar " class="BUSE" id="tpEP" data-inputbus="1" data-dependencia="'+data[2]+'" ><span class="fa fa-search"></span>');
+                                    $('#inputComponente').append('<input type="search" placeholder="Buscar" class="BUSE" id="tpEP" data-inputbus="1" data-dependencia="'+data[2]+'" ><span class="fa fa-search"></span>');
 									$('#tarjetaComponentes_ p').remove();
 									$('#tarjetaComponentes_ li').remove();
 									$.each(data[0], function(i, item)
@@ -573,7 +573,7 @@ function consultar_pieza ()
 
 									//alert(data[0])
 									$('#inputPiezas input').remove();
-                                    $('#inputPiezas').append('<input type="search" placeholder="Buscar Pieza " class="BUSE" id="Tepieza" data-inputbus="2" data-dependencia="'+data[2]+'" ><span class="fa fa-search"></span>');
+                                    $('#inputPiezas').append('<input type="search" placeholder="Buscar" class="BUSE" id="Tepieza" data-inputbus="2" data-dependencia="'+data[2]+'" ><span class="fa fa-search"></span>');
 
 									$('#tarjetaPiezas_ li').remove();
 									$.each(data[0], function(i, item)
