@@ -10,6 +10,7 @@ $( document ).ready( function ()
   		var vista=elemento.attr('data-vista');
   		var datos=[tabla,texto,submodulo,vista];
   		var url='/buscarRegistros';
+  		
 
 
   		$('#areaResultados div').remove();//limpia los registros 

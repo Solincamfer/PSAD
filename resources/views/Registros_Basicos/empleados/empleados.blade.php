@@ -35,7 +35,7 @@
                             </div>
                         </div>
 
-                        <div class="col-xs-5 col-sm-5 col-md-6 col-md-offset-3" style=""> 
+                        <div class="col-xs-5 col-sm-5 col-md-6 col-md-offset-3" id="areaResultados" data-tab="{{$datosC6}}"> 
 
                             @foreach($consulta as $empleado)
                                 <div class="contMd" style="">
@@ -51,7 +51,7 @@
                                               </span>
                                              @elseif($accion->id==76)
                                                 <span class="iclsp">
-                                                  <a href="#myModal2" class="tltp modificarEmpleado" id="m{{$empleado->id}}" data-ttl="{{$accion->descripcion}}" data-registro="{{$empleado->id}}" data-toggle="modal" data-target="#myModal2"> 
+                                                  <a  class="tltp ModificaR" id="ModificaR{{$empleado->id}}" data-ttl="{{$accion->descripcion}}" data-reg="{{$empleado->id}}" data-toggle="modal" > 
                                                   <i class="{{$accion->clase_css}}"></i>
                                                   </a>
                                                </span>
@@ -72,7 +72,7 @@
                                 <p class="ttlMd"><strong>{{$empleado->nombre."  ".$empleado->apellido}}</strong></p>
                                 </div>
                             @endforeach
-                            <input type="hidden" name="TND" value="{{$datosC6}}">
+                            <input type="text" name="TND" value="{{$datosC6}}">
                         </div>
                         <!--    Registro -->
 
@@ -183,7 +183,7 @@
                                                                <div class="col-md-10 col-md-offset-1">
                                                                    <div class="form-group row">
                                                                        <label for="dptoEmp">Departamento</label><span class="ic"><i class="fa fa-chevron-down"></i></span>
-                                                                       <select name="dptoEmp" class="form-control" id="dptoEmp">
+                                                                       <select name="dptoEmp" class="form-control" id="dptoEmp" data-lista="0">
                                                                            <option value="0">-</option>
                                                                            @foreach ($datosC5 as $departamentos)
                                                                               <option value="{{$departamentos->id}}">{{$departamentos->descripcion}}</option>
@@ -208,7 +208,7 @@
                                                            <div class="row rEmp4">
                                                                <div class="form-group col-md-6">
                                                                    <label for="pdhe">País</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
-                                                                   <select name="pdhe" class="form-control" id="pdhe">
+                                                                   <select name="pdhe" class="form-control" id="pdhe" >
                                                                        <option value="0">-</option>
                                                                        @foreach ($datosC2 as $pais)
                                                                           <option value="{{$pais->id}}">{{$pais->descripcion}}</option>
@@ -441,7 +441,7 @@
                                                         <div class="col-md-10 col-md-offset-1">
                                                             <div class="form-group row">
                                                                 <label for="dptoEmpm">Departamento</label><span class="ic"><i class="fa fa-chevron-down"></i></span>
-                                                                <select name="dptoEmpm" class="form-control" id="dptoEmpm">
+                                                                <select name="dptoEmpm" class="form-control" id="dptoEmpm" data-lista="0">
                                                                     <option value="">-</option>
                                                                     @foreach ($datosC5 as $departamentos)
                                                                       <option value="{{$departamentos->id}}">{{$departamentos->descripcion}}</option>
@@ -466,7 +466,7 @@
                                                     <div class="row rEmp4">
                                                         <div class="form-group col-md-6">
                                                             <label for="pdhem">País</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
-                                                            <select name="pdhem" class="form-control" id="pdhem">
+                                                            <select name="pdhem" class="form-control" id="pdhem" data-lista="1" data-clase="0">
                                                                 <option value="">-</option>
                                                                 @foreach ($datosC2 as $pais)
                                                                   <option value="{{$pais->id}}">{{$pais->descripcion}}</option>
@@ -475,13 +475,13 @@
                                                         </div>
                                                         <div class="form-group col-md-6">
                                                             <label for="rgdhem">Región</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
-                                                            <select name="rgdhem" class="form-control" id="rgdhem">
+                                                            <select name="rgdhem" class="form-control" id="rgdhem" data-lista="2" data-clase="0">
                                                                 <option value="">-</option>
                                                             </select><i class="fa fa-map icemp"></i>
                                                         </div>
                                                         <div class="form-group col-md-6">
                                                             <label for="edodhem">Estado</label><span class="ic"><i class="fa fa-chevron-down"></i></span>
-                                                            <select name="edodhem" class="form-control" id="edodhem">
+                                                            <select name="edodhem" class="form-control" id="edodhem" data-lista="3" data-clase="0">
                                                                 <option value="">-</option>
                                                             </select><i class="fa fa-map-pin icemp"></i>
                                                         </div>

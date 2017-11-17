@@ -41,8 +41,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-5 col-sm-5 col-md-6 col-md-offset-3" >
-                <div id="areaResultados">
+                <div class="col-xs-5 col-sm-5 col-md-6 col-md-offset-3" id="areaResultados" data-tab={{$extra}} >
+                <div >
                         @foreach($consulta as $cargo)
                             <div class="contMd" >
                                 <div class="icl">
@@ -51,7 +51,7 @@
                                         @if($accion->desci!='status' && $accion->desci!='radio')
                                             @if($accion->desci=='modificar')
                                                 <span class="{{$accion->clase_cont}}">
-                                                    <a href="{{$accion->url}}" class="{{$accion->clase_elem}}" id="{{$accion->identificador.$cargo->id}}" data-ttl="{{$accion->descripcion}}" data-toggle="modal" data-target="{{$accion->url}}"> 
+                                                    <a  class="{{$accion->clase_elem}}" id="{{$accion->identificador.$cargo->id}}" data-reg="{{$cargo->id}}" data-ttl="{{$accion->descripcion}}" data-toggle="modal" > 
                                                         <i class="{{$accion->clase_css}}"></i>
                                                     </a>
                                                 </span>
@@ -66,7 +66,7 @@
                                         @elseif($accion->desci=='status' || $accion->desci=='radio')
                                             @if($accion->desci=='status')
                                                 <div class="{{$accion->clase_cont}}">
-                                                     <input type="checkbox" class="{{$accion->clase_elem}}" name="status" id="{{'inchbx'. $cargo->id}}" value="{{$cargo->status}}" {{$cargo->condicion}}><label for="{{'inchbx'. $cargo->id}}"  data-ttl="{{$accion->descripcion}}"></label>
+                                                     <input type="checkbox" class="{{$accion->clase_elem}}" name="status" id="{{'inchbx'. $cargo->id}}" value="{{$cargo->status}}"><label for="{{'inchbx'. $cargo->id}}"  data-ttl="{{$accion->descripcion}}"></label>
                                                 </div>
                                                
                                             @endif
@@ -81,7 +81,7 @@
                     <div class="paginador" id="paginador">
                         {{ $consulta->links() }}
                     </div>
-                      <input type="hidden"   name="TND"  value="{{$extra}}">
+                      <input type="text"   name="TND"  value="{{$extra}}">
                 </div>
                 
                 <!-- Modal Agregar -->
@@ -137,24 +137,24 @@
                         <div class="modal-content">
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title" id="myModalLabel2"><strong>Modificar Cargo</strong></h4>
+                                <h4 class="modal-title" id="myModalLabel2" data-department="{{$datosC1}}"><strong>Modificar Cargo</strong></h4>
                             </div>
                             <div class="modal-body">
                                 <form class="form-horizontal DepCarPer" >
                                     {{ csrf_field() }}
-                                    <div class="container-fluid" id="contcgo">
+                                    <div class="container-fluid" id="contcgo" >
 
                                         <div id="cgom">
                                             <div class="col-md-8 col-md-offset-2">
                                                 <div class="form-group row">
                                                     <label for="nomCgom_">Nombre del cargo</label>
-                                                    <input type="text" class="form-control descripcion" name="Descripcion" id="nomCgom_" /><i class="fa fa-id-badge " id="miccg1"></i>                     
+                                                    <input type="text" class="form-control descripcion" name="Descripcion" id="caText" /><i class="fa fa-id-badge " id="miccg1"></i>                     
                                                 </div>
                                             </div>
                                             <div class="col-md-8 col-md-offset-2">
                                                 <div class="form-group row">
                                                     <label for="stCgom_">Estatus del Cargo</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
-                                                    <select id="stCgom_" class="form-control status" name="Status">
+                                                    <select id="caStatus" class="form-control status" name="Status">
                                                         <option value="1">ACTIVO</option>
                                                         <option value="0">INACTIVO</option>
                                                     </select><i class="fa fa-check" id="miccg2"></i>
@@ -162,8 +162,8 @@
                                             </div>
 
                                         </div>
-                                         <input type="hidden" value="" id="MIndexC" name="MIndex">
-                                         <input type="hidden" value="{{$datosC1}}" id="DCargo" name="DCargo">
+                                         <input type="text" value="" id="MIndexC" name="MIndex">
+                                         <input type="text" value="{{$datosC1}}" id="DCargo" name="DCargo">
 
 
                                     </div>

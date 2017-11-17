@@ -34,7 +34,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-5 col-sm-5 col-md-6 col-md-offset-3" style=""> 
+                <div class="col-xs-5 col-sm-5 col-md-6 col-md-offset-3" id="areaResultados" data-tab="{{$extra}}"> 
                  
                    @foreach($consulta as $planes)
                         <div class="contMd">
@@ -43,13 +43,13 @@
                                     @if($accion->id!=66)
                                         @if($accion->id==65)
                                             <span class="iclsp">
-                                                <a href="#myModal2" class="tltp modificarPlanes" data-ttl="{{$accion->descripcion}}" data-id="{{$planes->id}}" data-toggle="modal" data-target="#myModal2"> 
+                                                <a  class="tltp ModificaR" data-reg="{{$planes->id}}"" data-ttl="{{$accion->descripcion}}"  data-toggle="modal" > 
                                                     <i class="{{$accion->clase_css}}"></i>
                                                 </a>
                                             </span>
                                         @elseif($accion->id!=65)
                                             <span class="iclsp">
-                                                <a href="{{$accion->url.$planes->id}}" class="tltp" data-ttl="{{$accion->descripcion}}">
+                                                <a href="{{$accion->url.$planes->id}}" class="tltp consultarPlan" data-ttl="{{$accion->descripcion}}">
                                                     <i class="{{$accion->clase_css}}"></i>
                                                 </a>
                                             </span>
@@ -74,7 +74,7 @@
                     <div class="paginador">
                         {{ $consulta->links() }}
                     </div>
-                    <input type="hidden"   name="TND"  value="{{$extra}}">
+                    <input type="text"   name="TND"  value="{{$extra}}">
                 </div>
 
 

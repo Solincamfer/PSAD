@@ -34,7 +34,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-5 col-sm-5 col-md-6 col-md-offset-3">  
+                <div class="col-xs-5 col-sm-5 col-md-6 col-md-offset-3" id="areaResultados" data-tab="{{$extra}}">  
                     @foreach($consulta as $departamento)
 
                         <div class="contMd" >
@@ -45,7 +45,7 @@
                                     @if($accion->id!=1 )
                                         @if($accion->id==2)
                                             <span class="iclsp">
-                                                <a href="#myModal2" class="tltp ModificaR" id="ModificaDepar{{$departamento->id}}" data-ttl="{{$accion->descripcion}}" data-toggle="modal" data-target="#myModal2"> 
+                                                <a  class="tltp ModificaR" data-reg="{{$departamento->id}}" id="ModificaDepar{{$departamento->id}}" data-ttl="{{$accion->descripcion}}" data-toggle="modal" > 
                                                     <i class="{{$accion->clase_css}}"></i>
                                                 </a>
                                             </span>
@@ -110,8 +110,8 @@
                                                        <label for="stDpto">Estatus del Departamento</label><span class="ic"><i class="fa fa-chevron-down"></i></span>
                                                        <select name="comboDpto" class="form-control" id="stDpto">
                                                             <option value="">-</option>
-                                                            <option value="1">Activo</option>
-                                                            <option value="0">Inactivo</option>
+                                                            <option value="1">ACTIVO</option>
+                                                            <option value="0">INACTIVO</option>
                                                        </select><i class="fa fa-check" id="icdp2"></i>
                                                    </div>
                                                </div> 
@@ -145,15 +145,15 @@
                                                 <div class="col-md-8 col-md-offset-2">
                                                     <div class="form-group row">
                                                         <label for="nomDptom_">Nombre del Departamento</label>
-                                                        <input type="text" name="Descripcion" class="form-control descripcion" id="nomDptom_"/><i class="fa fa-briefcase " id="micdp1"></i>
+                                                        <input type="text" name="Descripcion" class="form-control descripcion" id="depText"/><i class="fa fa-briefcase " id="micdp1"></i>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-8 col-md-offset-2">
                                                     <div class="form-group row">
                                                         <label for="stDptom_">Estatus del Departamento</label><span class="ic"><i class="fa fa-chevron-down"></i></span>
-                                                        <select name="Status" class="form-control status" id="stDptom_">
-                                                            <option value="1">Activo</option>
-                                                            <option value="0">Inactivo</option>
+                                                        <select name="Status" class="form-control status" id="depStatus">
+                                                            <option value="1">ACTIVO</option>
+                                                            <option value="0">INACTIVO</option>
                                                         </select><i class="fa fa-check" id="micdp2"></i>
                                                     </div>
                                                 </div> 

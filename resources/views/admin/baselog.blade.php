@@ -18,6 +18,7 @@
     <script src="{{asset('plugins/sweetalert/sweetalert.min.js')}}"></script>
     <script src="{{asset('js/val.js')}}"></script>
     <script src="{{asset('js/AJAX.js')}}"></script>
+     <script src="{{asset('js/botonModificar.js')}}"></script>
     <script src="{{asset('js/validator.min.js')}}"></script>
     <script src="{{asset('plugins/tooltipster/dist/js/tooltipster.bundle.min.js')}}"></script>
 </body>
