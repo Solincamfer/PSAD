@@ -308,8 +308,39 @@ public function capturar_datos_responsables()
 
 	public function buscarRegistro($registryId,$table)
 	{
-		$boards=["departamentos","cargos","perfiles","empleados"];
+		$boards=["departamentos","cargos","perfiles"];
 		$registry=DB::table($boards[$table])->where('id',$registryId)->first();
+		return ($registry);
+	}
+
+	public function buscarCategorias($registryId)
+	{
+		$registry=DB::table('categorias')->where('id',$registryId)
+		                                 ->select('categorias.id AS id',
+		                                 	      'categorias.nombre AS descripcion',
+		                                 	      'categorias.status AS status',
+		                                 	      'categorias.cliente_id AS padreId')
+		                                 ->first();
+		return ($registry);
+	}
+
+	public function buscarPlanes($registryId)
+	{
+		$registry=DB::table('planes')->where('id',$registryId)
+		                             ->select('planes.nombreP AS descripcion','planes.descuento AS descuento','planes.status AS status')
+		                             ->first();
+		return ($registry);
+
+	}
+
+	public function buscarSucursales($registryId)
+	{
+		$registry=DB::table('sucursales')->where('id',$registryId)
+		                                 ->select('sucursales.razon_s AS razonS',
+		                                 		  'sucursales.nombre_c AS nombreC',
+		                                 		  'sucursales.status AS status')
+		                                 ->first();
+
 		return ($registry);
 	}
 
@@ -515,14 +546,7 @@ public function capturar_datos_responsables()
 	}
 
 
-	public function buscarPlanes($registryId)
-	{
-		$registry=DB::table('planes')->where('id',$registryId)
-		                             ->select('planes.nombreP AS descripcion','planes.descuento AS descuento','planes.status AS status')
-		                             ->first();
-		return ($registry);
-
-	}
+	
 
     ///metodo que obtiene la informacion enviada por los script JS, que contienen la informacion correspondiente al boton modificar
     //Args: Table: entero que es el identificador de la tabla que contiene los datos para el modal, registry: es el id del registro
@@ -538,17 +562,25 @@ public function capturar_datos_responsables()
 				{
 					$registry=$this->buscarRegistro($registryId,$table);
 				}
-			else if ($table==3)
+			else if($table==3)
 				{
-					$registry=$this->buscarEmpleados($registryId);
+					$registry=$this->buscarCategorias($registryId);
 				}
 			else if ($table==4)
 				{
+					$registry=$this->buscarEmpleados($registryId);
+				}
+			else if ($table==5)
+				{
 					$registry=$this->buscarPlanes($registryId);
 				}
-			else if($table==5)
+			else if($table==6)
 				{
 					$registry=$this->buscarClientes($registryId);
+				}
+			else if($table==7)
+				{
+					$registry=$this->buscarSucursales($registryId);
 				}
 		
 			
@@ -625,7 +657,7 @@ public function planes_servicios()
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
 		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(65,66,67),64);
-		return view ('Registros_Basicos\PlaneS\planes',$this->datos_vista($datos,$acciones,DB::table('planes')->paginate(11),4));
+		return view ('Registros_Basicos\PlaneS\planes',$this->datos_vista($datos,$acciones,DB::table('planes')->paginate(11),5));
 
 		
 	}
@@ -845,7 +877,7 @@ public function empleados()
 
 	$datos=$this->cargar_header_sidebar_acciones();
 	$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(76,77,78),75);
-	return view ('Registros_Basicos\empleados\empleados',$this->datos_vista($datos,$acciones,DB::table('empleados')->where('id','<>',3)->get(),$tipoR,$tipoD,$paises,$codigoC,$codigoL,$departamentos,3));//el 3 significa que es la vista 3
+	return view ('Registros_Basicos\empleados\empleados',$this->datos_vista($datos,$acciones,DB::table('empleados')->where('id','<>',4)->get(),$tipoR,$tipoD,$paises,$codigoC,$codigoL,$departamentos,4));//el 3 significa que es la vista 3
 }
 
 public function empleados_perfiles($empleado_id)
@@ -1226,7 +1258,7 @@ public function clientes()//inicializacion del submodulo: clientes
 															 'municipios'=>$municipios,
 															 'codigoC'=>$codigoC,
 															 'codigoL'=>$codigoL,
-															 'extra'=>5
+															 'extra'=>6
 
 
 
@@ -1564,7 +1596,7 @@ public function clientes_categoria($cliente_id)//vista de categorias de un clien
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
 		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(16,17,18,19),20);
-		return view ('Registros_Basicos\Clientes\clientes_categoria',$this->datos_vista($datos,$acciones,DB::table('categorias')->where('cliente_id',$cliente_id)->get(),$cliente_id,5));
+		return view ('Registros_Basicos\Clientes\clientes_categoria',$this->datos_vista($datos,$acciones,DB::table('categorias')->where('cliente_id',$cliente_id)->get(),$cliente_id,3));
 						
 	}
 
@@ -1715,7 +1747,7 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 															 'codigoL'=>$codigoL,
 															 'clienteId'=>$consulta_->cliente_id,
 															 'categoriaId'=>$categoria_id,
-															 'extra'=>6]);
+															 'extra'=>7]);
 
 						
 	}

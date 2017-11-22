@@ -461,23 +461,23 @@ $('#log1').click(function(){
 	});
 
 
-	$(".modificarCategoria").click(function(){
+	// $(".modificarCategoria").click(function(){
 
-		///////////BUSCADO BOTON CLICKEADO/////////////	
+	// 	///////////BUSCADO BOTON CLICKEADO/////////////	
 			
-			ID = $(this).attr("id");///////ID DEL BOTTON MODIFICAR/////////
-			idCategoria=$('#idcateg'+ID).val();///////TRAER VALOR DEL ID DEL BOTTON MODIFICAR/////////
-			$('#Categoriaid').val(idCategoria);///////ID DEL BOTTON MODIFICAR IGUALADA AL VALOR DEL CAMPO CORRESPONDIENTE AL ID SELECCIONADO/////////	
-		///////////PASANDO VARIABLE Y CARGANDO LISTADO CORRESPONDIENTE A LA SELECCION PREVIA Y ESPERANDO DATA COMO RESPUESTA/////////////			        	
-			$.get("/menu/registros/clientes/modificar/categoria", {idCategoria: idCategoria}, function(data){
-	    ///////////ASIGNANDO LOS VALORES DEL ARRAY A LOS IMPUT CORRESPONDIENTES DEL MODAL MODIFICAR/////////////	
+	// 		ID = $(this).attr("id");///////ID DEL BOTTON MODIFICAR/////////
+	// 		idCategoria=$('#idcateg'+ID).val();///////TRAER VALOR DEL ID DEL BOTTON MODIFICAR/////////
+	// 		$('#Categoriaid').val(idCategoria);///////ID DEL BOTTON MODIFICAR IGUALADA AL VALOR DEL CAMPO CORRESPONDIENTE AL ID SELECCIONADO/////////	
+	// 	///////////PASANDO VARIABLE Y CARGANDO LISTADO CORRESPONDIENTE A LA SELECCION PREVIA Y ESPERANDO DATA COMO RESPUESTA/////////////			        	
+	// 		$.get("/menu/registros/clientes/modificar/categoria", {idCategoria: idCategoria}, function(data){
+	//     ///////////ASIGNANDO LOS VALORES DEL ARRAY A LOS IMPUT CORRESPONDIENTES DEL MODAL MODIFICAR/////////////	
 	        	
-        		$('#CatM1').val(data[0]);
-        		$('#CatM2').val(data[1]);
-        		//->->->//alert(data);///////Data para probar los campos resividos por el AJAX//
-	       });
+ //        		$('#CatM1').val(data[0]);
+ //        		$('#CatM2').val(data[1]);
+ //        		//->->->//alert(data);///////Data para probar los campos resividos por el AJAX//
+	//        });
 
-	});
+	// });
 
 	$(".modificarResponsable_clinete").click(function(){
 

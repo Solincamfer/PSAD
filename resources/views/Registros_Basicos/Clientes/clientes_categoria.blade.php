@@ -41,7 +41,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xs-5 col-sm-5 col-md-6 col-md-offset-3" style=""> 
+                        <div class="col-xs-5 col-sm-5 col-md-6 col-md-offset-3" id="areaResultados" data-tab="{{$datosC1}}"> 
                          
                         @foreach($consulta as $categoria)   
                                 <div class="contMd" style="">
@@ -50,7 +50,7 @@
                                            @if($accion->id!=18)
                                                @if($accion->id==16)
                                                    <span class="iclsp">
-                                                       <a href="#myModal2" class="tltp modificarCategoria" data-ttl="{{$accion->descripcion}}" data-toggle="modal" id="m{{$categoria->id}}" data-target="#myModal2">
+                                                       <a  class="tltp ModificaR" data-ttl="{{$accion->descripcion}}" data-reg="{{$categoria->id}}"data-toggle="modal" id="m{{$categoria->id}}" >
                                                            <i class="{{$accion->clase_css}}"></i>
                                                        </a>
                                                     </span>
@@ -78,7 +78,7 @@
                                     <input type="hidden" name="idcateg{{$categoria->id}}" value="{{$categoria->id}}" id="idcategm{{$categoria->id}}">
                                 </div>
                           @endforeach
-							<input type="hidden" name="TND" value="{{$datosC1}}">
+							<input type="text" name="TND" value="{{$datosC1}}">
                         </div>
                         <!-- 	Registro -->
 
@@ -143,13 +143,13 @@
                                                         <div class="col-md-10 ">
                                                             <div class="form-group col-md-offset-2">
                                                                 <label for="nomCat">Nombre de la Categoría</label>
-                                                                <input type="text" name="nomCat" class="form-control userEmail" id="CatM1"><i class="fa fa-briefcase" id="micct1"></i>
+                                                                <input type="text" name="nomCat" class="form-control userEmail" id="catText"><i class="fa fa-briefcase" id="micct1"></i>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-10 ">
                                                             <div class="form-group col-md-offset-2">
                                                                 <label for="stCat">Estatus de la Categoría</label><span class="ic"><i class="fa fa-chevron-down"></i></span>
-                                                                <select name="stCat" class="form-control userEmail" id="CatM2">
+                                                                <select name="stCat" class="form-control userEmail" id="catStatus">
                                                                     <option value="">-</option>
                                                                     <option value="1">Activo</option>
                                                                     <option value="0">Inactivo</option>

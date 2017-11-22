@@ -92,22 +92,18 @@ $(document).ready(function()
 		$('#pdhem').val(registry.paisId);
 		$('#descpdhem').val(registry.descripcionDireccion);
 		$('#dptoEmpm').val(registry.departamentoId);
-
 		//cargar cargos asociados al departamento del empleado y seleccionar el correspondiente
 		//pasa como arumento el id del departamento al cual pertenece el cargo del empleado, el 1 indica que se desean 
 		//consultar cargos,'#cgoEmpm' es el id de la lista que se desea modificar, registry.cagoId , muestra el id del cargo del empleado
 		//mostrarDefault indica si se desea seleccionar una opcion por defaul, que en este caso es el cargo del empleado.
 		cargarListaDependiente(registry.departamentoId,1,'#cgoEmpm','',registry.cargoId,mostrarDefault=true)
-
 		//Cargar regiones que pertenecen al pais selecciones 
 		cargarListaDependiente(registry.paisId,2,'#rgdhem','0',registry.regionId,mostrarDefault=true)
-
 		//Cargar estados asociados a una region
 		cargarListaDependiente(registry.regionId,3,'#edodhem','0',registry.estadoId,mostrarDefault=true)
-
 		//Cargar municipios asociados a un estado
 		cargarListaDependiente(registry.estadoId,4,'#mundhem','0',registry.municipioId,mostrarDefault=true)
-
+		//
 		$(modalId).modal('show');
 
 		return 0;
@@ -118,8 +114,6 @@ $(document).ready(function()
 
 	function modalClientes(registry,modalId)
 	{
-		
-
 		$('#in11').val(registry.razonS);
 		$('#in12').val(registry.nombreC);
 		$('#in13').val(registry.tipoRif);
@@ -134,10 +128,6 @@ $(document).ready(function()
 		$('#innnn13').val(registry.codigoCelular);
 		$('#innnn12').val(registry.telefonoFijo);
 		$('#innnn14').val(registry.telefonoCelular);
-
-		
-
-		
 		/////////////DIRECCION FISCAL ////////////////////////////////////////////////////////////////
 		//Cargar regiones que pertenecen al pais selecciones 
 		cargarListaDependiente(registry.paisId,2,'#inn2','1',registry.regionIdF,mostrarDefault=true)
@@ -159,10 +149,6 @@ $(document).ready(function()
 		
 		// // //Cargar municipios asociados a un estado
 		cargarListaDependiente(registry.estadoIdF,4,'#innn14','2',registry.municipioidF,mostrarDefault=true)
-
-
-
-
 		$(modalId).modal('show');
 	}
 
@@ -180,6 +166,17 @@ $(document).ready(function()
 		return 0;
 	}
 
+	function modalSucursales(registry,modalId)
+	{
+
+
+		$('#razonSs').val(registry.razonS);
+		$('#nombreCs').val(registry.nombreC);
+
+		$(modalId).modal('show');
+		return 0;
+	}
+
 	///////Metodo que detecta cuando se presiona un boton modificar 
 	//////Args que captura: Tabla(table) donde se encuentra el registro a modificar y id del registro(registry) seleccionado, modalId: Id del modal modificar
 	//////Alcance: captura los datos y los envia al metodo de php encargado de coordinar las consultas a las tablas 
@@ -190,7 +187,7 @@ $(document).ready(function()
 	{
 		
 
-		var prefixes=['dep','ca','per'];
+		var prefixes=['dep','ca','per','cat'];
 		var modalId='#myModal2';
 		var route='/menu/modificar/registros'
 		var table=$('#areaResultados').attr('data-tab');
@@ -205,27 +202,31 @@ $(document).ready(function()
 			{
 				
 				
-				if (table==0||table==1||table==2) //cuando se usan las tablas: departamentos, cargos y perfiles
+				if (table==0||table==1||table==2||table==3) //cuando se usan las tablas: departamentos, cargos, perfiles y categorias 
 				{
 					modalCarDepPer(prefixes[table],registry,modalId);
 
 				}
-				else if(table==3)
+				else if(table==4)
 				{
 					modalEmpleados(registry,modalId);
 
 				}
-				else if(table==4)
+				else if(table==5)
 				{
 
 					modalPlanes(registry,modalId);
 				}
-				else if(table==5)
+				else if(table==6)
 				{
 
 					modalClientes(registry,modalId);
 				}
-				
+				else if(table==7)
+				{
+					modalSucursales(registry,modalId);
+				}
+
 		
 			})
 

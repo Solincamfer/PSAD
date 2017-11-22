@@ -41,7 +41,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xs-5 col-sm-5 col-md-6 col-md-offset-3" style="">
+                        <div class="col-xs-5 col-sm-5 col-md-6 col-md-offset-3" id="areaResultados" data-tab="{{$extra}}">
                           
                             @foreach($consulta as $sucursal)
                                 <div class="contMd" style="">
@@ -50,7 +50,7 @@
                                             @if($accion->id!=30)
                                                 @if($accion->id==25)
                                                     <span class="iclsp">
-                                                        <a href="#myModal2" class="tltp" data-ttl="{{$accion->descripcion}}" data-toggle="modal" data-target="#myModal2"> 
+                                                        <a href="#myModal2" class="tltp ModificaR" data-ttl="{{$accion->descripcion}}" data-toggle="modal" data-target="#myModal2" data-reg="{{$sucursal->id}}"> 
                                                             <i class="{{$accion->clase_css}}"></i>
                                                         </a>
                                                     </span>
@@ -77,7 +77,7 @@
                                     <p class="ttlMd"><strong>{{$sucursal->razon_s}}</strong></p>
                                 </div>
                           @endforeach
-						  <input type="hidden" name="TND" value="{{$extra}}">
+						  <input type="text" name="TND" value="{{$extra}}">
                         </div>
                         <!--Registro -->
 
@@ -335,13 +335,13 @@
                                                             <div class="col-md-12" id="dbcm1">
                                                                 <div class="form-group col-md-12">
                                                                     <label for="rs">Razon Social:</label>                           
-                                                                    <input type="text" name="rs" class="form-control userEmail"  id="inputm1"/>
+                                                                    <input type="text" name="rs" class="form-control userEmail"  id="razonSs"/>
                                                                     <i class="fa fa-university" id="micc1"></i>                              
                                                                 </div>                                                          
                                                                 <div class="form-group col-md-12">
 
                                                                     <label for="nc">Nombre Comercial:</label>
-                                                                    <input type="text" name="nc" id="inputm2" class="form-control userEmail" />
+                                                                    <input type="text" name="nc" id="nombreCs" class="form-control userEmail" />
                                                                     <i class="fa fa-building" id="micc2"></i>
 
                                                                 </div>

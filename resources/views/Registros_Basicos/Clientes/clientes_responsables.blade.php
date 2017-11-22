@@ -327,7 +327,7 @@
                                                                     <input type="text" name="mail2" id="RpMdaa5" class="form-control typeEmail">
                                                                     <i class="fa fa-envelope" id="micr15"></i>
                                                                 </div>
-                                                                <input type="hidden" name="Registroid" id="Registroid">
+                                                                <input type="text" name="Registroid" id="Registroid">
                                                             </div>
                                                         </div>
                                                     </div>

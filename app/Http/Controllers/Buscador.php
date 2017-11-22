@@ -79,162 +79,79 @@ class Buscador extends Controller
 
 
 
-	public function prueba_metodo($registryId=6)
+	public function prueba_metodo($registryId=1)
 	{
 
-		
-		// /////////////////traer datos del empleado desde la base de datos ///////////////////////////////////////////
-		// $registry=DB::table('empleados')->join('cedulas','empleados.cedula_id','=','cedulas.id')
-		// 								->join('tipos','cedulas.tipo_id','=','tipos.id')
-		// 								->join('rifs','empleados.rif_id','=','rifs.id')
-		// 								->join('departamentos','empleados.departamento_id','=','departamentos.id')
-		// 								->join('cargos','empleados.cargo_id','=','cargos.id')
-		// 								->join('usuarios','empleados.usuario_id','=','usuarios.id')
-		// 								->join('contactos','empleados.contacto_id','=','contactos.id')
-		// 								->join('direcciones','empleados.direccion_id','=','direcciones.id')
-										
-		// 								->join('municipios','direcciones.municipio_id','=','municipios.id')
-		// 								->join('regiones','direcciones.region_id','=','regiones.id')
-		// 								->join('estados','direcciones.estado_id','=','estados.id')
-		// 								->join('paises','direcciones.pais_id','=','paises.id')
-		// 								->select(	'empleados.id AS empleadoId',
-		// 											'empleados.contacto_id AS contactoId',
-		// 											'empleados.nombre AS primerNombre',
-		// 											'empleados.nombre_ AS segundoNombre',
-		// 										 	'empleados.apellido AS primerApellido',
-		// 										 	'empleados.apellido_ AS segundoApellido',
-		// 										 	'empleados.fechaN AS fechaNacimiento',
-		// 										 	'cedulas.numero AS numeroCedula',
-		// 										 	'cedulas.rol AS rol',
-		// 										 	'tipos.descripcion AS tipoCedula',
-		// 										 	'tipos.id AS tipoCedulaId',
-		// 										 	'departamentos.descripcion AS nombreDepartamento',
-		// 										 	'departamentos.id AS departamentoId',
-		// 										 	'cargos.descripcion AS nombreCargo',
-		// 										 	'cargos.id AS cargoId',
-		// 										 	'usuarios.n_usuario AS nombreUsuario','usuarios.clave AS claveUsuario',
-		// 										 	'usuarios.status AS statusUsuario',
-		// 										 	'contactos.correo AS correoUsuario',
-		// 										 	'paises.id AS paisId',
-		// 										 	'paises.descripcion AS nombrePais',
-		// 										     'estados.id AS estadoId',
-		// 										     'estados.descripcion AS nombreEstado',
-		// 										 	 'municipios.id AS municipioId',
-		// 										 	 'municipios.descripcion AS nombreMunicipio',
-		// 										 	 'regiones.id AS regionId',
-		// 										 	 'regiones.descripcion AS nombreRegion',
-		// 										 	 'direcciones.descripcion AS descripcionDireccion',
-		// 										 	 'empleados.rif_id AS rifId')
-		// 								->where('empleados.id',$registryId)->first();
+		$sucursal=DB::table('sucursales')-> where('sucursales.id',$registryId)
+		                             ->select('sucursales.razon_s AS razonS','sucursales.nombre_c AS nombreC','sucursales.status AS status','sucursales.rif_id AS rifId','sucursales.tipo_id AS idTipocontribuyente','sucursales.direccion_id AS idDireccionFiscal','sucursales.direccion__id AS idDireccionComercial','sucursales.contacto_id AS contactoId','sucursales.cliente_id AS matrizId','sucursales.categoria_id AS categoriaId')
+		                             ->first();
+
+		$rif=DB::table('rifs')->where('rifs.id',$sucursal->rifId)
+							  ->select('rifs.numero AS numero','rifs.tipo_id As tipoRif')
+							  ->first();
+
+		$contribuyente=DB::table('tipos')->where('tipos.id',$sucursal->idTipocontribuyente)
+										 ->select('tipos.descripcion AS descripcion','tipos.id AS codigoIdContribuyente')
+										 ->first();
+
+		$direccionFiscal=DB::table('direcciones')->join('municipios','direcciones.municipio_id','=','municipios.id')
+		                                         ->join('regiones','direcciones.region_id','=','regiones.id')
+		                                         ->join('estados','direcciones.estado_id','=','estados.id')
+		                                         ->join('paises','direcciones.pais_id','=','paises.id')
+		                                         ->select('municipios.id AS municipioId','municipios.descripcion AS municipio',
+		                                     			  'estados.id AS estadoId','estados.descripcion AS estado',
+		                                     			  'regiones.id AS regionId','regiones.descripcion AS region','paises.id AS paisId','paises.descripcion AS pais')
+		                                         ->where('direcciones.id',$sucursal->idDireccionFiscal)
+		                                         ->first();
 
 
-		// $rif=DB::table('rifs')->join('tipos','rifs.tipo_id','=','tipos.id')
-		// 					  ->select('rifs.numero AS numeroRif','tipos.descripcion AS tipoRif')
-		// 					  ->where('rifs.id',$registry->rifId)->first();
-							 
-		// $telfL=DB::table('contactos')->join('tipos','tipos.id','contactos.tipo__id')
-		// 							 ->select('tipos.descripcion AS codigoTelefonoFijo','contactos.telefono_f AS telefonoLocal','tipos.id AS fijCodigo')
-		// 							 ->where('contactos.id',$registry->contactoId)->first();
+		$direccionComercial=DB::table('direcciones')->join('municipios','direcciones.municipio_id','=','municipios.id')
+		                                         ->join('regiones','direcciones.region_id','=','regiones.id')
+		                                         ->join('estados','direcciones.estado_id','=','estados.id')
+		                                         ->join('paises','direcciones.pais_id','=','paises.id')
+		                                         ->select('municipios.id AS municipioId','municipios.descripcion AS municipio',
+		                                     			  'estados.id AS estadoid','estados.descripcion AS estado',
+		                                     			  'regiones.id AS regionId','regiones.descripcion AS region','paises.id AS paisId','paises.descripcion AS pais')
+		                                         ->where('direcciones.id',$sucursal->idDireccionComercial)
+		                                         ->first();
 
-		// $telfC=DB::table('contactos')->join('tipos','tipos.id','contactos.tipo_id')
-		// 							 ->select('tipos.descripcion AS codigoTelefonoCelular','contactos.telefono_m AS telefonoCelular','tipos.id AS celCodigoId')
-		// 							 ->where('contactos.id',$registry->contactoId)->first();
+		 $celularCorr=DB::table('contactos')->join('tipos','contactos.tipo_id','=','tipos.id')
+                                         ->select('contactos.correo AS correousuario','tipos.descripcion AS codigoCel','tipos.id AS codigoCelid','contactos.telefono_m AS celular')
+		                                 ->where('contactos.id',$sucursal->contactoId)
+		 							     ->first();
+
+		$fijo=DB::table('contactos')->join('tipos','contactos.tipo__id','=','tipos.id')
+								    ->select('contactos.telefono_f AS telefonoLocal','tipos.descripcion AS codigoFij',
+								    	     'tipos.id AS codigoFijId')->first();
 
 
-	
 		
 		
 
-		// $data = array('primerNombre' =>$registry->primerNombre,'segundoNombre'=>$registry->segundoNombre,
-		// 			  'primerApellido'=>$registry->primerApellido,'segundoApellido'=>$registry->segundoApellido,
-		// 			  'fechaNacimiento'=>$registry->fechaNacimiento,'tipoCedulaId'=>$registry->tipoCedulaId,
-		// 			  'tipoCedula'=>$registry->tipoCedula,'numeroCedula'=>$registry->numeroCedula,
-		// 			  'departamentoId'=>$registry->departamentoId,'nombreDepartamento'=>$registry->nombreDepartamento,
-		// 			  'cargoId'=>$registry->cargoId,'nombreCargo'=>$registry->nombreCargo,
-		// 			  'nombreUsuario'=>$registry->nombreUsuario,'claveUsuario'=>$registry->claveUsuario,
-		// 			  'statusUsuario'=>$registry->statusUsuario,'correoUsuario'=>$registry->correoUsuario,
-		// 			  'paisId'=>$registry->paisId,'nombrePais'=>$registry->nombrePais,
-		// 			  'estadoId'=>$registry->estadoId,'nombreEstado'=>$registry->nombreEstado,
-		// 			  'municipioId'=>$registry->municipioId,'nombreMunicipio'=>$registry->nombreMunicipio,
-		// 			  'regionId'=>$registry->regionId,'nombreRegion'=>$registry->nombreRegion,
-		// 			  'descripcionDireccion'=>$registry->descripcionDireccion,'rifId'=>$registry->rifId,
-		// 			  'numeroRif' =>$rif->numeroRif,'tipoRif'=>$rif->tipoRif,
-		// 			  'tipoCodigoCel'=>$telfC->celCodigoId,'codigoCel'=>$telfC->codigoTelefonoCelular,
-		// 			  'numeroCel'=>$telfC->telefonoCelular,'tipoCodigoFij'=>$telfL->fijCodigo,
-		// 			  'codigoFij'=>$telfL->codigoTelefonoFijo,'telefonoLocal'=>$telfL->telefonoLocal);
-
-		// //$data=json_encode($data);
-		// dd($data);
-		$cliente=DB::table('clientes')
-					  ->join('rifs','clientes.rif_id','=','rifs.id')
-					  ->join('contactos','clientes.contacto_id','=','contactos.id')
-					  ->join('tipos','clientes.tipo_id','=','tipos.id')
-					  
-
-					  ->select('clientes.razon_s AS razonS','clientes.nombre_c AS nombreC','rifs.numero As numeroR','rifs.tipo_id AS tipoR',
-					  		   'contactos.tipo_id AS codigoC','contactos.telefono_m AS telefonoC','contactos.tipo__id AS codigoL',
-					  		   'contactos.telefono_f AS telefonoF','contactos.correo','tipos.id As idtipoContribuyente','tipos.descripcion As Contribuyente')
-					  ->where('clientes.id',$registryId)->first();
 
 
-		$direccionF=DB::table('clientes')->join('direcciones','clientes.direccion_id','=','direcciones.id')
-
-										->join('paises','paises.id','=','direcciones.pais_id')
-										->join('regiones','regiones.id','=','direcciones.region_id')
-										->join('estados','estados.id','=','direcciones.estado_id')
-										->join('municipios','municipios.id','=','direcciones.municipio_id')
-
-										->select('paises.id As idpaisF','paises.descripcion As paisF',
-												 'regiones.id As idregionF','regiones.descripcion As regionF ',
-												 'estados.id As idestadoF','estados.descripcion As estadoF',
-												 'municipios.id As idmunicipioF','municipios.descripcion As municipiosF',
-												 'direcciones.id As iddireccionF','direcciones.descripcion As direccionF')
-												
-										
-										->where('clientes.id',$registryId)->first();
-
-		$direccionC=DB::table('clientes')->join('direcciones','clientes.direccion__id','=','direcciones.id')
-
-										->join('paises','paises.id','=','direcciones.pais_id')
-										->join('regiones','regiones.id','=','direcciones.region_id')
-										->join('estados','estados.id','=','direcciones.estado_id')
-										->join('municipios','municipios.id','=','direcciones.municipio_id')
-
-										->select('paises.id As idpaisC','paises.descripcion As paisC',
-												 'regiones.id As idregionC','regiones.descripcion As regionC ',
-												 'estados.id As idestadoC','estados.descripcion As estadoC',
-												 'municipios.id As idmunicipioC','municipios.descripcion As municipiosC',
-												 'direcciones.id As iddireccionC','direcciones.descripcion As direccionC')
-												
-										
-										->where('clientes.id',$registryId)->first();
-
-		// 0 id cliente/ 1 razonS /2 nombreC /3 numeroRif / 4 tipo Rif / 5 tipo codigoCelular 
-		//  6 numero Celular / 7 codigo telefono local / 8 numero de telefono local /9 correo 
-		//10 id tipo contirbuyente/11 descripcion tipo de contribuyente
-		//12 paisidF /13 paisF/14 regionidF/15 regionF /16 estadoidF/17 estadoF /18 municipioidF/19 municipio F/20 iddireccionF/21 direccionF
-		//22 paisidC /23 paisC/24 regionidC/25 regionC /26 estadoidC/27 estadoC /28 municipioidC/29 municipioC /30 iddireccionC/31 direccionC
-
-
-		$data= array(
-						'razonS'=>$cliente->razonS,'nombreC'=>$cliente->nombreC,
-						'numeroRif'=>$cliente->numeroR,'tipoRif'=>$cliente->tipoR,
-						'codigoCelular'=>$cliente->codigoC,'telefonoCelular'=>$cliente->telefonoC,
-						'codigoLocal'=>$cliente->codigoL,'telefonoFijo'=>$cliente->telefonoF,
-						'correoUsuario'=>$cliente->correo,'idTipoContribuyento'=>$cliente->idtipoContribuyente,
-						'tipoContribuyente'=>$cliente->Contribuyente,'paisId'=>$direccionF->idpaisF,
-						'paisFiscal'=>$direccionF->paisF,'regionIdF'=>$direccionF->idregionF,
-						'regionFiscal'=>$direccionF->regionF,'estadoIdF'=>$direccionF->idestadoF,
-						'estadoF'=>$direccionF->estadoF,'municipioidF'=>$direccionF->idmunicipioF,
-						'municipiosF'=>$direccionF->municipiosF,'direccionIdFiscal'=>$direccionF->iddireccionF,
-						'direccionIdFiscal'=>$direccionF->direccionF,'paisIdC'=>$direccionC->idpaisC,'paisC'=>$direccionC->paisC,'regionIdC'=>$direccionC->idregionC,'regionC'=>$direccionC->regionC,
-						'estadoidC'=>$direccionC->idestadoC,'estadoC'=>$direccionC->estadoC,
-						'municipioIdC'=>$direccionC->idmunicipioC,'municipiosC'=>$direccionC->municipiosC,
-						'direcionIdC'=>$direccionC->iddireccionC,'direccionC'=>$direccionC->direccionC);
-
-		//$data=json_encode($data);
-		
-		dd($data);
+		$data=array(
+					"razonsocial"=>$sucursal->razonS,
+					"nombreC",=>$sucursal->nombreC,
+					"tiporif"=>$rif->tipoRif,
+					"numeroRif"=>$rif->numero,
+					"tipoContribuyente"=>$contribuyente->codigoIdContribuyente,
+					"contribuyente"=>$contribuyente->descripcion,
+					"idPaisF"=>$direccionFiscal->paisId,
+					"paisF"=>$direccionFiscal->pais,
+					"idRegionF"=>$direccionFiscal->regionId,
+					"regionF"=>$direccionFiscal->region,
+					"idEstadoF"=>$direccionFiscal->estadoId,
+					"estadoF"=>$direccionFiscal->estado,
+					"idMunicipioF"=>$direccionFiscal->municipioId,
+					"municipioF"=>$direccionFiscal->municipio,
+					"direccionF"=>$direccionFiscal->,
+					""=>,
+					""=>,
+					""=>,
+					""=>,
+					""=>,
+					""=>);
 	
 	}
 }
