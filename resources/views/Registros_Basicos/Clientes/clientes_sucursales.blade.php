@@ -351,8 +351,10 @@
                                                                 <div class="form-group col-md-4" id="sepm">
                                                                     <select name="rif" id="inputm3" class="form-control userEmail">
                                                                         <option value="">-</option>
-                                                                        <option value="1">J-</option>
-                                                                        <option value="2">G-</option>
+                                                                    @foreach($tipoR As $rif)
+                                                                        <option value="{{$rif->id}}">{{$rif->descripcion}}</option>
+                                                                    @endforeach
+                                                                        
                                                                     </select><i class="fa fa-clipboard" id="micc3"></i>
                                                                 </div>  
                                                                 <div class="form-group col-md-8">                                   
@@ -365,8 +367,10 @@
                                                                     <label for="tipCon">Contribuyente</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
                                                                     <select name="tipCon" id="inputm5" class="form-control userEmail" >
                                                                         <option value="">-</option>
-                                                                        <option value="1">asdas</option>
-                                                                        <option value="2">sada</option>
+                                                                    @foreach($tipoC AS $contribuyente)
+                                                                        <option value="{{$contribuyente->id}}">{{$contribuyente->descripcion}}</option>
+                                                                    @endforeach
+                                                                       
                                                                     </select><i class="fa fa-clipboard" id="micc5"></i>                                                      
                                                                 </div>
                                                             </div>
@@ -378,33 +382,35 @@
                                                             <br>
                                                             <div class="form-group col-md-6" id="dfcm1">
                                                                 <label for="paisdf">País</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
-                                                                <select name="paisdf" id="inputm6" class="form-control userEmail">
+                                                                <select name="paisdf" id="inputm6" class="form-control userEmail" data-lista="1" data-clase="3">
                                                                     <option value="">-</option>
-                                                                    <option value="caracas">caracas</option>    
+                                                                @foreach($paises AS $pais)
+                                                                    <option value="{{$pais->id}}">{{$pais->descripcion}}</option>
+                                                                @endforeach     
                                                                 </select><i class="fa fa-globe" id="micc6"></i>
                                                             </div>
                                                             <div class="form-group col-md-7" id="dfcm2">
                                                                 <div class="col-md-offset-2">
                                                                     <label for="regiondf">Región</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
-                                                                    <select name="regiondf" id="inputm7" class="form-control userEmail">
+                                                                    <select name="regiondf" id="inputm7" class="form-control userEmail" data-lista="2" data-clase="3">
                                                                         <option value="">-</option>
-                                                                        <option value="caracas">caracas</option>
+                                                                       
                                                                     </select><i class="fa fa-map" id="micc7"></i>
                                                                 </div>
                                                             </div>
                                                             <div class="form-group col-md-6" id="dfcm3">
                                                                 <label for="edodf">Estado</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
-                                                                <select name="edodf" id="inputm8" class="form-control userEmail">
+                                                                <select name="edodf" id="inputm8" class="form-control userEmail" data-lista="3" data-clase="3" >
                                                                     <option value="">-</option>
-                                                                    <option value="caracas">caracas</option>
+                                                                   
                                                                 </select><i class="fa fa-map-pin" id="micc8"></i>
                                                             </div>
                                                             <div class="form-group col-md-7" id="dfcm4">
                                                                 <div class="col-md-offset-2">
                                                                     <label for="mundf">Municipio</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
-                                                                    <select name="mundf" id="inputm9" class="form-control userEmail">
+                                                                    <select name="mundf" id="inputm9" class="form-control userEmail" data-lista="4" data-clase="3" >
                                                                         <option value="">-</option>
-                                                                        <option value="caracas">caracas</option>
+                                                                      
                                                                     </select><i class="fa fa-map-signs" id="micc9"></i>
                                                                 </div>  
                                                             </div>
@@ -420,33 +426,35 @@
                                                             <br>                                    
                                                             <div class="form-group col-md-6" id="dccm1">
                                                                 <label for="paisdc">País</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
-                                                                <select name="paisdc" id="inputm11" class="form-control userEmail">
-                                                                    <option value="">-</option>
-                                                                    <option value="caracas">caracas</option>    
+                                                                <select name="paisdc" id="inputm11" class="form-control userEmail" data-lista="1" data-clase="4">
+                                                                <option value="">-</option>
+                                                               @foreach($paises AS $pais)
+                                                                    <option value="{{$pais->id}}">{{$pais->descripcion}}</option>
+                                                                @endforeach   
                                                                 </select><i class="fa fa-globe" id="micc11"></i>
                                                             </div>
                                                             <div class="form-group col-md-7" id="dccm2">
                                                                 <div class="col-md-offset-2">
                                                                     <label for="regiondc">Región</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
-                                                                    <select name="regiondc" id="inputm12" class="form-control userEmail">
+                                                                    <select name="regiondc" id="inputm12" class="form-control userEmail" data-lista="2" data-clase="4">
                                                                         <option value="">-</option>
-                                                                        <option value="caracas">caracas</option>
+                                                                      
                                                                     </select><i class="fa fa-map" id="micc12"></i>
                                                                 </div>
                                                             </div>
                                                             <div class="form-group col-md-6" id="dccm3">
                                                                 <label for="edodc">Estado</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
-                                                                <select name="edodc" id="inputm13" class="form-control userEmail">
+                                                                <select name="edodc" id="inputm13" class="form-control userEmail" data-lista="3" data-clase="4">
                                                                     <option value="">-</option>
-                                                                    <option value="caracas">caracas</option>
+                                                                    
                                                                 </select><i class="fa fa-map-pin" id="micc13"></i>
                                                             </div>
                                                             <div class="form-group col-md-7" id="dccm4">
                                                                 <div class="col-md-offset-2">
                                                                     <label for="mundc">Municipio</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
-                                                                    <select name="mundc" id="inputm14" class="form-control userEmail">
+                                                                    <select name="mundc" id="inputm14" class="form-control userEmail" data-lista="4" data-clase="4">
                                                                         <option value="">-</option>
-                                                                        <option value="caracas">caracas</option>
+                                                                       
                                                                     </select><i class="fa fa-map-signs" id="micc14"></i>
                                                                 </div>  
                                                             </div>                                                  
@@ -470,7 +478,9 @@
                                                                         <div class="form-group">
                                                                             <select name="tlflcl" id="inputm16" class="form-control userEmail">
                                                                                 <option value="">-</option>
-                                                                                <option value="0212">0212</option>
+                                                                            @foreach($codigoL AS $codigoFijo)
+                                                                                <option value="{{$codigoFijo->id}}">{{$codigoFijo->descripcion}}</option>
+                                                                            @endforeach
                                                                             </select><i class="fa fa-hashtag" id="micc16"></i>
                                                                         </div>
                                                                     </div>
@@ -490,7 +500,9 @@
                                                                         <div class="form-group">
                                                                             <select name="tlfmvl" id="inputm18" class="form-control userEmail">
                                                                                 <option value="">-</option>
-                                                                                <option value="0416">0416</option>
+                                                                            @foreach($codigoC AS $codigoMovil)
+                                                                                <option value="{{$codigoMovil->id}}">{{$codigoMovil->descripcion}}</option>
+                                                                            @endforeach
                                                                             </select><i class="fa fa-hashtag" id="micc18"></i>
                                                                         </div>
                                                                     </div>
