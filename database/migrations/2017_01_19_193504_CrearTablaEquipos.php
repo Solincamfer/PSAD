@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class TablaEquipos extends Migration
+class CrearTablaEquipos extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,17 @@ class TablaEquipos extends Migration
      */
     public function up()
     {
-        Schema::create('equipos', function (Blueprint $table) {
+        Schema::create('equipos', function (Blueprint $table)
+         {
             $table->increments('id');
-            $table->string('nombre',100);
+            $table->string('descripcion',100);
+            $table->string('tipo',100);
+            $table->string('marca',100);
+            $table->string('modelo',100);
             $table->string('serial',100);
             $table->integer('status');
-
+            $table->integer('sucursal_id')->unsigned();
+            $table->foreign('sucursal_id')->references('id')->on('sucursales');
         });
     }
 
