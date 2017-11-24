@@ -100,7 +100,7 @@ class Buscador extends Controller
 		                                         ->join('paises','direcciones.pais_id','=','paises.id')
 		                                         ->select('municipios.id AS municipioId','municipios.descripcion AS municipio',
 		                                     			  'estados.id AS estadoId','estados.descripcion AS estado',
-		                                     			  'regiones.id AS regionId','regiones.descripcion AS region','paises.id AS paisId','paises.descripcion AS pais')
+		                                     			  'regiones.id AS regionId','regiones.descripcion AS region','paises.id AS paisId','paises.descripcion AS pais','direcciones.descripcion AS direccion')
 		                                         ->where('direcciones.id',$sucursal->idDireccionFiscal)
 		                                         ->first();
 
@@ -110,8 +110,8 @@ class Buscador extends Controller
 		                                         ->join('estados','direcciones.estado_id','=','estados.id')
 		                                         ->join('paises','direcciones.pais_id','=','paises.id')
 		                                         ->select('municipios.id AS municipioId','municipios.descripcion AS municipio',
-		                                     			  'estados.id AS estadoid','estados.descripcion AS estado',
-		                                     			  'regiones.id AS regionId','regiones.descripcion AS region','paises.id AS paisId','paises.descripcion AS pais')
+		                                     			  'estados.id AS estadoId','estados.descripcion AS estado',
+		                                     			  'regiones.id AS regionId','regiones.descripcion AS region','paises.id AS paisId','paises.descripcion AS pais','direcciones.descripcion AS direccion')
 		                                         ->where('direcciones.id',$sucursal->idDireccionComercial)
 		                                         ->first();
 
@@ -122,17 +122,16 @@ class Buscador extends Controller
 
 		$fijo=DB::table('contactos')->join('tipos','contactos.tipo__id','=','tipos.id')
 								    ->select('contactos.telefono_f AS telefonoLocal','tipos.descripcion AS codigoFij',
-								    	     'tipos.id AS codigoFijId')->first();
+								    	     'tipos.id AS codigoFijId')
+								    ->where('contactos.id',$sucursal->contactoId)
+								    ->first();
 
 
-		
-		
-
-
+	
 
 		$data=array(
 					"razonsocial"=>$sucursal->razonS,
-					"nombreC",=>$sucursal->nombreC,
+					"nombreC"=>$sucursal->nombreC,
 					"tiporif"=>$rif->tipoRif,
 					"numeroRif"=>$rif->numero,
 					"tipoContribuyente"=>$contribuyente->codigoIdContribuyente,
@@ -145,13 +144,24 @@ class Buscador extends Controller
 					"estadoF"=>$direccionFiscal->estado,
 					"idMunicipioF"=>$direccionFiscal->municipioId,
 					"municipioF"=>$direccionFiscal->municipio,
-					"direccionF"=>$direccionFiscal->,
-					""=>,
-					""=>,
-					""=>,
-					""=>,
-					""=>,
-					""=>);
+					"direccionF"=>$direccionFiscal->direccion,
+					"idPaisC"=>$direccionComercial->paisId,
+					"paisC"=>$direccionComercial->pais,
+					"idRegionC"=>$direccionComercial->regionId,
+					"regionC"=>$direccionComercial->region,
+					"idestadoC"=>$direccionComercial->estadoId,
+					"estadoC"=>$direccionComercial->estado,
+				    "idMunicipioC"=>$direccionComercial->municipioId,
+				    "municipioC"=>$direccionComercial->municipio,
+				    "direccionC"=>$direccionComercial->municipio,
+				    "idCodigoFij"=>$fijo->codigoFijId,
+				    "codigoFij"=>$fijo->codigoFij,
+				    "telefonoFij"=>$fijo->telefonoLocal,
+				    "idCodigoCel"=>$celularCorr->codigoCelid,
+				    "codigoCel"=>$celularCorr->codigoCel,
+				    "telefonoCel"=>$celularCorr->celular);
+
+		dd($data);
 	
 	}
 }

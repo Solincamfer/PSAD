@@ -4,17 +4,16 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CrearTablaTequipos extends Migration
+class TablaTipoEquipos extends Migration
 {
     /**
      * Run the migrations.
      *
      * @return void
      */
-    public $timestamps=false;
     public function up()
     {
-        Schema::create('Tequipos', function (Blueprint $table) {
+        Schema::create('tipoEquipos', function (Blueprint $table) {
             $table->increments('id');
             $table->string('descripcion',100);
         });
@@ -27,6 +26,6 @@ class CrearTablaTequipos extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('Tequipos');
+        Schema::dropIfExists('tipoEquipos');
     }
 }

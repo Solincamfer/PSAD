@@ -172,6 +172,46 @@ $(document).ready(function()
 
 		$('#razonSs').val(registry.razonS);
 		$('#nombreCs').val(registry.nombreC);
+		$('#inputm3').val(registry.tipoRif);
+		$('#inputm4').val(registry.numeroRif);
+		$('#inputm5').val(registry.tipoContribuyente);
+		$('#inputm6').val(registry.idPaisF);
+		$('#inputm10').val(registry.direccionF);
+		$('#inputm11').val(registry.idPaisC);
+		$('#inputm15').val(registry.direccionC);
+		$('#inputm16').val(registry.idCodigoFij);
+		$('#inputm17').val(registry.telefonoFij);
+		$('#inputm18').val(registry.idCodigoCel);
+		$('#inputm19').val(registry.telefonoCel);
+		$('#inputm20').val(registry.correoUsuario);
+
+		/////////////////////DIRECCION FISCAL /////////////////////////////////////////////////
+
+		//////////////////cargar regiones que pertenecen al pais seleccionado ////////////////////////
+		cargarListaDependiente(registry.idPaisF,2,'#inputm7','3',registry.idRegionF,mostrarDefault=true)
+
+		//////////////////cargar estados de la region seleccionada ////////////////////////
+		cargarListaDependiente(registry.idRegionF,3,'#inputm8','3',registry.idEstadoF,mostrarDefault=true)
+
+		//////////////////cargar municipios del estado seleccionado////////////////////////
+		cargarListaDependiente(registry.idEstadoF,4,'#inputm9','3',registry.idMunicipioF,mostrarDefault=true)
+
+
+		/////////////////////DIRECCION COMERCIAL /////////////////////////////////////////////////
+
+		//////////////////cargar regiones que pertenecen al pais seleccionado ////////////////////////
+		cargarListaDependiente(registry.idPaisC,2,'#inputm12','3',registry.idRegionC,mostrarDefault=true)
+
+		//////////////////cargar estados de la region seleccionada ////////////////////////
+		cargarListaDependiente(registry.idRegionC,3,'#inputm13','3',registry.idEstadoC,mostrarDefault=true)
+
+		//////////////////cargar municipios del estado seleccionado////////////////////////
+		cargarListaDependiente(registry.idEstadoC,4,'#inputm14','3',registry.idMunicipioC,mostrarDefault=true)
+
+
+
+
+
 
 		$(modalId).modal('show');
 		return 0;
@@ -252,16 +292,16 @@ $(document).ready(function()
  			
  			var lista=$(this).attr('data-lista');//identifica que select se selecciono 0: departamentos, 1: Pais , 2: Region, 3: Estado, 4: Municipio
  			var clase=$(this).attr('data-clase');//indica a que grupo pertenece
- 			var regiones=['#rgdhem','#inn2','#innn12'];
- 			var estados=['#edodhem','#inn3','#innn13'];
- 			var municipios=['#mundhem','#inn4','#innn14'];
+ 			var regiones=['#rgdhem','#inn2','#innn12','#inputm7','#inputm12'];
+ 			var estados=['#edodhem','#inn3','#innn13','#inputm8','#inputm13'];
+ 			var municipios=['#mundhem','#inn4','#innn14','#inputm9','#inputm14'];
  			var id=$(this).val();
  			
  			if(lista==0)
  			{
  				cargarListaDependiente(id,1,'#cgoEmpm','');
  			}
- 			else if(lista==1)
+ 			else if(lista==1)//si se cambia el select de paises
  			{
  				$('.2'+clase).remove();//limpia la lista de regiones
 				$('.3'+clase).remove();//limpia la lista de estados
@@ -269,14 +309,14 @@ $(document).ready(function()
  				cargarListaDependiente(id,2,regiones[clase],clase);
  				
  			}
- 			else if(lista==2)
+ 			else if(lista==2)//si se cambia el select de regiones
  			{
  				
  				$('.3'+clase).remove();//limpia la lista de estados
 				$('.4'+clase).remove();//limpia la lista de municipios 
 				cargarListaDependiente(id,3,estados[clase],clase);
  			}
- 			else if(lista==3)
+ 			else if(lista==3)//si se cambia el select de estados 
  			{
  				$('.4'+clase).remove();//limpia los municipios  que se encontraban cargados
 				cargarListaDependiente(id,4,municipios[clase],clase);//carga los municipios correspondientes a un estado

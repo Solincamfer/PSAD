@@ -4,19 +4,17 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CrearTablaEmodelos extends Migration
+class EliminarColumnaTipoMarca extends Migration
 {
     /**
      * Run the migrations.
      *
      * @return void
      */
-    public $timestamps=false;
     public function up()
     {
-        Schema::create('Emodelos', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('descripcion',100);
+        Schema::table('marcas', function (Blueprint $table) {
+            $table->dropColumn('tipo');
         });
     }
 
@@ -27,6 +25,8 @@ class CrearTablaEmodelos extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('Emodelos');
+        Schema::table('marcas', function (Blueprint $table) {
+            $table->integer('tipo');
+        });
     }
 }
