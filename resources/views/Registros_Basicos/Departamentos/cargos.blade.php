@@ -65,9 +65,15 @@
                                             @endif
                                         @elseif($accion->desci=='status' || $accion->desci=='radio')
                                             @if($accion->desci=='status')
-                                                <div class="{{$accion->clase_cont}}">
-                                                     <input type="checkbox" class="{{$accion->clase_elem}}" name="status" id="{{'inchbx'. $cargo->id}}" value="{{$cargo->status}}"><label for="{{'inchbx'. $cargo->id}}"  data-ttl="{{$accion->descripcion}}"></label>
-                                                </div>
+                                                @if($cargo->status==0)
+                                                    <div class="{{$accion->clase_cont}}">
+                                                         <input type="checkbox" class="{{$accion->clase_elem}}" name="status" id="{{'inchbx'. $cargo->id}}" value="{{$cargo->status}}"><label for="{{'inchbx'. $cargo->id}}"  data-ttl="{{$accion->descripcion}}"></label>
+                                                    </div>
+                                                @elseif($cargo->status==1)
+                                                     <div class="{{$accion->clase_cont}}">
+                                                         <input type="checkbox" class="{{$accion->clase_elem}}" name="status" id="{{'inchbx'. $cargo->id}}" value="{{$cargo->status}}" checked><label for="{{'inchbx'. $cargo->id}}"  data-ttl="{{$accion->descripcion}}"></label>
+                                                    </div>
+                                                @endif
                                                
                                             @endif
                                         @endif
@@ -132,7 +138,8 @@
                 @endif
                 
                 <!-- Modal Modificar-->
-                <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" >
+                <div class="modal fade" id="myModal2" tabindex="-1"  data-tab="{{$extra}}" data-reg="" role="dialog" aria-labelledby="myModalLabel2" >
+                   
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -140,7 +147,7 @@
                                 <h4 class="modal-title" id="myModalLabel2" data-department="{{$datosC1}}"><strong>Modificar Cargo</strong></h4>
                             </div>
                             <div class="modal-body">
-                                <form class="form-horizontal DepCarPer" >
+                                <form class="form-horizontal DepCarPer" id="formulario_1">
                                     {{ csrf_field() }}
                                     <div class="container-fluid" id="contcgo" >
 
@@ -168,7 +175,7 @@
 
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="submit" class="bttnMd" id="mDepCarPer">Guardar <i class="fa fa-floppy-o"></i></button>
+                                        <button type="submit" class="bttnMd GuardarModificar" id="mDepCarPer">Guardar <i class="fa fa-floppy-o"></i></button>
                                     </div>
                                 </form>
                             </div>

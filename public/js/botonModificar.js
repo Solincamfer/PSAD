@@ -128,6 +128,7 @@ $(document).ready(function()
 		$('#innnn13').val(registry.codigoCelular);
 		$('#innnn12').val(registry.telefonoFijo);
 		$('#innnn14').val(registry.telefonoCelular);
+		
 		/////////////DIRECCION FISCAL ////////////////////////////////////////////////////////////////
 		//Cargar regiones que pertenecen al pais selecciones 
 		cargarListaDependiente(registry.paisId,2,'#inn2','1',registry.regionIdF,mostrarDefault=true)
@@ -232,6 +233,7 @@ $(document).ready(function()
 		var route='/menu/modificar/registros'
 		var table=$('#areaResultados').attr('data-tab');
 		var registry=$(this).attr('data-reg');
+		$(modalId).attr('data-reg', registry);
 	
 		
 		

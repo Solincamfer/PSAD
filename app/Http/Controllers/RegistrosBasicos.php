@@ -667,59 +667,93 @@ public function capturar_datos_responsables()
 		}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///metodos utilizados para verificar que el registro no exista en la tabla 
 
-
-
-public function actualizar_registrosCD(){     //actualizar departamentos y cargos, segun lo agregado en el modal modificar
+public function isCargo($descripcion,$registry)
+{
 	
-	$tablas=array("departamentos","cargos","perfiles");//listado de las tablas de la base de datos
-	$datos=Request::get('datos');
-	$tablaRegistro=$datos[2];// registro(0)-tabla(1)
-	$descripcion=strtoupper($datos[0]);//ucwords convierte la primera en mayuscula
-	$status=(int)$datos[1];
-	$dependencia=0;
+	$departamento=DB::table('cargos')->select('departamento_id')->where('id',$registry)->first();
+	$cargoConsulta=DB::table('cargos')->where(['descripcion'=>$descripcion,'departamento_id'=>$departamento->departamento_id])->get();
 
-	$index=(int)strpos($tablaRegistro,'ß');//indice del separador
-	$registro=(int)substr($tablaRegistro,0,$index);//registro a modificar
-	$indextabla=(int)trim(strrchr($tablaRegistro,'ß'),'ß');//tabla a modificar
-	$tabla=$tablas[$indextabla];//tabla donde se encuentra el registro a modificar
+	$cantidad=count($cargoConsulta);
+
+	return($cantidad);
+}
+
+
+
+public function updatePosition($descripcion,$status,$registry)
+{
+	$update=DB::table('cargos')->where('id',$registry)->update(['descripcion'=>$descripcion,'status'=>$status]);
+	return ($update);
+
+}
+
+
+
+
+
+public function duplicate($table,$descripcion,$registry)
+{
+	if($table==1)
+	{
+		$respuesta=$this->isCargo($descripcion,$registry);
+	}
+
+	return($respuesta);
+}
+
+
+
+
+	
+
+public function updateData($table,$registry,$form)
+{
+	if($table==1)
+	{
+       $update=$this->updatePosition($form['descripcion'],$form['status'],$registry);
+	}
+
+	return($update);
+}
+
+
+public function selectMessage($table,$duplicate,$update,$entity,$father)
+{
+	if ($duplicate>0)
+	{
+
+
+		if($table==1)
+		{
+			$message='El cargo: '.$entity.' , Se encuentra registrado para el departamento: '.$father;
+		}
+	}
+}
+
+/////metodos utilizados para realizar la actualizacion en la tabla de la informacion contenida en los formularios de modificar
+
+
+
+///////////////////metodo que realiza  la recepcion de los datos del formulario modificar y llama a los metodos correspondientes
+
+public function actualizar_registrosCD()
+{     //actualizar departamentos y cargos, segun lo agregado en el modal modificar
+	
+	$table=(int)Request::get('table');
+	$registry=(int)Request::get('registry');
+	$form=Request::get('datosFormulario');
 	
 	
-	if ($indextabla==1){ 
-	  //agrega ruta para los cargos relacionados con un departamento
-		$dependencia=(int)$datos[3];//departamento al cual pertenece el cargo a modificar
 
+	$duplicado=$this->duplicate($table,$form['descripcion'],$registry);
+	if($duplicado==0)
+	{
+		$update=$this->updateData($table,$registry,$form);
 	}
 	
-
-	$consulta=DB::table($tabla)->where('id','<>',$registro)->where('descripcion',$descripcion)->get();
-	if(count($consulta)==0){
-		
-		$consulta=DB::table($tabla)->where('id',$registro)->update(['descripcion'=>$descripcion,'status'=>$status]);
-		
-		if ($tabla =='departamentos') {
-			$respuesta= array (	1,
-							'/menu/registros/departamentos',
-							'Departamento'
-						);
-		}
-		elseif($tabla =='cargos'){
-			$respuesta= array(	1,
-							"/menu/registros/departamentos/cargos/".(string)$dependencia,
-							"Cargo"
-						);
-		}
-		elseif ($tabla =='perfiles') {
-			$respuesta= array(	1,
-							"/menu/registros/perfiles",
-							"Perfil"
-						);
-		}
-	}
-	else{
-		$respuesta=0;
-	}
-	return $respuesta;
+	return($duplicado);
 
 }
 

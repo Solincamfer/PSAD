@@ -5,6 +5,7 @@ use App\Usuario;
 use App\Empleado;
 use App\Perfil;
 use Session;
+use Response;
 use Request;
 use DB;
 
@@ -13,12 +14,23 @@ class InicioController extends Controller
 {
     
    
-    public function index()
+   public function pruebaJson()
+   {
+     $table=Request::get('table');
+     $registry=Request::get('registry');
+
+
+     return Response::json(['table'=>$table,'registry'=>$registry]);
+   }
+
+
+   public function index()
     {
         Session::forget('sesion');//limpia los datos de la sesion anterior
         Session::forget('modulos');
         Session::forget('submodulos');
         Session::forget('acciones');
+        
         return view('login');
     }//retorna el formulario de login
 
