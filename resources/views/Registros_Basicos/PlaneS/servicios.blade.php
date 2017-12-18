@@ -29,6 +29,7 @@
                                     <input type="hidden" id="plan" value="{{$extra}}">
 
 <!-- //////  TARJETA DE HORARIOS  //////-->
+
                                     <a id="s1" type="button" class="btn tltpcd m_Servicio " data-ttl="Horarios" data-toggle="modal" data-target="#myModal1" href="#myModal1">
                                         <div class="col-md-2 hh">
                                             <div class="col-md-8 col-md-offset-2">

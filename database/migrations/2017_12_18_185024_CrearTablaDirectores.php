@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class EliminarColumnaTipoMarca extends Migration
+class CrearTablaDirectores extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,10 @@ class EliminarColumnaTipoMarca extends Migration
      */
     public function up()
     {
-        Schema::table('marcas', function (Blueprint $table) {
-            $table->dropColumn('tipo');
+        schema::create('directores',function(Blueprint $table){
+            $table->increments('id');
+            $table->string('descripcion',100);
+            $table->integer('status');
         });
     }
 
@@ -25,8 +27,6 @@ class EliminarColumnaTipoMarca extends Migration
      */
     public function down()
     {
-        Schema::table('marcas', function (Blueprint $table) {
-            $table->integer('tipo');
-        });
+        schema::dropIfExists('directores');
     }
 }

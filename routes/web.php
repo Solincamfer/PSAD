@@ -45,7 +45,7 @@ Route::get('/buscarRegistros','Buscador@buscarRegistros'); //modificar registros
 
 Route::group(['prefix'=>'/menu/registros','middleware'=>['v_menu']],function(){
 
-	Route::match(['post','get'],'/departamentos',														['middleware'=>'validar_sm:2','uses'=>'RegistrosBasicos@departamentos']);
+	Route::match(['post','get'],'/departamentos',														['middleware'=>'validar_sm:2','uses'=>'EstructuraController@departamentos']);
 	Route::match(['post','get'],'/planeservicios',														['middleware'=>'validar_sm:3','uses'=> 'RegistrosBasicos@planes_servicios']);
 	Route::match(['post','get'],'/tiposequipos',														['middleware'=>'validar_sm:4','uses'=>'RegistrosBasicos@tipos']);
 	Route::match(['post','get'],'/perfiles',															['middleware'=>'validar_sm:5','uses'=>'RegistrosBasicos@perfiles']);

@@ -9,79 +9,118 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-2 ttlp">
-                            <h1>Departamentos</h1>
+                            <h1>Mi Compañia</h1>
                         </div>
                     </div>
-                    <div class="row sep-div">
-                        <div class="col-md-2 despl-bttn">
-                        @if($agregar)
+                    <div class="row">
+                        <div class="col-md-4" style="padding-top: 10px;">
+                            <select class="form-control" >
+                                @for($i = 0; $i < 3; $i++)
+                                <option>Opcion</option>
+                                @endfor
+                            </select>
+                            
+                        </div>
+                        <div class="col-md-4" style="padding-top: 20px; padding-left: 0px;">
+                           <h1><a href="#">Direcciones</a></h1>
+                        </div>
+                        <div class="col-md-4">
+                            @if($agregar)
                             <div class="bttn-agregar">
                                 <button id="btnAdd" type="button" class="bttn-agr" data-toggle="modal" data-target="#myModal" href="#myModal"><span class="fa fa-plus"></span><span class="txt-bttn">AGREGAR</span></button>
                             </div>
-                        @endif 
+                            @endif  
                         </div>
-                        <div  class="col-md-4 despl-bttn">
-                            <div class="search-cont" id="scnt">
-                                <form action="" method="">
-                                    <div class="input-group sci">
-                                        <input type="search" class="form-control filtro" placeholder="Buscar departamento..."><span class="fa fa-search"></span>
-                                    </div>
-                                </form> 
-                                <a class="bttn-search">
-                                    <span class="fa fa-search"></span>
-                                </a>
-                            </div>
-                        </div>
+                        
                     </div>
-                </div>
-                <div class="col-xs-5 col-sm-5 col-md-6 col-md-offset-3" id="areaResultados" data-tab="{{$extra}}">  
-                    @foreach($consulta as $departamento)
+                    <div class="row" style="padding-top: 30px;">
+                        <ul class="nav nav-tabs">
+                            <li class="active col-md-3"><a data-toggle="tab" href="#dep">Departamentos</a></li>
+                            <li class="col-md-3"><a data-toggle="tab" href="#area">Areas</a></li>
+                            <li class="col-md-3"><a data-toggle="tab" href="#cargo">Cargos</a></li>
+                        </ul>
 
-                        <div class="contMd" >
 
-                            <div class="icl">
-
-                                @foreach($acciones as $accion)
-                                    @if($accion->id!=1 )
-                                        @if($accion->id==2)
-                                            <span class="iclsp">
-                                                <a  class="tltp ModificaR" data-reg="{{$departamento->id}}" id="ModificaDepar{{$departamento->id}}" data-ttl="{{$accion->descripcion}}" data-toggle="modal" > 
-                                                    <i class="{{$accion->clase_css}}"></i>
-                                                </a>
-                                            </span>
-                                        @elseif($accion->id==3)
-                                            <span class="iclsp">
-                                                <a href="{{$accion->url.$departamento->id}}" class="tltp"  data-ttl="{{$accion->descripcion}}">
-                                                    <i class="{{$accion->clase_css}}"></i>
-                                                </a>
-                                            </span>
-                                        @endif
-                                    @elseif($accion->id==1 )
-                                        @if($departamento->status==1)
-                                            <div class="chbx">
-                                                <input type="checkbox" class="btnAcc" name="status" id="{{'inchbx'. $departamento->id}}" value="{{$departamento->status}}" checked><label for="{{'inchbx'. $departamento->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
-                                            </div>
-                                        @elseif($departamento->status==0)
-                                            <div class="chbx">
-                                                <input type="checkbox" class="btnAcc" name="status" id="{{'inchbx'. $departamento->id}}" value="{{$departamento->status}}"><label for="{{'inchbx'. $departamento->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
-                                            </div>
-                                        @endif
-                                    @endif
-                                @endforeach
-
-                            </div>
-                            <p class="ttlMd"><strong>{{$departamento->descripcion}}</strong></p>
+                        <div class="tab-content ">
                             
+                            <div id="dep" class="tab-pane fade in active col-xs-5 col-sm-5 col-md-6 col-md-offset-2">
+                                <div class="row" style="padding:40px 0 20px 0;">
+                                    <div  class="col-md-10">
+                                        <div class="search-cont" id="scnt">
+                                            <form action="" method="">
+                                                <div class="input-group sci">
+                                                    <input type="search" class="form-control filtro" placeholder="Buscar departamento..."><span class="fa fa-search"></span>
+                                                </div>
+                                            </form> 
+                                            <a class="bttn-search">
+                                                <span class="fa fa-search"></span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1">
+                                        @if($agregar)
+                                        <div class="bttn-agregar">
+                                            <button id="btnAdd" type="button" class="bttn-agr" data-toggle="modal" data-target="#myModal" href="#myModal"><span class="fa fa-plus"></span><span class="txt-bttn">AGREGAR</span></button>
+                                        </div>
+                                        @endif  
+                                    </div>
+                                </div>
+                                <div class="contRegister">
+                                @foreach($consulta as $departamento)
+                                
+                                    <div class="contMd">
 
+                                        <div class="icl">
+                                            @foreach($acciones as $accion)
+                                                @if($accion->id!=1 )
+                                                    @if($accion->id==2)
+                                                        <span class="iclsp">
+                                                            <a  class="tltp ModificaR" data-reg="{{$departamento->id}}" id="ModificaDepar{{$departamento->id}}" data-ttl="{{$accion->descripcion}}" data-toggle="modal" > 
+                                                                <i class="{{$accion->clase_css}}"></i>
+                                                            </a>
+                                                        </span>
+                                                    @elseif($accion->id==3)
+                                                        <span class="iclsp">
+                                                            <a href="{{$accion->url.$departamento->id}}" class="tltp"  data-ttl="{{$accion->descripcion}}">
+                                                                <i class="{{$accion->clase_css}}"></i>
+                                                            </a>
+                                                        </span>
+                                                    @endif
+                                                @elseif($accion->id==1 )
+                                                    @if($departamento->status==1)
+                                                        <div class="chbx">
+                                                            <input type="checkbox" class="btnAcc" name="status" id="{{'inchbx'. $departamento->id}}" value="{{$departamento->status}}" checked><label for="{{'inchbx'. $departamento->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
+                                                        </div>
+                                                    @elseif($departamento->status==0)
+                                                        <div class="chbx">
+                                                            <input type="checkbox" class="btnAcc" name="status" id="{{'inchbx'. $departamento->id}}" value="{{$departamento->status}}"><label for="{{'inchbx'. $departamento->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
+                                                        </div>
+                                                    @endif
+                                                @endif
+                                            @endforeach
+                                        </div>
+                                        <div class="checkbox ttlMd1">
+                                            <label><input type="checkbox" value="">{{$departamento->descripcion}}</label>
+                                        </div>
+                                    </div>
+                                
+                                @endforeach
+                                </div>
+  
+                            </div>
+                            <div id="area" class="tab-pane fade col-xs-5 col-sm-5 col-md-6 col-md-offset-2 ">
+                                
+
+                            </div>
+                            <div id="cargo" class="tab-pane fade col-xs-5 col-sm-5 col-md-6 col-md-offset-2">
+
+
+                            </div>
                         </div>
-
-                    @endforeach
-                    <div class="paginador">
-                        {{ $consulta->links() }}
                     </div>
-                  <input type="hidden"   name="TND"  value="{{$extra}}">
-
                 </div>
+                <input type="hidden"   name="TND"  value="{{$extra}}">
+
                 
                 <!-- Modal AGREGAR-->
 
@@ -165,6 +204,7 @@
                                     <div class="modal-footer">
                                         <button type="submit" class="bttnMd" id="mDepCarPer">Guardar <i class="fa fa-floppy-o"></i></button>
                                     </div>
+
                                 </form>
                             </div>                           
                         </div>

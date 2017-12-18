@@ -979,7 +979,7 @@ $('#savePlan').click(function(){
 var valorP;
 var valorR; 
 var valorT;
-$(".m_Servicio").click(function(){
+$(".m_Servicio").on("click",function(){
 	ID = $(this).attr("id");
 	idplan=$('#plan').val();	
 	datos=[ID,idplan];	        	
@@ -1071,7 +1071,7 @@ $(".m_Servicio").click(function(){
 
 ///////////////////////////////////// CAMBIOS DE VALORES DE CHECK PARA LOS SERVICIOS   /////////////////////////////////////////////////
 
-$("input[name=radio1]").change(function () {
+$("input[name=radio1]").on("change",function () {
 	if (valorP==0) {
 		valorP = '';
 	}
@@ -1086,39 +1086,39 @@ $("input[name=radio1]").change(function () {
 	}
 });
 
-$("input[name=radio2]").change(function () {
+$("input[name=radio2]").on("change",function () {
 	if (valorR==0) {
 		valorR = '';
 	}
 	if ($("input[name=radio2]:checked").val()=='contabilizado') {
 		$('#p2').remove();
-		$('.icc5').append('<input class="campo" type="number" id="p1"  placeholder="Cantidad de Soportes Remotos"  value="'+valorR+'"><i id="ic1" class="fa fa-laptop"></i>');
+		$('.icc5').append('<input class="campo" name="campo" type="number" id="p1"  placeholder="Cantidad de Soportes Remotos"  value="'+valorR+'"><i id="ic1" class="fa fa-laptop"></i>');
 	}
 	else if ($("input[name=radio2]:checked").val()=='ilimitado'){
 		$('#p1').remove();
 		$('#ic1').remove();
-		$('.icc5').append('<input class="campo" type="hidden" id="p2" value="0">');
+		$('.icc5').append('<input class="campo" name="campo" type="hidden" id="p2" value="0">');
 	}
 });
 
-$("input[name=radio3]").change(function () {
+$("input[name=radio3]").on("change",function () {
 	if (valorT==0) {
 		valorT = '';
 	}
 	if ($("input[name=radio3]:checked").val()=='contabilizado') {
 		$('#p2').remove();
-		$('.icc4').append('<input class="campo" type="number" id="p1"  placeholder="Cantidad de Soportes Telefónicos"  value="'+valorT+'"><i id="ic1" class="fa fa-laptop"></i>');
+		$('.icc4').append('<input class="campo" name="campo" type="number" id="p1"  placeholder="Cantidad de Soportes Telefónicos"  value="'+valorT+'"><i id="ic1" class="fa fa-laptop"></i>');
 	}
 	else if ($("input[name=radio3]:checked").val()=='ilimitado'){
 		$('#p1').remove();
 		$('#ic1').remove();
-		$('.icc4').append('<input class="campo" type="hidden" id="p2" value="0">');
+		$('.icc4').append('<input class="campo" name="campo" type="hidden" id="p2" value="0">');
 	}
 });
 
 //////////////////////////////// INSERTAR VALORES EN BD PARA SERVICIO DE HORARIOS ///////////////////////////
 
-$('#saveHorario').click(function(){
+$('#saveHorario').on("click",function(){
 	idplan=$('#plan').val();	
 	var url= '/menu/registros/planes/servicios/insertar';
 	var inicio = $('#horaI').val();
@@ -1166,7 +1166,7 @@ $('#saveHorario').click(function(){
 });
 //////////////////////////////// INSERTAR VALORES EN BD PARA SERVICIO DE SOPORTES PRESENCIALES ///////////////////////////
 
-$('#savePresencial').click(function(){
+$('#savePresencial').on("click",function(){
 	idplan=$('#plan').val();	
 	var url= '/menu/registros/planes/servicios/insertar';
 	var etiqueta = $("input[name=radio1]:checked").val();
@@ -1211,7 +1211,7 @@ $('#savePresencial').click(function(){
 	}
 });
 //////////////////////////////// INSERTAR VALORES EN BD PARA SERVICIO DE SOPORTES REMOTOS ///////////////////////////
-$('#saveRemoto').click(function(){
+$('#saveRemoto').on("click",function(){
 	idplan=$('#plan').val();	
 	var url= '/menu/registros/planes/servicios/insertar';
 	var etiqueta = $("input[name=radio2]:checked").val();
@@ -1256,7 +1256,7 @@ $('#saveRemoto').click(function(){
 	}
 });
 //////////////////////////////// INSERTAR VALORES EN BD PARA SERVICIO DE SOPORTES TELEFONICOS ///////////////////////////
-$('#saveTelefonico').click(function(){
+$('#saveTelefonico').on("click",function(){
 	idplan=$('#plan').val();	
 	var url= '/menu/registros/planes/servicios/insertar';
 	var etiqueta = $("input[name=radio3]:checked").val();
@@ -1301,7 +1301,7 @@ $('#saveTelefonico').click(function(){
 	}
 });
 //////////////////////////////// INSERTAR VALORES EN BD PARA SERVICIO DE TIEMPO DE RESPUESTA /////////////////////////
-$('#saveTR').click(function(){
+$('#saveTR').on("click",function(){
 	idplan=$('#plan').val();	
 	var url= '/menu/registros/planes/servicios/insertar';
 	var etiqueta = $("input[name=radio3]:checked").val();
@@ -1369,7 +1369,7 @@ $('#saveTR').click(function(){
 
 // });
 ////////////////////////////////////////////////  MODIFICACION DE PLANES ////////////////////////////////////////////////////
-$('#actualizarPlan').click(function(){
+$('#actualizarPlan').on("click",function(){
 	var url= '/menu/registros/planes/modificar';
 	var plan = $('#nomPnm').val();
 	var desc = $('#porDesm').val();

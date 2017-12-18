@@ -380,7 +380,7 @@ function Validar(){
                     },
                     regexp: {
                             regexp: /^[1-9]+$/,
-                            message: 'Sólo Números Positivos'                            
+                            message: 'El precio debe ser mayor a 0'                            
                     },
                 }
             },
