@@ -8,13 +8,13 @@ class Cargo extends Model
 {
     public $timestamps=false;
     protected $table="cargos";
-    protected $fillable=['id','status','departamento_id','descripcion'];
+    protected $fillable=['id','status','area_id','descripcion'];
 
 
 
-    public function departamento()
+    public function area()
     {
-    	return $this->belongsTo('App\Departamento');
+    	return $this->belongsTo('App\Area');
     }
 
     public function empleados()

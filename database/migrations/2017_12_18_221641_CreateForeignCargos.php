@@ -27,7 +27,7 @@ class CreateForeignCargos extends Migration
     public function down()
     {
         Schema::table('cargos', function (Blueprint $table) {
-            schema::dropIfExists('cargos_area_id_foreign');
+            schema::dropForeign('cargos_area_id_foreign');
             schema::dropColumn('area_id');
         });
     }

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Director;
+use App\Departamento;
 
 class EstructuraController extends Controller
 {
@@ -104,24 +106,14 @@ class EstructuraController extends Controller
 
 // Definicion de la estructura de la empresa como prestadora de servicio.
 
-	public function departamentos_cargos($departamento_id)//Inicializacion del submodulo: /departamentos/cargos
-	{
-		$boton_agregar=7;
-		$datos=$this->cargar_header_sidebar_acciones();
-		$acc=$this->obtener_acciones_submodulo(2,2);//obtiene las acciones de un submodulo
-		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],$acc,$boton_agregar);//obtiene las opciones validas para la vista
-		$nombre=\DB::table('departamentos')->where('id',$departamento_id)->value('descripcion');
-		return view('Registros_Basicos\Departamentos\cargos',$this->datos_vista($datos,$acciones,\DB::table('cargos')->where('departamento_id',$departamento_id)->paginate(4),1,(int)$departamento_id,$nombre));
-					
-	}
-
-
 	public function departamentos()//ventana principal de departamentos
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
 		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(1,2,3),4);
+		$direcciones= \App\Director::all();
+		$departamentos=\App\Departamento::all();
 		
-		return view('Registros_Basicos\Departamentos\departamentos',$this->datos_vista($datos,$acciones,\DB::table('departamentos')->get(),0));
+		return view('Registros_Basicos\Departamentos\departamentos',$this->datos_vista($datos,$acciones,$direcciones,$departamentos));
 					
 	}
 
