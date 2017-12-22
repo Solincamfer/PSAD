@@ -11,7 +11,7 @@ class EstructuraController extends Controller
 		public function cargar_header_sidebar_acciones()//obtiene desde la variable, la configuracion para el usuario logueado
 	{
 
-		
+
 		$datos=\Session::get('sesion');
 		$modulos=\Session::get('modulos');
 		$submodulos=\Session::get('submodulos');
@@ -22,19 +22,19 @@ class EstructuraController extends Controller
 		$acciones=$acciones[0];
 		$modulos=$modulos[0];
 		$submodulos=$submodulos[0];
-	
+
 		return (compact('nombre','apellido','modulos','submodulos','acciones'));
 	}
 
-	
-	
-	
+
+
+
 	public function obtener_acciones_submodulo($submodulo_id,$vista)
 	{
 		$acc_=array();
 		$acciones_sub=\DB::table('acciones')->where(['submodulo_id'=>$submodulo_id,'vista'=>$vista])->get();//obtiene las acciones para una vista
-		
-		foreach($acciones_sub as $acc) 
+
+		foreach($acciones_sub as $acc)
 		{
 			array_push($acc_, $acc->id);
 		}
@@ -42,13 +42,13 @@ class EstructuraController extends Controller
 	}
 	public function cargar_acciones_submodulo_perfil($acciones_perfil,$acciones_sm,$accion_agregar)//obtiene las acciones para un submodulo, asociadas a un perfil
 	{
-		
+
 
 		$acciones=array();
 		$agregar=false;
 
 
-		foreach ($acciones_perfil as $accion) 
+		foreach ($acciones_perfil as $accion)
 			{
 				if((in_array($accion->id, $acciones_sm) )and ($accion->status_ac==1))
 				{
@@ -64,7 +64,7 @@ class EstructuraController extends Controller
 	}
 
 
-	
+
 		public function datos_vista_($datos_session,$consulta)
 	{
 		$valores_vista=array(
@@ -101,20 +101,35 @@ class EstructuraController extends Controller
 
 								);
 
-		return $valores_vista;	
+		return $valores_vista;
 	}
 
 // Definicion de la estructura de la empresa como prestadora de servicio.
 
-	public function departamentos()//ventana principal de departamentos
+	public function departamentos()//ventana principal de Estructura
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
 		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(1,2,3),4);
 		$direcciones= \App\Director::all();
 		$departamentos=\App\Departamento::all();
-		
-		return view('Registros_Basicos\Departamentos\departamentos',$this->datos_vista($datos,$acciones,$direcciones,$departamentos));
-					
+		$areas=\App\Area::all();
+		$cargos=\App\Cargo::all();
+
+		return view('Registros_Basicos.Departamentos.departamentos',$this->datos_vista($datos,$acciones,$direcciones,$departamentos,$areas,$cargos));
+
+	}
+
+	public function buscarDepartamentos(){ //Obtener el id de la direccion y buscar departamentos, areas y cargos asociados.
+		$direccionId=\Request::get('data');
+		$datos=$this->cargar_header_sidebar_acciones();
+		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(1,2,3),4);
+		$query=\App\Departamento::where('director_id',$direccionId)->get();
+		$resultado=array(
+			'departamentos'=>view('Registros_Basicos.Departamentos.partials.listaDatos',$this->datos_vista(0,$acciones,$query)),
+			'areas'=>view('Registros_Basicos.Departamentos.partials.listaDatos',$this->datos_vista(0,$acciones,$query)),
+			'cargos'=>view('Registros_Basicos.Departamentos.partials.listaDatos',$this->datos_vista(0,$acciones,$query))
+		);
+		return $resultado;
 	}
 
 
@@ -122,11 +137,11 @@ class EstructuraController extends Controller
 	{
 
 		$nombreD= strtoupper(Request::get('textDpto'));//nombre del departamento, llevado a mayusculas
-		$statusD= (int)Request::get('comboDpto');//status del departamento 
+		$statusD= (int)Request::get('comboDpto');//status del departamento
 
 
 		$consulta=\DB::table('departamentos')->where('descripcion',$nombreD)->first();
-		
+
 
 		if (empty($consulta)) //si el registro no existe, se procede a ingresar los datos del departamento
 		{
@@ -137,7 +152,7 @@ class EstructuraController extends Controller
 					 	);
 
 			$respuesta= 1;
-			
+
 		}
 		else{
 			$respuesta= 0;
@@ -149,10 +164,10 @@ class EstructuraController extends Controller
 
 	public function cargos_ingresar($departamento_id)
 	{
-		
+
 		$nombreC= strtoupper(Request::get('textCgo'));//nombre del cargo
 		$statusC= (int)Request::get('comboCgo');//status del cargo
-		
+
 
 		$consulta=\DB::table('cargos')->where('descripcion',$nombreC)->first();
 
@@ -163,15 +178,15 @@ class EstructuraController extends Controller
 
 					 		['status'=>$statusC,'descripcion'=>$nombreC,'departamento_id'=>$departamento_id]
 					 	);
-		
-	
+
+
 			$resultado = 1;
 		}
 		else
 		{
 			$resultado = 0;
 		}
-	
+
 		return $resultado;
 
 

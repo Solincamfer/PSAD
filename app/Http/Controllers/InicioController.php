@@ -12,8 +12,8 @@ use DB;
 
 class InicioController extends Controller
 {
-    
-   
+
+
    public function pruebaJson()
    {
      $table=Request::get('table');
@@ -30,21 +30,21 @@ class InicioController extends Controller
         Session::forget('modulos');
         Session::forget('submodulos');
         Session::forget('acciones');
-        
+
         return view('login');
     }//retorna el formulario de login
 
 
-    
+
 
     public function verificar()//verifica que las credenciales del usuario sean correctas
     {
         $usuario=Request::get('user');//nombre de usuario ingresado en el formulario
-        $password=Request::get('pwd');//contraseña ingresada por el usuario en el formulario    
-        $_usuario=Usuario::where('n_usuario',$usuario)->where('clave',$password)->first(); //consulta a la base de datos con los datos capturados  en el formulario      
-        
-       
-        if (empty($_usuario)==false)//si la consulta a la base de datos devuelve registros 
+        $password=Request::get('pwd');//contraseña ingresada por el usuario en el formulario
+        $_usuario=Usuario::where('n_usuario',$usuario)->where('clave',$password)->first(); //consulta a la base de datos con los datos capturados  en el formulario
+
+
+        if (empty($_usuario)==false)//si la consulta a la base de datos devuelve registros
             {
                 $persona=Empleado::where('usuario_id',$_usuario->id)->first();//consulta de los datos personales  del usuario
                 $datos= array
@@ -56,8 +56,8 @@ class InicioController extends Controller
 
                         );//datos que se almacenaran en la variable session "sesion"
 
-                
-                
+
+
                 $perfil=Perfil::find($datos['perfil']);
                 if ($perfil->status) //si el perfil esta habilitado  ///agregar la verificacion de status del usuario
                     {
@@ -74,9 +74,9 @@ class InicioController extends Controller
                          ////////////////////////////////consulta para los submodulos///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                          $submodulos=DB::table('submodulos')->join('perfil_submodulo','perfil_submodulo.submodulo_id','=','submodulos.id')->select(
                                                                    'submodulos.id AS submoduloId','submodulos.descripcion AS descripcion','submodulos.status_sm AS submoduloStatus','submodulos.modulo_id AS padre','submodulos.ruta AS ruta',
-                                                                       'submodulos.url AS url', 
+                                                                       'submodulos.url AS url',
                                                                    'perfil_submodulo.status AS status')->where(['perfil_submodulo.perfil_id'=>$perfil->id,'submodulos.status_sm'=>1,'perfil_submodulo.status'=>1,'submodulos.padre'=>1])->orderBy('orden','asc')->get();
-                        
+
 
                          //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -91,33 +91,33 @@ class InicioController extends Controller
 
                          //$submodulos=$perfil->submodulos;//obtener submodulos asociados al perfil logueado
                          //$acciones=$perfil->acciones;
-                       
+
                          Session::push('sesion',$datos);//almacenar datos en la variable session:'sesion' del usuario logueado
                          Session::push('modulos',$modulos);//almacenar datos en la variable session:'modulos' de los modulos asociados al perfil logueado
                          Session::push('submodulos',$submodulos);//almacenar datos en la variable session: 'submodulos' de los submodulos asociados al perfil logueado
                          Session::push('acciones',$acciones);
 
                     }
-               
 
-                $respuesta=[true,$persona->nombre,$persona->apellido,$perfil->status]; //Datos para el mensaje de inicio 
-                
+
+                $respuesta=[true,$persona->nombre,$persona->apellido,$perfil->status]; //Datos para el mensaje de inicio
+
                 return $respuesta;
             }
-        
+
     }
 
 
 
     public function iniciarMenu()//carga el menu inicial
     {
-        
+
         $modulos=Session::get('modulos');//obteine modulos para el perfil logueado desde la variable session
         $submodulos=Session::get('submodulos');//obtiene submodulos para el perfil logueado desde la variable session
         $datos=Session::get('sesion');//obtiene datos del usuario
 
         return view(
-                            'Menu\menu',
+                            'Menu.menu',
                             [
                             "modulos"=>$modulos[0],
                             "submodulos"=>$submodulos[0],

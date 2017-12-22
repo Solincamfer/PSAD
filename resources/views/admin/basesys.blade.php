@@ -17,13 +17,15 @@
         <script src="{{asset('plugins/bootstrap3.3.7/js/bootstrap.min.js')}}"></script>
         <script src="{{asset('js/bootstrapValidator.js')}}"></script>
         <script src="{{asset('js/validationJS.js')}}"></script>
-        <script src="{{asset('js/val.js')}}"></script>        
+        <script src="{{asset('js/val.js')}}"></script>
         <script src="{{asset('js/AJAX.js')}}"></script>
         <script src="{{asset('js/configuraciones.js')}}"></script>
         <script src="{{asset('js/buscador.js')}}"></script>
         <script src="{{asset('js/botonModificar.js')}}"></script>
         <script src="{{asset('js/botonGuardarMA.js')}}"></script>
         <script src="{{asset('js/validator.min.js')}}"></script>
+        <script src="{{asset('js/mycompany.js')}}"></script>
         <script src="{{asset('plugins/sweetalert/sweetalert.min.js')}}"></script>
+
     </body>
 </html>

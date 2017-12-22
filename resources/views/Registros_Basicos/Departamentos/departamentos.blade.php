@@ -14,13 +14,13 @@
                     </div>
                     <div class="form-group row">
                         <div class="col-md-4" style="padding-top: 10px;">
-                            <select class="form-control" >
+                            <select class="form-control" id="comboDireccion" >
                                 <option selected="selected">Seleccione una Dirección</option>
                                 @foreach($consulta as $direccion)
-                                <option data-id="{{$direccion->id}}">{{$direccion->descripcion}}</option>
+                                <option value="{{$direccion->id}}">{{$direccion->descripcion}}</option>
                                 @endforeach
                             </select>
-                            
+
                         </div>
                         <div class="col-md-4" style="padding-top: 20px; padding-left: 0px;">
                            <h1><a data-toggle="modal" data-target="#myModall" href="#myModal">Direcciones</a></h1>
@@ -30,9 +30,9 @@
                             <div class="bttn-agregar">
                                 <button id="btnAdd" type="button" class="bttn-agr" data-toggle="modal" data-target="#myModalD" href="#myModal"><span class="fa fa-plus"></span><span class="txt-bttn">AGREGAR</span></button>
                             </div>
-                            @endif  
+                            @endif
                         </div>
-                        
+
                     </div>
                     <div class="row" style="padding-top: 30px;">
                         <ul class="nav nav-tabs">
@@ -43,7 +43,7 @@
 
 
                         <div class="tab-content ">
-                            
+
                             <div id="dep" class="tab-pane fade in active col-xs-5 col-sm-5 col-md-6 col-md-offset-2">
                                 <div class="row" style="padding:40px 0 20px 0;">
                                     <div  class="col-md-10">
@@ -52,7 +52,7 @@
                                                 <div class="input-group sci">
                                                     <input type="search" class="form-control filtro" placeholder="Buscar departamento..."><span class="fa fa-search"></span>
                                                 </div>
-                                            </form> 
+                                            </form>
                                             <a class="bttn-search">
                                                 <span class="fa fa-search"></span>
                                             </a>
@@ -63,12 +63,12 @@
                                         <div class="bttn-agregar">
                                             <button id="btnAdd" type="button" class="bttn-agr" data-toggle="modal" data-target="#myModalDE" href="#myModal"><span class="fa fa-plus"></span><span class="txt-bttn">AGREGAR</span></button>
                                         </div>
-                                        @endif  
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="contRegister">
                                 @foreach($extra as $departamento)
-                                
+
                                     <div class="contMd">
 
                                         <div class="icl">
@@ -76,7 +76,7 @@
                                                 @if($accion->id!=1 )
                                                     @if($accion->id==2)
                                                         <span class="iclsp">
-                                                            <a  class="tltp ModificaR" data-reg="{{$departamento->id}}" id="ModificaDepar{{$departamento->id}}" data-ttl="{{$accion->descripcion}}" data-toggle="modal" > 
+                                                            <a  class="tltp ModificaR" data-reg="{{$departamento->id}}" id="ModificaDepar{{$departamento->id}}" data-ttl="{{$accion->descripcion}}" data-toggle="modal" >
                                                                 <i class="{{$accion->clase_css}}"></i>
                                                             </a>
                                                         </span>
@@ -104,13 +104,13 @@
                                             <label><input type="checkbox" value="">{{$departamento->descripcion}}</label>
                                         </div>
                                     </div>
-                                
+
                                 @endforeach
                                 </div>
-  
+
                             </div>
                             <div id="area" class="tab-pane fade col-xs-5 col-sm-5 col-md-6 col-md-offset-2 ">
-                                
+
 
                             </div>
                             <div id="cargo" class="tab-pane fade col-xs-5 col-sm-5 col-md-6 col-md-offset-2">
@@ -153,15 +153,15 @@
                                                             <option value="0">INACTIVO</option>
                                                        </select><i class="fa fa-check" id="icdp2"></i>
                                                    </div>
-                                               </div> 
-                                            </div> 
+                                               </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="submit" class="bttnMd" id="btnSv">Guardar <i class="fa fa-floppy-o"></i></button>
                                     </div>
                                 </form>
-                            </div>                           
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -177,7 +177,7 @@
                             <div class="modal-body">
                                 <div class="contRegister">
                                 @foreach($consulta as $direccion)
-                                
+
                                     <div class="contMd">
 
                                         <div class="icl">
@@ -185,7 +185,7 @@
                                                 @if($accion->id!=1 )
                                                     @if($accion->id==2)
                                                         <span class="iclsp">
-                                                            <a  class="tltp ModificaR" data-reg="{{$direccion->id}}" id="ModificaDepar{{$direccion->id}}" data-ttl="{{$accion->descripcion}}" data-toggle="modal" > 
+                                                            <a  class="tltp ModificaR" data-reg="{{$direccion->id}}" id="ModificaDepar{{$direccion->id}}" data-ttl="{{$accion->descripcion}}" data-toggle="modal" >
                                                                 <i class="{{$accion->clase_css}}"></i>
                                                             </a>
                                                         </span>
@@ -216,9 +216,9 @@
                                 @endforeach
                                 </div>
                                 <div class="modal-footer">
-                               
+
                                 </div>
-                            </div>                           
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -252,8 +252,8 @@
                                                             <option value="0">INACTIVO</option>
                                                         </select><i class="fa fa-check" id="micdp2"></i>
                                                     </div>
-                                                </div> 
-                                            </div> 
+                                                </div>
+                                            </div>
                                         </div>
                                         <input type="hidden" value="" id="MIndexD" name="MIndex">
 
@@ -263,10 +263,10 @@
                                     </div>
 
                                 </form>
-                            </div>                           
+                            </div>
                         </div>
                     </div>
-                </div> 
+                </div>
 
 <!-- VENTANAS MODALES DE DEPARTAMENTOS -->
 
@@ -300,20 +300,20 @@
                                                             <option value="0">INACTIVO</option>
                                                        </select><i class="fa fa-check" id="icdp2"></i>
                                                    </div>
-                                               </div> 
-                                            </div> 
+                                               </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="submit" class="bttnMd" id="btnSv">Guardar <i class="fa fa-floppy-o"></i></button>
                                     </div>
                                 </form>
-                            </div>                           
+                            </div>
                         </div>
                     </div>
-                </div> 
+                </div>
                @endif
-               
+
     <!-- MODAL MODIFICAR DEPARTAMENTO -->
 
                 <div class="modal fade" id="myModalDEM" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
@@ -343,8 +343,8 @@
                                                             <option value="0">INACTIVO</option>
                                                         </select><i class="fa fa-check" id="micdp2"></i>
                                                     </div>
-                                                </div> 
-                                            </div> 
+                                                </div>
+                                            </div>
                                         </div>
                                         <input type="hidden" value="" id="MIndexD" name="MIndex">
 
@@ -354,10 +354,10 @@
                                     </div>
 
                                 </form>
-                            </div>                           
+                            </div>
                         </div>
                     </div>
-                </div> 
+                </div>
             </div>
 
 <!-- VENTANAS MODAL AREAS -->
@@ -390,18 +390,18 @@
                                                             <option value="0">INACTIVO</option>
                                                        </select><i class="fa fa-check" id="icdp2"></i>
                                                    </div>
-                                               </div> 
-                                            </div> 
+                                               </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="submit" class="bttnMd" id="btnSv">Guardar <i class="fa fa-floppy-o"></i></button>
                                     </div>
                                 </form>
-                            </div>                           
+                            </div>
                         </div>
                     </div>
-                </div> 
+                </div>
 
     <!-- MODAL MODIFICAR AREAS -->
                 <div class="modal fade" id="myModalAM" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
@@ -431,8 +431,8 @@
                                                             <option value="0">INACTIVO</option>
                                                         </select><i class="fa fa-check" id="micdp2"></i>
                                                     </div>
-                                                </div> 
-                                            </div> 
+                                                </div>
+                                            </div>
                                         </div>
                                         <input type="hidden" value="" id="MIndexD" name="MIndex">
 
@@ -442,7 +442,7 @@
                                     </div>
 
                                 </form>
-                            </div>                           
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -476,18 +476,18 @@
                                                             <option value="0">INACTIVO</option>
                                                        </select><i class="fa fa-check" id="icdp2"></i>
                                                    </div>
-                                               </div> 
-                                            </div> 
+                                               </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="submit" class="bttnMd" id="btnSv">Guardar <i class="fa fa-floppy-o"></i></button>
                                     </div>
                                 </form>
-                            </div>                           
+                            </div>
                         </div>
                     </div>
-                </div> 
+                </div>
 
     <!-- MODAL MODIFICAR CARGOS -->
                 <div class="modal fade" id="myModalCM" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
@@ -517,8 +517,8 @@
                                                             <option value="0">INACTIVO</option>
                                                         </select><i class="fa fa-check" id="micdp2"></i>
                                                     </div>
-                                                </div> 
-                                            </div> 
+                                                </div>
+                                            </div>
                                         </div>
                                         <input type="hidden" value="" id="MIndexD" name="MIndex">
 
@@ -528,8 +528,8 @@
                                     </div>
 
                                 </form>
-                            </div>                           
+                            </div>
                         </div>
                     </div>
-                </div> 
+                </div>
     @endsection
