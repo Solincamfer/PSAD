@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 17-11-2017 a las 22:15:39
+-- Tiempo de generación: 22-12-2017 a las 21:18:38
 -- Versión del servidor: 10.1.16-MariaDB
 -- Versión de PHP: 5.6.24
 
@@ -622,6 +622,19 @@ INSERT INTO `aplicaciones` (`id`, `descripcion`, `licencia`, `version`, `status`
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `areas`
+--
+
+CREATE TABLE `areas` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `descripcion` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `status` int(10) UNSIGNED NOT NULL,
+  `departamento_id` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `auxiliares`
 --
 
@@ -633,30 +646,42 @@ CREATE TABLE `auxiliares` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `bitacoras`
+--
+
+CREATE TABLE `bitacoras` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `usuario` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `accion` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `registro_id` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `ventana` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `detalles` varchar(400) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `bitacoras`
+--
+
+INSERT INTO `bitacoras` (`id`, `usuario`, `accion`, `created_at`, `updated_at`, `registro_id`, `ventana`, `detalles`) VALUES
+(1, 'VINCEN SANTAELLA', 'Modificar Perfil', '2017-12-23 00:06:48', '2017-12-23 00:06:48', '12', 'Perfil -> Modificar Perfil', '{"DESCRIPCION":"ACTUALIZADO_ -> ACTUALIZADO"}'),
+(2, 'VINCEN SANTAELLA', 'Cambiar Status', '2017-12-23 00:07:05', '2017-12-23 00:07:05', '12', 'Perfil', '{"status":"1 -> 0"}'),
+(3, 'VINCEN SANTAELLA', 'Modificar Plan', '2017-12-23 00:09:07', '2017-12-23 00:09:07', '5', 'Planes -> Modificar Plan', '{"NOMBREP":"BASICO 1 -> BASICO 2"}'),
+(4, 'VINCEN SANTAELLA', 'Cambiar Status', '2017-12-23 00:09:17', '2017-12-23 00:09:17', '5', 'Planes', '{"status":"0 -> 1"}');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `cargos`
 --
 
 CREATE TABLE `cargos` (
   `id` int(10) UNSIGNED NOT NULL,
   `status` int(11) NOT NULL DEFAULT '0',
-  `departamento_id` int(10) UNSIGNED NOT NULL,
-  `descripcion` varchar(100) COLLATE utf8_unicode_ci NOT NULL
+  `descripcion` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `area_id` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Volcado de datos para la tabla `cargos`
---
-
-INSERT INTO `cargos` (`id`, `status`, `departamento_id`, `descripcion`) VALUES
-(1, 1, 69, 'PROGRAMADOR III'),
-(2, 1, 69, 'BACKEND'),
-(3, 0, 69, 'BAC'),
-(4, 1, 69, 'BACKEEEE'),
-(5, 1, 69, 'COORDINADOR'),
-(6, 0, 69, 'DIRECTOR'),
-(7, 1, 69, 'CDFG'),
-(8, 1, 69, 'COORDINADOR2'),
-(9, 1, 69, 'DDD');
 
 -- --------------------------------------------------------
 
@@ -890,26 +915,21 @@ INSERT INTO `contactos` (`id`, `tipo_id`, `tipo__id`, `telefono_m`, `telefono_f`
 CREATE TABLE `departamentos` (
   `id` int(10) UNSIGNED NOT NULL,
   `status` int(11) NOT NULL,
-  `descripcion` varchar(100) COLLATE utf8_unicode_ci NOT NULL
+  `descripcion` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `director_id` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `departamentos`
 --
 
-INSERT INTO `departamentos` (`id`, `status`, `descripcion`) VALUES
-(69, 1, 'DESARROLLO__'),
-(70, 0, 'SOPORTE TECNICO NIVEL 1'),
-(71, 0, 'SOPORTE TECNICO NIVEL 2'),
-(72, 1, 'SOPORTE SISTEMA DE FACTURACION'),
-(73, 1, 'RRHH'),
-(74, 1, 'ADMINISTRACION'),
-(75, 0, 'MERCADEO'),
-(76, 1, 'TALLER'),
-(77, 1, 'INFRAESTRUCTURA'),
-(78, 0, ''),
-(79, 1, 'INFRA'),
-(80, 1, 'NUEVO INFRA');
+INSERT INTO `departamentos` (`id`, `status`, `descripcion`, `director_id`) VALUES
+(81, 1, 'RRHH', 1),
+(82, 1, 'DESARROLLO', 1),
+(83, 1, 'SOFTWARE', 1),
+(84, 1, 'HARDWARE', 1),
+(85, 1, 'INFRAESTRUCTURA', 1),
+(86, 1, 'COMPRAS', 1);
 
 -- --------------------------------------------------------
 
@@ -1002,6 +1022,25 @@ INSERT INTO `direcciones` (`id`, `descripcion`, `municipio_id`, `pais_id`, `regi
 (87, '7898777', 82, 1, 2, 8),
 (88, 'asasasas', 166, 1, 2, 9),
 (89, 'asasasasasas', 1, 1, 1, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `directores`
+--
+
+CREATE TABLE `directores` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `descripcion` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `status` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `directores`
+--
+
+INSERT INTO `directores` (`id`, `descripcion`, `status`) VALUES
+(1, 'Operaciones', 1);
 
 -- --------------------------------------------------------
 
@@ -1276,7 +1315,8 @@ CREATE TABLE `horarios` (
 INSERT INTO `horarios` (`id`, `plan_id`, `horaI`, `horaF`, `diaI`, `diaF`, `precio`) VALUES
 (3, 6, '08:00:00', '19:30:00', 'Lunes', 'Sabado', 1624),
 (4, 8, '18:00:00', '00:00:00', 'Miercoles', 'Sabado', 64),
-(6, 5, '08:00:00', '17:00:00', 'Lunes', 'Viernes', 1555);
+(7, 5, '08:00:00', '17:00:00', 'Lunes', 'Viernes', 1),
+(8, 9, '01:01:00', '02:00:00', 'Martes', 'Lunes', 1);
 
 -- --------------------------------------------------------
 
@@ -1358,7 +1398,14 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (69, '2017_01_19_201439_CrearTablaAplicaciones', 38),
 (70, '2017_01_19_202450_PiezasTabla', 39),
 (71, '2017_01_20_060539_TablaPlanSucursal', 40),
-(72, '2017_06_07_135919_TablaPersonaSucursal', 41);
+(72, '2017_06_07_135919_TablaPersonaSucursal', 41),
+(73, '2017_12_18_185024_CrearTablaDirectores', 42),
+(74, '2017_12_18_194627_CrearTablaAreas', 43),
+(75, '2017_12_18_194907_addForeignKeyCargos', 44),
+(76, '2017_12_18_220820_CreateForeignAreas', 45),
+(77, '2017_12_18_221641_CreateForeignCargos', 46),
+(78, '2017_12_19_131022_CreateForeignDepartamentos', 47),
+(79, '2017_12_18_182721_tablaBitacora', 48);
 
 -- --------------------------------------------------------
 
@@ -1807,7 +1854,7 @@ CREATE TABLE `perfiles` (
 --
 
 INSERT INTO `perfiles` (`id`, `descripcion`, `status`) VALUES
-(12, 'ACTUALIZADO_', 1),
+(12, 'ACTUALIZADO', 0),
 (13, 'SUPER USUARIO', 1),
 (14, 'ADMINISTRADOR', 1),
 (15, 'PRUEBA', 1),
@@ -1999,10 +2046,12 @@ CREATE TABLE `planes` (
 --
 
 INSERT INTO `planes` (`id`, `nombreP`, `descuento`, `status`) VALUES
-(5, 'BASICO 1', 50, 0),
+(5, 'BASICO 2', 50, 1),
 (6, 'MEDIO', 0, 1),
 (7, 'VIP', 0, 1),
-(8, 'PEGATE CON TODO', 0, 1);
+(8, 'PEGATE CON TODO', 0, 1),
+(9, 'NUEVA', 10, 1),
+(10, 'NUEVA1', 10, 1);
 
 -- --------------------------------------------------------
 
@@ -2042,9 +2091,10 @@ CREATE TABLE `presenciales` (
 --
 
 INSERT INTO `presenciales` (`id`, `plan_id`, `etiqueta`, `valor`, `precio`) VALUES
-(2, 5, 'contabilizado', 10, 1500.00),
 (3, 6, 'contabilizado', 20, 2000.00),
-(4, 8, 'contabilizado', 50, 6000.00);
+(4, 8, 'contabilizado', 50, 6000.00),
+(5, 5, 'contabilizado', 10, 1500.00),
+(6, 10, 'contabilizado', 1200, 1200.00);
 
 -- --------------------------------------------------------
 
@@ -2091,9 +2141,9 @@ CREATE TABLE `remotos` (
 --
 
 INSERT INTO `remotos` (`id`, `plan_id`, `etiqueta`, `valor`, `precio`) VALUES
-(3, 5, 'contabilizado', 10, 1500.00),
 (4, 6, 'contabilizado', 20, 2400.00),
-(5, 8, 'contabilizado', 60, 6000.00);
+(5, 8, 'contabilizado', 60, 6000.00),
+(14, 5, 'contabilizado', 1, 1500.00);
 
 -- --------------------------------------------------------
 
@@ -2113,9 +2163,9 @@ CREATE TABLE `respuestas` (
 --
 
 INSERT INTO `respuestas` (`id`, `plan_id`, `maximo`, `precio`) VALUES
-(2, 5, 3, 1500.00),
 (3, 6, 2, 3200.00),
-(4, 8, 1, 4500.00);
+(4, 8, 1, 4500.00),
+(7, 5, 7, 1500.00);
 
 -- --------------------------------------------------------
 
@@ -2407,9 +2457,22 @@ ALTER TABLE `aplicaciones`
   ADD KEY `aplicaciones_equipo_id_foreign` (`equipo_id`);
 
 --
+-- Indices de la tabla `areas`
+--
+ALTER TABLE `areas`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `areas_departamento_id_foreign` (`departamento_id`);
+
+--
 -- Indices de la tabla `auxiliares`
 --
 ALTER TABLE `auxiliares`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `bitacoras`
+--
+ALTER TABLE `bitacoras`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -2417,7 +2480,7 @@ ALTER TABLE `auxiliares`
 --
 ALTER TABLE `cargos`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `cargos_departamento_id_foreign` (`departamento_id`);
+  ADD KEY `cargos_area_id_foreign` (`area_id`);
 
 --
 -- Indices de la tabla `categorias`
@@ -2471,7 +2534,8 @@ ALTER TABLE `contactos`
 -- Indices de la tabla `departamentos`
 --
 ALTER TABLE `departamentos`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `departamentos_director_id_foreign` (`director_id`);
 
 --
 -- Indices de la tabla `direcciones`
@@ -2482,6 +2546,12 @@ ALTER TABLE `direcciones`
   ADD KEY `direcciones_pais_id_foreign` (`pais_id`),
   ADD KEY `direcciones_region_id_foreign` (`region_id`),
   ADD KEY `direcciones_estado_id_foreign` (`estado_id`);
+
+--
+-- Indices de la tabla `directores`
+--
+ALTER TABLE `directores`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `ecomponentes`
@@ -2767,15 +2837,25 @@ ALTER TABLE `accion_perfil`
 ALTER TABLE `aplicaciones`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
+-- AUTO_INCREMENT de la tabla `areas`
+--
+ALTER TABLE `areas`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT de la tabla `auxiliares`
 --
 ALTER TABLE `auxiliares`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
+-- AUTO_INCREMENT de la tabla `bitacoras`
+--
+ALTER TABLE `bitacoras`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+--
 -- AUTO_INCREMENT de la tabla `cargos`
 --
 ALTER TABLE `cargos`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT de la tabla `categorias`
 --
@@ -2810,12 +2890,17 @@ ALTER TABLE `contactos`
 -- AUTO_INCREMENT de la tabla `departamentos`
 --
 ALTER TABLE `departamentos`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
 --
 -- AUTO_INCREMENT de la tabla `direcciones`
 --
 ALTER TABLE `direcciones`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=90;
+--
+-- AUTO_INCREMENT de la tabla `directores`
+--
+ALTER TABLE `directores`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `ecomponentes`
 --
@@ -2875,7 +2960,7 @@ ALTER TABLE `estados`
 -- AUTO_INCREMENT de la tabla `horarios`
 --
 ALTER TABLE `horarios`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT de la tabla `marca_modelo`
 --
@@ -2885,7 +2970,7 @@ ALTER TABLE `marca_modelo`
 -- AUTO_INCREMENT de la tabla `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
 --
 -- AUTO_INCREMENT de la tabla `modulos`
 --
@@ -2935,7 +3020,7 @@ ALTER TABLE `piezas`
 -- AUTO_INCREMENT de la tabla `planes`
 --
 ALTER TABLE `planes`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT de la tabla `plan_sucursal`
 --
@@ -2945,7 +3030,7 @@ ALTER TABLE `plan_sucursal`
 -- AUTO_INCREMENT de la tabla `presenciales`
 --
 ALTER TABLE `presenciales`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT de la tabla `regiones`
 --
@@ -2955,12 +3040,12 @@ ALTER TABLE `regiones`
 -- AUTO_INCREMENT de la tabla `remotos`
 --
 ALTER TABLE `remotos`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT de la tabla `respuestas`
 --
 ALTER TABLE `respuestas`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT de la tabla `rifs`
 --
@@ -3021,16 +3106,28 @@ ALTER TABLE `aplicaciones`
   ADD CONSTRAINT `aplicaciones_equipo_id_foreign` FOREIGN KEY (`equipo_id`) REFERENCES `equipos` (`id`);
 
 --
+-- Filtros para la tabla `areas`
+--
+ALTER TABLE `areas`
+  ADD CONSTRAINT `areas_departamento_id_foreign` FOREIGN KEY (`departamento_id`) REFERENCES `departamentos` (`id`);
+
+--
 -- Filtros para la tabla `cargos`
 --
 ALTER TABLE `cargos`
-  ADD CONSTRAINT `cargos_departamento_id_foreign` FOREIGN KEY (`departamento_id`) REFERENCES `departamentos` (`id`);
+  ADD CONSTRAINT `cargos_area_id_foreign` FOREIGN KEY (`area_id`) REFERENCES `areas` (`id`);
 
 --
 -- Filtros para la tabla `componentes`
 --
 ALTER TABLE `componentes`
   ADD CONSTRAINT `componentes_equipo_id_foreign` FOREIGN KEY (`equipo_id`) REFERENCES `equipos` (`id`);
+
+--
+-- Filtros para la tabla `departamentos`
+--
+ALTER TABLE `departamentos`
+  ADD CONSTRAINT `departamentos_director_id_foreign` FOREIGN KEY (`director_id`) REFERENCES `directores` (`id`);
 
 --
 -- Filtros para la tabla `ecomponente_epieza`
@@ -3045,107 +3142,6 @@ ALTER TABLE `ecomponente_epieza`
 ALTER TABLE `ecomponente_tequipo`
   ADD CONSTRAINT `ecomponente_tequipo_ecomponente_id_foreign` FOREIGN KEY (`ecomponente_id`) REFERENCES `ecomponentes` (`id`),
   ADD CONSTRAINT `ecomponente_tequipo_tequipo_id_foreign` FOREIGN KEY (`tequipo_id`) REFERENCES `tequipos` (`id`);
-
---
--- Filtros para la tabla `empleados`
---
-ALTER TABLE `empleados`
-  ADD CONSTRAINT `empleados_cargo_id_foreign` FOREIGN KEY (`cargo_id`) REFERENCES `cargos` (`id`),
-  ADD CONSTRAINT `empleados_cedula_id_foreign` FOREIGN KEY (`cedula_id`) REFERENCES `cedulas` (`id`),
-  ADD CONSTRAINT `empleados_contacto_id_foreign` FOREIGN KEY (`contacto_id`) REFERENCES `contactos` (`id`),
-  ADD CONSTRAINT `empleados_departamento_id_foreign` FOREIGN KEY (`departamento_id`) REFERENCES `departamentos` (`id`),
-  ADD CONSTRAINT `empleados_direccion_id_foreign` FOREIGN KEY (`direccion_id`) REFERENCES `direcciones` (`id`),
-  ADD CONSTRAINT `empleados_rif_id_foreign` FOREIGN KEY (`rif_id`) REFERENCES `rifs` (`id`),
-  ADD CONSTRAINT `empleados_usuario_id_foreign` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id`);
-
---
--- Filtros para la tabla `equipos`
---
-ALTER TABLE `equipos`
-  ADD CONSTRAINT `equipos_sucursal_id_foreign` FOREIGN KEY (`sucursal_id`) REFERENCES `sucursales` (`id`);
-
---
--- Filtros para la tabla `equipo_marca`
---
-ALTER TABLE `equipo_marca`
-  ADD CONSTRAINT `equipo_marca_emarca_id_foreign` FOREIGN KEY (`emarca_id`) REFERENCES `emarcas` (`id`),
-  ADD CONSTRAINT `equipo_marca_tequipo_id_foreign` FOREIGN KEY (`tequipo_id`) REFERENCES `tequipos` (`id`);
-
---
--- Filtros para la tabla `equipo_modelo`
---
-ALTER TABLE `equipo_modelo`
-  ADD CONSTRAINT `equipo_modelo_emodelo_id_foreign` FOREIGN KEY (`emodelo_id`) REFERENCES `emodelos` (`id`),
-  ADD CONSTRAINT `equipo_modelo_tequipo_id_foreign` FOREIGN KEY (`tequipo_id`) REFERENCES `tequipos` (`id`);
-
---
--- Filtros para la tabla `horarios`
---
-ALTER TABLE `horarios`
-  ADD CONSTRAINT `horarios_plan_id_foreign` FOREIGN KEY (`plan_id`) REFERENCES `planes` (`id`);
-
---
--- Filtros para la tabla `marca_modelo`
---
-ALTER TABLE `marca_modelo`
-  ADD CONSTRAINT `marca_modelo_emarca_id_foreign` FOREIGN KEY (`emarca_id`) REFERENCES `emarcas` (`id`),
-  ADD CONSTRAINT `marca_modelo_emodelo_id_foreign` FOREIGN KEY (`emodelo_id`) REFERENCES `emodelos` (`id`);
-
---
--- Filtros para la tabla `persona_sucursal`
---
-ALTER TABLE `persona_sucursal`
-  ADD CONSTRAINT `persona_sucursal_persona_id_foreign` FOREIGN KEY (`persona_id`) REFERENCES `personas` (`id`),
-  ADD CONSTRAINT `persona_sucursal_sucursal_id_foreign` FOREIGN KEY (`sucursal_id`) REFERENCES `sucursales` (`id`);
-
---
--- Filtros para la tabla `piezas`
---
-ALTER TABLE `piezas`
-  ADD CONSTRAINT `piezas_componente_id_foreign` FOREIGN KEY (`componente_id`) REFERENCES `componentes` (`id`);
-
---
--- Filtros para la tabla `plan_sucursal`
---
-ALTER TABLE `plan_sucursal`
-  ADD CONSTRAINT `plan_sucursal_plan_id_foreign` FOREIGN KEY (`plan_id`) REFERENCES `planes` (`id`),
-  ADD CONSTRAINT `plan_sucursal_sucursal_id_foreign` FOREIGN KEY (`sucursal_id`) REFERENCES `sucursales` (`id`);
-
---
--- Filtros para la tabla `presenciales`
---
-ALTER TABLE `presenciales`
-  ADD CONSTRAINT `presenciales_plan_id_foreign` FOREIGN KEY (`plan_id`) REFERENCES `planes` (`id`);
-
---
--- Filtros para la tabla `remotos`
---
-ALTER TABLE `remotos`
-  ADD CONSTRAINT `remotos_plan_id_foreign` FOREIGN KEY (`plan_id`) REFERENCES `planes` (`id`);
-
---
--- Filtros para la tabla `respuestas`
---
-ALTER TABLE `respuestas`
-  ADD CONSTRAINT `respuestas_plan_id_foreign` FOREIGN KEY (`plan_id`) REFERENCES `planes` (`id`);
-
---
--- Filtros para la tabla `sucursales`
---
-ALTER TABLE `sucursales`
-  ADD CONSTRAINT `sucursales_categoria_id_foreign` FOREIGN KEY (`categoria_id`) REFERENCES `categorias` (`id`),
-  ADD CONSTRAINT `sucursales_cliente_id_foreign` FOREIGN KEY (`cliente_id`) REFERENCES `clientes` (`id`),
-  ADD CONSTRAINT `sucursales_contacto_id_foreign` FOREIGN KEY (`contacto_id`) REFERENCES `contactos` (`id`),
-  ADD CONSTRAINT `sucursales_direccion__id_foreign` FOREIGN KEY (`direccion__id`) REFERENCES `direcciones` (`id`),
-  ADD CONSTRAINT `sucursales_direccion_id_foreign` FOREIGN KEY (`direccion_id`) REFERENCES `direcciones` (`id`),
-  ADD CONSTRAINT `sucursales_rif_id_foreign` FOREIGN KEY (`rif_id`) REFERENCES `rifs` (`id`),
-  ADD CONSTRAINT `sucursales_tipo_id_foreign` FOREIGN KEY (`tipo_id`) REFERENCES `tipos` (`id`);
-
---
--- Filtros para la tabla `telefonicos`
---
-ALTER TABLE `telefonicos`
-  ADD CONSTRAINT `telefonicos_plan_id_foreign` FOREIGN KEY (`plan_id`) REFERENCES `planes` (`id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
