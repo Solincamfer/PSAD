@@ -8,6 +8,10 @@ use DB;
 use Request;
 use App\Perfil;
 use App\Horario;
+use App\Bitacora;
+use App\Plan;
+use Response;
+
 
 class RegistrosBasicos extends Controller 
 {
@@ -772,30 +776,30 @@ public function planes_servicios()
 
 		
 	}
-public function planes_ingresar(){
-	$nombreP= strtoupper(Request::get('nomPn'));//nombre del Plan, llevado a mayusculas
-	$descuento= (int)Request::get('porDes');//Porcentaje de descuento del plan 
-	$statusP= (int)Request::get('stPn');//status del Plan 
 
+public function planesIngresar()
+{
 
-	$consulta=DB::table('planes')->where('nombreP',$nombreP)->first();
-	
+	$formulario=['nombreP'=>strtoupper(Request::get('nomPn')),'descuento'=>Request::get('porDes'),'status'=>Request::get('stPn')];
+	$duplicate=Plan::where('nombreP',$formulario['nombreP'])->count();
+	$insert=false;
 
-	if (empty($consulta)) //si el registro no existe, se procede a ingresar los datos del departamento
+	if($duplicate==0)
 	{
-		 DB::table('planes')->insert
-				 	(
-
-				 		['nombreP'=>$nombreP,'descuento'=>$descuento,'status'=>$statusP]
-				 	);
-
-		$respuesta= 1;
+		$nuevoPlan=new Plan;
+		$nuevoPlan->nombreP=$formulario['nombreP'];
+		$nuevoPlan->status=$formulario['status'];
+		$nuevoPlan->descuento=$formulario['descuento'];
+		$insert=$nuevoPlan->save();
+		if($insert)
+		{
+			$this->registroBitacora($nuevoPlan->id,'Agregar Plan',json_encode($nuevoPlan),'Planes -> Agregar Plan');
+		}
 		
 	}
-	else{
-		$respuesta= 0;
-	}
-	return (int)$respuesta;
+
+	
+	return Response()->json(['duplicate'=>$duplicate,'insert'=>$insert]);	
 }
 	
 
@@ -926,50 +930,61 @@ public function insertar_servicios(){
 	}
 	return $respuesta;
 }
-///////////////////////////////////////   CARGAR DATOS EN EL MODAL MODIFICAR PLAN  //////////////////////////////
+///////////////////////////////////////   actualizar los datos del modal  //////////////////////////////
 
-public function planes_mostrar_datos(){
-	$id=Request::get('datos');
-	$consulta=DB::table('planes')->where('id','=',$id)->first();
-	if (count($consulta)==1) {
-		$respuesta = 	array(	$consulta->nombreP,
-								$consulta->descuento,
-								$consulta->status,
-								$consulta->id,
-								1
-						);
-	}
-	else{
-		$respuesta = 0;	
-	}
-	return $respuesta; 
-}
-////////////////////////////////////// MODIFICAR PLANES ///////////////////////////////////////////////////////
-
-public function planes_modificar(){
-
-	$datos=Request::get('datos');
-	$nombreP= strtoupper($datos[0][0]);//nombre del Plan, llevado a mayusculas
-	$descuento= $datos[0][1];//Porcentaje de descuento del plan 
-	$statusP= (int)$datos[0][2];;//status del Plan 
-
-	$consulta=DB::table('planes')->where('id','<>',$datos[1])->where('nombreP',$nombreP)->get();
+public function planesActualizar()
+{
 	
+	$formulario=['nombreP'=>strtoupper(Request::get('nomPlan')),'descuento'=>Request::get('porDesc'),'status'=>Request::get('statusPlan'),'id'=>Request::get('registroPlan')];
 
-	if (count($consulta)==0) //si el registro no existe con otro id, se procede a modificar los datos del plan
+	$indicadores=['update'=>false,'duplicate'=>1];
+	$cambios=[];
+	//////////////////////////////Verificar si el registro existe en el sistema /////////////////////////////////////////////////////
+	$indicadores['duplicate']=Plan::where('nombreP',$formulario['nombreP'])->count();
+	//////////////////////////////////////Si no hay registros duplicados ////////////////////////////////////////////////////////////
+	if($indicadores['duplicate']==0)
 	{
-		$actualizacion=DB::table('planes')->where('id',$datos[1])->update([	'nombreP'=>$nombreP,
-																			'descuento'=>$descuento,
-																			'status'=>$statusP
-																		]);
-						
-		$respuesta= 1;
-		
+       $aux=$this->compararCampos($formulario,$indicadores['duplicate'],Plan::find($formulario['id']));
+       $indicadores['update']=$aux['update'];
+       if($indicadores['update']==true)
+       {
+       	$cambios=(string) json_encode($aux['cambios']);
+       	$this->registroBitacora($formulario['id'],'Modificar Plan',$cambios,'Planes -> Modificar Plan');
+       }
+
 	}
-	else{
-		$respuesta= 0;
-	}
-	return $respuesta;
+
+
+
+	return Response()->json($indicadores);
+	
+}
+////////////////////////////////////// cargar datos al modal///////////////////////////////////////////////////////
+
+public function planesModificar()
+{
+   $registry=Request::get('registry');
+   $plan=Plan::find($registry);
+   return $plan;
+
+
+}
+
+function planesModificarStatus()
+{
+	$status=[1,0];
+	$registry=Request::get('registry');
+	$aux=false;
+	///////////// Busqueda del perfil y cambio de status ////////////////////////
+	$plan=Plan::find($registry);
+	$plan->status=$status[$plan->status];
+	$aux=$plan->save();
+	/////////////////////////////////////////////////////////////////////////////////////////////////////
+    $this->registroBitacora($registry,'Cambiar Status','{"status":"'.$status[$plan->status].' -> '.$plan->status.'"}','Planes');
+    /////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	return Response()->json(['update'=>$aux]);
+
 }
 	
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1025,6 +1040,11 @@ public function empleados_asignar_perfil()
 	$actualizacion=DB::table('usuarios')->where('id',$usuario)->update(['perfil_id'=>$perfil]);
 	return $actualizacion;
 	
+}
+
+public function empleadosModificar()
+{
+		
 }
 
 public function cargar_modal_agregar(){
@@ -1160,28 +1180,122 @@ public function perfiles()//ventana perfiles
 
 public function perfiles_insertar()
 {
-	$perfil=strtoupper(Request::get('duPfl'));
-	$status=(int)Request::get('stPfl');
+	
+	$formulario=['descripcion'=>strtoupper(Request::get('DescripcionAdd')),'status'=>Request::get('StatusAdd')];
+	$duplicate=Perfil::where('descripcion',$formulario['descripcion'])->count();
+	$insert=false;
 
-	$consulta=DB::table('perfiles')->where('descripcion',$perfil)->first();
-
-	if (empty($consulta)) //si no existe el perfil
+	if($duplicate==0)
 	{
+		$nuevoPerfil=new Perfil;
+		$nuevoPerfil->descripcion=$formulario['descripcion'];
+		$nuevoPerfil->status=$formulario['status'];
+		$insert=$nuevoPerfil->save();
+		if($insert)
+		{
+			$this->registroBitacora($nuevoPerfil->id,'Agregar Perfil',json_encode($nuevoPerfil),'Perfil -> Agregar Perfil');
+		}
 		
-					 $perfil_id=DB::table('perfiles')->insertGetId
-					 	(
-
-					 		['descripcion'=>$perfil,'status'=>$status]
-					 	);
-
-		$this->perfil_inicial($perfil_id);//configuracion por defecto para un perfil
-		$respuesta=1;
 	}
-	else{
-		$respuesta=0;
-	}
-	return $respuesta;
 
+	
+	return Response()->json(['duplicate'=>$duplicate,'insert'=>$insert]);
+
+}
+
+public function registroBitacora($registry,$accion,$detalles,$ventana)
+{
+
+	$datos=Session::get('sesion');
+	$usuario=$datos[0]['nombre'].' '.$datos[0]['apellido'];
+	
+
+	$bitacora=new Bitacora;
+	$bitacora->usuario=$usuario;
+	$bitacora->accion=$accion;
+	$bitacora->registro_id=$registry;
+	$bitacora->detalles=$detalles;
+	$bitacora->ventana=$ventana;
+
+     return $bitacora->save();
+
+}
+
+public function perfilesModificarStatus()
+{
+
+	$status=[1,0];
+	$registry=Request::get('registry');
+	$aux=false;
+	///////////// Busqueda del perfil y cambio de status ////////////////////////
+	$perfil=Perfil::find($registry);
+	$perfil->status=$status[$perfil->status];
+	$aux=$perfil->save();
+	/////////////////////////////////////////////////////////////////////////////////////////////////////
+    $this->registroBitacora($registry,'Cambiar Status','{"status":"'.$status[$perfil->status].' -> '.$perfil->status.'"}','Perfil');
+    /////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	return Response()->json(['update'=>$aux]);
+}
+
+public function perfilesModificar()//obtiene la informacion que va al modal modificar
+{
+
+	$registry=Request::get('registry');
+	$consultaPerfil=Perfil::find($registry);//retorna los datos del perfil consultado
+	return $consultaPerfil;
+}
+
+public function compararCampos($formulario,$duplicado,$registro)
+{
+    $cambios=[];
+    $update=false;
+
+	
+		foreach ($formulario as $llave => $valor) 
+		{
+			if($llave!='id')//si no es el campo id
+			{
+				if($registro->$llave!=$formulario[$llave])//si existe diferencias entre un campo del formulario y la base de datos
+				{
+					$cambios[strtoupper($llave)]=$registro->$llave.' -> '.$formulario[$llave];
+					$registro->$llave=$formulario[$llave];
+					$aux=$registro->save();
+					if($aux==true)
+						{$update=$aux;}
+				}
+			}
+		}
+	return ['cambios'=>$cambios,'update'=>$update];
+}
+
+
+public function perfilesActualizar()
+{
+
+	$formulario=['descripcion'=>strtoupper(Request::get('Descripcion')),'status'=>Request::get('Status'),'id'=>Request::get('Registro')];
+	$indicadores=['update'=>false,'duplicate'=>1];
+	$cambios=[];
+	
+
+	//////////////////////////////Verificar si el registro existe en el sistema /////////////////////////////////////////////////////
+	$indicadores['duplicate']=Perfil::where('descripcion',$formulario['descripcion'])->count();
+	//////////////////////////////////////Si no hay registros duplicados ////////////////////////////////////////////////////////////
+	if($indicadores['duplicate']==0)
+	{
+       $aux=$this->compararCampos($formulario,$indicadores['duplicate'],Perfil::find($formulario['id']));
+       $indicadores['update']=$aux['update'];
+       if($indicadores['update']==true)
+       {
+       	$cambios=(string) json_encode($aux['cambios']);
+       	$this->registroBitacora($formulario['id'],'Modificar Perfil',$cambios,'Perfil -> Modificar Perfil');
+       }
+
+	}
+
+	
+
+   return Response()->json($indicadores);
 }
 
 

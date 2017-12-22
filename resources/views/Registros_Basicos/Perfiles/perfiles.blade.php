@@ -35,7 +35,8 @@
                         </div>
                     </div>
                     
-                    <div class="col-xs-5 col-sm-5 col-md-6 col-md-offset-3" id="areaResultados" data-tab="{{$extra}}"> 
+                    <div class="col-xs-5 col-sm-5 col-md-6 col-md-offset-3" id="areaResultados" > 
+                        {{ csrf_field() }}
                         @foreach($consulta as $perfiles)
                             <div class="contMd" style="">
                                 <div class="icl">
@@ -43,7 +44,7 @@
                                         @if($accion->id!=85)
                                               @if($accion->id==84)
                                                     <span class="iclsp">
-                                                        <a class="tltp ModificaR" id="ModificaPer{{$perfiles->id}}" data-reg="{{$perfiles->id}}"data-ttl="{{$accion->descripcion}}" data-toggle="modal" > 
+                                                        <a class="tltp ModificarPerfil" id="ModificaPer{{$perfiles->id}}" data-reg="{{$perfiles->id}}"data-ttl="{{$accion->descripcion}}" data-toggle="modal" > 
                                                              <i class="{{$accion->clase_css}}"></i>
                                                        </a>
                                                     </span>
@@ -58,11 +59,11 @@
                                         @elseif($accion->id==85)
                                              @if($perfiles->status==1)
                                            <div class="chbx">
-                                               <input type="checkbox" class="btnAcc" name="status" id="{{'inchbx'. $perfiles->id}}" value="{{$perfiles->status}}" checked><label for="{{'inchbx'. $perfiles->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
+                                               <input type="checkbox" class="checkPerfil" name="status" id="{{'inchbx'. $perfiles->id}}" value="{{$perfiles->status}}" data-reg="{{$perfiles->id}}" checked><label for="{{'inchbx'. $perfiles->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
                                            </div>
                                            @elseif($perfiles->status==0)
                                                <div class="chbx">
-                                                   <input type="checkbox" class="btnAcc" name="status" id="{{'inchbx'. $perfiles->id}}" value="{{$perfiles->status}}"><label for="{{'inchbx'. $perfiles->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
+                                                   <input type="checkbox" class="checkPerfil" name="status" id="{{'inchbx'. $perfiles->id}}" value="{{$perfiles->status}}" data-reg="{{$perfiles->id}}"><label for="{{'inchbx'. $perfiles->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}" ></label>
                                                </div>
                                            @endif
                                         @endif
@@ -75,7 +76,7 @@
                         <div class="paginador">
                           {{ $consulta->links() }}
                         </div>
-                        <input type="text"   name="TND"  value="{{$extra}}">
+                       
                     </div>
 
           <!--   Modal Agregar --> 
@@ -97,13 +98,13 @@
                                                   <div class="col-md-8 col-md-offset-2">
                                                       <div class="form-group row">
                                                           <label for="duPfl">Nombre del Perfil</label>
-                                                          <input type="text" class="form-control" name="duPfl" id="duPfl"><i class="fa fa-id-badge icpfl"></i>
+                                                          <input type="text" class="form-control" name="DescripcionAdd" id="duPfl"><i class="fa fa-id-badge icpfl"></i>
                                                       </div>
                                                   </div>
                                                   <div class="col-md-8 col-md-offset-2">
                                                       <div class="form-group row">
                                                           <label for="stPfl">Estatus del Perfil</label><span class="ic"><i class="fa fa-chevron-down"></i></span>
-                                                          <select name="stPfl" id="stPfl" class="form-control">
+                                                          <select name="StatusAdd" id="stPfl" class="form-control">
                                                               <option value="">-</option>
                                                               <option value="1">ACTIVO</option>
                                                               <option value="0">INACTIVO</option>
@@ -133,7 +134,7 @@
                                     <h4 class="modal-title" id="myModalLabel2">Modificar Perfil</h4>
                                 </div>
                                 <div class="modal-body">
-                                    <form  class="DepCarPer">
+                                    <form  class="DepCarPer" id="forActPerf">
                                       {{ csrf_field() }}
                                         <div class="container-fluid contpfl">
                                            <div class="row">
@@ -154,14 +155,16 @@
                                                           </select><i class="fa fa-check icpfl"></i>
                                                       </div>
                                                   </div> 
+
+                                                  <input type="text" class="form-control descripcion" name="Registro" id="perfilRegistry" value="">
                                                </div>
-                                               <input type="text" value="" id="MIndexP" name="MIndex">
+                                               
                                            </div>
                                         </div>
                                       
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="submit" class="bttnMd" id="mDepCarPer"> Guardar <i class="fa fa-floppy-o"></i></button>
+                                    <button type="submit" class="bttnMd" id="actualizarPerfil" > Guardar <i class="fa fa-floppy-o"></i></button>
                                 </div>
                                  
                                </form>

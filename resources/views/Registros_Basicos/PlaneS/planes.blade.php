@@ -34,7 +34,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-5 col-sm-5 col-md-6 col-md-offset-3" id="areaResultados" data-tab="{{$extra}}"> 
+                <div class="col-xs-5 col-sm-5 col-md-6 col-md-offset-3" id="areaResultados" > 
                  
                    @foreach($consulta as $planes)
                         <div class="contMd">
@@ -43,7 +43,7 @@
                                     @if($accion->id!=66)
                                         @if($accion->id==65)
                                             <span class="iclsp">
-                                                <a  class="tltp ModificaR" data-reg="{{$planes->id}}"" data-ttl="{{$accion->descripcion}}"  data-toggle="modal" > 
+                                                <a  class="tltp ModificarPlan" data-reg="{{$planes->id}}"" data-ttl="{{$accion->descripcion}}"  data-toggle="modal" > 
                                                     <i class="{{$accion->clase_css}}"></i>
                                                 </a>
                                             </span>
@@ -57,11 +57,11 @@
                                     @elseif($accion->id==66)
                                         @if($planes->status==1)
                                             <div class="chbx">
-                                                <input type="checkbox" class="btnAcc" name="status" id="{{'inchbx'. $planes->id}}" value="{{$planes->status}}" checked><label for="{{'inchbx'. $planes->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
+                                                <input type="checkbox" class="checkPlan" name="status" id="{{'inchbx'. $planes->id}}" value="{{$planes->status}}" data-reg="{{$planes->id}}" checked><label for="{{'inchbx'. $planes->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
                                             </div>
                                         @elseif($planes->status==0)
                                             <div class="chbx">
-                                                <input type="checkbox" class="btnAcc" name="status" id="{{'inchbx'. $planes->id}}" value="{{$planes->status}}"><label for="{{'inchbx'. $planes->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
+                                                <input type="checkbox" class="checkPlan" name="status" id="{{'inchbx'. $planes->id}}" value="{{$planes->status}}" data-reg="{{$planes->id}}"><label for="{{'inchbx'. $planes->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
                                             </div>
                                         @endif
                                     @endif
@@ -74,7 +74,7 @@
                     <div class="paginador">
                         {{ $consulta->links() }}
                     </div>
-                    <input type="text"   name="TND"  value="{{$extra}}">
+                    
                 </div>
 
 
@@ -135,33 +135,35 @@
                                 <h4 class="modal-title" id="myModalLabel2">Modificar Plan</h4>
                             </div>
                             <form id="mPlan">
+                                {{ csrf_field() }}
                                 <div class="modal-body">
-                                        {{ csrf_field() }}
+                                        
                                         <input type="hidden" id="id_registro" value="">
                                         <div class="container-fluid" id="contpn">
                                             <div class="rPnm">
                                                 <div class="col-md-8 col-md-offset-2">
                                                     <div class="form-group row">
                                                         <label for="nomPnm">Nombre del plan</label>
-                                                        <input type="text" name="nomPnm" id="nomPnm"><i class="fa fa-cubes" id="micpn1"></i>
+                                                        <input type="text" name="nomPlan" id="nomPlan"><i class="fa fa-cubes" id="micpn1"></i>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-8 col-md-offset-2">
                                                     <div class="form-group row">
                                                         <label for="porDesm">Porcentaje de descuento</label>
-                                                        <input type="number" name="porDesm" id="porDesm"><i class="fa fa-percent" id="micpn2"></i>
+                                                        <input type="number" name="porDesc" id="porDesc"><i class="fa fa-percent" id="micpn2"></i>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-8 col-md-offset-2">
                                                     <div class="form-group row">
                                                         <label for="stPnm">Estatus del Plan</label><span class="ic"><i class="fa fa-chevron-down"></i></span>
-                                                        <select name="stPnm" id="stPnm">
+                                                        <select name="statusPlan" id="statusPlan">
                                                             <option value="">-</option>
                                                             <option value="1">Activo</option>
                                                             <option value="0">Inactivo</option>
                                                         </select><i class="fa fa-check" id="micpn4"></i>
                                                     </div>
                                                 </div>
+                                                 <input type="hidden" class="form-control descripcion" name="registroPlan" id="planRegistry" value="">
                                             </div>
                                         </div>
                                     

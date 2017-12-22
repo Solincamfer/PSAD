@@ -25,6 +25,9 @@
         <script src="{{asset('js/botonGuardarMA.js')}}"></script>
         <script src="{{asset('js/validator.min.js')}}"></script>
         <script src="{{asset('js/mycompany.js')}}"></script>
+        <script src="{{asset('js/vista_perfil.js')}}"></script>
+        <script src="{{asset('js/vista_empleados.js')}}"></script>
+        <script src="{{asset('js/vista_planes.js')}}"></script>
         <script src="{{asset('plugins/sweetalert/sweetalert.min.js')}}"></script>
 
     </body>

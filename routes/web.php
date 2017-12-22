@@ -126,7 +126,10 @@ Route::group(['prefix'=>'/menu/registros','middleware'=>['v_menu']],function(){
 	Route::match(['post','get'],'/actualizar',                                                              ['uses'=>'RegistrosBasicos@actualizar_registrosCD']);
 	Route::match(['post','get'],'/departamentos/cargos/registrar/{departamento_id}',                      	['uses'=>'RegistrosBasicos@cargos_ingresar']);
 	Route::match(['post','get'],'/perfiles/registrar',                                                      ['uses'=>'RegistrosBasicos@perfiles_insertar']);
-	Route::match(['post','get'],'/perfiles/modificar',                                                  	['uses'=>'RegistrosBasicos@perfiles_modificar']);
+	Route::match(['post','get'],'/perfiles/status',                                                      ['uses'=>'RegistrosBasicos@perfilesModificarStatus']); 
+	Route::match(['post','get'],'/perfiles/modificar',                                                  	['uses'=>'RegistrosBasicos@perfilesModificar']); 
+	Route::match(['post','get'],'/perfiles/actualizar',                                                  	['uses'=>'RegistrosBasicos@perfilesActualizar']); 
+	
 	Route::match(['post','get'],'/perfiles/configurar/modulo',                                              ['uses'=>'RegistrosBasicos@perfiles_configurar_moduloDependencias']);
 	Route::match(['post','get'],'/perfiles/configurar/modulo_',                                             ['uses'=>'RegistrosBasicos@perfiles_configurar_modulo']);
 	Route::match(['post','get'],'/perfiles/configurar/submodulo',                                           ['uses'=>'RegistrosBasicos@perfiles_configurar_submoduloDependencias']);
@@ -135,12 +138,11 @@ Route::group(['prefix'=>'/menu/registros','middleware'=>['v_menu']],function(){
 
 
 /*////////////////////////////////Planes y servicios//////////////////////////////////////////*/
+	Route::match(['post','get'],'/planes/registrar',                                                     	 ['uses'=>'RegistrosBasicos@planesIngresar']);
 
-	Route::match(['post','get'],'/planes/registrar',                                                     	 ['uses'=>'RegistrosBasicos@planes_ingresar']);
-
-	Route::match(['post','get'],'/planes/actualizar',                                               		 ['uses'=>'RegistrosBasicos@planes_mostrar_datos']);
-
-	Route::match(['post','get'],'/planes/modificar',                                               			 ['uses'=>'RegistrosBasicos@planes_modificar']);
+	Route::match(['post','get'],'/planes/actualizar',                                               		 ['uses'=>'RegistrosBasicos@planesActualizar']);
+	Route::match(['post','get'],'/planes/modificar',                                               			 ['uses'=>'RegistrosBasicos@planesModificar']); 
+	Route::match(['post','get'],'/planes/status',                                               			 ['uses'=>'RegistrosBasicos@planesModificarStatus']);    
 
 	Route::match(['post','get'],'/planes/consultarservicios',                                               ['uses'=>'RegistrosBasicos@valores_servicios']);
 	Route::match(['post','get'],'/planes/servicios/insertar',                                               ['uses'=>'RegistrosBasicos@insertar_servicios']);
@@ -173,7 +175,7 @@ Route::group(['prefix'=>'/menu/registros','middleware'=>['v_menu']],function(){
 //////////////////////////////	EMPLEADOS ////////////////////////////////////////////////////////
 	Route::match(['post','get'],'/empleados/consulta',                                              			['uses'=>'RegistrosBasicos@cargar_modal_agregar']);
 	Route::match(['post','get'],'/empleados/agregar',                                              			['uses'=>'RegistrosBasicos@insertar_empleado']);
-	Route::match(['post','get'],'/empleados/modificar',                                              			['uses'=>'RegistrosBasicos@cargar_modal_modificar']);
+	Route::match(['post','get'],'/empleados/modificar',                                              			['uses'=>'RegistrosBasicos@empleadosModificar']);
 	Route::match(['post','get'],'/empleados/cargar',                                              			['uses'=>'RegistrosBasicos@cargar_combos']);
 	Route::match(['post','get'],'/empleados/actualizar',                                              			['uses'=>'RegistrosBasicos@cargar_modal_modificar']);
 

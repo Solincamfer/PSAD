@@ -591,90 +591,90 @@ $('.ttlMd').change(function()//asignar perfil a un usuario
 $(".btnResp").change(function(){alert('hola');});
 
 
-$(".btnAcc").change(function()//cambio de status de los check
-	{
-	/////// Valores para mensajes y cambio de status /////////////////
-		var registros=['Departamento','Cargo','Perfil','Plan','Cliente','Categoria','Sucursal','Equipo','Componente','Pieza','Aplicacion','Empleado'];
-		var estado=["Habilitar el ","Deshabilitar el "];
-	 	var cambio=["habilitado","deshabilitado"];
-	 	var valores=[1,0];
-	 	var estados=[false,true];
-	 	var colores=["#207D07","#EE1919"];
+// $(".btnAcc").change(function()//cambio de status de los check
+// 	{
+// 	/////// Valores para mensajes y cambio de status /////////////////
+// 		var registros=['Departamento','Cargo','Perfil','Plan','Cliente','Categoria','Sucursal','Equipo','Componente','Pieza','Aplicacion','Empleado'];
+// 		var estado=["Habilitar el ","Deshabilitar el "];
+// 	 	var cambio=["habilitado","deshabilitado"];
+// 	 	var valores=[1,0];
+// 	 	var estados=[false,true];
+// 	 	var colores=["#207D07","#EE1919"];
 
 
-	//////////////////////////obtener registro a modificar //////////////////////////////////////////
-		var id=$(this).attr('id');//id del boton modificar seleccionado
-		var longitud=id.length;//longitud del  id de modificar
-		var indice=id.indexOf('x');//indice del ultimo caracter
-		var registro=id.slice(indice+1,longitud);//numero del registro a modificar 
+// 	//////////////////////////obtener registro a modificar //////////////////////////////////////////
+// 		var id=$(this).attr('id');//id del boton modificar seleccionado
+// 		var longitud=id.length;//longitud del  id de modificar
+// 		var indice=id.indexOf('x');//indice del ultimo caracter
+// 		var registro=id.slice(indice+1,longitud);//numero del registro a modificar 
     	
-	/////////////////////////////////////////////////////////////////////////////////	
+// 	/////////////////////////////////////////////////////////////////////////////////	
 
 
-		var name= $(this).attr("id");
-		var valor=$('#'+name).val();
-	 	var tabla=$('input[name=TND]').val();
+// 		var name= $(this).attr("id");
+// 		var valor=$('#'+name).val();
+// 	 	var tabla=$('input[name=TND]').val();
 
 		
-		swal({
-				title: "Cambio de status",
-				text: "¿Desea "+estado[valor]+registros[tabla]+" Seleccionado ?",
-				type: "warning",
-				showCancelButton: true,
-				confirmButtonColor:colores[valor],
-				confirmButtonText: estado[valor]+registros[tabla],
-				cancelButtonText: "Cancelar",
-				closeOnConfirm: false,
-				closeOnCancel: false
-			 },
+// 		swal({
+// 				title: "Cambio de status",
+// 				text: "¿Desea "+estado[valor]+registros[tabla]+" Seleccionado ?",
+// 				type: "warning",
+// 				showCancelButton: true,
+// 				confirmButtonColor:colores[valor],
+// 				confirmButtonText: estado[valor]+registros[tabla],
+// 				cancelButtonText: "Cancelar",
+// 				closeOnConfirm: false,
+// 				closeOnCancel: false
+// 			 },
 
-			 function(isConfirm)
-			 {
-			 	if(isConfirm)//pasar peticion
-			 	{
-			 		var url= '/menu/cambio/registros';//ruta del controlador 
-					var datos=[valor,registro,tabla];//datos para el controlad
+// 			 function(isConfirm)
+// 			 {
+// 			 	if(isConfirm)//pasar peticion
+// 			 	{
+// 			 		var url= '/menu/cambio/registros';//ruta del controlador 
+// 					var datos=[valor,registro,tabla];//datos para el controlad
 				
-					$.get(url, {datos:datos}, function(actualizar)
-					{
+// 					$.get(url, {datos:datos}, function(actualizar)
+// 					{
 						
-					   	if(actualizar>0)//si se realiza una actualizacion en la base de datos
-						   	{
+// 					   	if(actualizar>0)//si se realiza una actualizacion en la base de datos
+// 						   	{
 						   		
-						   		swal("Cambio de status", "El "+registros[tabla]+ " seleccionado fue "+cambio[valor]+" con exito", "success");
-						   		$('#'+name).val(valores[valor]);
+// 						   		swal("Cambio de status", "El "+registros[tabla]+ " seleccionado fue "+cambio[valor]+" con exito", "success");
+// 						   		$('#'+name).val(valores[valor]);
 						   		
-						   	}
-					   	else //si no se realiza ninguna consulta
-						   	{
-						   		swal("Error Inesperado !!", "Comuniquese con el administrador", "error");
-						   		$('#'+name).prop('checked',estados[valor]);//estado inicial del check
-			 					$('#'+name).val(valor);//valor inicial del check
-						   	}
-				 	}
-				 	);
+// 						   	}
+// 					   	else //si no se realiza ninguna consulta
+// 						   	{
+// 						   		swal("Error Inesperado !!", "Comuniquese con el administrador", "error");
+// 						   		$('#'+name).prop('checked',estados[valor]);//estado inicial del check
+// 			 					$('#'+name).val(valor);//valor inicial del check
+// 						   	}
+// 				 	}
+// 				 	);
 			    	
 
 			 		 
-			 	}
-			 	else//si no se desea asignar el perfil
-			 	{
+// 			 	}
+// 			 	else//si no se desea asignar el perfil
+// 			 	{
 			 		
 			 	
-			 			$('#'+name).prop('checked',estados[valor]);//estado inicial del check
-			 			$('#'+name).val(valor);//valor inicial del check
-			 			//alert($('#radio'+padre_).attr('value'));
+// 			 			$('#'+name).prop('checked',estados[valor]);//estado inicial del check
+// 			 			$('#'+name).val(valor);//valor inicial del check
+// 			 			//alert($('#radio'+padre_).attr('value'));
 			 		
 			 		
-			 		swal("Cancelado", "No se realizo el cambio de status para el "+registros[tabla]+" seleccionado", "error");	
-			 	}
+// 			 		swal("Cancelado", "No se realizo el cambio de status para el "+registros[tabla]+" seleccionado", "error");	
+// 			 	}
 
-			 }
-			);
+// 			 }
+// 			);
 		
 
 
-	});
+// 	});
 
 
 
@@ -889,97 +889,97 @@ $('#saveCargo').click(function(){
 	}
 });
 ////////////////////////////////////////// Validacion de registros iguales para Perfiles ///////////////////////////////////////
-$('#savePerfil').click(function(){
-	var form=$('#NewPerfil');
-	var url= '/menu/registros/perfiles/registrar';
-	var data= form.serialize();
-	var Perf = $('#duPfl').val();
-	var estatus = $('#stPfl').val();
-	if (Perf != '' && estatus != ''){
-		var posting = $.get(url, data,function(resultado){
-			if (resultado == 1) {
-				//SWALLLL mensajes de alerta y sucesos
-				swal({
-					title:'Guardado Exitoso',//Contenido del modal
-					text: 'El Perfil fue Guardado Exitosamente',
-					type: "success",
-					timer:1000,
-					showConfirmButton:false,//Eliminar boton de confirmacion
-				});
-				//Retardo en ejecucion de ruta.
-				setTimeout(function(){location.href = "/menu/registros/perfiles";},1200); // 3000ms = 3s
-			}	
-			else {
-				swal({
+// $('#savePerfil').click(function(){
+// 	var form=$('#NewPerfil');
+// 	var url= '/menu/registros/perfiles/registrar';
+// 	var data= form.serialize();
+// 	var Perf = $('#duPfl').val();
+// 	var estatus = $('#stPfl').val();
+// 	if (Perf != '' && estatus != ''){
+// 		var posting = $.get(url, data,function(resultado){
+// 			if (resultado == 1) {
+// 				//SWALLLL mensajes de alerta y sucesos
+// 				swal({
+// 					title:'Guardado Exitoso',//Contenido del modal
+// 					text: 'El Perfil fue Guardado Exitosamente',
+// 					type: "success",
+// 					timer:1000,
+// 					showConfirmButton:false,//Eliminar boton de confirmacion
+// 				});
+// 				//Retardo en ejecucion de ruta.
+// 				setTimeout(function(){location.href = "/menu/registros/perfiles";},1200); // 3000ms = 3s
+// 			}	
+// 			else {
+// 				swal({
 
-					title:'Registro Existente!!!.',//Contenido del modal
-					text: 'Este Perfil ya existe',
-					type: "error",
-					timer:2000,
-					showConfirmButton:false,//Eliminar boton de confirmacion
-				});
-			}						
-		});
-		posting.fail(function() {
-			swal({
-				title:'Error inesperado!!',//Contenido del modal
-				text: 'Pongase en contacto con el administrador',
-				type: "error",
-				showConfirmButton:true,//Eliminar boton de confirmacion
-			});
-		});
-	}
-});
+// 					title:'Registro Existente!!!.',//Contenido del modal
+// 					text: 'Este Perfil ya existe',
+// 					type: "error",
+// 					timer:2000,
+// 					showConfirmButton:false,//Eliminar boton de confirmacion
+// 				});
+// 			}						
+// 		});
+// 		posting.fail(function() {
+// 			swal({
+// 				title:'Error inesperado!!',//Contenido del modal
+// 				text: 'Pongase en contacto con el administrador',
+// 				type: "error",
+// 				showConfirmButton:true,//Eliminar boton de confirmacion
+// 			});
+// 		});
+// 	}
+// });
 /////////////////////////////////////   Validacion de registros iguales para Planes //////////////////////////////////////////
-$('#savePlan').click(function(){
-	var form=$('#NewPlan');
-	var url= '/menu/registros/planes/registrar';
-	var data= form.serialize();
-	var Plan = $('#nomPn').val();
-	var desc = $('#stPn').val();
-	var estatus = $('#porDes').val();
+// $('#savePlan').click(function(){
+// 	var form=$('#NewPlan');
+// 	var url= '/menu/registros/planes/registrar';
+// 	var data= form.serialize();
+// 	var Plan = $('#nomPn').val();
+// 	var desc = $('#stPn').val();
+// 	var estatus = $('#porDes').val();
 	
-	if (Plan != '' && desc != '' && estatus != ''){
-		var posting = $.get(url, data,function(resultado){
-			if (resultado == 1) {
-				//SWALLLL mensajes de alerta y sucesos
-				swal({
-					title:'Guardado Exitoso',//Contenido del modal
-					text: 'El Plan fue Guardado Exitosamente',
-					type: "success",
-					timer:1000,
-					showConfirmButton:false,//Eliminar boton de confirmacion
-				});
-				//Retardo en ejecucion de ruta.
-				setTimeout(function(){location.href = "/menu/registros/planeservicios";},1200); // 3000ms = 3s
-			}	
-			else {
-				swal({
+// 	if (Plan != '' && desc != '' && estatus != ''){
+// 		var posting = $.get(url, data,function(resultado){
+// 			if (resultado == 1) {
+// 				//SWALLLL mensajes de alerta y sucesos
+// 				swal({
+// 					title:'Guardado Exitoso',//Contenido del modal
+// 					text: 'El Plan fue Guardado Exitosamente',
+// 					type: "success",
+// 					timer:1000,
+// 					showConfirmButton:false,//Eliminar boton de confirmacion
+// 				});
+// 				//Retardo en ejecucion de ruta.
+// 				setTimeout(function(){location.href = "/menu/registros/planeservicios";},1200); // 3000ms = 3s
+// 			}	
+// 			else {
+// 				swal({
 
-					title:'Registro Existente!!!.',//Contenido del modal
-					text: 'Este Plan ya existe',
-					type: "error",
-					timer:2000,
-					showConfirmButton:false,//Eliminar boton de confirmacion
-				});
-			}						
-		});
-		posting.fail(function() {
-			swal({
-				title:'Error inesperado!!',//Contenido del modal
-				text: 'Pongase en contacto con el administrador',
-				type: "error",
-				showConfirmButton:true,//Eliminar boton de confirmacion
-			});
-		});
-	}
-});
+// 					title:'Registro Existente!!!.',//Contenido del modal
+// 					text: 'Este Plan ya existe',
+// 					type: "error",
+// 					timer:2000,
+// 					showConfirmButton:false,//Eliminar boton de confirmacion
+// 				});
+// 			}						
+// 		});
+// 		posting.fail(function() {
+// 			swal({
+// 				title:'Error inesperado!!',//Contenido del modal
+// 				text: 'Pongase en contacto con el administrador',
+// 				type: "error",
+// 				showConfirmButton:true,//Eliminar boton de confirmacion
+// 			});
+// 		});
+// 	}
+// });
 
 ////////////////////////////////////// Asociacion de Servicios a Plan /////////////////////////////////
 var valorP;
 var valorR; 
 var valorT;
-$(".m_Servicio").on("click",function(){
+$(".m_Servicio").click(function(){
 	ID = $(this).attr("id");
 	idplan=$('#plan').val();	
 	datos=[ID,idplan];	        	
@@ -1071,7 +1071,7 @@ $(".m_Servicio").on("click",function(){
 
 ///////////////////////////////////// CAMBIOS DE VALORES DE CHECK PARA LOS SERVICIOS   /////////////////////////////////////////////////
 
-$("input[name=radio1]").on("change",function () {
+$("input[name=radio1]").change(function () {
 	if (valorP==0) {
 		valorP = '';
 	}
@@ -1086,39 +1086,39 @@ $("input[name=radio1]").on("change",function () {
 	}
 });
 
-$("input[name=radio2]").on("change",function () {
+$("input[name=radio2]").change(function () {
 	if (valorR==0) {
 		valorR = '';
 	}
 	if ($("input[name=radio2]:checked").val()=='contabilizado') {
 		$('#p2').remove();
-		$('.icc5').append('<input class="campo" name="campo" type="number" id="p1"  placeholder="Cantidad de Soportes Remotos"  value="'+valorR+'"><i id="ic1" class="fa fa-laptop"></i>');
+		$('.icc5').append('<input class="campo" type="number" id="p1"  placeholder="Cantidad de Soportes Remotos"  value="'+valorR+'"><i id="ic1" class="fa fa-laptop"></i>');
 	}
 	else if ($("input[name=radio2]:checked").val()=='ilimitado'){
 		$('#p1').remove();
 		$('#ic1').remove();
-		$('.icc5').append('<input class="campo" name="campo" type="hidden" id="p2" value="0">');
+		$('.icc5').append('<input class="campo" type="hidden" id="p2" value="0">');
 	}
 });
 
-$("input[name=radio3]").on("change",function () {
+$("input[name=radio3]").change(function () {
 	if (valorT==0) {
 		valorT = '';
 	}
 	if ($("input[name=radio3]:checked").val()=='contabilizado') {
 		$('#p2').remove();
-		$('.icc4').append('<input class="campo" name="campo" type="number" id="p1"  placeholder="Cantidad de Soportes Telefónicos"  value="'+valorT+'"><i id="ic1" class="fa fa-laptop"></i>');
+		$('.icc4').append('<input class="campo" type="number" id="p1"  placeholder="Cantidad de Soportes Telefónicos"  value="'+valorT+'"><i id="ic1" class="fa fa-laptop"></i>');
 	}
 	else if ($("input[name=radio3]:checked").val()=='ilimitado'){
 		$('#p1').remove();
 		$('#ic1').remove();
-		$('.icc4').append('<input class="campo" name="campo" type="hidden" id="p2" value="0">');
+		$('.icc4').append('<input class="campo" type="hidden" id="p2" value="0">');
 	}
 });
 
 //////////////////////////////// INSERTAR VALORES EN BD PARA SERVICIO DE HORARIOS ///////////////////////////
 
-$('#saveHorario').on("click",function(){
+$('#saveHorario').click(function(){
 	idplan=$('#plan').val();	
 	var url= '/menu/registros/planes/servicios/insertar';
 	var inicio = $('#horaI').val();
@@ -1166,7 +1166,7 @@ $('#saveHorario').on("click",function(){
 });
 //////////////////////////////// INSERTAR VALORES EN BD PARA SERVICIO DE SOPORTES PRESENCIALES ///////////////////////////
 
-$('#savePresencial').on("click",function(){
+$('#savePresencial').click(function(){
 	idplan=$('#plan').val();	
 	var url= '/menu/registros/planes/servicios/insertar';
 	var etiqueta = $("input[name=radio1]:checked").val();
@@ -1211,7 +1211,7 @@ $('#savePresencial').on("click",function(){
 	}
 });
 //////////////////////////////// INSERTAR VALORES EN BD PARA SERVICIO DE SOPORTES REMOTOS ///////////////////////////
-$('#saveRemoto').on("click",function(){
+$('#saveRemoto').click(function(){
 	idplan=$('#plan').val();	
 	var url= '/menu/registros/planes/servicios/insertar';
 	var etiqueta = $("input[name=radio2]:checked").val();
@@ -1256,7 +1256,7 @@ $('#saveRemoto').on("click",function(){
 	}
 });
 //////////////////////////////// INSERTAR VALORES EN BD PARA SERVICIO DE SOPORTES TELEFONICOS ///////////////////////////
-$('#saveTelefonico').on("click",function(){
+$('#saveTelefonico').click(function(){
 	idplan=$('#plan').val();	
 	var url= '/menu/registros/planes/servicios/insertar';
 	var etiqueta = $("input[name=radio3]:checked").val();
@@ -1301,7 +1301,7 @@ $('#saveTelefonico').on("click",function(){
 	}
 });
 //////////////////////////////// INSERTAR VALORES EN BD PARA SERVICIO DE TIEMPO DE RESPUESTA /////////////////////////
-$('#saveTR').on("click",function(){
+$('#saveTR').click(function(){
 	idplan=$('#plan').val();	
 	var url= '/menu/registros/planes/servicios/insertar';
 	var etiqueta = $("input[name=radio3]:checked").val();
@@ -1369,49 +1369,49 @@ $('#saveTR').on("click",function(){
 
 // });
 ////////////////////////////////////////////////  MODIFICACION DE PLANES ////////////////////////////////////////////////////
-$('#actualizarPlan').on("click",function(){
-	var url= '/menu/registros/planes/modificar';
-	var plan = $('#nomPnm').val();
-	var desc = $('#porDesm').val();
-	var estatus = $('#stPnm').val();
-	var campos = [plan,desc,estatus];
-	var ID_registro = $('#id_registro').val();
-	var datos = [campos,ID_registro]
-	if (plan != '' && desc != '' && estatus != ''){
-		var posting = $.get(url,{datos:datos},function(resultado){
-			if (resultado == 1) {
-				//SWALLLL mensajes de alerta y sucesos
-				swal({
-					title:'Actualizacion Exitosa',//Contenido del modal
-					text: 'El Plan fue actualizado Exitosamente',
-					type: "success",
-					timer:1600,
-					showConfirmButton:false,//Eliminar boton de confirmacion
-				});
-				//Retardo en ejecucion de ruta.
-				setTimeout(function(){location.href = "/menu/registros/planeservicios";},1800); // 3000ms = 3s
-			}	
-			else {
-				swal({
+// $('#actualizarPlan').click(function(){
+// 	var url= '/menu/registros/planes/modificar';
+// 	var plan = $('#nomPnm').val();
+// 	var desc = $('#porDesm').val();
+// 	var estatus = $('#stPnm').val();
+// 	var campos = [plan,desc,estatus];
+// 	var ID_registro = $('#id_registro').val();
+// 	var datos = [campos,ID_registro]
+// 	if (plan != '' && desc != '' && estatus != ''){
+// 		var posting = $.get(url,{datos:datos},function(resultado){
+// 			if (resultado == 1) {
+// 				//SWALLLL mensajes de alerta y sucesos
+// 				swal({
+// 					title:'Actualizacion Exitosa',//Contenido del modal
+// 					text: 'El Plan fue actualizado Exitosamente',
+// 					type: "success",
+// 					timer:1600,
+// 					showConfirmButton:false,//Eliminar boton de confirmacion
+// 				});
+// 				//Retardo en ejecucion de ruta.
+// 				setTimeout(function(){location.href = "/menu/registros/planeservicios";},1800); // 3000ms = 3s
+// 			}	
+// 			else {
+// 				swal({
 
-					title:'Registro Existente!!!.',//Contenido del modal
-					text: 'Este Plan ya Existe, Revise el nombre del Plan',
-					type: "error",
-					timer:2000,
-					showConfirmButton:false,//Eliminar boton de confirmacion
-				});
-			}						
-		});
-		posting.fail(function() {
-			swal({
-				title:'Error inesperado!!',//Contenido del modal
-				text: 'Pongase en contacto con el administrador',
-				type: "error",
-				showConfirmButton:true,//Eliminar boton de confirmacion
-			});
-		});
-	}
-});
+// 					title:'Registro Existente!!!.',//Contenido del modal
+// 					text: 'Este Plan ya Existe, Revise el nombre del Plan',
+// 					type: "error",
+// 					timer:2000,
+// 					showConfirmButton:false,//Eliminar boton de confirmacion
+// 				});
+// 			}						
+// 		});
+// 		posting.fail(function() {
+// 			swal({
+// 				title:'Error inesperado!!',//Contenido del modal
+// 				text: 'Pongase en contacto con el administrador',
+// 				type: "error",
+// 				showConfirmButton:true,//Eliminar boton de confirmacion
+// 			});
+// 		});
+// 	}
+// });
 
 /////////////////////////////////////// COMBOS DEPENDIENTES DEL MODAL DE AGREGAR EMPLEADO /////////////////////////////////
 

@@ -10,7 +10,7 @@ class Perfil extends Model
     public $timestamps=false;
     protected $table="perfiles";
 
-    protected $fillable=['id','descripcion'];
+    protected $fillable=['id','descripcion','status'];
 
     public function usuarios()
     {
