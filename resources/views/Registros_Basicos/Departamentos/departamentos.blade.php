@@ -67,7 +67,7 @@
                                         @endif
                                     </div>
                                 </div>
-                                <div class="contRegister contDep">
+                                <div class="contRegister contDep" id="contDep">
                                 @foreach($extra as $departamento)
 
                                     <div class="contMd">
@@ -101,8 +101,8 @@
                                                 @endif
                                             @endforeach
                                         </div>
-                                        <div class="checkbox ttlMd1">
-                                            <label><input type="checkbox" value="">{{$departamento->descripcion}}</label>
+                                        <div class="checkbox ttlMd1 filtro">
+                                            <label><input type="checkbox" value="{{$departamento->id}}">{{$departamento->descripcion}}</label>
                                         </div>
                                     </div>
 

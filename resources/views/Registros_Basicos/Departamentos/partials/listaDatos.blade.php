@@ -31,8 +31,8 @@
                 @endif
             @endforeach
         </div>
-        <div class="checkbox ttlMd1">
-            <label><input type="checkbox" value="">{{$departamento->descripcion}}</label>
+        <div class="checkbox ttlMd1 filtro">
+            <label><input type="checkbox" value="{{$departamento->id}}">{{$departamento->descripcion}}</label>
         </div>
     </div>
 

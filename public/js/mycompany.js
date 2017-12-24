@@ -18,10 +18,14 @@ $(document).ready(function(){
       });
     }
   });
-
-
-
   $('#nav-area').on("click",function(){
+    var selected = '';
+    $('#contDep .filtro input:checkbox:checked').each(function(){
+      alert($(this).val());
+    });
+
+
+
     var data=$('#comboDireccion').val();
     url="/menu/registros/estructura/buscarAreas";
     $.get(url,{data:data},function(respuesta){

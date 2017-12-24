@@ -162,9 +162,15 @@ class EstructuraController extends Controller
 		$datos=$this->cargar_header_sidebar_acciones();
 		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(1,2,3),4);
 		$direccionId=\Request::get('data');
-		$query=\DB::table('departamentos')->join('directores','departamentos.director_id','=','directores.id')
-																			->select('departamentos.*')
-																			->where('directores.id',$direccionId)->get();
+		if ($direccionId!=0) {
+			$query=\DB::table('departamentos')->join('directores','departamentos.director_id','=','directores.id')
+																				->select('departamentos.*')
+																				->where('directores.id',$direccionId)->get();
+		}
+		else {
+			$query=\App\Departamento::all();
+		}
+
 		return view('Registros_Basicos.Departamentos.partials.listaDatos',$this->datos_vista(0,$acciones,$query));
 	}
 
@@ -172,21 +178,32 @@ class EstructuraController extends Controller
 		$datos=$this->cargar_header_sidebar_acciones();
 		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(1,2,3),4);
 		$direccionId=\Request::get('data');
-		$query=\DB::table('areas')->join('departamentos','areas.departamento_id','=','departamentos.id')
-															->join('directores','departamentos.director_id','=','directores.id')
-															->select('areas.*')
-															->where('directores.id',$direccionId)->get();
+		if ($direccionId==0) {
+			$query=\App\Area::all();
+		}
+		else {
+			$query=\DB::table('areas')->join('departamentos','areas.departamento_id','=','departamentos.id')
+																->join('directores','departamentos.director_id','=','directores.id')
+																->select('areas.*')
+																->where('directores.id',$direccionId)->get();
+		}
 		return view('Registros_Basicos.Departamentos.partials.listaDatos',$this->datos_vista(0,$acciones,$query));
 	}
 	public function buscarCargos(){
 		$datos=$this->cargar_header_sidebar_acciones();
 		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(1,2,3),4);
 		$direccionId=\Request::get('data');
-		$query=\DB::table('cargos')->join('areas','cargos.area_id','=','areas.id')
-															 ->join('departamentos','areas.departamento_id','=','departamentos.id')
-															 ->join('directores','departamentos.director_id','=','directores.id')
-															 ->select('cargos.*')
-															 ->where('directores.id',$direccionId)->get();
+		if ($direccionId!=0) {
+			$query=\DB::table('cargos')->join('areas','cargos.area_id','=','areas.id')
+																 ->join('departamentos','areas.departamento_id','=','departamentos.id')
+																 ->join('directores','departamentos.director_id','=','directores.id')
+																 ->select('cargos.*')
+																 ->where('directores.id',$direccionId)->get();
+		}
+		else {
+			$query=\App\Cargo::all();
+		}
+
 		return view('Registros_Basicos.Departamentos.partials.listaDatos',$this->datos_vista(0,$acciones,$query));
 	}
 
