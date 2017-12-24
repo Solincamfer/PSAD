@@ -15,7 +15,7 @@
                     <div class="form-group row">
                         <div class="col-md-4" style="padding-top: 10px;">
                             <select class="form-control" id="comboDireccion" >
-                                <option selected="selected">Seleccione una Dirección</option>
+                                <option value="0" selected="selected">Seleccione una Dirección</option>
                                 @foreach($consulta as $direccion)
                                 <option value="{{$direccion->id}}">{{$direccion->descripcion}}</option>
                                 @endforeach
@@ -36,9 +36,10 @@
                     </div>
                     <div class="row" style="padding-top: 30px;">
                         <ul class="nav nav-tabs">
-                            <li class="active col-md-3"><a data-toggle="tab" href="#dep">Departamentos</a></li>
-                            <li class="col-md-3"><a data-toggle="tab" href="#area">Areas</a></li>
-                            <li class="col-md-3"><a data-toggle="tab" href="#cargo">Cargos</a></li>
+                            <li class="active col-md-3" data-valor="dep"><a data-toggle="tab" id="nav-dep" href="#dep">Departamentos</a></li>
+                            <li class="col-md-3" data-valor="area"
+                            ><a data-toggle="tab" id="nav-area" href="#area">Areas</a></li>
+                            <li class="col-md-3" data-valor="car"><a data-toggle="tab" id="nav-cargo" href="#cargo">Cargos</a></li>
                         </ul>
 
 
@@ -66,7 +67,7 @@
                                         @endif
                                     </div>
                                 </div>
-                                <div class="contRegister">
+                                <div class="contRegister contDep">
                                 @foreach($extra as $departamento)
 
                                     <div class="contMd">
@@ -110,11 +111,58 @@
 
                             </div>
                             <div id="area" class="tab-pane fade col-xs-5 col-sm-5 col-md-6 col-md-offset-2 ">
+                              <div class="row" style="padding:40px 0 20px 0;">
+                                  <div  class="col-md-10">
+                                      <div class="search-cont" id="scnt">
+                                          <form action="" method="">
+                                              <div class="input-group sci">
+                                                  <input type="search" class="form-control filtro" placeholder="Buscar departamento..."><span class="fa fa-search"></span>
+                                              </div>
+                                          </form>
+                                          <a class="bttn-search">
+                                              <span class="fa fa-search"></span>
+                                          </a>
+                                      </div>
+                                  </div>
+                                  <div class="col-md-1">
+                                      @if($agregar)
+                                      <div class="bttn-agregar">
+                                          <button id="btnAdd" type="button" class="bttn-agr" data-toggle="modal" data-target="#myModalA" href="#myModal"><span class="fa fa-plus"></span><span class="txt-bttn">AGREGAR</span></button>
+                                      </div>
+                                      @endif
+                                  </div>
+                              </div>
+                              <div class="contRegister contArea">
+                              </div>
+
+
 
 
                             </div>
                             <div id="cargo" class="tab-pane fade col-xs-5 col-sm-5 col-md-6 col-md-offset-2">
-
+                              <div class="row" style="padding:40px 0 20px 0;">
+                                  <div  class="col-md-10">
+                                      <div class="search-cont" id="scnt">
+                                          <form action="" method="">
+                                              <div class="input-group sci">
+                                                  <input type="search" class="form-control filtro" placeholder="Buscar departamento..."><span class="fa fa-search"></span>
+                                              </div>
+                                          </form>
+                                          <a class="bttn-search">
+                                              <span class="fa fa-search"></span>
+                                          </a>
+                                      </div>
+                                  </div>
+                                  <div class="col-md-1">
+                                      @if($agregar)
+                                      <div class="bttn-agregar">
+                                          <button id="btnAdd" type="button" class="bttn-agr" data-toggle="modal" data-target="#myModalC" href="#myModal"><span class="fa fa-plus"></span><span class="txt-bttn">AGREGAR</span></button>
+                                      </div>
+                                      @endif
+                                  </div>
+                              </div>
+                              <div class="contRegister contCarg">
+                              </div>
 
                             </div>
                         </div>

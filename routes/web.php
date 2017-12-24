@@ -126,10 +126,10 @@ Route::group(['prefix'=>'/menu/registros','middleware'=>['v_menu']],function(){
 	Route::match(['post','get'],'/actualizar',                                                              ['uses'=>'RegistrosBasicos@actualizar_registrosCD']);
 	Route::match(['post','get'],'/departamentos/cargos/registrar/{departamento_id}',                      	['uses'=>'RegistrosBasicos@cargos_ingresar']);
 	Route::match(['post','get'],'/perfiles/registrar',                                                      ['uses'=>'RegistrosBasicos@perfiles_insertar']);
-	Route::match(['post','get'],'/perfiles/status',                                                      ['uses'=>'RegistrosBasicos@perfilesModificarStatus']); 
-	Route::match(['post','get'],'/perfiles/modificar',                                                  	['uses'=>'RegistrosBasicos@perfilesModificar']); 
-	Route::match(['post','get'],'/perfiles/actualizar',                                                  	['uses'=>'RegistrosBasicos@perfilesActualizar']); 
-	
+	Route::match(['post','get'],'/perfiles/status',                                                      ['uses'=>'RegistrosBasicos@perfilesModificarStatus']);
+	Route::match(['post','get'],'/perfiles/modificar',                                                  	['uses'=>'RegistrosBasicos@perfilesModificar']);
+	Route::match(['post','get'],'/perfiles/actualizar',                                                  	['uses'=>'RegistrosBasicos@perfilesActualizar']);
+
 	Route::match(['post','get'],'/perfiles/configurar/modulo',                                              ['uses'=>'RegistrosBasicos@perfiles_configurar_moduloDependencias']);
 	Route::match(['post','get'],'/perfiles/configurar/modulo_',                                             ['uses'=>'RegistrosBasicos@perfiles_configurar_modulo']);
 	Route::match(['post','get'],'/perfiles/configurar/submodulo',                                           ['uses'=>'RegistrosBasicos@perfiles_configurar_submoduloDependencias']);
@@ -141,8 +141,8 @@ Route::group(['prefix'=>'/menu/registros','middleware'=>['v_menu']],function(){
 	Route::match(['post','get'],'/planes/registrar',                                                     	 ['uses'=>'RegistrosBasicos@planesIngresar']);
 
 	Route::match(['post','get'],'/planes/actualizar',                                               		 ['uses'=>'RegistrosBasicos@planesActualizar']);
-	Route::match(['post','get'],'/planes/modificar',                                               			 ['uses'=>'RegistrosBasicos@planesModificar']); 
-	Route::match(['post','get'],'/planes/status',                                               			 ['uses'=>'RegistrosBasicos@planesModificarStatus']);    
+	Route::match(['post','get'],'/planes/modificar',                                               			 ['uses'=>'RegistrosBasicos@planesModificar']);
+	Route::match(['post','get'],'/planes/status',                                               			 ['uses'=>'RegistrosBasicos@planesModificarStatus']);
 
 	Route::match(['post','get'],'/planes/consultarservicios',                                               ['uses'=>'RegistrosBasicos@valores_servicios']);
 	Route::match(['post','get'],'/planes/servicios/insertar',                                               ['uses'=>'RegistrosBasicos@insertar_servicios']);
@@ -184,6 +184,9 @@ Route::group(['prefix'=>'/menu/registros','middleware'=>['v_menu']],function(){
 	Route::match(['post','get'],'/clientes/consultaplan',						   	['uses'=>'RegistrosBasicos@consultar_plan']);
 
 /////////////////////////// ESTRUCTURA ///////////////////////////////////////////////////////////
-Route::match(['post','get'],'/estructura/buscarDepartamentos',						   	['uses'=>'EstructuraController@buscarDepartamentos']);
-
+Route::match(['post','get'],'/estructura/mostrarEstructuraDireccion',						   	['uses'=>'EstructuraController@mostrarEstructuraDireccion']);
+Route::match(['post','get'],'/estructura/mostrarEstructuraTodos',['uses'=>'EstructuraController@mostrarEstructuraTodos']);
+Route::match(['post','get'],'/estructura/buscarAreas',['uses'=>'EstructuraController@buscarAreas']);
+Route::match(['post','get'],'/estructura/buscarDepartamentos',['uses'=>'EstructuraController@buscarDepartamentos']);
+Route::match(['post','get'],'/estructura/buscarCargos',['uses'=>'EstructuraController@buscarCargos']);
 });

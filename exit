@@ -1,0 +1,2901 @@
+[33mcommit 61b121ede65d774b5ef6a399eb6bcb4c9618258e[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Fri Dec 22 16:19:49 2017 -0400
+
+    base de datos
+
+[33mcommit 6a9e83eb8f16732d49ab1715ab28a9505244fd65[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Fri Dec 22 16:09:56 2017 -0400
+
+    consolidado de cambios
+
+[33mcommit ec473f21b874668cc9d112c5cdff07214c3f9306[m
+Author: vinrast <vinrast@gmail.com>
+Date:   Fri Dec 22 07:15:27 2017 -0400
+
+    cargando sub vistas
+
+[33mcommit d631667f0adf08a59f49ca986c63087acfec68e1[m
+Author: vinrast <vinrast@gmail.com>
+Date:   Tue Dec 19 16:18:13 2017 -0430
+
+    listando registros de direccion y departamentos
+
+[33mcommit 50de89730ea6404607c4c0b3004c0920e4df58de[m
+Author: vinrast <vinrast@gmail.com>
+Date:   Mon Dec 18 17:53:00 2017 -0430
+
+    Agregando campos clave en cargos y areas
+
+[33mcommit e0e0da1fe8f5334987c4975ea612bbbf8012d3ca[m
+Author: vinrast <vinrast@gmail.com>
+Date:   Mon Dec 18 17:34:06 2017 -0430
+
+    Ventana de Mi compañia
+
+[33mcommit be9d9fc92bbc70274bb597e35f6b06cf9e2e6ff2[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Thu Nov 30 16:45:45 2017 -0400
+
+    cambios
+
+[33mcommit 2e7e024f889af94cb672eea5088c74055e786137[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Fri Nov 24 12:28:16 2017 -0400
+
+    Revert "Revert "cambios""
+    
+    This reverts commit 14c0bd1b2f952e4990b7e55033689228af80678d.
+
+[33mcommit 14c0bd1b2f952e4990b7e55033689228af80678d[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Fri Nov 24 12:26:32 2017 -0400
+
+    Revert "cambios"
+    
+    This reverts commit f1c03ce36101a25773adda8d2724c4b94096c9fd.
+
+[33mcommit f1c03ce36101a25773adda8d2724c4b94096c9fd[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Thu Nov 23 16:39:20 2017 -0400
+
+    cambios
+
+[33mcommit 2adfcd5df1d2606936a0daa0e01f71073c756446[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Wed Nov 22 17:49:05 2017 -0400
+
+    cambios
+
+[33mcommit 2cfefcf624833dbb2f6423a860d7caef4960cdf7[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Fri Nov 17 17:19:04 2017 -0400
+
+    cambios
+
+[33mcommit 0299cdef56d6aebfdeda5d45a7d4d1c964ac86c8[m
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Mon Jun 12 17:01:35 2017 -0400
+
+    cambios menores
+
+[33mcommit f3fdf5c174bfb530317377c8f4c2712ea5ab7dcc[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Mon Jun 12 10:07:21 2017 -0400
+
+    buscador
+
+[33mcommit a8642477b5b643f17b40b49bd3582974b5255102[m
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Fri Jun 9 11:17:14 2017 -0400
+
+    Agregar estilo en el campo busqueda
+    
+    Se agrego estilos en el campo de busqueda del panel de datos
+    complementarios.
+
+[33mcommit 7c9819eb51573cd2c68d9abbbf46c7de21fef474[m
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Fri Jun 9 09:38:43 2017 -0400
+
+    removiendo estilos
+
+[33mcommit 7f48299b0515127bb02785f6d9cb860d49224c5b[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Fri Jun 9 09:30:26 2017 -0400
+
+    chec de status de empleados
+
+[33mcommit 4ad02c764f5104afef9dc23b515c7e98adf02615[m
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Thu Jun 8 17:04:51 2017 -0400
+
+    Mejorando estilos
+
+[33mcommit ffdda32430196e9cb6c6ae0a55dce0327b24f8ce[m
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Thu Jun 8 15:59:28 2017 -0400
+
+    Estilos de botones
+    
+    Se arreglo la ubicacion de los botones en el area de trabajo
+
+[33mcommit 742a46495a1552212f1d0e72f839de4d42199304[m
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Wed Jun 7 16:35:55 2017 -0400
+
+    Estilo final del campo busqueda
+    
+    Se arreglo los estilos del campo de busqueda.
+
+[33mcommit a9bc1be09ad3095d3ae4536770f0e72784310419[m
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Wed Jun 7 09:40:25 2017 -0400
+
+    Buscador Vista plan
+    
+    Se agrego el input en la vista plan
+
+[33mcommit 84830e173ce8da43a76f895b9101003814849a28[m
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Wed Jun 7 09:30:27 2017 -0400
+
+    Buscador en vistas
+    
+    Se agrego el input de busqueda en las vistas establecidas.
+
+[33mcommit dc9033d61b73a6e0b007808125a53a22d8d02c3b[m
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Wed Jun 7 09:01:23 2017 -0400
+
+    Search Terminado Departamento
+
+[33mcommit 291b067a1ae0157ad654dea2580802a6d44426cb[m
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Tue Jun 6 16:05:43 2017 -0400
+
+    mejorando el search
+
+[33mcommit ae5226a491553099bb6b940275d8440b43b2c5da[m
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Tue Jun 6 14:03:25 2017 -0400
+
+    Replica Checkbox Vista Cliente
+    
+    Se replico la funcionalidad de los check en el modulo de cliente.
+
+[33mcommit 946a9b04448b8659ebb04c7380faf90c32267413[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Tue Jun 6 10:57:52 2017 -0400
+
+    check clientes
+
+[33mcommit c2b96d261c37d465de2e154b52f31ddde300c041[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Tue Jun 6 10:46:35 2017 -0400
+
+    cambios
+
+[33mcommit 789683c5a705790a79c009fa58b8f2ede988ad5f[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Tue Apr 18 16:47:06 2017 -0400
+
+    acceso base de datos
+
+[33mcommit af0fc7ab0b72d3e2ae4bd7e0c8445a01500c6711[m
+Author: Vincen Yoel Santaella <vinrast@gmail.com>
+Date:   Thu Jan 26 10:31:34 2017 -0430
+
+    arreglando pruebas
+
+[33mcommit 41ebfbb028050cd41717966f7ff6e93aef422bb6[m
+Merge: 753623e ffb4d0e
+Author: Vincen Yoel Santaella <vinrast@gmail.com>
+Date:   Tue Jan 24 09:03:49 2017 -0430
+
+    Merge branch 'master' of https://github.com/Solincamfer/PSAD
+
+[33mcommit 753623e5b2cf53f3e4ede2219deefe67886931bf[m
+Author: Vincen Yoel Santaella <vinrast@gmail.com>
+Date:   Tue Jan 24 09:03:26 2017 -0430
+
+    agregando lista de valores para planes
+
+[33mcommit ffb4d0e57f7bb23a2f34ffd240736ebbe0ae4450[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Mon Jan 23 22:55:13 2017 -0430
+
+    cambios
+
+[33mcommit 94b0cf46a0b039cd499ad10357ddd5480800c92d[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Mon Jan 23 22:07:16 2017 -0430
+
+    arreglar acciones
+
+[33mcommit 8d2dc8aebcd2d9816cc595641f0f22dac15c8a23[m
+Merge: 0e5718a 9afbe3c
+Author: Vincen Yoel Santaella <vinrast@gmail.com>
+Date:   Fri Jan 20 14:09:16 2017 -0430
+
+    Merge branch 'master' of https://github.com/Solincamfer/PSAD
+
+[33mcommit 0e5718a70cf39ab370355de94789376698752442[m
+Author: Vincen Yoel Santaella <vinrast@gmail.com>
+Date:   Fri Jan 20 14:09:02 2017 -0430
+
+    mostrando informacion del plan
+
+[33mcommit 9afbe3c6b978f1d6dcf28aaa16707410c8828a2b[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Fri Jan 20 13:31:18 2017 -0400
+
+    cambios menores
+
+[33mcommit ecf25aec9b986ebebdedb80f20387ae2d64f8fa8[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Fri Jan 20 13:27:13 2017 -0400
+
+    paginador
+
+[33mcommit 93f3a86fe95c909899bab463f3399a85ace1da9a[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Fri Jan 20 13:17:24 2017 -0400
+
+    cambios menores
+
+[33mcommit da6f247c39f4827bf25648d737e154e99ffe3963[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Fri Jan 20 11:20:30 2017 -0430
+
+    cambios
+
+[33mcommit 5fa78ccbf2dca9d862fe8c1c5aac4623e55e760f[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Fri Jan 20 11:11:31 2017 -0430
+
+    cambios
+
+[33mcommit 73cde8e4a55f61d0b81d699c1cf0df397f40310a[m
+Merge: 83d18b9 7023a68
+Author: Vincen Yoel Santaella <vinrast@gmail.com>
+Date:   Fri Jan 20 10:54:26 2017 -0430
+
+    Merge branch 'master' of https://github.com/Solincamfer/PSAD
+
+[33mcommit 83d18b96f0564a9bf69da88a76a085b224a5eebc[m
+Author: Vincen Yoel Santaella <vinrast@gmail.com>
+Date:   Fri Jan 20 10:54:16 2017 -0430
+
+    agregando estilo a los datos complementarios
+
+[33mcommit 7023a682d1917f4d1e84e9691e15de51cb14c32b[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Fri Jan 20 07:24:22 2017 -0430
+
+    ordenar submodulos
+
+[33mcommit feb199721721dcab7b2c5dbfc23ce771c37851ab[m
+Merge: f2730b3 762fa4f
+Author: Vincen Yoel Santaella <vinrast@gmail.com>
+Date:   Fri Jan 20 06:37:17 2017 -0430
+
+    Merge branch 'master' of https://github.com/Solincamfer/PSAD
+
+[33mcommit f2730b3e5a718f601a098c7e4875387c1f9a7246[m
+Author: Vincen Yoel Santaella <vinrast@gmail.com>
+Date:   Fri Jan 20 06:36:52 2017 -0430
+
+    probando cargar modal
+
+[33mcommit 762fa4f35e5a9d5930b86ea8cc30fa680f6dfdd4[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Fri Jan 20 06:27:33 2017 -0430
+
+    boton volver,listar planes clientes
+
+[33mcommit 024fd9eb03862c2b4e2e7719abc35a5867771391[m
+Author: Vincen Yoel Santaella <vinrast@gmail.com>
+Date:   Thu Jan 19 22:52:28 2017 -0430
+
+    modal modificar
+
+[33mcommit 4efa162c2cf92548ddf34461d7d8edfa38622c45[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Thu Jan 19 17:50:46 2017 -0400
+
+    listar equipos,componentes..
+
+[33mcommit 103ec3797f7f1a5ff81261274b08cdfc0318d3bb[m
+Author: Vincen Yoel Santaella <vinrast@gmail.com>
+Date:   Thu Jan 19 17:23:21 2017 -0430
+
+    cargando datos en modal modificar empleado
+
+[33mcommit cb7da041b5625f1d288c4cb8f6606ac22e72dd60[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Thu Jan 19 16:34:59 2017 -0400
+
+    migraciones
+
+[33mcommit 097785261fbb5e378c5249858cd6942e86822eda[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Thu Jan 19 10:02:55 2017 -0400
+
+    eliminacion de componentes
+
+[33mcommit 3968ca11c763124ce764aede467574f4f5d001a6[m
+Author: Vincen Yoel Santaella <vinrast@gmail.com>
+Date:   Thu Jan 19 00:18:14 2017 -0430
+
+    modificando combos dependientes
+
+[33mcommit 47aa245f6e940878f60dd4049c1f903a32a4fd67[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Wed Jan 18 18:54:43 2017 -0400
+
+    eliminar piezas
+
+[33mcommit 16c3a02f053e3b05fbfe6a5d520a2dcf583b2d69[m
+Author: Vincen Yoel Santaella <vinrast@gmail.com>
+Date:   Wed Jan 18 18:46:15 2017 -0430
+
+    insertando y modificando empleados
+
+[33mcommit fb4c28a5207e5e7b8b6843e156f02635bc2ae381[m
+Merge: 12fb98a 0667cc5
+Author: Vincen Yoel Santaella <vinrast@gmail.com>
+Date:   Wed Jan 18 07:08:02 2017 -0430
+
+    Merge branch 'master' of https://github.com/Solincamfer/PSAD
+
+[33mcommit 12fb98ab88dfd0c70ee5a7a735b48af6a41cd1db[m
+Author: Vincen Yoel Santaella <vinrast@gmail.com>
+Date:   Wed Jan 18 07:07:40 2017 -0430
+
+    agregando empleados
+
+[33mcommit 0667cc5571738cb43a30b8b11209d866495fec5c[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Tue Jan 17 16:14:55 2017 -0400
+
+    cambios
+
+[33mcommit 6d675a42dc4ba93d8aee2ed85ca0fe6b04db0294[m
+Author: Vincen Yoel Santaella <vinrast@gmail.com>
+Date:   Tue Jan 17 08:51:32 2017 -0430
+
+    llenando modal de agregar empleado
+
+[33mcommit 981847142cc9f58453742fb9b40e41be9f105ad6[m
+Author: Vincen Yoel Santaella <vinrast@gmail.com>
+Date:   Tue Jan 17 05:16:40 2017 -0430
+
+    agregando redireccion al login
+
+[33mcommit 23aa976e8d7e60cf6f31fb66947aa2c9212ccb31[m
+Author: Vincen Yoel Santaella <vinrast@gmail.com>
+Date:   Mon Jan 16 14:31:05 2017 -0430
+
+    Mantener activo el link en el sidebar
+
+[33mcommit f58fd897483c4b81a87effb30d1cb0c596d70f02[m
+Author: Vincen Yoel Santaella <vinrast@gmail.com>
+Date:   Sat Jan 14 22:18:39 2017 -0430
+
+    cambios menores
+
+[33mcommit 88c9398ced20ba578a6a5519512695b15d6605d8[m
+Author: Vincen Yoel Santaella <vinrast@gmail.com>
+Date:   Sat Jan 14 18:42:10 2017 -0430
+
+    Agregando Descripciones a cargos, perfiles y planes
+
+[33mcommit 9d3a190e886d1d67af1ce970d43357164ee55f00[m
+Author: Vincen Yoel Santaella <vinrast@gmail.com>
+Date:   Sat Jan 14 17:31:14 2017 -0430
+
+    cambiando vista de datos complementarios
+
+[33mcommit 9ad53d99bc900343fc162f93bdf124ab90473c94[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Fri Jan 13 17:23:49 2017 -0400
+
+    cambios datos complementarios
+
+[33mcommit 68a8898f586e253b450d4d2f2e88c8ecb7f36f5f[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Fri Jan 13 17:09:54 2017 -0400
+
+    cambios
+
+[33mcommit c97a5a65590f329741884b32973d435139095b34[m
+Author: Vincen Yoel Santaella <vinrast@gmail.com>
+Date:   Fri Jan 13 17:02:01 2017 -0430
+
+    Agregando tarjetas a datos complementarios
+
+[33mcommit 2a3c331088676e282891ece2293b1bd98077cb20[m
+Author: Vincen Yoel Santaella <vinrast@gmail.com>
+Date:   Fri Jan 13 11:59:56 2017 -0430
+
+    Archivo de Datos Complementarios
+
+[33mcommit 9285ff6091c2ecdd370560c6a3939db4bf8f933a[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Fri Jan 13 11:33:19 2017 -0400
+
+    cambios css
+
+[33mcommit f921c68aec4af5692febd108d34abb35e09f9f57[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Fri Jan 13 11:24:39 2017 -0400
+
+    cargar_vista__
+
+[33mcommit 1dea875fdd04362530f4783239939dc027361739[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Fri Jan 13 10:52:21 2017 -0400
+
+    cambios menores
+
+[33mcommit 397e8f89641cb31faec77bf7d4805350da0b4d7c[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Fri Jan 13 09:53:27 2017 -0400
+
+    cambios
+
+[33mcommit 5a482c16d1de84ed187c50b166c6e4a995ba4ee6[m
+Author: Vincen Yoel Santaella <vinrast@gmail.com>
+Date:   Thu Jan 12 17:52:59 2017 -0430
+
+    validacion de mensajes para departamentos cargos y perfiles
+
+[33mcommit 9ad37a764565ba14503a106cf09d7a42b29a2a8d[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Wed Jan 11 17:07:01 2017 -0400
+
+    submodulo perfiles
+
+[33mcommit c5d134952938c9f6c9080315d88d7bcaae2dce2b[m
+Author: Vincen Yoel Santaella <vinrast@gmail.com>
+Date:   Wed Jan 11 17:09:23 2017 -0430
+
+    validacion de modificar planes
+
+[33mcommit c6ea5d7d7ffa2d5312f85c2156dae2201db45baf[m
+Merge: 9d1cf53 85785f9
+Author: Vincen Yoel Santaella <vinrast@gmail.com>
+Date:   Wed Jan 11 11:34:35 2017 -0430
+
+    Merge branch 'master' of https://github.com/Solincamfer/PSAD
+
+[33mcommit 9d1cf53af591ca390a93d6316b9bc1eba55bc530[m
+Author: Vincen Yoel Santaella <vinrast@gmail.com>
+Date:   Wed Jan 11 11:33:58 2017 -0430
+
+    probando cargar datos a modal de planes
+
+[33mcommit 85785f938fc79a23c4efdad3c8fe851809983c65[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Wed Jan 11 10:21:02 2017 -0400
+
+    depencias completas(faltan pruebas)
+
+[33mcommit e83251d1095b77569f81a074a84bc98a242db80f[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Tue Jan 10 17:37:36 2017 -0400
+
+    cambios
+
+[33mcommit 2dac5f9ecd21ab63c696bb7d9ee65b73339efec2[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Tue Jan 10 03:12:43 2017 -0430
+
+    acciones dependientes
+
+[33mcommit 7ba3bd376b89a16105a9a94818dee0bbe184d3b0[m
+Author: Vincen Yoel Santaella <vinrast@gmail.com>
+Date:   Mon Jan 9 23:44:57 2017 -0430
+
+    Validacion de formularios de servicios
+
+[33mcommit 562799fe5fb635e52376a12fdaf0748fab788b06[m
+Merge: d1c8c05 b8bbd52
+Author: Vincen Yoel Santaella <vinrast@gmail.com>
+Date:   Mon Jan 9 20:22:08 2017 -0430
+
+    Merge branch 'master' of https://github.com/Solincamfer/PSAD
+
+[33mcommit d1c8c05b1446f981a852dfc2d53ff38c04389a0e[m
+Author: Vincen Yoel Santaella <vinrast@gmail.com>
+Date:   Mon Jan 9 20:21:40 2017 -0430
+
+    insertando datos para horarios
+
+[33mcommit b8bbd52a4c2c84d9c73c341b88e3a57133118ee2[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Mon Jan 9 17:38:29 2017 -0400
+
+    cambios acciones
+
+[33mcommit 112b19be1641df7f022c53e9d6c27b95fdbd77bd[m
+Merge: cc53204 717dd89
+Author: Vincen Yoel Santaella <vinrast@gmail.com>
+Date:   Mon Jan 9 14:42:45 2017 -0430
+
+    Merge branch 'master' of https://github.com/Solincamfer/PSAD
+
+[33mcommit cc532041ba9489668e59406236fd32d2a5d5a413[m
+Author: Vincen Yoel Santaella <vinrast@gmail.com>
+Date:   Mon Jan 9 14:42:35 2017 -0430
+
+    Insertando datos en horarios
+
+[33mcommit 717dd89a9c4401f0cd3d1540ec72e233b4afa96d[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Mon Jan 9 10:13:44 2017 -0400
+
+    cambios menores
+
+[33mcommit dcb906f265c35b2ac40c80e13d62d2259d0eb082[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Mon Jan 9 09:36:06 2017 -0400
+
+    validacion de vistas por id (planes)
+
+[33mcommit b20621fe1c9bc79179a9f71f0729c11041864215[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Mon Jan 9 09:25:28 2017 -0400
+
+    cambios rutas ajax
+
+[33mcommit 79851715bf7866e69c10ff29ca4b3971f3772337[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Mon Jan 9 00:32:03 2017 -0430
+
+    cambios menores
+
+[33mcommit b8bc735eef8f5a4b4592cc6dc494ac5331fc086a[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Mon Jan 9 00:01:57 2017 -0430
+
+    cambios menores
+
+[33mcommit 9ebd6ee58e545f636c74b9a580eed79145ea5126[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Sun Jan 8 23:09:56 2017 -0430
+
+    validacion de vistas por id
+
+[33mcommit d70805566c04511f00e1c51548fdc0e053b542ee[m
+Merge: 9daa801 bf22d3c
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Sun Jan 8 20:36:15 2017 -0430
+
+    Merge remote-tracking branch 'origin/master'
+
+[33mcommit 9daa8017ad6eb438bbb84014eabfb79c8256b31d[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Sun Jan 8 20:35:34 2017 -0430
+
+    cambios menoores
+
+[33mcommit bf22d3c3d82e61e79cc9baed0410e16fdf3143e5[m
+Merge: 55ec006 ca821b9
+Author: Vincen Yoel Santaella <vinrast@gmail.com>
+Date:   Sun Jan 8 19:47:29 2017 -0430
+
+    Merge branch 'master' of https://github.com/Solincamfer/PSAD
+
+[33mcommit 55ec006610d352788b0bcbae8116bf109c63e33f[m
+Author: Vincen Yoel Santaella <vinrast@gmail.com>
+Date:   Sun Jan 8 19:47:05 2017 -0430
+
+    chequeo de campos de servicios
+
+[33mcommit ca821b990e981ea7720e38e9affbdd93f3e46f74[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Sun Jan 8 18:21:16 2017 -0430
+
+    dependencias (acciones->submodulos->modulos)
+
+[33mcommit c83cfb238a2c0ff412f3108cbfbee075c7a9e197[m
+Author: Vincen Yoel Santaella <vinrast@gmail.com>
+Date:   Sat Jan 7 23:42:36 2017 -0430
+
+    checked
+
+[33mcommit 2f46c4847d9756193fc5a409ffa043df36f671c8[m
+Merge: 951b487 0015742
+Author: Vincen Yoel Santaella <vinrast@gmail.com>
+Date:   Sat Jan 7 19:48:29 2017 -0430
+
+    Merge branch 'master' of https://github.com/Solincamfer/PSAD
+
+[33mcommit 951b487edaf51058d2ab3da939dbe6cc71b50add[m
+Author: Vincen Yoel Santaella <vinrast@gmail.com>
+Date:   Sat Jan 7 19:48:20 2017 -0430
+
+    cambios
+
+[33mcommit 001574208ceeaa284fbeecb47e303434aef349f3[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Sat Jan 7 13:01:46 2017 -0430
+
+    dependencias :submodulos-acciones
+
+[33mcommit 1a723ef266d5655d1d52336e5da6447d0bc9a7ef[m
+Merge: dd68e8c 2ce9e50
+Author: Vincen Yoel Santaella <vinrast@gmail.com>
+Date:   Sat Jan 7 12:59:12 2017 -0430
+
+    Merge branch 'master' of https://github.com/Solincamfer/PSAD
+
+[33mcommit dd68e8cacd8640cd5dbb99f6ecb913ef18ccd4d1[m
+Author: Vincen Yoel Santaella <vinrast@gmail.com>
+Date:   Sat Jan 7 12:58:56 2017 -0430
+
+    cambios menores
+
+[33mcommit 2ce9e5009518915f7564ab03e28f59a6b116dde0[m
+Merge: 8ed0c42 ac9fcf8
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Sat Jan 7 11:36:41 2017 -0430
+
+    Merge remote-tracking branch 'origin/master'
+
+[33mcommit 8ed0c42e5442921a9de33fe33090f0ce891ff994[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Sat Jan 7 11:36:12 2017 -0430
+
+    cambios controlador
+
+[33mcommit ac9fcf8234c2d57378c4e841592d956c5d9adea0[m
+Author: Vincen Yoel Santaella <vinrast@gmail.com>
+Date:   Sat Jan 7 01:19:00 2017 -0430
+
+    creando campo de contabilizacion
+
+[33mcommit a487fda51247a1a673912ff639007acc7c770856[m
+Merge: c9d3dd5 098040b
+Author: Vincen Yoel Santaella <vinrast@gmail.com>
+Date:   Fri Jan 6 21:42:47 2017 -0430
+
+    Merge branch 'master' of https://github.com/Solincamfer/PSAD
+
+[33mcommit c9d3dd5e1f31e56fe77354818e7251dad5ad2bff[m
+Author: Vincen Yoel Santaella <vinrast@gmail.com>
+Date:   Fri Jan 6 21:41:58 2017 -0430
+
+    checked
+
+[33mcommit 098040bdc49934f00ea4727c04c3137d9aca450e[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Fri Jan 6 11:46:47 2017 -0400
+
+    dependencias (modulos-submodulos-acciones)
+
+[33mcommit 93f8fc136dd74d92d9c73e223641bdb8da25e400[m
+Merge: 2ef9955 d1b3318
+Author: Vincen Yoel Santaella <vinrast@gmail.com>
+Date:   Fri Jan 6 01:02:05 2017 -0430
+
+    Merge branch 'master' of https://github.com/Solincamfer/PSAD
+
+[33mcommit 2ef99556947291450c2c21653ad637534eacc14a[m
+Author: Vincen Yoel Santaella <vinrast@gmail.com>
+Date:   Fri Jan 6 01:01:43 2017 -0430
+
+    cargando valores de servicios en modales
+
+[33mcommit d1b33181279984c29a001ce0f2e10462320e546f[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Thu Jan 5 23:27:55 2017 -0430
+
+    consulta acciones
+
+[33mcommit ddff2177669cd37fc0e3692d4e5002b526dccd5c[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Thu Jan 5 22:44:16 2017 -0430
+
+    cambios menores
+
+[33mcommit b6123d9b63680bdcea2c8ffd4296757ddc501fe8[m
+Merge: f782c42 8857ca9
+Author: Vincen Yoel Santaella <vinrast@gmail.com>
+Date:   Thu Jan 5 19:47:39 2017 -0430
+
+    Merge branch 'master' of https://github.com/Solincamfer/PSAD
+
+[33mcommit f782c4206998ef6b134d1fa2665cb453a30705f0[m
+Author: Vincen Yoel Santaella <vinrast@gmail.com>
+Date:   Thu Jan 5 19:47:09 2017 -0430
+
+    asociacion de servicios a planes
+
+[33mcommit 8857ca9cdc84b55cefe380fa2c7d76003e1553ff[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Thu Jan 5 18:15:25 2017 -0400
+
+    cambios menores
+
+[33mcommit 5a41911b842c0ba628a37e3e37d47839e4e663dc[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Thu Jan 5 18:12:56 2017 -0400
+
+    cambios menores
+
+[33mcommit f22842d623ff69ba9a00f84f3f26052d94842a3a[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Thu Jan 5 18:05:40 2017 -0400
+
+    cambios menores
+
+[33mcommit 45966ee131ed583c265ae11866fab8372df44639[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Thu Jan 5 18:04:56 2017 -0400
+
+    dependencia modulos-submodulos
+
+[33mcommit 83e2ea12703bb4e5a92229325580313ffff21a80[m
+Author: Vincen Yoel Santaella <vinrast@gmail.com>
+Date:   Thu Jan 5 12:20:14 2017 -0430
+
+    validacion de planes
+
+[33mcommit 1ea0982bff733dc483f533a142fcf7de82c057cc[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Thu Jan 5 12:05:04 2017 -0400
+
+    configuracion(submodulo_perfil)
+
+[33mcommit ae037ce4c557adcd3fb9aa10cc2585162d2b8dc6[m
+Author: Vincen Yoel Santaella <vinrast@gmail.com>
+Date:   Thu Jan 5 10:33:20 2017 -0430
+
+    validacion de formularios
+
+[33mcommit dff31c3258542ea4af9d732e3619c271255e956f[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Thu Jan 5 09:35:07 2017 -0400
+
+    cambios menores
+
+[33mcommit 9575ce1f26efc44922296a1a6a387a0c49276de2[m
+Author: Vincen Yoel Santaella <vinrast@gmail.com>
+Date:   Thu Jan 5 08:54:57 2017 -0430
+
+    Ingresar Planes
+
+[33mcommit c6c4542000865eafffab5e6d95971f38dbcef0d1[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Thu Jan 5 01:22:30 2017 -0430
+
+    cambios menores
+
+[33mcommit 13b38e62e32d50c7f5b11397712c59eef61de876[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Thu Jan 5 00:06:49 2017 -0430
+
+    chek dependientes(modulos,submodulos)
+
+[33mcommit 8009b45c0e58f73a28f83adf84512c0baa2a2e70[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Wed Jan 4 17:20:52 2017 -0400
+
+    cambios menores
+
+[33mcommit 12ca2fb77726a19fd3ca78c7c9cd37330c2877bb[m
+Author: Vincen Yoel Santaella <vinrast@gmail.com>
+Date:   Wed Jan 4 17:17:09 2017 -0430
+
+    estatus de planes
+
+[33mcommit da87e4dad09a134912067da9a1c05f4011bf13e6[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Wed Jan 4 15:24:50 2017 -0400
+
+    cambiar metodo (.cofigurarPer) al script configuraciones
+
+[33mcommit 093e888cee6249b828b8bd6ab98b68996d3a0a44[m
+Author: Vincen Yoel Santaella <vinrast@gmail.com>
+Date:   Wed Jan 4 15:27:33 2017 -0430
+
+    Listando Planes de la base de datos
+
+[33mcommit cd8a35202411fbef0f25f5d3f3921f3856c4c30e[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Wed Jan 4 14:56:17 2017 -0400
+
+    creacion de script configuraciones.js
+
+[33mcommit 379d57d3eb2d2c1e750de2050785b37a3684a15e[m
+Merge: 38ee2df 98cdf9a
+Author: Vincen Yoel Santaella <vinrast@gmail.com>
+Date:   Wed Jan 4 14:53:54 2017 -0430
+
+    Merge branch 'master' of https://github.com/Solincamfer/PSAD
+
+[33mcommit 38ee2df54d8c0ef519427b66b1e60a348ad2d037[m
+Author: Vincen Yoel Santaella <vinrast@gmail.com>
+Date:   Wed Jan 4 14:53:11 2017 -0430
+
+    Perfiles
+
+[33mcommit 98cdf9a89131b3ef338c5163661b72fedfb26863[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Wed Jan 4 14:48:30 2017 -0400
+
+    cambios menores
+
+[33mcommit c5797fa30236875461a870bddd47eaf7d4a0de3d[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Wed Jan 4 14:40:17 2017 -0400
+
+    documentacion (modelos,tablas)
+
+[33mcommit d81b98524679ea7d3d4d44be5394d80a232e7e0d[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Wed Jan 4 14:28:20 2017 -0400
+
+    migraciones y modelos (planes,servicios)
+
+[33mcommit 03e40e8a7f3509714459e2718f3520695d653927[m
+Author: Vincen Yoel Santaella <vinrast@gmail.com>
+Date:   Tue Jan 3 23:30:26 2017 -0430
+
+    validacion de registros iguales en cargos
+
+[33mcommit 3aafcbea2c3f0c38a97015c84cfa664407abad0b[m
+Author: Vincen Yoel Santaella <vinrast@gmail.com>
+Date:   Mon Jan 2 21:34:14 2017 -0430
+
+    Validacion de departamentos iguales
+
+[33mcommit cae6ca166567aa8224a764658b8f4e118f9749b2[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Mon Jan 2 17:03:40 2017 -0400
+
+    Validacion para departamentos iguales
+
+[33mcommit 0368895fe28015dc1b595bf77968646ae3b08dec[m
+Author: Vincen Yoel Santaella <vinrast@gmail.com>
+Date:   Mon Jan 2 11:03:20 2017 -0430
+
+    probando validaciones
+
+[33mcommit 9718baab49900cd97648cd8bbcc8a1ac81c26980[m
+Author: Vincen Yoel Santaella <vinrast@gmail.com>
+Date:   Mon Jan 2 10:35:19 2017 -0430
+
+    Probando mensajes de validacion
+
+[33mcommit 54d924fd963814b34cde54323de30de5ff063059[m
+Author: Vincen Yoel Santaella <vinrast@gmail.com>
+Date:   Mon Jan 2 00:24:35 2017 -0430
+
+    Validaciones y paginacion de departamentos y cargos
+
+[33mcommit fc59097d0784da30b43eb664519bbe2362f2f7c2[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Thu Dec 29 16:40:12 2016 -0400
+
+    cambios menores
+
+[33mcommit e5829ea9a23fbce392ca680575247b584e1b27cf[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Thu Dec 29 16:32:30 2016 -0400
+
+    acion eliminar
+
+[33mcommit 9861386b036fda43ac6e8818b096da44121d0b77[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Thu Dec 29 14:09:39 2016 -0400
+
+    cambios menores
+
+[33mcommit 95d2daeb7041330b4375fde0c307596fb9a6884c[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Thu Dec 29 11:08:12 2016 -0400
+
+    validacion por status
+
+[33mcommit 397e6fdfd03c0aa0669145fc6fbf52b05b46408b[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Wed Dec 28 16:42:10 2016 -0400
+
+    configuracion de perfiles
+
+[33mcommit 80d0618166c03aa88ff8995bd78201fc034de0cf[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Tue Dec 27 17:10:26 2016 -0400
+
+    creacion de perfil por defecto
+
+[33mcommit 2436a243bde17ced536da29b341fb9f0b2f6aa88[m
+Author: Vincen Yoel Santaella <vinrast@gmail.com>
+Date:   Tue Dec 27 13:20:43 2016 -0430
+
+    eliminando prueba
+
+[33mcommit f55f37679c6891ed22dbc2067cec7a6bc5ebe575[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Tue Dec 27 10:32:01 2016 -0400
+
+    cambios menores
+
+[33mcommit e1c99b1a9f39bb6ceb6e88651f651058ad9039e6[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Tue Dec 27 10:21:48 2016 -0400
+
+    Insertar,modificar(perfiles)
+
+[33mcommit e1e194d86200a42e6de989c09d60da43bfce627d[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Mon Dec 26 17:36:41 2016 -0400
+
+    cambios menores
+
+[33mcommit 0400160c72ec7a3074255a89ad58a0fd2620f8af[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Mon Dec 26 17:18:12 2016 -0400
+
+    cambios menores
+
+[33mcommit 7b2b58e716cd545c20c3a7f8b1793c3d47bc9f2a[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Mon Dec 26 17:14:35 2016 -0400
+
+    modificar(departamentos,cargos), insertar y check de status(perfiles)
+
+[33mcommit 9a2fc00806db4188d2a600dca2c87fb614c76e74[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Fri Dec 23 17:05:50 2016 -0400
+
+    check de status (departamentos y cargos)
+
+[33mcommit a5bf2e84284d64ba8bc5c425947cb1240a214ae1[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Fri Dec 2 11:47:07 2016 -0400
+
+    cambios css y consulta de modulos
+
+[33mcommit 601ea63e9478cdf343d2c1c2a34239cc4de5470b[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Fri Dec 2 11:39:35 2016 -0400
+
+    arreglos css
+
+[33mcommit 4482dc3c37b2092a919046f9c4702f5d0af6a6ae[m
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Fri Dec 2 11:37:18 2016 -0400
+
+    arreglos menores
+
+[33mcommit 1590bca82f0bbba884b66864a4ed81aa5c7e3a04[m
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Fri Dec 2 10:12:55 2016 -0400
+
+    modificando etiquetas de perfil
+
+[33mcommit f593f5a739ab93c216edab2b31563630881131e8[m
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Fri Dec 2 09:51:54 2016 -0400
+
+    modificando etiquetas de perfil
+
+[33mcommit 6bf5a6e897322dd9151527a0c39bbd9b81f579e9[m
+Merge: 0ba1936 f791ee9
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Fri Dec 2 09:28:49 2016 -0400
+
+    Merge branch 'master' of https://github.com/Solincamfer/PSAD
+
+[33mcommit 0ba1936cfd3a9933366bb76adabf8caa8fc4a2ad[m
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Fri Dec 2 09:25:27 2016 -0400
+
+    Agregando etiquetas de perfil
+
+[33mcommit f791ee974310677388a4195fd2380af55a3de8d9[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Fri Dec 2 03:40:25 2016 -0430
+
+    Asignacion de perfiles a empleados
+
+[33mcommit 1a7c6b31f104902635d7bd6b1033bda7f6924765[m
+Author: Vincen Yoel Santaella <vinrast@gmail.com>
+Date:   Thu Dec 1 19:45:45 2016 -0430
+
+    modificando los mensajes
+
+[33mcommit b343693a16d96822a3f6b62c2de9744dc8fb3ced[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Thu Dec 1 18:08:35 2016 -0400
+
+    impresion del nombre del usuario en la ventana permisos
+
+[33mcommit 643738c358eb8821dafcb083ef6d01e59c41ac15[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Thu Dec 1 18:05:34 2016 -0400
+
+    cambios menores
+
+[33mcommit bc0ef41dbc973d0a4a09d1fa36764293274d04d9[m
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Thu Dec 1 17:11:53 2016 -0400
+
+    Arreglos de Vista permisos
+
+[33mcommit e973013087faa53c1234ccc25fcb9e552e74da56[m
+Author: Vincen Yoel Santaella <vinrast@gmail.com>
+Date:   Thu Dec 1 17:09:16 2016 -0430
+
+    quitando no active de modales
+
+[33mcommit b7b90a709826232fe3a062c71eff078e94ee65e0[m
+Author: Vincen Yoel Santaella <vinrast@gmail.com>
+Date:   Thu Dec 1 15:36:18 2016 -0430
+
+    agrengado titulos en modales de servicios
+
+[33mcommit ffa2f2e77759e4400a779b268165ca0dece420ac[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Thu Dec 1 14:18:34 2016 -0400
+
+    cambios menores
+
+[33mcommit 7a5115cc8a3b876be55a857b82686166f1f7ab46[m
+Merge: 2426b6e 518430e
+Author: Vincen Yoel Santaella <vinrast@gmail.com>
+Date:   Thu Dec 1 12:38:40 2016 -0430
+
+    Merge branch 'master' of github.com:solincamfer/PSAD
+
+[33mcommit 2426b6e93a24af8006cca196fd8cda7a827f1cff[m
+Author: Vincen Yoel Santaella <vinrast@gmail.com>
+Date:   Thu Dec 1 12:37:20 2016 -0430
+
+    Quitando alert de validaciones
+
+[33mcommit 518430e4293eda201510cabee5e8361350af3a95[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Thu Dec 1 12:31:47 2016 -0400
+
+    listar perfiles por empleados
+
+[33mcommit 760024d86c48c0132bc9856296a57eef21f8f2ab[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Thu Dec 1 11:22:45 2016 -0400
+
+    controlador para mostrar acciones, listado de empleados
+
+[33mcommit c7c900f2dc2a5237ef2e30d97c0f4cdcf46628e9[m
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Thu Dec 1 05:57:28 2016 -0400
+
+    Arreglos en algunas Vista
+    
+    Se arreglaron algunas Vistas y se agrego la logica que se discutio 30/11
+
+[33mcommit 1619af561b1cb9dedb5609d1aef3153143909b31[m
+Author: toio <angel.toyo@solincamfer.com>
+Date:   Thu Dec 1 05:04:22 2016 -0400
+
+    aporte Perfil/Modificar
+    
+    Gracias por todo muchachos =)
+
+[33mcommit 3399aeff6ec014cfc5fe67021ff422e9ca2a73ff[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Wed Nov 30 17:42:02 2016 -0400
+
+    controlador
+
+[33mcommit 759e7015f8cdc413d41a6e421246f59d5ce55c78[m
+Author: TOYO <angel.toyo@solincamfer.com>
+Date:   Wed Nov 30 17:09:57 2016 -0400
+
+    Listar cliente
+
+[33mcommit 59534a3f4b4b7e6150d3b6ba1307471f8d20a31b[m
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Wed Nov 30 14:42:28 2016 -0400
+
+    Arreglo a la vista empleado y arreglos menores
+
+[33mcommit 9af9d31ae06c898402535ca7e86171d37d57d65d[m
+Author: TOYO <angel.toyo@solincamfer.com>
+Date:   Wed Nov 30 13:42:53 2016 -0400
+
+    modificar perfiles/acciones
+
+[33mcommit 37608b0b5727b5b159330626136c0fa9d02944d8[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Wed Nov 30 13:39:07 2016 -0400
+
+    controlador
+
+[33mcommit 4a27a86e0d3a28bc27bd1aed85e265927591df5c[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Wed Nov 30 13:10:53 2016 -0400
+
+    consulta de todos los submodulos
+
+[33mcommit 255b864eeab6a7a38967e514c9ab6fc2cd1cdd2f[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Wed Nov 30 11:19:49 2016 -0400
+
+    controlador
+
+[33mcommit 29b8d3f096832f38c1a0e135fe1e261c4a13f892[m
+Author: TOYO <angel.toyo@solincamfer.com>
+Date:   Wed Nov 30 11:16:19 2016 -0400
+
+    cambios perfil modificar
+
+[33mcommit fc48e56fae5c3659d288eb8fb493bbb2fb3dd22f[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Wed Nov 30 11:01:32 2016 -0400
+
+    id perfil
+
+[33mcommit 54d47367c5f6f9a2826f812f2c8110f8c45a0db0[m
+Author: TOYO <angel.toyo@solincamfer.com>
+Date:   Wed Nov 30 10:57:34 2016 -0400
+
+    modificacion perfil
+
+[33mcommit c9fcf3549d542fcd179c1c38fef477b1de87cf8f[m
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Wed Nov 30 10:36:00 2016 -0400
+
+    Arreglo visual al modal Perfiles
+
+[33mcommit 9bb1637dd471fcb5e5d1ebb1d8c63c2f63ab9329[m
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Wed Nov 30 10:14:23 2016 -0400
+
+    Finalizacion de la vista servicios
+    
+    Se arreglo las pequeñas cosas que faltaban en la vista y se agrego los
+    tooltip a las tarjetas
+
+[33mcommit 798f98f65b39b928ab6f6b067cd3747523e7b6c5[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Wed Nov 30 09:57:33 2016 -0400
+
+    controlador para mostrar submodulos
+
+[33mcommit f071f1a85dc4ab81d91dee020dd6a13aeed303dd[m
+Author: TOYO <angel.toyo@solincamfer.com>
+Date:   Wed Nov 30 09:54:38 2016 -0400
+
+    modificaciones perfil
+
+[33mcommit 5d794a1f07c5f3103a96858cdb03ba3dac3f3f28[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Wed Nov 30 09:29:44 2016 -0400
+
+    listado de modulos (perfiles)
+
+[33mcommit 35f72a3110ccc8d00fefedc2334a9f36755300c1[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Wed Nov 30 06:11:03 2016 -0430
+
+    modificaciones rutas
+
+[33mcommit 55f7e7a1ef2ebb042a70a82991945f1a11d5984a[m
+Author: TOYO <angel.toyo@solincamfer.com>
+Date:   Tue Nov 29 17:00:52 2016 -0400
+
+    Cambios
+
+[33mcommit df1a76cb8ddb7ac85554335aeaa648c3ae053bd2[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Tue Nov 29 16:53:26 2016 -0400
+
+    listado de perfiles desde la base de datos
+
+[33mcommit 6112700f483696346c51fc5b803fab7fa112a0fb[m
+Author: TOYO <angel.toyo@solincamfer.com>
+Date:   Tue Nov 29 16:04:31 2016 -0400
+
+    categoria responsable listo
+
+[33mcommit b69ff186e5e77cc19b81ba5934fb42f9d248bd7d[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Tue Nov 29 15:49:41 2016 -0400
+
+    controlador modificar responsables desde categorias
+
+[33mcommit 9bdaa77260889875dc983d4a6d60b68beda37241[m
+Author: TOYO <angel.toyo@solincamfer.com>
+Date:   Tue Nov 29 15:49:39 2016 -0400
+
+    cambio
+
+[33mcommit f65efc818f87e0f2326baaf03bc7b4838b44a5ca[m
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Tue Nov 29 15:48:00 2016 -0400
+
+    modificaciones menores
+
+[33mcommit e6e00d8d816742efcd33843b23a60597a6916120[m
+Merge: 96b4763 f0cbb39
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Tue Nov 29 15:46:44 2016 -0400
+
+    Merge branch 'master' of https://github.com/Solincamfer/PSAD
+
+[33mcommit f0cbb39963118b168c13dbd8937faca3cb975968[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Tue Nov 29 14:55:05 2016 -0400
+
+    foreach para modificar responsables desde categorias
+
+[33mcommit 10902d4d5bb0b045d46b46e10f4ecfbe38568bac[m
+Author: TOYO <angel.toyo@solincamfer.com>
+Date:   Tue Nov 29 14:41:10 2016 -0400
+
+    modificar_categoria_responsable
+
+[33mcommit 81a2b74f218c78e89a4b78b33c15ce528d751da1[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Tue Nov 29 14:39:07 2016 -0400
+
+    cambios
+
+[33mcommit 862f8cdae379464cd06e91954532ef1e5c0f56b3[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Tue Nov 29 14:08:14 2016 -0400
+
+    ruta para traer datos de un responsable desde una categoria
+
+[33mcommit 5bc3309d853f2f48070ce53219169b15315a7da9[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Tue Nov 29 13:58:53 2016 -0400
+
+    ingresar responsables de una categoria
+
+[33mcommit 96b47630dc3e2f34508dcf46bc875bafc54e8b02[m
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Tue Nov 29 12:46:35 2016 -0400
+
+    modificaciones menores
+
+[33mcommit e0491ac3ce98a14df750a92275f5678730fff611[m
+Author: TOYO <angel.toyo@solincamfer.com>
+Date:   Tue Nov 29 11:34:43 2016 -0400
+
+    listar/actualizar Categoria
+
+[33mcommit 57b1cfbd5dd31fc80c3efcd196ba8cd38547e4e6[m
+Author: TOYO <angel.toyo@solincamfer.com>
+Date:   Tue Nov 29 11:16:27 2016 -0400
+
+    modificar categoria
+
+[33mcommit ee10c7d830f3a861d2fd4ed5d70fe008c68ada65[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Tue Nov 29 11:13:05 2016 -0400
+
+    cambios rutas
+
+[33mcommit 06b6d4378055963b0a534752d0946aee3f2868bb[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Tue Nov 29 11:12:29 2016 -0400
+
+    cambios rutas
+
+[33mcommit be0b674bdb8e18aa17c0db985578c044e7d24749[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Tue Nov 29 10:03:48 2016 -0400
+
+    cambios
+
+[33mcommit b8901c87ebddd447d391604214351c4db30d297c[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Tue Nov 29 10:01:54 2016 -0400
+
+    cambios menores
+
+[33mcommit 434720ed522b07b82398e8828320520ab1fc7af5[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Tue Nov 29 09:37:59 2016 -0400
+
+    modificar matriz y modificar responsables de la matriz
+
+[33mcommit 23928746b4c4a9e881b3d342a426fa5d9912c68f[m
+Author: TOYO <angel.toyo@solincamfer.com>
+Date:   Tue Nov 29 09:07:53 2016 -0400
+
+    Modicaciones 2
+
+[33mcommit 2a8b604729e478a566c0f2c2f2aeb5a183b033c6[m
+Author: TOYO <angel.toyo@solincamfer.com>
+Date:   Tue Nov 29 08:47:59 2016 -0400
+
+    Modificaciones
+
+[33mcommit 9d301c414f0689da3b8c42fab043af6bca5448d4[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Mon Nov 28 23:11:23 2016 -0430
+
+    controladores: modificar y actualizar categorias
+
+[33mcommit 23b1eec3ee2b5caf7167d21038c373f3845b1cbb[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Mon Nov 28 22:25:03 2016 -0430
+
+    modificar responsables
+
+[33mcommit 950ea3467c2ed84d8afdca2ad8ad53fbedd0125a[m
+Author: TOYO <angel.toyo@solincamfer.com>
+Date:   Mon Nov 28 17:49:22 2016 -0400
+
+    modificar quiente responsable
+
+[33mcommit bc3870c1094afd9c4c816bede84a5a9bf8b8c9b6[m
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Mon Nov 28 17:46:24 2016 -0400
+
+    Vista perfiles
+    
+    Se arreglo la vista perfiles
+
+[33mcommit e08ab793d3cb88ba4c5972011100f0290897a9ae[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Mon Nov 28 17:39:27 2016 -0400
+
+    correcciones menores
+
+[33mcommit e89a6bd7bb9fb4c2661b0b6317986395cc981468[m
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Mon Nov 28 17:30:46 2016 -0400
+
+    Arreglo de vista Perfiles y servicios
+
+[33mcommit c09bfcb52cca3b94873ffc2a1054ed3c1629705f[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Mon Nov 28 17:16:34 2016 -0400
+
+    correcciones menores
+
+[33mcommit 0a757b2f9b606d08833ffc1d172b3643f259227b[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Mon Nov 28 17:14:26 2016 -0400
+
+    correcciones menores
+
+[33mcommit a38447f6bbf8a4df3b913d9ede038ab338226cb4[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Mon Nov 28 17:12:08 2016 -0400
+
+    consulta correo
+
+[33mcommit 3f26760aa07c58568a99af5b050bf62efa3408e9[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Mon Nov 28 17:10:12 2016 -0400
+
+    ruta modificar perfil
+
+[33mcommit 36befd102766003a0e4369f5a77af1c4414ac794[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Mon Nov 28 16:48:24 2016 -0400
+
+    controlador actualizar responsables de una matriz
+
+[33mcommit 31ad6333a2e88af3e5911e54450f09c41aacbcd4[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Mon Nov 28 15:21:47 2016 -0400
+
+    modificar matriz
+
+[33mcommit 78218a06ae7b008027ec040effb03b39b4cf5526[m
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Mon Nov 28 15:05:14 2016 -0400
+
+    Cambios minimos y agregado de vista de empleados
+
+[33mcommit 2a0b923a6684d47a1aaac2ff787111f88528d41f[m
+Author: TOYO <angel.toyo@solincamfer.com>
+Date:   Mon Nov 28 14:47:35 2016 -0400
+
+    ajustes form modificar/cliente
+
+[33mcommit 8f75ee9870db6895fb7b660ac8a99a884135c48b[m
+Author: TOYO <angel.toyo@solincamfer.com>
+Date:   Mon Nov 28 14:35:01 2016 -0400
+
+    Controlar action form cliente mod
+
+[33mcommit 538633a778f424adbe5b722a696860346ca3cb3a[m
+Author: TOYO <angel.toyo@solincamfer.com>
+Date:   Mon Nov 28 11:54:44 2016 -0400
+
+    cambios ajax
+
+[33mcommit e56e2802435ccf916708c3c35368a1e2ef409b88[m
+Author: TOYO <angel.toyo@solincamfer.com>
+Date:   Mon Nov 28 11:02:52 2016 -0400
+
+    cambios
+
+[33mcommit a4d96ac58f577d638c3d76ad082229f26386678b[m
+Author: TOYO <angel.toyo@solincamfer.com>
+Date:   Mon Nov 28 10:48:45 2016 -0400
+
+    Combo dependientes completados
+
+[33mcommit aff35a1266a6032dcfe60a83b42d80e204e1d4ef[m
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Mon Nov 28 10:48:07 2016 -0400
+
+    cambios minimos
+
+[33mcommit fda87c89fd626c5652eb7ccad5f24e9eac9d06dc[m
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Mon Nov 28 09:39:38 2016 -0400
+
+    Cambios minimos en servicios
+
+[33mcommit 8af932cf3201570d4650d511c7c7f81d1c7da707[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Mon Nov 28 10:46:20 2016 -0400
+
+    controlador modificar cliente
+
+[33mcommit 825c115614feb58479db9b27a9b0545a3f5a8f66[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Mon Nov 28 09:06:50 2016 -0400
+
+    Ruta y acciones para la ventana principal del submodulo perfiles
+
+[33mcommit 714310399376521f9f864d7a70c26efa2bd8f4e4[m
+Author: toio <angel.toyo@solincamfer.com>
+Date:   Mon Nov 28 06:47:33 2016 -0400
+
+    campo dependiente modificar
+
+[33mcommit 3022e29dd6f658fa569d0e24ff8b8bf6dd15c480[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Sun Nov 27 17:23:13 2016 -0430
+
+    correcciones menores
+
+[33mcommit b22dfda80ac3ea265e58401a43ad927e70233e2f[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Sun Nov 27 17:07:04 2016 -0430
+
+    agregar categorias listar responsables por categoria
+
+[33mcommit 004c01a42b98a80b560779ee5b1a879a37e793a4[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Sun Nov 27 13:41:14 2016 -0430
+
+    rutas y acciones :empleados
+
+[33mcommit a1d86c00160ec3017018f9d40cb2a4c44c6cc156[m
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Sat Nov 26 17:35:38 2016 -0400
+
+    Vista de Servicio
+    
+    Se agrego y se arreglo la vista de servicio
+
+[33mcommit 3f25346e0802b4d6dae6c886dec77fa7a90c7921[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Sat Nov 26 17:18:16 2016 -0400
+
+    estatus de los registros de responsables y radio button
+
+[33mcommit c30deb3b656b471d2f115178cbbfaa3abc2c3c84[m
+Author: TOYO <angel.toyo@solincamfer.com>
+Date:   Sat Nov 26 17:18:10 2016 -0400
+
+    Modificaciones
+
+[33mcommit 342a6007b50927b9c5c9e080796d5b20fa460209[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Sat Nov 26 16:32:51 2016 -0400
+
+    consulta y ruta para modificar responsables de una matriz
+
+[33mcommit f57d09e7bbd06f4b2cf828e76435b686577f5453[m
+Author: TOYO <angel.toyo@solincamfer.com>
+Date:   Sat Nov 26 14:46:07 2016 -0400
+
+    Validacion responsable
+
+[33mcommit 5d98b6536934ff4273c885f4124580276e7e2593[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Sat Nov 26 14:44:06 2016 -0400
+
+    arreglo para consulta de modificar clientes
+
+[33mcommit 873b89647cd0de83b093274040a9c2e08965786e[m
+Author: TOYO <angel.toyo@solincamfer.com>
+Date:   Sat Nov 26 13:31:00 2016 -0400
+
+    modiificar
+
+[33mcommit aed0e59771d87e827966206654d48ae95270ccf7[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Sat Nov 26 12:55:55 2016 -0400
+
+    2 consultas modificar
+
+[33mcommit 7be96543ec5fd8aaf9c614637da995120d336370[m
+Author: TOYO <angel.toyo@solincamfer.com>
+Date:   Sat Nov 26 12:28:47 2016 -0400
+
+    Cambios modificar
+
+[33mcommit c415da30c34f4a001289bffdb0fe8804fc3765be[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Sat Nov 26 12:28:38 2016 -0400
+
+    consulta  modificar matriz
+
+[33mcommit 82cbc34839d1274ba68f7c2ebd11ae78c17e1d06[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Sat Nov 26 12:05:25 2016 -0400
+
+    consulta
+
+[33mcommit 3735d404fbedc92e6736cb12449e85da9c2310e1[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Sat Nov 26 08:47:14 2016 -0400
+
+    correcciones insertar responsable
+
+[33mcommit d55a17c7a88a0ae2d5d88528237885d0628bf77e[m
+Author: Vincen Yoel Santaella <vinrast@gmail.com>
+Date:   Fri Nov 25 20:55:41 2016 -0430
+
+    quitando echos de controlador
+
+[33mcommit f2c5ba8c3dcbdea16b3af4a3e587bd097e922309[m
+Author: TOYO <angel.toyo@solincamfer.com>
+Date:   Fri Nov 25 18:24:48 2016 -0400
+
+    Listar datos cliente
+
+[33mcommit 11c9a3df1b1f38a7cd5c4bd7cc4975f52d8e53c0[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Fri Nov 25 17:16:54 2016 -0400
+
+    consulta modificar cliente (prueba 1)
+
+[33mcommit 9f8f66b3fa18e68209309cd1f40bb4be2534d844[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Fri Nov 25 16:44:14 2016 -0400
+
+    listar responsables de una matriz
+
+[33mcommit 439ed5f22b1d3dbeabb40db104b0184b7e9d238a[m
+Author: TOYO <angel.toyo@solincamfer.com>
+Date:   Fri Nov 25 16:41:35 2016 -0400
+
+    Form Categoria
+
+[33mcommit 762e254ef185fa28661535301192c99ec9f558ab[m
+Merge: 78b804b a6f3fea
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Fri Nov 25 08:24:12 2016 -0400
+
+    Merge branch 'master' of https://github.com/Solincamfer/PSAD
+
+[33mcommit a6f3feacb0411cfe13b4fa6b42cc6921bdf89da2[m
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Thu Nov 24 17:51:41 2016 -0400
+
+    arreglos menores
+
+[33mcommit 10b3b7030ec3e0a8b355d04d6a0b8181491d5871[m
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Thu Nov 24 17:40:14 2016 -0400
+
+    Vista planes
+    
+    se agrego arreglo en las vista Planes
+
+[33mcommit 24a10d5dac4ebdae6835fe988b44719c97b3bab5[m
+Author: TOYO <angel.toyo@solincamfer.com>
+Date:   Thu Nov 24 17:01:10 2016 -0400
+
+    Responsable form
+
+[33mcommit 78b804b2d22f85e5ebd064c75d576784ec0a7178[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Thu Nov 24 17:01:04 2016 -0400
+
+    insertar
+
+[33mcommit 809684210459b4d9be986f3f35d262d17b87e237[m
+Merge: 5f17bb6 6368702
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Thu Nov 24 16:40:14 2016 -0400
+
+    Arreglando Insercion
+
+[33mcommit 5f17bb65692e04d1193eb62270e05bfea7637372[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Thu Nov 24 16:34:59 2016 -0400
+
+    validar acciones
+
+[33mcommit 6368702bf0bc2460dbab6bcb6ef7784d65825220[m
+Author: TOYO <angel.toyo@solincamfer.com>
+Date:   Thu Nov 24 16:34:20 2016 -0400
+
+    formulario agregar cliente
+
+[33mcommit 7f9185dacb5f994cd51e9c5fa40154d433a11858[m
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Thu Nov 24 16:29:36 2016 -0400
+
+    Correcciones minimas
+
+[33mcommit f1f0dda24f23c8e2c11b42a4b18567046178f0ac[m
+Author: TOYO <angel.toyo@solincamfer.com>
+Date:   Thu Nov 24 15:59:57 2016 -0400
+
+    acciion guardar cliente
+
+[33mcommit 7fb587e07459fe12e44f97344615689b5bfb3aec[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Thu Nov 24 15:57:01 2016 -0400
+
+    /planes/servicios--vista en blanco
+
+[33mcommit 43868efe07eb93e7e4736e70ec03b9c5794813b7[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Thu Nov 24 15:51:45 2016 -0400
+
+    redireccion del controlador de insertar cliente matriz
+
+[33mcommit 7f5f1194019d47fcff4e939c79070ec980e5de23[m
+Author: TOYO <angel.toyo@solincamfer.com>
+Date:   Thu Nov 24 15:49:34 2016 -0400
+
+    Campos dependientes completos
+
+[33mcommit 1c9f860a83cf90fd4b914a31b80eea5cfb1661b2[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Thu Nov 24 15:28:43 2016 -0400
+
+    planes y servicios
+
+[33mcommit adad5b4eee5d5614defa15b42dd7a7cf82b14097[m
+Author: TOYO <angel.toyo@solincamfer.com>
+Date:   Thu Nov 24 14:58:41 2016 -0400
+
+    Validacion cliente
+
+[33mcommit e99667b8a1aff8746bdee2ceec8b3710eb720643[m
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Thu Nov 24 14:56:48 2016 -0400
+
+    Cmabios menores
+    
+    tooltip estatus, funcion en el menu desplegable de cierre
+
+[33mcommit b51e648538c987e07ebce09c4803ef9d09476af2[m
+Author: Vincen Yoel Santaella <vinrast@gmail.com>
+Date:   Thu Nov 24 14:32:31 2016 -0430
+
+    cambiando footer
+
+[33mcommit 55d416dfbb67a908542d2a64e1db9c785ce7d44b[m
+Author: Vincen Yoel Santaella <vinrast@gmail.com>
+Date:   Thu Nov 24 14:26:08 2016 -0430
+
+    modificando footer
+
+[33mcommit a46b7e6d265c7c87005e5ae3518ccc93e68b653c[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Thu Nov 24 14:16:03 2016 -0400
+
+    correcciones menores
+
+[33mcommit 97f44fe5651275b2d455e45add703e7bb114220a[m
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Thu Nov 24 13:04:23 2016 -0400
+
+    Arreglos menores y a categoria responsable
+
+[33mcommit fcdc231f123c6f4755ded5bb339b78eec5b27177[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Thu Nov 24 12:45:13 2016 -0400
+
+    middleware para submodulos
+
+[33mcommit 4ef6e0fc8dde28e13a9b12222f6b9bd9a62d30cb[m
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Thu Nov 24 11:17:26 2016 -0400
+
+    Cambio al formulario Sucursales Responsable
+    
+    Se quitaron los campos fecha de nac, 2do nombre y apellido, rif de la
+    persona responsable
+
+[33mcommit 9575b7b0b48f840478684a290e6a07d3ba8de72e[m
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Wed Nov 23 18:43:05 2016 -0400
+
+    Arreglo de header
+    
+    Se arreglo el diseño visual del header
+
+[33mcommit 8aa9edb0ce204b7282ff187f3564743e20aa7bc1[m
+Author: TOYO <angel.toyo@solincamfer.com>
+Date:   Wed Nov 23 18:38:18 2016 -0400
+
+    Form Clientes
+
+[33mcommit 4e73b27257b946227afe48428c1145138e03daf2[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Wed Nov 23 18:29:43 2016 -0400
+
+    responsables por categorias
+
+[33mcommit 5d6285546aa9a2ded9396139d1e28fd474782456[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Wed Nov 23 18:06:16 2016 -0400
+
+    categorias de clientes
+
+[33mcommit 8d51a6315c7d97863f1e5ad75a3e09db41fd8452[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Wed Nov 23 16:59:28 2016 -0400
+
+    listado de responsables por cliente matriz
+
+[33mcommit b07c84eb093c01617ed5f7acc7e75e0ba29f367b[m
+Author: TOYO <angel.toyo@solincamfer.com>
+Date:   Wed Nov 23 16:48:30 2016 -0400
+
+    Limpiar campos dependientes
+
+[33mcommit bd69cfade3c6d491b87f27b5b282e9ca66b495c0[m
+Author: TOYO <angel.toyo@solincamfer.com>
+Date:   Wed Nov 23 16:30:30 2016 -0400
+
+    controlador modificado
+
+[33mcommit 36710aeffc8c076d053408ffdf18f9c0c00ba754[m
+Author: TOYO <angel.toyo@solincamfer.com>
+Date:   Wed Nov 23 16:23:53 2016 -0400
+
+    Campos dependientes 2
+
+[33mcommit b90fee21b33435690be819c774313319f1db679d[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Wed Nov 23 16:21:29 2016 -0400
+
+    correciones controlador de los select
+
+[33mcommit 64acbf4229f5178935ae96fa142a5c64b9b1f344[m
+Merge: a4fb29a 50569ee
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Wed Nov 23 16:19:52 2016 -0400
+
+    Merge remote-tracking branch 'origin/master'
+    
+    # Conflicts:
+    #	app/Http/Controllers/RegistrosBasicos.php
+
+[33mcommit a4fb29a1ddecc85e162d50bfe3ba633a9033132b[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Wed Nov 23 16:16:11 2016 -0400
+
+    controladores actulizados para los select
+
+[33mcommit 50569ee18f5c2123e985186a55bcebaf001224c3[m
+Author: TOYO <angel.toyo@solincamfer.com>
+Date:   Wed Nov 23 15:34:45 2016 -0400
+
+    Campos dependientes 2
+
+[33mcommit c892a9afc7de55cfd4b17d4c359d2979a0ef668b[m
+Author: TOYO <angel.toyo@solincamfer.com>
+Date:   Wed Nov 23 15:14:10 2016 -0400
+
+    Campos dependientes
+
+[33mcommit 0b618cf68fc2dc2abc366f004fb15081e60a3ab5[m
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Wed Nov 23 12:25:58 2016 -0400
+
+    Vistas Departamento y Cargos
+    
+    Se agreglo el diseño visual de Departamentos y Cargos
+
+[33mcommit 65f871199d34340298c1d9940a3b1558a8ab7304[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Wed Nov 23 12:12:08 2016 -0400
+
+    retorno descripcion de la primera region traida de la base de datos
+
+[33mcommit 186846a27ced971bb7a6a43abd655fa5ef5b582f[m
+Author: TOYO <angel.toyo@solincamfer.com>
+Date:   Wed Nov 23 11:55:54 2016 -0400
+
+    Campos dependientes
+
+[33mcommit 7afac9d7ee5a2f65ffd07e571dfbfb0768bc80cf[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Wed Nov 23 11:53:56 2016 -0400
+
+    controlador select con ajax
+
+[33mcommit d519b596ff9dbefca7f2cc1ee440768121fb609b[m
+Merge: c0ff031 0ed8ead
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Wed Nov 23 10:47:17 2016 -0400
+
+    Merge remote-tracking branch 'origin/master'
+    
+    # Conflicts:
+    
+    #	resources/views/Registros_Basicos/Clientes/clientes_sucursales_plan.blade.php
+
+[33mcommit c0ff031a8b7587d930248333b0bb1833a6ab4735[m
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Wed Nov 23 10:43:48 2016 -0400
+
+    Correcciones de vista
+
+[33mcommit 0ed8ead4a2a9f3400dbc0870c566470d72b7b0ea[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Wed Nov 23 10:37:42 2016 -0400
+
+    check para: clientes (responsable, sucursales,equipos)--eliminado modificar de : sucursales/plan
+
+[33mcommit 6d9b745eacc4ce6090884d0f7b6f2f80b2b67dd2[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Wed Nov 23 09:53:13 2016 -0400
+
+    correcciones relacion contactos
+
+[33mcommit 645897d4aae2db7817de319131a33589c26ff640[m
+Author: TOYO <angel.toyo@solincamfer.com>
+Date:   Wed Nov 23 09:31:00 2016 -0400
+
+    Cliente modals
+    
+    Guardar&Modificar
+
+[33mcommit 38f0fe818c6f9d6e2e7b101260f60d3b5dca8a0a[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Wed Nov 23 09:11:06 2016 -0400
+
+    insecion de cliente matriz
+
+[33mcommit e3848f394a0b074608fea8b617e82e31deb594f9[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Tue Nov 22 19:05:40 2016 -0400
+
+    insercciones
+
+[33mcommit cc3114b0e5293a3c54e00acc6f39968e2f3ff175[m
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Wed Nov 23 05:44:42 2016 -0400
+
+    Vista Componentes Aplicaciones y piezas
+    
+    Se arreglaron y estructuraron las vistas
+
+[33mcommit fd22824e9f8681b6f17534e74928ebab6e87c6fa[m
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Wed Nov 23 04:23:05 2016 -0400
+
+    Vista Equipo Componentes
+    
+    Se arreglo la vista Equipos Componentes
+
+[33mcommit 121a8570897bbb92f2b77cb1f952b75f33d9fcd0[m
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Tue Nov 22 13:41:21 2016 -0400
+
+    Vista Componentes
+
+[33mcommit 33c37c0db1f385be6200910b817976d8eaf05891[m
+Author: toio <angel.toyo@solincamfer.com>
+Date:   Tue Nov 22 17:29:16 2016 -0400
+
+    boton submit
+
+[33mcommit e2e710b06fbd4efa956e722dbc799a9ab7a3d52c[m
+Author: toio <angel.toyo@solincamfer.com>
+Date:   Tue Nov 22 17:17:40 2016 -0400
+
+    Validacion y tabs js mejorados
+
+[33mcommit 551a4b8100f1577315393e82171e2986ce250e89[m
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Tue Nov 22 12:57:48 2016 -0400
+
+    Vista Sucursal Equipos
+    
+    Se modifico el diseño visual de Sucursal Equipo
+
+[33mcommit cfebffa479e7715f807e26de240de8d0c388f2c4[m
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Tue Nov 22 10:45:06 2016 -0400
+
+    Vista Sucursales Plan
+    
+    Faltaba agregar el boton de volver
+
+[33mcommit 53780c04bc368a21a8e769bcb53912aec8417fbc[m
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Tue Nov 22 10:42:44 2016 -0400
+
+    Vista Sucursales plan
+    
+    Arreglo de la Vista Sucursales Plan
+
+[33mcommit 3d2b992a80dc7e7982cf75058df5f0d855a5ebeb[m
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Tue Nov 22 10:36:39 2016 -0400
+
+    Vista Sucursal Responsable
+    
+    Se arreglo la vista Sucursal Responsable
+
+[33mcommit cab10eb779fb33f13561c3709c3bf5cf5f4273ad[m
+Merge: 7d73701 a206e23
+Author: toio <angel.toyo@solincamfer.com>
+Date:   Tue Nov 22 10:26:45 2016 -0400
+
+    Merge remote-tracking branch 'origin/master'
+    
+    # Conflicts:
+    #	resources/views/Registros_Basicos/Clientes/clientes.blade.php
+
+[33mcommit 7d737014c73e5b4e3fd951699b377a94431e9a0b[m
+Author: toio <angel.toyo@solincamfer.com>
+Date:   Tue Nov 22 10:21:05 2016 -0400
+
+    Cambios ajustes cliente
+
+[33mcommit a206e23f55dff372adc6177520de7ab0fa0b1e49[m
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Tue Nov 22 10:13:53 2016 -0400
+
+    Vista Sucursal
+    
+    Se le agrego el diseño visual de la sucursal
+
+[33mcommit 809bff0801e3693391e986a42fd28a320c1f9e48[m
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Tue Nov 22 08:07:03 2016 -0400
+
+    Arreglo Visual Categoria_Responsable
+    
+    Se arreglo el diseño visual de Categoria Responsable, y algunas fallas
+    de cliente Responsable
+
+[33mcommit 7f91a7573c7c792f521fb920390b3ae5c09f79ec[m
+Author: toio <angel.toyo@solincamfer.com>
+Date:   Tue Nov 22 08:06:13 2016 -0400
+
+    cambio pequeño
+
+[33mcommit 1c716fd4d6e7645d0a9aaf22dbafc3a9c9e9b8fe[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Tue Nov 22 08:05:34 2016 -0400
+
+    controladores de clientes
+
+[33mcommit 1b72f79fb667090ffe9fccefc2dfd1115c60feec[m
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Tue Nov 22 05:59:07 2016 -0400
+
+    Categoria, cliente responsable, cliente,  y estilos
+    
+    Se reestructuro la vista de cada uno de ellos. y se elimino el plugins
+    de tooltip que no se iba a utilizar
+
+[33mcommit 42109c4666fe494562483df2e9d04ef92042b890[m
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Mon Nov 21 17:24:02 2016 -0400
+
+    Piezas y Aplicaciones
+
+[33mcommit 57233467e12dc36d870e565a1d955b1137d7c1af[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Mon Nov 21 17:21:56 2016 -0400
+
+    tipos de rif select
+
+[33mcommit 8e7668d4f800855c44a00aef50cd6613e9306e0c[m
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Mon Nov 21 17:18:44 2016 -0400
+
+    arreglo del checkbox cliente
+
+[33mcommit ecb98fb4e2d311a9d592b6b0a2e32cb8f3c53e82[m
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Mon Nov 21 16:40:02 2016 -0400
+
+    correciones del Responsable Cliente
+
+[33mcommit 07e22e548be1ca0796260cc0db405bdf043c4209[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Mon Nov 21 15:53:21 2016 -0400
+
+    listado de clientes
+
+[33mcommit ccfce25387b19c83e9ea6a0d48bc0db804cf5a9b[m
+Merge: 8109dab 4bf7afa
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Mon Nov 21 15:52:02 2016 -0400
+
+    Agregando boton de Vlver
+
+[33mcommit 8109dabf010e7e16905dc611ddbb8caa90e618a9[m
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Mon Nov 21 15:41:39 2016 -0400
+
+    Se Estructuro el Cliente Responsable
+
+[33mcommit 4bf7afa9d67177c2ce4e200dff765550970df319[m
+Merge: dcc43da 47b4b87
+Author: toio <angel.toyo@solincamfer.com>
+Date:   Mon Nov 21 14:58:03 2016 -0400
+
+    Subiendo validaciones de formularios de clientes
+
+[33mcommit dcc43daef2d3f00e2ef35dd1440873bf85d4c90d[m
+Author: toio <angel.toyo@solincamfer.com>
+Date:   Mon Nov 21 14:42:07 2016 -0400
+
+    Cliente validado 100%
+
+[33mcommit 47b4b874bb5a0458edb3348fcd6590d6f4679d44[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Mon Nov 21 14:41:28 2016 -0400
+
+    cambio de nombre a las carpetas
+
+[33mcommit 1ec7e748cbc29f28ad3683c74f81c53e7aa48c68[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Mon Nov 21 13:24:23 2016 -0400
+
+    modelos y migraciones relacionadas a cliente matriz
+
+[33mcommit 0f74e0a7ceab2cfe857998d4c8974ca1a744c4d5[m
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Mon Nov 21 11:06:26 2016 -0400
+
+    Correccion de errores Cliente_responsable
+
+[33mcommit c743a678165e9d5197e2134e6cd9b0a27cb294b5[m
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Mon Nov 21 11:01:05 2016 -0400
+
+    Modificacion a Cliente Responsable
+
+[33mcommit 67aba8fe7babc4a492bc13a41cc0e5c2d8582398[m
+Author: toio <angel.toyo@solincamfer.com>
+Date:   Mon Nov 21 09:59:16 2016 -0400
+
+    Eliminar mensaje de alerta
+
+[33mcommit 54bd66f7bb5f907fba9ec5e20cb4ec2e565a5f83[m
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Mon Nov 21 00:33:46 2016 -0400
+
+    Tooltip y rediseño del boton agregar
+    
+    Se creo el tooltip para los iconos y se rediseño el boton agregar, y el
+    diseño para incluir el boton atras.
+
+[33mcommit 281b934bc0c089b4e9f43d7b5a90b392cc9e4b08[m
+Merge: 5398091 659de0d
+Author: toio <angel.toyo@solincamfer.com>
+Date:   Sun Nov 20 23:21:11 2016 -0400
+
+    Merge remote-tracking branch 'origin/master'
+    
+    # Conflicts:
+    #	resources/views/Registros
+    Basicos/Clientes/clientes_sucursales.blade.php
+
+[33mcommit 5398091a753d12891ad445d22320639bb920e600[m
+Author: toio <angel.toyo@solincamfer.com>
+Date:   Sun Nov 20 23:18:31 2016 -0400
+
+    Modificaciones cliente
+
+[33mcommit eb177508892274ee7096e1c6f339e096975bc1c9[m
+Author: toio <angel.toyo@solincamfer.com>
+Date:   Sun Nov 20 23:18:01 2016 -0400
+
+    Validaciones clientes
+
+[33mcommit 659de0d5f297b812bc36e78c4a1e1daee97d6adc[m
+Author: toio <angel.toyo@solincamfer.com>
+Date:   Sun Nov 20 22:38:35 2016 -0400
+
+    Sub modulo-Cliente-Validado
+    
+    Cliente Matriz
+    responsableMatriz
+    Categoria
+    resposableCategoria
+    Cliente Sucursal
+    responsableSucursal
+    Planes-Servicios
+    Equipos-Componentes
+    Usuarios
+
+[33mcommit 430d168d122f9b7768657796ca02f5ed994263b1[m
+Merge: c92e3b9 038a3c8
+Author: Vincen Yoel Santaella <vinrast@gmail.com>
+Date:   Sat Nov 19 21:30:35 2016 -0430
+
+    arreglando conflictos
+
+[33mcommit c92e3b9ca2f7b96d453a194126458ad221b41e0b[m
+Author: Vincen Yoel Santaella <vinrast@gmail.com>
+Date:   Sat Nov 19 21:25:47 2016 -0430
+
+    subiendo vista
+
+[33mcommit 038a3c824dd9f0ded02681ece948784d28ef81d8[m
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Fri Nov 18 17:14:25 2016 -0400
+
+    Vista Cliente arreglada
+    
+    Se le agrego la funcionalidad de modificar que despliegue otro modal, y
+    se arreglo el visual de modificar
+
+[33mcommit 1efc7de7b18cd66a1128f99e5b7481cb2525a79f[m
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Thu Nov 17 17:32:01 2016 -0400
+
+    Cambios Clientes
+    
+    Se agregaron a los botones para cada lista
+
+[33mcommit 5145710356f81ad0404fcba86774191acd571a64[m
+Author: toio <angel.toyo@solincamfer.com>
+Date:   Thu Nov 17 17:14:52 2016 -0400
+
+    ResponsableValidacion
+
+[33mcommit e3520e30f7af6d8a8de72530c302d19761793cad[m
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Thu Nov 17 14:02:15 2016 -0400
+
+    Diseño visual de Cargo y Departamento
+    
+    Se le agrego al diseño visual estilos al los inputs y selects
+
+[33mcommit 54dd97583924c9a8973f1334775934f35f1652d2[m
+Author: toio <angel.toyo@solincamfer.com>
+Date:   Thu Nov 17 13:34:41 2016 -0400
+
+    ClienteValidacionCompleta
+
+[33mcommit fd44b4760b6b6fb400df25926210ac03e904b818[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Thu Nov 17 13:03:32 2016 -0400
+
+    enrutado hasta: /sucursales/usuarios
+
+[33mcommit 0fcc77e1a9b6e027b96e89dd6fb3944df698f846[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Thu Nov 17 09:09:23 2016 -0400
+
+    reorganizacion de codigo  en controladores
+
+[33mcommit 0169334528ee73a370398cc0edee12e81eab538b[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Wed Nov 16 17:22:40 2016 -0400
+
+    Enrutado: hasta menu sucursales
+
+[33mcommit 62af4edaa90f078c04b66edd8262dd3ee65ed513[m
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Wed Nov 16 17:18:29 2016 -0400
+
+    Cambios Leves
+
+[33mcommit f5106bc6703ccd5654f864df527df0fa7256e0c0[m
+Author: toio <angel.toyo@solincamfer.com>
+Date:   Wed Nov 16 17:09:37 2016 -0400
+
+    modificacionValidacion
+
+[33mcommit 269c7475113391920539d6481ff08f002cf444a7[m
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Wed Nov 16 15:19:37 2016 -0400
+
+    Sucursal(Usuario, servicios, perfil)
+    
+    Se agregaron las vista de Usuarios, Servicios y perfiles
+
+[33mcommit d3376259553db7c020ba1de1260904dba5820cfc[m
+Author: toio <angel.toyo@solincamfer.com>
+Date:   Wed Nov 16 14:45:40 2016 -0400
+
+    Validacion-clienteMatriz
+
+[33mcommit ea3845a6aba3f11718a92912de5eb3a40003e9cf[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Wed Nov 16 14:15:04 2016 -0400
+
+    Clases para las acciones del modulo clientes/enlace side bar-clientes
+
+[33mcommit b2a5c0d9f8458bf2a702989ce4b3288cbd78daf4[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Wed Nov 16 10:43:05 2016 -0400
+
+    eliminacion de vista repetida
+
+[33mcommit 1c61568b8021f54c0b916c56dfb38727f85d39ab[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Wed Nov 16 10:39:56 2016 -0400
+
+    Agrupacion de vistas por carpetas
+
+[33mcommit deaaf055dc08d9100fdda5269efc0fabcb80e599[m
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Wed Nov 16 10:34:52 2016 -0400
+
+    Sucursales plan
+    
+    Se agrego la vista de palnes que poseen sucursales
+
+[33mcommit ef85870a90a3d6c20c796b441724375bdf4c60fb[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Tue Nov 15 17:37:23 2016 -0400
+
+    correcciones menores
+
+[33mcommit 18bd03cd1b41a20e76fe7503a89556c735c4655a[m
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Tue Nov 15 17:12:16 2016 -0400
+
+    Formularios Clientes
+    
+    Se agregaron los formularios de equipo y componentes
+
+[33mcommit 82b7b22094710da04735f1e710ed74e5d1836c29[m
+Author: toio <angel.toyo@solincamfer.com>
+Date:   Tue Nov 15 16:59:39 2016 -0400
+
+    Validacion
+    
+    departamentos-cargos-clientes
+
+[33mcommit e2db6a52a017360d1bd114000083ed91f199d1ec[m
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Tue Nov 15 15:00:02 2016 -0400
+
+    Nuevos Cambios
+    
+    Se realizaron cambios en rutas, archivos, y se agregaron formularios
+    categoria, responsable y sucursales
+
+[33mcommit fd423313914c82224913f54c1f3471798c5d60fd[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Tue Nov 15 12:17:52 2016 -0400
+
+    Rutas y modelos modulo clientes
+
+[33mcommit e79cc92521e2bd3d32465048f9fd3691ecb4c740[m
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Tue Nov 15 11:27:52 2016 -0400
+
+    Revision y correcciones de Responsable y cliente
+
+[33mcommit 04830f7d422af5373be05d7b91090d0409a687c2[m
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Tue Nov 15 11:13:13 2016 -0400
+
+    Responsable
+    
+    Se agrego el formulario para el responsable Cliente, sucursal y
+    categoria
+
+[33mcommit b59c015fb0e763f45d38c1d5534910c6a0c2e84c[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Tue Nov 15 09:35:13 2016 -0400
+
+    correccion menor en controlador de registros basicos
+
+[33mcommit 1d4887d2edc839a5f54d20a97e0cb7c4f1a8bf18[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Tue Nov 15 09:28:46 2016 -0400
+
+    Rutas de acciones para el modulo clientes
+
+[33mcommit 9d88aca791a04631a15c486b0f32e3fe092ee1f1[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Tue Nov 15 08:33:30 2016 -0400
+
+    modelos para las tablas de direcciones
+
+[33mcommit b0a43c86323c940033a52c2a54941a7e2d7cfdd8[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Mon Nov 14 10:21:21 2016 -0400
+
+    modificaciones menores en el controlador: Registros basicos
+
+[33mcommit 1e89c7cadf46114ce9a08eabc343b2b8e0785a94[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Sun Nov 13 20:35:34 2016 -0430
+
+    Acciones por perfil
+
+[33mcommit 900988f48f059b94d2d200da71aae65aff6c6037[m
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Fri Nov 11 17:10:59 2016 -0400
+
+    Planes y css planes, dpto, cgo
+    
+    Arreglo y se agrego planes
+
+[33mcommit d1b3502b90083bbb5dc466bd0db10deb92e25bca[m
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Fri Nov 11 16:59:40 2016 -0400
+
+    Departamento y cargo css dpto
+    
+    Se genero el contenido del departamento y cargo
+
+[33mcommit 86ddff20502da1149cb3eb245d2bd0e367121cf0[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Fri Nov 11 16:58:07 2016 -0400
+
+    ruta: planes
+
+[33mcommit b614eeb4236572831ff9fcd3ec477bc771035461[m
+Merge: 96625ef 3a76049
+Author: toio <angel.toyo@solincamfer.com>
+Date:   Fri Nov 11 16:53:07 2016 -0400
+
+    Merge remote-tracking branch 'origin/master'
+
+[33mcommit 96625ef3ef467f52a3cb10fe9ef46d562cabc3c6[m
+Author: toio <angel.toyo@solincamfer.com>
+Date:   Fri Nov 11 16:52:49 2016 -0400
+
+    Cliente validacion
+
+[33mcommit 3a760492a92edb2d921d8adfb92ae010d48dbcf2[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Fri Nov 11 15:18:27 2016 -0400
+
+    ruta : cargos
+
+[33mcommit d012f10983aeeb0d7d93bb4ee03010c76cf4baa3[m
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Fri Nov 11 12:48:42 2016 -0400
+
+    Arreglos de css
+
+[33mcommit ed7975805a5579a31e76eb8dcdf85fb71a0d2302[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Fri Nov 11 10:22:01 2016 -0400
+
+    Rutas departamentos
+
+[33mcommit 8295404e8328855a465a57d48fb2148b9dacbb7b[m
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Fri Nov 11 10:16:58 2016 -0400
+
+    Cliente
+    
+    Se agrego el contenido del formulario que va en el modal
+
+[33mcommit 44190289776847e2e23dee726e36adfd18b244ce[m
+Author: toio <angel.toyo@solincamfer.com>
+Date:   Thu Nov 10 16:09:36 2016 -0400
+
+    Ajustes css
+
+[33mcommit d97ce670d2b0f0425987030dda90af9b1da69152[m
+Author: toio <angel.toyo@solincamfer.com>
+Date:   Thu Nov 10 15:23:18 2016 -0400
+
+    Cambio footer
+
+[33mcommit 2ed0fd0058ef26f09afd84a6385714eff09ad7dc[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Thu Nov 10 15:15:10 2016 -0400
+
+    Carga de modulos y submodulos por perfil
+
+[33mcommit 060aac17539f4eb846ee9db933b88ea0bb0c6c25[m
+Author: toio <angel.toyo@solincamfer.com>
+Date:   Thu Nov 10 12:48:51 2016 -0400
+
+    Vista cliente
+
+[33mcommit f6019aa4b75156655a9f02c5871000635aa24da6[m
+Merge: 6e5ce96 f535e7b
+Author: toio <angel.toyo@solincamfer.com>
+Date:   Thu Nov 10 12:48:26 2016 -0400
+
+    Ajuste cliente
+    
+    # Conflicts:
+    #	resources/views/clientes.blade.php
+
+[33mcommit f535e7bf416ca64892f7a61e94c602a6d324b2d7[m
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Thu Nov 10 12:13:38 2016 -0400
+
+    Arreglo del listado
+    
+    Se arreglo el diseño visual de como se reflejan los listados
+
+[33mcommit 3b514fe898557a2749df5db29503a49875795018[m
+Author: Vincen Yoel Santaella <vinrast@gmail.com>
+Date:   Thu Nov 10 11:11:24 2016 -0430
+
+    base de datos
+
+[33mcommit 6e5ce96c463eddc8ceabe1e38731266cf7c55869[m
+Author: toio <angel.toyo@solincamfer.com>
+Date:   Thu Nov 10 11:01:06 2016 -0400
+
+    Login terminado
+
+[33mcommit 738e6be4ec5e97ad8efcd3c0896c292ed5a6484b[m
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Thu Nov 10 09:14:05 2016 -0400
+
+    Sidebar - Menu
+    
+    Arreglo del menu en el Sidebar
+
+[33mcommit f6294c4c50d80aa04016f3e8c788639aac069fd6[m
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Wed Nov 9 11:33:43 2016 -0400
+
+    Arreglo del acordeon del Sidebar
+    
+    Se arreglo y se rediseño el panel del menu sidebar.
+
+[33mcommit dfb943b13d4981a80809d7538f396d5968dcc1a1[m
+Author: toio <angel.toyo@solincamfer.com>
+Date:   Tue Nov 8 17:42:06 2016 -0400
+
+    Cambios clientes para modificaciones
+
+[33mcommit 20708495c631f3bb5794515cc91abee89a807b77[m
+Author: toio <angel.toyo@solincamfer.com>
+Date:   Tue Nov 8 17:24:02 2016 -0400
+
+    Vistas clientes
+
+[33mcommit b9eb455f4ea916c015a3b3ebc5f3fc2f9c72be37[m
+Author: toio <angel.toyo@solincamfer.com>
+Date:   Tue Nov 8 16:35:38 2016 -0400
+
+    Login completado ajax+controlador funcional
+
+[33mcommit 5ceea25111e9cfd69bc8b3a16c1b0d1590a09daa[m
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Tue Nov 8 12:28:47 2016 -0400
+
+    Inicio PSAD
+    
+    Estructura y acordeon
+
+[33mcommit ba87fb77b0a25c7058a168b93fc125e82f447d48[m
+Author: toio <angel.toyo@solincamfer.com>
+Date:   Mon Nov 7 17:11:35 2016 -0400
+
+    Cambios AJAX
+
+[33mcommit c700e286b893bdd4e27b7e38e77c144e6a7498f4[m
+Merge: 3060bbc 30b340c
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Mon Nov 7 14:25:52 2016 -0400
+
+    arreglando error en AJAX
+
+[33mcommit 3060bbc9ac052e10467923dad25ec5d5e7dcc133[m
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Mon Nov 7 13:58:22 2016 -0400
+
+    Login
+    
+    Se arreglo lo del boton inicio de sesion
+
+[33mcommit 30b340c8716cef6c23f61b95494bf92ad1250307[m
+Author: toio <angel.toyo@solincamfer.com>
+Date:   Mon Nov 7 13:27:52 2016 -0400
+
+    Ajuste del Ajax en login
+
+[33mcommit 082dc9251acef470f3022ac11829727783550dbf[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Mon Nov 7 13:15:32 2016 -0400
+
+    retorno de datos de la persona, creacion de ruta: /menu/modulos/sumodulos/clientes
+
+[33mcommit 6eb517b7d017deb5873433574e7d53901d120cee[m
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Fri Nov 4 15:56:05 2016 -0400
+
+    Inicio PSAD
+    
+    Reestructuracion de la estructura
+
+[33mcommit 94de4ba510f8d19887fa02c99d8c4b31fd5eb2da[m
+Author: toio <angel.toyo@solincamfer.com>
+Date:   Fri Nov 4 14:33:31 2016 -0400
+
+    mensajes ajax con tiempo de retardo mejorados
+
+[33mcommit 9310166bb6bc1ba2e456d825532d2c188ae3fb62[m
+Author: toio <angel.toyo@solincamfer.com>
+Date:   Fri Nov 4 13:38:56 2016 -0400
+
+    AJAX completado..
+    
+    Validacion con ajax en la vista de login para verificacion de usuario y
+    contraseña sin recarga de vista
+
+[33mcommit aa2188ddeb20c7b2dd804d954f0c000e91040f76[m
+Author: toio <angel.toyo@solincamfer.com>
+Date:   Fri Nov 4 10:06:56 2016 -0400
+
+    Sincronizando
+
+[33mcommit d9429fb577a0cbcca0a18aeb2f268445bc9fe65d[m
+Merge: 0a6eba1 083a163
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Fri Nov 4 09:57:19 2016 -0400
+
+    Login
+    
+    Modificar login
+
+[33mcommit 0a6eba15588e5a3b22de52984d37b54c8bd5c59b[m
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Fri Nov 4 09:55:01 2016 -0400
+
+    Login
+    
+    Reestructuracion del login
+
+[33mcommit 083a1637045e784d2ca21ef8e891e3353f90ab11[m
+Author: Vincen Yoel Santaella <vinrast@gmail.com>
+Date:   Thu Nov 3 17:04:08 2016 -0430
+
+    prueba
+
+[33mcommit 632cbad7e345cb1d0ef7803bf469fa2f2b4110da[m
+Author: toio <angel.toyo@solincamfer.com>
+Date:   Thu Nov 3 15:04:24 2016 -0400
+
+    Modificaciones validar AJAX
+
+[33mcommit a6cafb4748f039aa5cace00b987cbf00d1f9c29e[m
+Author: toio <angel.toyo@solincamfer.com>
+Date:   Thu Nov 3 14:04:56 2016 -0400
+
+    Adaptando validacion AJAX,PHP,MYSQL
+
+[33mcommit 0f76d25d2dbe86b978bc979f57886f0321c8a732[m
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Thu Nov 3 13:40:56 2016 -0400
+
+    arreglo de login
+
+[33mcommit f50c6bcdf47b14d07f03c3121279bba8834d42d5[m
+Merge: 6435d18 b887540
+Author: toio <angel.toyo@solincamfer.com>
+Date:   Thu Nov 3 13:39:18 2016 -0400
+
+    Merge branch 'master' of https://github.com/Solincamfer/PSAD
+
+[33mcommit b8875405cf481af92086e74bdb834355ad9272ab[m
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Thu Nov 3 13:15:28 2016 -0400
+
+    Reestructuracion del archivo style
+    
+    Se borro ese archivo que no se necesitaba
+
+[33mcommit 2d8af919d784663451da6da1508750978d9c7049[m
+Merge: d141b8e b6a40bd
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Thu Nov 3 13:13:53 2016 -0400
+
+    Merge remote-tracking branch 'origin/master'
+    
+    # Conflicts:
+    #	public/css/style.css
+    #	resources/views/login.blade.php
+    #	resources/views/redireccion.blade.php
+
+[33mcommit d141b8e5fda39c782a6b68fb36ca5d0c0697ea5b[m
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Thu Nov 3 13:09:54 2016 -0400
+
+    Modificacion Login e Inicio al sistema
+    
+    Se modifico y reestructuro el login del sistema, y la de inicio al
+    sistema
+
+[33mcommit 6435d18ef9c1b46230e56d9061fcdf635a2d4e03[m
+Author: toio <angel.toyo@solincamfer.com>
+Date:   Thu Nov 3 12:59:51 2016 -0400
+
+    Validacion AJAX
+
+[33mcommit b6a40bdf2ff331942b410f4ff042c5514f66f7de[m
+Merge: 4ef5a5e 35633d8
+Author: toio <angel.toyo@solincamfer.com>
+Date:   Thu Nov 3 12:44:04 2016 -0400
+
+    Merge remote-tracking branch 'origin/master'
+    
+    # Conflicts:
+    #	public/js/val.js
+    #	resources/views/login.blade.php
+    #	resources/views/redireccion.blade.php
+    #	routes/web.php
+
+[33mcommit 4ef5a5eb5d02fe2cc8095f56bc924e20835e7479[m
+Author: toio <angel.toyo@solincamfer.com>
+Date:   Thu Nov 3 12:37:26 2016 -0400
+
+    Validacion con AJAX
+
+[33mcommit 8ba35c780143873af36a8210d10026a9b2cb126d[m
+Author: toio <angel.toyo@solincamfer.com>
+Date:   Thu Nov 3 12:33:35 2016 -0400
+
+    Sincronizar
+    
+    acoplando proyecto con modificaciones para manejar mensajes en AJAX
+
+[33mcommit 35633d8ae775db724b8dcbabb0bebd96a4a0e7c2[m
+Merge: 3677359 50fea47
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Thu Nov 3 08:50:07 2016 -0400
+
+    Merge remote-tracking branch 'origin/master'
+    
+    # Conflicts:
+    #	resources/views/login.blade.php
+
+[33mcommit 3677359b17c7530461addbe6a7329219f7e63796[m
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Thu Nov 3 08:49:22 2016 -0400
+
+    prueba
+    
+    prueba
+
+[33mcommit 50fea47ed93ca182b8f1c1ab1c557068856b12aa[m
+Merge: a260919 44195e4
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Wed Nov 2 14:38:22 2016 -0400
+
+    Merge remote-tracking branch 'origin/master'
+    
+    # Conflicts:
+    #	routes/web.php
+
+[33mcommit 44195e471f5af24f265a636ddcb2fc21b09f51d8[m
+Author: Vincen Yoel Santaella <vinrast@gmail.com>
+Date:   Wed Nov 2 14:30:38 2016 -0430
+
+    revisando error de rutas
+
+[33mcommit a26091940ef9b8b6eb0688fb2bfd0ecf6f3619f3[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Wed Nov 2 14:37:43 2016 -0400
+
+    agregar
+
+[33mcommit f74b86d014e890e86ed515c8aadf8ebee677b4c9[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Wed Nov 2 14:36:10 2016 -0400
+
+    prueba
+
+[33mcommit 2e95f818ef0152043460af6a5e6ee72c056cde7a[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Wed Nov 2 12:58:37 2016 -0400
+
+    Haciendo commit de prueba
+
+[33mcommit 680fcc0ba41b563aea91814d3004b71d0ca57c06[m
+Merge: edd5780 7ee6473
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Wed Nov 2 12:51:34 2016 -0400
+
+    Merge remote-tracking branch 'origin/master'
+    
+    # Conflicts:
+    #	resources/views/redireccion.blade.php
+
+[33mcommit edd578089ba7a24859043c3bd1180c6a748be27f[m
+Merge: 694c653 119650b
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Wed Nov 2 12:39:26 2016 -0400
+
+    Merge remote-tracking branch 'origin/master'
+    
+    # Conflicts:
+    #	resources/views/login.blade.php
+
+[33mcommit 7ee6473d922a752223df25ebbeee9c233ad2fa43[m
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Wed Nov 2 12:34:10 2016 -0400
+
+    Inicio de Sesion al Sistema
+    
+    Estructura y funcionalidad del sistema una vez se inicia sesion
+
+[33mcommit 694c653a8a7f7f854769f964c5959dbec1dd070d[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Wed Nov 2 12:32:03 2016 -0400
+
+    consulta a la base de datos para el login
+
+[33mcommit 119650b3f93ae66f54df12541f14ec569bcc08b7[m
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Wed Nov 2 10:11:23 2016 -0400
+
+    Validacion Alert
+    
+    modificacion
+
+[33mcommit 4031effdba15f7335c5f57ea986e95ef347eaba5[m
+Merge: 4d0b628 499cd17
+Author: toio <angel.toyo@solincamfer.com>
+Date:   Wed Nov 2 10:06:56 2016 -0400
+
+    Modificaciones
+    
+    ajuste de proyecto
+
+[33mcommit 4d0b628da61afeebc09103c3ce28e94cc90099e1[m
+Author: toio <angel.toyo@solincamfer.com>
+Date:   Wed Nov 2 10:00:49 2016 -0400
+
+    Validaciones por campo
+    
+    Mensajes de alerta para validar
+
+[33mcommit 499cd17423c5c4e7b4be874e18177b92b1a3260c[m
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Wed Nov 2 09:57:53 2016 -0400
+
+    Validacion (Alert!!)
+    
+    Agregar alert mas esteticos para que se vea mas llamativo.
+
+[33mcommit aeeeb8ae876961af8027d8f5b47783b69d0eed90[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Tue Nov 1 17:07:43 2016 -0400
+
+    modelos y relaciones
+
+[33mcommit 057e4406095252220ef2fa77072f8a6dc61669e5[m
+Author: toio <angel.toyo@solincamfer.com>
+Date:   Tue Nov 1 17:07:57 2016 -0400
+
+    AlertasInicio
+    
+    Sañade el div de alerta al formulario
+
+[33mcommit d6048076b87d95f6aaab96af926d18c1959f16c5[m
+Author: toio <angel.toyo@solincamfer.com>
+Date:   Tue Nov 1 16:17:17 2016 -0400
+
+    ValidacionInicio
+    
+    Validaciones en campos y en botones.
+
+[33mcommit 430fe16c3b655c9a3e3a20fcf2bf7bc68a5239e5[m
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Tue Nov 1 15:48:49 2016 -0400
+
+    login
+    
+    prueba
+
+[33mcommit f744386e732317187dd615680219ce9641a45716[m
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Tue Nov 1 15:35:54 2016 -0400
+
+    Login
+    
+    Funcionalidad a los botones del login.
+
+[33mcommit e74a64afde7cfc7845caead7bd95c515a75655a2[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Tue Nov 1 14:52:42 2016 -0400
+
+    creacion de la ruta /login/verificar   , migraciones y modelos
+
+[33mcommit 28d0f92bc2ce68902866d94f197a74beb00fd309[m
+Author: toio <angel.toyo@solincamfer.com>
+Date:   Tue Nov 1 13:35:38 2016 -0400
+
+    login
+    
+    Modificacion en login, limpienda prueba de layout sidebar
+
+[33mcommit 8dcee6f19ab19eb7e48f35af67bdd7ec11072887[m
+Author: toio <angel.toyo@solincamfer.com>
+Date:   Tue Nov 1 13:32:35 2016 -0400
+
+    sidebar
+    
+    Modificacion en el moton del menu desplegable, logo en forma de barras
+
+[33mcommit a8d8fe1f8e8a7569b3663a1919654dfde83dcc39[m
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Tue Nov 1 13:31:24 2016 -0400
+
+    cambios al footer
+    
+    Se cambio el grillado para darle una mejor percepcion al footer
+
+[33mcommit 4f2e878fada75c2286a4cd89abb616b8f35e0c00[m
+Author: toio <angel.toyo@solincamfer.com>
+Date:   Tue Nov 1 13:12:34 2016 -0400
+
+    sidebar
+    
+    SE agrego layout referente al sidebar
+
+[33mcommit c99fff9baf96d6a7fbbb4b113b2427d35a8feea6[m
+Author: ricardovirguez <ricardo.virguez@solincamfer.com>
+Date:   Tue Nov 1 12:18:45 2016 -0400
+
+    Creación del Login
+    
+    Se creo el login, y se agregaron layouts, frameworks.
+
+[33mcommit 238e6f261e66ea74e6131483d868620bc21b912a[m
+Author: JocTayupo <josetayupo@gmail.com>
+Date:   Tue Nov 1 10:43:35 2016 -0400
+
+    Creando mi primera vista
+
+[33mcommit 0c21abf26d82ecc47e3cb6abba9d1244c177bde7[m
+Author: Vincen Yoel Santaella <vinrast@gmail.com>
+Date:   Tue Nov 1 08:59:42 2016 -0430
+
+    "cambiando archivos ignorados"
+
+[33mcommit 438905f816d03563541bb95bf74c551f5da949a3[m
+Author: Vincen Yoel Santaella <vinrast@gmail.com>
+Date:   Tue Nov 1 00:26:21 2016 -0430
+
+    Archivos de prueba
+
+[33mcommit 636a59b93c47751b2220ae92462a29f5ddfddb88[m
+Author: Vincen Yoel Santaella <vinrast@gmail.com>
+Date:   Tue Nov 1 00:18:57 2016 -0430
+
+    creando PSAD
+
+[33mcommit fc91ce7a80d537666940567fb262467569cdf8d9[m
+Author: Vincen Yoel Santaella <vinrast@gmail.com>
+Date:   Mon Oct 31 23:55:10 2016 -0430
+
+    Creando proyecto PSAD

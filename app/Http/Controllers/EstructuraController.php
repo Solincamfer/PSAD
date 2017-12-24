@@ -119,18 +119,77 @@ class EstructuraController extends Controller
 
 	}
 
-	public function buscarDepartamentos(){ //Obtener el id de la direccion y buscar departamentos, areas y cargos asociados.
-		$direccionId=\Request::get('data');
+	public function mostrarEstructuraDireccion(){ //Obtener el id de la direccion y buscar departamentos, areas y cargos asociados.
+		$argumento=\Request::get('data');
 		$datos=$this->cargar_header_sidebar_acciones();
 		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(1,2,3),4);
-		$query=\App\Departamento::where('director_id',$direccionId)->get();
-		$resultado=array(
-			'departamentos'=>view('Registros_Basicos.Departamentos.partials.listaDatos',$this->datos_vista(0,$acciones,$query)),
-			'areas'=>view('Registros_Basicos.Departamentos.partials.listaDatos',$this->datos_vista(0,$acciones,$query)),
-			'cargos'=>view('Registros_Basicos.Departamentos.partials.listaDatos',$this->datos_vista(0,$acciones,$query))
-		);
-		return $resultado;
+		if ($argumento[1]=='dep') {
+			$query=\App\Departamento::where('director_id',$argumento[0])->get();
+		}
+		elseif ($argumento[1]=='area') {
+			$query=\DB::table('areas')->join('departamentos','areas.departamento_id','=','departamentos.id')
+																->join('directores','departamentos.director_id','=','directores.id')
+																->select('areas.*')
+																->where('directores.id',$argumento[0])->get();
+		}
+		else {
+			$query=\DB::table('cargos')->join('areas','cargos.area_id','=','areas.id')
+																 ->join('departamentos','areas.departamento_id','=','departamentos.id')
+																 ->join('directores','departamentos.director_id','=','directores.id')
+																 ->select('cargos.*')
+																 ->where('directores.id',$argumento[0])->get();
+		}
+		return view('Registros_Basicos.Departamentos.partials.listaDatos',$this->datos_vista(0,$acciones,$query));
 	}
+
+	public function mostrarEstructuraTodos(){
+		$argumento=\Request::get('data');
+		$datos=$this->cargar_header_sidebar_acciones();
+		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(1,2,3),4);
+		if ($argumento[1]=='dep') {
+			$query=\App\Departamento::all();
+		}
+		elseif ($argumento[1]=='area') {
+			$query=\App\Area::all();
+		}
+		else {
+			$query=\App\Cargo::all();
+		}
+
+		return view('Registros_Basicos.Departamentos.partials.listaDatos',$this->datos_vista(0,$acciones,$query));
+	}
+	public Function buscarDepartamentos(){
+		$datos=$this->cargar_header_sidebar_acciones();
+		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(1,2,3),4);
+		$direccionId=\Request::get('data');
+		$query=\DB::table('departamentos')->join('directores','departamentos.director_id','=','directores.id')
+																			->select('departamentos.*')
+																			->where('directores.id',$direccionId)->get();
+		return view('Registros_Basicos.Departamentos.partials.listaDatos',$this->datos_vista(0,$acciones,$query));
+	}
+
+	public Function buscarAreas(){
+		$datos=$this->cargar_header_sidebar_acciones();
+		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(1,2,3),4);
+		$direccionId=\Request::get('data');
+		$query=\DB::table('areas')->join('departamentos','areas.departamento_id','=','departamentos.id')
+															->join('directores','departamentos.director_id','=','directores.id')
+															->select('areas.*')
+															->where('directores.id',$direccionId)->get();
+		return view('Registros_Basicos.Departamentos.partials.listaDatos',$this->datos_vista(0,$acciones,$query));
+	}
+	public function buscarCargos(){
+		$datos=$this->cargar_header_sidebar_acciones();
+		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(1,2,3),4);
+		$direccionId=\Request::get('data');
+		$query=\DB::table('cargos')->join('areas','cargos.area_id','=','areas.id')
+															 ->join('departamentos','areas.departamento_id','=','departamentos.id')
+															 ->join('directores','departamentos.director_id','=','directores.id')
+															 ->select('cargos.*')
+															 ->where('directores.id',$direccionId)->get();
+		return view('Registros_Basicos.Departamentos.partials.listaDatos',$this->datos_vista(0,$acciones,$query));
+	}
+
 
 
 	public function departamentos_ingresar()
