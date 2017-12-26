@@ -123,23 +123,34 @@ class EstructuraController extends Controller
 		$argumento=\Request::get('data');
 		$datos=$this->cargar_header_sidebar_acciones();
 		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(1,2,3),4);
+
 		if ($argumento[1]=='dep') {
+			$consulta=\App\Director::where('id',$argumento[0])->get();
 			$query=\App\Departamento::where('director_id',$argumento[0])->get();
+			return view('Registros_Basicos.Departamentos.partials.listaDatos',$this->datos_vista(0,$acciones,$consulta,$query));
 		}
 		elseif ($argumento[1]=='area') {
+			$consulta=\App\Departamento::where('director_id',$argumento[0])->get();
 			$query=\DB::table('areas')->join('departamentos','areas.departamento_id','=','departamentos.id')
-																->join('directores','departamentos.director_id','=','directores.id')
-																->select('areas.*')
-																->where('directores.id',$argumento[0])->get();
+									  ->join('directores','departamentos.director_id','=','directores.id')
+									  ->select('areas.*')
+									  ->where('directores.id',$argumento[0])->get();
+
+			return view('Registros_Basicos.Departamentos.partials.listarAreas',$this->datos_vista(0,$acciones,$consulta,$query));
 		}
 		else {
+			$consulta=\DB::table('areas')->join('departamentos','areas.departamento_id','=','departamentos.id')
+										 ->join('directores','departamentos.director_id','=','directores.id')
+										 ->select('areas.*')
+										 ->where('directores.id',$argumento[0])->get();
+
 			$query=\DB::table('cargos')->join('areas','cargos.area_id','=','areas.id')
-																 ->join('departamentos','areas.departamento_id','=','departamentos.id')
-																 ->join('directores','departamentos.director_id','=','directores.id')
-																 ->select('cargos.*')
-																 ->where('directores.id',$argumento[0])->get();
+									   ->join('departamentos','areas.departamento_id','=','departamentos.id')
+									   ->join('directores','departamentos.director_id','=','directores.id')
+									   ->select('cargos.*')
+									   ->where('directores.id',$argumento[0])->get();
+			return view('Registros_Basicos.Departamentos.partials.listarCargos',$this->datos_vista(0,$acciones,$consulta,$consulta,$query));
 		}
-		return view('Registros_Basicos.Departamentos.partials.listaDatos',$this->datos_vista(0,$acciones,$query));
 	}
 
 	public function mostrarEstructuraTodos(){
@@ -147,17 +158,31 @@ class EstructuraController extends Controller
 		$datos=$this->cargar_header_sidebar_acciones();
 		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(1,2,3),4);
 		if ($argumento[1]=='dep') {
+			$consulta=\DB::table('departamentos')->join('directores','departamentos.director_id','=','directores.id')
+								   			     ->select('directores.*')
+									             ->whereNotNull('departamentos.director_id')
+									             ->distinct()
+									             ->get();
 			$query=\App\Departamento::all();
+			return view('Registros_Basicos.Departamentos.partials.listaDatos',$this->datos_vista(0,$acciones,$consulta,$query));
 		}
 		elseif ($argumento[1]=='area') {
+			//$consulta=\App\Departamento::all();
+			$consulta=\DB::table('areas')->join('departamentos','areas.departamento_id','=','departamentos.id')
+								   			     ->select('departamentos.*')
+									             ->whereNotNull('areas.departamento_id')
+									             ->distinct()
+									             ->get();
 			$query=\App\Area::all();
+			return view('Registros_Basicos.Departamentos.partials.listarAreas',$this->datos_vista(0,$acciones,$consulta,$query));
 		}
 		else {
+			$consulta=\App\Area::all();
 			$query=\App\Cargo::all();
+			return view('Registros_Basicos.Departamentos.partials.listarCargos',$this->datos_vista(0,$acciones,$consulta,$query));
 		}
-
-		return view('Registros_Basicos.Departamentos.partials.listaDatos',$this->datos_vista(0,$acciones,$query));
 	}
+
 	public Function buscarDepartamentos(){
 		$datos=$this->cargar_header_sidebar_acciones();
 		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(1,2,3),4);

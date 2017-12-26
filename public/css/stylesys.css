@@ -1009,7 +1009,15 @@ input[type = "radio"] {
 }
 
 /*Departamento, Cargo*/
-
+.titulo-registros{
+    margin-top:5px;
+    color:#fff;
+    font-size: 20px;
+    padding: 5px;
+    text-align: center;
+    background-color: rgba(38, 166, 157,0.7);
+    border-radius: 5px;
+}
 #dpto input, #dpto select, #cgo input, #cgo select,
 #dptom input, #dptom select, #cgom input, #cgom select{
     display: block;
