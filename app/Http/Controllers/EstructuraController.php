@@ -111,11 +111,16 @@ class EstructuraController extends Controller
 		$datos=$this->cargar_header_sidebar_acciones();
 		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(1,2,3),4);
 		$direcciones= \App\Director::all();
+		$direccionesf=\DB::table('departamentos')->join('directores','departamentos.director_id','=','directores.id')
+								   			     ->select('directores.*')
+									             ->whereNotNull('departamentos.director_id')
+									             ->distinct()
+									             ->get();
 		$departamentos=\App\Departamento::all();
 		$areas=\App\Area::all();
 		$cargos=\App\Cargo::all();
 
-		return view('Registros_Basicos.Departamentos.departamentos',$this->datos_vista($datos,$acciones,$direcciones,$departamentos,$areas,$cargos));
+		return view('Registros_Basicos.Departamentos.departamentos',$this->datos_vista($datos,$acciones,$direcciones,$departamentos,$areas,$cargos,$direccionesf));
 
 	}
 
@@ -125,12 +130,23 @@ class EstructuraController extends Controller
 		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(1,2,3),4);
 
 		if ($argumento[1]=='dep') {
-			$consulta=\App\Director::where('id',$argumento[0])->get();
+			$consulta=\DB::table('departamentos')->join('directores','departamentos.director_id','=','directores.id')
+								   			     ->select('directores.*')
+								   			     ->where('directores.id',$argumento[0])
+									             ->whereNotNull('departamentos.director_id')
+									             ->distinct()
+									             ->get();
 			$query=\App\Departamento::where('director_id',$argumento[0])->get();
 			return view('Registros_Basicos.Departamentos.partials.listaDatos',$this->datos_vista(0,$acciones,$consulta,$query));
 		}
 		elseif ($argumento[1]=='area') {
-			$consulta=\App\Departamento::where('director_id',$argumento[0])->get();
+			$consulta=\DB::table('areas')->join('departamentos','areas.departamento_id','=','departamentos.id')
+										 ->join('directores','departamentos.director_id','=','directores.id')
+						   			     ->select('departamentos.*')
+						   			     ->where('directores.id',$argumento[0])
+							             ->whereNotNull('areas.departamento_id')
+							             ->distinct()
+							             ->get();
 			$query=\DB::table('areas')->join('departamentos','areas.departamento_id','=','departamentos.id')
 									  ->join('directores','departamentos.director_id','=','directores.id')
 									  ->select('areas.*')
@@ -139,21 +155,26 @@ class EstructuraController extends Controller
 			return view('Registros_Basicos.Departamentos.partials.listarAreas',$this->datos_vista(0,$acciones,$consulta,$query));
 		}
 		else {
-			$consulta=\DB::table('areas')->join('departamentos','areas.departamento_id','=','departamentos.id')
-										 ->join('directores','departamentos.director_id','=','directores.id')
-										 ->select('areas.*')
-										 ->where('directores.id',$argumento[0])->get();
+			$consulta=\DB::table('cargos')->join('areas','cargos.area_id','=','areas.id')
+										  ->join('departamentos','areas.departamento_id','=','departamentos.id')
+										  ->join('directores','departamentos.director_id','=','directores.id')
+						   			      ->select('areas.*')
+						   			      ->where('directores.id',$argumento[0])
+							              ->whereNotNull('cargos.area_id')
+							              ->distinct()
+							              ->get();
 
 			$query=\DB::table('cargos')->join('areas','cargos.area_id','=','areas.id')
 									   ->join('departamentos','areas.departamento_id','=','departamentos.id')
 									   ->join('directores','departamentos.director_id','=','directores.id')
 									   ->select('cargos.*')
 									   ->where('directores.id',$argumento[0])->get();
-			return view('Registros_Basicos.Departamentos.partials.listarCargos',$this->datos_vista(0,$acciones,$consulta,$consulta,$query));
+			return view('Registros_Basicos\Departamentos\partials\listarCargos',$this->datos_vista(0,$acciones,$consulta,$query));
 		}
 	}
 
-	public function mostrarEstructuraTodos(){
+
+	public function mostrarEstructuraTodos(){ // METODO UTILIZADO PARA MOSTRAR TODOS LOS REGISTROS EN CASO QUE NO SE SELECCIONE NINGUNA 											 DIRECCION, DEPENDIENDO DE LA PESTAÑA QUE ESTE ACTIVA
 		$argumento=\Request::get('data');
 		$datos=$this->cargar_header_sidebar_acciones();
 		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(1,2,3),4);
@@ -167,7 +188,6 @@ class EstructuraController extends Controller
 			return view('Registros_Basicos.Departamentos.partials.listaDatos',$this->datos_vista(0,$acciones,$consulta,$query));
 		}
 		elseif ($argumento[1]=='area') {
-			//$consulta=\App\Departamento::all();
 			$consulta=\DB::table('areas')->join('departamentos','areas.departamento_id','=','departamentos.id')
 								   			     ->select('departamentos.*')
 									             ->whereNotNull('areas.departamento_id')
@@ -177,7 +197,11 @@ class EstructuraController extends Controller
 			return view('Registros_Basicos.Departamentos.partials.listarAreas',$this->datos_vista(0,$acciones,$consulta,$query));
 		}
 		else {
-			$consulta=\App\Area::all();
+			$consulta=\DB::table('cargos')->join('areas','cargos.area_id','=','areas.id')
+								   			     ->select('areas.*')
+									             ->whereNotNull('cargos.area_id')
+									             ->distinct()
+									             ->get();
 			$query=\App\Cargo::all();
 			return view('Registros_Basicos.Departamentos.partials.listarCargos',$this->datos_vista(0,$acciones,$consulta,$query));
 		}
@@ -188,15 +212,26 @@ class EstructuraController extends Controller
 		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(1,2,3),4);
 		$direccionId=\Request::get('data');
 		if ($direccionId!=0) {
+			$consulta=\DB::table('departamentos')->join('directores','departamentos.director_id','=','directores.id')
+								   			     ->select('directores.*')
+								   			     ->where('directores.id',$direccionId)
+									             ->whereNotNull('departamentos.director_id')
+									             ->distinct()
+									             ->get();
 			$query=\DB::table('departamentos')->join('directores','departamentos.director_id','=','directores.id')
-																				->select('departamentos.*')
-																				->where('directores.id',$direccionId)->get();
+											  ->select('departamentos.*')
+											  ->where('directores.id',$direccionId)->get();
 		}
 		else {
+			$consulta=\DB::table('departamentos')->join('directores','departamentos.director_id','=','directores.id')
+								   			     ->select('directores.*')
+									             ->whereNotNull('departamentos.director_id')
+									             ->distinct()
+									             ->get();
 			$query=\App\Departamento::all();
 		}
 
-		return view('Registros_Basicos.Departamentos.partials.listaDatos',$this->datos_vista(0,$acciones,$query));
+		return view('Registros_Basicos.Departamentos.partials.listaDatos',$this->datos_vista(0,$acciones,$consulta,$query));
 	}
 
 	public Function buscarAreas(){
@@ -204,21 +239,41 @@ class EstructuraController extends Controller
 		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(1,2,3),4);
 		$direccionId=\Request::get('data');
 		if ($direccionId==0) {
+			$consulta=\DB::table('areas')->join('departamentos','areas.departamento_id','=','departamentos.id')
+								   			     ->select('departamentos.*')
+									             ->whereNotNull('areas.departamento_id')
+									             ->distinct()
+									             ->get();
 			$query=\App\Area::all();
 		}
 		else {
+			$consulta=\DB::table('areas')->join('departamentos','areas.departamento_id','=','departamentos.id')
+										 ->join('directores','departamentos.director_id','=','directores.id')
+						   			     ->select('departamentos.*')
+						   			     ->where('directores.id',$direccionId)
+							             ->whereNotNull('areas.departamento_id')
+							             ->distinct()
+							             ->get();
 			$query=\DB::table('areas')->join('departamentos','areas.departamento_id','=','departamentos.id')
 																->join('directores','departamentos.director_id','=','directores.id')
 																->select('areas.*')
 																->where('directores.id',$direccionId)->get();
 		}
-		return view('Registros_Basicos.Departamentos.partials.listaDatos',$this->datos_vista(0,$acciones,$query));
+		return view('Registros_Basicos.Departamentos.partials.listarAreas',$this->datos_vista(0,$acciones,$consulta,$query));
 	}
 	public function buscarCargos(){
 		$datos=$this->cargar_header_sidebar_acciones();
 		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(1,2,3),4);
 		$direccionId=\Request::get('data');
 		if ($direccionId!=0) {
+			$consulta=\DB::table('cargos')->join('areas','cargos.area_id','=','areas.id')
+										  ->join('departamentos','areas.departamento_id','=','departamentos.id')
+										  ->join('directores','departamentos.director_id','=','directores.id')
+						   			      ->select('areas.*')
+						   			      ->where('directores.id',$direccionId)
+							              ->whereNotNull('cargos.area_id')
+							              ->distinct()
+							              ->get();
 			$query=\DB::table('cargos')->join('areas','cargos.area_id','=','areas.id')
 																 ->join('departamentos','areas.departamento_id','=','departamentos.id')
 																 ->join('directores','departamentos.director_id','=','directores.id')
@@ -226,10 +281,15 @@ class EstructuraController extends Controller
 																 ->where('directores.id',$direccionId)->get();
 		}
 		else {
+			$consulta=\DB::table('cargos')->join('areas','cargos.area_id','=','areas.id')
+								   			     ->select('areas.*')
+									             ->whereNotNull('cargos.area_id')
+									             ->distinct()
+									             ->get();
 			$query=\App\Cargo::all();
 		}
 
-		return view('Registros_Basicos.Departamentos.partials.listaDatos',$this->datos_vista(0,$acciones,$query));
+		return view('Registros_Basicos.Departamentos.partials.listarCargos',$this->datos_vista(0,$acciones,$consulta,$query));
 	}
 
 

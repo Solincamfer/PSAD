@@ -3,7 +3,7 @@
           <label>{{$area->descripcion}}</label>
         </div>
         @foreach($extra as $cargo)
-            @if($cargo->$area_id == $area->id)
+            @if($cargo->area_id == $area->id)
                 <div class="contMd">
 
                     <div class="icl">

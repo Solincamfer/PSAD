@@ -8,7 +8,7 @@ class Cargo extends Model
 {
     public $timestamps=false;
     protected $table="cargos";
-    protected $fillable=['id','status','area_id','descripcion'];
+    //protected $fillable=['id','status','area_id','descripcion'];
 
 
 

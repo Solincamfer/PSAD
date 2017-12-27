@@ -68,7 +68,7 @@
                                     </div>
                                 </div>
                                 <div class="contRegister contDep" id="contDep">
-                                @foreach($consulta as $director)
+                                @foreach($datosC3 as $director)
                                     <div class="titulo-registros">
                                       <label>{{$director->descripcion}}</label>
                                     </div>
