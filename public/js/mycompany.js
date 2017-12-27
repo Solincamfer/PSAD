@@ -19,14 +19,12 @@ $(document).ready(function(){
     }
   });
   $('#nav-area').on("click",function(){
-    var selected = '';
-    $('#contDep .filtro input:checkbox:checked').each(function(){
-      alert($(this).val());
+    var selected = new Array();
+    $('#contDep .filtro input:checkbox:checked').each(function(index){
+      selected[index]= $(this).val();
     });
-
-
-
-    var data=$('#comboDireccion').val();
+    var direccion=$('#comboDireccion').val();
+    var data =[direccion,selected];
     url="/menu/registros/estructura/buscarAreas";
     $.get(url,{data:data},function(respuesta){
       $('.contArea').empty();

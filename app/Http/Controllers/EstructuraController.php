@@ -237,30 +237,47 @@ class EstructuraController extends Controller
 	public Function buscarAreas(){
 		$datos=$this->cargar_header_sidebar_acciones();
 		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(1,2,3),4);
-		$direccionId=\Request::get('data');
-		if ($direccionId==0) {
-			$consulta=\DB::table('areas')->join('departamentos','areas.departamento_id','=','departamentos.id')
-								   			     ->select('departamentos.*')
-									             ->whereNotNull('areas.departamento_id')
-									             ->distinct()
-									             ->get();
-			$query=\App\Area::all();
+		$data=\Request::get('data');
+		if(empty($data[1])){
+			if ($data[0]==0) {
+				$consulta=\DB::table('areas')->join('departamentos','areas.departamento_id','=','departamentos.id')
+									   			     ->select('departamentos.*')
+										             ->whereNotNull('areas.departamento_id')
+										             ->distinct()
+										             ->get();
+				$query=\App\Area::all();
+			}
+			else {
+				$consulta=\DB::table('areas')->join('departamentos','areas.departamento_id','=','departamentos.id')
+											 ->join('directores','departamentos.director_id','=','directores.id')
+							   			     ->select('departamentos.*')
+							   			     ->where('directores.id',$data[0])
+								             ->whereNotNull('areas.departamento_id')
+								             ->distinct()
+								             ->get();
+				$query=\DB::table('areas')->join('departamentos','areas.departamento_id','=','departamentos.id')
+																	->join('directores','departamentos.director_id','=','directores.id')
+																	->select('areas.*')
+																	->where('directores.id',$data[0])->get();
+			}
 		}
-		else {
-			$consulta=\DB::table('areas')->join('departamentos','areas.departamento_id','=','departamentos.id')
-										 ->join('directores','departamentos.director_id','=','directores.id')
-						   			     ->select('departamentos.*')
-						   			     ->where('directores.id',$direccionId)
-							             ->whereNotNull('areas.departamento_id')
-							             ->distinct()
-							             ->get();
-			$query=\DB::table('areas')->join('departamentos','areas.departamento_id','=','departamentos.id')
-																->join('directores','departamentos.director_id','=','directores.id')
-																->select('areas.*')
-																->where('directores.id',$direccionId)->get();
+		else{
+			$consulta=array();
+			$longitud=count($data[1]);
+			$filtro=array();
+			for ($i=0; $i<$longitud; $i++) { 
+				$consulta[]=\DB::table('areas')->where('departamento_id',$data[1][$i])->get();
+			}
+			for ($i=0; $i <$longitud; $i++) { 
+				if(count($consulta[$i])!=''){
+					$filtro[]=$consulta[$i];
+				}
+			}
 		}
-		return view('Registros_Basicos.Departamentos.partials.listarAreas',$this->datos_vista(0,$acciones,$consulta,$query));
+			
+	return dd($filtro);
 	}
+
 	public function buscarCargos(){
 		$datos=$this->cargar_header_sidebar_acciones();
 		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(1,2,3),4);
