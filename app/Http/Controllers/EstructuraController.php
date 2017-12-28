@@ -238,6 +238,7 @@ class EstructuraController extends Controller
 		$datos=$this->cargar_header_sidebar_acciones();
 		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(1,2,3),4);
 		$data=\Request::get('data');
+		$parametro = 0;
 		if(empty($data[1])){
 			if ($data[0]==0) {
 				$consulta=\DB::table('areas')->join('departamentos','areas.departamento_id','=','departamentos.id')
@@ -262,32 +263,43 @@ class EstructuraController extends Controller
 			}
 		}
 		else{
-			$consulta=array();
+			$areas=array();
 			$longitud=count($data[1]);
-			$filtro=array();
+			$query=array();
+			$departamentos=array();
+			$consulta=array();
+			$parametro=1;
 			for ($i=0; $i<$longitud; $i++) { 
-				$consulta[]=\DB::table('areas')->where('departamento_id',$data[1][$i])->get();
-			}
-			for ($i=0; $i <$longitud; $i++) { 
-				if(count($consulta[$i])!=''){
-					$filtro[]=$consulta[$i];
+				$areas[]=\DB::table('areas')->where('departamento_id',$data[1][$i])->get();
+				if(count($areas[$i])!=''){
+					$query[]=$areas[$i];
+				}
+				$departamentos[]=\DB::table('areas')->join('departamentos','areas.departamento_id','=','departamentos.id')
+							   			     ->select('departamentos.*')
+							   			     ->where('areas.departamento_id',$data[1][$i])
+							   			     ->distinct()
+								             ->get();
+				if(count($departamentos[$i])!=''){
+					$consulta[]=$departamentos[$i];
 				}
 			}
 		}
 			
-	return dd($filtro);
+	return view('Registros_Basicos.Departamentos.partials.listarAreas',$this->datos_vista(0,$acciones,$consulta,$query,$parametro));
 	}
 
 	public function buscarCargos(){
 		$datos=$this->cargar_header_sidebar_acciones();
 		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(1,2,3),4);
-		$direccionId=\Request::get('data');
-		if ($direccionId!=0) {
+		$data=\Request::get('data');
+		$parametro=0;
+		if(empty($data[1]) && empty($data[2])){
+			if ($data[0]!=0) {
 			$consulta=\DB::table('cargos')->join('areas','cargos.area_id','=','areas.id')
 										  ->join('departamentos','areas.departamento_id','=','departamentos.id')
 										  ->join('directores','departamentos.director_id','=','directores.id')
 						   			      ->select('areas.*')
-						   			      ->where('directores.id',$direccionId)
+						   			      ->where('directores.id',$data[0])
 							              ->whereNotNull('cargos.area_id')
 							              ->distinct()
 							              ->get();
@@ -295,18 +307,70 @@ class EstructuraController extends Controller
 																 ->join('departamentos','areas.departamento_id','=','departamentos.id')
 																 ->join('directores','departamentos.director_id','=','directores.id')
 																 ->select('cargos.*')
-																 ->where('directores.id',$direccionId)->get();
+																 ->where('directores.id',$data[0])->get();
+			}
+			else {
+				$consulta=\DB::table('cargos')->join('areas','cargos.area_id','=','areas.id')
+									   			     ->select('areas.*')
+										             ->whereNotNull('cargos.area_id')
+										             ->distinct()
+										             ->get();
+				$query=\App\Cargo::all();
+			}
 		}
-		else {
-			$consulta=\DB::table('cargos')->join('areas','cargos.area_id','=','areas.id')
+		else{
+			if ($data[2]!=0) {
+				$cargos=array();
+				$longitud=count($data[2]);
+				$query=array();
+				$areas=array();
+				$consulta=array();
+				$parametro=1;
+				for ($i=0; $i<$longitud; $i++) { 
+					$cargos[]=\DB::table('cargos')->where('area_id',$data[2][$i])->get();
+					if(count($cargos[$i])!=''){
+						$query[]=$cargos[$i];
+					}
+					$areas[]=\DB::table('cargos')->join('areas','cargos.area_id','=','areas.id')
 								   			     ->select('areas.*')
-									             ->whereNotNull('cargos.area_id')
-									             ->distinct()
+								   			     ->where('cargos.area_id',$data[2][$i])
+								   			     ->distinct()
 									             ->get();
-			$query=\App\Cargo::all();
+					if(count($cargos[$i])!=''){
+						$consulta[]=$areas[$i];
+					}				}
+			}
+			elseif(empty($data[2])){
+				$cargos=array();
+				$longitud=count($data[2]);
+				$query=array();
+				$areas=array();
+				$consulta=array();
+				$parametro=1;
+				for ($i=0; $i<$longitud; $i++) { 
+					$cargos[]=\DB::table('cargos')->join('areas','cargos.area_id','=','areas.id')
+												  ->join('departamentos','areas.departamento_id','departamentos.id')
+												  ->select('cargos.*')
+												  ->where('areas.departamento_id',$data[1][$i])
+												  ->get();
+					if(count($cargos[$i])!=''){
+						$query[]=$cargos[$i];
+					}
+					$areas[]=\DB::table('cargos')->join('areas','cargos.area_id','=','areas.id')
+												 ->join('departamentos','areas.departamento_id','departamentos.id')
+								   			     ->select('areas.*')
+								   			     ->where('areas.departamento_id',$data[1][$i])
+								   			     ->distinct()
+									             ->get();
+					if(count($cargos[$i])!=''){
+						$consulta[]=$areas[$i];
+					}
+				}
+			}
 		}
 
-		return view('Registros_Basicos.Departamentos.partials.listarCargos',$this->datos_vista(0,$acciones,$consulta,$query));
+	//return dd($data[2]);
+	return view('Registros_Basicos.Departamentos.partials.listarCargos',$this->datos_vista(0,$acciones,$consulta,$query,$parametro));
 	}
 
 

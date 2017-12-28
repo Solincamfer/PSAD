@@ -1,4 +1,5 @@
 $(document).ready(function(){
+
   $('#comboDireccion').on("change",function(){
     var id=$(this).val();
     var activo=$('.active').data('valor');
@@ -18,6 +19,18 @@ $(document).ready(function(){
       });
     }
   });
+
+  $('#nav-dep').on("click",function(){
+    
+    var data =$('#comboDireccion').val();
+    url="/menu/registros/estructura/buscarDepartamentos";
+    $.get(url,{data:data},function(respuesta){
+      $('.contDep').empty();
+      $('.contDep').append(respuesta);
+    });
+  });
+  
+
   $('#nav-area').on("click",function(){
     var selected = new Array();
     $('#contDep .filtro input:checkbox:checked').each(function(index){
@@ -32,16 +45,22 @@ $(document).ready(function(){
     });
   });
 
-  $('#nav-dep').on("click",function(){
-    var data =$('#comboDireccion').val();
-    url="/menu/registros/estructura/buscarDepartamentos";
-    $.get(url,{data:data},function(respuesta){
-      $('.contDep').empty();
-      $('.contDep').append(respuesta);
-    });
-  });
+
   $('#nav-cargo').on("click",function(){
-    var data =$('#comboDireccion').val();
+    var departamentos = new Array();
+    var areas = new Array();
+    $('#contDep .filtro input:checkbox:checked').each(function(index){
+      departamentos[index]= $(this).val();
+    });
+    $('#areas:checked').each(function(index) {
+      areas[index]=$(this).val();
+    });
+    if (areas.length==0) {
+      areas = 0;
+    }
+    console.log(areas);
+    var direccion =$('#comboDireccion').val();
+    var data=[direccion,departamentos,areas];
     url="/menu/registros/estructura/buscarCargos";
     $.get(url,{data:data},function(respuesta){
       $('.contCarg').empty();
