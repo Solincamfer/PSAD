@@ -23,7 +23,7 @@
 
                         </div>
                         <div class="col-md-4" style="padding-top: 20px; padding-left: 0px;">
-                           <h1><a data-toggle="modal" data-target="#myModall" href="#myModal">Direcciones</a></h1>
+                           <h1><a data-toggle="modal" data-target="#myModall" href="#myModal" id="link-direcciones">Direcciones</a></h1>
                         </div>
                         <div class="col-md-4">
                             @if($agregar)
@@ -62,21 +62,21 @@
 
                                             <div class="icl">
                                                 @foreach($acciones as $accion)
-                                                    @if($accion->id!=1 )
-                                                        @if($accion->id==2)
+                                                    @if($accion->id!=94 )
+                                                        @if($accion->id==95)
                                                             <span class="iclsp">
                                                                 <a  class="tltp ModificaR" data-reg="{{$departamento->id}}" id="ModificaDepar{{$departamento->id}}" data-ttl="{{$accion->descripcion}}" data-toggle="modal" >
                                                                     <i class="{{$accion->clase_css}}"></i>
                                                                 </a>
                                                             </span>
-                                                        @elseif($accion->id==3)
+                                                        @elseif($accion->id==96)
                                                             <span class="iclsp">
                                                                 <a href="{{$accion->url.$departamento->id}}" class="tltp"  data-ttl="{{$accion->descripcion}}">
                                                                     <i class="{{$accion->clase_css}}"></i>
                                                                 </a>
                                                             </span>
                                                         @endif
-                                                    @elseif($accion->id==1 )
+                                                    @elseif($accion->id==94 )
                                                         @if($departamento->status==1)
                                                             <div class="chbx">
                                                                 <input type="checkbox" class="btnAcc" name="status" id="{{'inchbx'. $departamento->id}}" value="{{$departamento->status}}" checked><label for="{{'inchbx'. $departamento->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
@@ -139,21 +139,21 @@
                                 <h4 class="modal-title" id="myModalLabel"><strong>Agregar Dirección</strong></h4>
                             </div>
                             <div class="modal-body">
-                                <form method="post" class="form-horizontal DepCarPer" id="NewDep">
+                                <form method="post" class="form-horizontal " id="nuevaDireccion">
                                     {{ csrf_field() }}
                                     <div class="container-fluid" id="contdpto">
                                         <div class="row">
                                             <div id="dpto">
                                                <div class="col-md-8 col-md-offset-2">
                                                    <div class="form-group row">
-                                                       <label for="nomDpto">Nombre de la Dirección</label>
-                                                       <input type="text" name="textDpto" class="form-control " id="nomDpto"/><i class="fa fa-briefcase" id="icdp1"></i>
+                                                       <label for="nomDireccion">Nombre de la Dirección</label>
+                                                       <input type="text" name="direccion" class="form-control " id="nomDireccion"/><i class="fa fa-briefcase" id="icdp1"></i>
                                                    </div>
                                                </div>
                                                <div class="col-md-8 col-md-offset-2">
                                                    <div class="form-group row">
-                                                       <label for="stDpto">Estatus de la Dirección</label><span class="ic"><i class="fa fa-chevron-down"></i></span>
-                                                       <select name="comboDpto" class="form-control" id="stDpto">
+                                                       <label for="stDireccion">Estatus de la Dirección</label><span class="ic"><i class="fa fa-chevron-down"></i></span>
+                                                       <select name="comboDireccion" class="form-control" id="stDireccion">
                                                             <option value="">-</option>
                                                             <option value="1">ACTIVO</option>
                                                             <option value="0">INACTIVO</option>
@@ -164,7 +164,7 @@
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="submit" class="bttnMd" id="btnSv">Guardar <i class="fa fa-floppy-o"></i></button>
+                                        <button type="submit" id="button-save" class="bttnMd">Guardar <i class="fa fa-floppy-o"></i></button>
                                     </div>
                                 </form>
                             </div>
@@ -181,7 +181,7 @@
                                 <h4 class="modal-title" id="myModalLabel"><strong>Lista de Direcciones</strong></h4>
                             </div>
                             <div class="modal-body">
-                                <div class="contRegister">
+                                <div class="contRegisterDireccion">
                                 @foreach($consulta as $direccion)
 
                                     <div class="contMd">

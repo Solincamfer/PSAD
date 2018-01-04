@@ -109,7 +109,7 @@ class EstructuraController extends Controller
 	public function departamentos()//ventana principal de Estructura
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
-		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(1,2,3),4);
+		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(1,2,3,94,95,96),4);
 		$direcciones= \App\Director::all();
 		$direccionesf=\DB::table('departamentos')->join('directores','departamentos.director_id','=','directores.id')
 								   			     ->select('directores.*')
@@ -338,7 +338,8 @@ class EstructuraController extends Controller
 									             ->get();
 					if(count($cargos[$i])!=''){
 						$consulta[]=$areas[$i];
-					}				}
+					}				
+				}
 			}
 			elseif(empty($data[2])){
 				$cargos=array();
@@ -372,8 +373,32 @@ class EstructuraController extends Controller
 	//return dd($data[2]);
 	return view('Registros_Basicos.Departamentos.partials.listarCargos',$this->datos_vista(0,$acciones,$consulta,$query,$parametro));
 	}
+	public function buscarDirecciones(){
+		$datos=$this->cargar_header_sidebar_acciones();
+		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(1,2,3),4);
+		$consulta=Director::all();
+		return view('Registros_basicos.Departamentos.partials.listarDirecciones',$this->datos_vista(0,$acciones,$consulta));
+	}
 
+	public function ingresarDireccion(){
+		$nombreDireccion= strtoupper(\Request::get('direccion'));//nombre de la direccion, llevado a mayusculas
+		$statusDireccion=\Request::get('comboDireccion');//status de la direccion
+		$consulta=\DB::table('directores')->where('descripcion',$nombreDireccion)->first(); //Consultar por el nombre la existencia de la direccion
+		$respuesta=array(0);
+		if (empty($consulta)) //si el registro no existe, se procede a ingresar los datos de la direccion
+		{
+			 $id=\DB::table('directores')->insertGetId
+					 	(
 
+					 		['descripcion'=>$nombreDireccion,
+					 		 'status'=>$statusDireccion
+					 		]);
+			$ultimo=Director::where('id',$id)->first();
+			$respuesta=array(1,$ultimo) ;
+
+		}
+		return $respuesta;
+	}
 
 	public function departamentos_ingresar()
 	{

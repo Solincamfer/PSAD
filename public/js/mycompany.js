@@ -58,7 +58,6 @@ $(document).ready(function(){
     if (areas.length==0) {
       areas = 0;
     }
-    console.log(areas);
     var direccion =$('#comboDireccion').val();
     var data=[direccion,departamentos,areas];
     url="/menu/registros/estructura/buscarCargos";
@@ -67,4 +66,84 @@ $(document).ready(function(){
       $('.contCarg').append(respuesta);
     });
   });
+
+  $('#nuevaDireccion').bootstrapValidator({
+   feedbackIcons: {
+     valid: 'glyphicon glyphicon-ok',
+     invalid: 'glyphicon glyphicon-remove',
+     validating: 'glyphicon glyphicon-refresh'
+   },
+   fields: {
+     direccion: {
+       validators: {
+         notEmpty: {
+           message: 'Debe indicar el nombre de la direccion'
+         }
+       }
+     },
+     comboDireccion: {
+       validators: {
+         notEmpty: {
+           message: 'Seleccione el estatus que tendra la nueva direccion'
+         }
+       }
+     }
+   }
+  });
+
+  $('#nuevaDireccion').bootstrapValidator().on('submit', function (e) {
+    if (e.isDefaultPrevented()) {
+    } 
+    else {
+      e.preventDefault();
+      var form= $('#nuevaDireccion').serialize();
+      var url="/menu/registros/estructura/ingresarDireccion";
+      $.post(url,form,function(respuesta){
+        if(respuesta[0]==1){
+          swal({
+            title:'Guardado Exitoso',//Contenido del modal
+            text: 'La dirección fue Guardada Exitosamente',
+            type: "success",
+            timer:1500,
+            showConfirmButton:false,//Eliminar boton de confirmacion
+          });
+          $('#comboDireccion').append('<option value="'+respuesta[1].id+'">'+respuesta[1].descripcion+'</option>');
+          $('#nomDireccion').val('');
+          $('#stDireccion').val('');
+          $('#nuevaDireccion').data('bootstrapValidator').resetForm();
+          $('#button-save').on("click",function(){
+            $('#nuevaDireccion').bootstrapValidator('validateField', 'direccion');
+            $('#nuevaDireccion').bootstrapValidator('validateField', 'comboDireccion');
+          });
+
+        }
+        else if(respuesta[0]==0){
+          swal({
+            title:'Casi Terminamos!!',//Contenido del modal
+            text: 'La dirección ya esta registrada',
+            type: "error",
+            timer:1500,
+            showConfirmButton:false,//Eliminar boton de confirmacion
+          });
+          $('#nuevaDireccion').data('bootstrapValidator').resetForm();
+          $('#button-save').on("click",function(){
+            $('#nuevaDireccion').bootstrapValidator('validateField', 'direccion');
+            $('#nuevaDireccion').bootstrapValidator('validateField', 'comboDireccion');
+          });
+        }
+        
+      });
+    }
+  })
+  $('#link-direcciones').on('click', function(event) {
+    var form=0;
+    var url="/menu/registros/estructura/buscarDirecciones";
+    $.post(url,form,function(respuesta){
+      $('.contRegisterDireccion').empty();
+      $('.contRegisterDireccion').append(respuesta);
+    });   
+  });
+
+
+
 });

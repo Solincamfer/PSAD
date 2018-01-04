@@ -188,5 +188,7 @@ Route::match(['post','get'],'/estructura/mostrarEstructuraDireccion',						   	[
 Route::match(['post','get'],'/estructura/mostrarEstructuraTodos',['uses'=>'EstructuraController@mostrarEstructuraTodos']);
 Route::match(['post','get'],'/estructura/buscarAreas',['uses'=>'EstructuraController@buscarAreas']);
 Route::match(['post','get'],'/estructura/buscarDepartamentos',['uses'=>'EstructuraController@buscarDepartamentos']);
+Route::match(['post','get'],'/estructura/buscarDirecciones',['uses'=>'EstructuraController@buscarDirecciones']);
 Route::match(['post','get'],'/estructura/buscarCargos',['uses'=>'EstructuraController@buscarCargos']);
+Route::match(['post','get'],'/estructura/ingresarDireccion',['uses'=>'EstructuraController@ingresarDireccion']);
 });
