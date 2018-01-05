@@ -52,7 +52,6 @@ Route::group(['prefix'=>'/menu/registros','middleware'=>['v_menu']],function(){
 	Route::match(['post','get'],'/empleados',															['middleware'=>'validar_sm:6','uses'=>'RegistrosBasicos@empleados']);
 	Route::match(['post','get'],'/clientes',															['middleware'=>'validar_sm:7','uses'=>'RegistrosBasicos@clientes']);
 
-	Route::match(['post','get'],'/departamentos/cargos/{departamento_id}',								['middleware'=>'validar_ac:3','uses'=>'RegistrosBasicos@departamentos_cargos']);
 
 	Route::match(['post','get'],'/clientes/insertar',                   								['uses'=>'RegistrosBasicos@clientes_insertar']);
 
@@ -191,4 +190,7 @@ Route::match(['post','get'],'/estructura/buscarDepartamentos',['uses'=>'Estructu
 Route::match(['post','get'],'/estructura/buscarDirecciones',['uses'=>'EstructuraController@buscarDirecciones']);
 Route::match(['post','get'],'/estructura/buscarCargos',['uses'=>'EstructuraController@buscarCargos']);
 Route::match(['post','get'],'/estructura/ingresarDireccion',['uses'=>'EstructuraController@ingresarDireccion']);
+Route::match(['post','get'],'/estructura/ingresarDepartamento',['uses'=>'EstructuraController@ingresarDepartamento']);
+Route::match(['post','get'],'/estructura/ingresarArea',['uses'=>'EstructuraController@ingresarArea']);
+Route::match(['post','get'],'/estructura/ingresarCargo',['uses'=>'EstructuraController@ingresarCargo']);
 });

@@ -400,62 +400,77 @@ class EstructuraController extends Controller
 		return $respuesta;
 	}
 
-	public function departamentos_ingresar()
-	{
+	public function ingresarDepartamento(){
 
-		$nombreD= strtoupper(Request::get('textDpto'));//nombre del departamento, llevado a mayusculas
-		$statusD= (int)Request::get('comboDpto');//status del departamento
-
-
-		$consulta=\DB::table('departamentos')->where('descripcion',$nombreD)->first();
-
+		$nombreD= strtoupper(\Request::get('departamento'));//nombre del departamento, llevado a mayusculas
+		$statusD= \Request::get('estatusDpto');//status del departamento
+		$padre= (int)\Request::get('padre');
+		$respuesta=0;
+		$consulta=\DB::table('departamentos')->where('descripcion',$nombreD)
+					->where('director_id',$padre)
+					->first();
 
 		if (empty($consulta)) //si el registro no existe, se procede a ingresar los datos del departamento
 		{
 			 \DB::table('departamentos')->insert
 					 	(
-
-					 		['descripcion'=>$nombreD,'status'=>$statusD]
-					 	);
-
-			$respuesta= 1;
-
+					 		[
+					 			'descripcion'=>$nombreD,
+					 			'status'=>$statusD,
+					 			'director_id'=>$padre
+					 		]);
+			$respuesta=1;
 		}
-		else{
-			$respuesta= 0;
+		return $respuesta;
+	}
+	public function ingresarArea(){
+
+		$nombreA= strtoupper(\Request::get('area'));//nombre del area, llevado a mayusculas
+		$statusA= \Request::get('comboArea');//status del area
+		$padre= (int)\Request::get('padre');
+		$respuesta=0;
+		$consulta=\DB::table('areas')->where('descripcion',$nombreA)
+					->where('departamento_id',$padre)
+					->first();
+
+		if (empty($consulta)) //si el registro no existe, se procede a ingresar los datos del area
+		{
+			 \DB::table('areas')->insert
+					 	(
+					 		[
+					 			'descripcion'=>$nombreA,
+					 			'status'=>$statusA,
+					 			'departamento_id'=>$padre
+					 		]);
+			$respuesta=1;
 		}
-		return (int)$respuesta;
+		return $respuesta;
 	}
 
 
 
-	public function cargos_ingresar($departamento_id)
-	{
+	public function ingresarCargo(){
 
-		$nombreC= strtoupper(Request::get('textCgo'));//nombre del cargo
-		$statusC= (int)Request::get('comboCgo');//status del cargo
+		$nombreC= strtoupper(\Request::get('cargo'));//nombre del cargo, llevado a mayusculas
+		$statusC= \Request::get('comboCargo');//status del cargo
+		$padre= (int)\Request::get('padre');
+		$respuesta=0;
+		$consulta=\DB::table('cargos')->where('descripcion',$nombreC)
+					->where('area_id',$padre)
+					->first();
 
-
-		$consulta=\DB::table('cargos')->where('descripcion',$nombreC)->first();
-
-		if (empty($consulta)) //si el registro no existe, se procede a ingresar los datos del departamento
+		if (empty($consulta)) //si el registro no existe, se procede a ingresar los cargos del area
 		{
 			 \DB::table('cargos')->insert
 					 	(
-
-					 		['status'=>$statusC,'descripcion'=>$nombreC,'departamento_id'=>$departamento_id]
-					 	);
-
-
-			$resultado = 1;
+					 		[
+					 			'descripcion'=>$nombreC,
+					 			'status'=>$statusC,
+					 			'area_id'=>$padre
+					 		]);
+			$respuesta=1;
 		}
-		else
-		{
-			$resultado = 0;
-		}
-
-		return $resultado;
-
+		return $respuesta;
 
 	}
 }

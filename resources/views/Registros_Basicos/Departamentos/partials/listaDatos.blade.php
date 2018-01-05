@@ -17,7 +17,7 @@
                                     </span>
                                 @elseif($accion->id==3)
                                     <span class="iclsp">
-                                        <a href="{{$accion->url.$departamento->id}}" class="tltp"  data-ttl="{{$accion->descripcion}}">
+                                        <a data-modal="1" class="tltp add-reg" data-reg="{{$departamento->id}}" data-ttl="{{$accion->descripcion}}">
                                             <i class="{{$accion->clase_css}}"></i>
                                         </a>
                                     </span>

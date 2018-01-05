@@ -7,13 +7,13 @@
                 @if($accion->id!=1 )
                     @if($accion->id==2)
                         <span class="iclsp">
-                            <a  class="tltp ModificaR" data-reg="{{$direccion->id}}" id="ModificaDepar{{$direccion->id}}" data-ttl="{{$accion->descripcion}}" data-toggle="modal" >
+                            <a  class="tltp ModificaR" data-reg="{{$direccion->id}}" id="ModificaDire{{$direccion->id}}" data-ttl="{{$accion->descripcion}}" data-toggle="modal" >
                                 <i class="{{$accion->clase_css}}"></i>
                             </a>
                         </span>
                     @elseif($accion->id==3)
                         <span class="iclsp">
-                            <a href="{{$accion->url.$direccion->id}}" class="tltp"  data-ttl="{{$accion->descripcion}}">
+                            <a id="AgregarDepar{{$direccion->id}}" data-modal="0" class="tltp add-reg" data-reg="{{$direccion->id}}" data-ttl="{{$accion->descripcion}}">
                                 <i class="{{$accion->clase_css}}"></i>
                             </a>
                         </span>

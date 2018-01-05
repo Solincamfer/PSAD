@@ -19,7 +19,7 @@
                                                 </span>
                                             @elseif($accion->id==3)
                                                 <span class="iclsp">
-                                                    <a href="{{$accion->url.$area->id}}" class="tltp"  data-ttl="{{$accion->descripcion}}">
+                                                    <a data-modal="2" class="tltp add-reg" data-reg="{{$area->id}}" data-ttl="{{$accion->descripcion}}">
                                                         <i class="{{$accion->clase_css}}"></i>
                                                     </a>
                                                 </span>
@@ -65,7 +65,7 @@
                                     </span>
                                 @elseif($accion->id==3)
                                     <span class="iclsp">
-                                        <a href="{{$accion->url.$area->id}}" class="tltp"  data-ttl="{{$accion->descripcion}}">
+                                        <a class="tltp add-reg" data-modal="2" data-reg="{{$area->id}}" data-ttl="{{$accion->descripcion}}">
                                             <i class="{{$accion->clase_css}}"></i>
                                         </a>
                                     </span>

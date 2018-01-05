@@ -71,7 +71,7 @@
                                                             </span>
                                                         @elseif($accion->id==96)
                                                             <span class="iclsp">
-                                                                <a href="{{$accion->url.$departamento->id}}" class="tltp"  data-ttl="{{$accion->descripcion}}">
+                                                                <a class="tltp add-reg" data-modal="1" data-reg="{{$departamento->id}}"  data-ttl="{{$accion->descripcion}}">
                                                                     <i class="{{$accion->clase_css}}"></i>
                                                                 </a>
                                                             </span>
@@ -182,44 +182,7 @@
                             </div>
                             <div class="modal-body">
                                 <div class="contRegisterDireccion">
-                                @foreach($consulta as $direccion)
-
-                                    <div class="contMd">
-
-                                        <div class="icl">
-                                            @foreach($acciones as $accion)
-                                                @if($accion->id!=1 )
-                                                    @if($accion->id==2)
-                                                        <span class="iclsp">
-                                                            <a  class="tltp ModificaR" data-reg="{{$direccion->id}}" id="ModificaDepar{{$direccion->id}}" data-ttl="{{$accion->descripcion}}" data-toggle="modal" >
-                                                                <i class="{{$accion->clase_css}}"></i>
-                                                            </a>
-                                                        </span>
-                                                    @elseif($accion->id==3)
-                                                        <span class="iclsp">
-                                                            <a href="{{$accion->url.$direccion->id}}" class="tltp"  data-ttl="{{$accion->descripcion}}">
-                                                                <i class="{{$accion->clase_css}}"></i>
-                                                            </a>
-                                                        </span>
-                                                    @endif
-                                                @elseif($accion->id==1 )
-                                                    @if($direccion->status==1)
-                                                        <div class="chbx">
-                                                            <input type="checkbox" class="btnAcc" name="status" id="{{'inchbx'. $direccion->id}}" value="{{$direccion->status}}" checked><label for="{{'inchbx'. $direccion->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
-                                                        </div>
-                                                    @elseif($direccion->status==0)
-                                                        <div class="chbx">
-                                                            <input type="checkbox" class="btnAcc" name="status" id="{{'inchbx'. $direccion->id}}" value="{{$direccion->status}}"><label for="{{'inchbx'. $direccion->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
-                                                        </div>
-                                                    @endif
-                                                @endif
-                                            @endforeach
-                                        </div>
-                                        <div class="ttlMd1">
-                                            <span>{{$direccion->descripcion}}</span>
-                                        </div>
-                                    </div>
-                                @endforeach
+                            
                                 </div>
                                 <div class="modal-footer">
 
@@ -277,7 +240,7 @@
 <!-- VENTANAS MODALES DE DEPARTAMENTOS -->
 
     <!-- MODAL NUEVO DEPARTAMENTO -->
-                @if($agregar)
+            
                 <div class="modal fade" id="myModalDE" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -286,21 +249,22 @@
                                 <h4 class="modal-title" id="myModalLabel"><strong>Agregar Departamento</strong></h4>
                             </div>
                             <div class="modal-body">
-                                <form method="post" class="form-horizontal DepCarPer" id="NewDep">
+                                <form method="post" enctype="multipart/form-data" class="form-horizontal" id="newDep">
                                     {{ csrf_field() }}
+                                    <input type="hidden" name="padre" value="">
                                     <div class="container-fluid" id="contdpto">
                                         <div class="row">
                                             <div id="dpto">
                                                <div class="col-md-8 col-md-offset-2">
                                                    <div class="form-group row">
-                                                       <label for="nomDpto">Nombre del Departamento</label>
-                                                       <input type="text" name="textDpto" class="form-control " id="nomDpto"/><i class="fa fa-briefcase" id="icdp1"></i>
+                                                       <label for="nombreDpto">Nombre del Departamento</label>
+                                                       <input type="text"  name="departamento" class="form-control " id="nombreDpto"/><i class="fa fa-briefcase" id="icdp1"></i>
                                                    </div>
                                                </div>
                                                <div class="col-md-8 col-md-offset-2">
                                                    <div class="form-group row">
-                                                       <label for="stDpto">Estatus del Departamento</label><span class="ic"><i class="fa fa-chevron-down"></i></span>
-                                                       <select name="comboDpto" class="form-control" id="stDpto">
+                                                       <label for="statusDpto">Estatus del Departamento</label><span class="ic"><i class="fa fa-chevron-down"></i></span>
+                                                       <select name="estatusDpto" class="form-control" id="statusDpto">
                                                             <option value="">-</option>
                                                             <option value="1">ACTIVO</option>
                                                             <option value="0">INACTIVO</option>
@@ -311,14 +275,14 @@
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="submit" class="bttnMd" id="btnSv">Guardar <i class="fa fa-floppy-o"></i></button>
+                                        <button type="submit" class="bttnMd" id="btnSvDep">Guardar <i class="fa fa-floppy-o"></i></button>
                                     </div>
                                 </form>
                             </div>
                         </div>
                     </div>
                 </div>
-               @endif
+    
 
     <!-- MODAL MODIFICAR DEPARTAMENTO -->
 
@@ -368,7 +332,7 @@
 
 <!-- VENTANAS MODAL AREAS -->
     <!-- MODAL AGREGAR AREAS -->
-                 <div class="modal fade" id="myModalA" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                 <div class="modal fade" id="myModalAR" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -376,21 +340,22 @@
                                 <h4 class="modal-title" id="myModalLabel"><strong>Agregar Area</strong></h4>
                             </div>
                             <div class="modal-body">
-                                <form method="post" class="form-horizontal DepCarPer" id="NewDep">
+                                <form method="post" enctype="multipart/form-data" class="form-horizontal" id="newArea">
                                     {{ csrf_field() }}
+                                    <input type="hidden" name="padre" value="">
                                     <div class="container-fluid" id="contdpto">
                                         <div class="row">
                                             <div id="dpto">
                                                <div class="col-md-8 col-md-offset-2">
                                                    <div class="form-group row">
-                                                       <label for="nomDpto">Nombre del Area</label>
-                                                       <input type="text" name="textDpto" class="form-control " id="nomDpto"/><i class="fa fa-briefcase" id="icdp1"></i>
+                                                       <label for="nombreArea">Nombre del Area</label>
+                                                       <input type="text" name="area"  class="form-control " id="nombreArea"/><i class="fa fa-briefcase" id="icdp1"></i>
                                                    </div>
                                                </div>
                                                <div class="col-md-8 col-md-offset-2">
                                                    <div class="form-group row">
-                                                       <label for="stDpto">Estatus del Area</label><span class="ic"><i class="fa fa-chevron-down"></i></span>
-                                                       <select name="comboDpto" class="form-control" id="stDpto">
+                                                       <label for="statusArea">Estatus del Area</label><span class="ic"><i class="fa fa-chevron-down"></i></span>
+                                                       <select name="comboArea" class="form-control" id="statusArea">
                                                             <option value="">-</option>
                                                             <option value="1">ACTIVO</option>
                                                             <option value="0">INACTIVO</option>
@@ -401,7 +366,7 @@
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="submit" class="bttnMd" id="btnSv">Guardar <i class="fa fa-floppy-o"></i></button>
+                                        <button type="submit" class="bttnMd" id="btnSvArea">Guardar <i class="fa fa-floppy-o"></i></button>
                                     </div>
                                 </form>
                             </div>
@@ -410,7 +375,7 @@
                 </div>
 
     <!-- MODAL MODIFICAR AREAS -->
-                <div class="modal fade" id="myModalAM" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
+                <div class="modal fade" id="myModalARM" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -454,7 +419,7 @@
                 </div>
 <!--VENTANAS MODAL CARGOS -->
     <!-- MODAL AGREGAR CARGO -->
-                <div class="modal fade" id="myModalC" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal fade" id="myModalCA" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -462,21 +427,22 @@
                                 <h4 class="modal-title" id="myModalLabel"><strong>Agregar Cargo</strong></h4>
                             </div>
                             <div class="modal-body">
-                                <form method="post" class="form-horizontal DepCarPer" id="NewDep">
+                                <form method="post" enctype="multipart/form-data" class="form-horizontal" id="newCargo">
                                     {{ csrf_field() }}
+                                    <input type="hidden" name="padre">
                                     <div class="container-fluid" id="contdpto">
                                         <div class="row">
                                             <div id="dpto">
                                                <div class="col-md-8 col-md-offset-2">
                                                    <div class="form-group row">
-                                                       <label for="nomDpto">Nombre del Cargo</label>
-                                                       <input type="text" name="textDpto" class="form-control " id="nomDpto"/><i class="fa fa-briefcase" id="icdp1"></i>
+                                                       <label for="nombreCargo">Nombre del Cargo</label>
+                                                       <input type="text"  name="cargo" class="form-control " id="nombreCargo"/><i class="fa fa-briefcase" id="icdp1"></i>
                                                    </div>
                                                </div>
                                                <div class="col-md-8 col-md-offset-2">
                                                    <div class="form-group row">
-                                                       <label for="stDpto">Estatus del Cargo</label><span class="ic"><i class="fa fa-chevron-down"></i></span>
-                                                       <select name="comboDpto" class="form-control" id="stDpto">
+                                                       <label for="statusCargo">Estatus del Cargo</label><span class="ic"><i class="fa fa-chevron-down"></i></span>
+                                                       <select name="comboCargo" class="form-control" id="statusCargo">
                                                             <option value="">-</option>
                                                             <option value="1">ACTIVO</option>
                                                             <option value="0">INACTIVO</option>
@@ -487,7 +453,7 @@
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="submit" class="bttnMd" id="btnSv">Guardar <i class="fa fa-floppy-o"></i></button>
+                                        <button type="submit" class="bttnMd" id="btnSvCargo">Guardar <i class="fa fa-floppy-o"></i></button>
                                     </div>
                                 </form>
                             </div>
@@ -496,7 +462,7 @@
                 </div>
 
     <!-- MODAL MODIFICAR CARGOS -->
-                <div class="modal fade" id="myModalCM" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
+                <div class="modal fade" id="myModalCAM" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">

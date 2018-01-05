@@ -18,12 +18,6 @@
                                                     <i class="{{$accion->clase_css}}"></i>
                                                 </a>
                                             </span>
-                                        @elseif($accion->id==3)
-                                            <span class="iclsp">
-                                                <a href="{{$accion->url.$cargo->id}}" class="tltp"  data-ttl="{{$accion->descripcion}}">
-                                                    <i class="{{$accion->clase_css}}"></i>
-                                                </a>
-                                            </span>
                                         @endif
                                     @elseif($accion->id==1 )
                                         @if($cargo->status==1)
@@ -63,12 +57,6 @@
                                 @if($accion->id==2)
                                     <span class="iclsp">
                                         <a  class="tltp ModificaR" data-reg="{{$cargo->id}}" id="ModificaDepar{{$cargo->id}}" data-ttl="{{$accion->descripcion}}" data-toggle="modal" >
-                                            <i class="{{$accion->clase_css}}"></i>
-                                        </a>
-                                    </span>
-                                @elseif($accion->id==3)
-                                    <span class="iclsp">
-                                        <a href="{{$accion->url.$cargo->id}}" class="tltp"  data-ttl="{{$accion->descripcion}}">
                                             <i class="{{$accion->clase_css}}"></i>
                                         </a>
                                     </span>
