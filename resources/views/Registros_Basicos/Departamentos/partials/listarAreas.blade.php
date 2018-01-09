@@ -13,7 +13,7 @@
                                         @if($accion->id!=1 )
                                             @if($accion->id==2)
                                                 <span class="iclsp">
-                                                    <a  class="tltp ModificaR" data-reg="{{$area->id}}" id="ModificaDepar{{$area->id}}" data-ttl="{{$accion->descripcion}}" data-toggle="modal" >
+                                                    <a  class="tltp modificar" data-modal="2" data-padre="{{$area->departamento_id}}" data-reg="{{$area->id}}" id="ModificaDepar{{$area->id}}" data-ttl="{{$accion->descripcion}}" data-toggle="modal" >
                                                         <i class="{{$accion->clase_css}}"></i>
                                                     </a>
                                                 </span>
@@ -59,7 +59,7 @@
                             @if($accion->id!=1 )
                                 @if($accion->id==2)
                                     <span class="iclsp">
-                                        <a  class="tltp ModificaR" data-reg="{{$area->id}}" id="ModificaDepar{{$area->id}}" data-ttl="{{$accion->descripcion}}" data-toggle="modal" >
+                                        <a  class="tltp modificar" data-modal="2" data-reg="{{$area->id}}" data-padre="{{ $area->departamento_id }}" id="ModificaDepar{{$area->id}}" data-ttl="{{$accion->descripcion}}" data-toggle="modal" >
                                             <i class="{{$accion->clase_css}}"></i>
                                         </a>
                                     </span>

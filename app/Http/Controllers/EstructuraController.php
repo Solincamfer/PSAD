@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+//use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Request;
 use App\Director;
 use App\Departamento;
+use App\Cargo;
+use App\Area;
 
 class EstructuraController extends Controller
 {
@@ -447,10 +450,7 @@ class EstructuraController extends Controller
 		return $respuesta;
 	}
 
-
-
 	public function ingresarCargo(){
-
 		$nombreC= strtoupper(\Request::get('cargo'));//nombre del cargo, llevado a mayusculas
 		$statusC= \Request::get('comboCargo');//status del cargo
 		$padre= (int)\Request::get('padre');
@@ -471,6 +471,34 @@ class EstructuraController extends Controller
 			$respuesta=1;
 		}
 		return $respuesta;
+	}
 
+	public function mostrarDatos(){
+		$registro=(int)Request::get('registro');
+		$modal=(int)Request::get('modal');
+		$tablas=['directores','departamentos','areas','cargos'];
+		$consulta=\DB::table($tablas[$modal])->where('id',$registro)->first();
+		return response()->json($consulta)
+		;
+	}
+
+	public function actualizarRegistros(){
+		//$padre=(int)Request::get('padre');
+		$registro=(int)Request::get('registro');
+		//$modal=(int)Request::get('modal');
+		$descripcion=strtoupper(Request::get('campoD'));
+		$estatus=Request::get('campoE');
+		$buscar=Director::where('descripcion',$descripcion)
+						  ->where('id','<>',$registro)
+						  ->first();
+		if (count($buscar)==0) {
+			Director::where('id',$registro)->update([ 'descripcion' => $descripcion,
+ 													  'status'      => $estatus
+													]);
+		}
+		$datos=$this->cargar_header_sidebar_acciones();
+		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(1,2,3),4);
+		$consulta=Director::all();
+		return view('Registros_basicos.Departamentos.partials.listarDirecciones',$this->datos_vista(0,$acciones,$consulta));
 	}
 }

@@ -389,4 +389,194 @@ $(document).ready(function(){
       });   
     }
   });
+
+//-------------------------- VENTANAS MODIFICAR REGISTROS (direcciones, departamentos, areas y cargos) -------------------------
+  
+  $('body').on('click', '.modificar', function(event) {
+    var ventana=['#myModalDM','#myModalDEM','#myModalARM','#myModalCAM'];
+    var modal=$(this).data('modal');
+    var padre=$(this).data('padre');
+    var registro=$(this).data('reg');
+    var data= new FormData;
+    $(ventana[modal]+' input[name=padre]').val(padre);
+    $(ventana[modal]+' input[name=registro]').val(registro);
+    data.append('registro',registro);
+    data.append('modal',modal);
+    var url= "/menu/registros/estructura/mostrarDatos";
+    $.ajax({
+      url: url,
+      type: 'post',
+      dataType: 'html',
+      data: data,
+      cache: false,
+      contentType: false,
+      processData: false
+    })
+    .done(function(respuesta) {
+      var response = JSON.parse(respuesta);
+        $(ventana[modal]+' input[name=campoD]').val(response.descripcion);
+        $(ventana[modal]+' select[name=campoE]').val(response.status);
+        $(ventana[modal]).modal('show');
+    })
+    .fail(function() {
+      swal({
+            title:'Error Inesperado!!',//Contenido del modal
+            text: 'Pongase en contacto con el administrador',
+            type: "error",
+          });
+    })
+    .always(function() {
+      console.log("complete");
+    });
+  });
+   var ventana=['#myModalDM','#myModalDEM','#myModalARM','#myModalCAM'];
+
+  $('#updateDireccion').bootstrapValidator({
+   feedbackIcons: {
+     valid: 'glyphicon glyphicon-ok',
+     invalid: 'glyphicon glyphicon-remove',
+     validating: 'glyphicon glyphicon-refresh'
+   },
+   fields: {
+     campoD: {
+       validators: {
+         notEmpty: {
+           message: 'Debe indicar el nombre de la dirección'
+         }
+       }
+     },
+     campoE: {
+       validators: {
+         notEmpty: {
+           message: 'Seleccione el estatus que tendra la nueva dirección'
+         }
+       }
+     }
+   }
+  });
+   $('#myModalDEM').bootstrapValidator({
+   feedbackIcons: {
+     valid: 'glyphicon glyphicon-ok',
+     invalid: 'glyphicon glyphicon-remove',
+     validating: 'glyphicon glyphicon-refresh'
+   },
+   fields: {
+     campoD: {
+       validators: {
+         notEmpty: {
+           message: 'Debe indicar el nombre del departamento'
+         }
+       }
+     },
+     campoE: {
+       validators: {
+         notEmpty: {
+           message: 'Seleccione el estatus que tendra el nuevo departamento'
+         }
+       }
+     }
+   }
+  });
+  $('#myModalARM').bootstrapValidator({
+   feedbackIcons: {
+     valid: 'glyphicon glyphicon-ok',
+     invalid: 'glyphicon glyphicon-remove',
+     validating: 'glyphicon glyphicon-refresh'
+   },
+   fields: {
+     campoD: {
+       validators: {
+         notEmpty: {
+           message: 'Debe indicar el nombre del Area'
+         }
+       }
+     },
+     campoE: {
+       validators: {
+         notEmpty: {
+           message: 'Seleccione el estatus que tendra la nueva area'
+         }
+       }
+     }
+   }
+  });
+   $('#myModalCAM').bootstrapValidator({
+   feedbackIcons: {
+     valid: 'glyphicon glyphicon-ok',
+     invalid: 'glyphicon glyphicon-remove',
+     validating: 'glyphicon glyphicon-refresh'
+   },
+   fields: {
+     campoD: {
+       validators: {
+         notEmpty: {
+           message: 'Debe indicar el nombre de la dirección'
+         }
+       }
+     },
+     campoE: {
+       validators: {
+         notEmpty: {
+           message: 'Seleccione el estatus que tendra la nueva dirección'
+         }
+       }
+     }
+   }
+  });
+
+  $('body').bootstrapValidator().on('submit','#updateDireccion', function (e) {
+    if(e.isDefaultPrevented()) {
+    } 
+    else {
+     e.preventDefault();
+      var form= new FormData(document.getElementById('updateDireccion'));
+      var url="/menu/registros/estructura/actualizarRegistros";
+      $.ajax({
+        url: url,
+        type: "post",
+        dataType: "html",
+        data: form,
+        cache: false,
+        contentType: false,
+        processData: false
+      })
+      .done(function(respuesta){
+        $('.contRegisterDireccion').empty();
+        $('.contRegisterDireccion').append(respuesta); 
+       /* if(respuesta==1){
+          swal({
+            title:'Guardado Exitoso',//Contenido del modal
+            text: 'La dirección fue actualizada exitosamente',
+            type: "success",
+            timer:1500,
+            showConfirmButton:false,//Eliminar boton de confirmacion
+          });
+          $('#direccionDesc').val('');
+          $('#direccionEst').val('');
+          $('#updateDireccion').data('bootstrapValidator').resetForm();
+          $('#buttonUpdateDir').on("click",function(){
+            $('#updateDireccion').bootstrapValidator('validateField', 'area');
+            $('#updateDireccion').bootstrapValidator('validateField', 'comboArea');
+          });
+
+        }
+        else if(respuesta==0){
+          swal({
+            title:'Casi Terminamos!!',//Contenido del modal
+            text: 'El nombre para esta dirección ya se encuentra registrado',
+            type: "error",
+            timer:1500,
+            showConfirmButton:false,//Eliminar boton de confirmacion
+          });
+         $('#direccionDesc').val('');
+          $('#direccionEst').val('');
+          $('#updateDireccion').data('bootstrapValidator').resetForm();
+          $('#buttonUpdateDir').on("click",function(){
+            $('#updateDireccion').bootstrapValidator('validateField', 'area');
+            $('#updateDireccion').bootstrapValidator('validateField', 'comboArea');
+          });
+        }*/
+      });   
+    }
+  });
 });

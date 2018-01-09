@@ -11,7 +11,7 @@
                             @if($accion->id!=1 )
                                 @if($accion->id==2)
                                     <span class="iclsp">
-                                        <a  class="tltp ModificaR" data-reg="{{$departamento->id}}" id="ModificaDepar{{$departamento->id}}" data-ttl="{{$accion->descripcion}}" data-toggle="modal" >
+                                        <a  class="tltp modificar" data-modal="1" data-padre="{{$departamento->direcctor_id}}" data-reg="{{$departamento->id}}" id="ModificaDepar{{$departamento->id}}" data-ttl="{{$accion->descripcion}}" data-toggle="modal" >
                                             <i class="{{$accion->clase_css}}"></i>
                                         </a>
                                     </span>

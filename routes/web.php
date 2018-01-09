@@ -193,4 +193,6 @@ Route::match(['post','get'],'/estructura/ingresarDireccion',['uses'=>'Estructura
 Route::match(['post','get'],'/estructura/ingresarDepartamento',['uses'=>'EstructuraController@ingresarDepartamento']);
 Route::match(['post','get'],'/estructura/ingresarArea',['uses'=>'EstructuraController@ingresarArea']);
 Route::match(['post','get'],'/estructura/ingresarCargo',['uses'=>'EstructuraController@ingresarCargo']);
+Route::match(['post','get'],'/estructura/mostrarDatos',['uses'=>'EstructuraController@mostrarDatos']);
+Route::match(['post','get'],'/estructura/actualizarRegistros',['uses'=>'EstructuraController@actualizarRegistros']);
 });

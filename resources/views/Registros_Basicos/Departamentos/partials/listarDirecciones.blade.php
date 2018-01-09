@@ -7,7 +7,7 @@
                 @if($accion->id!=1 )
                     @if($accion->id==2)
                         <span class="iclsp">
-                            <a  class="tltp ModificaR" data-reg="{{$direccion->id}}" id="ModificaDire{{$direccion->id}}" data-ttl="{{$accion->descripcion}}" data-toggle="modal" >
+                            <a  class="tltp modificar" data-modal="0" data-reg="{{$direccion->id}}" id="ModificaDire{{$direccion->id}}" data-ttl="{{$accion->descripcion}}" data-toggle="modal" >
                                 <i class="{{$accion->clase_css}}"></i>
                             </a>
                         </span>

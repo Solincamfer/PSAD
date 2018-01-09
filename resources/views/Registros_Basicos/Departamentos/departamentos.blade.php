@@ -13,13 +13,13 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <div class="col-md-4" style="padding-top: 10px;">
+                        <div class="col-md-4 form-group row" style="padding-top: 10px;">
                             <select class="form-control" id="comboDireccion" >
                                 <option value="0" selected="selected">Seleccione una Dirección</option>
                                 @foreach($consulta as $direccion)
                                 <option value="{{$direccion->id}}">{{$direccion->descripcion}}</option>
                                 @endforeach
-                            </select>
+                            </i></select>
 
                         </div>
                         <div class="col-md-4" style="padding-top: 20px; padding-left: 0px;">
@@ -65,7 +65,7 @@
                                                     @if($accion->id!=94 )
                                                         @if($accion->id==95)
                                                             <span class="iclsp">
-                                                                <a  class="tltp ModificaR" data-reg="{{$departamento->id}}" id="ModificaDepar{{$departamento->id}}" data-ttl="{{$accion->descripcion}}" data-toggle="modal" >
+                                                                <a  class="tltp modificar" data-padre="{{$departamento->director_id }}" data-modal="1" data-reg="{{$departamento->id}}" id="ModificaDepar{{$departamento->id}}" data-ttl="{{$accion->descripcion}}" data-toggle="modal" >
                                                                     <i class="{{$accion->clase_css}}"></i>
                                                                 </a>
                                                             </span>
@@ -202,21 +202,24 @@
                                 <h4 class="modal-title" id="myModalLabel2"><strong>Modificar Dirección</strong></h4>
                             </div>
                             <div class="modal-body">
-                                <form method="post" class="form-horizontal DepCarPer" action=>
+                                <form method="post" class="form-horizontal formUpdateReg" id="updateDireccion">
                                     {{ csrf_field() }}
+                                    <input type="hidden" name="padre">
+                                    <input type="hidden" name="registro">
+                                    <input type="hidden" name="modal" value="0">
                                     <div class="container-fluid" id="contdpto">
                                         <div class="row">
                                             <div id="dptom">
                                                 <div class="col-md-8 col-md-offset-2">
                                                     <div class="form-group row">
                                                         <label for="nomDptom_">Nombre de la Dirección</label>
-                                                        <input type="text" name="Descripcion" class="form-control descripcion" id="depText"/><i class="fa fa-briefcase " id="micdp1"></i>
+                                                        <input type="text" name="campoD" class="form-control descripcion" id="direccionDesc"/><i class="fa fa-briefcase " id="micdp1"></i>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-8 col-md-offset-2">
                                                     <div class="form-group row">
-                                                        <label for="stDptom_">Estatus de la Direccipon</label><span class="ic"><i class="fa fa-chevron-down"></i></span>
-                                                        <select name="Status" class="form-control status" id="depStatus">
+                                                        <label for="stDptom_">Estatus de la Dirección</label><span class="ic"><i class="fa fa-chevron-down"></i></span>
+                                                        <select name="campoE" class="form-control status" id="direccionEst">
                                                             <option value="1">ACTIVO</option>
                                                             <option value="0">INACTIVO</option>
                                                         </select><i class="fa fa-check" id="micdp2"></i>
@@ -228,7 +231,7 @@
 
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="submit" class="bttnMd" id="mDepCarPer">Guardar <i class="fa fa-floppy-o"></i></button>
+                                        <button type="submit" class="bttnMd" id="buttonUpdateDir">Guardar <i class="fa fa-floppy-o"></i></button>
                                     </div>
 
                                 </form>
@@ -294,21 +297,24 @@
                                 <h4 class="modal-title" id="myModalLabel2"><strong>Modificar Departamento</strong></h4>
                             </div>
                             <div class="modal-body">
-                                <form method="post" class="form-horizontal DepCarPer" action=>
+                                <form method="post" class="form-horizontal formUpdateReg" action=>
                                     {{ csrf_field() }}
+                                    <input type="hidden" name="padre">
+                                    <input type="hidden" name="registro">
+                                    <input type="hidden" name="modal" value="1">
                                     <div class="container-fluid" id="contdpto">
                                         <div class="row">
                                             <div id="dptom">
                                                 <div class="col-md-8 col-md-offset-2">
                                                     <div class="form-group row">
                                                         <label for="nomDptom_">Nombre del Departamento</label>
-                                                        <input type="text" name="Descripcion" class="form-control descripcion" id="depText"/><i class="fa fa-briefcase " id="micdp1"></i>
+                                                        <input type="text" name="campoD" class="form-control descripcion" id="depText"/><i class="fa fa-briefcase " id="micdp1"></i>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-8 col-md-offset-2">
                                                     <div class="form-group row">
                                                         <label for="stDptom_">Estatus del Departamento</label><span class="ic"><i class="fa fa-chevron-down"></i></span>
-                                                        <select name="Status" class="form-control status" id="depStatus">
+                                                        <select name="campoE" class="form-control status" id="depStatus">
                                                             <option value="1">ACTIVO</option>
                                                             <option value="0">INACTIVO</option>
                                                         </select><i class="fa fa-check" id="micdp2"></i>
@@ -383,21 +389,24 @@
                                 <h4 class="modal-title" id="myModalLabel2"><strong>Modificar Area</strong></h4>
                             </div>
                             <div class="modal-body">
-                                <form method="post" class="form-horizontal DepCarPer" action=>
+                                <form method="post" class="form-horizontal formUpdateReg" action=>
                                     {{ csrf_field() }}
+                                    <input type="hidden" name="padre">
+                                    <input type="hidden" name="registro">
+                                    <input type="hidden" name="modal" value="2">
                                     <div class="container-fluid" id="contdpto">
                                         <div class="row">
                                             <div id="dptom">
                                                 <div class="col-md-8 col-md-offset-2">
                                                     <div class="form-group row">
                                                         <label for="nomDptom_">Nombre del Area</label>
-                                                        <input type="text" name="Descripcion" class="form-control descripcion" id="depText"/><i class="fa fa-briefcase " id="micdp1"></i>
+                                                        <input type="text" name="campoD" class="form-control descripcion" id="depText"/><i class="fa fa-briefcase " id="micdp1"></i>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-8 col-md-offset-2">
                                                     <div class="form-group row">
                                                         <label for="stDptom_">Estatus del Area</label><span class="ic"><i class="fa fa-chevron-down"></i></span>
-                                                        <select name="Status" class="form-control status" id="depStatus">
+                                                        <select name="campoE" class="form-control status" id="depStatus">
                                                             <option value="1">ACTIVO</option>
                                                             <option value="0">INACTIVO</option>
                                                         </select><i class="fa fa-check" id="micdp2"></i>
@@ -430,6 +439,7 @@
                                 <form method="post" enctype="multipart/form-data" class="form-horizontal" id="newCargo">
                                     {{ csrf_field() }}
                                     <input type="hidden" name="padre">
+                                    <input type="hidden" name="registro">
                                     <div class="container-fluid" id="contdpto">
                                         <div class="row">
                                             <div id="dpto">
@@ -470,21 +480,24 @@
                                 <h4 class="modal-title" id="myModalLabel2"><strong>Modificar Cargo</strong></h4>
                             </div>
                             <div class="modal-body">
-                                <form method="post" class="form-horizontal DepCarPer" action=>
+                                <form method="post" class="form-horizontal formUpdateReg" action=>
                                     {{ csrf_field() }}
+                                    <input type="hidden" name="padre">
+                                    <input type="hidden" name="registro">
+                                    <input type="hidden" name="modal" value="3">
                                     <div class="container-fluid" id="contdpto">
                                         <div class="row">
                                             <div id="dptom">
                                                 <div class="col-md-8 col-md-offset-2">
                                                     <div class="form-group row">
                                                         <label for="nomDptom_">Nombre del Cargo</label>
-                                                        <input type="text" name="Descripcion" class="form-control descripcion" id="depText"/><i class="fa fa-briefcase " id="micdp1"></i>
+                                                        <input type="text" name="campoD" class="form-control descripcion" id="depText"/><i class="fa fa-briefcase " id="micdp1"></i>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-8 col-md-offset-2">
                                                     <div class="form-group row">
                                                         <label for="stDptom_">Estatus del Cargo</label><span class="ic"><i class="fa fa-chevron-down"></i></span>
-                                                        <select name="Status" class="form-control status" id="depStatus">
+                                                        <select name="campoE" class="form-control status" id="depStatus">
                                                             <option value="1">ACTIVO</option>
                                                             <option value="0">INACTIVO</option>
                                                         </select><i class="fa fa-check" id="micdp2"></i>
