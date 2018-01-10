@@ -8,11 +8,13 @@ class Cedula extends Model
 {
     public $timestamps=false;
     protected $table="cedulas";
-    protected $fillable=['id','numero','tipo_id','persona_id'];
+    protected $fillable=['id','numero','rol','tipo_id'];
 
-    public function persona()
-    {
-    	return $this->belongsTo('App\Persona');
-    	
-    }
+    
+
+    
+   public function empleado()
+   {
+    return $this->belongsTo('App\Empleado');
+   }
 }

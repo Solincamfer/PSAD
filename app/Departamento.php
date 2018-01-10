@@ -17,4 +17,9 @@ class Departamento extends Model
     {
     	return $this->hasMany('App\Area');
     }
+
+   public function empleado()
+   {
+    return $this->belongsTo('App\Empleado');
+   }
 }

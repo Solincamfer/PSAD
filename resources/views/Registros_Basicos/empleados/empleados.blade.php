@@ -180,9 +180,10 @@
                                                                        <input type="date" name="fnEmp" class="form-control" id="fnEmp"><i class="fa fa-calendar icemp"></i>
                                                                    </div>
                                                                </div>
+                                                              
                                                                <div class="col-md-10 col-md-offset-1">
                                                                    <div class="form-group row">
-                                                                       <label for="dptoEmp">Departamento</label><span class="ic"><i class="fa fa-chevron-down"></i></span>
+                                                                       <label for="dptoEmp"> Direccion </label><span class="ic"><i class="fa fa-chevron-down"></i></span>
                                                                        <select name="dptoEmp" class="form-control" id="dptoEmp" data-lista="0">
                                                                            <option value="0">-</option>
                                                                            @foreach ($datosC5 as $departamentos)
@@ -191,14 +192,39 @@
                                                                        </select><i class="fa fa-briefcase icemp"></i>
                                                                    </div>
                                                                </div>
+
                                                                <div class="col-md-10 col-md-offset-1">
                                                                    <div class="form-group row">
-                                                                       <label for="cgoEmp">Cargo</label><span class="ic"><i class="fa fa-chevron-down"></i></span>
+                                                                       <label for="cgoEmp"> Departamento </label><span class="ic"><i class="fa fa-chevron-down"></i></span>
                                                                        <select name="cgoEmp" class="form-control" id="cgoEmp">
                                                                            <option value="">-</option>
                                                                        </select><i class="fa fa-id-badge icemp"></i>
                                                                    </div>
                                                                </div>
+
+
+                                                               <div class="col-md-10 col-md-offset-1">
+                                                                   <div class="form-group row">
+                                                                       <label for="dptoEmp"> Area </label><span class="ic"><i class="fa fa-chevron-down"></i></span>
+                                                                       <select name="dptoEmp" class="form-control" id="dptoEmp" data-lista="0">
+                                                                           <option value="0">-</option>
+                                                                           @foreach ($datosC5 as $departamentos)
+                                                                              <option value="{{$departamentos->id}}">{{$departamentos->descripcion}}</option>
+                                                                            @endforeach
+                                                                       </select><i class="fa fa-briefcase icemp"></i>
+                                                                   </div>
+                                                               </div>
+
+                                                               <div class="col-md-10 col-md-offset-1">
+                                                                   <div class="form-group row">
+                                                                       <label for="cgoEmp"> Cargo </label><span class="ic"><i class="fa fa-chevron-down"></i></span>
+                                                                       <select name="cgoEmp" class="form-control" id="cgoEmp">
+                                                                           <option value="">-</option>
+                                                                       </select><i class="fa fa-id-badge icemp"></i>
+                                                                   </div>
+                                                               </div>
+
+
                                                            </div>
                                                         </div>
                                                     </div>
@@ -233,10 +259,24 @@
                                                                        <option value="0">-</option>
                                                                    </select><i class="fa fa-map-signs icemp"></i>
                                                                </div>
+
+                                                               
+                                                                
+                                                                   
+                                                                
+                                                                <div class="form-group col-md-6 ">
+                                                                   <label for="descpdhe">Codigo Postal</label>
+                                                                   <input type="text" name="codigoPostal" class="form-control" id="c_postal">
+                                                                   <i class="fa fa-map-marker icemp"></i>
+                                                                 </div>
+                                                               
+
                                                                <div class="form-group col-md-12">
                                                                    <label for="descpdhe">Descripcion de la dirección</label>
                                                                    <textarea type="text" name="descpdhe" class="form-control" id="descpdhe"></textarea><i class="fa fa-map-marker icemp"></i>
                                                                </div>
+
+
                                                            </div>
                                                         </div>
                                                     </div>
@@ -256,7 +296,7 @@
                                                                                 <option value="{{$tl->id}}">{{$tl->descripcion}}</option>
                                                                               @endforeach
                                                                            </select><i class="fa fa-hashtag icemp"></i> --}}
-                                                                           <input type="tel" name="numerol"  placeholder="Codigo" class="form-control" id="numtlflcle">
+                                                                           <input type="tel" name="numerol"  placeholder="Codigo" class="form-control" id="numtlflcle"><i class="fa fa-hashtag icemp"></i>
 
                                                                        </div>
                                                                    </div>
@@ -278,7 +318,7 @@
                                                                                 <option value="{{$tc->id}}">{{$tc->descripcion}}</option>
                                                                               @endforeach
                                                                            </select><i class="fa fa-hashtag icemp"></i> --}}
-                                                                            <input type="tel" placeholder="Codigo"name="numerol"class="form-control" id="numtlflcle">
+                                                                            <input type="tel" placeholder="Codigo"name="numerol"class="form-control" id="numtlflcle"><i class="fa fa-hashtag icemp"></i>
                                                                        </div>
                                                                    </div>
                                                                    <div class="col-md-7">
@@ -289,7 +329,7 @@
                                                                </div>
 
                                                                <div class="col-md-10 col-md-offset-1">
-                                                                   <label for="tlfmvle">Teléfono Móvil 2</label>
+                                                                   <label for="tlfmvle">Teléfono Móvil </label>
                                                                    <br>
                                                                    <div class="col-md-5">
                                                                        <div class="form-group row">
@@ -516,6 +556,13 @@
                                                             <select name="mundhem" class="form-control" id="mundhem">
                                                                 <option value="">-</option>
                                                             </select><i class="fa fa-map-signs icemp"></i>
+                                                        </div>
+                                                        
+
+                                                        <div class="form-group col-md-6 ">
+                                                            <label for="descpdhe">Codigo Postal</label>
+                                                            <input type="text" name="codigoPostal" class="form-control" id="c_postal">
+                                                            <i class="fa fa-map-marker icemp"></i>
                                                         </div>
                                                         <div class="form-group col-md-12">
                                                             <label for="descpdhem">Descripcion de la dirección</label>

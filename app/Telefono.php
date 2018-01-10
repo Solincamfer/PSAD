@@ -4,16 +4,15 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Rif extends Model
+class Telefono extends Model
 {
    public $timestamps=false;
-   protected  $table="rifs";
-   protected $fillable=['id','numero','rol','tipo_id'];
+   protected $table="telefonos";
+   protected $fillable=['id','codigo','telefono','tipo'];
 
-
-   
    public function empleado()
    {
     return $this->belongsTo('App\Empleado');
    }
+   
 }

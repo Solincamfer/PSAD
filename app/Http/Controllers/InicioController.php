@@ -57,7 +57,7 @@ class InicioController extends Controller
                         );//datos que se almacenaran en la variable session "sesion"
 
 
-
+ 
                 $perfil=Perfil::find($datos['perfil']);
                 if ($perfil->status) //si el perfil esta habilitado  ///agregar la verificacion de status del usuario
                     {
@@ -119,10 +119,10 @@ class InicioController extends Controller
         return view(
                             'Menu.menu',
                             [
-                            "modulos"=>$modulos[0],
-                            "submodulos"=>$submodulos[0],
-                            "nombre"=>$datos[0]["nombre"],
-                            "apellido"=>$datos[0]["apellido"]
+                              "modulos"=>$modulos[0],
+                              "submodulos"=>$submodulos[0],
+                              "nombre"=>$datos[0]["nombre"],
+                              "apellido"=>$datos[0]["apellido"]
                             ]
                     );
 
