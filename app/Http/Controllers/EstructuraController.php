@@ -128,10 +128,18 @@ class EstructuraController extends Controller
 	}
 
 	public function mostrarEstructuraDireccion(){ //Obtener el id de la direccion y buscar departamentos, areas y cargos asociados.
+
 		$argumento=\Request::get('data');
 		$datos=$this->cargar_header_sidebar_acciones();
 		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(1,2,3),4);
-
+		if (empty($argumento[2])) {
+			$argumento[2]=[0];
+		}
+		if (empty($argumento[3])) {
+			$argumento[3]=[0];
+		}
+		//\Session::push('marcados',$argumento[2]);
+		//$marcados=\Session::get('marcados');
 		if ($argumento[1]=='dep') {
 			$consulta=\DB::table('departamentos')->join('directores','departamentos.director_id','=','directores.id')
 								   			     ->select('directores.*')
@@ -140,7 +148,7 @@ class EstructuraController extends Controller
 									             ->distinct()
 									             ->get();
 			$query=\App\Departamento::where('director_id',$argumento[0])->get();
-			return view('Registros_Basicos.Departamentos.partials.listaDatos',$this->datos_vista(0,$acciones,$consulta,$query));
+			return view('Registros_Basicos.Departamentos.partials.listaDatos',$this->datos_vista(0,$acciones,$consulta,$query,$argumento[2]));
 		}
 		elseif ($argumento[1]=='area') {
 			$consulta=\DB::table('areas')->join('departamentos','areas.departamento_id','=','departamentos.id')
@@ -155,7 +163,7 @@ class EstructuraController extends Controller
 									  ->select('areas.*')
 									  ->where('directores.id',$argumento[0])->get();
 
-			return view('Registros_Basicos.Departamentos.partials.listarAreas',$this->datos_vista(0,$acciones,$consulta,$query));
+			return view('Registros_Basicos.Departamentos.partials.listarAreas',$this->datos_vista(0,$acciones,$consulta,$query,$argumento[3]));
 		}
 		else {
 			$consulta=\DB::table('cargos')->join('areas','cargos.area_id','=','areas.id')
@@ -181,6 +189,12 @@ class EstructuraController extends Controller
 		$argumento=\Request::get('data');
 		$datos=$this->cargar_header_sidebar_acciones();
 		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(1,2,3),4);
+		if (empty($argumento[2])) {
+			$argumento[2]=[0];
+		}
+		if (empty($argumento[3])) {
+			$argumento[3]=[0];
+		}
 		if ($argumento[1]=='dep') {
 			$consulta=\DB::table('departamentos')->join('directores','departamentos.director_id','=','directores.id')
 								   			     ->select('directores.*')
@@ -188,7 +202,7 @@ class EstructuraController extends Controller
 									             ->distinct()
 									             ->get();
 			$query=\App\Departamento::all();
-			return view('Registros_Basicos.Departamentos.partials.listaDatos',$this->datos_vista(0,$acciones,$consulta,$query));
+			return view('Registros_Basicos.Departamentos.partials.listaDatos',$this->datos_vista(0,$acciones,$consulta,$query,$argumento[2]));
 		}
 		elseif ($argumento[1]=='area') {
 			$consulta=\DB::table('areas')->join('departamentos','areas.departamento_id','=','departamentos.id')
@@ -197,7 +211,7 @@ class EstructuraController extends Controller
 									             ->distinct()
 									             ->get();
 			$query=\App\Area::all();
-			return view('Registros_Basicos.Departamentos.partials.listarAreas',$this->datos_vista(0,$acciones,$consulta,$query));
+			return view('Registros_Basicos.Departamentos.partials.listarAreas',$this->datos_vista(0,$acciones,$consulta,$query,$argumento[3]));
 		}
 		else {
 			$consulta=\DB::table('cargos')->join('areas','cargos.area_id','=','areas.id')
@@ -213,17 +227,23 @@ class EstructuraController extends Controller
 	public Function buscarDepartamentos(){
 		$datos=$this->cargar_header_sidebar_acciones();
 		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(1,2,3),4);
-		$direccionId=\Request::get('data');
-		if ($direccionId!=0) {
+		$data=\Request::get('data');
+		if(empty($data[1])){
+			$data[1]=[0];
+		}
+		\Session::forget('depmarcados');
+		\Session::push('depmarcados',$data[1]);
+		$marcados=\Session::get('depmarcados');
+		if ($data[0]!=0) {
 			$consulta=\DB::table('departamentos')->join('directores','departamentos.director_id','=','directores.id')
 								   			     ->select('directores.*')
-								   			     ->where('directores.id',$direccionId)
+								   			     ->where('directores.id',$data[0])
 									             ->whereNotNull('departamentos.director_id')
 									             ->distinct()
 									             ->get();
 			$query=\DB::table('departamentos')->join('directores','departamentos.director_id','=','directores.id')
 											  ->select('departamentos.*')
-											  ->where('directores.id',$direccionId)->get();
+											  ->where('directores.id',$data[0])->get();
 		}
 		else {
 			$consulta=\DB::table('departamentos')->join('directores','departamentos.director_id','=','directores.id')
@@ -234,7 +254,8 @@ class EstructuraController extends Controller
 			$query=\App\Departamento::all();
 		}
 
-		return view('Registros_Basicos.Departamentos.partials.listaDatos',$this->datos_vista(0,$acciones,$consulta,$query));
+		return view('Registros_Basicos.Departamentos.partials.listaDatos',$this->datos_vista(0,$acciones,$consulta,$query,$marcados[0]));
+
 	}
 
 	public Function buscarAreas(){
@@ -242,6 +263,18 @@ class EstructuraController extends Controller
 		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(1,2,3),4);
 		$data=\Request::get('data');
 		$parametro = 0;
+		if (empty($data[1])) {
+			$data[1]=[0];
+		}
+		if (empty($data[2])) {
+			$data[2]=[0];
+		}
+		\Session::forget('depmarcados');
+		\Session::forget('areamarcada');
+		\Session::push('depmarcados',$data[1]);
+		\Session::push('areamarcada',$data[2]);
+		$areamarcada=\Session::get('areamarcada');
+
 		if(empty($data[1])){
 			if ($data[0]==0) {
 				$consulta=\DB::table('areas')->join('departamentos','areas.departamento_id','=','departamentos.id')
@@ -288,7 +321,7 @@ class EstructuraController extends Controller
 			}
 		}
 			
-	return view('Registros_Basicos.Departamentos.partials.listarAreas',$this->datos_vista(0,$acciones,$consulta,$query,$parametro));
+	return view('Registros_Basicos.Departamentos.partials.listarAreas',$this->datos_vista(0,$acciones,$consulta,$query,$parametro,$areamarcada[0]));
 	}
 
 	public function buscarCargos(){
@@ -296,6 +329,16 @@ class EstructuraController extends Controller
 		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(1,2,3),4);
 		$data=\Request::get('data');
 		$parametro=0;
+		if (empty($data[1])) {
+			$data[1]=[0];
+		}
+		if (empty($data[2])) {
+			$data[2]=[0];
+		}
+		\Session::forget('depmarcados');
+		\Session::forget('areamarcada');
+		\Session::push('depmarcados',$data[1]);
+		\Session::push('areamarcada',$data[2]);
 		if(empty($data[1]) && empty($data[2])){
 			if ($data[0]!=0) {
 			$consulta=\DB::table('cargos')->join('areas','cargos.area_id','=','areas.id')
@@ -372,8 +415,6 @@ class EstructuraController extends Controller
 				}
 			}
 		}
-
-	//return dd($data[2]);
 	return view('Registros_Basicos.Departamentos.partials.listarCargos',$this->datos_vista(0,$acciones,$consulta,$query,$parametro));
 	}
 	public function buscarDirecciones(){
@@ -478,14 +519,13 @@ class EstructuraController extends Controller
 		$modal=(int)Request::get('modal');
 		$tablas=['directores','departamentos','areas','cargos'];
 		$consulta=\DB::table($tablas[$modal])->where('id',$registro)->first();
-		return response()->json($consulta)
-		;
+		return response()->json($consulta);
 	}
 
-	public function actualizarRegistros(){
+	public function actualizarDireccion(){
 		//$padre=(int)Request::get('padre');
 		$registro=(int)Request::get('registro');
-		//$modal=(int)Request::get('modal');
+		$respuesta=0;
 		$descripcion=strtoupper(Request::get('campoD'));
 		$estatus=Request::get('campoE');
 		$buscar=Director::where('descripcion',$descripcion)
@@ -495,10 +535,35 @@ class EstructuraController extends Controller
 			Director::where('id',$registro)->update([ 'descripcion' => $descripcion,
  													  'status'      => $estatus
 													]);
+			$datos=$this->cargar_header_sidebar_acciones();
+			$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(1,2,3),4);
+			$consulta=Director::all();
+			$respuesta=view('Registros_basicos.Departamentos.partials.listarDirecciones',$this->datos_vista(0,$acciones,$consulta));
 		}
-		$datos=$this->cargar_header_sidebar_acciones();
-		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(1,2,3),4);
-		$consulta=Director::all();
-		return view('Registros_basicos.Departamentos.partials.listarDirecciones',$this->datos_vista(0,$acciones,$consulta));
+		return $respuesta;
+	}
+
+	public function actualizarDepartamento(){
+		$padre=(int)Request::get('padre');
+		$registro=(int)Request::get('registro');
+		$respuesta=0;
+		$descripcion=strtoupper(Request::get('campoD'));
+		$estatus=Request::get('campoE');
+		$buscar=Departamento::where('descripcion',$descripcion)
+						  ->where('id','<>',$registro)
+						  ->where('director_id','<>',$padre)
+						  ->first();
+		if (count($buscar)==0) {
+			Departamento::where('id',$registro)->update([ 'descripcion' => $descripcion,
+ 													  	  'status'      => $estatus,
+ 													  	  'director_id' => $padre
+
+													]);
+			$datos=$this->cargar_header_sidebar_acciones();
+			$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(1,2,3),4);
+			$consulta=Departamento::all();
+			$respuesta=view('Registros_basicos.Departamentos.partials.listaDatos',$this->datos_vista(0,$acciones,$consulta));
+		}
+		return $respuesta;
 	}
 }

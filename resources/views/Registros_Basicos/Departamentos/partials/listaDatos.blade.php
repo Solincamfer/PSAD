@@ -11,7 +11,7 @@
                             @if($accion->id!=1 )
                                 @if($accion->id==2)
                                     <span class="iclsp">
-                                        <a  class="tltp modificar" data-modal="1" data-padre="{{$departamento->direcctor_id}}" data-reg="{{$departamento->id}}" id="ModificaDepar{{$departamento->id}}" data-ttl="{{$accion->descripcion}}" data-toggle="modal" >
+                                        <a  class="tltp modificar" data-modal="1" data-padre="{{$departamento->director_id}}" data-reg="{{$departamento->id}}" id="ModificaDepar{{$departamento->id}}" data-ttl="{{$accion->descripcion}}" data-toggle="modal" >
                                             <i class="{{$accion->clase_css}}"></i>
                                         </a>
                                     </span>
@@ -36,8 +36,12 @@
                         @endforeach
                     </div>
                     <div class="checkbox ttlMd1 filtro">
-                        <label><input type="checkbox" value="{{$departamento->id}}">{{$departamento->descripcion}}</label>
-                    </div>
+                        @if(in_array($departamento->id,$datosC1))                     
+                            <label><input type="checkbox" checked="checked" value="{{$departamento->id}}">{{$departamento->descripcion}}</label>
+                        @else
+                            <label><input type="checkbox" value="{{$departamento->id}}">{{$departamento->descripcion}}</label>
+                        @endif
+                    </div>     
                 </div>
             @endif
       @endforeach

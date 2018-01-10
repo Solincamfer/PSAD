@@ -38,7 +38,11 @@
                                     @endforeach
                                 </div>
                                 <div class="checkbox ttlMd1 filtro">
-                                    <label><input id="areas" type="checkbox" value="{{$area->id}}">{{$area->descripcion}}</label>
+                                   @if(in_array($area->id,$datosC2))                     
+                                        <label><input type="checkbox" checked="checked" value="{{$area->id}}">{{$area->descripcion}}</label>
+                                    @else
+                                        <label><input type="checkbox" value="{{$area->id}}">{{$area->descripcion}}</label>
+                                    @endif
                                 </div>
                             </div>
                         @endif
@@ -83,8 +87,12 @@
                             @endif
                         @endforeach
                     </div>
-                    <div class="checkbox ttlMd1 filtro">
-                        <label><input type="checkbox" id="areas" value="{{$area->id}}">{{$area->descripcion}}</label>
+                    <div class="checkbox ttlMd1 filtro" id="areas">
+                        @if(in_array($area->id,$datosC2))                     
+                            <label><input type="checkbox" checked="checked" value="{{$area->id}}">{{$area->descripcion}}</label>
+                        @else
+                            <label><input type="checkbox" value="{{$area->id}}">{{$area->descripcion}}</label>
+                        @endif
                     </div>
                 </div>
             @endif

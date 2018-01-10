@@ -3,7 +3,15 @@ $(document).ready(function(){
   $('#comboDireccion').on("change",function(){
     var id=$(this).val();
     var activo=$('.active').data('valor');
-    var data=[id,activo];
+    var  selected= new Array();
+    var areas= new Array();
+    $('#contDep .filtro input:checkbox:checked').each(function(index){
+      selected[index]= $(this).val();
+    });
+    $('#areas:checked').each(function(index) {
+      areas[index]=$(this).val();
+    });
+    var data=[id,activo,selected,areas];
     if (id!='0') {
       url="/menu/registros/estructura/mostrarEstructuraDireccion";
       $.get(url,{data:data},function(respuesta){
@@ -20,9 +28,17 @@ $(document).ready(function(){
     }
   });
 
-  $('#nav-dep').on("click",function(){
-    
-    var data =$('#comboDireccion').val();
+  $('body').on("click","#nav-dep",function(){
+    var selected = new Array();
+    var areas = new Array();
+    $('#contDep .filtro input:checkbox:checked').each(function(index){
+      selected[index]= $(this).val();
+    });
+    $('#areas:checked').each(function(index) {
+      areas[index]=$(this).val();
+    });
+    var idpadre =$('#comboDireccion').val();
+    var data=[idpadre,selected,areas];
     url="/menu/registros/estructura/buscarDepartamentos";
     $.get(url,{data:data},function(respuesta){
       $('.contDep').empty();
@@ -31,30 +47,36 @@ $(document).ready(function(){
   });
   
 
-  $('#nav-area').on("click",function(){
+  $('body').on("click","#nav-area",function(){
     var selected = new Array();
+    var areas = new Array();
     $('#contDep .filtro input:checkbox:checked').each(function(index){
       selected[index]= $(this).val();
     });
+    $('#contArea .filtro input:checkbox:checked').each(function(index) {
+      areas[index]=$(this).val();
+    });
     var direccion=$('#comboDireccion').val();
-    var data =[direccion,selected];
+    var data =[direccion,selected,areas];
     url="/menu/registros/estructura/buscarAreas";
     $.get(url,{data:data},function(respuesta){
+      console.log(areas);
       $('.contArea').empty();
       $('.contArea').append(respuesta);
     });
   });
 
 
-  $('#nav-cargo').on("click",function(){
+  $('body').on("click","#nav-cargo",function(){
     var departamentos = new Array();
     var areas = new Array();
     $('#contDep .filtro input:checkbox:checked').each(function(index){
       departamentos[index]= $(this).val();
     });
-    $('#areas:checked').each(function(index) {
+    $('#areas input:checkbox:checked').each(function(index) {
       areas[index]=$(this).val();
     });
+    alert(areas);
     if (areas.length==0) {
       areas = 0;
     }
@@ -406,16 +428,15 @@ $(document).ready(function(){
     $.ajax({
       url: url,
       type: 'post',
-      dataType: 'html',
+      dataType: 'json',
       data: data,
       cache: false,
       contentType: false,
       processData: false
     })
     .done(function(respuesta) {
-      var response = JSON.parse(respuesta);
-        $(ventana[modal]+' input[name=campoD]').val(response.descripcion);
-        $(ventana[modal]+' select[name=campoE]').val(response.status);
+        $(ventana[modal]+' input[name=campoD]').val(respuesta.descripcion);
+        $(ventana[modal]+' select[name=campoE]').val(respuesta.status);
         $(ventana[modal]).modal('show');
     })
     .fail(function() {
@@ -429,7 +450,6 @@ $(document).ready(function(){
       console.log("complete");
     });
   });
-   var ventana=['#myModalDM','#myModalDEM','#myModalARM','#myModalCAM'];
 
   $('#updateDireccion').bootstrapValidator({
    feedbackIcons: {
@@ -449,29 +469,6 @@ $(document).ready(function(){
        validators: {
          notEmpty: {
            message: 'Seleccione el estatus que tendra la nueva dirección'
-         }
-       }
-     }
-   }
-  });
-   $('#myModalDEM').bootstrapValidator({
-   feedbackIcons: {
-     valid: 'glyphicon glyphicon-ok',
-     invalid: 'glyphicon glyphicon-remove',
-     validating: 'glyphicon glyphicon-refresh'
-   },
-   fields: {
-     campoD: {
-       validators: {
-         notEmpty: {
-           message: 'Debe indicar el nombre del departamento'
-         }
-       }
-     },
-     campoE: {
-       validators: {
-         notEmpty: {
-           message: 'Seleccione el estatus que tendra el nuevo departamento'
          }
        }
      }
@@ -530,7 +527,7 @@ $(document).ready(function(){
     else {
      e.preventDefault();
       var form= new FormData(document.getElementById('updateDireccion'));
-      var url="/menu/registros/estructura/actualizarRegistros";
+      var url="/menu/registros/estructura/actualizarDireccion";
       $.ajax({
         url: url,
         type: "post",
@@ -541,41 +538,116 @@ $(document).ready(function(){
         processData: false
       })
       .done(function(respuesta){
-        $('.contRegisterDireccion').empty();
-        $('.contRegisterDireccion').append(respuesta); 
-       /* if(respuesta==1){
+         
+        if(respuesta==0){
+            swal({
+            title:'Casi Terminamos!!',//Contenido del modal
+            text: 'Ya existe una dirección con ese nombre',
+            type: "error",
+            //timer:1500,
+            showConfirmButton:true,//Eliminar boton de confirmacion
+            });
+          $('#updateDireccion').data('bootstrapValidator').resetForm();
+          $('#buttonUpdateDir').on("click",function(){
+            $('#updateDireccion').bootstrapValidator('validateField', 'campoD');
+            $('#updateDireccion').bootstrapValidator('validateField', 'campoE');
+          });
+
+        }
+        else{
           swal({
-            title:'Guardado Exitoso',//Contenido del modal
+            title:'Actualización Exitosa',//Contenido del modal
             text: 'La dirección fue actualizada exitosamente',
             type: "success",
             timer:1500,
             showConfirmButton:false,//Eliminar boton de confirmacion
           });
-          $('#direccionDesc').val('');
-          $('#direccionEst').val('');
+          $('.contRegisterDireccion').empty();
+          $('.contRegisterDireccion').append(respuesta);
           $('#updateDireccion').data('bootstrapValidator').resetForm();
           $('#buttonUpdateDir').on("click",function(){
-            $('#updateDireccion').bootstrapValidator('validateField', 'area');
-            $('#updateDireccion').bootstrapValidator('validateField', 'comboArea');
+            $('#updateDireccion').bootstrapValidator('validateField', 'campoD');
+            $('#updateDireccion').bootstrapValidator('validateField', 'campoE');
+          });
+          setTimeout(function(){location.reload()},2200);
+        }
+      });   
+    }
+  });
+
+  $('#updateDepartamento').bootstrapValidator({
+   feedbackIcons: {
+     valid: 'glyphicon glyphicon-ok',
+     invalid: 'glyphicon glyphicon-remove',
+     validating: 'glyphicon glyphicon-refresh'
+   },
+   fields: {
+     campoD: {
+       validators: {
+         notEmpty: {
+           message: 'Debe indicar el nombre del departamento'
+         }
+       }
+     },
+     campoE: {
+       validators: {
+         notEmpty: {
+           message: 'Seleccione el estatus que tendra el nuevo departamento'
+         }
+       }
+     }
+   }
+  });
+
+  $('body').bootstrapValidator().on('submit','#updateDepartamento', function (e) {
+    if(e.isDefaultPrevented()) {
+    } 
+    else {
+     e.preventDefault();
+      var form= new FormData(document.getElementById('updateDepartamento'));
+      var url="/menu/registros/estructura/actualizarDepartamento";
+      $.ajax({
+        url: url,
+        type: "post",
+        dataType: "json",
+        data: form,
+        cache: false,
+        contentType: false,
+        processData: false
+      })
+      .done(function(respuesta){
+         
+        if(respuesta==0){
+            swal({
+            title:'Casi Terminamos!!',//Contenido del modal
+            text: 'Ya existe un departamento con ese nombre dentro de la direccion seleccionada',
+            type: "error",
+            //timer:1500,
+            showConfirmButton:true,//Eliminar boton de confirmacion
+            });
+          $('#updateDepartamento').data('bootstrapValidator').resetForm();
+          $('#buttonUpdateDep').on("click",function(){
+            $('#updateDepartamento').bootstrapValidator('validateField', 'campoD');
+            $('#updateDepartamento').bootstrapValidator('validateField', 'campoE');
           });
 
         }
-        else if(respuesta==0){
+        else{
           swal({
-            title:'Casi Terminamos!!',//Contenido del modal
-            text: 'El nombre para esta dirección ya se encuentra registrado',
-            type: "error",
+            title:'Actualización Exitosa',//Contenido del modal
+            text: 'El departamento fue actualizado exitosamente',
+            type: "success",
             timer:1500,
             showConfirmButton:false,//Eliminar boton de confirmacion
           });
-         $('#direccionDesc').val('');
-          $('#direccionEst').val('');
-          $('#updateDireccion').data('bootstrapValidator').resetForm();
-          $('#buttonUpdateDir').on("click",function(){
-            $('#updateDireccion').bootstrapValidator('validateField', 'area');
-            $('#updateDireccion').bootstrapValidator('validateField', 'comboArea');
+          $('.contDep').empty();
+          $('.contDep').append(respuesta);
+          $('#updateDepartamento').data('bootstrapValidator').resetForm();
+          $('#buttonUpdateDep').on("click",function(){
+            $('#updateDepartamento').bootstrapValidator('validateField', 'campoD');
+            $('#updateDepartamento').bootstrapValidator('validateField', 'campoE');
           });
-        }*/
+        }
       });   
     }
   });

@@ -108,10 +108,6 @@
                               <div class="contRegister contArea" id="contArea">
 
                               </div>
-
-
-
-
                             </div>
                             <div id="cargo" class="tab-pane fade col-xs-5 col-sm-5 col-md-6 col-md-offset-2">
                               <div class="row" style="padding:40px 0 20px 0;">
@@ -206,7 +202,6 @@
                                     {{ csrf_field() }}
                                     <input type="hidden" name="padre">
                                     <input type="hidden" name="registro">
-                                    <input type="hidden" name="modal" value="0">
                                     <div class="container-fluid" id="contdpto">
                                         <div class="row">
                                             <div id="dptom">
@@ -297,11 +292,10 @@
                                 <h4 class="modal-title" id="myModalLabel2"><strong>Modificar Departamento</strong></h4>
                             </div>
                             <div class="modal-body">
-                                <form method="post" class="form-horizontal formUpdateReg" action=>
+                                <form method="post" class="form-horizontal formUpdateReg" id="updateDepartamento">
                                     {{ csrf_field() }}
                                     <input type="hidden" name="padre">
                                     <input type="hidden" name="registro">
-                                    <input type="hidden" name="modal" value="1">
                                     <div class="container-fluid" id="contdpto">
                                         <div class="row">
                                             <div id="dptom">
@@ -326,7 +320,7 @@
 
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="submit" class="bttnMd" id="mDepCarPer">Guardar <i class="fa fa-floppy-o"></i></button>
+                                        <button type="submit" class="bttnMd" id="buttonUpdateDep">Guardar <i class="fa fa-floppy-o"></i></button>
                                     </div>
 
                                 </form>
