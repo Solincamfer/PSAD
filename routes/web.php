@@ -84,9 +84,9 @@ Route::group(['prefix'=>'/menu/registros','middleware'=>['v_menu']],function(){
 	///**/Route::match(['post','get'],'/clientes/sucursales/plan/servicio/agregar',       				['middleware'=>'validar_ac','uses'=>'RegistrosBasicos@clientes_sucursales_plan_serv_agregar']);
 	///**/Route::match(['post','get'],'/clientes/sucursales/equipos/agregar',             				['middleware'=>'validar_ac','uses'=>'RegistrosBasicos@clientes_sucursales_equipos_agregar']);
 	///**/Route::match(['post','get'],'/clientes/sucursales/equipos/modificar',           				['middleware'=>'validar_ac','uses'=>'RegistrosBasicos@clientes_sucursales_equipos_modificar']);
-	/**/Route::match(['post','get'],'/clientes/categoria/sucursal/equipos/componentes/{equipo_id}', 	['middleware'=>'validar_ac:44','uses'=>'RegistrosBasicos@clientes_sucursales_equipos_componentes']);
-	/**/Route::match(['post','get'],'/clientes/categoria/sucursal/equipos/componentes/piezas/{componente_id}',			['middleware'=>'validar_ac:48','uses'=> 'RegistrosBasicos@clientes_sucursales_equipos_piezas']);
-	/**/Route::match(['post','get'],'/clientes/categoria/sucursal/equipos/aplicaciones/{equipo_id}',    ['middleware'=>'validar_ac:49','uses'=> 'RegistrosBasicos@clientes_sucursales_equipos_aplicaciones']);
+	/**/Route::match(['post','get'],'/clientes/categoria/sucursal/equipos/componentes/{equipo_id}', 	       ['middleware'=>'validar_ac:44','uses'=>'RegistrosBasicos@clientes_sucursales_equipos_componentes']);
+	/**/Route::match(['post','get'],'/clientes/categoria/sucursal/equipos/componentes/piezas/{componente_id}', ['middleware'=>'validar_ac:48','uses'=> 'RegistrosBasicos@clientes_sucursales_equipos_piezas']);
+	/**/Route::match(['post','get'],'/clientes/categoria/sucursal/equipos/aplicaciones/{equipo_id}',           ['middleware'=>'validar_ac:49','uses'=> 'RegistrosBasicos@clientes_sucursales_equipos_aplicaciones']);
 
 	///**/Route::match(['post','get'],'/clientes/sucursales/usuario/agregar',                   		 	['middleware'=>'validar_ac','uses'=> 'RegistrosBasicos@clientes_sucursales_usuarios_agregar']);
 	///**/Route::match(['post','get'],'/clientes/sucursales/usuario/modificar',                   		['middleware'=>'validar_ac','uses'=> 'RegistrosBasicos@clientes_sucursales_usuarios_modificar']);
@@ -125,7 +125,7 @@ Route::group(['prefix'=>'/menu/registros','middleware'=>['v_menu']],function(){
 	Route::match(['post','get'],'/actualizar',                                                              ['uses'=>'RegistrosBasicos@actualizar_registrosCD']);
 	Route::match(['post','get'],'/departamentos/cargos/registrar/{departamento_id}',                      	['uses'=>'RegistrosBasicos@cargos_ingresar']);
 	Route::match(['post','get'],'/perfiles/registrar',                                                      ['uses'=>'RegistrosBasicos@perfiles_insertar']);
-	Route::match(['post','get'],'/perfiles/status',                                                      ['uses'=>'RegistrosBasicos@perfilesModificarStatus']);
+	Route::match(['post','get'],'/perfiles/status',                                                         ['uses'=>'RegistrosBasicos@perfilesModificarStatus']);
 	Route::match(['post','get'],'/perfiles/modificar',                                                  	['uses'=>'RegistrosBasicos@perfilesModificar']);
 	Route::match(['post','get'],'/perfiles/actualizar',                                                  	['uses'=>'RegistrosBasicos@perfilesActualizar']);
 
@@ -180,7 +180,7 @@ Route::group(['prefix'=>'/menu/registros','middleware'=>['v_menu']],function(){
 
 //////////////////////////// CLIENTES /////////////////////////////////////////////////////////////
 
-	Route::match(['post','get'],'/clientes/consultaplan',						   	['uses'=>'RegistrosBasicos@consultar_plan']);
+	Route::match(['post','get'],'/clientes/consultaplan',						   	                        ['uses'=>'RegistrosBasicos@consultar_plan']);
 
 /////////////////////////// ESTRUCTURA ///////////////////////////////////////////////////////////
 Route::match(['post','get'],'/estructura/mostrarEstructuraDireccion',						   	['uses'=>'EstructuraController@mostrarEstructuraDireccion']);

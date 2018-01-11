@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class TablaCorreoEmpleado extends Migration
+class TablaEmpleadoUsuario extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,13 @@ class TablaCorreoEmpleado extends Migration
      */
     public function up()
     {
-        Schema::create('correo_empleado', function (Blueprint $table) {
+        Schema::create('empleado_usuario', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('correo_id')->unsigned();
             $table->integer('empleado_id')->unsigned();
+            $table->integer('usuario_id')->unsigned();
 
-            $table->foreign('correo_id')->references('id')->on('correos');
             $table->foreign('empleado_id')->references('id')->on('empleados');
-
-
-
+            $table->foreign('usuario_id')->references('id')->on('usuarios');
         });
     }
 
@@ -33,6 +30,6 @@ class TablaCorreoEmpleado extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('correo_empleado');
+        Schema::dropIfExists('empleado_usuario');
     }
 }

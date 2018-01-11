@@ -69,7 +69,7 @@
                                           @endif
                                         @endforeach
                                     </div>
-                                <p class="ttlMd"><strong>{{$empleado->nombre."  ".$empleado->apellido}}</strong></p>
+                                <p class="ttlMd"><strong>{{$empleado->primerNombre."  ".$empleado->primerApellido}}</strong></p>
                                 </div>
                             @endforeach
                             <input type="text" name="TND" value="{{$datosC6}}">
@@ -184,10 +184,10 @@
                                                                <div class="col-md-10 col-md-offset-1">
                                                                    <div class="form-group row">
                                                                        <label for="dptoEmp"> Direccion </label><span class="ic"><i class="fa fa-chevron-down"></i></span>
-                                                                       <select name="dptoEmp" class="form-control" id="dptoEmp" data-lista="0">
+                                                                       <select name="direccionEmp" class="form-control" id="direccionEmp" data-lista="0">
                                                                            <option value="0">-</option>
-                                                                           @foreach ($datosC5 as $departamentos)
-                                                                              <option value="{{$departamentos->id}}">{{$departamentos->descripcion}}</option>
+                                                                           @foreach ($datosC5 as $direccion)
+                                                                              <option value="{{$direccion->id}}">{{$direccion->descripcion}}</option>
                                                                             @endforeach
                                                                        </select><i class="fa fa-briefcase icemp"></i>
                                                                    </div>
@@ -196,7 +196,7 @@
                                                                <div class="col-md-10 col-md-offset-1">
                                                                    <div class="form-group row">
                                                                        <label for="cgoEmp"> Departamento </label><span class="ic"><i class="fa fa-chevron-down"></i></span>
-                                                                       <select name="cgoEmp" class="form-control" id="cgoEmp">
+                                                                       <select name="departamentoEmp" class="form-control" id="departamentoEmp">
                                                                            <option value="">-</option>
                                                                        </select><i class="fa fa-id-badge icemp"></i>
                                                                    </div>
@@ -206,11 +206,8 @@
                                                                <div class="col-md-10 col-md-offset-1">
                                                                    <div class="form-group row">
                                                                        <label for="dptoEmp"> Area </label><span class="ic"><i class="fa fa-chevron-down"></i></span>
-                                                                       <select name="dptoEmp" class="form-control" id="dptoEmp" data-lista="0">
+                                                                       <select name="areaEmp" class="form-control" id="areaEmp" data-lista="0">
                                                                            <option value="0">-</option>
-                                                                           @foreach ($datosC5 as $departamentos)
-                                                                              <option value="{{$departamentos->id}}">{{$departamentos->descripcion}}</option>
-                                                                            @endforeach
                                                                        </select><i class="fa fa-briefcase icemp"></i>
                                                                    </div>
                                                                </div>
@@ -266,7 +263,7 @@
                                                                 
                                                                 <div class="form-group col-md-6 ">
                                                                    <label for="descpdhe">Codigo Postal</label>
-                                                                   <input type="text" name="codigoPostal" class="form-control" id="c_postal">
+                                                                   <input type="text" name="codigoPostal" class="form-control" id="codigoPostal">
                                                                    <i class="fa fa-map-marker icemp"></i>
                                                                  </div>
                                                                
@@ -296,13 +293,13 @@
                                                                                 <option value="{{$tl->id}}">{{$tl->descripcion}}</option>
                                                                               @endforeach
                                                                            </select><i class="fa fa-hashtag icemp"></i> --}}
-                                                                           <input type="tel" name="numerol"  placeholder="Codigo" class="form-control" id="numtlflcle"><i class="fa fa-hashtag icemp"></i>
+                                                                           <input type="tel" name="numerol_1c"  placeholder="Codigo" class="form-control" id="numerol_1c"><i class="fa fa-hashtag icemp"></i>
 
                                                                        </div>
                                                                    </div>
                                                                    <div class="col-md-7">
                                                                        <div class="form-group row">
-                                                                           <input type="tel" name="numerol"class="form-control" id="numtlflcle"><i class="fa fa-phone icemp"></i>
+                                                                           <input type="tel" name="numerol_1t"class="form-control" id="numerol_1t"><i class="fa fa-phone icemp"></i>
                                                                        </div>
                                                                    </div>
                                                                </div>
@@ -318,12 +315,12 @@
                                                                                 <option value="{{$tc->id}}">{{$tc->descripcion}}</option>
                                                                               @endforeach
                                                                            </select><i class="fa fa-hashtag icemp"></i> --}}
-                                                                            <input type="tel" placeholder="Codigo"name="numerol"class="form-control" id="numtlflcle"><i class="fa fa-hashtag icemp"></i>
+                                                                            <input type="tel" placeholder="Codigo" name="numerol_2c" class="form-control" id="numerol_2c"><i class="fa fa-hashtag icemp"></i>
                                                                        </div>
                                                                    </div>
                                                                    <div class="col-md-7">
                                                                        <div class="form-group row">
-                                                                           <input type="tel" name="numeroc" class="form-control" id="numtlfmvle"><i class="fa fa-mobile icemp"></i>
+                                                                           <input type="tel" name="numerol_2t" class="form-control" id="numerol_2t"><i class="fa fa-mobile icemp"></i>
                                                                        </div>
                                                                    </div>
                                                                </div>
@@ -334,7 +331,7 @@
                                                                    <div class="col-md-5">
                                                                        <div class="form-group row">
                                                                            <span class="ic"><i class="fa fa-chevron-down" ></i></span>
-                                                                           <select name="tlfmvle" class="form-control" id="tlfmvle">
+                                                                           <select name="numerom_c" class="form-control" id="numerom_c">
                                                                                <option value="0">-</option>
                                                                               @foreach ($datosC3 as $tc)
                                                                                 <option value="{{$tc->id}}">{{$tc->descripcion}}</option>
@@ -344,7 +341,7 @@
                                                                    </div>
                                                                    <div class="col-md-7">
                                                                        <div class="form-group row">
-                                                                           <input type="tel" name="numeroc" class="form-control" id="numtlfmvle"><i class="fa fa-mobile icemp"></i>
+                                                                           <input type="tel" name="numerom_t" class="form-control" id="numerom_t"><i class="fa fa-mobile icemp"></i>
                                                                        </div>
                                                                    </div>
                                                                </div>
@@ -354,7 +351,7 @@
                                                                    <div class="col-md-10 col-md-offset-1">
                                                                        <div class="form-group row">
                                                                            <label for="maile">Correo Electrónico</label>
-                                                                           <input type="text" name="maile" class="form-control" id="maile"><i class="fa fa-envelope icemp"></i>
+                                                                           <input type="text" name="correo_agr" class="form-control" id="correo_agr"><i class="fa fa-envelope icemp"></i>
                                                                        </div>
                                                                    </div>
                                                                </div>
@@ -368,19 +365,19 @@
                                                                 <div class="col-md-8 col-md-offset-2">
                                                                     <div class="form-group row">
                                                                         <label for="nomUs">Nombre de Usuario</label>
-                                                                        <input type="text" class="form-control" name="nomUs" id="nomUs"><i class="fa fa-user-circle icemp"></i>
+                                                                        <input type="text" class="form-control" name="nomUs_agr" id="nomUs_agr"><i class="fa fa-user-circle icemp"></i>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-8 col-md-offset-2">
                                                                     <div class="form-group row">
                                                                         <label for="pwUs1">Contraseña</label>
-                                                                        <input type="password" class="form-control" name="pwUs1" id="pwUs1"><i class="fa fa-lock icemp"></i>    
+                                                                        <input type="password" class="form-control" name="psw_agr" id="psw_agr"><i class="fa fa-lock icemp"></i>    
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-8 col-md-offset-2">
                                                                     <div class="form-group row">
                                                                         <label for="stUs">Estatus de Usuario</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
-                                                                        <select name="status" id="stUs" class="form-control">
+                                                                        <select name="statusEm_agr" id="statusEm_agr" class="form-control">
                                                                             <option value="">-</option>
                                                                             <option value="1">Activo</option>
                                                                             <option value="0">Inactivo</option>

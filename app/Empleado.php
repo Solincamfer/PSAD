@@ -52,6 +52,11 @@ class Empleado extends Model
     return $this->hasOne('App\Cargo');
    }
 
+    public function usuarios()
+   {
+    return $this->belongsToMany('App\Usuario');
+   }
+
 
 
 
