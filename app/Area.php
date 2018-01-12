@@ -13,7 +13,13 @@ class Area extends Model
     public function departamentos(){
     	return $this->belongsto('App\Departamento');
     }
-    public function cargos(){
+    public function cargos()
+    {
     	return $this->hasMany('App\Cargo');
     }
+
+   public function empleado()
+   {
+    return $this->belongsTo('App\Empleado');
+   }
 }

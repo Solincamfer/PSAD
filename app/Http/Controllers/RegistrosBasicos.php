@@ -10,6 +10,8 @@ use App\Perfil;
 use App\Horario;
 use App\Bitacora;
 use App\Plan;
+use App\Empleado;
+use App\Usuario;
 use Response;
 
 
@@ -998,12 +1000,12 @@ public function empleados()
 		$paises=DB::table('paises')->get();
 		$codigoC=DB::table('tipos')->where('numero_c',2)->get();
 		$codigoL=DB::table('tipos')->where('numero_c',3)->get();
-		$departamentos=DB::table('departamentos')->where('status',1)->get();
+		$directores=DB::table('directores')->where('status',1)->get();
 
 
 	$datos=$this->cargar_header_sidebar_acciones();
 	$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(76,77,78),75);
-	return view ('Registros_Basicos\empleados\empleados',$this->datos_vista($datos,$acciones,DB::table('empleados')->where('id','<>',4)->get(),$tipoR,$tipoD,$paises,$codigoC,$codigoL,$departamentos,4));//el 3 significa que es la vista 3
+	return view ('Registros_Basicos\empleados\empleados',$this->datos_vista($datos,$acciones,DB::table('empleados')->get(),$tipoR,$tipoD,$paises,$codigoC,$codigoL,$directores,4));//el 3 significa que es la vista 3
 }
 
 public function empleados_perfiles($empleado_id)
@@ -1012,10 +1014,14 @@ public function empleados_perfiles($empleado_id)
 	$datos=$this->cargar_header_sidebar_acciones();
 	$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(),false);
 	
-	$consulta=DB::table('perfiles')->join('usuarios','perfiles.id','=','usuarios.perfil_id')
-								   ->join('empleados','usuarios.id','=','empleados.usuario_id')
-								   ->select('usuarios.perfil_id As perfilE','usuarios.n_usuario As usuarioE','usuarios.id As usuarioId')
-								   ->where('empleados.id',$empleado_id)->first();
+	$empleado=Empleado::find($empleado_id);
+	$usuario=$empleado->usuarios;
+	$usuario=$usuario[0];
+
+	$perfil=Perfil::find($usuario->perfil_id);
+
+
+
 	
 
 	
@@ -1023,9 +1029,9 @@ public function empleados_perfiles($empleado_id)
 	
 	return view ('Registros_Basicos\empleados\empleados_perfil',$this->datos_vista($datos,$acciones,
 						DB::table('perfiles')->where('id','<>',13)->where('id','<>',16)->get(),
-						$consulta->usuarioE,//extra
-						$consulta->perfilE,//datosC1
-						$consulta->usuarioId//datosC2
+						$usuario->n_usuario,//extra
+						$perfil->id,//datosC1
+						$usuario->id//datosC2
 					
 						));
 }
@@ -1066,72 +1072,26 @@ public function cargar_modal_agregar(){
 	return $consulta;
 }
 
-public function insertar_empleado(){
+///////////////////////////////////Insertar empleados : submoduloEmpleados ///////////////////////////////////////////////////////
 
-	$nombre1=Request::get('nomEmp1');
-	$nombre2=Request::get('nomEmp2');
-	$apellido1=Request::get('apellEmp1');
-	$apellido2=Request::get('apellEmp2');
-	$tiporif= Request::get('TrifEmp');
-	$rif= Request::get('rifEmp');
-	$tipocedula= Request::get('TciEmp');
-	$cedula= Request::get('ciEmp');
-	$fechanac= Request::get('fnEmp');
-	$departamento= Request::get('dptoEmp');
-	$cargo = Request::get('cgoEmp');
-	$pais = Request::get('pdhe');
-	$region = Request::get('rgdhe');
-	$estado = Request::get('edodhe');
-	$municipio = Request::get('mundhe');
-	$direccion=Request::get('descpdhe');
-	$codigoL= Request::get('tlflcle');
-	$numeroL= Request::get('numerol');
-	$codigoC= Request::get('tlfmvle');
-	$numeroC= Request::get('numeroc');
-	$correoE= Request::get('maile');
-	$usuario= Request::get('nomUs');
-	$password= Request::get('pwUs1');
-	$estatus= Request::get('status');
-	$consultac= DB::table('cedulas')->where('numero',$cedula)->where('rol','empleado')->first();
-	$consultar= DB::table('rifs')->where('numero',$rif)->where('rol','empleado')->first();
-	$consultau= DB::table('usuarios')->where('n_usuario',$usuario)->first();
-	if(count($consultac)==0 and count($consultar)==0 and count($consultau)==0){
+public function insertar_empleado()
+{
 
-		//////////////////// INSERTAR DATOS EN TABLAS CORRESPONDIENTES ///////////////////////////////////////
+	$formulario=array(
 
-		$idR= DB::table('rifs')->insertGetId//insertar rif 
-						(
-							['numero'=>$rif,'tipo_id'=>$tiporif,'rol'=>'empleado']
-						);
-		$idC= DB::table('cedulas')->insertGetId//insertar rif 
-						(
-							['numero'=>$cedula,'tipo_id'=>$tipocedula,'rol'=>'empleado']
-						);
-		$idd= DB::table('direcciones')->insertGetId//insertar rif 
-						(
-							['descripcion'=>$direccion,'municipio_id'=>$municipio,'pais_id'=>$pais, 'region_id'=>$region, 'estado_id'=>$estado ]
-						);
-		$idCO= DB::table('contactos')->insertGetId
-						(
-							['tipo_id'=>$codigoL,'tipo__id'=>$codigoC,'telefono_m'=>$numeroC,'telefono_f'=>$numeroL,'correo'=>$correoE]
-						);
-		$idU= DB::table('usuarios')->insertGetId
-						(
-							['n_usuario'=>$usuario,'clave'=>$password,'status'=>$estatus,'perfil_id'=>(int)16]
+						'primerNombre'=>strtoupper(Request::get('nomEmp1')),
+						'segundoNombre'=>strtoupper(Request::get('nomEmp2')),
+						'primerApellido'=>strtoupper(Request::get('apellEmp1')),
+						'segundoApellido'=>strtoupper(Request::get('apellEmp2')),
+						'tipoRif'=>Request::get('TrifEmp'),
+						'numeroRif'=>Request::get('rifEmp'),
+						'tipocedula'=>Request::get('TciEmp'),
+						'numeroCedula'=>Request::get('ciEmp'),
+						'fechaNacimiento'=>Request::get('fnEmp'),
+
 						);
 
-		DB::table('empleados')->insert
-						(
-							['nombre'=>$nombre1,'nombre_'=>$nombre2,'apellido'=>$apellido1,'apellido_'=>$apellido2,'fechaN'=>$fechanac,'cedula_id'=>$idC,'rif_id'=>$idR,'departamento_id'=>$departamento,'cargo_id'=>$cargo,'direccion_id'=>$idd,'contacto_id'=>$idCO,'usuario_id'=>$idU]
-						);
-
-		$respuesta=1;
-	}
-	else{
-		$respuesta=0;
-	}
-
-	return $respuesta;
+return Response::json($formulario);
 }
 
 

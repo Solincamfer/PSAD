@@ -69,6 +69,7 @@ $('#log1').click(function(){
 									html: true
 								});
 								//Retardo en ejecucion de ruta.
+
 								setTimeout(function(){location.href = "/menu";},2200); // 3000ms = 3s
 							}	
 						else if(resultado[3]==0)
@@ -1474,44 +1475,44 @@ $("#edodhe").change(function(){
 
 /////////////////////////////// VALIDAR E INSERTAR REGISTROS PARA EMPLEADOS /////////////////////////////
 
-$("#saveEmpl").click(function(){
-	url= "/menu/registros/empleados/agregar"
-	var form = $("#NewEmp");
-	nombre=$('#nomEmp1').val();
-	datos = form.serialize();
-	var posting = $.post(url,datos,function(resultado){
-		if (resultado == 1) {
-			//SWALLLL mensajes de alerta y sucesos
-			swal({
-				title:'Guardado Exitoso',//Contenido del modal
-				text: 'El Empleado fue guardado Exitosamente',
-				type: "success",
-				timer:1600,
-				showConfirmButton:false,//Eliminar boton de confirmacion
-			});
-			//Retardo en ejecucion de ruta.
-			setTimeout(function(){location.href = "/menu/registros/empleados/";},1800); // 3000ms = 3s
-		}	
-		else {
-			swal({
+// $("#saveEmpl").click(function(){
+// 	url= "/menu/registros/empleados/agregar"
+// 	var form = $("#NewEmp");
+// 	nombre=$('#nomEmp1').val();
+// 	datos = form.serialize();
+// 	var posting = $.post(url,datos,function(resultado){
+// 		if (resultado == 1) {
+// 			//SWALLLL mensajes de alerta y sucesos
+// 			swal({
+// 				title:'Guardado Exitoso',//Contenido del modal
+// 				text: 'El Empleado fue guardado Exitosamente',
+// 				type: "success",
+// 				timer:1600,
+// 				showConfirmButton:false,//Eliminar boton de confirmacion
+// 			});
+// 			//Retardo en ejecucion de ruta.
+// 			setTimeout(function(){location.href = "/menu/registros/empleados/";},1800); // 3000ms = 3s
+// 		}	
+// 		else {
+// 			swal({
 
-				title:'Registro Existente!!!.',//Contenido del modal
-				text: 'La Cédula, el Rif, o el Usuario ya estan asociados a un empleado, Revise estos datos',
-				type: "error",
-				timer:3000,
-				showConfirmButton:false,//Eliminar boton de confirmacion
-			});
-		}					
-	});
-	posting.fail(function() {
-		swal({
-			title:'Error inesperado!!',//Contenido del modal
-			text: 'Pongase en contacto con el administrador',
-			type: "error",
-			showConfirmButton:true,//Eliminar boton de confirmacion
-		});
-	});
-});
+// 				title:'Registro Existente!!!.',//Contenido del modal
+// 				text: 'La Cédula, el Rif, o el Usuario ya estan asociados a un empleado, Revise estos datos',
+// 				type: "error",
+// 				timer:3000,
+// 				showConfirmButton:false,//Eliminar boton de confirmacion
+// 			});
+// 		}					
+// 	});
+// 	posting.fail(function() {
+// 		swal({
+// 			title:'Error inesperado!!',//Contenido del modal
+// 			text: 'Pongase en contacto con el administrador',
+// 			type: "error",
+// 			showConfirmButton:true,//Eliminar boton de confirmacion
+// 		});
+// 	});
+// });
 
 // /////////////////////////////// CARGAR DATOS EN MODAL DE MODIFICAR EMPLEADO /////////////////////////////
 

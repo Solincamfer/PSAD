@@ -8,7 +8,7 @@ class Direccion extends Model
 {
     public $timestamps=false;
     protected $table="direcciones";
-    protected $fillable=['id','descripcion','municipio_id','pais_id','region_id','estado_id'];
+    protected $fillable=['id','descripcion','codigoPostal','municipio_id','pais_id','region_id','estado_id'];
     
 
     public function estado()
@@ -30,5 +30,10 @@ class Direccion extends Model
     {
         return $this->belongsTo('App\Municipio');
     }
+
+   public function empleado()
+   {
+    return $this->belongsTo('App\Empleado');
+   }
 
 }

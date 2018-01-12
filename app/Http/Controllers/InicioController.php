@@ -44,20 +44,35 @@ class InicioController extends Controller
         $_usuario=Usuario::where('n_usuario',$usuario)->where('clave',$password)->first(); //consulta a la base de datos con los datos capturados  en el formulario
 
 
+
+
+
         if (empty($_usuario)==false)//si la consulta a la base de datos devuelve registros
             {
-                $persona=Empleado::where('usuario_id',$_usuario->id)->first();//consulta de los datos personales  del usuario
-                $datos= array
-                        (
-                           'usuario'=>$_usuario->n_usuario,
-                           'perfil'=>$_usuario->perfil_id,
-                           'nombre'=>$persona->nombre,
-                           'apellido'=>$persona->apellido
+                
+                if($usuario=='SUPSAD')
+                {
+                  $datos=array
+                  (
+                    'usuario'=>'SUPSAD',
+                    'perfil'=>13,
+                    'nombre'=>'SUPERVISOR',
+                    'apellido'=>'PSAD'
+                  );
+                }
+                else if($usuario!='SUPSAD')
+                {
+                 $persona=$_usuario->empleados;//trae el usuario que posee el usuario logueado
+                 $datos=array(
+                        'usuario'=>$_usuario->n_usuario,
+                        'perfil'=>$_usuario->perfil_id,
+                        'nombre'=>$persona[0]->primerNombre,
+                        'apellido'=>$persona[0]->primerApellido
+                      );
+                }
 
-                        );//datos que se almacenaran en la variable session "sesion"
 
-
-
+ 
                 $perfil=Perfil::find($datos['perfil']);
                 if ($perfil->status) //si el perfil esta habilitado  ///agregar la verificacion de status del usuario
                     {
@@ -100,10 +115,12 @@ class InicioController extends Controller
                     }
 
 
-                $respuesta=[true,$persona->nombre,$persona->apellido,$perfil->status]; //Datos para el mensaje de inicio
+                $respuesta=[true,$datos['nombre'],$datos['apellido'],$perfil->status]; //Datos para el mensaje de inicio
 
                 return $respuesta;
             }
+
+       
 
     }
 
@@ -119,10 +136,10 @@ class InicioController extends Controller
         return view(
                             'Menu.menu',
                             [
-                            "modulos"=>$modulos[0],
-                            "submodulos"=>$submodulos[0],
-                            "nombre"=>$datos[0]["nombre"],
-                            "apellido"=>$datos[0]["apellido"]
+                              "modulos"=>$modulos[0],
+                              "submodulos"=>$submodulos[0],
+                              "nombre"=>$datos[0]["nombre"],
+                              "apellido"=>$datos[0]["apellido"]
                             ]
                     );
 

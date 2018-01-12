@@ -8,21 +8,60 @@ class Empleado extends Model
 {
    public $timestamps=false;
    protected $table="empleados";
-   protected $fillable=['id','nombre','nombre_','apellido','apellido_','fechaN','cedula_id','rif_id','departamento_id','direccion_id','contacto_id','usuario_id','cargo_id'];
+   protected $fillable=['id','primerNombre','segundoNombre','primerApellido','segundoApellido','fechaNaciemiento','status'];
+
+   public function correo()
+   {
+    return $this->hasOne('App\Correo');
+   }
+
+   public function telefono()
+   {
+    return $this->hasOne('App\Telefono');
+   }
+
+   public function cedula()
+   {
+    return $this->hasOne('App\Cedula');
+   }
+
+  public function rif()
+   {
+    return $this->hasOne('App\Rif');
+   }
+  
+
+   public function direccion()
+   {
+    return $this->hasOne('App\Direccion');
+   }
+
+    public function departamento()
+   {
+    return $this->hasOne('App\Departamento');
+   }
+
+    public function area()
+   {
+    return $this->hasOne('App\Area');
+   }
 
 
-  /* public function usuario()
-    {
-
-    	return $this->hasOne('App\Usuario');
-
-    }
-
-*/
     public function cargo()
-    {
-    	return $this->belongsTo('App\Cargo');
-    }
+   {
+    return $this->hasOne('App\Cargo');
+   }
+
+    public function usuarios()
+   {
+    return $this->belongsToMany('App\Usuario');
+   }
+
+
+
+
+
+
 
 
 }
