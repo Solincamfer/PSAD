@@ -14,7 +14,6 @@ class EstructuraController extends Controller
 		public function cargar_header_sidebar_acciones()//obtiene desde la variable, la configuracion para el usuario logueado
 	{
 
-
 		$datos=\Session::get('sesion');
 		$modulos=\Session::get('modulos');
 		$submodulos=\Session::get('submodulos');
@@ -138,8 +137,12 @@ class EstructuraController extends Controller
 		if (empty($argumento[3])) {
 			$argumento[3]=[0];
 		}
-		//\Session::push('marcados',$argumento[2]);
-		//$marcados=\Session::get('marcados');
+		\Session::forget('depmarcados');
+		\Session::push('depmarcados',$argumento[2]);
+		\Session::forget('areamarcada');
+		\Session::push('areamarcada',$argumento[3]);
+		$marcados=\Session::get('depmarcados');
+		$areamarcada=\Session::get('areamarcada');
 		if ($argumento[1]=='dep') {
 			$consulta=\DB::table('departamentos')->join('directores','departamentos.director_id','=','directores.id')
 								   			     ->select('directores.*')
@@ -148,7 +151,7 @@ class EstructuraController extends Controller
 									             ->distinct()
 									             ->get();
 			$query=\App\Departamento::where('director_id',$argumento[0])->get();
-			return view('Registros_Basicos.Departamentos.partials.listaDatos',$this->datos_vista(0,$acciones,$consulta,$query,$argumento[2]));
+			return view('Registros_Basicos.Departamentos.partials.listaDatos',$this->datos_vista(0,$acciones,$consulta,$query,$marcados[0]));
 		}
 		elseif ($argumento[1]=='area') {
 			$consulta=\DB::table('areas')->join('departamentos','areas.departamento_id','=','departamentos.id')
@@ -163,7 +166,7 @@ class EstructuraController extends Controller
 									  ->select('areas.*')
 									  ->where('directores.id',$argumento[0])->get();
 
-			return view('Registros_Basicos.Departamentos.partials.listarAreas',$this->datos_vista(0,$acciones,$consulta,$query,$argumento[3]));
+			return view('Registros_Basicos.Departamentos.partials.listarAreas',$this->datos_vista(0,$acciones,$consulta,$query,0,$areamarcada[0]));
 		}
 		else {
 			$consulta=\DB::table('cargos')->join('areas','cargos.area_id','=','areas.id')
@@ -195,6 +198,12 @@ class EstructuraController extends Controller
 		if (empty($argumento[3])) {
 			$argumento[3]=[0];
 		}
+		\Session::forget('depmarcados');
+		\Session::push('depmarcados',$argumento[2]);
+		\Session::forget('areamarcada');
+		\Session::push('areamarcada',$argumento[3]);
+		$marcados=\Session::get('depmarcados');
+		$areamarcada=\Session::get('areamarcada');
 		if ($argumento[1]=='dep') {
 			$consulta=\DB::table('departamentos')->join('directores','departamentos.director_id','=','directores.id')
 								   			     ->select('directores.*')
@@ -202,7 +211,7 @@ class EstructuraController extends Controller
 									             ->distinct()
 									             ->get();
 			$query=\App\Departamento::all();
-			return view('Registros_Basicos.Departamentos.partials.listaDatos',$this->datos_vista(0,$acciones,$consulta,$query,$argumento[2]));
+			return view('Registros_Basicos.Departamentos.partials.listaDatos',$this->datos_vista(0,$acciones,$consulta,$query,$marcados[0]));
 		}
 		elseif ($argumento[1]=='area') {
 			$consulta=\DB::table('areas')->join('departamentos','areas.departamento_id','=','departamentos.id')
@@ -211,7 +220,7 @@ class EstructuraController extends Controller
 									             ->distinct()
 									             ->get();
 			$query=\App\Area::all();
-			return view('Registros_Basicos.Departamentos.partials.listarAreas',$this->datos_vista(0,$acciones,$consulta,$query,$argumento[3]));
+			return view('Registros_Basicos.Departamentos.partials.listarAreas',$this->datos_vista(0,$acciones,$consulta,$query,0,$areamarcada[0]));
 		}
 		else {
 			$consulta=\DB::table('cargos')->join('areas','cargos.area_id','=','areas.id')
@@ -263,15 +272,10 @@ class EstructuraController extends Controller
 		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(1,2,3),4);
 		$data=\Request::get('data');
 		$parametro = 0;
-		if (empty($data[1])) {
-			$data[1]=[0];
-		}
 		if (empty($data[2])) {
 			$data[2]=[0];
 		}
-		\Session::forget('depmarcados');
 		\Session::forget('areamarcada');
-		\Session::push('depmarcados',$data[1]);
 		\Session::push('areamarcada',$data[2]);
 		$areamarcada=\Session::get('areamarcada');
 
@@ -329,16 +333,6 @@ class EstructuraController extends Controller
 		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(1,2,3),4);
 		$data=\Request::get('data');
 		$parametro=0;
-		if (empty($data[1])) {
-			$data[1]=[0];
-		}
-		if (empty($data[2])) {
-			$data[2]=[0];
-		}
-		\Session::forget('depmarcados');
-		\Session::forget('areamarcada');
-		\Session::push('depmarcados',$data[1]);
-		\Session::push('areamarcada',$data[2]);
 		if(empty($data[1]) && empty($data[2])){
 			if ($data[0]!=0) {
 			$consulta=\DB::table('cargos')->join('areas','cargos.area_id','=','areas.id')
@@ -444,26 +438,56 @@ class EstructuraController extends Controller
 		return $respuesta;
 	}
 
-	public function ingresarDepartamento(){
 
-		$nombreD= strtoupper(\Request::get('departamento'));//nombre del departamento, llevado a mayusculas
-		$statusD= \Request::get('estatusDpto');//status del departamento
-		$padre= (int)\Request::get('padre');
+	public function ingresarDepartamento(){
+		$datos=$this->cargar_header_sidebar_acciones();
+		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(1,2,3),4);
+		$data=Request::get('data');
+		$departamentoSelect=$data[0];
+		$direccionSelect=(int)$data[1];
+		$nombreD=strtoupper($data[2]);//nombre del departamento, llevado a mayusculas
+		$statusD=(int)$data[3];//status del departamento
+		$padre=$data[4];
 		$respuesta=0;
 		$consulta=\DB::table('departamentos')->where('descripcion',$nombreD)
-					->where('director_id',$padre)
-					->first();
+					 ->where('director_id',$padre)
+				     ->first();
+		if(empty($departamentoSelect)){
+			$departamentoSelect=[0];
+		}
+		\Session::forget('depmarcados');
+		\Session::push('depmarcados',$departamentoSelect);
+		$marcados=\Session::get('depmarcados');
+		if (count($consulta)==0) {  //si el registro no existe, se procede a ingresar los datos del departamento
 
-		if (empty($consulta)) //si el registro no existe, se procede a ingresar los datos del departamento
-		{
-			 \DB::table('departamentos')->insert
-					 	(
-					 		[
-					 			'descripcion'=>$nombreD,
-					 			'status'=>$statusD,
-					 			'director_id'=>$padre
-					 		]);
-			$respuesta=1;
+			$departamentos=new Departamento;
+			$departamentos->descripcion=$nombreD;
+			$departamentos->status=$statusD;
+			$departamentos->director_id=$padre;
+			$departamentos->save();
+			 
+			if ($direccionSelect!=0) {
+				$listaDirectores=\DB::table('departamentos')->join('directores','departamentos.director_id','=','directores.id')
+															->select('directores.*')
+															->where('directores.id',$direccionSelect)
+															->whereNotNull('departamentos.director_id')
+															->distinct()
+															->get();
+
+				$query=\DB::table('departamentos')->join('directores','departamentos.director_id','=','directores.id')
+												  ->select('departamentos.*')
+												  ->where('directores.id',$direccionSelect)->get();
+			}
+			else {
+				$listaDirectores=\DB::table('departamentos')->join('directores','departamentos.director_id','=','directores.id')
+									   			     ->select('directores.*')
+										             ->whereNotNull('departamentos.director_id')
+										             ->distinct()
+										             ->get();
+				$query=Departamento::all();
+			}
+
+			$respuesta=view('Registros_Basicos.Departamentos.partials.listaDatos',$this->datos_vista(0,$acciones,$listaDirectores,$query,$marcados[0]));
 		}
 		return $respuesta;
 	}
@@ -544,26 +568,246 @@ class EstructuraController extends Controller
 	}
 
 	public function actualizarDepartamento(){
+		$datos=$this->cargar_header_sidebar_acciones();
+		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(1,2,3),4);
+		$direccionSelect=(int)Request::get('direccionSelect');
+		$departamentoSelect=Request::get('departamentoSelect');
 		$padre=(int)Request::get('padre');
 		$registro=(int)Request::get('registro');
 		$respuesta=0;
 		$descripcion=strtoupper(Request::get('campoD'));
-		$estatus=Request::get('campoE');
+		$estatus=(int)Request::get('campoE');
 		$buscar=Departamento::where('descripcion',$descripcion)
 						  ->where('id','<>',$registro)
-						  ->where('director_id','<>',$padre)
+						  ->where('director_id',$padre)
 						  ->first();
+		if($departamentoSelect==0) {
+			$departamentoSelect=[0];
+	  	}
+	  	\Session::forget('depmarcados');
+		\Session::push('depmarcados',$departamentoSelect);	
+		$marcados=\Session::get('depmarcados');			  
 		if (count($buscar)==0) {
 			Departamento::where('id',$registro)->update([ 'descripcion' => $descripcion,
  													  	  'status'      => $estatus,
  													  	  'director_id' => $padre
 
 													]);
-			$datos=$this->cargar_header_sidebar_acciones();
-			$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(1,2,3),4);
-			$consulta=Departamento::all();
-			$respuesta=view('Registros_basicos.Departamentos.partials.listaDatos',$this->datos_vista(0,$acciones,$consulta));
+			if ($direccionSelect!=0) {
+				$listaDirectores=\DB::table('departamentos')->join('directores','departamentos.director_id','=','directores.id')
+															->select('directores.*')
+															->where('directores.id',$direccionSelect)
+															->whereNotNull('departamentos.director_id')
+															->distinct()
+															->get();
+
+				$query=\DB::table('departamentos')->join('directores','departamentos.director_id','=','directores.id')
+												  ->select('departamentos.*')
+												  ->where('directores.id',$direccionSelect)->get();
+			}
+			else {
+				$listaDirectores=\DB::table('departamentos')->join('directores','departamentos.director_id','=','directores.id')
+									   			     ->select('directores.*')
+										             ->whereNotNull('departamentos.director_id')
+										             ->distinct()
+										             ->get();
+				$query=Departamento::all();
+			}
+
+			$respuesta =view('Registros_Basicos.Departamentos.partials.listaDatos',$this->datos_vista(0,$acciones,$listaDirectores,$query,$marcados[0]));
 		}
+		return $respuesta;
+	}
+
+	public function actualizarArea(){
+		$parametro = 0;
+		$datos=$this->cargar_header_sidebar_acciones();
+		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(1,2,3),4);
+		$direccionSelect=(int)Request::get('direccionSelect');
+		$departamentoSelect=Request::get('departamentoSelect');
+		$areaSelect=Request::get('areaSelect');
+		$padre=(int)Request::get('padre');
+		$registro=(int)Request::get('registro');
+		$respuesta=0;
+		$descripcion=strtoupper(Request::get('campoD'));
+		$estatus=(int)Request::get('campoE');
+		$buscar=Area::where('descripcion',$descripcion)
+						  ->where('id','<>',$registro)
+						  ->where('departamento_id',$padre)
+						  ->first();
+		if ($areaSelect==0){
+			$areaSelect=[0];
+		}
+		\Session::forget('areamarcada');
+		\Session::push('areamarcada',$areaSelect);
+		$areamarcada=\Session::get('areamarcada');
+		if (count($buscar)==0) {
+			Area::where('id',$registro)->update([ 'descripcion' => $descripcion,
+ 													  	  'status'      => $estatus,
+ 													  	  'departamento_id' => $padre
+
+													]);
+			if($departamentoSelect==0){
+				if ($direccionSelect==0) {
+					$consulta=\DB::table('areas')->join('departamentos','areas.departamento_id','=','departamentos.id')
+										   			     ->select('departamentos.*')
+											             ->whereNotNull('areas.departamento_id')
+											             ->distinct()
+											             ->get();
+					$query=\App\Area::all();
+				}
+				else {
+					$consulta=\DB::table('areas')->join('departamentos','areas.departamento_id','=','departamentos.id')
+												 ->join('directores','departamentos.director_id','=','directores.id')
+								   			     ->select('departamentos.*')
+								   			     ->where('directores.id',$direccionSelect)
+									             ->whereNotNull('areas.departamento_id')
+									             ->distinct()
+									             ->get();
+					$query=\DB::table('areas')->join('departamentos','areas.departamento_id','=','departamentos.id')
+																		->join('directores','departamentos.director_id','=','directores.id')
+																		->select('areas.*')
+																		->where('directores.id',$direccionSelect)->get();
+				}
+			}
+			else{
+				$areas=array();
+				$longitud=count($departamentoSelect);
+				$query=array();
+				$departamentos=array();
+				$consulta=array();
+				$parametro=1;
+				for ($i=0; $i<$longitud; $i++) { 
+					$areas[]=\DB::table('areas')->where('departamento_id',$departamentoSelect[$i])->get();
+					if(count($areas[$i])!=''){
+						$query[]=$areas[$i];
+					}
+					$departamentos[]=\DB::table('areas')->join('departamentos','areas.departamento_id','=','departamentos.id')
+								   			     ->select('departamentos.*')
+								   			     ->where('areas.departamento_id',$departamentoSelect[$i])
+								   			     ->distinct()
+									             ->get();
+					if(count($departamentos[$i])!=''){
+						$consulta[]=$departamentos[$i];
+					}
+				}
+			}	
+			$respuesta = view('Registros_Basicos.Departamentos.partials.listarAreas',$this->datos_vista(0,$acciones,$consulta,$query,$parametro,$areamarcada[0]));
+		}
+		return $respuesta;
+	}
+
+	public function actualizarCargo(){
+		$parametro = 0;
+		$datos=$this->cargar_header_sidebar_acciones();
+		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(1,2,3),4);
+		$direccionSelect=(int)Request::get('direccionSelect');
+		$departamentoSelect=Request::get('departamentoSelect');
+		$areaSelect=Request::get('areaSelect');
+		$padre=(int)Request::get('padre');
+		$registro=(int)Request::get('registro');
+		$respuesta=0;
+		$descripcion=strtoupper(Request::get('campoD'));
+		$estatus=(int)Request::get('campoE');
+		$buscar=Cargo::where('descripcion',$descripcion)
+						  ->where('id','<>',$registro)
+						  ->where('area_id',$padre)
+						  ->first();
+		if (count($buscar)==0) {
+			Cargo::where('id',$registro)->update([ 'descripcion' => $descripcion,
+ 													  	  'status'      => $estatus,
+ 													  	  'area_id' => $padre
+
+													]);
+			if($areaSelect==0 && $departamentoSelect==0){
+				if ($direccionSelect!=0) {
+					$consulta=\DB::table('cargos')->join('areas','cargos.area_id','=','areas.id')
+												  ->join('departamentos','areas.departamento_id','=','departamentos.id')
+												  ->join('directores','departamentos.director_id','=','directores.id')
+								   			      ->select('areas.*')
+								   			      ->where('directores.id',$direccionSelect)
+									              ->whereNotNull('cargos.area_id')
+									              ->distinct()
+									              ->get();
+					$query=\DB::table('cargos')->join('areas','cargos.area_id','=','areas.id')
+																		 ->join('departamentos','areas.departamento_id','=','departamentos.id')
+																		 ->join('directores','departamentos.director_id','=','directores.id')
+																		 ->select('cargos.*')
+																		 ->where('directores.id',$direccionSelect)->get();
+				}
+				else {
+					$consulta=\DB::table('cargos')->join('areas','cargos.area_id','=','areas.id')
+										   			     ->select('areas.*')
+											             ->whereNotNull('cargos.area_id')
+											             ->distinct()
+											             ->get();
+					$query=\App\Cargo::all();
+				}
+			}
+			else{
+				if ($areaSelect!=0) {
+					$cargos=array();
+					$longitud=count($areaSelect);
+					$query=array();
+					$areas=array();
+					$consulta=array();
+					$parametro=1;
+					for ($i=0; $i<$longitud; $i++) { 
+						$cargos[]=\DB::table('cargos')->where('area_id',$areaSelect[$i])->get();
+						if(count($cargos[$i])!=''){
+							$query[]=$cargos[$i];
+						}
+						$areas[]=\DB::table('cargos')->join('areas','cargos.area_id','=','areas.id')
+									   			     ->select('areas.*')
+									   			     ->where('cargos.area_id',$areaSelect[$i])
+									   			     ->distinct()
+										             ->get();
+						if(count($cargos[$i])!=''){
+							$consulta[]=$areas[$i];
+						}				
+					}
+				}
+				elseif($areaSelect==0){
+					$cargos=array();
+					$longitud=count($areaSelect);
+					$query=array();
+					$areas=array();
+					$consulta=array();
+					$parametro=1;
+					for ($i=0; $i<$longitud; $i++) { 
+						$cargos[]=\DB::table('cargos')->join('areas','cargos.area_id','=','areas.id')
+													  ->join('departamentos','areas.departamento_id','departamentos.id')
+													  ->select('cargos.*')
+													  ->where('areas.departamento_id',$departamentoSelect[$i])
+													  ->get();
+						if(count($cargos[$i])!=''){
+							$query[]=$cargos[$i];
+						}
+						$areas[]=\DB::table('cargos')->join('areas','cargos.area_id','=','areas.id')
+													 ->join('departamentos','areas.departamento_id','departamentos.id')
+									   			     ->select('areas.*')
+									   			     ->where('areas.departamento_id',$departamentoSelect[$i])
+									   			     ->distinct()
+										             ->get();
+						if(count($cargos[$i])!=''){
+							$consulta[]=$areas[$i];
+						}
+					}
+				}
+			}
+		$respuesta=view('Registros_Basicos.Departamentos.partials.listarCargos',$this->datos_vista(0,$acciones,$consulta,$query,$parametro));
+	}
+	return $respuesta;
+	}
+
+	public function modificarStatus(){
+		$status=[1,0];
+		$tablas=["directores","departamentos","areas","cargos"];
+		$registro=(int)Request::get('registry');
+		$tabla=(int)Request::get('tabla');
+		$buscar=\DB::table($tablas[$tabla])->where('id',$registro)->first();
+		$consulta=\DB::table($tablas[$tabla])->where('id',$registro)->update(['status' => $status[$buscar->status]]);
+		$respuesta=1;
 		return $respuesta;
 	}
 }
