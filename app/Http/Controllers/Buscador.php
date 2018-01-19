@@ -8,6 +8,23 @@ use DB;
 use Request;
 use App\Perfil;
 use App\Horario;
+use App\Bitacora;
+use App\Plan;
+use App\Empleado;
+use App\Usuario;
+use App\Departamento;
+use App\Area;
+use App\Cargo;
+use App\Cedula;
+use App\Rif;
+use App\Correo;
+use App\Direccion;
+use App\Telefono;
+use App\TIpo;
+use App\Modulo;
+use App\Submodulo;
+use App\Accion;
+use Response;
 
 class Buscador extends Controller
 {
@@ -82,90 +99,74 @@ class Buscador extends Controller
 	public function prueba_metodo($buscar='PROGRAMADOR III')
 	{
 
-	        $update=DB::table('cargos')->where('id',1)->update(['descripcion'=>'DESARROLLADOR SENIOR','status'=>1]);
-	        return ($update);
-		// $consulta=DB::table('cargos')->where('descripcion',$buscar)->first();
-		// return(count($consulta));
-		// $sucursal=DB::table('sucursales')-> where('sucursales.id',$registryId)
-		//                              ->select('sucursales.razon_s AS razonS','sucursales.nombre_c AS nombreC','sucursales.status AS status','sucursales.rif_id AS rifId','sucursales.tipo_id AS idTipocontribuyente','sucursales.direccion_id AS idDireccionFiscal','sucursales.direccion__id AS idDireccionComercial','sucursales.contacto_id AS contactoId','sucursales.cliente_id AS matrizId','sucursales.categoria_id AS categoriaId')
-		//                              ->first();
 
-		// $rif=DB::table('rifs')->where('rifs.id',$sucursal->rifId)
-		// 					  ->select('rifs.numero AS numero','rifs.tipo_id As tipoRif')
-		// 					  ->first();
+		$perfil=Perfil::find(13);
 
-		// $contribuyente=DB::table('tipos')->where('tipos.id',$sucursal->idTipocontribuyente)
-		// 								 ->select('tipos.descripcion AS descripcion','tipos.id AS codigoIdContribuyente')
-		// 								 ->first();
+		$acciones=Accion::where('submodulo_id',7)->select('id')->get();
 
-		// $direccionFiscal=DB::table('direcciones')->join('municipios','direcciones.municipio_id','=','municipios.id')
-		//                                          ->join('regiones','direcciones.region_id','=','regiones.id')
-		//                                          ->join('estados','direcciones.estado_id','=','estados.id')
-		//                                          ->join('paises','direcciones.pais_id','=','paises.id')
-		//                                          ->select('municipios.id AS municipioId','municipios.descripcion AS municipio',
-		//                                      			  'estados.id AS estadoId','estados.descripcion AS estado',
-		//                                      			  'regiones.id AS regionId','regiones.descripcion AS region','paises.id AS paisId','paises.descripcion AS pais','direcciones.descripcion AS direccion')
-		//                                          ->where('direcciones.id',$sucursal->idDireccionFiscal)
-		//                                          ->first();
+		foreach ($acciones as $accion)
+		{
+			$perfil->acciones()->attach($accion->id);
+		}
 
 
-		// $direccionComercial=DB::table('direcciones')->join('municipios','direcciones.municipio_id','=','municipios.id')
-		//                                          ->join('regiones','direcciones.region_id','=','regiones.id')
-		//                                          ->join('estados','direcciones.estado_id','=','estados.id')
-		//                                          ->join('paises','direcciones.pais_id','=','paises.id')
-		//                                          ->select('municipios.id AS municipioId','municipios.descripcion AS municipio',
-		//                                      			  'estados.id AS estadoId','estados.descripcion AS estado',
-		//                                      			  'regiones.id AS regionId','regiones.descripcion AS region','paises.id AS paisId','paises.descripcion AS pais','direcciones.descripcion AS direccion')
-		//                                          ->where('direcciones.id',$sucursal->idDireccionComercial)
-		//                                          ->first();
+		
+	    // $empleados=Empleado::all();
 
-		//  $celularCorr=DB::table('contactos')->join('tipos','contactos.tipo_id','=','tipos.id')
-  //                                        ->select('contactos.correo AS correousuario','tipos.descripcion AS codigoCel','tipos.id AS codigoCelid','contactos.telefono_m AS celular')
-		//                                  ->where('contactos.id',$sucursal->contactoId)
-		//  							     ->first();
+	    // foreach ($empleados as $empleado) 
+	    // {
+	    	
+	    	
+	    	
 
-		// $fijo=DB::table('contactos')->join('tipos','contactos.tipo__id','=','tipos.id')
-		// 						    ->select('contactos.telefono_f AS telefonoLocal','tipos.descripcion AS codigoFij',
-		// 						    	     'tipos.id AS codigoFijId')
-		// 						    ->where('contactos.id',$sucursal->contactoId)
-		// 						    ->first();
+	    // 	$usuarioEmp=DB::table('empleado_usuario')->where('empleado_id',$empleado->id)->first();
+	    // 	$borrar=DB::table('empleado_usuario')->where('id',$usuarioEmp->id)->delete();
+
+	    // 	$usuario=Usuario::find($usuarioEmp->usuario_id);
+	    // 	$usuario->delete();
+
+	    // 	$empleadoTelf=DB::table('empleado_telefono')->where('empleado_id',$empleado->id)->get();//arreglotele
+	    	
+
+	    // 	foreach ($empleadoTelf as $telefE) 
+	    // 	{
+	    		
+	    		
+	    // 		DB::table('empleado_telefono')->where('id',$telefE->id)->delete();
+	    // 		$telefono=Telefono::find($telefE->telefono_id);
+	    // 		$telefono->delete();
+
+	    // 	}
 
 
-	
+	    	
 
-		// $data=array(
-		// 			"razonsocial"=>$sucursal->razonS,
-		// 			"nombreC"=>$sucursal->nombreC,
-		// 			"tiporif"=>$rif->tipoRif,
-		// 			"numeroRif"=>$rif->numero,
-		// 			"tipoContribuyente"=>$contribuyente->codigoIdContribuyente,
-		// 			"contribuyente"=>$contribuyente->descripcion,
-		// 			"idPaisF"=>$direccionFiscal->paisId,
-		// 			"paisF"=>$direccionFiscal->pais,
-		// 			"idRegionF"=>$direccionFiscal->regionId,
-		// 			"regionF"=>$direccionFiscal->region,
-		// 			"idEstadoF"=>$direccionFiscal->estadoId,
-		// 			"estadoF"=>$direccionFiscal->estado,
-		// 			"idMunicipioF"=>$direccionFiscal->municipioId,
-		// 			"municipioF"=>$direccionFiscal->municipio,
-		// 			"direccionF"=>$direccionFiscal->direccion,
-		// 			"idPaisC"=>$direccionComercial->paisId,
-		// 			"paisC"=>$direccionComercial->pais,
-		// 			"idRegionC"=>$direccionComercial->regionId,
-		// 			"regionC"=>$direccionComercial->region,
-		// 			"idestadoC"=>$direccionComercial->estadoId,
-		// 			"estadoC"=>$direccionComercial->estado,
-		// 		    "idMunicipioC"=>$direccionComercial->municipioId,
-		// 		    "municipioC"=>$direccionComercial->municipio,
-		// 		    "direccionC"=>$direccionComercial->municipio,
-		// 		    "idCodigoFij"=>$fijo->codigoFijId,
-		// 		    "codigoFij"=>$fijo->codigoFij,
-		// 		    "telefonoFij"=>$fijo->telefonoLocal,
-		// 		    "idCodigoCel"=>$celularCorr->codigoCelid,
-		// 		    "codigoCel"=>$celularCorr->codigoCel,
-		// 		    "telefonoCel"=>$celularCorr->celular);
 
-		// dd($data);
+	    // 	$aux=Empleado::find($empleado->id);
+	    // 	$aux->delete();
+
+	    // 	$cedula=Cedula::find($empleado->cedula_id);
+	    // 	$cedula->delete();
+
+	    // 	$rif=Rif::find($empleado->rif_id);
+	    // 	$rif->delete();
+
+	    // 	$correo=Correo::find($empleado->correo_id);
+	    // 	$correo->delete();
+
+	    // 	$direccion=Direccion::find($empleado->direccion_id);
+	    // 	$direccion->delete();
+
+	    	
+	    	
+
+	    // }
 	
 	}
+
+
+
+
+
+
 }

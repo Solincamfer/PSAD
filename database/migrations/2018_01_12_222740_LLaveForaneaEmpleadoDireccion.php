@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class TablaDireccionEmpleado extends Migration
+class LLaveForaneaEmpleadoDireccion extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,12 @@ class TablaDireccionEmpleado extends Migration
      */
     public function up()
     {
-        Schema::create('direccion_empleado', function (Blueprint $table) {
-            $table->increments('id');
+       Schema::table('empleados', function (Blueprint $table) 
+        {
             $table->integer('direccion_id')->unsigned();
-            $table->integer('empleado_id')->unsigned();
-
             $table->foreign('direccion_id')->references('id')->on('direcciones');
-            $table->foreign('empleado_id')->references('id')->on('empleados');
-        });
+
+        }); //
     }
 
     /**
@@ -30,6 +28,9 @@ class TablaDireccionEmpleado extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('direccion_empleado');
+          Schema::table('empleados', function (Blueprint $table) 
+        {
+           $table->dropForeign('direccion_id');
+        });
     }
 }

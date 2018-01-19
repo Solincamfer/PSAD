@@ -173,10 +173,12 @@ Route::group(['prefix'=>'/menu/registros','middleware'=>['v_menu']],function(){
 
 //////////////////////////////	EMPLEADOS ////////////////////////////////////////////////////////
 	Route::match(['post','get'],'/empleados/consulta',                                              			['uses'=>'RegistrosBasicos@cargar_modal_agregar']);
-	Route::match(['post','get'],'/empleados/agregar',                                              			['uses'=>'RegistrosBasicos@insertar_empleado']);
+	Route::match(['post','get'],'/empleados/agregar',                                              			    ['uses'=>'RegistrosBasicos@insertar_empleado']);
 	Route::match(['post','get'],'/empleados/modificar',                                              			['uses'=>'RegistrosBasicos@empleadosModificar']);
-	Route::match(['post','get'],'/empleados/cargar',                                              			['uses'=>'RegistrosBasicos@cargar_combos']);
+	Route::match(['post','get'],'/empleados/cargar',                                              			    ['uses'=>'RegistrosBasicos@cargar_combos']);
 	Route::match(['post','get'],'/empleados/actualizar',                                              			['uses'=>'RegistrosBasicos@cargar_modal_modificar']);
+	Route::match(['post','get'],'/empleados/estructura',                                              			['uses'=>'RegistrosBasicos@selectStructura']);
+	Route::match(['post','get'],'/empleados/status',                                              			    ['uses'=>'RegistrosBasicos@empleadosStatus']);
 
 //////////////////////////// CLIENTES /////////////////////////////////////////////////////////////
 

@@ -8,16 +8,16 @@ class Empleado extends Model
 {
    public $timestamps=false;
    protected $table="empleados";
-   protected $fillable=['id','primerNombre','segundoNombre','primerApellido','segundoApellido','fechaNaciemiento','status'];
+   protected $fillable=['id','primerNombre','segundoNombre','primerApellido','segundoApellido','fechaNaciemiento','status','cedula_id','rif_id','correo_id','direccion_id'];
 
    public function correo()
    {
     return $this->hasOne('App\Correo');
    }
 
-   public function telefono()
+   public function telefonos()
    {
-    return $this->hasOne('App\Telefono');
+    return $this->belongsToMany('App\Telefono');
    }
 
    public function cedula()

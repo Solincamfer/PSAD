@@ -10,9 +10,9 @@ class Telefono extends Model
    protected $table="telefonos";
    protected $fillable=['id','codigo','telefono','tipo'];
 
-   public function empleado()
+   public function empleados()
    {
-    return $this->belongsTo('App\Empleado');
+    return $this->belongsToMany('App\Empleado');
    }
    
 }

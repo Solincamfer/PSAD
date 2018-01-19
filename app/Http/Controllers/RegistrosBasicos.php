@@ -12,6 +12,18 @@ use App\Bitacora;
 use App\Plan;
 use App\Empleado;
 use App\Usuario;
+use App\Departamento;
+use App\Area;
+use App\Cargo;
+use App\Cedula;
+use App\Rif;
+use App\Correo;
+use App\Direccion;
+use App\Telefono;
+use App\TIpo;
+use App\Modulo;
+use App\Submodulo;
+use App\Accion;
 use Response;
 
 
@@ -1001,11 +1013,19 @@ public function empleados()
 		$codigoC=DB::table('tipos')->where('numero_c',2)->get();
 		$codigoL=DB::table('tipos')->where('numero_c',3)->get();
 		$directores=DB::table('directores')->where('status',1)->get();
+		$perfilEmpleados=DB::table('empleado_usuario')->get();
+
+		$empleados_usuario=[];
+
+		foreach($perfilEmpleados as $usuario)
+		{
+			array_push($empleados_usuario,$usuario->empleado_id);
+		}
 
 
 	$datos=$this->cargar_header_sidebar_acciones();
 	$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(76,77,78),75);
-	return view ('Registros_Basicos\empleados\empleados',$this->datos_vista($datos,$acciones,DB::table('empleados')->get(),$tipoR,$tipoD,$paises,$codigoC,$codigoL,$directores,4));//el 3 significa que es la vista 3
+	return view ('Registros_Basicos\empleados\empleados',$this->datos_vista($datos,$acciones,DB::table('empleados')->get(),$tipoR,$tipoD,$paises,$codigoC,$codigoL,$directores,$empleados_usuario));//el 3 significa que es la vista 3
 }
 
 public function empleados_perfiles($empleado_id)
@@ -1050,7 +1070,8 @@ public function empleados_asignar_perfil()
 
 public function empleadosModificar()
 {
-		
+	$empleado=Empleado::find(Request::get('registry'));
+	return Response::json([$empleado]);
 }
 
 public function cargar_modal_agregar(){
@@ -1074,9 +1095,52 @@ public function cargar_modal_agregar(){
 
 ///////////////////////////////////Insertar empleados : submoduloEmpleados ///////////////////////////////////////////////////////
 
-public function insertar_empleado()
+
+
+public function empleadosStatus()
+{
+	$status=[1,0];
+	$registry=Request::get('registry');
+	$aux=false;
+	/////////////////Busqueda del empleado y cambio de status ////////////////////////////////////////////
+	$empleado=Empleado::find($registry);
+	$empleado->status=$status[$empleado->status];
+	$aux=$empleado->save();
+	/////////////////////////////////////////////////////////////////////////////////////////////////////
+    $this->registroBitacora($registry,'Cambiar Status','{"status":"'.$status[$empleado->status].' -> '.$empleado->status.'"}','Empleados');
+    /////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	return Response()->json(['update'=>$aux]);
+}
+
+
+
+public function selectStructura()
 {
 
+	$idRegistro=Request::get('idRegistro');
+	$caso=(int)Request::get('caso');
+	$resultado=null;
+
+	if($caso==1)
+	{
+		$resultado=Departamento::where(['director_id'=>$idRegistro,'status'=>1])->select('descripcion','id')->get();
+	}
+	else if($caso==2)
+	{
+		$resultado=Area::where(['departamento_id'=>$idRegistro,'status'=>1])->select('descripcion','id')->get();
+	}
+	else if($caso==3)
+	{
+		$resultado=Cargo::where(['area_id'=>$idRegistro,'status'=>1])->select('descripcion','id')->get();
+	}
+
+
+
+	return Response::json($resultado);
+}
+public function caprturarFormularioEmpleado()
+{
 	$formulario=array(
 
 						'primerNombre'=>strtoupper(Request::get('nomEmp1')),
@@ -1085,13 +1149,190 @@ public function insertar_empleado()
 						'segundoApellido'=>strtoupper(Request::get('apellEmp2')),
 						'tipoRif'=>Request::get('TrifEmp'),
 						'numeroRif'=>Request::get('rifEmp'),
-						'tipocedula'=>Request::get('TciEmp'),
+						'tipoCedula'=>Request::get('TciEmp'),
 						'numeroCedula'=>Request::get('ciEmp'),
 						'fechaNacimiento'=>Request::get('fnEmp'),
+						'director'=>Request::get('direccionEmpr'),
+						'departamento'=>Request::get('departamentoEmp'),
+						'area'=>Request::get('areaEmp_agr'),
+						'cargo'=>Request::get('cgoEmp'),
+						'pais'=>Request::get('pdhe'),
+						'region'=>Request::get('rgdhe'),
+						'estado'=>Request::get('edodhe'),
+						'municipio'=>Request::get('mundhe'),
+						'codigoPostal'=>Request::get('codigoPostal'),
+						'descripcionDireccion'=>Request::get('descpdhe'),
+						'telefonoLocal1Codigo'=>Request::get('numerol_1c'),
+						'telefonoLocal1Numero'=>Request::get('numerol_1t'),
+						'telefonoLocal2Codigo'=>Request::get('numerol_2c'),
+						'telefonoLocal2Numero'=>Request::get('numerol_2t'),
+						'telefonoMovilCodigo'=>Request::get('numerom_c'),
+						'telefonoMovil'=>Request::get('numerom_t'),
+						'correo'=>Request::get('correo_agr'),
+						'nombreUsuario'=>Request::get('nomUs_agr'),
+						'password'=>Request::get('psw_agr'),
+						'status'=>Request::get('statusEm_agr')
+
 
 						);
+				
 
-return Response::json($formulario);
+
+	return $formulario;
+}
+
+
+public function certificarCedulaRif($cedula,$rif)
+{
+
+		$duplicado=array('cedula_id'=>0,'rif_id'=>0,'codigo'=>0,'extra'=>0);
+		$consultaCedula=Cedula::where(['numero'=>$cedula['numero'],'tipo_id'=>$cedula['tipo'],'rol'=>'EMPLEADO'])->first();
+		$consultaRif=Rif::where(['numero'=>$rif['numero'],'tipo_id'=>$rif['tipo'],'rol'=>'EMPLEADO'])->first();
+
+		if(count($consultaCedula)!=0)
+		{
+			
+			$duplicado['cedula_id']=$consultaCedula->id;
+		}
+
+		if(count($consultaRif)!=0)
+		{
+			
+			$duplicado['rif_id']=$consultaRif->id;
+		}
+
+		return($duplicado);
+
+}
+
+
+
+public function insertar_empleado()
+{
+	$formulario=$this->caprturarFormularioEmpleado();
+	$duplicado=$this->certificarCedulaRif(array('numero'=>$formulario['numeroCedula'],'tipo'=>$formulario['tipoCedula']), array('numero'=>$formulario['numeroRif'],'tipo'=>$formulario['tipoRif']));
+	$mensaje="";
+	
+
+
+
+	   
+
+	if($duplicado['cedula_id']==0 && $duplicado['rif_id']==0)
+	{
+
+		$cedula=new Cedula();
+		$cedula->numero=$formulario['numeroCedula'];
+		$cedula->tipo_id=$formulario['tipoCedula'];
+		$cedula->rol='EMPLEADO';
+		$cedula->save();
+
+		$rif=new Rif();
+		$rif->numero=$formulario['numeroRif'];
+		$rif->rol="EMPLEADO";
+		$rif->tipo_id=$formulario['tipoRif'];
+		$rif->save();
+
+
+		$correo=new Correo();
+		$correo->correo=$formulario['correo'];
+		$correo->save();
+
+
+		$direccion=new Direccion();
+		$direccion->descripcion=$formulario['descripcionDireccion'];
+		$direccion->codigoPostal=$formulario['codigoPostal'];
+		$direccion->municipio_id=$formulario['municipio'];
+		$direccion->pais_id=$formulario['pais'];
+		$direccion->region_id=$formulario['region'];
+		$direccion->estado_id=$formulario['estado'];
+		$direccion->save();
+
+
+		$empleado=new Empleado();
+		$empleado->primerNombre=$formulario['primerNombre'];
+		$empleado->segundoNombre=$formulario['segundoNombre'];
+		$empleado->primerApellido=$formulario['primerApellido'];
+		$empleado->segundoApellido=$formulario['segundoApellido'];
+		$empleado->fechaNacimiento=$formulario['fechaNacimiento'];
+		$empleado->status=$formulario['status'];
+		$empleado->cedula_id=$cedula->id;
+		$empleado->rif_id=$rif->id;
+		$empleado->correo_id=$correo->id;
+		$empleado->direccion_id=$direccion->id;
+		$empleado->cargo_id=$formulario['cargo'];
+		$empleado->save();
+
+
+		$telefonoLocal1=new Telefono();
+		$telefonoLocal1->telefono=$formulario['telefonoLocal1Numero'];
+		$telefonoLocal1->codigo=$formulario['telefonoLocal1Codigo'];
+		$telefonoLocal1->tipo=1;
+		$telefonoLocal1->save();
+
+		$telefonoLocal2=new Telefono();
+		$telefonoLocal2->telefono=$formulario['telefonoLocal2Numero'];
+		$telefonoLocal2->codigo=$formulario['telefonoLocal2Codigo'];
+		$telefonoLocal2->tipo=1;
+		$telefonoLocal2->save();
+
+		
+		$codigoMovil=Tipo::where('id',$formulario['telefonoMovilCodigo'])->select('descripcion')->first();
+
+		$telefonoMovil=new Telefono();
+		$telefonoMovil->telefono=$formulario['telefonoMovil'];
+		$telefonoMovil->codigo=$codigoMovil->descripcion;
+		$telefonoMovil->tipo=2;
+		$telefonoMovil->save();
+
+
+		$empleado->telefonos()->attach($telefonoLocal1->id);
+		$empleado->telefonos()->attach($telefonoLocal2->id);
+		$empleado->telefonos()->attach($telefonoMovil->id);
+
+		$usuario=new Usuario();
+		$usuario->n_usuario=$formulario['numeroCedula'];
+		$usuario->clave=$formulario['password'];
+		$usuario->status=$formulario['status'];
+		$usuario->perfil_id=16;
+		$usuario->save();
+		$usuario->empleados()->attach($empleado->id);
+		
+
+
+		$duplicado['codigo']=1;
+
+
+	}   
+	else if($duplicado['cedula_id']!=0 && $duplicado['rif_id']!=0)//primera capa de mensajes  aqui se genera el error porque consulta un foreignKey que no existe
+	{
+		$duplicado['codigo']=2;///los datos de rif y cedula ya estan registrados
+		$empleado=Empleado::where(['cedula_id'=>$duplicado['cedula_id'],'rif_id'=>$duplicado['rif_id']])->select('primerNombre','primerApellido')->first();
+		$duplicado['extra']=$empleado->primerNombre.' '.$empleado->primerApellido;
+
+	}
+
+	
+
+	
+
+
+
+	
+
+	
+
+	return Response::json($duplicado);
+}
+
+
+
+
+
+public function selectEstructura()
+{
+
+
 }
 
 
@@ -1136,6 +1377,43 @@ public function perfiles()//ventana perfiles
 
 
 
+public function configurarPerfil($perfil_id)
+{
+	$modulos=Modulo::all();
+	$submodulos=Submodulo::all();
+	$acciones=Accion::all();
+
+	foreach ($modulos as $modulo) 
+	{
+		
+		if($modulo->status_m==1)
+		{
+			DB::table('modulo_perfil')->insert(['perfil_id'=>$perfil_id,'modulo_id'=>$modulo->id,'status'=>0]);
+		}
+	}
+
+	foreach ($submodulos as $submodulo) 
+	{
+		if($submodulo->status_sm==1)
+		{
+			DB::table('perfil_submodulo')->insert(['perfil_id'=>$perfil_id,'submodulo_id'=>$submodulo->id,'status'=>0]);
+		}
+	}
+
+	foreach($acciones as $accion)
+	{
+		if($accion->status_ac==1)
+		{
+			DB::table('accion_perfil')->insert(['perfil_id'=>$perfil_id,'accion_id'=>$accion->id,'status'=>0]);
+		}
+	}
+
+
+	return 0;
+
+}
+
+
 
 
 public function perfiles_insertar()
@@ -1157,6 +1435,8 @@ public function perfiles_insertar()
 		}
 		
 	}
+
+	$this->configurarPerfil($nuevoPerfil->id);
 
 	
 	return Response()->json(['duplicate'=>$duplicate,'insert'=>$insert]);
