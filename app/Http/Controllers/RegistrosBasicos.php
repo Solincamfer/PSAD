@@ -3434,6 +3434,12 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 						
 	}
 
+	public function sucursalesAgregar()
+	{
+
+		
+	}
+
 
 	public function clientes_sucursales_responsable($sucursal_id)
 	{

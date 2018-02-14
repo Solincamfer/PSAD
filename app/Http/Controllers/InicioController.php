@@ -50,7 +50,7 @@ class InicioController extends Controller
         if (empty($_usuario)==false)//si la consulta a la base de datos devuelve registros
             {
                 
-                if($usuario=='SUPSAD')
+                if(strtoupper($usuario)=='SUPSAD')
                 {
                   $datos=array
                   (
