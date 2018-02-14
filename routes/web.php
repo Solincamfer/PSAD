@@ -208,5 +208,7 @@ Route::match(['post','get'],'/estructura/ingresarCargo',['uses'=>'EstructuraCont
 Route::match(['post','get'],'/estructura/mostrarDatos',['uses'=>'EstructuraController@mostrarDatos']);
 Route::match(['post','get'],'/estructura/actualizarDireccion',['uses'=>'EstructuraController@actualizarDireccion']);
 Route::match(['post','get'],'/estructura/actualizarDepartamento',['uses'=>'EstructuraController@actualizarDepartamento']);
-Route::match(['post','get'],'/estructura/actualizarArea',['uses'=>'EstructuraController@actualizarDepartamento']);
+Route::match(['post','get'],'/estructura/actualizarArea',['uses'=>'EstructuraController@actualizarArea']);
+Route::match(['post','get'],'/estructura/actualizarCargo',['uses'=>'EstructuraController@actualizarCargo']);
+Route::match(['post','get'],'/estructura/status',['uses'=>'EstructuraController@modificarStatus']);
 });

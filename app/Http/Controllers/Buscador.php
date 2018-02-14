@@ -30,6 +30,7 @@ use App\Estado;
 use App\Municipio;
 
 use Response;
+use App\Departamento;
 
 class Buscador extends Controller
 {
@@ -103,46 +104,45 @@ class Buscador extends Controller
 
 	public function prueba_metodo()
 	{
+
 		
-		//DB::table('modulo_perfil')->insert(['perfil_id'=>24,'modulo_id'=>5]);
-		DB::table('perfil_submodulo')->insert(['perfil_id'=>24,'submodulo_id'=>15]);
+// 		//DB::table('modulo_perfil')->insert(['perfil_id'=>24,'modulo_id'=>5]);
+// 		DB::table('perfil_submodulo')->insert(['perfil_id'=>24,'submodulo_id'=>15]);
 
-	///////////agregar modulo y submodulo de Bitacoras 
-		//  $empleado=Empleado::where('id',23)->first();
+// 	///////////agregar modulo y submodulo de Bitacoras 
+// 		//  $empleado=Empleado::where('id',23)->first();
 
-		// $verificarCedula=DB::table('cedulas')->where(['numero'=>'19438374','rol'=>'EMPLEADO','tipo_id'=>14])->where('id','<>',35)->first();
-		// dd(($empleado));
+// 		// $verificarCedula=DB::table('cedulas')->where(['numero'=>'19438374','rol'=>'EMPLEADO','tipo_id'=>14])->where('id','<>',35)->first();
+// 		// dd(($empleado));
 
 
- //       //////////////////////////////////////////////// Rutina para eliminar a un empleado y a todos sus interdependencias /////////////////////////
-	// 	$empleados=Empleado::all();
+//  //       //////////////////////////////////////////////// Rutina para eliminar a un empleado y a todos sus interdependencias /////////////////////////
+// 	// 	$empleados=Empleado::all();
 
-	// 	foreach ($empleados as $empleado) 
-	// 	{
+// 	// 	foreach ($empleados as $empleado) 
+// 	// 	{
 			
-	// 		$empUsuario=DB::table('empleado_usuario')->where('empleado_id',$empleado->id)->first();
-	// 		DB::table('empleado_usuario')->where('empleado_id',$empleado->id)->delete();//eliminar registro empleado usuario
-	// 		DB::table('usuarios')->where('id',$empUsuario->usuario_id)->delete();//eliminar el usuario del empleado
+// 	// 		$empUsuario=DB::table('empleado_usuario')->where('empleado_id',$empleado->id)->first();
+// 	// 		DB::table('empleado_usuario')->where('empleado_id',$empleado->id)->delete();//eliminar registro empleado usuario
+// 	// 		DB::table('usuarios')->where('id',$empUsuario->usuario_id)->delete();//eliminar el usuario del empleado
 
-	// 		$empTelefono=DB::table('empleado_telefono')->where('empleado_id',$empleado->id)->get();//captura id del empleado y sus telefonos asociados
+// 	// 		$empTelefono=DB::table('empleado_telefono')->where('empleado_id',$empleado->id)->get();//captura id del empleado y sus telefonos asociados
 
-	// 		foreach ($empTelefono as $empT) 
-	// 		{
-	// 			DB::table('empleado_telefono')->where('empleado_id',$empT->empleado_id)->delete();// eliminar el registro de la 
-	// 			DB::table('telefonos')->where('id',$empT->telefono_id)->delete();//eliminar el telefono
-	// 		}
+// 	// 		foreach ($empTelefono as $empT) 
+// 	// 		{
+// 	// 			DB::table('empleado_telefono')->where('empleado_id',$empT->empleado_id)->delete();// eliminar el registro de la 
+// 	// 			DB::table('telefonos')->where('id',$empT->telefono_id)->delete();//eliminar el telefono
+// 	// 		}
 
-	// 		$empDelete=DB::table('empleados')->where('id',$empT->empleado_id)->delete();//eliminar el empleado
-
-
-	// 		DB::table('cedulas')->where('id',$empleado->cedula_id)->delete();
-	// 		DB::table('rifs')->where('id',$empleado->rif_id)->delete();
-	// 		DB::table('correos')->where('id',$empleado->correo_id)->delete();
-	// 		DB::table('direcciones')->where('id',$empleado->direccion_id)->delete();
-
-	// // ///////////////////////////// fin de la rutina para eliminar empleados ///////////////////////////////////////////////////////////////
+// 	// 		$empDelete=DB::table('empleados')->where('id',$empT->empleado_id)->delete();//eliminar el empleado
 
 
+// 	// 		DB::table('cedulas')->where('id',$empleado->cedula_id)->delete();
+// 	// 		DB::table('rifs')->where('id',$empleado->rif_id)->delete();
+// 	// 		DB::table('correos')->where('id',$empleado->correo_id)->delete();
+// 	// 		DB::table('direcciones')->where('id',$empleado->direccion_id)->delete();
+
+// 	// // ///////////////////////////// fin de la rutina para eliminar empleados ///////////////////////////////////////////////////////////////
 
 
 
@@ -153,13 +153,22 @@ class Buscador extends Controller
 
 
 
-	// 	 }
+
+
+// 	// 	 }
 
 		
 		
 
 	
-	}
+// =======
+// 	       $departamentos=new Departamento;
+// 			$departamentos->descripcion="vincen";
+// 			$departamentos->status=1;
+// 			$departamentos->director_id=0;
+// 			$departamentos->save();
+// >>>>>>> origin/master
+// 	}
 
 
 

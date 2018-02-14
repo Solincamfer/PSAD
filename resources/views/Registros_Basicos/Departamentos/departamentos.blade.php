@@ -79,11 +79,11 @@
                                                     @elseif($accion->id==94 )
                                                         @if($departamento->status==1)
                                                             <div class="chbx">
-                                                                <input type="checkbox" class="btnAcc" name="status" id="{{'inchbx'. $departamento->id}}" value="{{$departamento->status}}" checked><label for="{{'inchbx'. $departamento->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
+                                                                <input type="checkbox" data-table="1" data-registro="{{ $departamento->id }}" class="btnAcc" name="status" id="{{'inchbx'. $departamento->id}}" value="{{$departamento->status}}" checked><label for="{{'inchbx'. $departamento->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
                                                             </div>
                                                         @elseif($departamento->status==0)
                                                             <div class="chbx">
-                                                                <input type="checkbox" class="btnAcc" name="status" id="{{'inchbx'. $departamento->id}}" value="{{$departamento->status}}"><label for="{{'inchbx'. $departamento->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
+                                                                <input type="checkbox" data-table="1" data-registro="{{ $departamento->id }}" class="btnAcc" name="status" id="{{'inchbx'. $departamento->id}}" value="{{$departamento->status}}"><label for="{{'inchbx'. $departamento->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
                                                             </div>
                                                         @endif
                                                     @endif
@@ -249,7 +249,7 @@
                             <div class="modal-body">
                                 <form method="post" enctype="multipart/form-data" class="form-horizontal" id="newDep">
                                     {{ csrf_field() }}
-                                    <input type="hidden" name="padre" value="">
+                                    <input type="hidden" id="padredir" name="padre" value="">
                                     <div class="container-fluid" id="contdpto">
                                         <div class="row">
                                             <div id="dpto">
@@ -383,11 +383,10 @@
                                 <h4 class="modal-title" id="myModalLabel2"><strong>Modificar Area</strong></h4>
                             </div>
                             <div class="modal-body">
-                                <form method="post" class="form-horizontal formUpdateReg" action=>
+                                <form method="post" class="form-horizontal formUpdateReg" id="updateArea">
                                     {{ csrf_field() }}
                                     <input type="hidden" name="padre">
                                     <input type="hidden" name="registro">
-                                    <input type="hidden" name="modal" value="2">
                                     <div class="container-fluid" id="contdpto">
                                         <div class="row">
                                             <div id="dptom">
@@ -412,7 +411,7 @@
 
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="submit" class="bttnMd" id="mDepCarPer">Guardar <i class="fa fa-floppy-o"></i></button>
+                                        <button type="submit" class="bttnMd" id="buttonUpdateAre">Guardar <i class="fa fa-floppy-o"></i></button>
                                     </div>
 
                                 </form>
@@ -474,11 +473,10 @@
                                 <h4 class="modal-title" id="myModalLabel2"><strong>Modificar Cargo</strong></h4>
                             </div>
                             <div class="modal-body">
-                                <form method="post" class="form-horizontal formUpdateReg" action=>
+                                <form method="post" class="form-horizontal formUpdateReg" id="updateCargo" =>
                                     {{ csrf_field() }}
                                     <input type="hidden" name="padre">
                                     <input type="hidden" name="registro">
-                                    <input type="hidden" name="modal" value="3">
                                     <div class="container-fluid" id="contdpto">
                                         <div class="row">
                                             <div id="dptom">
@@ -503,7 +501,7 @@
 
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="submit" class="bttnMd" id="mDepCarPer">Guardar <i class="fa fa-floppy-o"></i></button>
+                                        <button type="submit" class="bttnMd" id="buttonUpdateCar">Guardar <i class="fa fa-floppy-o"></i></button>
                                     </div>
 
                                 </form>
