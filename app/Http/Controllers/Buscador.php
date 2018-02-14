@@ -176,3 +176,5 @@ class Buscador extends Controller
 
 
 }
+
+}
