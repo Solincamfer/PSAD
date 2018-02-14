@@ -156,7 +156,7 @@
                                                       </div>
                                                   </div> 
 
-                                                  <input type="text" class="form-control descripcion" name="Registro" id="perfilRegistry" value="">
+                                                  <input type="hidden" class="form-control descripcion" name="Registro" id="perfilRegistry" value="">
                                                </div>
                                                
                                            </div>

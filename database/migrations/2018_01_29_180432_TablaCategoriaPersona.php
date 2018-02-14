@@ -13,14 +13,14 @@ class TablaCategoriaPersona extends Migration
      */
     public function up()
     {
-        Schema::create('categoria_persona', function (Blueprint $table) 
-
-        {
+        Schema::create('categoria_persona', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('categoria_id')->unsigned();
             $table->integer('persona_id')->unsigned();
-            $table->foreign('categoria_id')->references('id')->on('categorias')->onDelate('cascade');
-            $table->foreign('persona_id')->references('id')->on('personas')->onDelate('cascade');
+
+            $table->foreign('categoria_id')->references('id')->on('categorias');
+            $table->foreign('persona_id')->references('id')->on('personas');
+
         });
     }
 

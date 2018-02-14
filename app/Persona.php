@@ -8,32 +8,7 @@ class Persona extends Model
 {
     public $timestamps=false;
     protected $table="personas";
-    protected $fillable=['id','p_nombre','s_nombre','p_apellido','s_apellido','cargo','encargado','contacto_id','cliente_id','status_p'];
+    protected $fillable=['id','primerNombre','primerApellido','cargo','encargado','status','cedula_id','correo_id','cliente_id'];
 
 
-    public function cedula ()
-    {
-    	return $this->hasOne('App\Cedula');
-    }
-
-
-    public function contacto()
-
-    {
-
-    	return $this->hasOne('App\Contacto');
-    }
-
-
-    public function cliente()
-    {
-
-    	return $this->belongsTo('App\Cliente');
-    }
-
-    public function categorias()
-    {
-
-        return $this->belongsToMany('App\Categoria');
-    }
 }

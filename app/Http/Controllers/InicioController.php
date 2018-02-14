@@ -55,7 +55,7 @@ class InicioController extends Controller
                   $datos=array
                   (
                     'usuario'=>'SUPSAD',
-                    'perfil'=>13,
+                    'perfil'=>24,
                     'nombre'=>'SUPERVISOR',
                     'apellido'=>'PSAD'
                   );

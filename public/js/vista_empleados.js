@@ -6,6 +6,7 @@ $(document).ready(function()
 		function limpiarLista(caso,listas)
 		{
 			var longitud=4;
+
 			for (var i = caso; i <longitud; i++)
 			 {
 				
@@ -22,6 +23,7 @@ $(document).ready(function()
 
 			for (var i = 0; i < longitud; i++) 
 			{
+				
 				$('#'+idLista).append('<option class="'+idLista+'" value="'+ datos[i].id+'">'+datos[i].descripcion+'</option>')
 			}
 
@@ -30,10 +32,71 @@ $(document).ready(function()
 
 		function loadModal(datos)
 		{
+			
+			var campoTel={codigo:['numerol_1cm','numerol_2cm','numerom_cm'],numero:['numerol_1tm','numerol_2tm','numerom_tm']};
+			
+
+			
 			$('#nomEmp1m').val(datos[0].primerNombre);
 			$('#nomEmp2m').val(datos[0].segundoNombre);
 			$('#apellEmp1m').val(datos[0].primerApellido);
 			$('#apellEmp2m').val(datos[0].segundoApellido);
+			$('#fnEmpmm').val(datos[0].fechaNacimiento);
+
+
+
+			$('#selRifEmpm').val(datos[1].tipo_id);
+			$('#numRifEmpm').val(datos[1].numero);
+			
+			$('#selCiEmpm').val(datos[2].tipo_id);
+			$('#numCiEmpm').val(datos[2].numero);
+
+			//Cargar select de estructuras 
+			cargarSelect(datos[4].departamentos,'departamentoEmpm');
+			cargarSelect(datos[4].areas,'areaEmp_m');
+			cargarSelect(datos[4].cargos,'cgoEmpm');
+
+			$('#direccionEmprm'+' option[value="'+datos[3].director_id+'"]').attr('selected',true);
+			$('#departamentoEmpm'+' option[value="'+datos[3].departamento_id+'"]').attr('selected',true);
+			$('#areaEmp_m'+' option[value="'+datos[3].area_id+'"]').attr('selected',true);
+			$('#cgoEmpm'+' option[value="'+datos[3].cargo_id+'"]').attr('selected',true);
+
+
+			//Cargar select de direccion 
+			cargarSelect(datos[6].regiones,'rgdhem');
+			cargarSelect(datos[6].estados,'edodhem');
+			cargarSelect(datos[6].municipios,'mundhem');
+
+			$('#pdhem'+' option[value="'+datos[5].pais_id+'"]').attr('selected',true);
+			$('#rgdhem'+' option[value="'+datos[5].region_id+'"]').attr('selected',true);
+			$('#edodhem'+' option[value="'+datos[5].estado_id+'"]').attr('selected',true);
+			$('#mundhem'+' option[value="'+datos[5].municipio_id+'"]').attr('selected',true);
+
+			$('#codigoPostalm').val(datos[5].codigoPostal);
+			$('#descpdhem').val(datos[5].direccion);
+
+
+			////////////////contacto
+			$('#'+campoTel.codigo[datos[8][0].tipo]).val(datos[8][0].codigo);//codigo telefono local 1
+			$('#'+campoTel.numero[datos[8][0].tipo]).val(datos[8][0].numero);//numero del telefono local 1
+
+			$('#'+campoTel.codigo[datos[8][1].tipo]).val(datos[8][1].codigo);//codigo telefono local 2 
+			$('#'+campoTel.numero[datos[8][1].tipo]).val(datos[8][1].numero);//numero del telefono local 2
+
+			$('#'+campoTel.codigo[datos[8][2].tipo]).val(datos[9].codigo);//codigo telefono local 2 
+			$('#'+campoTel.numero[datos[8][2].tipo]).val(datos[8][2].numero);//numero del telefono movil
+
+			$('#correo_m').val(datos[7].correo);
+
+			//////////////usuario 
+
+			$('#nomUs_m').val(datos[10].usuario);
+			$('#psw_m').val(datos[10].clave);
+			$('#statusEm_m').val(datos[10].status);
+
+
+			
+
 			$('#myModal2').modal('show');
 		}
 
@@ -76,22 +139,51 @@ $(document).ready(function()
 			});
 
 
+		//////////////////////////////////////////////Funciones para los select de direccion //////////////////////////////
+		$('.direccion_emp').change(function()
+		{
+			var caso= $(this).attr('data-caso');
+			var registry=$(this).val();
+			var route='/menu/registros/empleados/direccion';
+			var _token=$( "input[name^='_token']" ).val();
+			var listas=['pdhem','rgdhem','edodhem','mundhem'];
+			
+			if(caso<4)
+			{
+
+							$.post(route,{_token:_token,registry:registry,caso:caso})
+
+							.done(function(answer)
+							{
+								
+							
+								limpiarLista(parseInt(caso)+1,listas);
+								cargarSelect(answer,listas[parseInt(caso)+1])
+
+								
+							})
+
+							.fail(function()
+								{swal("Error Inesperado !!", "Comuniquese con el administrador", "error");});
 
 
+			}
 
+		})
 		/////////////////////////////////////////////Funcion boton modificar///////////////////////////////////////////////
 		$('.ModificarEmpleado').click(function() 
 		{
 		  var registry=$(this).attr('data-reg');
 		  var _token=$( "input[name^='_token']" ).val();
 		  var route='/menu/registros/empleados/modificar';
+		  $('#_idEmpleado_').val(registry);
 		  
 
 		  $.post(route,{_token:_token,registry:registry})
 		  .done(function(answer)
 		  {
 		  	
-		  	console.log(answer);
+		  	
 		  	loadModal(answer);
 		  })
 
@@ -136,8 +228,7 @@ $(document).ready(function()
 				{
 					
 					
-					console.log(answer);
-
+					
 					if(answer.codigo==1)
 					{
 							swal({
@@ -183,9 +274,54 @@ $(document).ready(function()
 
 
  
-		/////////////////////////////////////////////Funcion Agregar/////////////////////////////////////////////////////////// 
+		/////////////////////////////////////////////Funcion Boton Guardar modificar /////////////////////////////////////////////////////////// 
 
 
+       $('#btnSvm').click(function()
+       {
+       		var form=$('#updateEmp').serialize();
+       		var route='/menu/registros/empleados/actualizar';
+
+       		$.post(route,form)
+			.done(function(answer)
+				{
+					
+					
+					if(answer.mensaje!='')
+					{
+						swal({
+									title:'Datos duplicados!!!',//Contenido del modal
+									text: '<p style="font-size: 0.9em;">'+answer.mensaje+'</p>',
+									type: "warning",
+									showConfirmButton:true,//Eliminar boton de confirmacion
+									html: true
+							});
+					}
+					else
+					{
+						swal({
+									title:'Actualizacion exitosa',//Contenido del modal
+									text: '<p style="font-size: 1.0em;">'+'Los datos de empleado se guardaron correctamente!!!'+'</p>',
+									type: "success",
+									showConfirmButton:true,//Eliminar boton de confirmacion
+									html: true
+								},
+		  				 	function(isConfirm)
+		  				 	{
+		  				 		if(isConfirm)
+		  				 		{
+		  				 			window.location.href="/menu/registros/empleados";
+		  				 		}	
+
+		  				 	});
+					}
+
+				})
+			.fail(function()
+				{
+					swal("Error Inesperado !!", "Comuniquese con el administrador", "error");
+				});
+       });
 
 
 

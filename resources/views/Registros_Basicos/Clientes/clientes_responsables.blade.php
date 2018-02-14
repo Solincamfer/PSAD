@@ -9,7 +9,8 @@
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-md-4 ttlp">
-                                    <h1>Cliente - Responsable</h1>
+                                    <h1>{{$datosC5->nombreComercial}} - Responsable</h1>
+                                    <input type="hidden" id="nombreClienteMatriz" value="{{$datosC5->nombreComercial}}">
                                 </div>
                             </div>
                             <div class="row sep-div">
@@ -32,13 +33,13 @@
                         <div class="col-xs-5 col-sm-5 col-md-6 col-md-offset-3" style=""> 
                         
                         @foreach($consulta as $responsable)
-                            <div class="contMd" style="">
+                            <div class="contMd " style="" ">
                                 <div class="icl">
                                     @foreach($acciones as $accion)
                                         @if($accion->id!=15)
                                             @if($accion->id==14)
                                                 <span class="iclsp">
-                                                    <a href="#myModal2" class="tltp modificarResponsable" data-ttl="{{$accion->descripcion}}" id="m{{$responsable->id}}" data-toggle="modal" data-target="#myModal2"> 
+                                                    <a  class="tltp modificarResponsable"  data-caso="0" data-ttl="{{$accion->descripcion}}" id="m{{$responsable->id}}" data-toggle="modal" data-reg="{{$responsable->id}}" > 
                                                         <i class="{{$accion->clase_css}}"></i>
                                                     </a>
                                                 </span>
@@ -50,13 +51,13 @@
                                                 </span>
                                             @endif
                                         @elseif($accion->id==15)
-                                            @if($responsable->statusR==1)
+                                            @if($responsable->status==1)
                                             <div class="chbx">
-                                                <input type="checkbox" class="btnAcc" name="status" id="{{'inchbx'. $responsable->id}}" value="{{$responsable->statusR}}" checked><label for="{{'inchbx'. $responsable->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
+                                                <input type="checkbox" class="checkResponsable" data-reg="{{$responsable->id}}" name="status" id="{{'inchbx'. $responsable->id}}" value="{{$responsable->status}}" checked><label for="{{'inchbx'. $responsable->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
                                             </div>
-                                            @elseif($responsable->statusR==0)
+                                            @elseif($responsable->status==0)
                                             <div class="chbx">
-                                                <input type="checkbox" class="btnAcc" name="status" id="{{'inchbx'. $responsable->id}}" value="{{$responsable->statusR}}"><label for="{{'inchbx'. $responsable->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
+                                                <input type="checkbox" class="checkResponsable" data-reg="{{$responsable->id}}" name="status" id="{{'inchbx'. $responsable->id}}" value="{{$responsable->status}}"><label for="{{'inchbx'. $responsable->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
                                             </div>
                                             @endif
                                         @endif
@@ -64,11 +65,13 @@
                                 </div>
                                 <input type="hidden" name="idresp{{$responsable->id}}" value="{{$responsable->id}}" id="idrespm{{$responsable->id}}">
                                 @if($responsable->encargado==1)
-                                    <span class="ttlMd"><input type="radio" name="c_rsp" id="c_rsp" value="{{$responsable->encargado}}" checked> 
-                                    <label for="c_rsp"><strong>{{$responsable->p_nombre." ".$responsable->p_apellido}}</strong></label></span>
+                                    <span class="ttlMd"><input type="radio" name="c_rsp"  class="radioResp" data-reg="{{$responsable->id}}" id="c_rsp{{$responsable->id}}" value="{{$responsable->encargado}}" checked> 
+                                    <label for="c_rsp"><strong>{{$responsable->primerNombre." ".$responsable->primerApellido}}</strong></label></span>
+                                    <input type="hidden" name="checkSeleccionado_" id="checkSeleccionado_" value="{{$responsable->id}}">
                                 @else
-                                     <span class="ttlMd"><input type="radio" name="c_rsp" id="c_rsp" value="{{$responsable->encargado}}" > 
-                                    <label for="c_rsp"><strong>{{$responsable->p_nombre." ".$responsable->p_apellido}}</strong></label></span>
+                                     <span class="ttlMd"><input type="radio" name="c_rsp" id="c_rsp{{$responsable->id}}"  class="radioResp" data-reg="{{$responsable->id}}" value="{{$responsable->encargado}}" > 
+                                    <label for="c_rsp"><strong>{{$responsable->primerNombre." ".$responsable->primerApellido}}</strong></label></span>
+                                     
                                 @endif
                             </div>
                         @endforeach
@@ -83,10 +86,10 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                        <h4 class="modal-title" id="myModalLabel">Agregar Responsable - Cliente</h4>
+                                        <h4 class="modal-title" id="myModalLabel">Agregar Responsable - {{$datosC5->nombreComercial}}</h4>
                                     </div>
                                     
-                                        <form method="post" class="form-horizontal Validacion" action="/menu/registros/clientes/responsable/insertar/{{$extra}}">
+                                        <form  class="form-horizontal Validacion" id="_responsableMatriz_">
                                         {{ csrf_field() }}
                                         <div class="modal-body">
                                             <ul class="nav nav-tabs" role="tablist" >
@@ -200,10 +203,11 @@
                                                     </div>
                                                 </div>
                                             </div> 
+                                            <input type="text" name="_clienteMatriz_" id="_clienteMatriz_" value="{{$datosC4}}">
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-primary" id="btnGuardarResponsable1">Guardar <i class="fa fa-floppy-o"></i></button>
-                                                <button type="button" class="btn btn-danger" id="btnLimipiarResponsable1">limpiar <i class="fa fa-floppy-o"></i></button>
+                                                <button type="button" class="btn btn-primary" id="btnGuardarResponsableM">Guardar <i class="fa fa-floppy-o"></i></button>
+                                                <button type="button" class="btn btn-danger" id="btnLimipiarResponsableM">limpiar <i class="fa fa-floppy-o"></i></button>
                                             </div>
                                         </form>
                                 </div>
@@ -217,10 +221,10 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                        <h4 class="modal-title" id="myModalLabel2">Modificar Responsable - Cliente</h4>
+                                        <h4 class="modal-title" id="myModalLabel2">{{$datosC5->nombreComercial}} - Cliente</h4>
                                     </div>
 
-                                    <form method="post" class="form-horizontal Validacion" action="/menu/registros/clientes/responsables/actualizar/{{$extra}}">
+                                    <form method="post" class="form-horizontal Validacion" id="_responsableMatriz_Mod">
                                         {{ csrf_field() }}
                                         <div class="modal-body">
                                             <ul class="nav nav-tabs" role="tablist" >
@@ -262,7 +266,7 @@
                                                                     </div>
                                                                     <div class="col-md-6">
                                                                         <div class="form-group row"> 
-                                                                            <input type="text" id="RpMda4" class="form-control typeCiNumber" name="RpMda4"><i class="fa fa-address-card-o" id="micr8"></i>
+                                                                            <input type="text" id="RpMda4" class="form-control typeCiNumber" name="txtci"><i class="fa fa-address-card-o" id="micr8"></i>
                                                                         </div>
                                                                     </div>
                                                                 </div> 
@@ -327,15 +331,18 @@
                                                                     <input type="text" name="mail2" id="RpMdaa5" class="form-control typeEmail">
                                                                     <i class="fa fa-envelope" id="micr15"></i>
                                                                 </div>
-                                                                <input type="text" name="Registroid" id="Registroid">
+                                                               
+                                                                  <input type="hidden" name="_clienteMatriz_" id="_clienteMatrizMod_" value="{{$datosC4}}">
                                                             </div>
+                                                             <input type="hidden" name="idRegistroMod_" id="idRegistroMod_" value="">
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div> 
+                                           
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-primary" id="btnModificarResponsable1">Modificar <i class="fa fa-floppy-o"></i></button>
+                                                <button type="button" class="btn btn-primary btnModificarResp_" id="btnModificarResponsable1" data-caso="0">Modificar <i class="fa fa-floppy-o"></i></button>
                                             </div>
                                         </form>
                                 </div>

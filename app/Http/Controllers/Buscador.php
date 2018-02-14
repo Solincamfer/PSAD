@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+
 use Session;
 use DB;
 use Request;
@@ -24,6 +25,10 @@ use App\TIpo;
 use App\Modulo;
 use App\Submodulo;
 use App\Accion;
+use App\Region;
+use App\Estado;
+use App\Municipio;
+
 use Response;
 
 class Buscador extends Controller
@@ -96,71 +101,63 @@ class Buscador extends Controller
 
 
 
-	public function prueba_metodo($buscar='PROGRAMADOR III')
+	public function prueba_metodo()
 	{
+		
+		//DB::table('modulo_perfil')->insert(['perfil_id'=>24,'modulo_id'=>5]);
+		DB::table('perfil_submodulo')->insert(['perfil_id'=>24,'submodulo_id'=>15]);
+
+	///////////agregar modulo y submodulo de Bitacoras 
+		//  $empleado=Empleado::where('id',23)->first();
+
+		// $verificarCedula=DB::table('cedulas')->where(['numero'=>'19438374','rol'=>'EMPLEADO','tipo_id'=>14])->where('id','<>',35)->first();
+		// dd(($empleado));
 
 
-		$perfil=Perfil::find(13);
+ //       //////////////////////////////////////////////// Rutina para eliminar a un empleado y a todos sus interdependencias /////////////////////////
+	// 	$empleados=Empleado::all();
 
-		$acciones=Accion::where('submodulo_id',7)->select('id')->get();
+	// 	foreach ($empleados as $empleado) 
+	// 	{
+			
+	// 		$empUsuario=DB::table('empleado_usuario')->where('empleado_id',$empleado->id)->first();
+	// 		DB::table('empleado_usuario')->where('empleado_id',$empleado->id)->delete();//eliminar registro empleado usuario
+	// 		DB::table('usuarios')->where('id',$empUsuario->usuario_id)->delete();//eliminar el usuario del empleado
 
-		foreach ($acciones as $accion)
-		{
-			$perfil->acciones()->attach($accion->id);
-		}
+	// 		$empTelefono=DB::table('empleado_telefono')->where('empleado_id',$empleado->id)->get();//captura id del empleado y sus telefonos asociados
 
+	// 		foreach ($empTelefono as $empT) 
+	// 		{
+	// 			DB::table('empleado_telefono')->where('empleado_id',$empT->empleado_id)->delete();// eliminar el registro de la 
+	// 			DB::table('telefonos')->where('id',$empT->telefono_id)->delete();//eliminar el telefono
+	// 		}
+
+	// 		$empDelete=DB::table('empleados')->where('id',$empT->empleado_id)->delete();//eliminar el empleado
+
+
+	// 		DB::table('cedulas')->where('id',$empleado->cedula_id)->delete();
+	// 		DB::table('rifs')->where('id',$empleado->rif_id)->delete();
+	// 		DB::table('correos')->where('id',$empleado->correo_id)->delete();
+	// 		DB::table('direcciones')->where('id',$empleado->direccion_id)->delete();
+
+	// // ///////////////////////////// fin de la rutina para eliminar empleados ///////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+	// 	 }
 
 		
-	    // $empleados=Empleado::all();
+		
 
-	    // foreach ($empleados as $empleado) 
-	    // {
-	    	
-	    	
-	    	
-
-	    // 	$usuarioEmp=DB::table('empleado_usuario')->where('empleado_id',$empleado->id)->first();
-	    // 	$borrar=DB::table('empleado_usuario')->where('id',$usuarioEmp->id)->delete();
-
-	    // 	$usuario=Usuario::find($usuarioEmp->usuario_id);
-	    // 	$usuario->delete();
-
-	    // 	$empleadoTelf=DB::table('empleado_telefono')->where('empleado_id',$empleado->id)->get();//arreglotele
-	    	
-
-	    // 	foreach ($empleadoTelf as $telefE) 
-	    // 	{
-	    		
-	    		
-	    // 		DB::table('empleado_telefono')->where('id',$telefE->id)->delete();
-	    // 		$telefono=Telefono::find($telefE->telefono_id);
-	    // 		$telefono->delete();
-
-	    // 	}
-
-
-	    	
-
-
-	    // 	$aux=Empleado::find($empleado->id);
-	    // 	$aux->delete();
-
-	    // 	$cedula=Cedula::find($empleado->cedula_id);
-	    // 	$cedula->delete();
-
-	    // 	$rif=Rif::find($empleado->rif_id);
-	    // 	$rif->delete();
-
-	    // 	$correo=Correo::find($empleado->correo_id);
-	    // 	$correo->delete();
-
-	    // 	$direccion=Direccion::find($empleado->direccion_id);
-	    // 	$direccion->delete();
-
-	    	
-	    	
-
-	    // }
 	
 	}
 

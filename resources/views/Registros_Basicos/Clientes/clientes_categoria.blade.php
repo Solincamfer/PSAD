@@ -9,7 +9,7 @@
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-md-4 ttlp">
-                                    <h1>Cliente - Categoría</h1>
+                                    <h1>{{$extra->nombreComercial}} - Categorías</h1>
                                 </div>
                             </div>
                             <div class="row sep-div">
@@ -41,7 +41,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xs-5 col-sm-5 col-md-6 col-md-offset-3" id="areaResultados" data-tab="{{$datosC1}}"> 
+                        <div class="col-xs-5 col-sm-5 col-md-6 col-md-offset-3" id="areaResultados" > 
                          
                         @foreach($consulta as $categoria)   
                                 <div class="contMd" style="">
@@ -50,7 +50,7 @@
                                            @if($accion->id!=18)
                                                @if($accion->id==16)
                                                    <span class="iclsp">
-                                                       <a  class="tltp ModificaR" data-ttl="{{$accion->descripcion}}" data-reg="{{$categoria->id}}"data-toggle="modal" id="m{{$categoria->id}}" >
+                                                       <a  class="tltp ModificarCategoria" data-ttl="{{$accion->descripcion}}" data-reg="{{$categoria->id}}"data-toggle="modal" id="m{{$categoria->id}}" >
                                                            <i class="{{$accion->clase_css}}"></i>
                                                        </a>
                                                     </span>
@@ -64,11 +64,11 @@
                                            @elseif($accion->id==18)
                                                @if($categoria->status==1)
                                                    <div class="chbx">
-                                                       <input type="checkbox" class="btnAcc" name="status" id="{{'inchbx'. $categoria->id}}" value="{{$categoria->status}}" checked><label for="{{'inchbx'. $categoria->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
+                                                       <input type="checkbox" class="btnAcc checkCategoria" name="status" id="{{'inchbx'. $categoria->id}}" value="{{$categoria->status}}" data-reg="{{$categoria->id}}" checked><label for="{{'inchbx'. $categoria->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
                                                    </div>
                                                 @elseif($categoria->status==0)
                                                    <div class="chbx">
-                                                       <input type="checkbox" class="btnAcc" name="status" id="{{'inchbx'. $categoria->id}}" value="{{$categoria->status}}"><label for="{{'inchbx'. $categoria->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
+                                                       <input type="checkbox" class="btnAcc checkCategoria" name="status" id="{{'inchbx'. $categoria->id}}" value="{{$categoria->status}}" data-reg="{{$categoria->id}}"><label for="{{'inchbx'. $categoria->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
                                                    </div>
                                                @endif
                                            @endif
@@ -78,7 +78,7 @@
                                     <input type="hidden" name="idcateg{{$categoria->id}}" value="{{$categoria->id}}" id="idcategm{{$categoria->id}}">
                                 </div>
                           @endforeach
-							<input type="text" name="TND" value="{{$datosC1}}">
+							
                         </div>
                         <!-- 	Registro -->
 
@@ -90,9 +90,9 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                        <h4 class="modal-title" id="myModalLabel">Agregar Categoría</h4>
+                                        <h4 class="modal-title" id="myModalLabel">{{$extra->nombreComercial}} Agregar Categoría</h4>
                                     </div>
-                                    <form method="post" action="/menu/registros/clientes/categoria/agregar/{{$extra}}" class="Validacion">
+                                    <form method="post" id="agregarCategoria__" class="Validacion">
                                     <div class="modal-body">
                                         
                                             {{ csrf_field() }}
@@ -117,6 +117,7 @@
                                                 </div>
                                         
                                     </div>
+                                    <input type="hidden" name="cliente_id__" id="cliente_id__" value="{{$extra->id}}">
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-primary" id="btnGuardarCategoria">Guardar<i class="fa fa-floppy-o"></i></button>
@@ -132,9 +133,9 @@
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                            <h4 class="modal-title" id="myModalLabel2">Modificar Categoría</h4>
+                                            <h4 class="modal-title" id="myModalLabel2">{{$extra->nombreComercial}} Modificar Categoría</h4>
                                         </div>
-                                        <form action="/menu/registros/clientes/categoria/actualizar/{{$extra}}" class="Validacion">
+                                        <form id="categoriaActualiar" class="Validacion">
                                             <div class="modal-body">
 
                                                 {{ csrf_field() }}
@@ -154,11 +155,11 @@
                                                                     <option value="1">Activo</option>
                                                                     <option value="0">Inactivo</option>
                                                                 </select><i class="fa fa-check" id="micct2"></i>
-                                                                <input type="hidden" name="Categoriaid" id="Categoriaid">
+                                                               
                                                             </div>
                                                         </div>
                                                     </div>
-
+                                                        <input type="hidden" name="_idCategoria_" id="_idCategoria_" value="">
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-primary" id="btnModificarCategoria">Modificar<i class="fa fa-floppy-o"></i></button>

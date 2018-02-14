@@ -292,6 +292,7 @@ $(document).ready(function()
  	$(".form-control").change(function()
  		{
  			
+ 			
  			var lista=$(this).attr('data-lista');//identifica que select se selecciono 0: departamentos, 1: Pais , 2: Region, 3: Estado, 4: Municipio
  			var clase=$(this).attr('data-clase');//indica a que grupo pertenece
  			var regiones=['#rgdhem','#inn2','#innn12','#inputm7','#inputm12'];

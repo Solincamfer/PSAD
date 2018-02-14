@@ -28,7 +28,12 @@
         <script src="{{asset('js/vista_perfil.js')}}"></script>
         <script src="{{asset('js/vista_empleados.js')}}"></script>
         <script src="{{asset('js/vista_planes.js')}}"></script>
+        <script src="{{asset('js/vista_clientes.js')}}"></script>
+        <script src="{{asset('js/movUsuarios.js')}}"></script>
+        <script src="{{asset('js/vistaRespMatriz.js')}}"></script>
+        <script src="{{asset('js/vistaCategoriaMatriz.js')}}"></script>
         <script src="{{asset('plugins/sweetalert/sweetalert.min.js')}}"></script>
+        <script src="{{asset('js/vistaRespCategoria.js')}}"></script>
 
     </body>
 </html>

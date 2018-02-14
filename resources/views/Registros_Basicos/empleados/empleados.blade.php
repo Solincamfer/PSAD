@@ -464,7 +464,7 @@
                                                             <div class="col-md-5">
                                                                 <div class="form-group row">
                                                                     <span class="ic"><i class="fa fa-chevron-down"></i></span>
-                                                                    <select name="TrifEmpmTrifEmpm" class="form-control" id="selRifEmpm">
+                                                                    <select name="TrifEmpm" class="form-control" id="selRifEmpm">
                                                                         <option value="">-</option>
                                                                         @foreach ($extra as $rif)
                                                                           <option value="{{$rif->id}}">{{$rif->descripcion}}</option>
@@ -557,7 +557,7 @@
                                                     <div class="row rEmp4">
                                                         <div class="form-group col-md-6">
                                                             <label for="pdhem">País</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
-                                                            <select name="pdhem" class="form-control" id="pdhem" data-lista="1" data-clase="0">
+                                                            <select name="pdhem" class="form-control direccion_emp" id="pdhem" data-vista="1" data-caso="0">
                                                                 <option value="">-</option>
                                                                 @foreach ($datosC2 as $pais)
                                                                   <option value="{{$pais->id}}">{{$pais->descripcion}}</option>
@@ -566,19 +566,19 @@
                                                         </div>
                                                         <div class="form-group col-md-6">
                                                             <label for="rgdhem">Región</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
-                                                            <select name="rgdhem" class="form-control" id="rgdhem" data-lista="2" data-clase="0">
+                                                            <select name="rgdhem" class="form-control direccion_emp" id="rgdhem" data-vista="1" data-caso="1">
                                                                 <option value="">-</option>
                                                             </select><i class="fa fa-map icemp"></i>
                                                         </div>
                                                         <div class="form-group col-md-6">
                                                             <label for="edodhem">Estado</label><span class="ic"><i class="fa fa-chevron-down"></i></span>
-                                                            <select name="edodhem" class="form-control" id="edodhem" data-lista="3" data-clase="0">
+                                                            <select name="edodhem" class="form-control direccion_emp" id="edodhem" data-vista="1" data-caso="2">
                                                                 <option value="">-</option>
                                                             </select><i class="fa fa-map-pin icemp"></i>
                                                         </div>
                                                         <div class="form-group col-md-6">
                                                             <label for="mundhem">Municipio</label><span class="ic"><i class="fa fa-chevron-down"></i></span>
-                                                            <select name="mundhem" class="form-control" id="mundhem">
+                                                            <select name="mundhem" class="form-control direccion_emp" id="mundhem" data-vista="1" data-caso="3">
                                                                 <option value="">-</option>
                                                             </select><i class="fa fa-map-signs icemp"></i>
                                                         </div>
@@ -717,6 +717,7 @@
                                   <div class="modal-footer">
                                       <button type="button" class="bttnMd" id="btnSvm">Guardar <i class="fa fa-floppy-o"></i></button>
                                   </div>
+                                  <input type="hidden" name="empleadoId" id="_idEmpleado_" value="">
                                 </form>
                             
                         </div>

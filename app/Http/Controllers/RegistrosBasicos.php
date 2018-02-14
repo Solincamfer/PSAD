@@ -24,6 +24,17 @@ use App\TIpo;
 use App\Modulo;
 use App\Submodulo;
 use App\Accion;
+use App\Pais;
+use App\Region;
+use App\Estado;
+use App\Municipio;
+use App\Respuesta;
+use App\Presencial;
+use App\Remoto;
+use App\Telefonico;
+use App\Cliente;
+use App\Persona;
+use App\Categoria;
 use Response;
 
 
@@ -140,31 +151,24 @@ class RegistrosBasicos extends Controller
 public function capturar_datos_responsables()
 	{
 		
-		$nombres=Request::get('nomRpb1');//nombres del responsable 
-		
-		$apellidos=Request::get('apellRpb1');//apellidos del responsable 
-		
-		$tipoCedula=(int)Request::get('selciRpb');//tipo cedula 
-		
-		$cedula=Request::get('txtci');//numero de cedula RpMda4
-		
-		$cargo=Request::get('cgoRpb');//cargo seltlfRpb
-		
-		$codigoMovil=(int)Request::get('seltlfRpb');//tipo codigo
-		
-		$numeroMovil=Request::get('numTelclRpb');//numero telefono numTelclRpb
-		
-		$codigoLocal=(int)Request::get('seltlfmRpb');//ctipo codigo seltlfmRpb
-		
-		$numeroLocal=Request::get('numTelmvlRpb');//numero fijo
-	
-		$correo=Request::get('mail2');//correo 
+		$form=(object)array
+				('nombre'=>strtoupper(Request::get('nomRpb1')),
+				 'apellido'=>strtoupper(Request::get('apellRpb1')),
+				 'cedula_id'=>Request::get('selciRpb'),
+				 'numeroCedula'=>Request::get('txtci'),
+				 'cargo'=>Request::get('cgoRpb'),
+				 'codigoMovil'=>Request::get('seltlfRpb'),
+				 'numeroMovil'=>Request::get('numTelclRpb'),
+				 'codigoFijo'=>Request::get('seltlfmRpb'),
+				 'numeroFijo'=>Request::get('numTelmvlRpb'),
+				 'correo'=>Request::get('mail2'),
+				 'cliente_id'=>Request::get('_clienteMatriz_'),
+				 'registro'=>Request::get('idRegistroMod_')
 
-		return array(
 
-					'nombre' => $nombres,'apellido'=>$apellidos,'tipoCedula'=>$tipoCedula,'cedula'=>$cedula,
-					'cargo'=>$cargo,'codigoC'=>$codigoMovil,'codigoL'=>$codigoLocal,'numeroC'=>$numeroMovil,
-					'numeroL'=>$numeroLocal,'correo'=>$correo);
+				);
+
+				return $form;
 
 	}
 	
@@ -226,7 +230,52 @@ public function capturar_datos_responsables()
 	}
 	
 	
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+
+
+
+
+///////////////////////////////////////////Submodulo movimientos por usuario ////////////////////////////////////
+public function	movimientosUsuario()
+{	    $datos=$this->cargar_header_sidebar_acciones();
+	return view('Registros_Basicos\Bitacoras\movimientos_por_usuario',$this->datos_vista_($datos,DB::table('departamentos')->get()));
+}
+
+public function mostrarUsuarios()
+{
+	$registry=Request::get('registry');
+	$departamento=Departamento::find($registry);
+	$usuarios=DB::table('usuarios')
+				->join('empleado_usuario','empleado_usuario.usuario_id','=','usuarios.id')
+				->join('empleados','empleados.id','=','empleado_usuario.empleado_id')
+				->join('cargos','cargos.id','=','empleados.cargo_id')
+				->join('areas','cargos.area_id','=','areas.id')
+				->join('departamentos','areas.departamento_id','=','departamentos.id')
+				->where(['departamentos.id'=>$registry,'usuarios.status'=>1])
+				->select('usuarios.id AS id','usuarios.n_usuario AS descripcion','empleados.primerNombre AS primerNombre','empleados.primerApellido AS primerApellido')
+				->get();
+	
+	return Response::json($usuarios);
+}
+
+public function movUsuariosReg()
+{
+
+	$usuario=Request::get('registry');
+	$usuario=DB::table('usuarios')
+				->join('empleado_usuario','empleado_usuario.usuario_id','=','usuarios.id')
+				->join('empleados','empleados.id','=','empleado_usuario.empleado_id')
+				->select('empleados.primerNombre AS primerNombre','empleados.primerApellido AS primerApellido','usuarios.n_usuario AS usuario')
+				->where('usuarios.id',$usuario)
+				->first();
+
+	$bitacora=Bitacora::where('usuario',$usuario->primerNombre.' '.$usuario->primerApellido)->get();
+
+
+	return view ('Registros_Basicos\Bitacoras\movimientos_usuario',compact('bitacora'));
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////submodulo departamentos ////////////////////////////////////////////////////////////
 
 
@@ -807,7 +856,31 @@ public function planesIngresar()
 		$insert=$nuevoPlan->save();
 		if($insert)
 		{
-			$this->registroBitacora($nuevoPlan->id,'Agregar Plan',json_encode($nuevoPlan),'Planes -> Agregar Plan');
+			$this->registroBitacora('Id del registro creado: '.$nuevoPlan->id,'Agregar Plan','{"Registro el plan":'.'"'.$nuevoPlan->nombreP.'"'.'}','Planes -> Agregar Plan');
+
+
+			/////////////////////Crear servicios para el plan //////////////////////////////////
+
+			$horario=new Horario();
+			$horario->plan_id=$nuevoPlan->id;
+			$horario->save();
+
+			$presencial=new Presencial();
+			$presencial->plan_id=$nuevoPlan->id;
+			$presencial->save();
+
+			$remoto=new Remoto();
+			$remoto->plan_id=$nuevoPlan->id;
+			$remoto->save();
+
+			$telefonico= new Telefonico();
+			$telefonico->plan_id=$nuevoPlan->id;
+			$telefonico->save();
+
+			$respuesta=new Respuesta();
+			$respuesta->plan_id=$nuevoPlan->id;
+			$respuesta->save();
+
 		}
 		
 	}
@@ -869,75 +942,166 @@ return $respuesta;
 ////////////////////////// INSERTAR Y ACTUALIZAR REGISTROS DE LOS SERVICIOS ASOCIADOS A UN PLAN //////////////////////////////
 
 public function insertar_servicios(){
+	$cambios=array();
+	$update=false;
 	$datos=Request::get('datos');
+	$planPadre=Plan::find($datos[1]);
 	if($datos[2]=='s1'){
-		DB::table('horarios')->where('plan_id','=',$datos[1])->delete();
-		DB::table('horarios')->insert
-				 	(
+		$horario=Horario::where('plan_id',$datos[1])->first();
 
-				 		[	'plan_id'=>$datos[1],
-				 			'horaI'=> $datos[0][0],
-				 			'horaF'=> $datos[0][1],
-				 			'diaI' => $datos[0][2],
-				 			'diaF' => $datos[0][3],
-				 			'precio'=>$datos[0][4],
+		$horario->plan_id=$datos[1];
 
-				 		]
-				 	);
+		$cambio=$this->detectarCambios($datos[0][0],$horario->horaI,'Tiempo de inicio');
+        $cambios=$this->agregarCambios($cambio,$cambios);
+		$horario->horaI=$datos[0][0];
 
-		$respuesta= 1;
+		$cambio=$this->detectarCambios($datos[0][1],$horario->horaF,'Tiempo final');
+        $cambios=$this->agregarCambios($cambio,$cambios);
+		$horario->horaF=$datos[0][1];
+
+		$cambio=$this->detectarCambios($datos[0][2],$horario->diaI,'Dia inicial');
+        $cambios=$this->agregarCambios($cambio,$cambios);
+		$horario->diaI=$datos[0][2];
+
+		$cambio=$this->detectarCambios($datos[0][3],$horario->diaF,'Dia final');
+        $cambios=$this->agregarCambios($cambio,$cambios);
+		$horario->diaF=$datos[0][3];
+
+
+		$cambio=$this->detectarCambios($datos[0][4],$horario->precio,'Precio');
+        $cambios=$this->agregarCambios($cambio,$cambios);
+		$horario->precio=$datos[0][4];
+
+		$update=$horario->save();
+		if($update)
+		{
+
+			$cambios=$this->documentarCambios($cambios);
+       		$this->registroBitacora('Plan:  '.$planPadre->nombreP.' , Servicio: Horarios','Crear/Modificar servicios',$cambios,$planPadre->nombreP.' - '.'Horarios');
+
+       		$respuesta= 1;
+		}
+	
+		
 
 	}
 	elseif($datos[2]=='s2'){
-		DB::table('presenciales')->where('plan_id','=',$datos[1])->delete();
-		DB::table('presenciales')->insert
-				 	(
 
-				 		[	'plan_id'=>$datos[1],
-				 			'etiqueta'=> $datos[0][0],
-				 			'valor'=> $datos[0][1],
-				 			'precio' => $datos[0][2],
-				 		]
-				 	);
-		$respuesta= 1;
+		$presencial= Presencial::where('plan_id',$datos[1])->first();
+		
+		
+		$cambio=$this->detectarCambios($datos[0][0],$presencial->etiqueta,'Etiqueta');
+        $cambios=$this->agregarCambios($cambio,$cambios);
+		$presencial->etiqueta=$datos[0][0];
+		
+		$cambio=$this->detectarCambios($datos[0][1],$presencial->valor,'Valor');
+        $cambios=$this->agregarCambios($cambio,$cambios);
+		$presencial->valor=$datos[0][1];
+		
+		$cambio=$this->detectarCambios($datos[0][2],$presencial->precio,'Precio');
+        $cambios=$this->agregarCambios($cambio,$cambios);
+		$presencial->precio=$datos[0][2];
+		
+		
+
+		$update=$presencial->save();
+		if($update)
+		{
+
+			$cambios=$this->documentarCambios($cambios);
+       		$this->registroBitacora('Plan:  '.$planPadre->nombreP.' , Servicio: Soporte Presencial','Crear/Modificar servicios',$cambios,$planPadre->nombreP.' - '.'Soporte Presencial');
+
+       		$respuesta= 1;
+		}
+	
 	}
 	elseif($datos[2]=='s3'){
-		DB::table('remotos')->where('plan_id','=',$datos[1])->delete();
-		DB::table('remotos')->insert
-				 	(
 
-				 		[	'plan_id'=>$datos[1],
-				 			'etiqueta'=> $datos[0][0],
-				 			'valor'=> $datos[0][1],
-				 			'precio' => $datos[0][2],
-				 		]
-				 	);
-		$respuesta= 1;
+
+		$remoto= Remoto::where('plan_id',$datos[1])->first();
+		
+		$cambio=$this->detectarCambios($datos[0][0],$remoto->etiqueta,'Etiqueta');
+        $cambios=$this->agregarCambios($cambio,$cambios);
+		$remoto->etiqueta=$datos[0][0];
+		
+		$cambio=$this->detectarCambios($datos[0][1],$remoto->valor,'Valor');
+        $cambios=$this->agregarCambios($cambio,$cambios);
+		$remoto->valor=$datos[0][1];
+		
+		$cambio=$this->detectarCambios($datos[0][2],$remoto->precio,'Precio');
+        $cambios=$this->agregarCambios($cambio,$cambios);
+		$remoto->precio=$datos[0][2];
+		
+		
+
+		$update=$remoto->save();
+		if($update)
+		{
+
+			$cambios=$this->documentarCambios($cambios);
+       		$this->registroBitacora('Plan:  '.$planPadre->nombreP.' , Servicio: Soporte Remoto','Crear/Modificar servicios',$cambios,$planPadre->nombreP.' - '.'Soporte Remoto');
+
+       		$respuesta= 1;
+		}
+		
 	}
 	elseif($datos[2]=='s4'){
-		DB::table('telefonicos')->where('plan_id','=',$datos[1])->delete();
-		DB::table('telefonicos')->insert
-				 	(
 
-				 		[	'plan_id'=>$datos[1],
-				 			'etiqueta'=> $datos[0][0],
-				 			'valor'=> $datos[0][1],
-				 			'precio' => $datos[0][2],
-				 		]
-				 	);
-		$respuesta= 1;
+		$telefonico= Telefonico::where('plan_id',$datos[1])->first();
+		
+		$cambio=$this->detectarCambios($datos[0][0],$telefonico->etiqueta,'Etiqueta');
+        $cambios=$this->agregarCambios($cambio,$cambios);
+		$telefonico->etiqueta=$datos[0][0];
+		
+		$cambio=$this->detectarCambios($datos[0][1],$telefonico->valor,'Valor');
+        $cambios=$this->agregarCambios($cambio,$cambios);
+		$telefonico->valor=$datos[0][1];
+		
+		$cambio=$this->detectarCambios($datos[0][2],$telefonico->precio,'Precio');
+        $cambios=$this->agregarCambios($cambio,$cambios);
+		$telefonico->precio=$datos[0][2];
+		
+		
+
+		$update=$telefonico->save();
+		if($update)
+		{
+
+			$cambios=$this->documentarCambios($cambios);
+       		$this->registroBitacora('Plan:  '.$planPadre->nombreP.' , Servicio: Soporte Telefonico','Crear/Modificar servicios',$cambios,$planPadre->nombreP.' - '.'Soporte Telefonico');
+
+       		$respuesta= 1;
+		}
+
+		
 	}
 	elseif($datos[2]=='s5'){
-		DB::table('respuestas')->where('plan_id','=',$datos[1])->delete();
-		DB::table('respuestas')->insert
-				 	(
 
-				 		[	'plan_id'=>$datos[1],
-				 			'maximo'=> $datos[0][0],
-				 			'precio' => $datos[0][1],
-				 		]
-				 	);
-		$respuesta= 1;
+
+		$respuesta=	Respuesta::where('plan_id',$datos[1])->first();
+
+		$cambio=$this->detectarCambios($datos[0][0],$respuesta->maximo,'Tiempo respuesta maximo');
+        $cambios=$this->agregarCambios($cambio,$cambios);
+		$respuesta->maximo=$datos[0][0];
+
+
+		$cambio=$this->detectarCambios($datos[0][1],$respuesta->precio,'Precio');
+        $cambios=$this->agregarCambios($cambio,$cambios);
+		$respuesta->precio=$datos[0][1];
+
+		$update=$respuesta->save();
+		if($update)
+		{
+
+			$cambios=$this->documentarCambios($cambios);
+       		$this->registroBitacora('Plan:  '.$planPadre->nombreP.' , Servicio: Tiempo de respuesta','Crear/Modificar servicios',$cambios,$planPadre->nombreP.' - '.'Tiempo de respuesta');
+
+       		$respuesta= 1;
+		}
+
+
+		
+		
 	}
 	else{
 		$respuesta= 0;
@@ -949,21 +1113,40 @@ public function insertar_servicios(){
 public function planesActualizar()
 {
 	
-	$formulario=['nombreP'=>strtoupper(Request::get('nomPlan')),'descuento'=>Request::get('porDesc'),'status'=>Request::get('statusPlan'),'id'=>Request::get('registroPlan')];
+	$formulario=(object)['nombreP'=>strtoupper(Request::get('nomPlan')),'descuento'=>Request::get('porDesc'),'status'=>Request::get('statusPlan'),'id'=>Request::get('registroPlan')];
 
 	$indicadores=['update'=>false,'duplicate'=>1];
-	$cambios=[];
+	$cambios=array();
 	//////////////////////////////Verificar si el registro existe en el sistema /////////////////////////////////////////////////////
-	$indicadores['duplicate']=Plan::where('nombreP',$formulario['nombreP'])->count();
+	$indicadores['duplicate']=Plan::where('nombreP',$formulario->nombreP)->count();
 	//////////////////////////////////////Si no hay registros duplicados ////////////////////////////////////////////////////////////
 	if($indicadores['duplicate']==0)
 	{
-       $aux=$this->compararCampos($formulario,$indicadores['duplicate'],Plan::find($formulario['id']));
-       $indicadores['update']=$aux['update'];
+       $plan=Plan::find($formulario->id);
+       
+       $cambio=$this->detectarCambios($formulario->nombreP,$plan->nombreP,'Nombre del plan');
+       $cambios=$this->agregarCambios($cambio,$cambios);
+       $plan->nombreP=$formulario->nombreP;
+
+       
+       $cambio=$this->detectarCambios($formulario->descuento,$plan->descuento,'Porcentaje descuento');
+       $cambios=$this->agregarCambios($cambio,$cambios);
+       $plan->descuento=$formulario->descuento;
+
+
+       $traduccionBd=$this->traducirId($plan->status,10);
+       $traduccionFor=$this->traducirId($formulario->status,10);
+       $cambio=$this->detectarCambios($traduccionFor,$traduccionBd,'Status');
+       $cambios=$this->agregarCambios($cambio,$cambios);
+       $plan->status=$formulario->status;
+       $indicadores['update']=$plan->save();
+
+        
        if($indicadores['update']==true)
        {
-       	$cambios=(string) json_encode($aux['cambios']);
-       	$this->registroBitacora($formulario['id'],'Modificar Plan',$cambios,'Planes -> Modificar Plan');
+       	
+       	$cambios=$this->documentarCambios($cambios);
+       	$this->registroBitacora('Id del registro modificado: '.$plan->id,'Modificar Plan',$cambios,'Planes -> Modificar Plan');
        }
 
 	}
@@ -987,6 +1170,8 @@ public function planesModificar()
 function planesModificarStatus()
 {
 	$status=[1,0];
+	$status_=['HABILITADO','INHABILITADO'];
+	$status__=['INHABILITADO','HABILITADO'];
 	$registry=Request::get('registry');
 	$aux=false;
 	///////////// Busqueda del perfil y cambio de status ////////////////////////
@@ -994,7 +1179,7 @@ function planesModificarStatus()
 	$plan->status=$status[$plan->status];
 	$aux=$plan->save();
 	/////////////////////////////////////////////////////////////////////////////////////////////////////
-    $this->registroBitacora($registry,'Cambiar Status','{"status":"'.$status[$plan->status].' -> '.$plan->status.'"}','Planes');
+    $this->registroBitacora('Plan: '.$plan->nombreP,'Cambiar Status','{"Status":"Cambio de: '.$status_[$plan->status].' a: '.$status__[$plan->status].'"}','Planes');
     /////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	return Response()->json(['update'=>$aux]);
@@ -1048,7 +1233,7 @@ public function empleados_perfiles($empleado_id)
 
 	
 	return view ('Registros_Basicos\empleados\empleados_perfil',$this->datos_vista($datos,$acciones,
-						DB::table('perfiles')->where('id','<>',13)->where('id','<>',16)->get(),
+						DB::table('perfiles')->where('descripcion','<>','STANDAR')->where('descripcion','<>','ROOT')->get(),
 						$usuario->n_usuario,//extra
 						$perfil->id,//datosC1
 						$usuario->id//datosC2
@@ -1060,18 +1245,497 @@ public function empleados_asignar_perfil()
 {
 	$valores=Request::get('datos');//usuario [0] , perfil [1]
 	
-	$usuario=(int)$valores[0];
-	$perfil=(int)$valores[1];
+	$usuario_id=(int)$valores[0];//id del usuario, viene de la vista
+	$perfil_id=(int)$valores[1];//id del perfil, viene de la vista
 
-	$actualizacion=DB::table('usuarios')->where('id',$usuario)->update(['perfil_id'=>$perfil]);
+	$empleado=DB::table('empleado_usuario')
+				->join('empleados','empleados.id','=','empleado_usuario.empleado_id')
+				->select('empleados.primerNombre AS primerNombre','empleados.primerApellido AS primerApellido')
+				->where('usuario_id',$usuario_id)
+				->first();//
+
+	$usuario=Usuario::find($usuario_id);//obtiene la informacion actual del usuario 
+	$perfilActual=Perfil::find($usuario->perfil_id);//obtiene la informacion del perfil actual del usuario
+	$perfilNuevo=Perfil::find($perfil_id);//informacion del nuevo perfil 
+
+	$actualizacion=DB::table('usuarios')->where('id',$usuario_id)->update(['perfil_id'=>$perfil_id]);
+	$this->registroBitacora('Usuario: '.$usuario->n_usuario.' - '.$empleado->primerNombre.' '.$empleado->primerApellido,'Asignar Perfil','{'.'"Perfil":'.'"'.$perfilActual->descripcion.' , Fue cambiado a: '.$perfilNuevo->descripcion.'"}','Empleados -> Permisos');
+	
 	return $actualizacion;
 	
 }
 
+public function selectDireccionEmp()
+{
+	$registry=Request::get('registry');
+	$caso=Request::get('caso');
+	$retorno=null;
+
+	if($caso==0)
+	{
+		$retorno=Region::where('pais_id',$registry)->get();
+	}
+	else if($caso==1)
+	{
+		$retorno=Estado::where('region_id',$registry)->get();
+	}
+	else if($caso==2)
+	{
+		$retorno=Municipio::where('estado_id',$registry)->get();
+	}
+
+
+    return Response::json($retorno);
+}
+
+
+public function obtenerFormularioActualizar()
+{
+  
+	$formulario=array(
+
+						'primerNombre'=>strtoupper(Request::get('nomEmp1m')),
+						'segundoNombre'=>strtoupper(Request::get('nomEmp2m')),
+						'primerApellido'=>strtoupper(Request::get('apellEmp1m')),
+						'segundoApellido'=>strtoupper(Request::get('apellEmp2m')),
+						'tipoRif'=>Request::get('TrifEmpm'),
+						'numeroRif'=>Request::get('rifEmpm'),
+						'tipoCedula'=>Request::get('TciEmpm'),
+						'numeroCedula'=>Request::get('ciEmpm'),
+						'fechaNacimiento'=>Request::get('fnEmpmm'),
+						'director'=>Request::get('direccionEmprm'),
+						'departamento'=>Request::get('departamentoEmpm'),
+						'area'=>Request::get('areaEmp_m'),
+						'cargo'=>Request::get('cgoEmpm'),
+						'pais'=>Request::get('pdhem'),
+						'region'=>Request::get('rgdhem'),
+						'estado'=>Request::get('edodhem'),
+						'municipio'=>Request::get('mundhem'),
+						'codigoPostal'=>Request::get('codigoPostalm'),
+						'descripcionDireccion'=>Request::get('descpdhem'),
+						'telefonoLocal1Codigo'=>Request::get('numerol_1cm'),
+						'telefonoLocal1Numero'=>Request::get('numerol_1tm'),
+						'telefonoLocal2Codigo'=>Request::get('numerol_2cm'),
+						'telefonoLocal2Numero'=>Request::get('numerol_2tm'),
+						'telefonoMovilCodigo'=>Request::get('numerom_cm'),
+						'telefonoMovil'=>Request::get('numerom_tm'),
+						'correo'=>Request::get('correo_m'),
+						'nombreUsuario'=>Request::get('nomUs_m'),
+						'password'=>Request::get('psw_m'),
+						'status'=>Request::get('statusEm_m'),
+						'empleado_id'=>Request::get('empleadoId')
+
+
+
+						);
+
+	return (object) $formulario;
+}
+
+public function traducirId($traducir,$campo,$registro_id=null)
+{
+
+	$status=['INHABILITADO','HABILITADO'];
+
+	if($campo==0||$campo==1||$campo==7)//se refiere a tipo de : rif, cedula y codigo de telefono movil
+	{
+		$retorno=DB::table('tipos')->where('id',$traducir)->select('descripcion AS descripcion')->first();
+		$retorno=$retorno->descripcion;
+		
+	}
+	else if($campo==2)//se refiere al id del pais
+	{
+		$retorno=DB::table('paises')->where('id',$traducir)->select('descripcion AS descripcion')->first();
+		$retorno=$retorno->descripcion;
+	}
+	else if($campo==3)
+	{
+		$retorno=DB::table('regiones')->where('id',$traducir)->select('descripcion AS descripcion')->first();
+		$retorno=$retorno->descripcion;
+	}
+	else if($campo==4)
+	{
+		$retorno=DB::table('estados')->where('id',$traducir)->select('descripcion AS descripcion')->first();
+		$retorno=$retorno->descripcion;
+	}
+	else if($campo==5)
+	{
+		$retorno=DB::table('municipios')->where('id',$traducir)->select('descripcion AS descripcion')->first();
+		$retorno=$retorno->descripcion;
+	}
+	else if($campo==6)
+	{
+		$retorno=DB::table('cargos')->where('id',$traducir)->select('descripcion AS descripcion')->first();
+		$retorno=$retorno->descripcion;
+	}
+	else if($campo==8)
+	{
+		$retorno=DB::table('empleados')->where('id',$registro_id)->select('status AS status')->first();
+		$retorno=$status[$retorno->status];
+
+	}
+	else if($campo==9)
+	{
+		$retorno=DB::table('usuarios')->where('id',$registro_id)->select('status AS status')->first();
+		$retorno=$status[$retorno->status];
+	}
+	else if($campo==10)
+	{
+		
+		$retorno=$status[$traducir];
+	}
+	else if($campo==11)
+	{
+		$retorno=DB::table('tipos')->where('id',$traducir)->select('descripcion AS descripcion')->first();
+		$retorno=$retorno->descripcion;
+	}
+
+	
+
+	return $retorno;
+}
+
+public function detectarCambios($valorForm,$valorBd,$campo)
+{
+	$retorno=null;
+	if($valorForm!=$valorBd)
+	{
+		$retorno=(object)array('campo'=>$campo,'cambio'=>$valorBd.' ,Fue cambiado a:  '.$valorForm);
+	}
+	return $retorno;
+}
+
+public function documentarCambios($cambios)
+{
+	$registro='{';
+    $longitud=count($cambios);
+    for ($i=0; $i <$longitud ; $i++) 
+    { 
+    	$registro=$registro.'"'.$cambios[$i]->campo.'"'.':'.'"'.$cambios[$i]->cambio.'"';
+    	if($i!==$longitud-1)
+    	{
+    		$registro=$registro.',';
+    	}
+    }
+    $registro=$registro.'}';
+
+    return $registro;
+  }
+
+
+
+ public function agregarCambios($cambio,$cambios)
+ {
+ 	$cambios=$cambios;
+
+ 	if($cambio!=null)
+    		{
+    			array_push($cambios,$cambio);
+    		}
+   	return $cambios;
+ }
+
+
+
+
+public function empleadosActualizar()
+{
+
+   $cambios=array();
+   $formulario=$this->obtenerFormularioActualizar();
+   $empleado=Empleado::where('id',$formulario->empleado_id)->first();
+   // ///////////////verificar si el usuario esta duplicado, para el resto de empleados //////////////
+   $empleadoUsu=DB::table('empleado_usuario')
+   					->join('usuarios','usuarios.id','=','empleado_usuario.usuario_id')
+   					->where('empleado_usuario.empleado_id',$formulario->empleado_id)
+   					->select('usuarios.n_usuario AS usuario','usuarios.id AS usuario_id')
+   					->first();////captura el username y el id de ese registro en la base de datos que est asociado al empleado a modificar
+
+   	$mensaje=(object)array('usuario'=>0,'cedula'=>0,'rif'=>0,'mensaje'=>'');
+
+
+   // 	///Buscar usuario duplicado 
+
+   $usuarioDuplicado=DB::table('usuarios')->where('id','<>',$empleadoUsu->usuario_id)->where('n_usuario','=',$formulario->nombreUsuario)->first();
+
+   //  ////Verificar si existe la cedula insertada en el formulario 
+   	$verificarCedula=DB::table('cedulas')->where(['numero'=>$formulario->numeroCedula,'rol'=>'EMPLEADO','tipo_id'=>$formulario->tipoCedula])->where('id','<>',$empleado->cedula_id)->first();
+
+   //  ///Verificar si existe el rif  insertado en el formulario 
+    $verificarRif=DB::table('rifs')->where(['numero'=>$formulario->numeroRif,'rol'=>'EMPLEADO','tipo_id'=>$formulario->tipoRif])->where('id','<>',$empleado->rif_id)->first();
+
+   //  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
+    if(count($usuarioDuplicado)>0){$mensaje->usuario=1;$mensaje->mensaje=$mensaje->mensaje.'<br>El usuario: '.$formulario->nombreUsuario.', existe en el sistema!!!';}
+    if(count($verificarCedula)>0)
+    	{
+    		$empleadoDup=Empleado::where('cedula_id',$verificarCedula->id)->select('primerNombre AS nombre','primerApellido AS apellido')->first();
+    		$mensaje->cedula=1;
+    		$mensaje->mensaje=$mensaje->mensaje.'<br>La cedula: '.$formulario->numeroCedula.' , se encuentra asignada a: '.$empleadoDup->nombre.' '.$empleadoDup->apellido;
+    	}
+    if(count($verificarRif)>0)
+    {
+    	    $empleadoDup=Empleado::where('rif_id',$verificarRif->id)->select('primerNombre AS nombre','primerApellido AS apellido')->first();
+    	    $mensaje->rif=1;
+    	    $mensaje->mensaje=$mensaje->mensaje.'<br>El rif: '.$formulario->numeroRif.' , se encuentra asignado a: '.$empleadoDup->nombre.' '.$empleadoDup->apellido;
+    }
+
+
+
+    if($mensaje->mensaje=='')//si no existe ningun mensaje 
+    {
+    		////////Informacion usuario /////////////////////////////
+    		$usuario=Usuario::find($empleadoUsu->usuario_id);
+    		
+    		$cambio=$this->detectarCambios($formulario->nombreUsuario,$usuario->n_usuario,'Usuario');
+    		$cambios=$this->agregarCambios($cambio,$cambios);
+    		$usuario->n_usuario=$formulario->nombreUsuario;
+    		
+
+    		$cambio=$this->detectarCambios($formulario->password,$usuario->clave,'Contraseña');
+    		$cambios=$this->agregarCambios($cambio,$cambios);
+    		$usuario->clave=$formulario->password;
+
+
+    		
+    		$usuario->status=$formulario->status;
+    		$usuario->save();
+
+    		///////Informacion Correo ////////////////////////////////
+    		$correo=Correo::find($empleado->correo_id);
+
+    		$cambio=$this->detectarCambios($formulario->correo,$correo->correo,'Correo');
+    		$cambios=$this->agregarCambios($cambio,$cambios);
+    		$correo->correo=$formulario->correo;
+    		$correo->save();
+
+    		///////Informacion Cedula //////////////////////////////////
+    		$cedula=Cedula::find($empleado->cedula_id);
+
+    		$cambio=$this->detectarCambios($formulario->numeroCedula,$cedula->numero,'Numero Cedula');
+    		$cambios=$this->agregarCambios($cambio,$cambios);
+    		$cedula->numero=$formulario->numeroCedula;
+
+
+    		$traduccionBd=$this->traducirId($cedula->tipo_id,1);
+    		$traduccionFor=$this->traducirId($formulario->tipoCedula,1);
+    		$cambio=$this->detectarCambios($traduccionFor,$traduccionBd,'Tipo Cedula');
+    		$cambios=$this->agregarCambios($cambio,$cambios);
+    		$cedula->tipo_id=$formulario->tipoCedula;
+    		$cedula->save();
+
+
+    		///////Informacion Rif ////////////////////////////////////////////////////////////////////
+    		$rif=Rif::find($empleado->rif_id);
+
+    		$cambio=$this->detectarCambios($formulario->numeroRif,$rif->numero,'Numero Rif');
+    		$cambios=$this->agregarCambios($cambio,$cambios);
+    		$rif->numero=$formulario->numeroRif;
+
+    		$traduccionBd=$this->traducirId($rif->tipo_id,0);
+    		$traduccionFor=$this->traducirId($formulario->tipoRif,0);
+    		$cambio=$this->detectarCambios($traduccionFor,$traduccionBd,'Tipo Rif');
+    		$cambios=$this->agregarCambios($cambio,$cambios);
+    		$rif->tipo_id=$formulario->tipoRif;
+    		$rif->save();
+
+    		//////Informacion Direccion ///////////////////////////////////////////////////////////////
+    		$direccion=Direccion::find($empleado->direccion_id);
+    		
+    		$cambio=$this->detectarCambios($formulario->descripcionDireccion,$direccion->descripcion,'Direccion');
+    		$cambios=$this->agregarCambios($cambio,$cambios);
+    		$direccion->descripcion=$formulario->descripcionDireccion;
+    		
+    		$cambio=$this->detectarCambios($formulario->codigoPostal,$direccion->codigoPostal,'Codigo Postal');
+    		$cambios=$this->agregarCambios($cambio,$cambios);
+    		$direccion->codigoPostal=$formulario->codigoPostal;
+    		
+
+    		$traduccionBd=$this->traducirId($direccion->municipio_id,5);
+    		$traduccionFor=$this->traducirId($formulario->municipio,5);
+    		$cambio=$this->detectarCambios($traduccionFor,$traduccionBd,'Municipio');
+    		$cambios=$this->agregarCambios($cambio,$cambios);
+    		$direccion->municipio_id=$formulario->municipio;
+    		
+    		$traduccionBd=$this->traducirId($direccion->estado_id,4);
+    		$traduccionFor=$this->traducirId($formulario->estado,4);
+    		$cambio=$this->detectarCambios($traduccionFor,$traduccionBd,'Estado');
+    		$cambios=$this->agregarCambios($cambio,$cambios);
+    		$direccion->estado_id=$formulario->estado;
+    		
+    		$traduccionBd=$this->traducirId($direccion->region_id,3);
+    		$traduccionFor=$this->traducirId($formulario->region,3);
+    		$cambio=$this->detectarCambios($traduccionFor,$traduccionBd,'Region');
+    		$cambios=$this->agregarCambios($cambio,$cambios);
+    		$direccion->region_id=$formulario->region;
+    		
+    		$traduccionBd=$this->traducirId($direccion->pais_id,2);
+    		$traduccionFor=$this->traducirId($formulario->pais,2);
+    		$cambio=$this->detectarCambios($traduccionFor,$traduccionBd,'Pais');
+    		$cambios=$this->agregarCambios($cambio,$cambios);
+    		$direccion->pais_id=$formulario->pais;
+    		
+
+    		$direccion->save();
+
+    		
+ 			//////Informacion Telefono /////////////////////////////////////////////////////////////////
+    		$empleadoTelefono=DB::table('empleado_telefono')->where('empleado_id',$empleado->id)->get();
+    		foreach ($empleadoTelefono as $empTe) 
+    		{
+    			$telefono=Telefono::find($empTe->telefono_id);
+    			if($telefono->tipo==0) 
+    			{
+    				$cambio=$this->detectarCambios($formulario->telefonoLocal1Codigo,$telefono->codigo,'Codigo Local 1');
+    				$cambios=$this->agregarCambios($cambio,$cambios);
+    				$telefono->codigo=$formulario->telefonoLocal1Codigo;
+
+    				$cambio=$this->detectarCambios($formulario->telefonoLocal1Numero,$telefono->telefono,'Numero Local 1');
+    				$cambios=$this->agregarCambios($cambio,$cambios);
+    				$telefono->telefono=$formulario->telefonoLocal1Numero;
+    				$telefono->save();
+    			}
+    			else if($telefono->tipo==1)
+    			{
+    				
+    				$cambio=$this->detectarCambios($formulario->telefonoLocal2Codigo,$telefono->codigo,'Codigo Local 2');
+    				$cambios=$this->agregarCambios($cambio,$cambios);
+    				$telefono->codigo=$formulario->telefonoLocal2Codigo;
+
+    				$cambio=$this->detectarCambios($formulario->telefonoLocal2Numero,$telefono->telefono,'Numero Local 2');
+    				$cambios=$this->agregarCambios($cambio,$cambios);
+    				$telefono->telefono=$formulario->telefonoLocal2Numero;
+    				$telefono->save();
+    			}
+    			else if($telefono->tipo==2)
+    			{
+    				$tipo=DB::table('tipos')->where('id',$formulario->telefonoMovilCodigo)->first();
+    				$tipoActual=DB::table('tipos')->where('descripcion',$telefono->codigo)->first();
+
+    				$traduccionBd=$this->traducirId($tipoActual->id,7);
+    				$traduccionFor=$this->traducirId($formulario->telefonoMovilCodigo,7);
+    				$cambio=$this->detectarCambios($traduccionFor,$traduccionBd,'Codigo Movil');
+    				$cambios=$this->agregarCambios($cambio,$cambios);
+    				$telefono->codigo=$tipo->descripcion;
+    				
+    				$cambio=$this->detectarCambios($formulario->telefonoMovil,$telefono->telefono,'Telefono Movil');
+    				$cambios=$this->agregarCambios($cambio,$cambios);
+    				$telefono->telefono=$formulario->telefonoMovil;
+    				$telefono->save();
+    			}
+    		}
+
+    		
+    		////////Informacion del empleado ////////////////////////////////////////////////////////////////
+    		$empleado=Empleado::find($formulario->empleado_id);
+
+    		$cambio=$this->detectarCambios($formulario->primerNombre,$empleado->primerNombre,'Primer Nombre');
+    		$cambios=$this->agregarCambios($cambio,$cambios);
+    		$empleado->primerNombre=$formulario->primerNombre;
+
+    		$cambio=$this->detectarCambios($formulario->segundoNombre,$empleado->segundoNombre,'Segundo Nombre');
+    		$cambios=$this->agregarCambios($cambio,$cambios);
+    		$empleado->segundoNombre=$formulario->segundoNombre;
+
+    		$cambio=$this->detectarCambios($formulario->primerApellido,$empleado->primerApellido,'Primer Apellido');
+    		$cambios=$this->agregarCambios($cambio,$cambios);
+    		$empleado->primerApellido=$formulario->primerApellido;
+
+    		$cambio=$this->detectarCambios($formulario->segundoApellido,$empleado->segundoApellido,'Segundo Apellido');
+    		$cambios=$this->agregarCambios($cambio,$cambios);
+    		$empleado->segundoApellido=$formulario->segundoApellido;
+
+    		$cambio=$this->detectarCambios($formulario->fechaNacimiento,$empleado->fechaNacimiento,'Fecha Nacimiento');
+    		$cambios=$this->agregarCambios($cambio,$cambios);
+    		$empleado->fechaNacimiento=$formulario->fechaNacimiento;
+
+    		// $cambio=$this->detectarCambios($formulario->telefonoLocal2Codigo,$telefono->codigo,'Codigo Local 2');
+    		// $cambios=$this->agregarCambios($cambio,$cambios);
+    		$empleado->status=$formulario->status;
+    		$empleado->save();
+    		$longitud=count($cambios);
+    		$cambios=$this->documentarCambios($cambios);
+    		
+    	if($longitud>0)
+    	 {
+
+    		$this->registroBitacora('Id del registro modificado: '.$empleado->id,'Modificar Empleado',$cambios,'Empleados');
+    	 }
+   
+
+    }
+
+
+ 
+
+ return Response::json($mensaje);
+}
+
+
+
 public function empleadosModificar()
 {
 	$empleado=Empleado::find(Request::get('registry'));
-	return Response::json([$empleado]);
+	$cedula=DB::table('cedulas')->where('id',$empleado->cedula_id)->first();
+	$rif=DB::table('rifs')->where('id',$empleado->rif_id)->first();
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	$estructura=DB::table('cargos')
+	              ->join('areas','cargos.area_id','=','areas.id')
+	              ->join('departamentos','areas.departamento_id','departamentos.id')
+	              ->join('directores','directores.id','=','departamentos.director_id')
+	              ->select('cargos.id AS cargo_id','cargos.descripcion AS cargo','areas.id AS area_id','areas.descripcion AS area','departamentos.id AS departamento_id','departamentos.descripcion','directores.id AS director_id','directores.descripcion AS director')
+	              ->where('cargos.id',$empleado->cargo_id)
+	              ->first();
+
+	 $selectStructura=array();
+	 
+	 $selectStructura['departamentos']=DB::table('departamentos')->where('director_id',$estructura->director_id)->get();
+	 $selectStructura['areas']=DB::table('areas')->where('departamento_id',$estructura->departamento_id)->get();
+	 $selectStructura['cargos']=DB::table('cargos')->where('area_id',$estructura->area_id)->get();
+	 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+	 $direccion=DB::table('direcciones')->join('paises','direcciones.pais_id','=','paises.id')
+	 								    ->join('regiones','direcciones.region_id','=','regiones.id')
+	 								    ->join('estados','direcciones.estado_id','=','estados.id')
+	 								    ->join('municipios','direcciones.municipio_id','=','municipios.id')
+	 								    ->select('paises.id AS pais_id','paises.descripcion AS pais','regiones.id AS region_id','regiones.descripcion AS region',
+	 								             'estados.id AS estado_id','estados.descripcion AS estado','municipios.id AS municipio_id','municipios.descripcion AS municipio','direcciones.descripcion AS direccion','direcciones.codigoPostal AS codigoPostal')
+	 								    ->where('direcciones.id',$empleado->direccion_id)
+	 								    ->first();
+
+	$selectDireccion=array();
+	$selectDireccion['regiones']=DB::table('regiones')->where('pais_id',$direccion->pais_id)->get();
+	$selectDireccion['estados']=DB::table('estados')->where('region_id',$direccion->region_id)->get();
+	$selectDireccion['municipios']=DB::table('municipios')->where('estado_id',$direccion->estado_id)->get();
+
+
+ /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+$correo=DB::table('correos')->where('id',$empleado->correo_id)->first();
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+$telefonos=DB::table('empleado_telefono')
+			->join('telefonos','empleado_telefono.telefono_id','=','telefonos.id')
+			->where('empleado_telefono.empleado_id',$empleado->id)
+			->select('telefonos.codigo AS codigo','telefonos.telefono AS numero','telefonos.tipo AS tipo')
+			->get();
+
+$codigoMovil=DB::table('tipos')->where('descripcion',$telefonos[2]->codigo)->select('id AS codigo')->first();
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+$usuario=DB::table('empleado_usuario')
+			->join('usuarios','empleado_usuario.usuario_id','=','usuarios.id')
+			->select('usuarios.n_usuario AS usuario','usuarios.clave AS clave ','usuarios.status AS status')
+			->where('empleado_usuario.empleado_id',$empleado->id)
+			->first();
+
+if(count($usuario)==0)
+{$usuario=null;}
+
+
+	return Response::json([$empleado,$rif,$cedula,$estructura,$selectStructura,$direccion,$selectDireccion,$correo,$telefonos,$codigoMovil,$usuario]);
 }
 
 public function cargar_modal_agregar(){
@@ -1100,6 +1764,8 @@ public function cargar_modal_agregar(){
 public function empleadosStatus()
 {
 	$status=[1,0];
+	$status_=['HABILITADO','INHABILITADO'];
+	$status__=['INHABILITADO','HABILITADO'];
 	$registry=Request::get('registry');
 	$aux=false;
 	/////////////////Busqueda del empleado y cambio de status ////////////////////////////////////////////
@@ -1107,7 +1773,12 @@ public function empleadosStatus()
 	$empleado->status=$status[$empleado->status];
 	$aux=$empleado->save();
 	/////////////////////////////////////////////////////////////////////////////////////////////////////
-    $this->registroBitacora($registry,'Cambiar Status','{"status":"'.$status[$empleado->status].' -> '.$empleado->status.'"}','Empleados');
+	$cedula=DB::table('cedulas')->join('tipos','tipos.id','=','cedulas.tipo_id')
+				->select('cedulas.numero AS numero','tipos.descripcion AS tipoCedula')
+				->where('cedulas.id',$empleado->cedula_id)
+				->first();
+
+    $this->registroBitacora($empleado->primerNombre.' '.$empleado->primerApellido.' - '.$cedula->tipoCedula.' '.$cedula->numero,'Cambiar Status','{"Status":"'.$status_[$empleado->status].' -> '.$status__[$empleado->status].'"}','Empleados');
     /////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	return Response()->json(['update'=>$aux]);
@@ -1267,7 +1938,7 @@ public function insertar_empleado()
 		$telefonoLocal1=new Telefono();
 		$telefonoLocal1->telefono=$formulario['telefonoLocal1Numero'];
 		$telefonoLocal1->codigo=$formulario['telefonoLocal1Codigo'];
-		$telefonoLocal1->tipo=1;
+		$telefonoLocal1->tipo=0;
 		$telefonoLocal1->save();
 
 		$telefonoLocal2=new Telefono();
@@ -1294,9 +1965,13 @@ public function insertar_empleado()
 		$usuario->n_usuario=$formulario['numeroCedula'];
 		$usuario->clave=$formulario['password'];
 		$usuario->status=$formulario['status'];
-		$usuario->perfil_id=16;
+		$usuario->perfil_id=27;
 		$usuario->save();
 		$usuario->empleados()->attach($empleado->id);
+
+
+		$traduccionTipoCedula=$this->traducirId($cedula->tipo_id,1);
+		$this->registroBitacora('Id del registro creado: '.$empleado->id,'Agregar Empleado','{'.'"Registro al empleado":'.'"'.$empleado->primerNombre.' '.$empleado->primerApellido.' , C.i: '.$traduccionTipoCedula.' '.$cedula->numero.'"}','Agregar Empleado');
 		
 
 
@@ -1371,7 +2046,7 @@ public function perfiles()//ventana perfiles
 {
 	$datos=$this->cargar_header_sidebar_acciones();
 	$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(84,85,86),83);
-	return view('Registros_Basicos\Perfiles\perfiles',$this->datos_vista($datos,$acciones,DB::table('perfiles')->where('id','<>',13)->where('id','<>',16)->paginate(11),2));
+	return view('Registros_Basicos\Perfiles\perfiles',$this->datos_vista($datos,$acciones,DB::table('perfiles')->where('descripcion','<>','ROOT')->where('descripcion','<>','STANDAR')->paginate(11),2));
 }
 
 
@@ -1431,12 +2106,12 @@ public function perfiles_insertar()
 		$insert=$nuevoPerfil->save();
 		if($insert)
 		{
-			$this->registroBitacora($nuevoPerfil->id,'Agregar Perfil',json_encode($nuevoPerfil),'Perfil -> Agregar Perfil');
+			$this->registroBitacora('Id del registro creado: '.$nuevoPerfil->id,'Agregar Perfil','{"Registro el perfil":'.'"'.$nuevoPerfil->descripcion.'"'.'}','Perfil -> Agregar Perfil');
 		}
 		
 	}
 
-	$this->configurarPerfil($nuevoPerfil->id);
+	$this->configurarPerfil($nuevoPerfil->id);//configuracion de todo los modulos aceptados para el perfil normalmente tarda 
 
 	
 	return Response()->json(['duplicate'=>$duplicate,'insert'=>$insert]);
@@ -1448,12 +2123,14 @@ public function registroBitacora($registry,$accion,$detalles,$ventana)
 
 	$datos=Session::get('sesion');
 	$usuario=$datos[0]['nombre'].' '.$datos[0]['apellido'];
+	$username=$datos[0]['usuario'];
 	
 
 	$bitacora=new Bitacora;
 	$bitacora->usuario=$usuario;
+	$bitacora->username=$username;
 	$bitacora->accion=$accion;
-	$bitacora->registro_id=$registry;
+	$bitacora->registro=$registry;
 	$bitacora->detalles=$detalles;
 	$bitacora->ventana=$ventana;
 
@@ -1465,6 +2142,8 @@ public function perfilesModificarStatus()
 {
 
 	$status=[1,0];
+	$status_=['HABILITADO','INHABILITADO'];
+	$status__=['INHABILITADO','HABILITADO'];
 	$registry=Request::get('registry');
 	$aux=false;
 	///////////// Busqueda del perfil y cambio de status ////////////////////////
@@ -1472,7 +2151,7 @@ public function perfilesModificarStatus()
 	$perfil->status=$status[$perfil->status];
 	$aux=$perfil->save();
 	/////////////////////////////////////////////////////////////////////////////////////////////////////
-    $this->registroBitacora($registry,'Cambiar Status','{"status":"'.$status[$perfil->status].' -> '.$perfil->status.'"}','Perfil');
+    $this->registroBitacora('Perfil: '.$perfil->descripcion,'Cambiar Status','{"Status":" Cambio de: '.$status_[$perfil->status].' a: '.$status__[$perfil->status].'"}','Perfil');
     /////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	return Response()->json(['update'=>$aux]);
@@ -1513,22 +2192,35 @@ public function compararCampos($formulario,$duplicado,$registro)
 public function perfilesActualizar()
 {
 
-	$formulario=['descripcion'=>strtoupper(Request::get('Descripcion')),'status'=>Request::get('Status'),'id'=>Request::get('Registro')];
+	$formulario=(object)['descripcion'=>strtoupper(Request::get('Descripcion')),'status'=>Request::get('Status'),'id'=>Request::get('Registro')];
 	$indicadores=['update'=>false,'duplicate'=>1];
-	$cambios=[];
+	$cambios=array();
 	
 
 	//////////////////////////////Verificar si el registro existe en el sistema /////////////////////////////////////////////////////
-	$indicadores['duplicate']=Perfil::where('descripcion',$formulario['descripcion'])->count();
+	$indicadores['duplicate']=Perfil::where('descripcion',$formulario->descripcion)->count();
 	//////////////////////////////////////Si no hay registros duplicados ////////////////////////////////////////////////////////////
 	if($indicadores['duplicate']==0)
 	{
-       $aux=$this->compararCampos($formulario,$indicadores['duplicate'],Perfil::find($formulario['id']));
-       $indicadores['update']=$aux['update'];
+      
+       $perfil=Perfil::find($formulario->id);
+       
+       $cambio=$this->detectarCambios($formulario->descripcion,$perfil->descripcion,'Nombre del perfil');
+       $cambios=$this->agregarCambios($cambio,$cambios);
+       $perfil->descripcion=$formulario->descripcion;
+
+       $traduccionBd=$this->traducirId($perfil->status,10);
+       $traduccionFor=$this->traducirId($formulario->status,10);
+       $cambio=$this->detectarCambios($traduccionFor,$traduccionBd,'Status');
+       $cambios=$this->agregarCambios($cambio,$cambios);
+       $perfil->status=$formulario->status;
+       $indicadores['update']=$perfil->save();
+
+
        if($indicadores['update']==true)
        {
-       	$cambios=(string) json_encode($aux['cambios']);
-       	$this->registroBitacora($formulario['id'],'Modificar Perfil',$cambios,'Perfil -> Modificar Perfil');
+        $cambios=$this->documentarCambios($cambios);
+       	$this->registroBitacora('Id del registro modificado: '.$perfil->id,'Modificar Perfil',$cambios,'Perfil -> Modificar Perfil');
        }
 
 	}
@@ -1771,220 +2463,396 @@ public function clientes()//inicializacion del submodulo: clientes
 	}
 	
 	
-	
+	public function formularioClientes()
+	{
+		$formulario=(object)array
+								('razonSocial'=>strtoupper(Request::get('rsnew')),
+								 'nombreComercial'=>strtoupper(Request::get('ncnew')),
+								 'rif_id'=>(int) Request::get('tiporif'),
+								 'numeroRif'=> Request::get('numerorif'),
+								 'tipoContribuyente_id'=>(int)Request::get('tipConnew'),
+								 'direccionFiscal'=>Request::get('descDirdf'),
+								 'paisF'=>(int)Request::get('paisdf'),
+								 'regionF'=>(int)Request::get('regiondf'),
+								 'estadoF'=>(int)Request::get('edodf'),
+								 'municipioF'=>(int)Request::get('mundf'),
+								 'direccionComercial'=>Request::get('descDirdc'),
+								 'paisC'=>(int)Request::get('paisdc'),
+								 'regionC'=>(int)Request::get('regiondc'),
+								 'estadoC'=>(int)Request::get('edodc'),
+								 'municipioC'=>(int)Request::get('mundc'),
+								 'codigoL'=>Request::get('tlflsv'),
+								 'codigoM'=>Request::get('tlfmvlsv'),
+								 'telefonoM'=>Request::get('tmvlsv'),
+								 'telefonoL'=>Request::get('tclsv'),
+								 'correo'=>Request::get('mailsv')
+								 );
+
+								return $formulario;
+	}
+
+
+	public function verificarRifCliente($rif)//contiene el numero y el tipo
+	{
+
+		$rif=(object)$rif;
+		$retorno=(object)array('codigo'=>0,'extra'=>0);
+
+		$verificarRif=Rif::where(['numero'=>$rif->numero,'tipo_id'=>$rif->tipo_id,'rol'=>'CLIENTE'])->first();
+		if($verificarRif!=null)//si existe
+		{
+			$retorno->codigo=2;//duplicado
+			$cliente=Cliente::where('rif_id',$verificarRif->id)->first();
+			$retorno->extra=$cliente->nombreComercial;
+		}
+
+		return $retorno;
+	}
+
 	public function clientes_insertar()//inserta en la base de datos un nuevo cliente matriz
 	{
 		
-		//capturar datos del formulario
-
-		$razonS=Request::get('rsnew');//razon social
-		$nombreC=Request::get('ncnew');//nombre comercial
 		
-		$tipoR=(int) Request::get('tiporif');//tipo rif
-		$numeroR= Request::get('numerorif');//numero rif
-		
-		$tipoC=(int)Request::get('tipConnew');//tipo de contribuyente
-		
-		
-		
-		$direccionF=Request::get('descDirdf');//direccion fiscal
-		$paisF=(int)Request::get('paisdf');//pais fiscal
-		$regionF=(int)Request::get('regiondf');//region fiscal
-		$estadoF=(int)Request::get('edodf');//estado fiscal
-		$municipioF=(int)Request::get('mundf');//municipiofiscal
-		
-		$direccionC=Request::get('descDirdc');//direccion comercial
-		$paisC=(int)Request::get('paisdc');//pais comercial
-		$regionC=(int)Request::get('regiondc');//region comercial
-		$estadoC=(int)Request::get('edodc');//estado comercial
-		$municipioC=(int)Request::get('mundc');//municipio comercial
-
-		
-		$codigoL=Request::get('tlflsv');//codigo local
-		$codigoM=Request::get('tlfmvlsv');//codigo movil
-
-		$telefonoM=Request::get('tmvlsv');//nro movil
-		$telefonoL=Request::get('tclsv');//nro local
-		
-
-		$correo=Request::get('mailsv');//correo electronico
-
-		
-
-		
-
-		////inserciones
-		
-				$idR= DB::table('rifs')->insertGetId//insertar rif 
-						(
-							['numero'=>$numeroR,'rol'=>'cliente','tipo_id'=>$tipoR]
-						);
-
-					
-					$idC=DB::table('contactos')->insertGetId//insercion de contacto
-						(
-
-						   ['tipo_id'=>$codigoM,'tipo__id'=>$codigoL,'telefono_m'=>$telefonoM,'telefono_f'=>$telefonoL,'correo'=>$correo]
-						);
+		$cliente=$this->formularioClientes();
+		$duplicado=$this->verificarRifCliente(array('numero'=>$cliente->numeroRif,'tipo_id'=>$cliente->rif_id));
+		if($duplicado->codigo==0)//si no se encuentra registrado el rif de un cliente
+		{
+			/////////////////////////////Obtener direccion fiscal del cliente //////////////////////////////////
+			$direccionFiscal=new Direccion();
+			$direccionFiscal->descripcion=$cliente->direccionFiscal;
+			$direccionFiscal->pais_id=$cliente->paisF;
+			$direccionFiscal->region_id=$cliente->regionF;
+			$direccionFiscal->estado_id=$cliente->estadoF;
+			$direccionFiscal->municipio_id=$cliente->municipioF;
+			$direccionFiscal->save();
 
 
-					
-					$iddF=(integer) DB::table('direcciones')->insertGetId//insercion de direcciones direccion fiscal
-						(
+			//////////////////////////Obtener direccion comercial del cliente //////////////////////////////////
+			$direccionComercial=new Direccion();
+			$direccionComercial->descripcion=$cliente->direccionComercial;
+			$direccionComercial->pais_id=$cliente->paisC;
+			$direccionComercial->region_id=$cliente->regionC;
+			$direccionComercial->estado_id=$cliente->estadoC;
+			$direccionComercial->municipio_id=$cliente->municipioC;
+			$direccionComercial->save();
 
-							['descripcion'=>$direccionF,'municipio_id'=>$municipioF,'pais_id'=>$paisF,'region_id'=>$regionF,'estado_id'=>$estadoF]
-						);
+			/////////////////////////Obtener Rif del cliente ///////////////////////////////////////////////////
+			$rif=new Rif();
+			$rif->numero=$cliente->numeroRif;
+			$rif->tipo_id=$cliente->rif_id;
+			$rif->rol='CLIENTE';
+			$rif->save();
 
-					$iddC=(integer)DB::table('direcciones')->insertGetId//insercion de direcciones direccion comercial
-						(
+			////////////////////////Obtener correo del Cliente ////////////////////////////////////////////////
+			$correo=new Correo();
+			$correo->correo=$cliente->correo;
+			$correo->save();
+			//////////////////////Obtener telefono Local del cliente ////////////////////////////////////////////
 
-							['descripcion'=>$direccionC,'municipio_id'=>$municipioC,'pais_id'=>$paisC,'region_id'=>$regionC,'estado_id'=>$estadoC]
-						);
+			$codigoL=Tipo::where('id',$cliente->codigoL)->first();
+			$telefonoL=new Telefono();
+			$telefonoL->codigo=$codigoL->descripcion;
+			$telefonoL->telefono=$cliente->telefonoL;
+			$telefonoL->tipo=0;
+			$telefonoL->save();
 
-					 DB::table('clientes')->insert
-					 	(
+			/////////////////////Obtener el telefono movil del Cliente //////////////////////////////////////////
+			$codigoM=Tipo::where('id',$cliente->codigoM)->first();
+			$telefonoM=new Telefono();
+			$telefonoM->codigo=$codigoM->descripcion;
+			$telefonoM->telefono=$cliente->telefonoM;
+			$telefonoM->tipo=2;
+			$telefonoM->save();
 
-					 		['razon_s'=>$razonS,'nombre_c'=>$nombreC,'rif_id'=>$idR,'tipo_id'=>$tipoC,'direccion_id'=>$iddF,'direccion__id'=>$iddC,'contacto_id'=>$idC]
-					 	);
+
+			///////////////////////Crear registro para el cliente ////////////////////////////////////////////////
+			$clienteN=new Cliente();
+			$clienteN->razonSocial=$cliente->razonSocial;
+			$clienteN->nombreComercial=$cliente->nombreComercial;
+			$clienteN->rif_id=$rif->id;
+			$clienteN->direccionFiscal_id=$direccionFiscal->id;
+			$clienteN->direccionComercial_id=$direccionComercial->id;
+			$clienteN->correo_id=$correo->id;
+			$clienteN->tipoContribuyente_id=$cliente->tipoContribuyente_id;
+			$update=$clienteN->save();
+
+			///////////////////asociar telefonos al cliente //////////////////////////////////////////////////////
+			DB::table('cliente_telefono')->insert(['telefono_id'=>$telefonoL->id,'cliente_id'=>$clienteN->id]);
+			DB::table('cliente_telefono')->insert(['telefono_id'=>$telefonoM->id,'cliente_id'=>$clienteN->id]);
+			///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+			$tipoRif=Tipo::where('id',$cliente->rif_id)->first();//descripcion del tipo de rif ingresado para el cliente 
+
+
+			if($update)
+			{
+				$duplicado->codigo=1;
+				$this->registroBitacora('Id del registro creado: '.$clienteN->id,'Agregar Cliente Matriz','{"Registro el Cliente":'.'"'.$clienteN->nombreComercial.' - '.$tipoRif->descripcion.' '.$rif->numero.'"'.'}','Clientes -> Agregar cliente Matriz');
+			}
+		}
+
+
+
 		
 	
-
-
-		return redirect('/menu/registros/clientes');//retorna a la vista clientes listado todos los clientes matriz de la base de datos;
+		
+		
+		
+		
+		
+		
+		
+		
+	 return Response::json($duplicado);
 	}
 
-	
+public function consultarTelefono($cliente_id,$tipo)//0 local, 1 local, 2 movil
+{
+		$telefono=DB::table('telefonos')
+							->join('cliente_telefono','telefonos.id','=','cliente_telefono.telefono_id')
+							->join('tipos','telefonos.codigo','=','tipos.descripcion')
+							->where(['cliente_telefono.cliente_id'=>$cliente_id,'telefonos.tipo'=>$tipo])
+							->select('telefonos.id AS id','telefonos.codigo AS codigo','telefonos.telefono AS numero','tipos.id AS tipo_id')
+							->first();
+		return $telefono;
+}
 	
 public function clientes_modificar()//metodo que consulta los datos de un cliente matriz para mostrarlos en el nodal modificar cliente
 	{
-		$id=(int)Request::get('idCliente');
+		
+		$cliente_id=Request::get('registry');
 
+		$cliente=Cliente::find($cliente_id);
+		$rif=Rif::find($cliente->rif_id);
+		$direccionFiscal=Direccion::find($cliente->direccionFiscal_id);
+		$direccionComercial=Direccion::find($cliente->direccionComercial_id);
+		$correo=Correo::find($cliente->correo_id);
+		$telefonoLocal=$this->consultarTelefono($cliente->id,0);
+		$telefonoMovil=$this->consultarTelefono($cliente->id,2);
 	
 
 
-		$cliente=DB::table('clientes')
-					  ->join('rifs','clientes.rif_id','=','rifs.id')
-					  ->join('contactos','clientes.contacto_id','=','contactos.id')
-					  ->join('tipos','clientes.tipo_id','=','tipos.id')
-					  
-
-					  ->select('clientes.razon_s AS razonS','clientes.nombre_c AS nombreC','rifs.numero As numeroR','rifs.tipo_id AS tipoR',
-					  		   'contactos.tipo_id AS codigoC','contactos.telefono_m AS telefonoC','contactos.tipo__id AS codigoL',
-					  		   'contactos.telefono_f AS telefonoF','contactos.correo','tipos.id As idtipoContribuyente','tipos.descripcion As Contribuyente')
-					  ->where('clientes.id',$id)->first();
 
 
-		$direccionF=DB::table('clientes')->join('direcciones','clientes.direccion_id','=','direcciones.id')
-
-										->join('paises','paises.id','=','direcciones.pais_id')
-										->join('regiones','regiones.id','=','direcciones.region_id')
-										->join('estados','estados.id','=','direcciones.estado_id')
-										->join('municipios','municipios.id','=','direcciones.municipio_id')
-
-										->select('paises.id As idpaisF','paises.descripcion As paisF',
-												 'regiones.id As idregionF','regiones.descripcion As regionF ',
-												 'estados.id As idestadoF','estados.descripcion As estadoF',
-												 'municipios.id As idmunicipioF','municipios.descripcion As municipiosF',
-												 'direcciones.id As iddireccionF','direcciones.descripcion As direccionF')
-												
-										
-										->where('clientes.id',$id)->first();
-
-		$direccionC=DB::table('clientes')->join('direcciones','clientes.direccion__id','=','direcciones.id')
-
-										->join('paises','paises.id','=','direcciones.pais_id')
-										->join('regiones','regiones.id','=','direcciones.region_id')
-										->join('estados','estados.id','=','direcciones.estado_id')
-										->join('municipios','municipios.id','=','direcciones.municipio_id')
-
-										->select('paises.id As idpaisC','paises.descripcion As paisC',
-												 'regiones.id As idregionC','regiones.descripcion As regionC ',
-												 'estados.id As idestadoC','estados.descripcion As estadoC',
-												 'municipios.id As idmunicipioC','municipios.descripcion As municipiosC',
-												 'direcciones.id As iddireccionC','direcciones.descripcion As direccionC')
-												
-										
-										->where('clientes.id',$id)->first();
-
-		// 0 id cliente/ 1 razonS /2 nombreC /3 numeroRif / 4 tipo Rif / 5 tipo codigoCelular 
-		//  6 numero Celular / 7 codigo telefono local / 8 numero de telefono local /9 correo 
-		//10 id tipo contirbuyente/11 descripcion tipo de contribuyente
-		//12 paisidF /13 paisF/14 regionidF/15 regionF /16 estadoidF/17 estadoF /18 municipioidF/19 municipio F/20 iddireccionF/21 direccionF
-		//22 paisidC /23 paisC/24 regionidC/25 regionC /26 estadoidC/27 estadoC /28 municipioidC/29 municipioC /30 iddireccionC/31 direccionC
-
-
-		return array($cliente->razonS,$cliente->nombreC,$cliente->numeroR,$cliente->tipoR,$cliente->codigoC,$cliente->telefonoC,
-							  $cliente->codigoL,$cliente->telefonoF,$cliente->correo,$cliente->idtipoContribuyente,$cliente->Contribuyente,
-							  $direccionF->idpaisF,$direccionF->paisF,$direccionF->idregionF,$direccionF->regionF,$direccionF->idestadoF,
-							  $direccionF->estadoF,$direccionF->idmunicipioF,$direccionF->municipiosF,$direccionF->iddireccionF,$direccionF->direccionF,
-							  $direccionC->idpaisC,$direccionC->paisC,$direccionC->idregionC,$direccionC->regionC,$direccionC->idestadoC,
-							  $direccionC->estadoC,$direccionC->idmunicipioC,$direccionC->municipiosC,$direccionC->iddireccionC,$direccionC->direccionC);
-
+		return Response::json(['cliente'=>$cliente,'rif'=>$rif,'direccionFiscal'=>$direccionFiscal,'direccionComercial'=>$direccionComercial,'correo'=>$correo,'telefonoLocal'=>$telefonoLocal,'telefonoMovil'=>$telefonoMovil]);
 		
 	}
 
 
+	public function formularioActualizarCliente()
+	{
+		$formulario=(object)array
+								('razonSocial'=>Request::get('rs'),
+								 'nombreComercial'=>Request::get('nc'),
+								 'rif_id'=>(int) Request::get('rif'),
+								 'numeroRif'=>Request::get('df'),
+								 'tipoContribuyente_id'=>(int)Request::get('tipCon'),
+								 'direccionFiscal'=>Request::get('descDirdc'),
+								 'paisF'=>(int)Request::get('paisdf'),
+								 'regionF'=>(int)Request::get('regiondf'),
+								 'estadoF'=>(int)Request::get('edodf'),
+								 'municipioF'=>(int)Request::get('mundf'),
+								 'direccionComercial'=>Request::get('descDirdf'),
+								 'paisC'=>(int)Request::get('paisdc'),
+								 'regionC'=>(int)Request::get('regiondc'),
+								 'estadoC'=>(int)Request::get('edodc'),
+								 'municipioC'=>(int)Request::get('mundc'),
+								 'codigoL'=>Request::get('tlflcl'),
+								 'codigoM'=>Request::get('tlfmvl'),
+								 'telefonoL'=>Request::get('tcl'),
+								 'telefonoM'=>Request::get('tmvl'),
+								 'correo'=>Request::get('mail'),
+								 'cliente_id'=>Request::get('_idCliente_')
+								);
+		return $formulario;
+	}
+    public function verificarRif($rif,$cliente_id)
+    {
+    	$rifC=Rif::where(['numero'=>$rif->numero,'tipo_id'=>$rif->tipo_id,'rol'=>'CLIENTE'])->first();
+    	$retorno=(object)array('codigo'=>0,'extra'=>0);
+    	if($rifC!=null)
+    	{
+    		$cliente=Cliente::where('rif_id',$rifC->id)->where('id','<>',$cliente_id)->first();
+    		if($cliente!=null)
+    		{
+    			$retorno->codigo=2;
+    			$retorno->extra=$cliente->razonSocial;//si esta duplicado
+    		}
+    	}
+    	return $retorno;
 
+    }
 
 	public function clientes_actualizar()//metodo para actualizar en la base de datos los datos de un cliente matriz
 	{
 
-		$razonS=Request::get('rs');//razon social
-		$nombreC=Request::get('nc');//nombre comercial
-		
-		$tipoR=(int) Request::get('rif');//tipo rif
-		$numeroR= Request::get('df');//numero rif
-		
-		$tipoC=(int)Request::get('tipCon');//tipo de contribuyente
-		
-		
-		
-		$direccionF=Request::get('descDirdf');//direccion fiscal
-		$paisF=(int)Request::get('paisdf');//pais fiscal
-		$regionF=(int)Request::get('regiondf');//region fiscal
-		$estadoF=(int)Request::get('edodf');//estado fiscal
-		$municipioF=(int)Request::get('mundf');//municipiofiscal
-		
-		$direccionC=Request::get('descDirdc');//direccion comercial
-		$paisC=(int)Request::get('paisdc');//pais comercial
-		$regionC=(int)Request::get('regiondc');//region comercial
-		$estadoC=(int)Request::get('edodc');//estado comercial
-		$municipioC=(int)Request::get('mundc');//municipio comercial
+		$cambios=array();
+		$clienteForm=$this->formularioActualizarCliente();
+		$duplicado=$this->verificarRif((object)array('numero'=>$clienteForm->numeroRif,'tipo_id'=>$clienteForm->rif_id),$clienteForm->cliente_id);
+		if($duplicado->codigo==0)//si el cliente no utiliza el rif de algun cliente
+		{
+			//////////////obtener los datos del cliente /////////////////////////////////////////////
+			$cliente=Cliente::find($clienteForm->cliente_id);
 
-		
-		$codigoL=Request::get('tlflcl');//codigo local
-		$codigoC=Request::get('tlfmvl');//codigo movil
+			/////////////obtener los datos del rif ////////////////////////////////////////////////
+			$rif=Rif::find($cliente->rif_id);
 
-		$telefonoM=Request::get('tmvl');//nro movil
-		$telefonoL=Request::get('tcl');//nro local
-		
+			$traduccionBd=$this->traducirId($rif->tipo_id,0);
+    		$traduccionFor=$this->traducirId($clienteForm->rif_id,0);
+    		$cambio=$this->detectarCambios($traduccionFor,$traduccionBd,'Tipo Rif');
+    		$cambios=$this->agregarCambios($cambio,$cambios);
+			$rif->tipo_id=$clienteForm->rif_id;
+			
+			$cambio=$this->detectarCambios($clienteForm->numeroRif,$rif->numero,'Numero Rif');
+    		$cambios=$this->agregarCambios($cambio,$cambios);
+			$rif->numero=$clienteForm->numeroRif;
+			$rif->save();
 
-		$correo=Request::get('mail');//correo electronico
+			//////////////Obtener los datos de la direccion fiscal ////////////////////////////////
 
-		
+			$direccionFiscal=Direccion::find($cliente->direccionFiscal_id);
+
+			$cambio=$this->detectarCambios($clienteForm->direccionFiscal,$direccionFiscal->descripcion,'Direccion Fiscal');
+    		$cambios=$this->agregarCambios($cambio,$cambios);
+			$direccionFiscal->descripcion=$clienteForm->direccionFiscal;
 
 
-		$id_cliente=(int)Request::get('Clienteid');//id del cliente a modificar
+			$traduccionBd=$this->traducirId($direccionFiscal->pais_id,2);
+    		$traduccionFor=$this->traducirId($clienteForm->paisF,2);
+    		$cambio=$this->detectarCambios($traduccionFor,$traduccionBd,'Pais Direccion Fiscal');
+    		$cambios=$this->agregarCambios($cambio,$cambios);
+			$direccionFiscal->pais_id=$clienteForm->paisF;
 
-		$cliente=DB::table('clientes')->where('id',$id_cliente)->first();//cliente a modificar
+			$traduccionBd=$this->traducirId($direccionFiscal->region_id,3);
+    		$traduccionFor=$this->traducirId($clienteForm->regionF,3);
+    		$cambio=$this->detectarCambios($traduccionFor,$traduccionBd,'Region Direccion Fiscal');
+    		$cambios=$this->agregarCambios($cambio,$cambios);
+			$direccionFiscal->region_id=$clienteForm->regionF;
 
-		if (empty($cliente)==false)//si el cliente a modifica existe
-			{	//////modificacion de razonS, nombreC y tipo contribuyente
-				DB::table('clientes')->where('id',$id_cliente)->update(['razon_s'=>$razonS,'nombre_c'=>$nombreC,'tipo_id'=>$tipoC]);
-				// ////modificacion del rif 
-				 DB::table('rifs')->where('id',$cliente->rif_id)->update(['numero'=>$numeroR,'tipo_id'=>$tipoR]);
-				// ///modificacion de la direccion Fiscal
-				 DB::table('direcciones')->where('id',$cliente->direccion_id)->update(['descripcion'=>$direccionF,'municipio_id'=>$municipioF,'pais_id'=>$paisF,'region_id'=>$regionF,'estado_id'=>$estadoF]);
-				// ///modificacion de la direccion comercial
-				 DB::table('direcciones')->where('id',$cliente->direccion__id)->update(['descripcion'=>$direccionC,'municipio_id'=>$municipioC,'pais_id'=>$paisC,'region_id'=>$regionC,'estado_id'=>$estadoC]);
-				// //modificacion contactos
-				DB::table('contactos')->where('contactos.id',$cliente->contacto_id)->update(['tipo_id'=>$codigoC,'tipo__id'=>$codigoL,'telefono_m'=>$telefonoM,'telefono_f'=>$telefonoL,'correo'=>$correo]);
-			}
+			$traduccionBd=$this->traducirId($direccionFiscal->estado_id,4);
+    		$traduccionFor=$this->traducirId($clienteForm->estadoF,4);
+    		$cambio=$this->detectarCambios($traduccionFor,$traduccionBd,'Estado Direccion Fiscal');
+    		$cambios=$this->agregarCambios($cambio,$cambios);
+			$direccionFiscal->estado_id=$clienteForm->estadoF;
 
-		return redirect('/menu/registros/clientes');
+
+			$traduccionBd=$this->traducirId($direccionFiscal->municipio_id,5);
+    		$traduccionFor=$this->traducirId($clienteForm->municipioF,5);
+    		$cambio=$this->detectarCambios($traduccionFor,$traduccionBd,'Estado Direccion Fiscal');
+    		$cambios=$this->agregarCambios($cambio,$cambios);
+			$direccionFiscal->municipio_id=$clienteForm->municipioF;
+			$direccionFiscal->save();
+
+			//////////////Obtener los datos de la direccion comercial ////////////////////////////////
+
+			$direccionComercial=Direccion::find($cliente->direccionComercial_id);
+
+			$cambio=$this->detectarCambios($clienteForm->direccionComercial,$direccionComercial->descripcion,'Direccion Comercial');
+    		$cambios=$this->agregarCambios($cambio,$cambios);
+			$direccionComercial->descripcion=$clienteForm->direccionComercial;
+
+
+			$traduccionBd=$this->traducirId($direccionComercial->pais_id,2);
+    		$traduccionFor=$this->traducirId($clienteForm->paisC,2);
+    		$cambio=$this->detectarCambios($traduccionFor,$traduccionBd,'Pais Direccion Comercial');
+    		$cambios=$this->agregarCambios($cambio,$cambios);
+			$direccionComercial->pais_id=$clienteForm->paisC;
+
+			$traduccionBd=$this->traducirId($direccionComercial->region_id,3);
+    		$traduccionFor=$this->traducirId($clienteForm->regionC,3);
+    		$cambio=$this->detectarCambios($traduccionFor,$traduccionBd,'Region Direccion Comercial');
+    		$cambios=$this->agregarCambios($cambio,$cambios);
+			$direccionComercial->region_id=$clienteForm->regionC;
+
+			$traduccionBd=$this->traducirId($direccionComercial->estado_id,4);
+    		$traduccionFor=$this->traducirId($clienteForm->estadoF,4);
+    		$cambio=$this->detectarCambios($traduccionFor,$traduccionBd,'Estado Direccion Comercial');
+    		$cambios=$this->agregarCambios($cambio,$cambios);
+			$direccionComercial->estado_id=$clienteForm->estadoF;
+
+
+			$traduccionBd=$this->traducirId($direccionComercial->municipio_id,5);
+    		$traduccionFor=$this->traducirId($clienteForm->municipioF,5);
+    		$cambio=$this->detectarCambios($traduccionFor,$traduccionBd,'Estado Direccion Comercial');
+    		$cambios=$this->agregarCambios($cambio,$cambios);
+			$direccionComercial->municipio_id=$clienteForm->municipioF;
+			$direccionComercial->save();
+
+			////////////////////Obtener datos del correo ////////////////////////////////////////////////////////////////
+			$correo=Correo::find($cliente->correo_id);
+
+			$cambio=$this->detectarCambios($clienteForm->correo,$correo->correo,'Correo');
+    		$cambios=$this->agregarCambios($cambio,$cambios);
+			$correo->correo=$clienteForm->correo;
+			$correo->save();
+
+			////////////////////Obtener los datos basicos  del cliente //////////////////////////////////////
+			
+			$cambio=$this->detectarCambios($clienteForm->razonSocial,$cliente->razonSocial,'Razon Social');
+    		$cambios=$this->agregarCambios($cambio,$cambios);
+			$cliente->razonSocial=$clienteForm->razonSocial;
+			
+			$cambio=$this->detectarCambios($clienteForm->nombreComercial,$cliente->nombreComercial,'Nombre Comercial');
+    		$cambios=$this->agregarCambios($cambio,$cambios);
+			$cliente->nombreComercial=$cliente->nombreComercial;
+			
+			$traduccionBd=$this->traducirId($cliente->tipoContribuyente_id,11);
+    		$traduccionFor=$this->traducirId($clienteForm->tipoContribuyente_id,11);
+    		$cambio=$this->detectarCambios($traduccionFor,$traduccionBd,'Tipo Contribuyente');
+    		$cambios=$this->agregarCambios($cambio,$cambios);
+			$cliente->tipoContribuyente_id=$clienteForm->tipoContribuyente_id;
+			$cliente->save();
+
+			$longitud=count($cambios);
+    		$cambios=$this->documentarCambios($cambios);
+
+    		if($longitud>0)
+    	 	{
+
+    			$this->registroBitacora('Id del registro modificado: '.$cliente->id,'Modificar Cliente Matriz',$cambios,'Clientes -> Cliente Matriz');
+    			$duplicado->codigo=1;
+    		}
+
+
+
+
+		}
+
+
+
+
+		return Response::json($cambios);
+		
+
+
+		
 
 	}
 	
+
+	public function clientesStatus()
+	{
+
+		$status=[1,0];
+		$status_=['HABILITADO','INHABILITADO'];
+		$status__=['INHABILITADO','HABILITADO'];
+		$registry=Request::get('registry');
+		$aux=false;
+		/////////////////Busqueda del cliente y cambio de status ////////////////////////////////////////////
+		$cliente=Cliente::find($registry);
+		$cliente->status=$status[$cliente->status];
+		$aux=$cliente->save();
+		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		$rif=DB::table('rifs')->join('tipos','tipos.id','=','rifs.tipo_id')
+					->select('rifs.numero AS numero','tipos.descripcion AS tipoRif')
+					->where('rifs.id',$cliente->rif_id)
+					->first();
+
+	    $this->registroBitacora($cliente->nombreComercial.' - '.$rif->tipoRif.' '.$rif->numero,'Cambiar Status','{"Status":"'.$status_[$cliente->status].' -> '.$status__[$cliente->status].'"}','Clientes ->Cliente Matriz');
+	    /////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		return Response()->json(['update'=>$aux]);
+	}
 	
 	
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -2001,17 +2869,91 @@ public function clientes_modificar()//metodo que consulta los datos de un client
 					  DB::table('personas')->where('cliente_id',$cliente_id)->get(),$cliente_id,
 					  DB::table('tipos')->where('numero_c',5)->get(),//tipos de cedula para los select
 					  DB::table('tipos')->where('numero_c',2)->get(),//tipos de codigos de telefonos para los select
-					  DB::table('tipos')->where('numero_c',3)->get()));//tipos de codigos locales para los select 
+					  DB::table('tipos')->where('numero_c',3)->get(),
+					  $cliente_id,
+					  DB::table('clientes')->where('id',$cliente_id)->select('nombreComercial AS nombreComercial')->first()
+					  ));//tipos de codigos locales para los select 
 					
 	}
 
-	public function clientes_insertar_responsable($cliente_id)//agregar posibles responsables a una matriz
+	
+	public function verificarCedulaResponsable($cedula_)
+	{
+		$duplicado=(object)array('codigo'=>0,'extra'=>0,'adicional'=>0);
+		$cedula=DB::table('cedulas')->where(['numero'=>$cedula_->numero,'rol'=>'ENCARGADO'])->first();
+		if($cedula!=null)
+		{
+			$persona=Persona::where('cedula_id',$cedula->id)->select('primerNombre AS nombre','primerApellido AS apellido')->first();
+			$duplicado->codigo=2;
+			$duplicado->extra=$persona->nombre.' '.$persona->apellido;
+		}
+
+		return $duplicado;
+		
+	}
+	public function clientes_insertar_responsable()//agregar posibles responsables a una matriz
 	{
 		
 	
 		$formulario=$this->capturar_datos_responsables();
-		$this->consulta_ingresar_responsable($formulario,$cliente_id);
-		return redirect('/menu/registros/clientes/responsable/'.(string)$cliente_id);//redirecciona a la venta que lista los responsables de un cliente matriz especifico: indicado por: $cliente_id
+		$duplicado=$this->verificarCedulaResponsable((object)array('numero'=>$formulario->numeroCedula,'tipo_id'=>$formulario->cedula_id));
+		if($duplicado->codigo==0)
+		{
+			
+			//////////////crear la cedula//////////////////////////////////
+			$cedula=new Cedula();
+			$cedula->numero=$formulario->numeroCedula;
+			$cedula->tipo_id=$formulario->cedula_id;
+			$cedula->rol="ENCARGADO";
+			$cedula->save();
+			////////////////////////////////////////////////////////////////
+
+			/////////////crear correo//////////////////////
+			$correo=new Correo();
+			$correo->correo=$formulario->correo;
+			$correo->save();
+			/////////////////////////////////////////////////
+
+			//////////////Crear persona//////////////////
+			$persona=new Persona();
+			$persona->primerNombre=$formulario->nombre;
+			$persona->primerApellido=$formulario->apellido;
+			$persona->cargo=strtoupper($formulario->cargo);
+			$persona->status=1;
+			$persona->cedula_id=$cedula->id;
+			$persona->correo_id=$correo->id;
+			$persona->cliente_id=$formulario->cliente_id;
+			$update=$persona->save();
+
+			//////////////Numeros de telefono //////////
+
+			$telefonoL=new Telefono();
+			$traduccionForm=$this->traducirId($formulario->codigoFijo,7);
+			$telefonoL->codigo=$traduccionForm;
+			$telefonoL->telefono=$formulario->numeroFijo;
+			$telefonoL->tipo=0;
+			$telefonoL->save();
+
+			$telefonoM=new Telefono();
+			$traduccionForm=$this->traducirId($formulario->codigoMovil,7);
+			$telefonoM->codigo=$traduccionForm;
+			$telefonoM->telefono=$formulario->numeroMovil;
+			$telefonoM->tipo=2;
+			$telefonoM->save();
+
+			DB::table('persona_telefono')->insert(['persona_id'=>$persona->id,'telefono_id'=>$telefonoL->id]);
+			DB::table('persona_telefono')->insert(['persona_id'=>$persona->id,'telefono_id'=>$telefonoM->id]);
+
+			if($update)
+			{
+				$duplicado->codigo=1;
+				$this->registroBitacora('Id del registro creado: '.$persona->id,'Agregar Responsable','{"Registro al responsable":'.'"'.$persona->primerNombre.' '.$persona->primerApellido.'"}','Clientes -> Cliente Matriz -> Responsable');	
+			}
+
+			
+		}
+		return Response::json($duplicado);
+	
 	}
 	
 	
@@ -2019,39 +2961,174 @@ public function clientes_modificar()//metodo que consulta los datos de un client
 	public function clientes_modificar_responsables()//consulta que muestra los datos del responsable de una matriz en e modal mofificar
 	{
 
-		$id=(int)Request::get('idResponsable');//campo hiiden con el id del registro a modificar
-		
-		$resp=DB::table('personas')
-					->join('cedulas','personas.cedula_id','=','cedulas.id')
-					->join('contactos','personas.contacto_id','=','contactos.id')
-					->join('tipos','cedulas.tipo_id','=','tipos.id')
+	
+		$formulario=$this->capturar_datos_responsables();
+		$persona=Persona::find($formulario->registro);
+		$cedula=Cedula::find($persona->cedula_id);
+		$correo=Correo::find($persona->correo_id);
+		$telefonoL=DB::table('persona_telefono')
+							->join('telefonos','telefonos.id','=','persona_telefono.telefono_id')
+							->join('tipos','telefonos.codigo','=','tipos.descripcion')
+							->where(['persona_telefono.persona_id'=>$formulario->registro,'telefonos.tipo'=>0])
+							->select('telefonos.codigo AS codigo','telefonos.id AS id','telefonos.telefono AS numero','tipos.descripcion AS codigo_id','tipos.id AS codigo_id')
+							->first();
 
-					->select('personas.p_nombre As nombre','personas.p_apellido As apellido','personas.cargo As cargo',
-						     'cedulas.numero As numeroC','cedulas.tipo_id As tipoC','tipos.descripcion As tipoCV',
-						     'contactos.tipo_id As codigoC','contactos.telefono_m As telefonoC','contactos.tipo__id As codigoL',
-						     'contactos.telefono_f As telefonoL','personas.cliente_id As matriz','contactos.correo As correo')->where('personas.id',(int)$id)->first();
-
-		return array($resp->nombre,$resp->apellido,$resp->cargo,$resp->numeroC,$resp->tipoC,$resp->tipoCV,
-					 $resp->codigoC,$resp->telefonoC,$resp->codigoL,$resp->telefonoL,$resp->matriz,$resp->correo);
+		$telefonoM=DB::table('persona_telefono')
+							->join('telefonos','telefonos.id','=','persona_telefono.telefono_id')
+							->join('tipos','telefonos.codigo','=','tipos.descripcion')
+							->where(['persona_telefono.persona_id'=>$formulario->registro,'telefonos.tipo'=>2])
+							->select('telefonos.codigo AS codigo','telefonos.id AS id','telefonos.telefono AS numero','tipos.descripcion AS codigo_id','tipos.id AS codigo_id')
+							->first();
 		
 		
+		
+		return Response::json(['persona'=>$persona,'cedula'=>$cedula,'correo'=>$correo,'telefonoL'=>$telefonoL,'telefonoM'=>$telefonoM]);
 	}
 	
 	
-	
-	public function clientes_actualizar_responsable($id_cliente)//modifica en la base de datos la informacion de los responsables de una matriz
+	function verificarCedulamod($cedula,$persona_id,$cliente_id)
+	{
+		$duplicado=(object)array('codigo'=>0,'extra'=>0);
+		$cedula_=Cedula::where(['numero'=>$cedula->numero,'tipo_id'=>$cedula->tipo_id,'rol'=>'ENCARGADO'])->first();
+		if($cedula_!=null)
+		{
+			$persona=DB::table('personas')->where('id','<>',$persona_id)->where('cedula_id',$cedula_->id)->where('cliente_id',$cliente_id)->first();
+			if($persona!=null)
+			{
+			    $duplicado->codigo=2;
+		        $duplicado->extra=$persona->primerNombre.' '.$persona->primerApellido;
+			}
+		
+		}
+
+		return $duplicado;
+	}
+
+
+	public function clientes_actualizar_responsable()//modifica en la base de datos la informacion de los responsables de una matriz
 	{
 
-		$formulario=$this->formulario_actualizar_responsable();
-		$this->consulta_actualizar_responsable($formulario);
-		$id_cliente=(int)$id_cliente;
+		$formulario=$this->capturar_datos_responsables();
+		$duplicado=$this->verificarCedulamod((object)array('numero'=>$formulario->numeroCedula,'tipo_id'=>$formulario->cedula_id),$formulario->registro,$formulario->cliente_id);
+		$cambios=array();
 
+		if($duplicado->codigo==0)//si no esta duplicado
+		{
+			////////////Obtener el registro de la persona ///////////////////////////////////////////////////////////////
+			$persona=Persona::find($formulario->registro);
+
+
+			////////Obtener la cedula //////////////////
+			$cedula=Cedula::find($persona->cedula_id);
+
+			$cambio=$this->detectarCambios($formulario->numeroCedula,$cedula->numero,'Numero Cedula');
+    		$cambios=$this->agregarCambios($cambio,$cambios);
+    		$cedula->numero=$formulario->numeroCedula;
+			
+
+			$traduccionBd=$this->traducirId($cedula->tipo_id,1);
+    		$traduccionFor=$this->traducirId($formulario->cedula_id,1);
+    		$cambio=$this->detectarCambios($traduccionFor,$traduccionBd,'Tipo Cedula');
+    		$cambios=$this->agregarCambios($cambio,$cambios);
+			$cedula->tipo_id=$formulario->cedula_id;
+
+			$cedula->save();
+
+			////////Obtener el correo /////////////////////////////////////////////////////////////////////////////////
+
+			$correo=Correo::find($persona->correo_id);
+
+			$cambio=$this->detectarCambios($formulario->correo,$correo->correo,'Correo');
+    		$cambios=$this->agregarCambios($cambio,$cambios);
+			$correo->correo=$formulario->correo;
+
+			$correo->save();
+
+			/////////Actualizar persona////////////////////////
+
+			$cambio=$this->detectarCambios($formulario->nombre,$persona->primerNombre,'Nombre');
+    		$cambios=$this->agregarCambios($cambio,$cambios);
+			$persona->primerNombre=strtoupper($formulario->nombre);
+
+			
+			$cambio=$this->detectarCambios($formulario->apellido,$persona->primerApellido,'Apellido');
+    		$cambios=$this->agregarCambios($cambio,$cambios);
+			$persona->primerApellido=strtoupper($formulario->apellido);
+
+			$cambio=$this->detectarCambios($formulario->cargo,$persona->cargo,'Cargo');
+    		$cambios=$this->agregarCambios($cambio,$cambios);
+			$persona->cargo=strtoupper($formulario->cargo);
+
+			$update=$persona->save();
+
+			$longitud=count($cambios);
+    		$cambios=$this->documentarCambios($cambios);
+
+    		if($longitud>0)
+    	 	{
+
+    			$this->registroBitacora('Id del registro modificado: '.$persona->id,'Modificar Responsable',$cambios,'Clientes -> Cliente Matriz');
+    			$duplicado->codigo=1;
+    		}
 
 		
 
-			return redirect('/menu/registros/clientes/responsable/'.(string)$id_cliente);
+
+
+
+		}
+		
+
+		
+
+		return Response::json($duplicado);
 	}
 	
+    function responsables_status()
+    {
+    	$status=[1,0];
+		$status_=['HABILITADO','INHABILITADO'];
+		$status__=['INHABILITADO','HABILITADO'];
+		$registry=Request::get('registry');
+		$aux=false;
+		///////////// Busqueda del perfil y cambio de status ////////////////////////
+		$persona=Persona::find($registry);
+		$persona->status=$status[$persona->status];
+		$aux=$persona->save();
+		/////////////////////////////////////////////////////////////////////////////////////////////////////
+	    $this->registroBitacora('Persona: '.$persona->primerNombre.' '.$persona->primerApellido,'Cambiar Status','{"Status":"Cambio de: '.$status_[$persona->status].' a: '.$status__[$persona->status].'"}','Clientes->responsable');
+	    /////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		return Response()->json(['update'=>$aux]);
+    }
+
+
+    function responsablesMatriz_asignar()
+    {
+
+    	$retorno=0;
+    	$anterior=Request::get('anterior');
+    	$nuevo=Request::get('nuevo');
+
+    	if($anterior!=0)
+    	{
+    		$personaAn=Persona::find($anterior);
+    		$personaAn->encargado=0;
+    		$personaAn->save();
+    	}
+    	
+
+    	$personaNu=Persona::find($nuevo);
+    	$personaNu->encargado=1;
+    	$update=$personaNu->save();
+
+    	if($update)
+    	{
+    		$retorno=1;
+    	}
+
+    	return Response::json(['retorno'=>$retorno]);
+    }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////categorias de un cliente matriz //////////////////////////////////////////////////////////
@@ -2060,8 +3137,9 @@ public function clientes_modificar()//metodo que consulta los datos de un client
 public function clientes_categoria($cliente_id)//vista de categorias de un cliente matriz
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
+		$cliente=Cliente::find($cliente_id);
 		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(16,17,18,19),20);
-		return view ('Registros_Basicos\Clientes\clientes_categoria',$this->datos_vista($datos,$acciones,DB::table('categorias')->where('cliente_id',$cliente_id)->get(),$cliente_id,3));
+		return view ('Registros_Basicos\Clientes\clientes_categoria',$this->datos_vista($datos,$acciones,DB::table('categorias')->where('cliente_id',$cliente_id)->get(),$cliente));
 						
 	}
 
@@ -2069,72 +3147,171 @@ public function clientes_categoria($cliente_id)//vista de categorias de un clien
 	
 	
 
-	public function clientes_categoria_agregar($id_cliente)///asociar categorias a un cliente matriz
-	{
-		$id=(int)$id_cliente;
-		$nombreC=strtoupper(Request::get('nomCat'));//nombre de la categoria en mayusculas
-		$statusC=(int)Request::get('stCat');//status de la categoria
-		
 
-		if(empty(DB::table('categorias')->where(['categorias.nombre'=>$nombreC,'categorias.cliente_id'=>$id_cliente])->first())==true)//si no existe
+	public function categoriaDuplicada($nombreCategoria,$cliente_id)
+	{
+		$duplicado=(object)array('codigo'=>0,'extra'=>0);
+		$categoria=DB::table('categorias')->where(['nombre'=>$nombreCategoria,'cliente_id'=>$cliente_id])->first();
+		if($categoria!=null)
+		{
+			$cliente=Cliente::find($cliente_id);
+			$duplicado->codigo=2;
+			$duplicado->extra='La categoria: '.$categoria->nombre.' ,Se encuentra creada para el cliente: '.$cliente->nombreComercial;
+		}
+
+		return $duplicado;
+	}
+
+	public function clientes_categoria_agregar()
+	{
+		
+		$nombreCategoria=Request::get('nomCat');
+		$status=Request::get('stCat');
+		$cliente_id=Request::get('cliente_id__');
+		$duplicado=$this->categoriaDuplicada($nombreCategoria,$cliente_id);
+
+		if($duplicado->codigo==0)
 		{
 
-			DB::table('categorias')->insert
-			(['nombre'=>$nombreC,'status'=>$statusC,'cliente_id'=>$id]);
-			
+
+				///////////////////////////////////////////////////////////////////////////////////
+				$categoria=new Categoria();
+				$categoria->nombre=strtoupper($nombreCategoria);
+				$categoria->status=$status;
+				$categoria->cliente_id=$cliente_id;
+				$update=$categoria->save();
+
+				if($update)
+				{
+					$this->registroBitacora('Id del registro creado: '.$categoria->id,'Agregar Categoria','{"Registro la categoria":'.'"'.$categoria->nombre.'"'.'}','Clientes -> Categoria');
+
+					$duplicado->codigo=1;
+				}
+
 		}
-		return redirect('/menu/registros/clientes/categoria/'.(string)$id);
+
+		return Response::json($duplicado);
 
 						
 	}
 	
 	
+	public function clientes_categoria_status()
+	{
+
+		$status=[1,0];
+		$status_=['HABILITADO','INHABILITADO'];
+		$status__=['INHABILITADO','HABILITADO'];
+		$registry=Request::get('registry');
+		$aux=false;
+		/////////////////Busqueda del cliente y cambio de status ////////////////////////////////////////////
+		$categoria=Categoria::find($registry);
+		$categoria->status=$status[$categoria->status];
+		$aux=$categoria->save();
+		// /////////////////////////////////////////////////////////////////////////////////////////////////////
+		// $rif=DB::table('rifs')->join('tipos','tipos.id','=','rifs.tipo_id')
+		// 			->select('rifs.numero AS numero','tipos.descripcion AS tipoRif')
+		// 			->where('rifs.id',$cliente->rif_id)
+		// 			->first();
+
+	    $this->registroBitacora($categoria->nombre,'Cambiar Status','{"Status":"'.$status_[$categoria->status].' -> '.$status__[$categoria->status].'"}','Clientes ->Categoria Matriz ');
+	    /////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		return Response()->json(['update'=>$aux]);
+
+	}
+
 	public function clientes_categorias_modificar()//carga datos al modal modificar categoria
 	{
-		$categoria_id=(int)Request::get('idCategoria');
-		$categorias=DB::table('categorias')->where('id',$categoria_id)->first();//buscar categoria por id
-		return array($categorias->nombre,$categorias->status,$categorias->cliente_id);
+		$registry=Request::get('registry');
+		$categoria=Categoria::find($registry);
+
+		return Response::json($categoria);
 		
 	}
 
-	public function clientes_categorias_actualizar($cliente_id)//actualiza los datos de una categoria en la base de datos
+	public function categoriaDuplicadaMod($categoria_id,$nombreCategoria,$cliente_id)
 	{
-		$nombreC=Request::get('nomCat');
-		$statusC=(int)Request::get('stCat');
-		$categoria_id=(int)Request::get('Categoriaid');
+		$duplicado=(object)array('codigo'=>0,'extra'=>0);
+		$categoria=DB::table('categorias')->where('id','<>',$categoria_id)->where('nombre','=',$nombreCategoria)->where('cliente_id',$cliente_id)->first();
+		if($categoria!=null)
+		{
+			$cliente=Cliente::find($categoria->cliente_id);
+			if ($cliente!=null) 
+			{
+				$duplicado->codigo=2;
+				$duplicado->extra='La categoria: '.$nombreCategoria.' , se encuentra creada para el cliente: <br>'.$cliente->nombreComercial;
+			}
+		}
+		return $duplicado;
+	}
 
-		DB::table('categorias')->where('id',$categoria_id)->update(['nombre'=>$nombreC,'status'=>$statusC]);
 
-		return redirect('/menu/registros/clientes/categoria/'.(string)$cliente_id);
+	public function clientes_categorias_actualizar()//actualiza los datos de una categoria en la base de datos
+	{
+		
+		
+		$cambios=array();
+		$nombreCategoria=strtoupper(Request::get('nomCat'));
+		$status=Request::get('stCat');
+		$categoria_id=Request::get('_idCategoria_');
+
+
+		$categoria=Categoria::find($categoria_id);
+		$duplicado=$this->categoriaDuplicadaMod($categoria_id,$nombreCategoria,$categoria->cliente_id);
+		if ($duplicado->codigo==0) 
+		{
+			
+		
+			$cambio=$this->detectarCambios($nombreCategoria,$categoria->nombre,'Nombre Categoria');
+	    	$cambios=$this->agregarCambios($cambio,$cambios);
+			$categoria->nombre=$nombreCategoria;
+			$categoria->status=$status;
+			$update=$categoria->save();
+			$longitud=count($cambios);
+    		$cambios=$this->documentarCambios($cambios);
+
+    		if($longitud>0)
+    	 	{
+
+    			$this->registroBitacora('Id del registro modificado: '.$categoria->id,'Modificar Categoria',$cambios,'Clientes -> Cliente Matriz ->Categoria');
+    			$duplicado->codigo=1;
+    		}
+
+		}
+
+
+
+		return Response::json($duplicado);
 	}
 	
-	
+	public function retornarResponsable($categoria_id)
+	{
+		$responsable=DB::table('categoria_persona')
+						->where('categoria_persona.categoria_id',$categoria_id)
+						->first();
+		if ($responsable!=null) {$id=$responsable->persona_id;}else{$id=0;}
+		return $id;
+
+	}
 	
 	public function clientes_categoria_responsable($categoria_id)//listar responsables de una categoria
 	{
-		$categoria=$categoria_id;
+		
 		$datos=$this->cargar_header_sidebar_acciones();
 		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(22,23),21);
-		$responsablesC=DB::table('categoria_persona')->where('categoria_id',$categoria_id)->first();
-		if (empty($responsablesC)==false) //si esta lleno
-		{
-			$id=(int)$responsablesC->persona_id;//id del responsable de una categoria (radio button)
-		}
-		else
-		{
+		$categoria=Categoria::find($categoria_id);
+		$cliente=Cliente::find($categoria->cliente_id);
+		$responsable=$this->retornarResponsable($categoria_id);
+		$responsables=DB::table('personas')->where('cliente_id',$categoria->cliente_id)->get();
+		$tiposCedula=DB::table('tipos')->where('numero_c',5)->get();
+		$tiposCelular=DB::table('tipos')->where('numero_c',2)->get();
+		$tiposFijo=DB::table('tipos')->where('numero_c',3)->get();
 
-			$id=0;//cuando la categoria no tiene responsable asignado
-		}
-		$consulta=DB::table('categorias')->where('categorias.id',$categoria)->first();
-		return view ('Registros_Basicos\Clientes\clientes_categoria_responsable',$this->datos_vista($datos,$acciones,DB::table('categorias')->join('clientes','clientes.id','=','categorias.cliente_id')
-								   ->join('personas','personas.cliente_id','=','clientes.id')
-								   ->select('personas.id','personas.p_nombre','personas.p_apellido')
-								   ->where('categorias.id','=',$categoria_id)->get(),
-								   $id,
-								   $categoria_id,
-								   DB::table('tipos')->where('numero_c',5)->get(),//tipos de cedula $datosC2
-								   DB::table('tipos')->where('numero_c',2)->get(),//tipos de codigo de celular $datosC3
-								   DB::table('tipos')->where('numero_c',3)->get(),$consulta->cliente_id));//tipos dle codigos loca
+
+		
+		
+		return view ('Registros_Basicos\Clientes\clientes_categoria_responsable',$this->datos_vista($datos,$acciones,$responsables,$responsable,$cliente,$tiposCedula,$tiposCelular,$tiposFijo,$categoria));//tipos dle codigos loca
 						
 	}
 
@@ -2170,6 +3347,46 @@ public function clientes_categoria($cliente_id)//vista de categorias de un clien
 		$this->consulta_actualizar_responsable($formulario);
 
 		return redirect('/menu/registros/clientes/categoria/responsable/'.(string)$id_categoria);
+	}
+
+
+	public function categoriasAsignarResponsable()
+	{
+		$retorno=0;
+		$nuevo=Request::get('nuevo');
+		$anterior=Request::get('anterior');
+		$categoria=Request::get('categoria');
+		if ($anterior==0) 
+		{
+			$update=DB::table('categoria_persona')->insert(['persona_id'=>$nuevo,'categoria_id'=>$categoria]);
+		}
+		else
+		{
+			$update=DB::table('categoria_persona')->where(['persona_id'=>$anterior,'categoria_id'=>$categoria])
+			->update(['persona_id'=>$nuevo]);
+		}
+
+		if ($update){$retorno=1;}
+
+		return Response::json(['retorno'=>$retorno]);
+	}
+
+	public function respCatStatus()
+	{
+		$status=[1,0];
+		$status_=['HABILITADO','INHABILITADO'];
+		$status__=['INHABILITADO','HABILITADO'];
+		$registry=Request::get('registry');
+		$aux=false;
+		///////////// Busqueda del perfil y cambio de status ////////////////////////
+		$persona=Persona::find($registry);
+		$persona->status=$status[$persona->status];
+		$aux=$persona->save();
+		/////////////////////////////////////////////////////////////////////////////////////////////////////
+	    $this->registroBitacora('Persona: '.$persona->primerNombre.' '.$persona->primerApellido,'Cambiar Status','{"Status":"Cambio de: '.$status_[$persona->status].' a: '.$status__[$persona->status].'"}','Clientes->Categoria->responsable');
+	    /////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		return Response()->json(['update'=>$aux]);
 	}
 
 ////////////////////////////////////////////sucursales/////////////////////////////////////////////////////////////////////////
@@ -2889,7 +4106,7 @@ public function crear_accion($status_ac=1,$descripcion=" ",$url=" ",$data_toogle
     	
     }
 
-
+  
     public function agregar_accion()
     {
     	
