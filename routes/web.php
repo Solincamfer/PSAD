@@ -79,6 +79,9 @@ Route::group(['prefix'=>'/menu/registros','middleware'=>['v_menu']],function(){
 
 	Route::match(['post','get'],'/clientes/modificar/sucursal',                   					    ['uses'=>'RegistrosBasicos@sucursalesModificar']);//cliente-categoria-sucursales
 
+
+	Route::match(['post','get'],'/clientes/actualizar/sucursal',                   					    ['uses'=>'RegistrosBasicos@sucursalesActualizar']);//cliente-categoria-sucursales
+
 	Route::match(['post','get'],'/clientes/categorias/sucursales/{categoria_id}',                   	['uses'=>'RegistrosBasicos@clientes_sucursales']);//cliente-categoria-sucursales
 
 	 Route::match(['post','get'],'/clientes/categoria/sucursal/responsable/{sucursal_id}',            	['uses'=>'RegistrosBasicos@clientes_sucursales_responsable']);

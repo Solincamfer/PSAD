@@ -379,7 +379,7 @@
                                                             <br>
                                                             <div class="form-group col-md-6" id="dfcm1">
                                                                 <label for="paisdf">País</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
-                                                                <select name="paisdf" id="inputm6" class="form-control userEmail" data-lista="1" data-clase="3">
+                                                                <select name="paisdf" id="inputm6" class="form-control userEmail dirSucursal dirSucursal" data-caso="0" data-grupo="2">
                                                                     <option value="">-</option>
                                                                 @foreach($paises AS $pais)
                                                                     <option value="{{$pais->id}}">{{$pais->descripcion}}</option>
@@ -389,7 +389,7 @@
                                                             <div class="form-group col-md-7" id="dfcm2">
                                                                 <div class="col-md-offset-2">
                                                                     <label for="regiondf">Región</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
-                                                                    <select name="regiondf" id="inputm7" class="form-control userEmail" data-lista="2" data-clase="3">
+                                                                    <select name="regiondf" id="inputm7" class="form-control userEmail dirSucursal" data-caso="1" data-grupo="2">
                                                                         <option value="">-</option>
                                                                        
                                                                     </select><i class="fa fa-map" id="micc7"></i>
@@ -397,7 +397,7 @@
                                                             </div>
                                                             <div class="form-group col-md-6" id="dfcm3">
                                                                 <label for="edodf">Estado</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
-                                                                <select name="edodf" id="inputm8" class="form-control userEmail" data-lista="3" data-clase="3" >
+                                                                <select name="edodf" id="inputm8" class="form-control userEmail dirSucursal" data-caso="2" data-grupo="2">
                                                                     <option value="">-</option>
                                                                    
                                                                 </select><i class="fa fa-map-pin" id="micc8"></i>
@@ -405,7 +405,7 @@
                                                             <div class="form-group col-md-7" id="dfcm4">
                                                                 <div class="col-md-offset-2">
                                                                     <label for="mundf">Municipio</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
-                                                                    <select name="mundf" id="inputm9" class="form-control userEmail" data-lista="4" data-clase="3" >
+                                                                    <select name="mundf" id="inputm9" class="form-control userEmail dirSucursal" data-caso="3" data-grupo="2" >
                                                                         <option value="">-</option>
                                                                       
                                                                     </select><i class="fa fa-map-signs" id="micc9"></i>
@@ -423,7 +423,7 @@
                                                             <br>                                    
                                                             <div class="form-group col-md-6" id="dccm1">
                                                                 <label for="paisdc">País</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
-                                                                <select name="paisdc" id="inputm11" class="form-control userEmail" data-lista="1" data-clase="4">
+                                                                <select name="paisdc" id="inputm11" class="form-control userEmail dirSucursal" data-caso="0" data-grupo="3">
                                                                 <option value="">-</option>
                                                                @foreach($paises AS $pais)
                                                                     <option value="{{$pais->id}}">{{$pais->descripcion}}</option>
@@ -433,7 +433,7 @@
                                                             <div class="form-group col-md-7" id="dccm2">
                                                                 <div class="col-md-offset-2">
                                                                     <label for="regiondc">Región</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
-                                                                    <select name="regiondc" id="inputm12" class="form-control userEmail" data-lista="2" data-clase="4">
+                                                                    <select name="regiondc" id="inputm12" class="form-control userEmail dirSucursal" data-caso="1" data-grupo="3">
                                                                         <option value="">-</option>
                                                                       
                                                                     </select><i class="fa fa-map" id="micc12"></i>
@@ -441,7 +441,7 @@
                                                             </div>
                                                             <div class="form-group col-md-6" id="dccm3">
                                                                 <label for="edodc">Estado</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
-                                                                <select name="edodc" id="inputm13" class="form-control userEmail" data-lista="3" data-clase="4">
+                                                                <select name="edodc" id="inputm13" class="form-control userEmail dirSucursal" data-caso="2" data-grupo="3">
                                                                     <option value="">-</option>
                                                                     
                                                                 </select><i class="fa fa-map-pin" id="micc13"></i>
@@ -449,7 +449,7 @@
                                                             <div class="form-group col-md-7" id="dccm4">
                                                                 <div class="col-md-offset-2">
                                                                     <label for="mundc">Municipio</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
-                                                                    <select name="mundc" id="inputm14" class="form-control userEmail" data-lista="4" data-clase="4">
+                                                                    <select name="mundc" id="inputm14" class="form-control userEmail dirSucursal" data-caso="3" data-grupo="3">
                                                                         <option value="">-</option>
                                                                        
                                                                     </select><i class="fa fa-map-signs" id="micc14"></i>
@@ -526,7 +526,7 @@
                                             </div>
                                         </div>                              
                                         <div class="modal-footer">
-                                           <button type="button" class="btn btn-primary" id="btnGuardarSucursal">Guardar<i class="fa fa-floppy-o"></i></button>  
+                                           <button type="button" class="btn btn-primary" id="btnModificarSucursal">Guardar<i class="fa fa-floppy-o"></i></button>  
                                         </div>
                                     </form>
 

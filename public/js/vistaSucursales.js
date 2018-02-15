@@ -89,9 +89,13 @@ $(document).ready(function()
 				var _token=$( "input[name^='_token']" ).val();
 				var listas=[
 							['input6','input7','input8','input9'],//direccion fiscal agregar. grupo 0
-							['input11','input12','input13','input14']//direccion comercial agregar. grupo 1
+							['input11','input12','input13','input14'],//direccion comercial agregar. grupo 1
+							['inputm6','inputm7','inputm8','inputm9'],
+							['inputm11','inputm12','inputm13','inputm14']
 						
 							];
+
+							
 				if(caso<4)
 				{
 
@@ -124,7 +128,7 @@ $(document).ready(function()
 									.done(function(answer)
 										{
 											
-											console.log(answer);
+											//console.log(answer);
 											
 											if(answer.codigo==1)
 											{
@@ -178,12 +182,12 @@ $(document).ready(function()
 			        var _token=$( "input[name^='_token']" ).val();
 				  	var route='/menu/registros/clientes/modificar/sucursal';
 				  	$('#registroSucursal_').val(registry);
-				  	alert(registry);
+				  	
 
 				  	  $.post(route,{_token:_token,registry:registry})
 					  .done(function(answer)
 					  {
-					  	console.log(answer);
+					  	//console.log(answer);
 					  	
 					  	 loadModal(answer);
 					  })
@@ -196,6 +200,60 @@ $(document).ready(function()
 
 
 			////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+			$('#btnModificarSucursal').click(function()
+				{
+					var form=$('#Formclientem').serialize();
+       				var route='/menu/registros/clientes/actualizar/sucursal';
+       				var categoria=$('#categoria__id').val();
+
+       				$.post(route,form)
+						.done(function(answer)
+							{
+								
+								
+								if(answer.codigo==1)
+													{
+															swal({
+																	title:'Actualizacion exitosa',//Contenido del modal
+																	text: '<p style="font-size: 1.0em;">'+'La sucursal se actualizo correctamente!!'+'</p>',
+																	type: "success",
+																	showConfirmButton:true,//Eliminar boton de confirmacion
+																	html: true
+															},
+										  				 	function(isConfirm)
+										  				 	{
+										  				 		if(isConfirm)
+										  				 		{
+										  				 			window.location.href="/menu/registros/clientes/categorias/sucursales/"+categoria;
+										  				 		}	
+
+										  				 	});
+										  				 
+													}
+
+													else if(answer.codigo==2)
+													{
+
+														swal({
+																	title:'Rif duplicado!!!',//Contenido del modal
+																	text: '<p style="font-size: 0.9em;">'+'Se encuentra asociado al cliente  : '+ answer.extra+'.<br><br><br>El RIF debe ser unico.</p>',
+																	type: "warning",
+																	showConfirmButton:true,//Eliminar boton de confirmacion
+																	html: true
+															});
+													}
+							})
+										
+						.fail(function()
+							{
+								swal("Error Inesperado !!", "Comuniquese con el administrador", "error");
+							});
+
+
+
+				});
 
 
 
