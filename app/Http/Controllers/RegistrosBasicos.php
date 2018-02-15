@@ -3564,7 +3564,41 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 		
 	}
 
-	public function sucursalesActualizar()
+
+
+
+	public function consultarTelefonoSuc($sucursal_id,$tipo)//0 local, 1 local, 2 movil
+	{
+		$telefono=DB::table('telefonos')
+					  ->join('sucursal_telefono','telefonos.id','=','sucursal_telefono.telefono_id')
+					  ->join('tipos','telefonos.codigo','=','tipos.descripcion')
+					  ->where(['sucursal_telefono.sucursal_id'=>$sucursal_id,'telefonos.tipo'=>$tipo])
+					  ->select('telefonos.id AS id','telefonos.codigo AS codigo','telefonos.telefono AS numero','tipos.id AS tipo_id')
+					  ->first();
+
+				return $telefono;
+	}
+
+	public function opcionesDependientes($lista,$padre_id)
+	{
+		if($lista==0)
+		{
+			$retorno=DB::table('regiones')->where('pais_id',$padre_id)->get();
+		}
+		else if($lista==1)
+		{
+			$retorno=DB::table('estados')->where('region_id',$padre_id)->get();
+		}
+		else if($lista==2)
+		{
+			$retorno=DB::table('municipios')->where('estado_id',$padre_id)->get();
+		}
+
+		return $retorno;
+	}
+
+
+	public function sucursalesModificar()
 	{
 		$registry=Request::get('registry');
 		$sucursal=Sucursal::find($registry);
@@ -3572,8 +3606,25 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 		$direccionFiscal=Direccion::find($sucursal->direccionFiscal_id);
 		$direccionComercial=Direccion::find($sucursal->direccionComercial_id);
 		$correo=Correo::find($sucursal->correo_id);
+		$telefonoLocal=$this->consultarTelefonoSuc($sucursal->id,0);
+		$telefonoMovil=$this->consultarTelefonoSuc($sucursal->id,2);
 
-		return Response::json(compact('sucursal','rif','direccionFiscal','direccionComercial','correo'));
+		/////////////////////////Opciones dependientes Direccion Fiscal/////////////
+		$regionesF=$this->opcionesDependientes(0,$direccionFiscal->pais_id);
+		$estadosF=$this->opcionesDependientes(1,$direccionFiscal->region_id);
+		$municipiosF=$this->opcionesDependientes(2,$direccionFiscal->estado_id);
+		$dependenciasF=['regiones'=>$regionesF,'estados'=>$estadosF,'municipios'=>$municipiosF];
+
+		/////////////////////////Opciones dependientes Direccion Comercial/////////////
+		$regionesC=$this->opcionesDependientes(0,$direccionComercial->pais_id);
+		$estadosC=$this->opcionesDependientes(1,$direccionComercial->region_id);
+		$municipiosC=$this->opcionesDependientes(2,$direccionComercial->estado_id);
+		$dependenciasC=['regiones'=>$regionesC,'estados'=>$estadosC,'municipios'=>$municipiosC];
+
+
+		
+
+		return Response::json(compact('sucursal','rif','direccionFiscal','direccionComercial','correo','telefonoLocal','telefonoMovil','dependenciasF','dependenciasC'));
 	}
 
 

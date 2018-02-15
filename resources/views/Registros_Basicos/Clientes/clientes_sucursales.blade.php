@@ -526,8 +526,7 @@
                                             </div>
                                         </div>                              
                                         <div class="modal-footer">
-                                            <button type="button" class="bttnMd" id="btnAnm">Anterior <i class="fa fa-times"></i></button>
-                                            <button type="button" class="bttnMd" id="btnSvm">Siguiente <i class="fa fa-hand-o-right"></i></button>   
+                                           <button type="button" class="btn btn-primary" id="btnGuardarSucursal">Guardar<i class="fa fa-floppy-o"></i></button>  
                                         </div>
                                     </form>
 

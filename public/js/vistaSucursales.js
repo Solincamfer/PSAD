@@ -45,21 +45,31 @@ $(document).ready(function()
 		$('#inputm10').val(datos.direccionFiscal.descripcion);
 		$('#inputm15').val(datos.direccionComercial.descripcion);
 		$('#inputm20').val(datos.correo.correo);
-		// $('#inputm16').val(datos.telefonoLocal.tipo_id);
-		// $('#inputm18').val(datos.telefonoMovil.tipo_id);
-		// $('#inputm17').val(datos.telefonoLocal.telefono);
-		// $('#inputm19').val(datos.telefonoMovil.telefono);
+		$('#inputm16').val(datos.telefonoLocal.tipo_id);
+		$('#inputm18').val(datos.telefonoMovil.tipo_id);
+		$('#inputm17').val(datos.telefonoLocal.numero);
+		$('#inputm19').val(datos.telefonoMovil.numero);
 
-		//////////////////////////////Cargar los selects: direccion fiscal /////////////////////////////////
-		// cargarListaDependiente('inn2',0,datos.direccionFiscal.pais_id,datos.direccionFiscal.region_id);//region
-		// cargarListaDependiente('inn3',1,datos.direccionFiscal.region_id,datos.direccionFiscal.estado_id);//estado
-		// cargarListaDependiente('inn4',2,datos.direccionFiscal.estado_id,datos.direccionFiscal.municipio_id);//municipio
+		/////////////////////////////Cargar los selects: direccion fiscal //////////////////////////////////
+		cargarSelect(datos.dependenciasF.regiones,'inputm7');
+		$('#inputm7').val(datos.direccionFiscal.region_id);
 
-		// //////////////////////////////Cargar los selects: direccion comercial /////////////////////////////////
-		// cargarListaDependiente('innn12',0,datos.direccionComercial.pais_id,datos.direccionComercial.region_id);//region
-		// cargarListaDependiente('innn13',1,datos.direccionComercial.region_id,datos.direccionComercial.estado_id);//estado
-		// cargarListaDependiente('innn14',2,datos.direccionComercial.estado_id,datos.direccionComercial.municipio_id);//municipio
+		cargarSelect(datos.dependenciasF.estados,'inputm8');
+		$('#inputm8').val(datos.direccionFiscal.estado_id);
 
+		cargarSelect(datos.dependenciasF.municipios,'inputm9');
+		$('#inputm9').val(datos.direccionFiscal.municipio_id);
+
+		/////////////////////////////Cargar los selects: direccion comercial //////////////////////////////////
+
+		cargarSelect(datos.dependenciasC.regiones,'inputm12');
+		$('#inputm12').val(datos.direccionComercial.region_id);
+
+		cargarSelect(datos.dependenciasC.estados,'inputm13');
+		$('#inputm13').val(datos.direccionComercial.estado_id);
+
+		cargarSelect(datos.dependenciasC.municipios,'inputm14');
+		$('#inputm14').val(datos.direccionComercial.municipio_id);
 
 			
 
@@ -168,11 +178,12 @@ $(document).ready(function()
 			        var _token=$( "input[name^='_token']" ).val();
 				  	var route='/menu/registros/clientes/modificar/sucursal';
 				  	$('#registroSucursal_').val(registry);
+				  	alert(registry);
 
 				  	  $.post(route,{_token:_token,registry:registry})
 					  .done(function(answer)
 					  {
-					  		
+					  	console.log(answer);
 					  	
 					  	 loadModal(answer);
 					  })
