@@ -2630,12 +2630,24 @@ public function clientes_modificar()//metodo que consulta los datos de un client
 		$correo=Correo::find($cliente->correo_id);
 		$telefonoLocal=$this->consultarTelefono($cliente->id,0);
 		$telefonoMovil=$this->consultarTelefono($cliente->id,2);
+
+		/////////////////////////Opciones dependientes Direccion Fiscal/////////////
+		$regionesF=$this->opcionesDependientes(0,$direccionFiscal->pais_id);
+		$estadosF=$this->opcionesDependientes(1,$direccionFiscal->region_id);
+		$municipiosF=$this->opcionesDependientes(2,$direccionFiscal->estado_id);
+		$dependenciasF=['regiones'=>$regionesF,'estados'=>$estadosF,'municipios'=>$municipiosF];
+
+		/////////////////////////Opciones dependientes Direccion Comercial/////////////
+		$regionesC=$this->opcionesDependientes(0,$direccionComercial->pais_id);
+		$estadosC=$this->opcionesDependientes(1,$direccionComercial->region_id);
+		$municipiosC=$this->opcionesDependientes(2,$direccionComercial->estado_id);
+		$dependenciasC=['regiones'=>$regionesC,'estados'=>$estadosC,'municipios'=>$municipiosC];
 	
 
 
 
 
-		return Response::json(['cliente'=>$cliente,'rif'=>$rif,'direccionFiscal'=>$direccionFiscal,'direccionComercial'=>$direccionComercial,'correo'=>$correo,'telefonoLocal'=>$telefonoLocal,'telefonoMovil'=>$telefonoMovil]);
+		return Response::json(['cliente'=>$cliente,'rif'=>$rif,'direccionFiscal'=>$direccionFiscal,'direccionComercial'=>$direccionComercial,'correo'=>$correo,'telefonoLocal'=>$telefonoLocal,'telefonoMovil'=>$telefonoMovil,'dependenciasF'=>$dependenciasF,'dependenciasC'=>$dependenciasC]);
 		
 	}
 
