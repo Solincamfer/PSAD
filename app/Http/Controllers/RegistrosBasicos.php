@@ -35,6 +35,7 @@ use App\Telefonico;
 use App\Cliente;
 use App\Persona;
 use App\Categoria;
+use App\Sucursal;
 use Response;
 
 
@@ -2581,7 +2582,7 @@ public function clientes()//inicializacion del submodulo: clientes
 			DB::table('cliente_telefono')->insert(['telefono_id'=>$telefonoM->id,'cliente_id'=>$clienteN->id]);
 			///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-			$tipoRif=Tipo::where('id',$cliente->rif_id)->first();//descripcion del tipo de rif ingresado para el cliente 
+			$tipoRif=Tipo::where('id',$rif->tipo_id)->first();//descripcion del tipo de rif ingresado para el cliente 
 
 
 			if($update)
@@ -3409,6 +3410,8 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 		$municipios=DB::table('municipios')->orderBy('descripcion')->get();//municipios
 		$codigoC=DB::table('tipos')->where('numero_c',2)->get();//codigo de celular
 		$codigoL=DB::table('tipos')->where('numero_c',3)->get();//codigo de telefono fijo 
+		$cliente=Cliente::find($consulta_->cliente_id);
+		$categoria=Categoria::find($categoria_id);
 		
 
 		return view('Registros_Basicos\Clientes\clientes_sucursales',
@@ -3427,11 +3430,150 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 															 'municipios'=>$municipios,
 															 'codigoC'=>$codigoC,
 															 'codigoL'=>$codigoL,
-															 'clienteId'=>$consulta_->cliente_id,
-															 'categoriaId'=>$categoria_id,
-															 'extra'=>7]);
+															 'cliente'=>$cliente,
+															 'categoria'=>$categoria
+															]);
 
 						
+	}
+
+	
+	public function datosSucursal()
+	{
+		$formulario=(object)
+							array(
+									'razonSocial'=>strtoupper(Request::get('rs')),
+									'nombreComercial'=>strtoupper(Request::get('nc')),
+									'rif_id'=>Request::get('rif'),
+									'numeroRif'=>Request::get('df'),
+									'tipoContribuyente_id'=>Request::get('tipCon'),
+									'paisF'=>Request::get('paisdf'),
+									'regionF'=>Request::get('regiondf'),
+									'estadoF'=>Request::get('edodf'),
+									'municipioF'=>Request::get('mundf'),
+									'direccionFiscal'=>Request::get('descDirdf'),
+									'paisC'=>Request::get('paisdc'),
+									'regionC'=>Request::get('regiondc'),
+									'estadoC'=>Request::get('edodc'),
+									'municipioC'=>Request::get('mundc'),
+									'direccionComercial'=>Request::get('descDirdc'),
+									'codigoLocal'=>Request::get('tlflcl'),
+									'numeroLocal'=>Request::get('tcl'),
+									'codigoMovil'=>Request::get('tlfmvl'),
+									'numeroMovil'=>Request::get('tmvl'),
+									'correo'=>Request::get('mail'),
+									'categoria'=>Request::get('categoria__id'),
+									'cliente'=>Request::get('cliente__id')
+								 );
+
+		return $formulario;
+
+	}
+
+	public function sucursalesAgregar()
+	{
+			$formulario=$this->datosSucursal();
+			$duplicado=(object) array('codigo'=>0,'extra'=>0);
+		
+		// $duplicado=$this->verificarRifCliente(array('numero'=>$cliente->numeroRif,'tipo_id'=>$cliente->rif_id));
+		// if($duplicado->codigo==0)//si no se encuentra registrado el rif de un cliente
+		// {
+		// 	/////////////////////////////Obtener direccion fiscal del cliente //////////////////////////////////
+			$direccionFiscal=new Direccion();
+			$direccionFiscal->descripcion=$formulario->direccionFiscal;
+			$direccionFiscal->pais_id=$formulario->paisF;
+			$direccionFiscal->region_id=$formulario->regionF;
+			$direccionFiscal->estado_id=$formulario->estadoF;
+			$direccionFiscal->municipio_id=$formulario->municipioF;
+			$direccionFiscal->save();
+
+
+			//////////////////////////Obtener direccion comercial del formulario //////////////////////////////////
+			$direccionComercial=new Direccion();
+			$direccionComercial->descripcion=$formulario->direccionComercial;
+			$direccionComercial->pais_id=$formulario->paisC;
+			$direccionComercial->region_id=$formulario->regionC;
+			$direccionComercial->estado_id=$formulario->estadoC;
+			$direccionComercial->municipio_id=$formulario->municipioC;
+			$direccionComercial->save();
+
+			/////////////////////////Obtener Rif del cliente ///////////////////////////////////////////////////
+			$rif=new Rif();
+			$rif->numero=$formulario->numeroRif;
+			$rif->tipo_id=$formulario->rif_id;
+			$rif->rol='SUCURSAL';
+			$rif->save();
+
+			////////////////////////Obtener correo del Cliente ////////////////////////////////////////////////
+			$correo=new Correo();
+			$correo->correo=$formulario->correo;
+			$correo->save();
+			//////////////////////Obtener telefono Local del cliente ////////////////////////////////////////////
+
+			$codigoL=Tipo::where('id',$formulario->codigoLocal)->first();
+			$telefonoL=new Telefono();
+			$telefonoL->codigo=$codigoL->descripcion;
+			$telefonoL->telefono=$formulario->numeroLocal;
+			$telefonoL->tipo=0;
+			$telefonoL->save();
+
+			/////////////////////Obtener el telefono movil del Cliente //////////////////////////////////////////
+			$codigoM=Tipo::where('id',$formulario->codigoMovil)->first();
+			$telefonoM=new Telefono();
+			$telefonoM->codigo=$codigoM->descripcion;
+			$telefonoM->telefono=$formulario->numeroMovil;
+			$telefonoM->tipo=2;
+			$telefonoM->save();
+
+
+			///////////////////////Crear registro para el cliente ////////////////////////////////////////////////
+			$sucursal=new Sucursal();
+			$sucursal->razonSocial=$formulario->razonSocial;
+			$sucursal->nombreComercial=$formulario->nombreComercial;
+			$sucursal->rif_id=$rif->id;
+			$sucursal->direccionFiscal_id=$direccionFiscal->id;
+			$sucursal->direccionComercial_id=$direccionComercial->id;
+			$sucursal->correo_id=$correo->id;
+			$sucursal->tipoContribuyente_id=$formulario->tipoContribuyente_id;
+			$sucursal->categoria_id=$formulario->categoria;
+			$update=$sucursal->save();
+
+			///////////////////asociar telefonos al cliente //////////////////////////////////////////////////////
+			DB::table('sucursal_telefono')->insert(['telefono_id'=>$telefonoL->id,'sucursal_id'=>$sucursal->id]);
+			DB::table('sucursal_telefono')->insert(['telefono_id'=>$telefonoM->id,'sucursal_id'=>$sucursal->id]);
+			///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+			$tipoRif=Tipo::where('id',$rif->tipo_id)->first();//descripcion del tipo de rif ingresado para el cliente 
+
+
+			if($update)
+			{
+				$duplicado->codigo=1;
+				$this->registroBitacora('Id del registro creado: '.$sucursal->id,'Agregar Sucursal','{"Registro la sucursal":'.'"'.$sucursal->nombreComercial.' - '.$tipoRif->descripcion.' '.$rif->numero.'"'.'}','Clientes -> Categorias ->Sucursal');
+			}
+		//}
+
+
+
+
+
+
+
+
+		return Response::json($duplicado);
+		
+	}
+
+	public function sucursalesActualizar()
+	{
+		$registry=Request::get('registry');
+		$sucursal=Sucursal::find($registry);
+		$rif=Rif::find($sucursal->rif_id);
+		$direccionFiscal=Direccion::find($sucursal->direccionFiscal_id);
+		$direccionComercial=Direccion::find($sucursal->direccionComercial_id);
+		$correo=Correo::find($sucursal->correo_id);
+
+		return Response::json(compact('sucursal','rif','direccionFiscal','direccionComercial','correo'));
 	}
 
 
