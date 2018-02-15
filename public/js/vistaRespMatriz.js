@@ -1,6 +1,5 @@
 $(document).ready(function()
  {
-		
 
 
  			///////////////////////////////Metodos comunes/////////////////////////////////////////
@@ -42,7 +41,7 @@ $(document).ready(function()
  			$('.modificarResponsable').click(function()
  				{
  					var registry=$(this).attr('data-reg');
- 					var caso=$(this).attr('data-caso');
+ 					var caso=$(this).data('caso');
 
  					var formularios=['_responsableMatriz_Mod','categoriResp__'];
  					var registros=['idRegistroMod_','Responsableid'];

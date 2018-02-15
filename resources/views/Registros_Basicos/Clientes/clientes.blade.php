@@ -249,7 +249,7 @@
 																<div class="col-md-5">
 																	<div class="form-group">
 																		<select name="tlflsv" id="ipppp1" class="form-control userEmail">
-																				<option value="">-</option>
+																			<option value="">-</option>
 																			@foreach($codigoL as $local)
 																			<option value="{{$local->id}}">{{$local->descripcion}}</option>
 																			@endforeach
@@ -301,7 +301,7 @@
 										</div>
 										</div>						
 										<div class="modal-footer">
-											<button type="button" class="btn btn-primary" id="btnGuardarCliente">Guardar <i class="fa fa-floppy-o"></i></button>	
+											<button type="submit" class="btn btn-primary" id="btnGuardarCliente">Guardar <i class="fa fa-floppy-o"></i></button>	
 										</div>
 								</form>	
 									

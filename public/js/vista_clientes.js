@@ -195,54 +195,215 @@ $(document).ready(function() {
 		});
 
 		////////////////////Boton guardar nuevo cliente ////////////////////////////////////////////////////////
-		$('#btnGuardarCliente').click(function() 
-		{
-			var form=$('#Formclientesv').serialize();
-			var route='/menu/registros/clientes/insertar';
-			$.post(route,form)
-			.done(function(answer)
-				{
-					
-					console.log(answer);
-					
-					if(answer.codigo==1)
+
+		$('#Formclientesv').bootstrapValidator({
+			excluded: [':disabled'],
+		   	feedbackIcons: {
+		     	valid: 'glyphicon glyphicon-ok',
+		     	invalid: 'glyphicon glyphicon-remove',
+		     	validating: 'glyphicon glyphicon-refresh'
+		   },
+		   fields: {
+		     rsnew: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Debe indicar la razon social de la empresa'
+		         }
+		       }
+		     },
+		     ncnew: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Debe indicar el nombre comercial de la empresa'
+		         }
+		       }
+		     },
+		     tiporif: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Seleccione el tipo de rif'
+		         }
+		       }
+		     },
+		     numerorif: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Debe indicar el número de rif'
+		         },
+		        regexp: {
+	                regexp: /^[0-9]+$/,
+	                message: 'El rif debe contener solo numeros'                            
+                },
+		       }
+		     },
+		     tipConnew: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Debe indicar el tipo de contribuyente'
+		         }
+		       }
+		     },
+		     paisdf: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Debe indicar el país'
+		         }
+		       }
+		     },
+		     regiondf: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Debe indicar la región'
+		         }
+		       }
+		     },
+		     edodf: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Debe indicar el estado'
+		         }
+		       }
+		     },
+ 		     mundf: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Debe indicar el municipio'
+		         }
+		       }
+		     },
+		     descDirdf: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Especifique la direccion Fiscal de la empresa'
+		         }
+		       }
+		     },
+		     paisdc: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Debe indicar el país'
+		         }
+		       }
+		     },
+		     regiondc: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Debe indicar la region'
+		         }
+		       }
+		     },
+		     edodc: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Debe indicar el estado'
+		         }
+		       }
+		     },
+		     mundc: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Debe indicar el municipio'
+		         }
+		       }
+		     },
+		     descDirdc: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Especifique la direccion Comercial de la empresa'
+		         }
+		       }
+		     },
+		     tlflsv: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Debe indicar un código de area local'
+		         }
+		       }
+		     },
+		     tclsv: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Debe indicar un número de telefono local'
+		         },
+		         regexp: {
+	                regexp: /^[0-9]+$/,
+	                message: 'Solo debe contener caracteres númericos'                            
+                },
+		       }
+		     },
+		     tmvlsv:{
+		     	validators:{
+		     		regexp: {
+		                regexp: /^[0-9]+$/,
+		                message: 'Solo debe contener caracteres númericos'                            
+                }
+		     	}
+		     },
+		     mailsv: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Debe indicar un correo electrónico'
+		        },
+		         emailAddress: {
+                        message: 'El correo electronico debe tener el formato minombre@midominio.com'
+                }
+		       }
+		     }
+		   }
+	  	});
+		$('body').bootstrapValidator().on('submit','#Formclientesv', function (e) {
+			if (e.isDefaultPrevented()) {
+
+			}
+			else{
+				var form=$('#Formclientesv').serialize();
+				console.log(form);
+				var route='/menu/registros/clientes/insertar';
+				$.post(route,form)
+				.done(function(answer)
 					{
+						
+						console.log(answer);
+						
+						if(answer.codigo==1)
+						{
+								swal({
+										title:'Insercion exitosa',//Contenido del modal
+										text: '<p style="font-size: 1.0em;">'+'El cliente se registro correctamente!!'+'</p>',
+										type: "success",
+										showConfirmButton:true,//Eliminar boton de confirmacion
+										html: true
+								},
+			  				 	function(isConfirm)
+			  				 	{
+			  				 		if(isConfirm)
+			  				 		{
+			  				 			window.location.href="/menu/registros/clientes";
+			  				 		}	
+
+			  				 	});
+			  				 
+						}
+
+						else if(answer.codigo==2)
+						{
+
 							swal({
-									title:'Insercion exitosa',//Contenido del modal
-									text: '<p style="font-size: 1.0em;">'+'El cliente se registro correctamente!!'+'</p>',
-									type: "success",
-									showConfirmButton:true,//Eliminar boton de confirmacion
-									html: true
-							},
-		  				 	function(isConfirm)
-		  				 	{
-		  				 		if(isConfirm)
-		  				 		{
-		  				 			window.location.href="/menu/registros/clientes";
-		  				 		}	
-
-		  				 	});
-		  				 
-					}
-
-					else if(answer.codigo==2)
+										title:'Rif duplicado!!!',//Contenido del modal
+										text: '<p style="font-size: 0.9em;">'+'Se encuentra asociado al cliente  : '+ answer.extra+'.<br><br><br>El RIF debe ser unico.</p>',
+										type: "warning",
+										showConfirmButton:true,//Eliminar boton de confirmacion
+										html: true
+								});
+						}
+					
+			
+					})
+				.fail(function()
 					{
-
-						swal({
-									title:'Rif duplicado!!!',//Contenido del modal
-									text: '<p style="font-size: 0.9em;">'+'Se encuentra asociado al cliente  : '+ answer.extra+'.<br><br><br>El RIF debe ser unico.</p>',
-									type: "warning",
-									showConfirmButton:true,//Eliminar boton de confirmacion
-									html: true
-							});
-					}
-				
-		
-				})
-			.fail(function()
-				{
-					swal("Error Inesperado !!", "Comuniquese con el administrador", "error");
-				});
+						swal("Error Inesperado !!", "Comuniquese con el administrador", "error");
+					});
+			}
 
 		});
 
