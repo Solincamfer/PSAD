@@ -355,9 +355,6 @@
 																@foreach($tipoR as $rif)
 																	<option value="{{$rif->id}}">{{$rif->descripcion}}</option>
 																@endforeach
-																
-																	<!-- <option value="1">J-</option>
-																	<option value="2">G-</option> -->
 																</select><i class="fa fa-clipboard" id="icc3"></i>
 															</div>	
 															<div class="form-group col-md-8">									
@@ -533,7 +530,7 @@
 										<input type="hidden" id="_idCliente_" name="_idCliente_" value="">
 										</div>								
 										<div class="modal-footer">
-											<button type="button" class="btn btn-primary" id="btnModificarCliente">Guardar <i class="fa fa-floppy-o"></i></button>	
+											<button type="submit" class="btn btn-primary" id="btnModificarCliente">Guardar <i class="fa fa-floppy-o"></i></button>	
 										</div>
 								</form>
 								
@@ -543,3 +540,6 @@
 					</div>
 				</div>   
 	@endsection
+	@section('js')
+		<script type="text/javascript" src="{{ asset('js/vista_clientes.js') }}"></script>
+	@endSection

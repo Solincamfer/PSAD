@@ -148,50 +148,209 @@ $(document).ready(function() {
 			
 		});
 		/////////////////////Boton Guardar cliente modificado///////////////////////////////////////////////////
-		$('#btnModificarCliente').click(function()
-		{
-			var form=$('#Formclientemd').serialize();
-       		var route='/menu/registros/clientes/actualizar';
+		$('#Formclientemd').bootstrapValidator({
+			excluded: [':disabled'],
+		   	feedbackIcons: {
+		     	valid: 'glyphicon glyphicon-ok',
+		     	invalid: 'glyphicon glyphicon-remove',
+		     	validating: 'glyphicon glyphicon-refresh'
+		   },
+		   fields: {
+		     rs: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Debe indicar la razon social de la empresa'
+		         }
+		       }
+		     },
+		     nc: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Debe indicar el nombre comercial de la empresa'
+		         }
+		       }
+		     },
+		     rif: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Seleccione el tipo de rif'
+		         }
+		       }
+		     },
+		     df: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Debe indicar el número de rif'
+		         },
+		        regexp: {
+	                regexp: /^[0-9]+$/,
+	                message: 'El rif debe contener solo numeros'                            
+                },
+		       }
+		     },
+		     tipCon: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Debe indicar el tipo de contribuyente'
+		         }
+		       }
+		     },
+		     paisdc: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Debe indicar el país'
+		         }
+		       }
+		     },
+		     regiondc: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Debe indicar la región'
+		         }
+		       }
+		     },
+		     edodc: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Debe indicar el estado'
+		         }
+		       }
+		     },
+ 		     mundc: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Debe indicar el municipio'
+		         }
+		       }
+		     },
+		     descDirdc: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Especifique la direccion Fiscal de la empresa'
+		         }
+		       }
+		     },
+		     paisdf: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Debe indicar el país'
+		         }
+		       }
+		     },
+		     regiondf: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Debe indicar la region'
+		         }
+		       }
+		     },
+		     edodf: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Debe indicar el estado'
+		         }
+		       } 
+		     },
+		     mundf: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Debe indicar el municipio'
+		         }
+		       }
+		     },
+		     descDirdf: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Especifique la direccion Comercial de la empresa'
+		         }
+		       }
+		     },
+		     tlflcl: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Debe indicar un código de area local'
+		         }
+		       }
+		     },
+		     tcl: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Debe indicar un número de telefono local'
+		         },
+		         regexp: {
+	                regexp: /^[0-9]+$/,
+	                message: 'Solo debe contener caracteres númericos'                            
+                },
+		       }
+		     },
+		     tmvl:{
+		     	validators:{
+		     		regexp: {
+		                regexp: /^[0-9]+$/,
+		                message: 'Solo debe contener caracteres númericos'                            
+                }
+		     	}
+		     },
+		     mail: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Debe indicar un correo electrónico'
+		        },
+		         emailAddress: {
+                        message: 'El correo electronico debe tener el formato minombre@midominio.com'
+                }
+		       }
+		     }
+		   }
+	  	});
+		$('body').bootstrapValidator().on('submit','#Formclientemd', function (e) {
+			if (e.isDefaultPrevented()) {
 
-       		$.post(route,form)
-			.done(function(answer)
-				{
-					
-					console.log(answer);
-					if(answer.codigo==2)
+			}
+			else{
+				var form=$('#Formclientemd').serialize();
+	       		var route='/menu/registros/clientes/actualizar';
+
+	       		$.post(route,form)
+				.done(function(answer)
 					{
-						swal({
-									title:'RIF duplicado!!!',//Contenido del modal
-									text: '<p style="font-size: 0.9em;">El RIF ingresado se encuentra asociado al cliente: '+answer.extra+'</p>',
-									type: "warning",
-									showConfirmButton:true,//Eliminar boton de confirmacion
-									html: true
-							});
-					}
-					else
+						
+						console.log(answer);
+						if(answer.codigo==2)
+						{
+							swal({
+										title:'RIF duplicado!!!',//Contenido del modal
+										text: '<p style="font-size: 0.9em;">El RIF ingresado se encuentra asociado al cliente: '+answer.extra+'</p>',
+										type: "warning",
+										showConfirmButton:true,//Eliminar boton de confirmacion
+										html: true
+								});
+						}
+						else
+						{
+							swal({
+										title:'Actualizacion exitosa',//Contenido del modal
+										text: '<p style="font-size: 1.0em;">'+'Los datos del cliente se guardaron correctamente!!!'+'</p>',
+										type: "success",
+										showConfirmButton:true,//Eliminar boton de confirmacion
+										html: true
+									},
+			  				 	function(isConfirm)
+			  				 	{
+			  				 		if(isConfirm)
+			  				 		{
+			  				 			window.location.href="/menu/registros/clientes";
+			  				 		}	
+
+			  				 	});
+						}
+
+					})
+				.fail(function()
 					{
-						swal({
-									title:'Actualizacion exitosa',//Contenido del modal
-									text: '<p style="font-size: 1.0em;">'+'Los datos del cliente se guardaron correctamente!!!'+'</p>',
-									type: "success",
-									showConfirmButton:true,//Eliminar boton de confirmacion
-									html: true
-								},
-		  				 	function(isConfirm)
-		  				 	{
-		  				 		if(isConfirm)
-		  				 		{
-		  				 			window.location.href="/menu/registros/clientes";
-		  				 		}	
-
-		  				 	});
-					}
-
-				})
-			.fail(function()
-				{
-					swal("Error Inesperado !!", "Comuniquese con el administrador", "error");
-				});
+						swal("Error Inesperado !!", "Comuniquese con el administrador", "error");
+					});
+			}
 		});
 
 		////////////////////Boton guardar nuevo cliente ////////////////////////////////////////////////////////
@@ -297,7 +456,7 @@ $(document).ready(function() {
 		         notEmpty: {
 		           message: 'Debe indicar el estado'
 		         }
-		       }
+		       } 
 		     },
 		     mundc: {
 		       validators: {

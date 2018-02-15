@@ -55,7 +55,7 @@ $(document).ready(function()
 		  				
 		  				 if(answer.duplicate>0 && answer.update==false)
 		  				 {
-		  				 	swal("El perfil existe en el sistema !!", "No debe crear perfiles duplicados", "warning");
+		  				 	swal("El perfil existe en el sistema !!", "No puede crear perfiles con el mismo nombre", "warning");
 		  				 	
 		  				 }
 		  				 else if(answer.duplicate==0 && answer.update==false)
@@ -100,48 +100,70 @@ $(document).ready(function()
 
 
 		//////////////////////////////////////Funcion boton:  Agregar perfil ///////////////////////////////////////////////////
-		$('#savePerfil').click(function() 
-		{
-			
-			var form=$('#NewPerfil').serialize();
-			var route='/menu/registros/perfiles/registrar';
+		$('#NewPerfil').bootstrapValidator({
+		   	feedbackIcons: {
+		     	valid: 'glyphicon glyphicon-ok',
+		     	invalid: 'glyphicon glyphicon-remove',
+		     	validating: 'glyphicon glyphicon-refresh'
+		   },
+		   fields: {
+		     DescripcionAdd: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Debe indicar el nombre del nuevo perfil'
+		         }
+		       }
+		     },
+		     StatusAdd: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Debe seleccionar un estatus para el nuevo perfil'
+		         }
+		       }
+		     }
+		   }
+	  	});
+		$('body').bootstrapValidator().on('submit','#NewPerfil', function (e) {
+			if (e.isDefaultPrevented()) {
+				alert('hola');
+			}
+			else{
+				console.log('hola');
+				var form=$('#NewPerfil').serialize();
+				var route='/menu/registros/perfiles/registrar';
 
-			$.post(route,form)
-			.done(function(answer)
-				{
-					
-					if(answer.duplicate>0 && answer.insert==false)
+				$.post(route,form)
+				.done(function(answer)
 					{
-						swal("El perfil existe en el sistema !!", "No debe crear perfiles duplicados", "warning");
-					}
-					else if(answer.duplicate==0 && answer.insert==true)
+						
+						if(answer.duplicate>0 && answer.insert==false)
+						{
+							swal("El perfil existe en el sistema !!", "No puede crear perfiles con el mismo nombre", "warning");
+						}
+						else if(answer.duplicate==0 && answer.insert==true)
+						{
+							swal({
+										title:'Isercion exitosa',//Contenido del modal
+										text: '<p style="font-size: 1.0em;">'+'El perfil se agrego correctamente'+'</p>',
+										type: "success",
+										showConfirmButton:true,//Eliminar boton de confirmacion
+										html: true
+								},
+			  				 	function(isConfirm)
+			  				 	{
+			  				 		if(isConfirm)
+			  				 		{
+			  				 			window.location.href="/menu/registros/perfiles";
+			  				 		}	
+
+			  				 	});
+						}
+					})
+				.fail(function()
 					{
-						swal({
-									title:'Isercion exitosa',//Contenido del modal
-									text: '<p style="font-size: 1.0em;">'+'El perfil se agrego correctamente'+'</p>',
-									type: "success",
-									showConfirmButton:true,//Eliminar boton de confirmacion
-									html: true
-							},
-		  				 	function(isConfirm)
-		  				 	{
-		  				 		if(isConfirm)
-		  				 		{
-		  				 			window.location.href="/menu/registros/perfiles";
-		  				 		}	
-
-		  				 	});
-					}
-				})
-			.fail(function()
-				{
-					swal("Error Inesperado !!", "Comuniquese con el administrador", "error");
-				});
-
-			
-
-
-
+						swal("Error Inesperado !!", "Comuniquese con el administrador", "error");
+					});
+			}
 		});
 
 
@@ -206,31 +228,5 @@ $(document).ready(function()
 
 
 		});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 });

@@ -23,9 +23,6 @@ $( "#NewDep" ).submit(function( event ){
 $( "#NewCarg" ).submit(function( event ){
 	event.preventDefault();
 });
-$( "#NewPerfil" ).submit(function( event ){
-	event.preventDefault();
-});
 $( "#NewPlan" ).submit(function( event ){
 	event.preventDefault();
 });
@@ -33,9 +30,6 @@ $( ".NewServicio" ).submit(function( event ){
 	event.preventDefault();
 });
 $( "#mPlan" ).submit(function( event ){
-	event.preventDefault();
-});
-$(".DepCarPer").submit(function( event ){
 	event.preventDefault();
 });
 $("#NewEmp").submit(function(event){
@@ -247,148 +241,6 @@ $('.radioEmp').change(function()//asignar perfil a un usuario
 			);
 });
 
-
-$(".btnResp").change(function(){alert('hola');});
-
-
-
-
-
-////////////////////    ACTUALIZAR REGISTROS Y VALIDACION DE REGISTROS IGUALES PARA PERFILES, DPTOS Y CARGOS //////////////////
-
-
-$('#mDepCarPer').click(function(){
-	var desc = $('.descripcion').val();
-	var status = $('.status').val();
-	var registro_tabla = $('input[name=MIndex]').val();
-	var dep_id= $('#DCargo').val();
-	var datos = [desc,status,registro_tabla,dep_id]
-	var url= "/menu/registros/departamentos/actualizar/DC";
-	if (desc != '' && status != ''){
-		var posting = $.get(url,{datos:datos},function(resultado){
-			//alert(resultado)
-			if (resultado[0] == 1) {
-				//SWALLLL mensajes de alerta y sucesos
-				swal({
-					title:'Guardado Exitoso',//Contenido del modal
-					text: 'El '+resultado[2]+' fue Guardado Exitosamente',
-					type: "success",
-					timer:1000,
-					showConfirmButton:false,//Eliminar boton de confirmacion
-				});
-				//Retardo en ejecucion de ruta.
-				setTimeout(function(){location.href =resultado[1];},1200); // 3000ms = 3s
-			}	
-			else if(resultado==0) {
-				swal({
-
-					title:'Registro Existente!!!.',//Contenido del modal
-					text: 'Este Registro ya existe en nuestra base de datos',
-					type: "error",
-					timer:2000,
-					showConfirmButton:false,//Eliminar boton de confirmacion
-				});
-			}					
-		});
-		posting.fail(function() {
-			swal({
-				title:'Error inesperado!!',//Contenido del modal
-				text: 'Pongase en contacto con el administrador',
-				type: "error",
-				showConfirmButton:true,//Eliminar boton de confirmacion
-			});
-		});
-	}
-});
-
-
-///////////////////////// Validacion de registros iguales para Departamentos /////////
-
-$('#btnSv').click(function(){
-	var form=$('#NewDep');
-	var url= '/menu/registros/departamentos/registrar';
-	var data= form.serialize();
-	var dep = $('#nomDpto').val();
-	var estatus = $('#stDpto').val();
-	if (dep != '' && estatus != ''){
-		var posting = $.get(url, data,function(resultado){
-			if (resultado == 1) {
-				//SWALLLL mensajes de alerta y sucesos
-				swal({
-					title:'Guardado Exitoso',//Contenido del modal
-					text: 'El Departamento fue Guardado Exitosamente',
-					type: "success",
-					timer:1000,
-					showConfirmButton:false,//Eliminar boton de confirmacion
-				});
-				//Retardo en ejecucion de ruta.
-				setTimeout(function(){location.href = "/menu/registros/departamentos";},1200); // 3000ms = 3s
-			}	
-			else {
-				swal({
-
-					title:'Registro Existente!!!.',//Contenido del modal
-					text: 'Este departamento ya existe',
-					type: "error",
-					timer:2000,
-					showConfirmButton:false,//Eliminar boton de confirmacion
-				});
-			}						
-		});
-		posting.fail(function() {
-			swal({
-				title:'Error inesperado!!',//Contenido del modal
-				text: 'Pongase en contacto con el administrador',
-				type: "error",
-				showConfirmButton:true,//Eliminar boton de confirmacion
-			});
-		});
-	}
-});
-
-///////////////////////// Validacion de registros iguales para Cargos /////////
-$('#saveCargo').click(function(){
-	var form=$('#NewCarg');
-	var iddep= $('#depID').val();
-	var url= '/menu/registros/departamentos/cargos/registrar/'+iddep;
-	var data= form.serialize();
-	var Carg = $('#nomCgo_').val();
-	var estatus = $('#stCgo_').val();
-	if (Carg != '' && estatus != ''){
-		var posting = $.get(url, data,function(resultado){
-			if (resultado == 1) {
-				//SWALLLL mensajes de alerta y sucesos
-				swal({
-					title:'Guardado Exitoso',//Contenido del modal
-					text: 'El Cargo fue Guardado Exitosamente',
-					type: "success",
-					timer:1000,
-					showConfirmButton:false,//Eliminar boton de confirmacion
-				});
-				//Retardo en ejecucion de ruta.
-				setTimeout(function(){location.href = "/menu/registros/departamentos/cargos/"+iddep;},1200); // 3000ms = 3s
-			}	
-			else {
-				swal({
-
-					title:'Registro Existente!!!.',//Contenido del modal
-					text: 'Este Cargo ya existe',
-					type: "error",
-					timer:2000,
-					showConfirmButton:false,//Eliminar boton de confirmacion
-				});
-			}						
-		});
-		posting.fail(function() {
-			swal({
-				title:'Error inesperado!!',//Contenido del modal
-				text: 'Pongase en contacto con el administrador',
-				type: "error",
-				showConfirmButton:true,//Eliminar boton de confirmacion
-			});
-		});
-	}
-});
 
 ////////////////////////////////////// Asociacion de Servicios a Plan /////////////////////////////////
 var valorP;

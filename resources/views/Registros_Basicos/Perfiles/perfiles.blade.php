@@ -90,7 +90,7 @@
                                     <h4 class="modal-title" id="myModalLabel">Agregar Perfil</h4>
                                 </div>
                                 <div class="modal-body">
-                                    <form method="post" class="DepCarPer" id="NewPerfil">
+                                    <form method="post" id="NewPerfil">
                                       {{ csrf_field() }}
                                         <div class="container-fluid contpfl">
                                            <div class="row">
@@ -98,13 +98,13 @@
                                                   <div class="col-md-8 col-md-offset-2">
                                                       <div class="form-group row">
                                                           <label for="duPfl">Nombre del Perfil</label>
-                                                          <input type="text" class="form-control" name="DescripcionAdd" id="duPfl"><i class="fa fa-id-badge icpfl"></i>
+                                                          <input type="text" class="form-control" name="DescripcionAdd"><i class="fa fa-id-badge icpfl"></i>
                                                       </div>
                                                   </div>
                                                   <div class="col-md-8 col-md-offset-2">
                                                       <div class="form-group row">
                                                           <label for="stPfl">Estatus del Perfil</label><span class="ic"><i class="fa fa-chevron-down"></i></span>
-                                                          <select name="StatusAdd" id="stPfl" class="form-control">
+                                                          <select name="StatusAdd" class="form-control">
                                                               <option value="">-</option>
                                                               <option value="1">ACTIVO</option>
                                                               <option value="0">INACTIVO</option>
@@ -173,4 +173,7 @@
                     </div>
 
                 </div>   
+    @endsection
+    @section('js')
+      <script type="text/javascript" src="{{ asset('js/vista_perfil.js') }}"></script>
     @endsection
