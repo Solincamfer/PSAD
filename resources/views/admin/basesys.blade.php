@@ -31,6 +31,7 @@
         <script src="{{asset('js/vistaCategoriaMatriz.js')}}"></script>
         <script src="{{asset('plugins/sweetalert/sweetalert.min.js')}}"></script>
         <script src="{{asset('js/vistaRespCategoria.js')}}"></script>
-        @yield('js')
+        <script src="{{asset('js/vistaSucursales.js')}}"></script>
+        @yield('js')    
     </body>
 </html>
