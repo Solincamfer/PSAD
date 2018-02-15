@@ -2696,6 +2696,18 @@ public function clientes_modificar()//metodo que consulta los datos de un client
 
     }
 
+
+    public function telefonoIdGet($tipo,$cliente_id)
+    {
+    	$telefonoLId=DB::table('cliente_telefono')
+							->join('telefonos','telefonos.id','=','cliente_telefono.telefono_id')
+							->where(['telefonos.tipo'=>$tipo,'cliente_telefono.cliente_id'=>$cliente_id])
+							->select('telefonos.id AS id')->first();
+		return $telefonoLId->id;
+
+    }
+
+
 	public function clientes_actualizar()//metodo para actualizar en la base de datos los datos de un cliente matriz
 	{
 
@@ -2815,6 +2827,41 @@ public function clientes_modificar()//metodo que consulta los datos de un client
     		$cambios=$this->agregarCambios($cambio,$cambios);
 			$cliente->tipoContribuyente_id=$clienteForm->tipoContribuyente_id;
 			$cliente->save();
+
+			//////////////////Obtener los datos del telefono Local /////////////////////////////////////////////////////////
+			$telefonoLocal=Telefono::find($this->telefonoIdGet(0,$cliente->id));
+
+			$cambio=$this->detectarCambios($clienteForm->telefonoL,$telefonoLocal->telefono,'Nro.Telf. Local');
+    		$cambios=$this->agregarCambios($cambio,$cambios);
+			$telefonoLocal->telefono=$clienteForm->telefonoL;
+			
+			$traduccionFor=$this->traducirId($clienteForm->codigoL,7);
+			$cambio=$this->detectarCambios($traduccionFor,$telefonoLocal->codigo,'Codigo Telf. Local');
+    		$cambios=$this->agregarCambios($cambio,$cambios);
+			$telefonoLocal->codigo=$traduccionFor;
+			
+
+			$telefonoLocal->save();
+
+
+
+			/////////////////Obtener los datos del telefono Movil ////////////////////////////////////////////////////////////
+			$telefonoMovil=Telefono::find($this->telefonoIdGet(2,$cliente->id));
+			
+			$cambio=$this->detectarCambios($clienteForm->telefonoM,$telefonoMovil->telefono,'Nro.Telf. Movil');
+    		$cambios=$this->agregarCambios($cambio,$cambios);
+			$telefonoMovil->telefono=$clienteForm->telefonoM;
+			
+			$traduccionFor=$this->traducirId($clienteForm->codigoM,7);
+			$cambio=$this->detectarCambios($traduccionFor,$telefonoMovil->codigo,'Codigo Telf. Movil');
+    		$cambios=$this->agregarCambios($cambio,$cambios);
+			$telefonoMovil->codigo=$traduccionFor;
+			
+			
+			$telefonoMovil->save();
+
+
+
 
 			$longitud=count($cambios);
     		$cambios=$this->documentarCambios($cambios);
