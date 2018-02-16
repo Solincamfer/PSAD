@@ -3781,14 +3781,14 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
     		$traduccionFor=$this->traducirId($formulario->estadoF,4);
     		$cambio=$this->detectarCambios($traduccionFor,$traduccionBd,'Estado Direccion Comercial');
     		$cambios=$this->agregarCambios($cambio,$cambios);
-			$direccionComercial->estado_id=$formulario->estadoF;
+			$direccionComercial->estado_id=$formulario->estadoC;
 
 
 			$traduccionBd=$this->traducirId($direccionComercial->municipio_id,5);
     		$traduccionFor=$this->traducirId($formulario->municipioF,5);
     		$cambio=$this->detectarCambios($traduccionFor,$traduccionBd,'Estado Direccion Comercial');
     		$cambios=$this->agregarCambios($cambio,$cambios);
-			$direccionComercial->municipio_id=$formulario->municipioF;
+			$direccionComercial->municipio_id=$formulario->municipioC;
 			$direccionComercial->save();
 
 			////////////////////Obtener datos del correo ////////////////////////////////////////////////////////////////
@@ -3866,7 +3866,7 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 
 
 
-	return Response::json($formulario);
+	return Response::json($duplicado);
 	}
 
 
