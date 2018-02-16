@@ -199,7 +199,7 @@ Route::match(['post','get'],'/clientes/categoria/sucursal/usuarios/perfil',     
 
 //////////////////////////// CLIENTES /////////////////////////////////////////////////////////////
 
-	Route::match(['post','get'],'/clientes/consultaplan',						   	                        ['uses'=>'RegistrosBasicos@consultar_plan']);
+	Route::match(['post','get'],'/clientes/consultaplan',						   	                            ['uses'=>'RegistrosBasicos@consultar_plan']);
 
 /////////////////////////// ESTRUCTURA ///////////////////////////////////////////////////////////
 Route::match(['post','get'],'/estructura/mostrarEstructuraDireccion',						   	['uses'=>'EstructuraController@mostrarEstructuraDireccion']);

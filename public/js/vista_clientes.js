@@ -50,23 +50,29 @@ $(document).ready(function() {
 		$('#innnn14').val(datos.telefonoMovil.numero);
 
 		/////////////////////////////Cargar los selects: direccion fiscal //////////////////////////////////
+		$('.'+'inn2').remove();
 		cargarSelect(datos.dependenciasF.regiones,'inn2');
 		$('#inn2').val(datos.direccionFiscal.region_id);
 
+		$('.'+'inn3').remove();
 		cargarSelect(datos.dependenciasF.estados,'inn3');
 		$('#inn3').val(datos.direccionFiscal.estado_id);
 
+		$('.'+'inn4').remove();
 		cargarSelect(datos.dependenciasF.municipios,'inn4');
 		$('#inn4').val(datos.direccionFiscal.municipio_id);
 
 		/////////////////////////////Cargar los selects: direccion comercial //////////////////////////////////
 
+		$('.'+'innn12').remove();
 		cargarSelect(datos.dependenciasC.regiones,'innn12');
 		$('#innn12').val(datos.direccionComercial.region_id);
 
+		$('.'+'innn13').remove();
 		cargarSelect(datos.dependenciasC.estados,'innn13');
 		$('#innn13').val(datos.direccionComercial.estado_id);
 
+		$('.'+'innn14').remove();
 		cargarSelect(datos.dependenciasC.municipios,'innn14');
 		$('#innn14').val(datos.direccionComercial.municipio_id);
 

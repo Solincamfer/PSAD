@@ -2660,12 +2660,12 @@ public function clientes_modificar()//metodo que consulta los datos de un client
 								 'rif_id'=>(int) Request::get('rif'),
 								 'numeroRif'=>Request::get('df'),
 								 'tipoContribuyente_id'=>(int)Request::get('tipCon'),
-								 'direccionFiscal'=>Request::get('descDirdc'),
+								 'direccionFiscal'=>Request::get('descDirdf'),
 								 'paisF'=>(int)Request::get('paisdf'),
 								 'regionF'=>(int)Request::get('regiondf'),
 								 'estadoF'=>(int)Request::get('edodf'),
 								 'municipioF'=>(int)Request::get('mundf'),
-								 'direccionComercial'=>Request::get('descDirdf'),
+								 'direccionComercial'=>Request::get('descDirdc'),
 								 'paisC'=>(int)Request::get('paisdc'),
 								 'regionC'=>(int)Request::get('regiondc'),
 								 'estadoC'=>(int)Request::get('edodc'),
@@ -2800,17 +2800,17 @@ public function clientes_modificar()//metodo que consulta los datos de un client
 			$direccionComercial->region_id=$clienteForm->regionC;
 
 			$traduccionBd=$this->traducirId($direccionComercial->estado_id,4);
-    		$traduccionFor=$this->traducirId($clienteForm->estadoF,4);
+    		$traduccionFor=$this->traducirId($clienteForm->estadoC,4);
     		$cambio=$this->detectarCambios($traduccionFor,$traduccionBd,'Estado Direccion Comercial');
     		$cambios=$this->agregarCambios($cambio,$cambios);
-			$direccionComercial->estado_id=$clienteForm->estadoF;
+			$direccionComercial->estado_id=$clienteForm->estadoC;
 
 
 			$traduccionBd=$this->traducirId($direccionComercial->municipio_id,5);
-    		$traduccionFor=$this->traducirId($clienteForm->municipioF,5);
+    		$traduccionFor=$this->traducirId($clienteForm->municipioC,5);
     		$cambio=$this->detectarCambios($traduccionFor,$traduccionBd,'Estado Direccion Comercial');
     		$cambios=$this->agregarCambios($cambio,$cambios);
-			$direccionComercial->municipio_id=$clienteForm->municipioF;
+			$direccionComercial->municipio_id=$clienteForm->municipioC;
 			$direccionComercial->save();
 
 			////////////////////Obtener datos del correo ////////////////////////////////////////////////////////////////
@@ -3866,7 +3866,7 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 
 
 
-	return Response::json($duplicado);
+	return Response::json($formulario);
 	}
 
 

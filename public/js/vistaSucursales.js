@@ -51,23 +51,29 @@ $(document).ready(function()
 		$('#inputm19').val(datos.telefonoMovil.numero);
 
 		/////////////////////////////Cargar los selects: direccion fiscal //////////////////////////////////
+		$('.'+'inputm7').remove();
 		cargarSelect(datos.dependenciasF.regiones,'inputm7');
 		$('#inputm7').val(datos.direccionFiscal.region_id);
 
+		$('.'+'inputm8').remove();
 		cargarSelect(datos.dependenciasF.estados,'inputm8');
 		$('#inputm8').val(datos.direccionFiscal.estado_id);
 
+		$('.'+'inputm9').remove();
 		cargarSelect(datos.dependenciasF.municipios,'inputm9');
 		$('#inputm9').val(datos.direccionFiscal.municipio_id);
 
 		/////////////////////////////Cargar los selects: direccion comercial //////////////////////////////////
 
+		$('.'+'inputm12').remove();
 		cargarSelect(datos.dependenciasC.regiones,'inputm12');
 		$('#inputm12').val(datos.direccionComercial.region_id);
 
+		$('.'+'inputm13').remove();
 		cargarSelect(datos.dependenciasC.estados,'inputm13');
 		$('#inputm13').val(datos.direccionComercial.estado_id);
 
+		$('.'+'inputm14').remove();
 		cargarSelect(datos.dependenciasC.municipios,'inputm14');
 		$('#inputm14').val(datos.direccionComercial.municipio_id);
 
@@ -187,7 +193,7 @@ $(document).ready(function()
 				  	  $.post(route,{_token:_token,registry:registry})
 					  .done(function(answer)
 					  {
-					  	//console.log(answer);
+					  	console.log(answer);
 					  	
 					  	 loadModal(answer);
 					  })
