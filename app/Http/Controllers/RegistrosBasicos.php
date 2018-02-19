@@ -3934,12 +3934,28 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 								->join('clientes','clientes.id','=','categorias.cliente_id')
 								->select('clientes.id AS id')
 								->where('sucursales.id',$sucursal_id)->first();
+
 		$responsables=DB::table('personas')->where('cliente_id',$cliente_id->id)->get();
-		$consulta=DB::table('sucursales')->where('id',$sucursal_id)->first();
+		$sucursal=Sucursal::find($sucursal_id);
+		$categoria=Categoria::find($sucursal->categoria_id);
+		$tipoCedula=DB::table('tipos')->where('numero_c',5)->get();
+		$tipoCodigoCel=DB::table('tipos')->where('numero_c',2)->get();
+		$tipoCodigoFijo=DB::table('tipos')->where('numero_c',3)->get();
+		$respSucursal=DB::table('persona_sucursal')->where('sucursal_id',$sucursal_id)->first();
+
+		if($respSucursal!=null)
+		{
+			$responsable=$respSucursal->persona_id;
+		}
+		else
+		{
+			$responsable=0;
+		}
+	
 		return view 
 		(
 			'Registros_Basicos\Clientes\clientes_sucursales_responsable',
-			$this->datos_vista($datos,$acciones,$responsables,$sucursal_id,$consulta->categoria_id)
+			$this->datos_vista($datos,$acciones,$responsables,$sucursal,$categoria,$cliente_id->id,$tipoCedula,$tipoCodigoCel,$tipoCodigoFijo,$responsable)
 		);
 						
 	}
@@ -3963,6 +3979,49 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 
 			return view ('Registros_Basicos\Clientes\clientes_sucursales_plan',$this->datos_vista($datos,$acciones,DB::table('planes')->paginate(11),$sucursal,$categoria,$planId));
 							
+		}
+
+		public function sucursalAsignarResponsable()
+		{
+
+			$retorno=0;
+			$nuevo=Request::get('nuevo');
+			$anterior=Request::get('anterior');
+			$sucursal=Request::get('sucursal');
+			if ($anterior==0) 
+			{
+				$update=DB::table('persona_sucursal')->insert(['persona_id'=>$nuevo,'sucursal_id'=>$sucursal]);
+			}
+			else
+			{
+				$update=DB::table('persona_sucursal')->where(['persona_id'=>$anterior,'sucursal_id'=>$sucursal])
+				->update(['persona_id'=>$nuevo]);
+			}
+
+			if ($update){$retorno=1;}
+
+			return Response::json(['retorno'=>$retorno]);
+
+		}
+
+		public function sucursalResponsableStatus()
+		{
+
+			$status=[1,0];
+			$status_=['HABILITADO','INHABILITADO'];
+			$status__=['INHABILITADO','HABILITADO'];
+			$registry=Request::get('registry');
+			$aux=false;
+			///////////// Busqueda del perfil y cambio de status ////////////////////////
+			$persona=Persona::find($registry);
+			$persona->status=$status[$persona->status];
+			$aux=$persona->save();
+			/////////////////////////////////////////////////////////////////////////////////////////////////////
+		    $this->registroBitacora('Persona: '.$persona->primerNombre.' '.$persona->primerApellido,'Cambiar Status','{"Status":"Cambio de: '.$status_[$persona->status].' a: '.$status__[$persona->status].'"}','Sucursales->responsable');
+		    /////////////////////////////////////////////////////////////////////////////////////////////////////
+
+			return Response()->json(['update'=>$aux]);
+
 		}
 		
 

@@ -75,7 +75,8 @@ Route::group(['prefix'=>'/menu/registros','middleware'=>['v_menu']],function(){
 	Route::match(['post','get'],'/clientes/responsable/status/categoria',  					             ['uses'=>'RegistrosBasicos@respCatStatus']);
 
 
-
+	Route::match(['post','get'],'/clientes/responsable/asignar/sucursal',                   					    ['uses'=>'RegistrosBasicos@sucursalAsignarResponsable']);
+	Route::match(['post','get'],'/clientes/responsable/status/sucursal',                   					    ['uses'=>'RegistrosBasicos@sucursalResponsableStatus']);
 	Route::match(['post','get'],'/clientes/planinfo/sucursal',                   					    ['uses'=>'RegistrosBasicos@planesInfo']);
 	Route::match(['post','get'],'/clientes/asignar/plan/sucursal',                   					    ['uses'=>'RegistrosBasicos@sucursalPlan']);
 
