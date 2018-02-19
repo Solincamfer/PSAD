@@ -32,6 +32,7 @@
         <script src="{{asset('plugins/sweetalert/sweetalert.min.js')}}"></script>
         <script src="{{asset('js/vistaRespCategoria.js')}}"></script>
         <script src="{{asset('js/vistaSucursales.js')}}"></script>
+        <script src="{{asset('js/sucursalPlanes.js')}}"></script>
         @yield('js')    
     </body>
 </html>

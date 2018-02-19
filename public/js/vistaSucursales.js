@@ -261,6 +261,67 @@ $(document).ready(function()
 
 				});
 
+			$('.checkSucursales').change(function()
+		{
+			
+
+			/////////////////////////////Datos para el alert /////////////////////////////////
+			var estados=[false,true];
+			var valores=[1,0];
+            var colores=["#207D07","#EE1919"];
+            var acciones=['Habilitar','Deshabilitar'];
+            var mensajes=['Habilitado','Deshabilitado'];
+			////////////////////////////////////////////////////////////////////////////////////
+
+			var _token=$( "input[name^='_token']" ).val();
+			var actual=$(this);
+			var registry=actual.attr('data-reg');
+			var valor=actual.val();
+			var route='/menu/registros/clientes/status/sucursal';
+
+			swal({
+				title: "Cambio de status",
+				text: "¿Desea "+acciones[valor]+" La sucursal seleccionada ?",
+				type: "warning",
+				showCancelButton: true,
+				confirmButtonColor:colores[valor],
+				confirmButtonText: acciones[valor]+' Sucursal',
+				cancelButtonText: "Cancelar",
+				closeOnConfirm: false,
+				closeOnCancel: false
+			 },
+			 function(isConfirm)
+			 {
+
+			 		if(isConfirm)
+			 		{
+
+						$.post(route, {_token:_token,registry:registry})
+						.done(function(answer)
+						{
+							if(answer.update)
+							{
+								swal("Modificacion exitosa !!", "La Sucursal ha sido "+mensajes[valor]+" correctamente", "success");
+								$('#'+actual.attr('id')).val(valores[valor]);
+
+							}
+						})
+						.fail(function()
+							{ swal("Error Inesperado !!", "Comuniquese con el administrador", "error");});
+					}
+					else
+					{
+						 
+						 swal("Cambio de status cancelado !!", "No se modifico el status de la Sucursal", "error");
+						 actual.prop('checked',estados[valor]);
+						 $('#'+actual.attr('id')).val(valor);
+						 
+					}
+			});
+
+
+		});
+
 
 
 

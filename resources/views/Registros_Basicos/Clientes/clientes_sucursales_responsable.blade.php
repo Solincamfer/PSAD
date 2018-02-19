@@ -31,7 +31,7 @@
                     </div>
                     
                     <div class="col-xs-5 col-sm-5 col-md-6 col-md-offset-3" style=""> 
-                     
+                        @foreach($consulta as $responsable)
                             <div class="contMd" style="">
                                 <div class="icl">
                                     @foreach($acciones as $accion)
@@ -62,8 +62,11 @@
                                         @endif
                                     @endforeach
                                 </div>
-                                <span class="ttlMd"><input type="radio" name="suc_rsp" id="suc_rsp" value=""> <label for="suc_rsp"><strong>Registro</strong></label></span>
+                               <span class="ttlMd"><input type="radio" name="radioSuc"  class="radioRespSuc" data-reg="{{$responsable->id}}" id="r_suc{{$responsable->id}}" value="{{$responsable->encargado}}" > 
+                                    <label for="r_suc{{$responsable->id}}"><strong>{{$responsable->primerNombre." ".$responsable->primerApellido}}</strong></label></span>
+                                    <input type="hidden" name="checkSucSeleccionado_" id="checkSucSeleccionado_" value="{{$responsable->id}}">
                             </div>
+                        @endforeach
                        
                     </div>
                     <!--Registro -->

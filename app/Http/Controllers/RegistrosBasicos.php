@@ -3634,6 +3634,61 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 		
 	}
 
+	
+	public function sucursalPlan()
+	{
+		$nuevo=Request::get('nuevo');
+		$anterior=Request::get('anterior');
+		$sucursal=Request::get('sucursal');
+		$retorno=0;
+
+		if ($anterior==0)
+		{
+			$update=DB::table('plan_sucursal')->insert(['sucursal_id'=>$sucursal,'plan_id'=>$nuevo]);
+		}
+		else
+		{
+			$update=DB::table('plan_sucursal')->where(['sucursal_id'=>$sucursal,'plan_id'=>$anterior])->update(['plan_id'=>$nuevo]);
+		}
+
+		if ($update==true) {$retorno=1;}
+
+		return Response::json(['retorno'=>$retorno]);
+	}
+
+	public function planesInfo()
+	{
+		$plan_id=Request::get('plan_id');
+		$plan=Plan::find($plan_id);
+		$plan=$plan->nombreP;
+		$horarios=Horario::where('plan_id',$plan_id)->first();
+		$respuestas=Respuesta::where('plan_id',$plan_id)->first();
+		$presenciales=Presencial::where('plan_id',$plan_id)->first();
+		$remotos=Remoto::where('plan_id',$plan_id)->first();
+		$telefonicos=Telefonico::where('plan_id',$plan_id)->first();
+		return Response::json(compact('horarios','respuestas','presenciales','remotos','telefonicos','plan'));
+	}
+
+	public function sucursalesStatus()
+	{
+
+		$status=[1,0];
+		$status_=['HABILITADO','INHABILITADO'];
+		$status__=['INHABILITADO','HABILITADO'];
+		$registry=Request::get('registry');
+		$aux=false;
+		///////////// Busqueda del perfil y cambio de status ////////////////////////
+		$sucursal=Sucursal::find($registry);
+		$sucursal->status=$status[$sucursal->status];
+		$aux=$sucursal->save();
+		/////////////////////////////////////////////////////////////////////////////////////////////////////
+	    $this->registroBitacora('Sucursal: '.$sucursal->nombreComercial,'Cambiar Status','{"Status":"Cambio de: '.$status_[$sucursal->status].' a: '.$status__[$sucursal->status].'"}','Sucursales');
+	    /////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		return Response()->json(['update'=>$aux]);
+
+	}
+
 
 
 
@@ -3874,11 +3929,17 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
 		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(32,33),31);
+		$cliente_id=DB::table('sucursales')
+								->join('categorias','categorias.id','=','sucursales.categoria_id')
+								->join('clientes','clientes.id','=','categorias.cliente_id')
+								->select('clientes.id AS id')
+								->where('sucursales.id',$sucursal_id)->first();
+		$responsables=DB::table('personas')->where('cliente_id',$cliente_id->id)->get();
 		$consulta=DB::table('sucursales')->where('id',$sucursal_id)->first();
 		return view 
 		(
 			'Registros_Basicos\Clientes\clientes_sucursales_responsable',
-			$this->datos_vista($datos,$acciones,array(),$sucursal_id,$consulta->categoria_id)
+			$this->datos_vista($datos,$acciones,$responsables,$sucursal_id,$consulta->categoria_id)
 		);
 						
 	}
@@ -3886,9 +3947,21 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 	public function clientes_sucursales_plan($sucursal_id)
 		{
 			$datos=$this->cargar_header_sidebar_acciones();
-			$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(37),false);///reisar vista para boton agregar
-			$consulta=DB::table('sucursales')->where('id',$sucursal_id)->first();
-			return view ('Registros_Basicos\Clientes\clientes_sucursales_plan',$this->datos_vista($datos,$acciones,DB::table('planes')->paginate(11),$sucursal_id,$consulta->categoria_id));
+			$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(37),false);///reisar vista 
+			$sucursal=Sucursal::find($sucursal_id);
+			$categoria=Categoria::find($sucursal->categoria_id);
+			//$consulta=DB::table('sucursales')->where('id',$sucursal_id)->first();
+			$consultaPlan=DB::table('plan_sucursal')->where('sucursal_id',$sucursal->id)->first();
+			if ($consultaPlan!=null) 
+			{
+				$planId=$consultaPlan->plan_id;
+			}
+			else
+			{
+				$planId=0;
+			}
+
+			return view ('Registros_Basicos\Clientes\clientes_sucursales_plan',$this->datos_vista($datos,$acciones,DB::table('planes')->paginate(11),$sucursal,$categoria,$planId));
 							
 		}
 		

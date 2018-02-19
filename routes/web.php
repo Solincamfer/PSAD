@@ -75,6 +75,12 @@ Route::group(['prefix'=>'/menu/registros','middleware'=>['v_menu']],function(){
 	Route::match(['post','get'],'/clientes/responsable/status/categoria',  					             ['uses'=>'RegistrosBasicos@respCatStatus']);
 
 
+
+	Route::match(['post','get'],'/clientes/planinfo/sucursal',                   					    ['uses'=>'RegistrosBasicos@planesInfo']);
+	Route::match(['post','get'],'/clientes/asignar/plan/sucursal',                   					    ['uses'=>'RegistrosBasicos@sucursalPlan']);
+
+	Route::match(['post','get'],'/clientes/status/sucursal',                   					    ['uses'=>'RegistrosBasicos@sucursalesStatus']);
+
 	Route::match(['post','get'],'/clientes/agregar/sucursal',                   					    ['uses'=>'RegistrosBasicos@sucursalesAgregar']);//cliente-categoria-sucursales
 
 	Route::match(['post','get'],'/clientes/modificar/sucursal',                   					    ['uses'=>'RegistrosBasicos@sucursalesModificar']);//cliente-categoria-sucursales
