@@ -6,13 +6,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class Marca extends Model
 {
-	public $timestamps=false;
-    protected $table="marcas";
-    protected $fillable=['id','nombre','tipo'];
+     public $timestamps=false;
+  	 protected $table="marcas"; 
+  	 protected $fillable=['id','descripcion'];
 
 
-    public function equipo()
+  	public function tipoequipos()
     {
-    	return $this->belongsTo('App\Equipo');
+        return $this->belongsToMany('App\Tipoequipo');
+    }
+
+    public function modelos()
+    {
+    	return $this->hasMany('App\Modelo');
     }
 }

@@ -36,6 +36,7 @@ use App\Cliente;
 use App\Persona;
 use App\Categoria;
 use App\Sucursal;
+use App\Tipoequipo;
 use Response;
 
 
@@ -4038,9 +4039,11 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 		{
 			$datos=$this->cargar_header_sidebar_acciones();
 			$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(42,43,44,49),41);
-			$consulta=DB::table('sucursales')->where('id',$sucursal_id)->first();
-			$tipoEquipo=DB::table('tequipos')->get();
-			return view ('Registros_Basicos\Clientes\clientes_sucursales_equipos',$this->datos_vista($datos,$acciones,DB::table('equipos')->where('sucursal_id',$sucursal_id)->paginate(11),$sucursal_id,$consulta->categoria_id,$tipoEquipo,7));
+			$sucursal=Sucursal::find($sucursal_id);
+			$categoria=Categoria::find($sucursal->categoria_id);
+			$tipoequipo=Tipoequipo::all();
+			
+			return view ('Registros_Basicos\Clientes\clientes_sucursales_equipos',$this->datos_vista($datos,$acciones,DB::table('equipos')->where('sucursal_id',$sucursal_id)->paginate(11),$sucursal,$categoria,$tipoequipo));
 							
 		}
 
