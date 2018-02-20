@@ -31,6 +31,7 @@
         <script src="{{asset('js/vistaSucursales.js')}}"></script>
         <script src="{{asset('js/sucursalPlanes.js')}}"></script>
         <script src="{{asset('js/respSucursal.js')}}"></script>
+        <script src="{{asset('js/vistaEquipos.js')}}"></script>
         @yield('js')    
     </body>
 </html>
