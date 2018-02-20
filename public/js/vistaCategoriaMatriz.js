@@ -41,23 +41,38 @@ function loadModal(datos)
 		});
 
 
-//////////////////////////////////////Actualiar registro ///////////////////////////////////////////////////////////
-$('#btnModificarCategoria').click(function() 
-{
-	var form=$('#categoriaActualiar').serialize();
+//////////////////////////////////////Actualizar registro ///////////////////////////////////////////////////////////
+$('#categoriaActualizar').bootstrapValidator({
+   fields: {
+     nomCat: {
+       validators: {
+         notEmpty: {
+           message: 'Debe indicar el nombre de la nueva categoria'
+         }
+       }
+     },
+     stCat: {
+       validators: {
+         notEmpty: {
+           message: 'Debe seleccionar un estatus para la nueva categoria'
+         }
+       }
+     }
+   }
+}).on('success.form.bv',function(e){
+	e.preventDefault();
+	var form=$('#categoriaActualizar').serialize();
     var route='/menu/registros/clientes/actualiar/categoria';
     var cliente_id=$('#cliente_id__').val();
 
        		$.post(route,form)
 			.done(function(answer)
-				{
-					
-						
+				{		
 					if(answer.codigo==1)
 					{
 							swal({
-									title:'Isercion exitosa',//Contenido del modal
-									text: '<p style="font-size: 1.0em;">'+'La categoria se registro correctamente!!'+'</p>',
+									title:'Modificación Exitosa',//Contenido del modal
+									text: '<p style="font-size: 1.0em;">'+'La categoria se actualizo correctamente!!'+'</p>',
 									type: "success",
 									showConfirmButton:true,//Eliminar boton de confirmacion
 									html: true
@@ -66,7 +81,7 @@ $('#btnModificarCategoria').click(function()
 		  				 	{
 		  				 		if(isConfirm)
 		  				 		{
-		  				 			window.location.href="/menu/registros/clientes/categoria"+cliente_id;
+		  				 			window.location.href="/menu/registros/clientes/categoria/"+cliente_id;
 		  				 		}	
 
 		  				 	});
@@ -93,9 +108,25 @@ $('#btnModificarCategoria').click(function()
 });
 
 /////////////////////////////////////////////////// Agregar Categoria nueva /////////////////////////////////////////////////////
-	$('#btnGuardarCategoria').click(function()
-		{
-		
+	$('#agregarCategoria__').bootstrapValidator({
+		   fields: {
+		     nomCat: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Debe indicar el nombre de la nueva categoria'
+		         }
+		       }
+		     },
+		     stCat: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Debe seleccionar un estatus para la nueva categoria'
+		         }
+		       }
+		     }
+		   }
+        }).on('success.form.bv',function(e){
+      		e.preventDefault();
 			var form=$('#agregarCategoria__').serialize();
 			var route='/menu/registros/clientes/agregar/categoria';
 			var cliente_id=$('#cliente_id__').val();
@@ -108,8 +139,8 @@ $('#btnModificarCategoria').click(function()
 									if(answer.codigo==1)
 									{
 											swal({
-													title:'Isercion exitosa',//Contenido del modal
-													text: '<p style="font-size: 1.0em;">'+'La categoiria se creo correctamente!!'+'</p>',
+													title:'Guardado exitoso',//Contenido del modal
+													text: '<p style="font-size: 1.0em;">'+'La categoría se creo correctamente!!'+'</p>',
 													type: "success",
 													showConfirmButton:true,//Eliminar boton de confirmacion
 													html: true

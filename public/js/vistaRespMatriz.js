@@ -67,15 +67,102 @@ $(document).ready(function()
 
 
  			///////////////////////// Modificar Responsable: Guardar cambios Matriz, categoria////////////////////////////////
- 			$('.btnModificarResp_').click(function()
- 				{
- 					var caso=$(this).attr('data-caso');////caso 0 resp Cliente//caso 1 resp Categoria
- 					var formularios=['_responsableMatriz_Mod','categoriResp__','respSucForMod'];
- 					var redirecciones=['_clienteMatriz_','categoriaId_','sucursal_id_resp'];
- 					var rutas=['/menu/registros/clientes/responsable/','/menu/registros/clientes/categoria/responsable/','/menu/registros/clientes/categoria/sucursal/responsable/'];
- 					var route='/menu/registros/clientes/responsables/actualizar';
- 					var formulario=$('#'+formularios[caso]).serialize();
- 					var redireccion=$('#'+redirecciones[caso]).val();
+ 			$('#_responsableMatriz_Mod').bootstrapValidator({
+				excluded: [':disabled'],
+			   fields: {
+			     nomRpb1: {
+			       validators: {
+			        notEmpty: {
+			           message: 'Debe indicar el nombre del responsable'
+			        },
+					regexp: {
+			                regexp: /^[a-z\s]+$/i,
+			                message: 'El nombre debe contener solo caracteres alfabéticos'
+	                }
+			       }
+			     },
+			     apellRpb1: {
+			       validators: {
+			        notEmpty: {
+			           message: 'Debe indicar el apellido del responsable'
+			        },
+					regexp: {
+			                regexp: /^[a-z\s]+$/i,
+			                message: 'El apellido debe contener solo caracteres alfabéticos'
+	                }
+			       }
+			     },
+			     selciRpb: {
+			       validators: {
+			         notEmpty: {
+			           message: 'Seleccione el tipo de documento'
+			         }
+			       }
+			     },
+			     txtci: {
+			       validators: {
+			         notEmpty: {
+			           message: 'Debe indicar el número de cédula del responsable'
+			         },
+			        regexp: {
+		                regexp: /^[0-9]+$/,
+		                message: 'La cédula de identidad debe contener solo numeros'                            
+	                },
+			       }
+			     },
+			     cgoRpb: {
+			       validators: {
+			         notEmpty: {
+			           message: 'Debe indicar el cargo de la persona responsable'
+			         }
+			       }
+			     },
+			     seltlfmRpb: {
+			       validators: {
+			         notEmpty: {
+			           message: 'Debe indicar un código de area local'
+			         }
+			       }
+			     },
+			     numTelmvlRpb: {
+			       validators: {
+			         notEmpty: {
+			           message: 'Debe indicar un número de telefono local'
+			         },
+			         regexp: {
+		                regexp: /^[0-9]+$/,
+		                message: 'Solo debe contener caracteres númericos'                            
+	                },
+			       }
+			     },
+			     numTelclRpb:{
+			     	validators:{
+			     		regexp: {
+			                regexp: /^[0-9]+$/,
+			                message: 'Solo debe contener caracteres númericos'                            
+	                }
+			     	}
+			     },
+			     mail2: {
+			       validators: {
+			         notEmpty: {
+			           message: 'Debe indicar un correo electrónico'
+			        },
+			         emailAddress: {
+	                        message: 'El correo electronico debe tener el formato minombre@midominio.com'
+	                }
+			       }
+			     }
+			   }
+	  		}).on('success.form.bv',function(e,data){
+	  			e.preventDefault();
+				var caso=$(this).attr('data-caso');////caso 0 resp Cliente//caso 1 resp Categoria
+				var formularios=['_responsableMatriz_Mod','categoriResp__','respSucForMod'];
+				var redirecciones=['_clienteMatriz_','categoriaId_','sucursal_id_resp'];
+				var rutas=['/menu/registros/clientes/responsable/','/menu/registros/clientes/categoria/responsable/','/menu/registros/clientes/categoria/sucursal/responsable/'];
+				var route='/menu/registros/clientes/responsables/actualizar';
+				var formulario=$('#'+formularios[caso]).serialize();
+				var redireccion=$('#'+redirecciones[caso]).val();
  					
  					
 
@@ -119,65 +206,148 @@ $(document).ready(function()
 				 			})
 
 				  		.fail(function()
-							{swal("Error Inesperado !!", "Comuniquese con el administrador", "error");});
-
-
-
-
- 				});
+							{swal("Error Inesperado !!", "Comuniquese con el administrador", "error");
+						});
+			});
 
  			///////////////////////// Guardar Responsable: Nuevo /////////////////////////////////////////////
- 			$('#btnGuardarResponsableM').click(function()
- 				{
- 					var form=$('#_responsableMatriz_').serialize();
- 					var cliente_id=$('#_clienteMatriz_').val();
- 					var route="/menu/registros/clientes/responsable/agregar";
-		 					
-		 			$.post(route,form)
-					.done(function(answer)
-						{
-							
-							console.log(answer);
-							
-							if(answer.codigo==1)
-							{
-									swal({
-											title:'Isercion exitosa',//Contenido del modal
-											text: '<p style="font-size: 1.0em;">'+'El responsable se registro correctamente!!'+'</p>',
-											type: "success",
-											showConfirmButton:true,//Eliminar boton de confirmacion
-											html: true
-									},
-				  				 	function(isConfirm)
-				  				 	{
-				  				 		if(isConfirm)
-				  				 		{
-				  				 			window.location.href="/menu/registros/clientes/categoria/responsable"+cliente_id;
-				  				 		}	
-
-				  				 	});
-				  				 
-							}
-
-							else if(answer.codigo==2)
-							{
-
-								swal({
-											title:'Cedula duplicada!!!',//Contenido del modal
-											text: '<p style="font-size: 0.9em;">'+'Se encuentra asociada al responsable: '+ answer.extra+'.<br><br><br>La cedula debe ser unica para un responsable.</p>',
-											type: "warning",
-											showConfirmButton:true,//Eliminar boton de confirmacion
-											html: true
-									});
-							}
-						
-		
-				})
-					.fail(function()
+ 			$('#_responsableMatriz_').bootstrapValidator({
+				excluded: [':disabled'],
+			   fields: {
+			     nomRpb1: {
+			       validators: {
+			        notEmpty: {
+			           message: 'Debe indicar el nombre del responsable'
+			        },
+					regexp: {
+			                regexp: /^[a-z\s]+$/i,
+			                message: 'El nombre debe contener solo caracteres alfabéticos'
+	                }
+			       }
+			     },
+			     apellRpb1: {
+			       validators: {
+			        notEmpty: {
+			           message: 'Debe indicar el apellido del responsable'
+			        },
+					regexp: {
+			                regexp: /^[a-z\s]+$/i,
+			                message: 'El apellido debe contener solo caracteres alfabéticos'
+	                }
+			       }
+			     },
+			     selciRpb: {
+			       validators: {
+			         notEmpty: {
+			           message: 'Seleccione el tipo de documento'
+			         }
+			       }
+			     },
+			     txtci: {
+			       validators: {
+			         notEmpty: {
+			           message: 'Debe indicar el número de cédula del responsable'
+			         },
+			        regexp: {
+		                regexp: /^[0-9]+$/,
+		                message: 'La cédula de identidad debe contener solo numeros'                            
+	                },
+			       }
+			     },
+			     cgoRpb: {
+			       validators: {
+			         notEmpty: {
+			           message: 'Debe indicar el cargo de la persona responsable'
+			         }
+			       }
+			     },
+			     seltlfmRpb: {
+			       validators: {
+			         notEmpty: {
+			           message: 'Debe indicar un código de area local'
+			         }
+			       }
+			     },
+			     numTelmvlRpb: {
+			       validators: {
+			         notEmpty: {
+			           message: 'Debe indicar un número de telefono local'
+			         },
+			         regexp: {
+		                regexp: /^[0-9]+$/,
+		                message: 'Solo debe contener caracteres númericos'                            
+	                },
+			       }
+			     },
+			     numTelclRpb:{
+			     	validators:{
+			     		regexp: {
+			                regexp: /^[0-9]+$/,
+			                message: 'Solo debe contener caracteres númericos'                            
+	                }
+			     	}
+			     },
+			     mail2: {
+			       validators: {
+			         notEmpty: {
+			           message: 'Debe indicar un correo electrónico'
+			        },
+			         emailAddress: {
+	                        message: 'El correo electronico debe tener el formato minombre@midominio.com'
+	                }
+			       }
+			     }
+			   }
+	  	}).on('success.form.bv',function(e,data){
+	  		e.preventDefault();
+			var form=$('#_responsableMatriz_').serialize();
+			var cliente_id=$('#_clienteMatriz_').val();
+			var route="/menu/registros/clientes/responsable/agregar";	
+ 			$.post(route,form)
+			.done(function(answer)
+				{
+					
+					console.log(answer);
+					
+					if(answer.codigo==1)
 					{
-						swal("Error Inesperado !!", "Comuniquese con el administrador", "error");
-					});
- 				});
+							swal({
+									title:'Guardado exitoso',//Contenido del modal
+									text: '<p style="font-size: 1.0em;">'+'El responsable se registro correctamente!!'+'</p>',
+									type: "success",
+									showConfirmButton:true,//Eliminar boton de confirmacion
+									html: true
+							},
+		  				 	function(isConfirm)
+		  				 	{
+		  				 		if(isConfirm)
+		  				 		{
+		  				 			window.location.href="/menu/registros/clientes/categoria/responsable"+cliente_id;
+		  				 		}	
+
+		  				 	});
+		  				 
+					}
+
+					else if(answer.codigo==2)
+					{
+
+						swal({
+									title:'Cedula duplicada!!!',//Contenido del modal
+									text: '<p style="font-size: 0.9em;">'+'Se encuentra asociada al responsable: '+ answer.extra+'.<br><br><br>La cedula debe ser unica para un responsable.</p>',
+									type: "warning",
+									showConfirmButton:true,//Eliminar boton de confirmacion
+									html: true
+							});
+					}
+				
+
+			})
+			.fail(function()
+			{
+				swal("Error Inesperado !!", "Comuniquese con el administrador", "error");
+			});
+		});
 
 
 

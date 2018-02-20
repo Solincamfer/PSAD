@@ -39,11 +39,6 @@ $(document).ready(function()
 
 	//////////////////////////////////////////////////Funcion boton : guardar/modificar //////////////////////////////////
    $('#forActPerf').bootstrapValidator({
-	   	feedbackIcons: {
-	     	valid: 'glyphicon glyphicon-ok',
-	     	invalid: 'glyphicon glyphicon-remove',
-	     	validating: 'glyphicon glyphicon-refresh'
-		   },
 		   fields: {
 		     Descripcion: {
 		       validators: {
@@ -110,11 +105,6 @@ $(document).ready(function()
 	//////////////////////////////////////Funcion boton:  Agregar perfil ///////////////////////////////////////////////////
 
 		$('#NewPerfil').bootstrapValidator({
-		   	feedbackIcons: {
-		     	valid: 'glyphicon glyphicon-ok',
-		     	invalid: 'glyphicon glyphicon-remove',
-		     	validating: 'glyphicon glyphicon-refresh'
-		   },
 		   fields: {
 		     DescripcionAdd: {
 		       validators: {

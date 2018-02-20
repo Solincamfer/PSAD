@@ -205,7 +205,7 @@
                                             <input type="hidden" name="_clienteMatriz_" id="_clienteMatriz_Resp_cat" value="{{$datosC1->id}}">
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-primary" id="btnGuardarResponsable2">Guardar <i class="fa fa-floppy-o"></i></button>
+                                                <button type="submit" class="btn btn-primary" id="btnGuardarResponsable2">Guardar <i class="fa fa-floppy-o"></i></button>
                                             </div>
                                         </form>
                             </div>
@@ -338,11 +338,14 @@
                                             </div> 
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-primary btnModificarResp_" id="btnModificarResponsable2" data-caso="1" >Modificar <i class="fa fa-floppy-o"></i></button>
+                                                <button type="submit" class="btn btn-primary btnModificarResp_" id="btnModificarResponsable2" data-caso="1" >Modificar <i class="fa fa-floppy-o"></i></button>
                                             </div>
                                         </form>
                             </div>
                         </div>
                     </div> 
                 </div>   
+    @endsection
+    @section('js')
+      <script src="{{asset('js/vistaRespCategoria.js')}}"></script>
     @endsection

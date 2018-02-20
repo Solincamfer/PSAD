@@ -25,9 +25,6 @@
         <script src="{{asset('js/botonGuardarMA.js')}}"></script>
         <script src="{{asset('js/vista_planes.js')}}"></script>
         <script src="{{asset('js/movUsuarios.js')}}"></script>
-        <script src="{{asset('js/vistaRespMatriz.js')}}"></script>
-        <script src="{{asset('js/vistaCategoriaMatriz.js')}}"></script>
-        <script src="{{asset('js/vistaRespCategoria.js')}}"></script>
         <script src="{{asset('js/vistaSucursales.js')}}"></script>
         <script src="{{asset('js/sucursalPlanes.js')}}"></script>
         <script src="{{asset('js/respSucursal.js')}}"></script>

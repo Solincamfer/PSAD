@@ -120,7 +120,7 @@
                                     <input type="hidden" name="cliente_id__" id="cliente_id__" value="{{$extra->id}}">
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-primary" id="btnGuardarCategoria">Guardar<i class="fa fa-floppy-o"></i></button>
+                                        <button type="submit" class="btn btn-primary" id="btnGuardarCategoria">Guardar<i class="fa fa-floppy-o"></i></button>
                                     </div>
                                 </form>
                                 </div>
@@ -135,7 +135,7 @@
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                             <h4 class="modal-title" id="myModalLabel2">{{$extra->nombreComercial}} Modificar Categoría</h4>
                                         </div>
-                                        <form id="categoriaActualiar" class="Validacion">
+                                        <form id="categoriaActualizar" class="Validacion">
                                             <div class="modal-body">
 
                                                 {{ csrf_field() }}
@@ -162,11 +162,14 @@
                                                         <input type="hidden" name="_idCategoria_" id="_idCategoria_" value="">
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-primary" id="btnModificarCategoria">Modificar<i class="fa fa-floppy-o"></i></button>
+                                                    <button type="submit" class="btn btn-primary" id="btnModificarCategoria">Modificar<i class="fa fa-floppy-o"></i></button>
                                                 </div>
                                                 </form>
                                             </div>
                                     </div>
                                 </div>
                     </div>   
-    @endsection
+@endsection
+@section('js')
+    <script src="{{asset('js/vistaCategoriaMatriz.js')}}"></script>
+@endsection

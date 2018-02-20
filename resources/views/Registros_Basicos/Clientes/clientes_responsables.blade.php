@@ -203,11 +203,10 @@
                                                     </div>
                                                 </div>
                                             </div> 
-                                            <input type="text" name="_clienteMatriz_" id="_clienteMatriz_" value="{{$datosC4}}">
+                                            <input type="hidden" name="_clienteMatriz_" id="_clienteMatriz_" value="{{$datosC4}}">
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-primary" id="btnGuardarResponsableM">Guardar <i class="fa fa-floppy-o"></i></button>
-                                                <button type="button" class="btn btn-danger" id="btnLimipiarResponsableM">limpiar <i class="fa fa-floppy-o"></i></button>
+                                                <button type="submit" class="btn btn-primary" id="btnGuardarResponsableM">Guardar <i class="fa fa-floppy-o"></i></button>
                                             </div>
                                         </form>
                                 </div>
@@ -342,11 +341,14 @@
                                            
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-primary btnModificarResp_" id="btnModificarResponsable1" data-caso="0">Modificar <i class="fa fa-floppy-o"></i></button>
+                                                <button type="submit" class="btn btn-primary btnModificarResp_" id="btnModificarResponsable1" data-caso="0">Modificar <i class="fa fa-floppy-o"></i></button>
                                             </div>
                                         </form>
                                 </div>
                             </div>
                         </div> 
                     </div>   
+    @endsection
+    @section('js')
+        <script src="{{asset('js/vistaRespMatriz.js')}}"></script>
     @endsection

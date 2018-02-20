@@ -148,11 +148,6 @@ $(document).ready(function() {
 		/////////////////////Boton Guardar cliente modificado///////////////////////////////////////////////////
 		$('#Formclientemd').bootstrapValidator({
 			excluded: [':disabled'],
-		   	feedbackIcons: {
-		     	valid: 'glyphicon glyphicon-ok',
-		     	invalid: 'glyphicon glyphicon-remove',
-		     	validating: 'glyphicon glyphicon-refresh'
-		   },
 		   fields: {
 		     rs: {
 		       validators: {
@@ -300,66 +295,56 @@ $(document).ready(function() {
 		       }
 		     }
 		   }
-	  	});
-		$('body').bootstrapValidator().on('submit','#Formclientemd', function (e) {
-			if (e.isDefaultPrevented()) {
+	  	}).on('success.form.bv',function(e,data){
+	  		e.preventDefault();
+			var form=$('#Formclientemd').serialize();
+       		var route='/menu/registros/clientes/actualizar';
 
-			}
-			else{
-				var form=$('#Formclientemd').serialize();
-	       		var route='/menu/registros/clientes/actualizar';
-
-	       		$.post(route,form)
-				.done(function(answer)
+       		$.post(route,form)
+			.done(function(answer)
+				{
+					
+					console.log(answer);
+					if(answer.codigo==2)
 					{
-						
-						console.log(answer);
-						if(answer.codigo==2)
-						{
-							swal({
-										title:'RIF duplicado!!!',//Contenido del modal
-										text: '<p style="font-size: 0.9em;">El RIF ingresado se encuentra asociado al cliente: '+answer.extra+'</p>',
-										type: "warning",
-										showConfirmButton:true,//Eliminar boton de confirmacion
-										html: true
-								});
-						}
-						else
-						{
-							swal({
-										title:'Actualizacion exitosa',//Contenido del modal
-										text: '<p style="font-size: 1.0em;">'+'Los datos del cliente se guardaron correctamente!!!'+'</p>',
-										type: "success",
-										showConfirmButton:true,//Eliminar boton de confirmacion
-										html: true
-									},
-			  				 	function(isConfirm)
-			  				 	{
-			  				 		if(isConfirm)
-			  				 		{
-			  				 			window.location.href="/menu/registros/clientes";
-			  				 		}	
-
-			  				 	});
-						}
-
-					})
-				.fail(function()
+						swal({
+									title:'RIF duplicado!!!',//Contenido del modal
+									text: '<p style="font-size: 0.9em;">El RIF ingresado se encuentra asociado al cliente: '+answer.extra+'</p>',
+									type: "warning",
+									showConfirmButton:true,//Eliminar boton de confirmacion
+									html: true
+							});
+					}
+					else
 					{
-						swal("Error Inesperado !!", "Comuniquese con el administrador", "error");
-					});
-			}
+						swal({
+									title:'Actualizacion exitosa',//Contenido del modal
+									text: '<p style="font-size: 1.0em;">'+'Los datos del cliente se guardaron correctamente!!!'+'</p>',
+									type: "success",
+									showConfirmButton:true,//Eliminar boton de confirmacion
+									html: true
+								},
+		  				 	function(isConfirm)
+		  				 	{
+		  				 		if(isConfirm)
+		  				 		{
+		  				 			window.location.href="/menu/registros/clientes";
+		  				 		}	
+
+		  				 	});
+					}
+
+				})
+			.fail(function()
+				{
+					swal("Error Inesperado !!", "Comuniquese con el administrador", "error");
+				});
 		});
 
 		////////////////////Boton guardar nuevo cliente ////////////////////////////////////////////////////////
 
 		$('#Formclientesv').bootstrapValidator({
 			excluded: [':disabled'],
-		   	feedbackIcons: {
-		     	valid: 'glyphicon glyphicon-ok',
-		     	invalid: 'glyphicon glyphicon-remove',
-		     	validating: 'glyphicon glyphicon-refresh'
-		   },
 		   fields: {
 		     rsnew: {
 		       validators: {
@@ -507,12 +492,7 @@ $(document).ready(function() {
 		       }
 		     }
 		   }
-	  	});
-		$('body').bootstrapValidator().on('submit','#Formclientesv', function (e) {
-			if (e.isDefaultPrevented()) {
-
-			}
-			else{
+	  	}).on('success.form.bv',function(e,data){
 				var form=$('#Formclientesv').serialize();
 				console.log(form);
 				var route='/menu/registros/clientes/insertar';
@@ -560,8 +540,6 @@ $(document).ready(function() {
 					{
 						swal("Error Inesperado !!", "Comuniquese con el administrador", "error");
 					});
-			}
-
 		});
 
 
