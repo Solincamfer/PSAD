@@ -199,75 +199,267 @@ $(document).ready(function()
 
 		//////////////////////////////////////////Funcion boton Guardar nuevo empleado ///////////////////////////////////////
 
-		$('#nomUs_agr').click(function()
-			{
-				var cedula=$('#numCiEmp').val();
-
-				if(cedula.length==0)
-				{
-					swal("EL numero de Cedula es requerido !!", "Ingrese un numero de cedula para el empleado", "warning");
-				}
-				else
-				{
-				
-					$(this).val(cedula);
-			    
-			    }
-				
-			})
-
-
-
-		$('#saveEmpl').click(function()
-		{
+		$('#NewEmp').bootstrapValidator({
+			excluded: [':disabled'],
+		   	fields: {
+				nomEmp1: {
+			       	validators: {
+				        notEmpty: {
+				           message: 'Indique el nombre del empleado'
+				        },
+				        regexp: {
+			                regexp: /^[a-z\s]+$/i,
+			                message: 'El nombre debe contener solo caracteres alfabéticos'
+		                }
+			       	}
+				},
+			    nomEmp2: {
+			       	validators: {
+			       		regexp:{
+				       		regexp: /^[a-z\s]+$/i,
+			                message: 'El nombre debe contener solo caracteres alfabéticos'
+			        	}
+			       }
+			    },
+			    apellEmp1: {
+			       validators: {
+			         	notEmpty: {
+			           		message: 'Indique el apellido del empleado'
+			        	},
+			        	regexp: {
+			                regexp: /^[a-z\s]+$/i,
+			                message: 'El apellido debe contener solo caracteres alfabéticos'
+	                	}
+			       	}
+			    },
+			     apellEmp2: {
+			       validators: {
+			        regexp: {
+		                regexp: /^[a-z\s]+$/i,
+		                message: 'El apellido debe contener solo caracteres alfabéticos'
+	                }
+			       }
+			     },
+			    TrifEmp: {
+			       	validators: {
+			         	notEmpty: {
+			           		message: 'Debe indicar el tipo de rif'
+			         	}
+			       	}
+			    },
+				rifEmp: {
+			       	validators: {
+			         	notEmpty: {
+			           		message: 'Debe indicar el número de rif'
+			         	},
+				        regexp: {
+			                regexp: /^[0-9]+$/,
+			                message: 'El rif debe contener solo numeros'                            
+		                }
+			       	}
+				},
+				TciEmp: {
+			       	validators: {
+		         		notEmpty: {
+				        	message: 'Debe indicar el tipo de documento'
+				        }
+			       	}
+			   	},
+			    ciEmp:{
+			       	validators: {
+						notEmpty: {
+				           message: 'Debe indicar el tipo de documento'
+				        },
+				        regexp: {
+			                regexp: /^[0-9]+$/,
+			                message: 'La cédula de identidad debe contener solo números'                            
+		                }
+			       	}
+			   	},
+			   	fnEmp:{
+			       	validators: {
+						notEmpty: {
+				           message: 'Debe indicar la fecha de nacimiento'
+				        }
+			       	}
+			   	},
+			   	direccionEmpr:{
+			       	validators: {
+						notEmpty: {
+				           message: 'Debe indicar la dirección a la cual pertenece el empleado'
+				        }
+			       	}
+			   	},
+			   	departamentoEmp:{
+			       	validators: {
+						notEmpty: {
+				           message: 'Debe indicar el departamento al cual pertenece el empleado'
+				        }
+			       	}
+			   	},
+			   	areaEmp_agr:{
+			       	validators: {
+						notEmpty: {
+				           message: 'Debe indicar el área a la cual pertenece el empleado'
+				        }
+			       	}
+			   	},
+			   	cgoEmp:{
+			       	validators: {
+						notEmpty: {
+				           message: 'Debe indicar el cargo del empleado'
+				        }
+			       	}
+			   	},
+			   	pdhe:{
+			       	validators: {
+						notEmpty: {
+				           message: 'Seleccione el país'
+				        }
+			       	}
+			   	},
+			   	rgdhe:{
+			       	validators: {
+						notEmpty: {
+				           message: 'Seleccione la región'
+				        }
+			       	}
+			   	},
+			   	edodhe:{
+			       	validators: {
+						notEmpty: {
+				           message: 'Seleccione el estado'
+				        }
+			       	}
+			   	},
+			   	mundhe:{
+			       	validators: {
+						notEmpty: {
+				           message: 'Seleccione el municipio'
+				        }
+			       	}
+			   	},
+			   	codigoPostal:{
+			       	validators: {
+						notEmpty: {
+				           message: 'Debe indicar el código postal'
+				        },
+				        regexp: {
+			                regexp: /^[0-9]+$/,
+			                message: 'El código postal debe contener solo números'                            
+		                }
+			       	}
+			   	},
+			   	descpdhe:{
+			       	validators: {
+						notEmpty: {
+				           message: 'Debe indicar la dirección específica'
+				        }
+			       	}
+			   	},
+			   	tlflcle:{
+			       	validators: {
+						notEmpty: {
+				           message: 'Debe indicar el código de área'
+				        }
+			       	}
+			   	},
+			   	numerol_1t:{
+			       	validators: {
+						notEmpty: {
+				           message: 'Debe indicar el número de telefono'
+				        },
+				        regexp: {
+			                regexp: /^[0-9]+$/,
+			                message: 'El telefono local debe ser solo números'                            
+		                }
+			       	}
+			   	},
+			   	numerol_2c:{
+			       	validators: {
+				        regexp: {
+			                regexp: /^[0-9]+$/,
+			                message: 'El telefono local debe ser solo números'                            
+		                }
+			       	}
+			   	},
+			   	numerol_2t:{
+			       	validators: {
+				        regexp: {
+			                regexp: /^[0-9]+$/,
+			                message: 'El telefono local debe ser solo números'                            
+		                }
+			       	}
+			   	},
+			   	numerom_c:{
+			       	validators: {
+						notEmpty: {
+				           message: 'Seleccione el código de operadora'
+				        }
+				    }
+			   	},
+			   	numerom_t:{
+			       	validators: {
+			       		notEmpty: {
+				           message: 'Debe indicar el número de telefono'
+				        },
+				        regexp: {
+			                regexp: /^[0-9]+$/,
+			                message: 'El telefono local debe ser solo números'                            
+		                }
+			       	}
+			   	},
+			   	correo_agr:{
+			       	validators: {
+			       		notEmpty: {
+				           	message: 'Debe indicar el correo electrónico'
+				        },
+				        emailAddress: {
+                        	message: 'El correo electronico debe tener el formato minombre@midominio.com'
+                		}
+			       	}
+			   	}
+		   	}
+	  	}).on('success.form.bv',function(e,data){
+	  		e.preventDefault();
+	  		var $form = $(e.target);               
+            var bv    = $form.data('bootstrapValidator');
 			var form=$('#NewEmp').serialize();
 			var route='/menu/registros/empleados/agregar';
-
 			$.post(route,form)
-			.done(function(answer)
-				{
-					
-					
-					
-					if(answer.codigo==1)
-					{
-							swal({
-									title:'Isercion exitosa',//Contenido del modal
-									text: '<p style="font-size: 1.0em;">'+'El empleado se registro correctamente!!'+'</p>',
-									type: "success",
-									showConfirmButton:true,//Eliminar boton de confirmacion
-									html: true
-							},
-		  				 	function(isConfirm)
-		  				 	{
-		  				 		if(isConfirm)
-		  				 		{
-		  				 			window.location.href="/menu/registros/empleados";
-		  				 		}	
+			.done(function(answer){
+					if(answer.codigo==1){
+						swal({
+								title:'Isercion exitosa',//Contenido del modal
+								text: '<p style="font-size: 1.0em;">'+'El empleado se registro correctamente!!'+'</p>',
+								type: "success",
+								showConfirmButton:true,//Eliminar boton de confirmacion
+								html: true
+						},
+	  				 	function(isConfirm)
+	  				 	{
+	  				 		if(isConfirm)
+	  				 		{
+	  				 			window.location.href="/menu/registros/empleados";
+	  				 		}	
 
-		  				 	});
+	  				 	});
 		  				 
 					}
 
-					else if(answer.codigo==2)
-					{
-
+					else if(answer.codigo==2){
 						swal({
-									title:'Cedula y Rif duplicados!!!',//Contenido del modal
-									text: '<p style="font-size: 0.9em;">'+'Se encuentran asociados a  : '+ answer.extra+'.<br><br><br>Los datos de: Cedula y Rif para un empleado, deben ser unicos.</p>',
-									type: "warning",
-									showConfirmButton:true,//Eliminar boton de confirmacion
-									html: true
-							});
+							title:'Cedula y Rif duplicados!!!',//Contenido del modal
+							text: '<p style="font-size: 0.9em;">'+'Se encuentran asociados a  : '+ answer.extra+'.<br><br><br>Los datos de: Cedula y Rif para un empleado, deben ser unicos.</p>',
+							type: "warning",
+							showConfirmButton:true,//Eliminar boton de confirmacion
+							html: true
+						});
 					}
-				
-		
-				})
-			.fail(function()
-				{
-					swal("Error Inesperado !!", "Comuniquese con el administrador", "error");
-				});
-
+			})
+			.fail(function(){
+				swal("Error Inesperado !!", "Comuniquese con el administrador", "error");
+			});
 		});
 
 

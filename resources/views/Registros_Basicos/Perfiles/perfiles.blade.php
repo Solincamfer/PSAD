@@ -89,22 +89,22 @@
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                     <h4 class="modal-title" id="myModalLabel">Agregar Perfil</h4>
                                 </div>
-                                <div class="modal-body">
-                                    <form method="post" id="NewPerfil">
+                                <form method="post" class="form-horizontal" id="NewPerfil">
+                                  <div class="modal-body">
                                       {{ csrf_field() }}
                                         <div class="container-fluid contpfl">
                                            <div class="row">
                                                <div class="rPfl">
                                                   <div class="col-md-8 col-md-offset-2">
                                                       <div class="form-group row">
-                                                          <label for="duPfl">Nombre del Perfil</label>
-                                                          <input type="text" class="form-control" name="DescripcionAdd"><i class="fa fa-id-badge icpfl"></i>
+                                                          <label for="DescripcionAdd">Nombre del Perfil</label>
+                                                          <input type="text" class="form-control" name="DescripcionAdd" id="DescripcionAdd"><i class="fa fa-id-badge icpfl"></i>
                                                       </div>
                                                   </div>
                                                   <div class="col-md-8 col-md-offset-2">
                                                       <div class="form-group row">
-                                                          <label for="stPfl">Estatus del Perfil</label><span class="ic"><i class="fa fa-chevron-down"></i></span>
-                                                          <select name="StatusAdd" class="form-control">
+                                                          <label for="StatusAdd">Estatus del Perfil</label><span class="ic"><i class="fa fa-chevron-down"></i></span>
+                                                          <select name="StatusAdd" id="StatusAdd" class="form-control">
                                                               <option value="">-</option>
                                                               <option value="1">ACTIVO</option>
                                                               <option value="0">INACTIVO</option>
@@ -114,12 +114,11 @@
                                                </div>
                                            </div>
                                         </div>
-                                   
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="submit" class="bttnMd" id="savePerfil">Guardar <i class="fa fa-floppy-o"></i></button>
-                                </div>
-                               </form>
+                                  </div>
+                                  <div class="modal-footer">
+                                      <button type="submit" class="bttnMd btn" id="savePerfil">Guardar <i class="fa fa-floppy-o"></i></button>
+                                  </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -134,7 +133,7 @@
                                     <h4 class="modal-title" id="myModalLabel2">Modificar Perfil</h4>
                                 </div>
                                 <div class="modal-body">
-                                    <form  class="DepCarPer" id="forActPerf">
+                                    <form  method="post" id="forActPerf">
                                       {{ csrf_field() }}
                                         <div class="container-fluid contpfl">
                                            <div class="row">
@@ -149,7 +148,7 @@
                                                       <div class="form-group row">
                                                           <label for="stPfl_">Estatus del Perfil</label><span class="ic"><i class="fa fa-chevron-down"></i></span>
                                                           <select name="Status" id="perStatus" class="form-control status">
-                                                              <option value="-">-</option>
+                                                              <option value="">-</option>
                                                               <option value="1">ACTIVO</option>
                                                               <option value="0">INACTIVO</option>
                                                           </select><i class="fa fa-check icpfl"></i>
@@ -164,7 +163,9 @@
                                       
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="submit" class="bttnMd" id="actualizarPerfil" > Guardar <i class="fa fa-floppy-o"></i></button>
+                                  <div class="form-group">
+                                    <button type="submit" class="bttnMd btn"> Guardar <i class="fa fa-floppy-o"></i></button>
+                                  </div>
                                 </div>
                                  
                                </form>

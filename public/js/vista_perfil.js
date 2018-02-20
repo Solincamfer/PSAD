@@ -1,66 +1,83 @@
 $(document).ready(function() 
 {
-	
+	////////////////////////////////////// Metodos comunes //////////////////////////////////////////////////////
+
+	function loadModal(descripcion,status,id)
+	{
 		
-		////////////////////////////////////// Metodos comunes //////////////////////////////////////////////////////
+		/////////////////indicar al boton guardar del modal modificar el registro que se desea modificar //////////////////////////////
+		$('#perfilRegistry').val(id);
 
-		function loadModal(descripcion,status,id)
-		{
-			
-			/////////////////indicar al boton guardar del modal modificar el registro que se desea modificar //////////////////////////////
-			$('#perfilRegistry').val(id);
+		/////////////////LLenar y desplegar modal///////////////////////////
+		$('#perText').val(descripcion);
+		$('#perStatus').val(status);
+		$('#myModal2').modal('show');
 
-			/////////////////LLenar y desplegar modal///////////////////////////
-			$('#perText').val(descripcion);
-			$('#perStatus').val(status);
-			$('#myModal2').modal('show');
-
-			return 0;
-		}
+		return 0;
+	}
 
 
 
-		//////////////////////////////////////Funcion boton: modificar llena el modal con los datos del registro que se desea modificar/////////////////////////////////////////////////////
-		$('.ModificarPerfil').click(function() 
-		{
-		  var registry=$(this).attr('data-reg');
-		  var _token=$( "input[name^='_token']" ).val();
-		  var route='/menu/registros/perfiles/modificar';
+	//////////////////////////////////////Funcion boton: modificar llena el modal con los datos del registro que se desea modificar/////////////////////////////////////////////////////
+	$('.ModificarPerfil').click(function() 
+	{
+	  var registry=$(this).attr('data-reg');
+	  var _token=$( "input[name^='_token']" ).val();
+	  var route='/menu/registros/perfiles/modificar';
 
-		  $.post(route,{_token:_token,registry:registry})
-		  .done(function(answer)
-		  {
-		  	loadModal(answer.descripcion,answer.status,answer.id);
-		  })
+	  $.post(route,{_token:_token,registry:registry})
+	  .done(function(answer)
+	  {
+	  	loadModal(answer.descripcion,answer.status,answer.id);
+	  })
 
-		  .fail(function()
-			{swal("Error Inesperado !!", "Comuniquese con el administrador", "error");});
+	  .fail(function()
+		{swal("Error Inesperado !!", "Comuniquese con el administrador", "error");});
 
-		});
+	});
 
 
 	//////////////////////////////////////////////////Funcion boton : guardar/modificar //////////////////////////////////
-   $('#actualizarPerfil').click(function()
-    	{
-    		
-    		var formulario=$('#forActPerf').serialize();
-    		var route='/menu/registros/perfiles/actualizar';
-
-
-
-    		$.post(route,formulario)
+   $('#forActPerf').bootstrapValidator({
+	   	feedbackIcons: {
+	     	valid: 'glyphicon glyphicon-ok',
+	     	invalid: 'glyphicon glyphicon-remove',
+	     	validating: 'glyphicon glyphicon-refresh'
+		   },
+		   fields: {
+		     Descripcion: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Debe indicar el nombre del nuevo perfil'
+		         }
+		       }
+		     },
+		     Status: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Debe seleccionar un estatus para el nuevo perfil'
+		         }
+		       }
+		     }
+		   }
+        }).on('success.form.bv',function(e,data){
+	  		e.preventDefault();
+			var $form = $(e.target);               
+            var bv    = $form.data('bootstrapValidator');
+			var formulario=$('#forActPerf').serialize();
+			var route='/menu/registros/perfiles/actualizar';
+			$.post(route,formulario)
 		  		.done(function(answer)
 		  			{
 		  				 
-		  				
 		  				 if(answer.duplicate>0 && answer.update==false)
 		  				 {
 		  				 	swal("El perfil existe en el sistema !!", "No puede crear perfiles con el mismo nombre", "warning");
-		  				 	
+		  				 	//$('#forActPerf').data('bootstrapValidator').resetForm();
 		  				 }
 		  				 else if(answer.duplicate==0 && answer.update==false)
 		  				 {
-		  				 	swal("Actualizacion no exitosa !!", "Comuniquese con el administrador", "error");
+		  				 	swal("Actualizacion Fallida !!", "Comuniquese con el administrador", "error");
 		  				 }
 		  				 else if (answer.duplicate==0 && answer.update==true)
 		  				 {
@@ -87,19 +104,11 @@ $(document).ready(function()
 
 		  		.fail(function()
 					{swal("Error Inesperado !!", "Comuniquese con el administrador", "error");});
-    		
-    	});
+    });
 
 
+	//////////////////////////////////////Funcion boton:  Agregar perfil ///////////////////////////////////////////////////
 
-
-
-
-
-
-
-
-		//////////////////////////////////////Funcion boton:  Agregar perfil ///////////////////////////////////////////////////
 		$('#NewPerfil').bootstrapValidator({
 		   	feedbackIcons: {
 		     	valid: 'glyphicon glyphicon-ok',
@@ -122,14 +131,9 @@ $(document).ready(function()
 		       }
 		     }
 		   }
-	  	});
-		$('body').bootstrapValidator().on('submit','#NewPerfil', function (e) {
-			if (e.isDefaultPrevented()) {
-				alert('hola');
-			}
-			else{
-				console.log('hola');
-				var form=$('#NewPerfil').serialize();
+        }).on('success.form.bv',function(e){
+      		e.preventDefault();
+      		var form=$('#NewPerfil').serialize();
 				var route='/menu/registros/perfiles/registrar';
 
 				$.post(route,form)
@@ -163,8 +167,8 @@ $(document).ready(function()
 					{
 						swal("Error Inesperado !!", "Comuniquese con el administrador", "error");
 					});
-			}
-		});
+      	});
+
 
 
 

@@ -2572,7 +2572,7 @@ label input[type="checkbox"], label input[type="radio"] {
 }
 
 .rEmp3 input, .rEmp3 select, .rEmp4 select, .rEmp4 textarea,
-.rEmpm3 input, .rEmpm3 select, .rEmpm4 select, .rEmpm4 textarea{
+.rEmpm3 input, .rEmpm3 select, .rEmpm4 select, .rEmpm4 textarea,.rEmp4 input{
     display: block;
     padding: 2px 5px;
     width: 100%;
@@ -2591,7 +2591,7 @@ label input[type="checkbox"], label input[type="radio"] {
 .rEmpm3 input:focus, .rEmpm3 select:focus, .rEmpm4 textarea:focus, 
 .rEmpm4 select:focus, .rEmpm5 select:focus, .rEmpm5 input:focus,
 .rEmp6 input:focus, .rEmp6 select:focus, .rEmpm6 input:focus, 
-.rEmpm6 select:focus{
+.rEmpm6 select:focus,.rEmp4 input:focus{
     outline: none;
     color: #444;
     border-color: #26a69d;

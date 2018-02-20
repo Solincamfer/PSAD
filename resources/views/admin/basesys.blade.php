@@ -16,20 +16,17 @@
         <script src="{{asset('plugins/bootstrap3.3.7/js/jquery.min.js')}}"></script>
         <script src="{{asset('plugins/bootstrap3.3.7/js/bootstrap.min.js')}}"></script>
         <script src="{{asset('js/bootstrapValidator.js')}}"></script>
+        <script src="{{asset('plugins/sweetalert/sweetalert.min.js')}}"></script>
+        <script src="{{asset('js/configuraciones.js')}}"></script>
         <script src="{{asset('js/val.js')}}"></script>
         <script src="{{asset('js/AJAX.js')}}"></script>
-        <script src="{{asset('js/configuraciones.js')}}"></script>
         <script src="{{asset('js/buscador.js')}}"></script>
         <script src="{{asset('js/botonModificar.js')}}"></script>
         <script src="{{asset('js/botonGuardarMA.js')}}"></script>
-        <script src="{{asset('js/validator.min.js')}}"></script>
-        <script src="{{asset('js/mycompany.js')}}"></script>
-        <script src="{{asset('js/vista_empleados.js')}}"></script>
         <script src="{{asset('js/vista_planes.js')}}"></script>
         <script src="{{asset('js/movUsuarios.js')}}"></script>
         <script src="{{asset('js/vistaRespMatriz.js')}}"></script>
         <script src="{{asset('js/vistaCategoriaMatriz.js')}}"></script>
-        <script src="{{asset('plugins/sweetalert/sweetalert.min.js')}}"></script>
         <script src="{{asset('js/vistaRespCategoria.js')}}"></script>
         <script src="{{asset('js/vistaSucursales.js')}}"></script>
         @yield('js')    

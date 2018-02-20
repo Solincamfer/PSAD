@@ -138,7 +138,7 @@
                                                                           
                                                                             <span class="ic"><i class="fa fa-chevron-down"></i></span>
                                                                             <select name="TrifEmp" class="form-control" id="selRifEmp">
-                                                                                <option value="0">-</option>
+                                                                                <option value="">-</option>
                                                                                 @foreach ($extra as $rif)
                                                                                   <option value="{{$rif->id}}">{{$rif->descripcion}}</option>
                                                                                 @endforeach
@@ -159,7 +159,7 @@
                                                                         <div class="form-group row">
                                                                             <span class="ic"><i class="fa fa-chevron-down"></i></span>
                                                                             <select name="TciEmp" class="form-control" id="selCiEmp">
-                                                                                <option value="0">-</option>
+                                                                                <option value="">-</option>
                                                                                 @foreach ($datosC1 as $cedula)
                                                                                   <option value="{{$cedula->id}}">{{$cedula->descripcion}}</option>
                                                                                 @endforeach
@@ -185,7 +185,7 @@
                                                                    <div class="form-group row">
                                                                        <label for="dptoEmp"> Direccion </label><span class="ic"><i class="fa fa-chevron-down"></i></span>
                                                                        <select name="direccionEmpr" class="form-control estructura_agr" id="direccionEmpr"   data-caso="1" data-vista="0">
-                                                                           <option value="0">-</option>
+                                                                           <option value="">-</option>
                                                                            @foreach ($datosC5 as $direccion)
                                                                               <option value="{{$direccion->id}}" class="op_agr">{{$direccion->descripcion}}</option>
                                                                             @endforeach
@@ -232,7 +232,7 @@
                                                                <div class="form-group col-md-6">
                                                                    <label for="pdhe">País</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
                                                                    <select name="pdhe" class="form-control" id="pdhe" >
-                                                                       <option value="0">-</option>
+                                                                       <option value="">-</option>
                                                                        @foreach ($datosC2 as $pais)
                                                                           <option value="{{$pais->id}}">{{$pais->descripcion}}</option>
                                                                         @endforeach
@@ -241,37 +241,30 @@
                                                                <div class="form-group col-md-6">
                                                                    <label for="rgdhe">Región</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
                                                                    <select name="rgdhe" class="form-control" id="rgdhe">
-                                                                       <option value="0">-</option>
+                                                                       <option value="">-</option>
                                                                    </select><i class="fa fa-map icemp"></i>
                                                                </div>
                                                                <div class="form-group col-md-6">
                                                                    <label for="edodhe">Estado</label><span class="ic"><i class="fa fa-chevron-down"></i></span>
                                                                    <select name="edodhe" class="form-control" id="edodhe">
-                                                                       <option value="0">-</option>
+                                                                       <option value="">-</option>
                                                                    </select><i class="fa fa-map-pin icemp"></i>
                                                                </div>
                                                                <div class="form-group col-md-6">
                                                                    <label for="mundhe">Municipio</label><span class="ic"><i class="fa fa-chevron-down"></i></span>
                                                                    <select name="mundhe" class="form-control" id="mundhe">
-                                                                       <option value="0">-</option>
+                                                                       <option value="">-</option>
                                                                    </select><i class="fa fa-map-signs icemp"></i>
                                                                </div>
-
-                                                               
-                                                                
-                                                                   
-                                                                
-                                                                <div class="form-group col-md-6 ">
-                                                                   <label for="descpdhe">Codigo Postal</label>
+                                                                <div class="form-group col-md-12">
+                                                                   <label for="descpdhe">Código Postal</label>
                                                                    <input type="text" name="codigoPostal" class="form-control" id="codigoPostal">
                                                                    <i class="fa fa-map-marker icemp"></i>
-                                                                 </div>
-                                                               
-
-                                                               <div class="form-group col-md-12">
+                                                                </div>
+                                                                <div class="form-group col-md-12">
                                                                    <label for="descpdhe">Descripcion de la dirección</label>
                                                                    <textarea type="text" name="descpdhe" class="form-control" id="descpdhe"></textarea><i class="fa fa-map-marker icemp"></i>
-                                                               </div>
+                                                                </div>
 
 
                                                            </div>
@@ -289,15 +282,13 @@
                                                                   <br>
                                                                    <div class="col-md-5">
                                                                        <div class="form-group row">
-                                                                          {{--  <span class="ic"><i class="fa fa-chevron-down" ></i></span>
+                                                                          <span class="ic"><i class="fa fa-chevron-down" ></i></span>
                                                                            <select name="tlflcle" class="form-control" id="tlflcle">
-                                                                               <option value="0">-</option>
+                                                                               <option value="">-</option>
                                                                               @foreach ($datosC4 as $tl)
                                                                                 <option value="{{$tl->id}}">{{$tl->descripcion}}</option>
                                                                               @endforeach
-                                                                           </select><i class="fa fa-hashtag icemp"></i> --}}
-                                                                           <input type="tel" name="numerol_1c"  placeholder="Codigo" class="form-control" id="numerol_1c"><i class="fa fa-hashtag icemp"></i>
-
+                                                                           </select><i class="fa fa-hashtag icemp"></i>
                                                                        </div>
                                                                    </div>
                                                                    <div class="col-md-7">
@@ -311,14 +302,13 @@
                                                                    <br>
                                                                    <div class="col-md-5">
                                                                        <div class="form-group row">
-                                                                          {{--  <span class="ic"><i class="fa fa-chevron-down" ></i></span>
+                                                                          <span class="ic"><i class="fa fa-chevron-down" ></i></span>
                                                                            <select name="tlfmvle" class="form-control" id="tlfmvle">
-                                                                               <option value="0">-</option>
+                                                                               <option value="">-</option>
                                                                               @foreach ($datosC3 as $tc)
                                                                                 <option value="{{$tc->id}}">{{$tc->descripcion}}</option>
                                                                               @endforeach
-                                                                           </select><i class="fa fa-hashtag icemp"></i> --}}
-                                                                            <input type="tel" placeholder="Codigo" name="numerol_2c" class="form-control" id="numerol_2c"><i class="fa fa-hashtag icemp"></i>
+                                                                           </select><i class="fa fa-hashtag icemp"></i>
                                                                        </div>
                                                                    </div>
                                                                    <div class="col-md-7">
@@ -335,7 +325,7 @@
                                                                        <div class="form-group row">
                                                                            <span class="ic"><i class="fa fa-chevron-down" ></i></span>
                                                                            <select name="numerom_c" class="form-control" id="numerom_c">
-                                                                               <option value="0">-</option>
+                                                                               <option value="">-</option>
                                                                               @foreach ($datosC3 as $tc)
                                                                                 <option value="{{$tc->id}}">{{$tc->descripcion}}</option>
                                                                               @endforeach
@@ -348,10 +338,6 @@
                                                                        </div>
                                                                    </div>
                                                                </div>
-
-                                                               
-
-
                                                                <div class="row">
                                                                    <div class="col-md-10 col-md-offset-1">
                                                                        <div class="form-group row">
@@ -724,4 +710,7 @@
                         </div>
                         </div>
                 </div>   
+    @endsection
+    @section('js')
+      <script src="{{asset('js/vista_empleados.js')}}"></script>
     @endsection

@@ -2109,10 +2109,12 @@ public function perfiles_insertar()
 		{
 			$this->registroBitacora('Id del registro creado: '.$nuevoPerfil->id,'Agregar Perfil','{"Registro el perfil":'.'"'.$nuevoPerfil->descripcion.'"'.'}','Perfil -> Agregar Perfil');
 		}
+
+		$this->configurarPerfil($nuevoPerfil->id);//configuracion de todo los modulos aceptados para el perfil normalmente tarda 
 		
 	}
 
-	$this->configurarPerfil($nuevoPerfil->id);//configuracion de todo los modulos aceptados para el perfil normalmente tarda 
+	
 
 	
 	return Response()->json(['duplicate'=>$duplicate,'insert'=>$insert]);
