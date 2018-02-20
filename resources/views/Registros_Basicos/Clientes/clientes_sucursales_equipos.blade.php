@@ -33,7 +33,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-2 despl-bttn">
-                                    <a href="/menu/registros/clientes/categorias/sucursales/{{$extra->id}}">
+                                    <a href="/menu/registros/clientes/categorias/sucursales/{{$datosC1->id}}">
                                         <div class="bttn-volver">
                                             <button id="btnBk" type="button" href="#" class="bttn-vol"><span class="fa fa-chevron-left"></span><span class="txt-bttn">VOLVER</span></button>
                                         </div>

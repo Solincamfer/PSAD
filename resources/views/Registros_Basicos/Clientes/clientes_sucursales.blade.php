@@ -214,7 +214,6 @@
                                                             <label for="edodc">Estado</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
                                                             <select name="edodc" id="input13" class="form-control userEmail dirSucursal" data-caso="2" data-grupo="1">
                                                                 <option value="">-</option>
-                                                                <option value="caracas">caracas</option>
                                                             </select><i class="fa fa-map-pin" id="icc13"></i>
                                                         </div>
                                                         <div class="form-group col-md-7" id="dcc4">
