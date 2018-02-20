@@ -58,7 +58,7 @@ Route::group(['prefix'=>'/menu/registros','middleware'=>['v_menu']],function(){
 
 	Route::match(['post','get'],'/clientes/insertar',                   								['uses'=>'RegistrosBasicos@clientes_insertar']);
 
-	Route::match(['post','get'],'/clientes/status',                   								['uses'=>'RegistrosBasicos@clientesStatus']);
+	Route::match(['post','get'],'/clientes/status',                   								    ['uses'=>'RegistrosBasicos@clientesStatus']);
 	Route::match(['post','get'],'/clientes/responsable/agregar',                   					    ['uses'=>'RegistrosBasicos@clientes_insertar_responsable']);
 	
 
@@ -75,11 +75,21 @@ Route::group(['prefix'=>'/menu/registros','middleware'=>['v_menu']],function(){
 	Route::match(['post','get'],'/clientes/responsable/status/categoria',  					             ['uses'=>'RegistrosBasicos@respCatStatus']);
 
 
+	Route::match(['post','get'],'/clientes/responsable/asignar/sucursal',                   					    ['uses'=>'RegistrosBasicos@sucursalAsignarResponsable']);
+	Route::match(['post','get'],'/clientes/responsable/status/sucursal',                   					    ['uses'=>'RegistrosBasicos@sucursalResponsableStatus']);
+	Route::match(['post','get'],'/clientes/planinfo/sucursal',                   					    ['uses'=>'RegistrosBasicos@planesInfo']);
+	Route::match(['post','get'],'/clientes/asignar/plan/sucursal',                   					    ['uses'=>'RegistrosBasicos@sucursalPlan']);
+
+	Route::match(['post','get'],'/clientes/status/sucursal',                   					    ['uses'=>'RegistrosBasicos@sucursalesStatus']);
+
 	Route::match(['post','get'],'/clientes/agregar/sucursal',                   					    ['uses'=>'RegistrosBasicos@sucursalesAgregar']);//cliente-categoria-sucursales
 
-	Route::match(['post','get'],'/clientes/modificar/sucursal',                   					    ['uses'=>'RegistrosBasicos@sucursalesActualizar']);//cliente-categoria-sucursales
+	Route::match(['post','get'],'/clientes/modificar/sucursal',                   					    ['uses'=>'RegistrosBasicos@sucursalesModificar']);//cliente-categoria-sucursales
 
-	Route::match(['post','get'],'/clientes/categorias/sucursales/{categoria_id}',                   					['uses'=>'RegistrosBasicos@clientes_sucursales']);//cliente-categoria-sucursales
+
+	Route::match(['post','get'],'/clientes/actualizar/sucursal',                   					    ['uses'=>'RegistrosBasicos@sucursalesActualizar']);//cliente-categoria-sucursales
+
+	Route::match(['post','get'],'/clientes/categorias/sucursales/{categoria_id}',                   	['uses'=>'RegistrosBasicos@clientes_sucursales']);//cliente-categoria-sucursales
 
 	 Route::match(['post','get'],'/clientes/categoria/sucursal/responsable/{sucursal_id}',            	['uses'=>'RegistrosBasicos@clientes_sucursales_responsable']);
 	 Route::match(['post','get'],'/clientes/categoria/sucursal/plan/{sucursal_id}',                  	['uses'=>'RegistrosBasicos@clientes_sucursales_plan']);
@@ -196,7 +206,7 @@ Route::match(['post','get'],'/clientes/categoria/sucursal/usuarios/perfil',     
 
 //////////////////////////// CLIENTES /////////////////////////////////////////////////////////////
 
-	Route::match(['post','get'],'/clientes/consultaplan',						   	                        ['uses'=>'RegistrosBasicos@consultar_plan']);
+	Route::match(['post','get'],'/clientes/consultaplan',						   	                            ['uses'=>'RegistrosBasicos@consultar_plan']);
 
 /////////////////////////// ESTRUCTURA ///////////////////////////////////////////////////////////
 Route::match(['post','get'],'/estructura/mostrarEstructuraDireccion',						   	['uses'=>'EstructuraController@mostrarEstructuraDireccion']);

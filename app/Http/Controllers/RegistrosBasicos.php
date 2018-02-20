@@ -36,6 +36,7 @@ use App\Cliente;
 use App\Persona;
 use App\Categoria;
 use App\Sucursal;
+use App\Tipoequipo;
 use Response;
 
 
@@ -2632,12 +2633,24 @@ public function clientes_modificar()//metodo que consulta los datos de un client
 		$correo=Correo::find($cliente->correo_id);
 		$telefonoLocal=$this->consultarTelefono($cliente->id,0);
 		$telefonoMovil=$this->consultarTelefono($cliente->id,2);
+
+		/////////////////////////Opciones dependientes Direccion Fiscal/////////////
+		$regionesF=$this->opcionesDependientes(0,$direccionFiscal->pais_id);
+		$estadosF=$this->opcionesDependientes(1,$direccionFiscal->region_id);
+		$municipiosF=$this->opcionesDependientes(2,$direccionFiscal->estado_id);
+		$dependenciasF=['regiones'=>$regionesF,'estados'=>$estadosF,'municipios'=>$municipiosF];
+
+		/////////////////////////Opciones dependientes Direccion Comercial/////////////
+		$regionesC=$this->opcionesDependientes(0,$direccionComercial->pais_id);
+		$estadosC=$this->opcionesDependientes(1,$direccionComercial->region_id);
+		$municipiosC=$this->opcionesDependientes(2,$direccionComercial->estado_id);
+		$dependenciasC=['regiones'=>$regionesC,'estados'=>$estadosC,'municipios'=>$municipiosC];
 	
 
 
 
 
-		return Response::json(['cliente'=>$cliente,'rif'=>$rif,'direccionFiscal'=>$direccionFiscal,'direccionComercial'=>$direccionComercial,'correo'=>$correo,'telefonoLocal'=>$telefonoLocal,'telefonoMovil'=>$telefonoMovil]);
+		return Response::json(['cliente'=>$cliente,'rif'=>$rif,'direccionFiscal'=>$direccionFiscal,'direccionComercial'=>$direccionComercial,'correo'=>$correo,'telefonoLocal'=>$telefonoLocal,'telefonoMovil'=>$telefonoMovil,'dependenciasF'=>$dependenciasF,'dependenciasC'=>$dependenciasC]);
 		
 	}
 
@@ -2650,12 +2663,12 @@ public function clientes_modificar()//metodo que consulta los datos de un client
 								 'rif_id'=>(int) Request::get('rif'),
 								 'numeroRif'=>Request::get('df'),
 								 'tipoContribuyente_id'=>(int)Request::get('tipCon'),
-								 'direccionFiscal'=>Request::get('descDirdc'),
+								 'direccionFiscal'=>Request::get('descDirdf'),
 								 'paisF'=>(int)Request::get('paisdf'),
 								 'regionF'=>(int)Request::get('regiondf'),
 								 'estadoF'=>(int)Request::get('edodf'),
 								 'municipioF'=>(int)Request::get('mundf'),
-								 'direccionComercial'=>Request::get('descDirdf'),
+								 'direccionComercial'=>Request::get('descDirdc'),
 								 'paisC'=>(int)Request::get('paisdc'),
 								 'regionC'=>(int)Request::get('regiondc'),
 								 'estadoC'=>(int)Request::get('edodc'),
@@ -2685,6 +2698,28 @@ public function clientes_modificar()//metodo que consulta los datos de un client
     	return $retorno;
 
     }
+
+
+    public function telefonoIdGet($tipo,$cliente_id)
+    {
+    	$telefonoLId=DB::table('cliente_telefono')
+							->join('telefonos','telefonos.id','=','cliente_telefono.telefono_id')
+							->where(['telefonos.tipo'=>$tipo,'cliente_telefono.cliente_id'=>$cliente_id])
+							->select('telefonos.id AS id')->first();
+		return $telefonoLId->id;
+
+    }
+
+     public function telefonoIdGetS($tipo,$cliente_id)
+    {
+    	$telefonoLId=DB::table('sucursal_telefono')
+							->join('telefonos','telefonos.id','=','sucursal_telefono.telefono_id')
+							->where(['telefonos.tipo'=>$tipo,'sucursal_telefono.sucursal_id'=>$cliente_id])
+							->select('telefonos.id AS id')->first();
+		return $telefonoLId->id;
+
+    }
+
 
 	public function clientes_actualizar()//metodo para actualizar en la base de datos los datos de un cliente matriz
 	{
@@ -2768,17 +2803,17 @@ public function clientes_modificar()//metodo que consulta los datos de un client
 			$direccionComercial->region_id=$clienteForm->regionC;
 
 			$traduccionBd=$this->traducirId($direccionComercial->estado_id,4);
-    		$traduccionFor=$this->traducirId($clienteForm->estadoF,4);
+    		$traduccionFor=$this->traducirId($clienteForm->estadoC,4);
     		$cambio=$this->detectarCambios($traduccionFor,$traduccionBd,'Estado Direccion Comercial');
     		$cambios=$this->agregarCambios($cambio,$cambios);
-			$direccionComercial->estado_id=$clienteForm->estadoF;
+			$direccionComercial->estado_id=$clienteForm->estadoC;
 
 
 			$traduccionBd=$this->traducirId($direccionComercial->municipio_id,5);
-    		$traduccionFor=$this->traducirId($clienteForm->municipioF,5);
+    		$traduccionFor=$this->traducirId($clienteForm->municipioC,5);
     		$cambio=$this->detectarCambios($traduccionFor,$traduccionBd,'Estado Direccion Comercial');
     		$cambios=$this->agregarCambios($cambio,$cambios);
-			$direccionComercial->municipio_id=$clienteForm->municipioF;
+			$direccionComercial->municipio_id=$clienteForm->municipioC;
 			$direccionComercial->save();
 
 			////////////////////Obtener datos del correo ////////////////////////////////////////////////////////////////
@@ -2805,6 +2840,41 @@ public function clientes_modificar()//metodo que consulta los datos de un client
     		$cambios=$this->agregarCambios($cambio,$cambios);
 			$cliente->tipoContribuyente_id=$clienteForm->tipoContribuyente_id;
 			$cliente->save();
+
+			//////////////////Obtener los datos del telefono Local /////////////////////////////////////////////////////////
+			$telefonoLocal=Telefono::find($this->telefonoIdGet(0,$cliente->id));
+
+			$cambio=$this->detectarCambios($clienteForm->telefonoL,$telefonoLocal->telefono,'Nro.Telf. Local');
+    		$cambios=$this->agregarCambios($cambio,$cambios);
+			$telefonoLocal->telefono=$clienteForm->telefonoL;
+			
+			$traduccionFor=$this->traducirId($clienteForm->codigoL,7);
+			$cambio=$this->detectarCambios($traduccionFor,$telefonoLocal->codigo,'Codigo Telf. Local');
+    		$cambios=$this->agregarCambios($cambio,$cambios);
+			$telefonoLocal->codigo=$traduccionFor;
+			
+
+			$telefonoLocal->save();
+
+
+
+			/////////////////Obtener los datos del telefono Movil ////////////////////////////////////////////////////////////
+			$telefonoMovil=Telefono::find($this->telefonoIdGet(2,$cliente->id));
+			
+			$cambio=$this->detectarCambios($clienteForm->telefonoM,$telefonoMovil->telefono,'Nro.Telf. Movil');
+    		$cambios=$this->agregarCambios($cambio,$cambios);
+			$telefonoMovil->telefono=$clienteForm->telefonoM;
+			
+			$traduccionFor=$this->traducirId($clienteForm->codigoM,7);
+			$cambio=$this->detectarCambios($traduccionFor,$telefonoMovil->codigo,'Codigo Telf. Movil');
+    		$cambios=$this->agregarCambios($cambio,$cambios);
+			$telefonoMovil->codigo=$traduccionFor;
+			
+			
+			$telefonoMovil->save();
+
+
+
 
 			$longitud=count($cambios);
     		$cambios=$this->documentarCambios($cambios);
@@ -3465,7 +3535,8 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 									'numeroMovil'=>Request::get('tmvl'),
 									'correo'=>Request::get('mail'),
 									'categoria'=>Request::get('categoria__id'),
-									'cliente'=>Request::get('cliente__id')
+									'cliente'=>Request::get('cliente__id'),
+									'registro'=>Request::get('registroSucursal')
 								 );
 
 		return $formulario;
@@ -3566,7 +3637,96 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 		
 	}
 
-	public function sucursalesActualizar()
+	
+	public function sucursalPlan()
+	{
+		$nuevo=Request::get('nuevo');
+		$anterior=Request::get('anterior');
+		$sucursal=Request::get('sucursal');
+		$retorno=0;
+
+		if ($anterior==0)
+		{
+			$update=DB::table('plan_sucursal')->insert(['sucursal_id'=>$sucursal,'plan_id'=>$nuevo]);
+		}
+		else
+		{
+			$update=DB::table('plan_sucursal')->where(['sucursal_id'=>$sucursal,'plan_id'=>$anterior])->update(['plan_id'=>$nuevo]);
+		}
+
+		if ($update==true) {$retorno=1;}
+
+		return Response::json(['retorno'=>$retorno]);
+	}
+
+	public function planesInfo()
+	{
+		$plan_id=Request::get('plan_id');
+		$plan=Plan::find($plan_id);
+		$plan=$plan->nombreP;
+		$horarios=Horario::where('plan_id',$plan_id)->first();
+		$respuestas=Respuesta::where('plan_id',$plan_id)->first();
+		$presenciales=Presencial::where('plan_id',$plan_id)->first();
+		$remotos=Remoto::where('plan_id',$plan_id)->first();
+		$telefonicos=Telefonico::where('plan_id',$plan_id)->first();
+		return Response::json(compact('horarios','respuestas','presenciales','remotos','telefonicos','plan'));
+	}
+
+	public function sucursalesStatus()
+	{
+
+		$status=[1,0];
+		$status_=['HABILITADO','INHABILITADO'];
+		$status__=['INHABILITADO','HABILITADO'];
+		$registry=Request::get('registry');
+		$aux=false;
+		///////////// Busqueda del perfil y cambio de status ////////////////////////
+		$sucursal=Sucursal::find($registry);
+		$sucursal->status=$status[$sucursal->status];
+		$aux=$sucursal->save();
+		/////////////////////////////////////////////////////////////////////////////////////////////////////
+	    $this->registroBitacora('Sucursal: '.$sucursal->nombreComercial,'Cambiar Status','{"Status":"Cambio de: '.$status_[$sucursal->status].' a: '.$status__[$sucursal->status].'"}','Sucursales');
+	    /////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		return Response()->json(['update'=>$aux]);
+
+	}
+
+
+
+
+	public function consultarTelefonoSuc($sucursal_id,$tipo)//0 local, 1 local, 2 movil
+	{
+		$telefono=DB::table('telefonos')
+					  ->join('sucursal_telefono','telefonos.id','=','sucursal_telefono.telefono_id')
+					  ->join('tipos','telefonos.codigo','=','tipos.descripcion')
+					  ->where(['sucursal_telefono.sucursal_id'=>$sucursal_id,'telefonos.tipo'=>$tipo])
+					  ->select('telefonos.id AS id','telefonos.codigo AS codigo','telefonos.telefono AS numero','tipos.id AS tipo_id')
+					  ->first();
+
+				return $telefono;
+	}
+
+	public function opcionesDependientes($lista,$padre_id)
+	{
+		if($lista==0)
+		{
+			$retorno=DB::table('regiones')->where('pais_id',$padre_id)->get();
+		}
+		else if($lista==1)
+		{
+			$retorno=DB::table('estados')->where('region_id',$padre_id)->get();
+		}
+		else if($lista==2)
+		{
+			$retorno=DB::table('municipios')->where('estado_id',$padre_id)->get();
+		}
+
+		return $retorno;
+	}
+
+
+	public function sucursalesModificar()
 	{
 		$registry=Request::get('registry');
 		$sucursal=Sucursal::find($registry);
@@ -3574,8 +3734,197 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 		$direccionFiscal=Direccion::find($sucursal->direccionFiscal_id);
 		$direccionComercial=Direccion::find($sucursal->direccionComercial_id);
 		$correo=Correo::find($sucursal->correo_id);
+		$telefonoLocal=$this->consultarTelefonoSuc($sucursal->id,0);
+		$telefonoMovil=$this->consultarTelefonoSuc($sucursal->id,2);
 
-		return Response::json(compact('sucursal','rif','direccionFiscal','direccionComercial','correo'));
+		/////////////////////////Opciones dependientes Direccion Fiscal/////////////
+		$regionesF=$this->opcionesDependientes(0,$direccionFiscal->pais_id);
+		$estadosF=$this->opcionesDependientes(1,$direccionFiscal->region_id);
+		$municipiosF=$this->opcionesDependientes(2,$direccionFiscal->estado_id);
+		$dependenciasF=['regiones'=>$regionesF,'estados'=>$estadosF,'municipios'=>$municipiosF];
+
+		/////////////////////////Opciones dependientes Direccion Comercial/////////////
+		$regionesC=$this->opcionesDependientes(0,$direccionComercial->pais_id);
+		$estadosC=$this->opcionesDependientes(1,$direccionComercial->region_id);
+		$municipiosC=$this->opcionesDependientes(2,$direccionComercial->estado_id);
+		$dependenciasC=['regiones'=>$regionesC,'estados'=>$estadosC,'municipios'=>$municipiosC];
+
+
+		
+
+		return Response::json(compact('sucursal','rif','direccionFiscal','direccionComercial','correo','telefonoLocal','telefonoMovil','dependenciasF','dependenciasC'));
+	}
+
+
+	public function sucursalesActualizar()
+	{
+
+		$formulario=$this->datosSucursal();
+		$duplicado=(object) array('codigo'=>0,'extra'=>0);
+		$cambios=array();
+			
+			//////////////////Datos de la sucursal ////////////////////
+			$sucursal=Sucursal::find($formulario->registro);
+
+			/////////////////Datos del rif ////////////////////////////
+			$rif=Rif::find($sucursal->rif_id);
+
+			$traduccionBd=$this->traducirId($rif->tipo_id,0);
+    		$traduccionFor=$this->traducirId($formulario->rif_id,0);
+    		$cambio=$this->detectarCambios($traduccionFor,$traduccionBd,'Tipo Rif');
+    		$cambios=$this->agregarCambios($cambio,$cambios);
+			$rif->tipo_id=$formulario->rif_id;
+			
+			$cambio=$this->detectarCambios($formulario->numeroRif,$rif->numero,'Numero Rif');
+    		$cambios=$this->agregarCambios($cambio,$cambios);
+			$rif->numero=$formulario->numeroRif;
+			$rif->save();
+
+			////////////////Obtener datos de la direccion fiscal ///////////////////////
+			$direccionFiscal=Direccion::find($sucursal->direccionFiscal_id);
+
+			$cambio=$this->detectarCambios($formulario->direccionFiscal,$direccionFiscal->descripcion,'Direccion Fiscal');
+    		$cambios=$this->agregarCambios($cambio,$cambios);
+			$direccionFiscal->descripcion=$formulario->direccionFiscal;
+
+
+			$traduccionBd=$this->traducirId($direccionFiscal->pais_id,2);
+    		$traduccionFor=$this->traducirId($formulario->paisF,2);
+    		$cambio=$this->detectarCambios($traduccionFor,$traduccionBd,'Pais Direccion Fiscal');
+    		$cambios=$this->agregarCambios($cambio,$cambios);
+			$direccionFiscal->pais_id=$formulario->paisF;
+
+			$traduccionBd=$this->traducirId($direccionFiscal->region_id,3);
+    		$traduccionFor=$this->traducirId($formulario->regionF,3);
+    		$cambio=$this->detectarCambios($traduccionFor,$traduccionBd,'Region Direccion Fiscal');
+    		$cambios=$this->agregarCambios($cambio,$cambios);
+			$direccionFiscal->region_id=$formulario->regionF;
+
+			$traduccionBd=$this->traducirId($direccionFiscal->estado_id,4);
+    		$traduccionFor=$this->traducirId($formulario->estadoF,4);
+    		$cambio=$this->detectarCambios($traduccionFor,$traduccionBd,'Estado Direccion Fiscal');
+    		$cambios=$this->agregarCambios($cambio,$cambios);
+			$direccionFiscal->estado_id=$formulario->estadoF;
+
+
+			$traduccionBd=$this->traducirId($direccionFiscal->municipio_id,5);
+    		$traduccionFor=$this->traducirId($formulario->municipioF,5);
+    		$cambio=$this->detectarCambios($traduccionFor,$traduccionBd,'Estado Direccion Fiscal');
+    		$cambios=$this->agregarCambios($cambio,$cambios);
+			$direccionFiscal->municipio_id=$formulario->municipioF;
+			$direccionFiscal->save();
+
+			/////////////////////Obtener datos de la direccion comrcial ///////////////////////////////////////////
+
+			$direccionComercial=Direccion::find($sucursal->direccionComercial_id);
+
+			$cambio=$this->detectarCambios($formulario->direccionComercial,$direccionComercial->descripcion,'Direccion Comercial');
+    		$cambios=$this->agregarCambios($cambio,$cambios);
+			$direccionComercial->descripcion=$formulario->direccionComercial;
+
+
+			$traduccionBd=$this->traducirId($direccionComercial->pais_id,2);
+    		$traduccionFor=$this->traducirId($formulario->paisC,2);
+    		$cambio=$this->detectarCambios($traduccionFor,$traduccionBd,'Pais Direccion Comercial');
+    		$cambios=$this->agregarCambios($cambio,$cambios);
+			$direccionComercial->pais_id=$formulario->paisC;
+
+			$traduccionBd=$this->traducirId($direccionComercial->region_id,3);
+    		$traduccionFor=$this->traducirId($formulario->regionC,3);
+    		$cambio=$this->detectarCambios($traduccionFor,$traduccionBd,'Region Direccion Comercial');
+    		$cambios=$this->agregarCambios($cambio,$cambios);
+			$direccionComercial->region_id=$formulario->regionC;
+
+			$traduccionBd=$this->traducirId($direccionComercial->estado_id,4);
+    		$traduccionFor=$this->traducirId($formulario->estadoF,4);
+    		$cambio=$this->detectarCambios($traduccionFor,$traduccionBd,'Estado Direccion Comercial');
+    		$cambios=$this->agregarCambios($cambio,$cambios);
+			$direccionComercial->estado_id=$formulario->estadoC;
+
+
+			$traduccionBd=$this->traducirId($direccionComercial->municipio_id,5);
+    		$traduccionFor=$this->traducirId($formulario->municipioF,5);
+    		$cambio=$this->detectarCambios($traduccionFor,$traduccionBd,'Estado Direccion Comercial');
+    		$cambios=$this->agregarCambios($cambio,$cambios);
+			$direccionComercial->municipio_id=$formulario->municipioC;
+			$direccionComercial->save();
+
+			////////////////////Obtener datos del correo ////////////////////////////////////////////////////////////////
+			$correo=Correo::find($sucursal->correo_id);
+
+			$cambio=$this->detectarCambios($formulario->correo,$correo->correo,'Correo');
+    		$cambios=$this->agregarCambios($cambio,$cambios);
+			$correo->correo=$formulario->correo;
+			$correo->save();
+
+			//////////////////Obtener datos basicos de la sucursal ///////////////////////////////////////////////////////
+
+			////////////////////Obtener los datos basicos  del cliente //////////////////////////////////////
+			
+			$cambio=$this->detectarCambios($formulario->razonSocial,$sucursal->razonSocial,'Razon Social');
+    		$cambios=$this->agregarCambios($cambio,$cambios);
+			$sucursal->razonSocial=$formulario->razonSocial;
+			
+			$cambio=$this->detectarCambios($formulario->nombreComercial,$sucursal->nombreComercial,'Nombre Comercial');
+    		$cambios=$this->agregarCambios($cambio,$cambios);
+			$sucursal->nombreComercial=$sucursal->nombreComercial;
+			
+			$traduccionBd=$this->traducirId($sucursal->tipoContribuyente_id,11);
+    		$traduccionFor=$this->traducirId($formulario->tipoContribuyente_id,11);
+    		$cambio=$this->detectarCambios($traduccionFor,$traduccionBd,'Tipo Contribuyente');
+    		$cambios=$this->agregarCambios($cambio,$cambios);
+			$sucursal->tipoContribuyente_id=$formulario->tipoContribuyente_id;
+			$sucursal->save();
+
+			// //////////////////Obtener los datos del telefono Local /////////////////////////////////////////////////////////
+			$telefonoLocal=Telefono::find($this->telefonoIdGetS(0,$sucursal->id));
+
+			$cambio=$this->detectarCambios($formulario->numeroLocal,$telefonoLocal->telefono,'Nro.Telf. Local');
+    		$cambios=$this->agregarCambios($cambio,$cambios);
+			$telefonoLocal->telefono=$formulario->numeroLocal;
+			
+			$traduccionFor=$this->traducirId($formulario->codigoLocal,7);
+			$cambio=$this->detectarCambios($traduccionFor,$telefonoLocal->codigo,'Codigo Telf. Local');
+    		$cambios=$this->agregarCambios($cambio,$cambios);
+			$telefonoLocal->codigo=$traduccionFor;
+			
+
+			$telefonoLocal->save();
+
+
+
+			/////////////////Obtener los datos del telefono Movil ////////////////////////////////////////////////////////////
+			$telefonoMovil=Telefono::find($this->telefonoIdGetS(2,$sucursal->id));
+			
+			$cambio=$this->detectarCambios($formulario->numeroMovil,$telefonoMovil->telefono,'Nro.Telf. Movil');
+    		$cambios=$this->agregarCambios($cambio,$cambios);
+			$telefonoMovil->telefono=$formulario->numeroMovil;
+			
+			$traduccionFor=$this->traducirId($formulario->codigoMovil,7);
+			$cambio=$this->detectarCambios($traduccionFor,$telefonoMovil->codigo,'Codigo Telf. Movil');
+    		$cambios=$this->agregarCambios($cambio,$cambios);
+			$telefonoMovil->codigo=$traduccionFor;
+			
+			
+			$telefonoMovil->save();
+
+			$longitud=count($cambios);
+    		$cambios=$this->documentarCambios($cambios);
+
+    		if($longitud>0)
+    	 	{
+
+    			$this->registroBitacora('Id del registro modificado: '.$sucursal->id,'Modificar Sucursal ',$cambios,'Clientes -> Cliente Matriz -> Categorias ->Sucursales');
+    			$duplicado->codigo=1;
+    		}
+
+
+
+
+
+
+
+	return Response::json($duplicado);
 	}
 
 
@@ -3583,11 +3932,33 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
 		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(32,33),31);
-		$consulta=DB::table('sucursales')->where('id',$sucursal_id)->first();
+		$cliente_id=DB::table('sucursales')
+								->join('categorias','categorias.id','=','sucursales.categoria_id')
+								->join('clientes','clientes.id','=','categorias.cliente_id')
+								->select('clientes.id AS id')
+								->where('sucursales.id',$sucursal_id)->first();
+
+		$responsables=DB::table('personas')->where('cliente_id',$cliente_id->id)->get();
+		$sucursal=Sucursal::find($sucursal_id);
+		$categoria=Categoria::find($sucursal->categoria_id);
+		$tipoCedula=DB::table('tipos')->where('numero_c',5)->get();
+		$tipoCodigoCel=DB::table('tipos')->where('numero_c',2)->get();
+		$tipoCodigoFijo=DB::table('tipos')->where('numero_c',3)->get();
+		$respSucursal=DB::table('persona_sucursal')->where('sucursal_id',$sucursal_id)->first();
+
+		if($respSucursal!=null)
+		{
+			$responsable=$respSucursal->persona_id;
+		}
+		else
+		{
+			$responsable=0;
+		}
+	
 		return view 
 		(
 			'Registros_Basicos\Clientes\clientes_sucursales_responsable',
-			$this->datos_vista($datos,$acciones,array(),$sucursal_id,$consulta->categoria_id)
+			$this->datos_vista($datos,$acciones,$responsables,$sucursal,$categoria,$cliente_id->id,$tipoCedula,$tipoCodigoCel,$tipoCodigoFijo,$responsable)
 		);
 						
 	}
@@ -3595,10 +3966,65 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 	public function clientes_sucursales_plan($sucursal_id)
 		{
 			$datos=$this->cargar_header_sidebar_acciones();
-			$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(37),false);///reisar vista para boton agregar
-			$consulta=DB::table('sucursales')->where('id',$sucursal_id)->first();
-			return view ('Registros_Basicos\Clientes\clientes_sucursales_plan',$this->datos_vista($datos,$acciones,DB::table('planes')->paginate(11),$sucursal_id,$consulta->categoria_id));
+			$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(37),false);///reisar vista 
+			$sucursal=Sucursal::find($sucursal_id);
+			$categoria=Categoria::find($sucursal->categoria_id);
+			//$consulta=DB::table('sucursales')->where('id',$sucursal_id)->first();
+			$consultaPlan=DB::table('plan_sucursal')->where('sucursal_id',$sucursal->id)->first();
+			if ($consultaPlan!=null) 
+			{
+				$planId=$consultaPlan->plan_id;
+			}
+			else
+			{
+				$planId=0;
+			}
+
+			return view ('Registros_Basicos\Clientes\clientes_sucursales_plan',$this->datos_vista($datos,$acciones,DB::table('planes')->paginate(11),$sucursal,$categoria,$planId));
 							
+		}
+
+		public function sucursalAsignarResponsable()
+		{
+
+			$retorno=0;
+			$nuevo=Request::get('nuevo');
+			$anterior=Request::get('anterior');
+			$sucursal=Request::get('sucursal');
+			if ($anterior==0) 
+			{
+				$update=DB::table('persona_sucursal')->insert(['persona_id'=>$nuevo,'sucursal_id'=>$sucursal]);
+			}
+			else
+			{
+				$update=DB::table('persona_sucursal')->where(['persona_id'=>$anterior,'sucursal_id'=>$sucursal])
+				->update(['persona_id'=>$nuevo]);
+			}
+
+			if ($update){$retorno=1;}
+
+			return Response::json(['retorno'=>$retorno]);
+
+		}
+
+		public function sucursalResponsableStatus()
+		{
+
+			$status=[1,0];
+			$status_=['HABILITADO','INHABILITADO'];
+			$status__=['INHABILITADO','HABILITADO'];
+			$registry=Request::get('registry');
+			$aux=false;
+			///////////// Busqueda del perfil y cambio de status ////////////////////////
+			$persona=Persona::find($registry);
+			$persona->status=$status[$persona->status];
+			$aux=$persona->save();
+			/////////////////////////////////////////////////////////////////////////////////////////////////////
+		    $this->registroBitacora('Persona: '.$persona->primerNombre.' '.$persona->primerApellido,'Cambiar Status','{"Status":"Cambio de: '.$status_[$persona->status].' a: '.$status__[$persona->status].'"}','Sucursales->responsable');
+		    /////////////////////////////////////////////////////////////////////////////////////////////////////
+
+			return Response()->json(['update'=>$aux]);
+
 		}
 		
 
@@ -3615,9 +4041,11 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 		{
 			$datos=$this->cargar_header_sidebar_acciones();
 			$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(42,43,44,49),41);
-			$consulta=DB::table('sucursales')->where('id',$sucursal_id)->first();
-			$tipoEquipo=DB::table('tequipos')->get();
-			return view ('Registros_Basicos\Clientes\clientes_sucursales_equipos',$this->datos_vista($datos,$acciones,DB::table('equipos')->where('sucursal_id',$sucursal_id)->paginate(11),$sucursal_id,$consulta->categoria_id,$tipoEquipo,7));
+			$sucursal=Sucursal::find($sucursal_id);
+			$categoria=Categoria::find($sucursal->categoria_id);
+			$tipoequipo=Tipoequipo::all();
+			
+			return view ('Registros_Basicos\Clientes\clientes_sucursales_equipos',$this->datos_vista($datos,$acciones,DB::table('equipos')->where('sucursal_id',$sucursal_id)->paginate(11),$sucursal,$categoria,$tipoequipo));
 							
 		}
 

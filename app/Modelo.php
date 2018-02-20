@@ -6,13 +6,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Modelo extends Model
 {
-    public $timestamps=false;
-    protected $table="modelos";
-    protected $fillable=['id','descripcion','tipo']
+     public $timestamps=false;
+  	 protected $table="modelos"; 
+  	 protected $fillable=['id','descripcion','marca_id'];
 
 
-    public function equipo()
-    {
-    	return $this->belongsTo('App\Equipo');
-    }
+
+
+
+  	 public function marca()
+  	 {
+  	 	 return $this->belongsTo('App\Marca');
+  	 }
 }

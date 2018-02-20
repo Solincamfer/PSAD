@@ -33,7 +33,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-2 despl-bttn">
-                                    <a href="/menu/registros/clientes/categorias/sucursales/{{$datosC1}}">
+                                    <a href="/menu/registros/clientes/categorias/sucursales/{{$extra->id}}">
                                         <div class="bttn-volver">
                                             <button id="btnBk" type="button" href="#" class="bttn-vol"><span class="fa fa-chevron-left"></span><span class="txt-bttn">VOLVER</span></button>
                                         </div>
@@ -80,7 +80,7 @@
                         <div class="paginador">
                              {{ $consulta->links() }}
                         </div>
-						<input type="hidden" name="TND" value="{{$datosC3}}">
+						
                         </div>
                         <!--Registro -->
 
@@ -93,7 +93,7 @@
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                         <h4 class="modal-title" id="myModalLabel">Agregar Equipo</h4>
                                     </div>
-                                    <form action="" class="Validacion">
+                                    <form  class="Validacion" id="equipoSucAgr">
                                     <div class="modal-body">
                                             {{ csrf_field() }}
                                             <div class="container-fluid" id="conteq">
@@ -110,7 +110,7 @@
                                                            <select name="_tpEq" id="_tpEq" class="form-control userEmail" data-tipo="0">
                                                                <option value="">-</option>
                                                                @foreach($datosC2 as $tipoEquipo)
-                                                                    <option value="{{$tipoEquipo->descripcion}}" >{{$tipoEquipo->descripcion}}</option>
+                                                                    <option value="{{$tipoEquipo->id}}" >{{$tipoEquipo->descripcion}}</option>
                                                                @endforeach
                                                               
                                                            </select><i class="fa fa-desktop" id="ice2"></i>
@@ -175,7 +175,7 @@
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                         <h4 class="modal-title" id="myModalLabel2">Modificar Equipo</h4>
                                     </div>
-                                    <form action="" class="Validacion">
+                                    <form  class="Validacion" id="equipoSucMod">
                                         <div class="modal-body">
                                             {{ csrf_field() }}
                                             <div class="container-fluid" id="conteqm">

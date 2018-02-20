@@ -45,21 +45,37 @@ $(document).ready(function()
 		$('#inputm10').val(datos.direccionFiscal.descripcion);
 		$('#inputm15').val(datos.direccionComercial.descripcion);
 		$('#inputm20').val(datos.correo.correo);
-		// $('#inputm16').val(datos.telefonoLocal.tipo_id);
-		// $('#inputm18').val(datos.telefonoMovil.tipo_id);
-		// $('#inputm17').val(datos.telefonoLocal.telefono);
-		// $('#inputm19').val(datos.telefonoMovil.telefono);
+		$('#inputm16').val(datos.telefonoLocal.tipo_id);
+		$('#inputm18').val(datos.telefonoMovil.tipo_id);
+		$('#inputm17').val(datos.telefonoLocal.numero);
+		$('#inputm19').val(datos.telefonoMovil.numero);
 
-		//////////////////////////////Cargar los selects: direccion fiscal /////////////////////////////////
-		// cargarListaDependiente('inn2',0,datos.direccionFiscal.pais_id,datos.direccionFiscal.region_id);//region
-		// cargarListaDependiente('inn3',1,datos.direccionFiscal.region_id,datos.direccionFiscal.estado_id);//estado
-		// cargarListaDependiente('inn4',2,datos.direccionFiscal.estado_id,datos.direccionFiscal.municipio_id);//municipio
+		/////////////////////////////Cargar los selects: direccion fiscal //////////////////////////////////
+		$('.'+'inputm7').remove();
+		cargarSelect(datos.dependenciasF.regiones,'inputm7');
+		$('#inputm7').val(datos.direccionFiscal.region_id);
 
-		// //////////////////////////////Cargar los selects: direccion comercial /////////////////////////////////
-		// cargarListaDependiente('innn12',0,datos.direccionComercial.pais_id,datos.direccionComercial.region_id);//region
-		// cargarListaDependiente('innn13',1,datos.direccionComercial.region_id,datos.direccionComercial.estado_id);//estado
-		// cargarListaDependiente('innn14',2,datos.direccionComercial.estado_id,datos.direccionComercial.municipio_id);//municipio
+		$('.'+'inputm8').remove();
+		cargarSelect(datos.dependenciasF.estados,'inputm8');
+		$('#inputm8').val(datos.direccionFiscal.estado_id);
 
+		$('.'+'inputm9').remove();
+		cargarSelect(datos.dependenciasF.municipios,'inputm9');
+		$('#inputm9').val(datos.direccionFiscal.municipio_id);
+
+		/////////////////////////////Cargar los selects: direccion comercial //////////////////////////////////
+
+		$('.'+'inputm12').remove();
+		cargarSelect(datos.dependenciasC.regiones,'inputm12');
+		$('#inputm12').val(datos.direccionComercial.region_id);
+
+		$('.'+'inputm13').remove();
+		cargarSelect(datos.dependenciasC.estados,'inputm13');
+		$('#inputm13').val(datos.direccionComercial.estado_id);
+
+		$('.'+'inputm14').remove();
+		cargarSelect(datos.dependenciasC.municipios,'inputm14');
+		$('#inputm14').val(datos.direccionComercial.municipio_id);
 
 			
 
@@ -79,9 +95,13 @@ $(document).ready(function()
 				var _token=$( "input[name^='_token']" ).val();
 				var listas=[
 							['input6','input7','input8','input9'],//direccion fiscal agregar. grupo 0
-							['input11','input12','input13','input14']//direccion comercial agregar. grupo 1
+							['input11','input12','input13','input14'],//direccion comercial agregar. grupo 1
+							['inputm6','inputm7','inputm8','inputm9'],
+							['inputm11','inputm12','inputm13','inputm14']
 						
 							];
+
+							
 				if(caso<4)
 				{
 
@@ -114,7 +134,7 @@ $(document).ready(function()
 									.done(function(answer)
 										{
 											
-											console.log(answer);
+											//console.log(answer);
 											
 											if(answer.codigo==1)
 											{
@@ -168,11 +188,12 @@ $(document).ready(function()
 			        var _token=$( "input[name^='_token']" ).val();
 				  	var route='/menu/registros/clientes/modificar/sucursal';
 				  	$('#registroSucursal_').val(registry);
+				  	
 
 				  	  $.post(route,{_token:_token,registry:registry})
 					  .done(function(answer)
 					  {
-					  		
+					  	console.log(answer);
 					  	
 					  	 loadModal(answer);
 					  })
@@ -185,6 +206,121 @@ $(document).ready(function()
 
 
 			////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+			$('#btnModificarSucursal').click(function()
+				{
+					var form=$('#Formclientem').serialize();
+       				var route='/menu/registros/clientes/actualizar/sucursal';
+       				var categoria=$('#categoria__id').val();
+
+       				$.post(route,form)
+						.done(function(answer)
+							{
+								
+								
+								if(answer.codigo==1)
+													{
+															swal({
+																	title:'Actualizacion exitosa',//Contenido del modal
+																	text: '<p style="font-size: 1.0em;">'+'La sucursal se actualizo correctamente!!'+'</p>',
+																	type: "success",
+																	showConfirmButton:true,//Eliminar boton de confirmacion
+																	html: true
+															},
+										  				 	function(isConfirm)
+										  				 	{
+										  				 		if(isConfirm)
+										  				 		{
+										  				 			window.location.href="/menu/registros/clientes/categorias/sucursales/"+categoria;
+										  				 		}	
+
+										  				 	});
+										  				 
+													}
+
+													else if(answer.codigo==2)
+													{
+
+														swal({
+																	title:'Rif duplicado!!!',//Contenido del modal
+																	text: '<p style="font-size: 0.9em;">'+'Se encuentra asociado al cliente  : '+ answer.extra+'.<br><br><br>El RIF debe ser unico.</p>',
+																	type: "warning",
+																	showConfirmButton:true,//Eliminar boton de confirmacion
+																	html: true
+															});
+													}
+							})
+										
+						.fail(function()
+							{
+								swal("Error Inesperado !!", "Comuniquese con el administrador", "error");
+							});
+
+
+
+				});
+
+			$('.checkSucursales').change(function()
+		{
+			
+
+			/////////////////////////////Datos para el alert /////////////////////////////////
+			var estados=[false,true];
+			var valores=[1,0];
+            var colores=["#207D07","#EE1919"];
+            var acciones=['Habilitar','Deshabilitar'];
+            var mensajes=['Habilitado','Deshabilitado'];
+			////////////////////////////////////////////////////////////////////////////////////
+
+			var _token=$( "input[name^='_token']" ).val();
+			var actual=$(this);
+			var registry=actual.attr('data-reg');
+			var valor=actual.val();
+			var route='/menu/registros/clientes/status/sucursal';
+
+			swal({
+				title: "Cambio de status",
+				text: "¿Desea "+acciones[valor]+" La sucursal seleccionada ?",
+				type: "warning",
+				showCancelButton: true,
+				confirmButtonColor:colores[valor],
+				confirmButtonText: acciones[valor]+' Sucursal',
+				cancelButtonText: "Cancelar",
+				closeOnConfirm: false,
+				closeOnCancel: false
+			 },
+			 function(isConfirm)
+			 {
+
+			 		if(isConfirm)
+			 		{
+
+						$.post(route, {_token:_token,registry:registry})
+						.done(function(answer)
+						{
+							if(answer.update)
+							{
+								swal("Modificacion exitosa !!", "La Sucursal ha sido "+mensajes[valor]+" correctamente", "success");
+								$('#'+actual.attr('id')).val(valores[valor]);
+
+							}
+						})
+						.fail(function()
+							{ swal("Error Inesperado !!", "Comuniquese con el administrador", "error");});
+					}
+					else
+					{
+						 
+						 swal("Cambio de status cancelado !!", "No se modifico el status de la Sucursal", "error");
+						 actual.prop('checked',estados[valor]);
+						 $('#'+actual.attr('id')).val(valor);
+						 
+					}
+			});
+
+
+		});
 
 
 

@@ -1,15 +1,12 @@
-$(document).ready(function()
+$(document).ready(function() 
 {
 	
 
-
-
-   ////////////////////////////////////////////Guardar nuevo responsable /////////////////////////////////
-		$('#btnGuardarResponsable2').click(function()
- 				{
- 				
- 					var form=$('#RespCatFor').serialize();
- 					var cliente_id=$('#_clienteMatriz_Resp').val();
+		////////////////agregar nuevo responsable /////////////////////////////////////////
+		$('#btnRespSucursal').click(function() 
+		{
+					var form=$('#respSucForAgr').serialize();
+ 					var sucursal=$('#sucursal_id_resp').val();
  					var route="/menu/registros/clientes/responsable/agregar";
 		 					
 		 			$.post(route,form)
@@ -31,7 +28,7 @@ $(document).ready(function()
 				  				 	{
 				  				 		if(isConfirm)
 				  				 		{
-				  				 			window.location.href="/menu/registros/clientes/responsable/"+cliente_id;
+				  				 			window.location.href="/menu/registros/clientes/categoria/sucursal/responsable/"+sucursal;
 				  				 		}	
 
 				  				 	});
@@ -56,13 +53,18 @@ $(document).ready(function()
 					{
 						swal("Error Inesperado !!", "Comuniquese con el administrador", "error");
 					});
- 				});
 
 
-		/////////////////////////////////////////////////Check de status /////////////////////////////////////////////////
 
 
-		$('.checkRespCat').change(function()
+
+
+
+		});
+
+		///////////////////////////////////////////check de status ///////////////////////////////////////////////////////////////////////
+
+		$('.checkResponsableSuc').change(function()
 		{
 			var estados=[false,true];
 			var valores=[1,0];
@@ -76,7 +78,7 @@ $(document).ready(function()
 			var actual=$(this);
 			var registry=actual.attr('data-reg');
 			var valor=actual.val();
-			var route='/menu/registros/clientes/responsable/status/categoria';
+			var route='/menu/registros/clientes/responsable/status/sucursal';
 
 			swal({
 					title: "Cambio de status",
@@ -121,22 +123,20 @@ $(document).ready(function()
 
 		});
 
-
-	//////////////////////////////////////////////////////////radio button /////////////////////////////////////////////////////
-
-			$('.radioRespCat').click(function()
+		////////////////////////////////////////////Radio Button ////////////////////////////////////////////////////////////////////////////////
+		$('.radioRespSuc').click(function()
 				{
 					
-					var anterior=$('#checkSeleccionadoCat_').val()
+					var anterior=$('#_checkSeleccionadoSuc_').val()
 					var nuevo=$(this).attr('data-reg');
-					var route='/menu/registros/clientes/responsable/asignar/categoria';
-					var categoria=$('#categoriaId_').val();
+					var route='/menu/registros/clientes/responsable/asignar/sucursal';
+					var sucursal=$('#sucursal_id_resp').val();
 					if(!anterior){anterior=0;}
 					
 
 					swal({
 							title: "Asignacion de responsable",
-							text: '<p style="font-size: 0.9em;">'+'Desea asignar a la persona seleccionada como responsable de la categoria:  <br>  '+''+'?</p>',
+							text: '<p style="font-size: 0.9em;">'+'Desea asignar a la persona seleccionada como responsable de la sucursal:  <br>  '+''+'?</p>',
 							type: "warning",
 							showCancelButton: true,
 							confirmButtonColor: "#207D07",
@@ -150,15 +150,15 @@ $(document).ready(function()
 				  				 	{
 				  				 		if(isConfirm)
 				  				 		{
-				  				 			$.getJSON(route,{nuevo:nuevo,anterior:anterior,categoria:categoria})
+				  				 			$.getJSON(route,{nuevo:nuevo,anterior:anterior,sucursal:sucursal})
 				  				 			.done(function(answer)
 				  				 			{
 				  				 				
 				  				 				if(answer.retorno==1)
 				  				 				{
-				  				 					$('#checkSeleccionadoCat_').val(nuevo);//agrega el valor del nuevo registro
-				  				 					$('#'+'cat_rsp'+nuevo).prop("checked",true);//chekea el nuevo registro
-				  				 					swal("Responsable asignado", "La categoria tiene un nuevo responsable asignado", "success");
+				  				 					$('#_checkSeleccionadoSuc_').val(nuevo);//agrega el valor del nuevo registro
+				  				 					$('#'+'s_resp'+nuevo).prop("checked",true);//chekea el nuevo registro
+				  				 					swal("Responsable asignado", "La sucursal tiene un nuevo responsable asignado", "success");
 				  				 				}
 				  				 				else
 				  				 				{
@@ -172,10 +172,10 @@ $(document).ready(function()
 				  				 		}
 				  				 		else
 				  				 		{
-				  				 			$('#checkSeleccionadoCat_').val(anterior);//agrega el valor del nuevo registro
-				  				 			$('#'+'cat_rsp'+anterior).prop("checked",true);//chekea el nuevo registro
-				  				 			$('#'+'cat_rsp'+nuevo).prop("checked",false);
-				  				 			swal("Asignacion cancelada", "No se asigno el responsable seleccionado a la categoria", "error");
+				  				 			$('#_checkSeleccionadoSuc_').val(anterior);//agrega el valor del nuevo registro
+				  				 			$('#'+'s_resp'+anterior).prop("checked",true);//chekea el nuevo registro
+				  				 			$('#'+'s_resp'+nuevo).prop("checked",false);
+				  				 			swal("Asignacion cancelada", "No se asigno el responsable seleccionado a la sucursal", "error");
 				  				 		}	
 
 				  				 	});
@@ -184,4 +184,9 @@ $(document).ready(function()
 
 
 				});
+
+
+
+
+
 });

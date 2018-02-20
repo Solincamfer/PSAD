@@ -28,9 +28,9 @@ use App\Accion;
 use App\Region;
 use App\Estado;
 use App\Municipio;
+use App\Sucursal;
 
 use Response;
-use App\Departamento;
 
 class Buscador extends Controller
 {
@@ -102,79 +102,42 @@ class Buscador extends Controller
 
 
 
-	public function prueba_metodo()
-	{
-
-		
-// 		//DB::table('modulo_perfil')->insert(['perfil_id'=>24,'modulo_id'=>5]);
-// 		DB::table('perfil_submodulo')->insert(['perfil_id'=>24,'submodulo_id'=>15]);
-
-// 	///////////agregar modulo y submodulo de Bitacoras 
-// 		//  $empleado=Empleado::where('id',23)->first();
-
-// 		// $verificarCedula=DB::table('cedulas')->where(['numero'=>'19438374','rol'=>'EMPLEADO','tipo_id'=>14])->where('id','<>',35)->first();
-// 		// dd(($empleado));
+			public function prueba_metodo()
+			{
+				$comercial=(object)array('pais'=>0,'region'=>0,'estado'=>0,'municipio'=>0);
+				$fiscal=(object)array('pais'=>0,'region'=>0,'estado'=>0,'municipio'=>0);
 
 
-//  //       //////////////////////////////////////////////// Rutina para eliminar a un empleado y a todos sus interdependencias /////////////////////////
-// 	// 	$empleados=Empleado::all();
+				$sucursal=Sucursal::find(6);
+				$direccionComercial=Direccion::find($sucursal->direccionComercial_id);
+				$direccionFiscal=Direccion::find($sucursal->direccionFiscal_id);
 
-// 	// 	foreach ($empleados as $empleado) 
-// 	// 	{
-			
-// 	// 		$empUsuario=DB::table('empleado_usuario')->where('empleado_id',$empleado->id)->first();
-// 	// 		DB::table('empleado_usuario')->where('empleado_id',$empleado->id)->delete();//eliminar registro empleado usuario
-// 	// 		DB::table('usuarios')->where('id',$empUsuario->usuario_id)->delete();//eliminar el usuario del empleado
+				$pais=DB::table('paises')->where('id',$direccionComercial->pais_id)->first();
+				$region=DB::table('regiones')->where('id',$direccionComercial->region_id)->first();
+				$estado=DB::table('estados')->where('id',$direccionComercial->estado_id)->first();
+				$municipio=DB::table('municipios')->where('id',$direccionComercial->municipio_id)->first();
 
-// 	// 		$empTelefono=DB::table('empleado_telefono')->where('empleado_id',$empleado->id)->get();//captura id del empleado y sus telefonos asociados
-
-// 	// 		foreach ($empTelefono as $empT) 
-// 	// 		{
-// 	// 			DB::table('empleado_telefono')->where('empleado_id',$empT->empleado_id)->delete();// eliminar el registro de la 
-// 	// 			DB::table('telefonos')->where('id',$empT->telefono_id)->delete();//eliminar el telefono
-// 	// 		}
-
-// 	// 		$empDelete=DB::table('empleados')->where('id',$empT->empleado_id)->delete();//eliminar el empleado
-
-
-// 	// 		DB::table('cedulas')->where('id',$empleado->cedula_id)->delete();
-// 	// 		DB::table('rifs')->where('id',$empleado->rif_id)->delete();
-// 	// 		DB::table('correos')->where('id',$empleado->correo_id)->delete();
-// 	// 		DB::table('direcciones')->where('id',$empleado->direccion_id)->delete();
-
-// 	// // ///////////////////////////// fin de la rutina para eliminar empleados ///////////////////////////////////////////////////////////////
+				$comercial->pais=$pais->descripcion;
+				$comercial->region=$region->descripcion;
+				$comercial->estado=$estado->descripcion;
+				$comercial->municipio=$municipio->descripcion;
 
 
 
+				$pais=DB::table('paises')->where('id',$direccionFiscal->pais_id)->first();
+				$region=DB::table('regiones')->where('id',$direccionFiscal->region_id)->first();
+				$estado=DB::table('estados')->where('id',$direccionFiscal->estado_id)->first();
+				$municipio=DB::table('municipios')->where('id',$direccionFiscal->municipio_id)->first();
 
+				$fiscal->pais=$pais->descripcion;
+				$fiscal->region=$region->descripcion;
+				$fiscal->estado=$estado->descripcion;
+				$fiscal->municipio=$municipio->descripcion;
 
+				
 
+				return Response::json(['comercial'=>$comercial,'fiscal'=>$fiscal]);
 
-
-
-
-
-
-// 	// 	 }
-
-		
-		
-
-	
-// =======
-// 	       $departamentos=new Departamento;
-// 			$departamentos->descripcion="vincen";
-// 			$departamentos->status=1;
-// 			$departamentos->director_id=0;
-// 			$departamentos->save();
-// >>>>>>> origin/master
-// 	}
-
-
-
-
-
-
-}
+			}
 
 }

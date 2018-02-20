@@ -8,16 +8,16 @@ $(document).ready(function()
 			
 			
 			var campos={
-							primerNombre:['RpMda1','RpMdn1'],
-							primerApellido:['RpMda2','RpMdn2'],
-							tipoCedula:['RpMda3','RpMdn3'],
-							numeroCedula:['RpMda4','RpMdn4'],
-							cargo:['RpMda5','RpMdn5'],
-							codigoMovil:['RpMdaa1','RpMdnn1'],
-							numeroMovil:['RpMdaa2','RpMdnn2'],
-							codigoLocal:['RpMdaa3','RpMdnn3'],
-							numeroLocal:['RpMdaa4','RpMdnn4'],
-							correo:['RpMdaa5','RpMdnn5']
+							primerNombre:['RpMda1','RpMdn1','inputm1'],
+							primerApellido:['RpMda2','RpMdn2','inputm3'],
+							tipoCedula:['RpMda3','RpMdn3','selciRpbm'],
+							numeroCedula:['RpMda4','RpMdn4','cedRespSuc'],
+							cargo:['RpMda5','RpMdn5','RpMdns5'],
+							codigoMovil:['RpMdaa1','RpMdnn1','RpMdnn1s'],
+							numeroMovil:['RpMdaa2','RpMdnn2','RpMdnns2'],
+							codigoLocal:['RpMdaa3','RpMdnn3','seltlsfmRpb'],
+							numeroLocal:['RpMdaa4','RpMdnn4','RpMdnns4'],
+							correo:['RpMdaa5','RpMdnn5','RpMdsnn5']
 						};
 			/////////////////indicar al boton guardar del modal modificar el registro que se desea modificar //////////////////////////////
 			$('#'+campos.primerNombre[caso]).val(datos.persona.primerNombre);
@@ -43,8 +43,9 @@ $(document).ready(function()
  					var registry=$(this).attr('data-reg');
  					var caso=$(this).data('caso');
 
- 					var formularios=['_responsableMatriz_Mod','categoriResp__'];
- 					var registros=['idRegistroMod_','Responsableid'];
+ 					var formularios=['_responsableMatriz_Mod','categoriResp__','respSucForMod'];
+ 					var registros=['idRegistroMod_','Responsableid','idRegistroModSuc'];
+ 					
 
  					$('#'+registros[caso]).val(registry);
  					var form=$('#'+formularios[caso]).serialize();
@@ -69,9 +70,9 @@ $(document).ready(function()
  			$('.btnModificarResp_').click(function()
  				{
  					var caso=$(this).attr('data-caso');////caso 0 resp Cliente//caso 1 resp Categoria
- 					var formularios=['_responsableMatriz_Mod','categoriResp__'];
- 					var redirecciones=['_clienteMatriz_','categoriaId_'];
- 					var rutas=['/menu/registros/clientes/responsable/','/menu/registros/clientes/categoria/responsable/'];
+ 					var formularios=['_responsableMatriz_Mod','categoriResp__','respSucForMod'];
+ 					var redirecciones=['_clienteMatriz_','categoriaId_','sucursal_id_resp'];
+ 					var rutas=['/menu/registros/clientes/responsable/','/menu/registros/clientes/categoria/responsable/','/menu/registros/clientes/categoria/sucursal/responsable/'];
  					var route='/menu/registros/clientes/responsables/actualizar';
  					var formulario=$('#'+formularios[caso]).serialize();
  					var redireccion=$('#'+redirecciones[caso]).val();
@@ -291,6 +292,7 @@ $(document).ready(function()
 				  				 		{
 				  				 			$('#checkSeleccionado_').val(anterior);//agrega el valor del nuevo registro
 				  				 			$('#'+'c_rsp'+anterior).prop("checked",true);//chekea el nuevo registro
+				  				 			$('#'+'c_rsp'+nuevo).prop("checked",false);
 				  				 			swal("Perfil asignado", "Ha concedido al usuario actual los permisos asociados al perfil seleccionado", "error");
 				  				 		}	
 
