@@ -10,11 +10,25 @@
 
 $( document ).ready(function() {
 
-////Validacion + permisologia + AJAX del boton submit de la vista LOGIN////
-$('#log1').click(function(){
-	var user = $('#user').val();
-	var pwd = $('#pwd').val();
-	if (user != '' && pwd != ''){
+$('#log').bootstrapValidator({
+		   fields: {
+				user: {
+			       validators: {
+			         notEmpty: {
+			           message: 'Debe indicar el nombre del nuevo perfil'
+			         }
+			       }
+		     	},
+		    	pwd: {
+			       validators: {
+			         notEmpty: {
+			           message: 'Debe seleccionar un estatus para el nuevo perfil'
+			         }
+		       }
+		     }
+		   }
+        }).on('success.form.bv',function(e,data){
+	  		e.preventDefault();
 		//Funcionalidad para la validacion de Boostrapt Validator en la que bloquea el boton del login
 			var form=$('#log');
 			var url= 'login/verificar';
@@ -72,8 +86,7 @@ $('#log1').click(function(){
 				//Validar preload
 				//alert( "complete" );
 			});	
-	}else{	
-	}
+
 });
 
 $("#btnLimipiarResponsable1").click(function(){

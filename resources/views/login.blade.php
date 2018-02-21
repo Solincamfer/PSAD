@@ -12,11 +12,11 @@
                             <div class="alert alert-success alert-dismissible fade in" role="alert" id="AccesoTrue"><p>Credenciales correctas.</p>
                             </div>
                             <div class="form-group col-md-12">
-                                <input type="text" id="user" name="user" class="form-control" placeholder="Usuario" required><i class="fa fa-user"></i>
+                                <input type="text" id="user" name="user" class="form-control" placeholder="Usuario" ><i class="fa fa-user"></i>
                                 <div class="help-block with-errors"></div>
                             </div>
                             <div class="form-group col-md-12">
-                                <input type="password" id="pwd" name="pwd" class="form-control" placeholder="Contraseña" required><i class="fa fa-lock"></i>
+                                <input type="password" id="pwd" name="pwd" class="form-control" placeholder="Contraseña" ><i class="fa fa-lock"></i>
                                 <div class="help-block with-errors"></div>
                             </div>
                         <div class="form-group container-fluid" id="f2">
