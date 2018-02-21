@@ -1,10 +1,304 @@
 $(document).ready(function() 
 {
-	
+///////////////////////////////Metodos comunes/////////////////////////////////////////
+ 			function loadModal(datos,caso)
+		{
+			
+			
+			var campos={
+							primerNombre:['RpMda1','RpMdn1','inputm1'],
+							primerApellido:['RpMda2','RpMdn2','inputm3'],
+							tipoCedula:['RpMda3','RpMdn3','selciRpbm'],
+							numeroCedula:['RpMda4','RpMdn4','cedRespSuc'],
+							cargo:['RpMda5','RpMdn5','RpMdns5'],
+							codigoMovil:['RpMdaa1','RpMdnn1','RpMdnn1s'],
+							numeroMovil:['RpMdaa2','RpMdnn2','RpMdnns2'],
+							codigoLocal:['RpMdaa3','RpMdnn3','seltlsfmRpb'],
+							numeroLocal:['RpMdaa4','RpMdnn4','RpMdnns4'],
+							correo:['RpMdaa5','RpMdnn5','RpMdsnn5']
+						};
+			/////////////////indicar al boton guardar del modal modificar el registro que se desea modificar //////////////////////////////
+			$('#'+campos.primerNombre[caso]).val(datos.persona.primerNombre);
+			$('#'+campos.primerApellido[caso]).val(datos.persona.primerApellido);
+			$('#'+campos.tipoCedula[caso]).val(datos.cedula.tipo_id);
+			$('#'+campos.numeroCedula[caso]).val(datos.cedula.numero);
+			$('#'+campos.cargo[caso]).val(datos.persona.cargo);
+			$('#'+campos.codigoMovil[caso]).val(datos.telefonoM.codigo_id);
+			$('#'+campos.numeroMovil[caso]).val(datos.telefonoM.numero);
+			$('#'+campos.codigoLocal[caso]).val(datos.telefonoL.codigo_id);
+			$('#'+campos.numeroLocal[caso]).val(datos.telefonoL.numero);
+			$('#'+campos.correo[caso]).val(datos.correo.correo);
+			$('#myModal2').modal('show');
+
+			return 0;
+		}
+
+
+ 			///////////////////////// Modificar Responsable: Cargar modal//////////////////////////////////////////
+
+ 			$('.modificarResponsable').click(function()
+ 				{
+ 					var registry=$(this).attr('data-reg');
+ 					var caso=$(this).data('caso');
+
+ 					var formularios=['_responsableMatriz_Mod','categoriResp__','respSucForMod'];
+ 					var registros=['idRegistroMod_','Responsableid','idRegistroModSuc'];
+ 					
+
+ 					$('#'+registros[caso]).val(registry);
+ 					var form=$('#'+formularios[caso]).serialize();
+
+ 					var route="/menu/registros/clientes/modificar/responsable";
+ 					
+ 				
+ 					$.post(route,form)
+					.done(function(answer)
+						{
+							loadModal(answer,caso);
+						})
+					.fail(function()
+					{
+						swal("Error Inesperado !!", "Comuniquese con el administrador", "error");
+					});
+
+ 				});
+
+
+ 			///////////////////////// Modificar Responsable: Guardar cambios Matriz, categoria////////////////////////////////
+ 			$('#respSucForMod').bootstrapValidator({
+				excluded: [':disabled'],
+			   fields: {
+			     nomRpb1: {
+			       validators: {
+			        notEmpty: {
+			           message: 'Debe indicar el nombre del responsable'
+			        },
+					regexp: {
+			                regexp: /^[a-z\s]+$/i,
+			                message: 'El nombre debe contener solo caracteres alfabéticos'
+	                }
+			       }
+			     },
+			     apellRpb1: {
+			       validators: {
+			        notEmpty: {
+			           message: 'Debe indicar el apellido del responsable'
+			        },
+					regexp: {
+			                regexp: /^[a-z\s]+$/i,
+			                message: 'El apellido debe contener solo caracteres alfabéticos'
+	                }
+			       }
+			     },
+			     selciRpb: {
+			       validators: {
+			         notEmpty: {
+			           message: 'Seleccione el tipo de documento'
+			         }
+			       }
+			     },
+			     txtci: {
+			       validators: {
+			         notEmpty: {
+			           message: 'Debe indicar el número de cédula del responsable'
+			         },
+			        regexp: {
+		                regexp: /^[0-9]+$/,
+		                message: 'La cédula de identidad debe contener solo numeros'                            
+	                },
+			       }
+			     },
+			     cgoRpb: {
+			       validators: {
+			         notEmpty: {
+			           message: 'Debe indicar el cargo de la persona responsable'
+			         }
+			       }
+			     },
+			     seltlfmRpb: {
+			       validators: {
+			         notEmpty: {
+			           message: 'Debe indicar un código de area local'
+			         }
+			       }
+			     },
+			     numTelmvlRpb: {
+			       validators: {
+			         notEmpty: {
+			           message: 'Debe indicar un número de telefono local'
+			         },
+			         regexp: {
+		                regexp: /^[0-9]+$/,
+		                message: 'Solo debe contener caracteres númericos'                            
+	                },
+			       }
+			     },
+			     numTelclRpb:{
+			     	validators:{
+			     		regexp: {
+			                regexp: /^[0-9]+$/,
+			                message: 'Solo debe contener caracteres númericos'                            
+	                }
+			     	}
+			     },
+			     mail2: {
+			       validators: {
+			         notEmpty: {
+			           message: 'Debe indicar un correo electrónico'
+			        },
+			         emailAddress: {
+	                        message: 'El correo electronico debe tener el formato minombre@midominio.com'
+	                }
+			       }
+			     }
+			   }
+	  		}).on('success.form.bv',function(e,data){
+	  			e.preventDefault();
+				var caso=$(this).attr('data-caso');////caso 0 resp Cliente//caso 1 resp Categoria
+				var formularios=['_responsableMatriz_Mod','categoriResp__','respSucForMod'];
+				var redirecciones=['_clienteMatriz_','categoriaId_','sucursal_id_resp'];
+				var rutas=['/menu/registros/clientes/responsable/','/menu/registros/clientes/categoria/responsable/','/menu/registros/clientes/categoria/sucursal/responsable/'];
+				var route='/menu/registros/clientes/responsables/actualizar';
+				var formulario=$('#'+formularios[caso]).serialize();
+				var redireccion=$('#'+redirecciones[caso]).val();
+ 					
+ 					
+
+		    		$.post(route,formulario)
+				  		.done(function(answer)
+				  			{
+				  				
+								
+								if(answer.codigo==1)
+								{
+										swal({
+												title:'Actualizacion Exitosa',//Contenido del modal
+												text: '<p style="font-size: 1.0em;">'+'EL responsable se modifico correctamente!!'+'</p>',
+												type: "success",
+												showConfirmButton:true,//Eliminar boton de confirmacion
+												html: true
+										},
+					  				 	function(isConfirm)
+					  				 	{
+					  				 		if(isConfirm)
+					  				 		{
+					  				 			window.location.href=rutas[caso]+redireccion;
+					  				 		}	
+
+					  				 	});
+					  				 
+								}
+
+								else if(answer.codigo==2)
+								{
+
+									swal({
+												title:'Cedula duplicada!!!',//Contenido del modal
+												text: '<p style="font-size: 0.9em;">'+'Se encuentra asociada al responsable: '+ answer.extra+'.<br><br><br>La cedula debe ser unica para un responsable.</p>',
+												type: "warning",
+												showConfirmButton:true,//Eliminar boton de confirmacion
+												html: true
+										});
+								}
+				  				
+				 			})
+
+				  		.fail(function()
+							{swal("Error Inesperado !!", "Comuniquese con el administrador", "error");
+						});
+			});
+
 
 		////////////////agregar nuevo responsable /////////////////////////////////////////
-		$('#btnRespSucursal').click(function() 
-		{
+	$('#respSucForAgr').bootstrapValidator({
+				excluded: [':disabled'],
+			   fields: {
+			     nomRpb1: {
+			       validators: {
+			        notEmpty: {
+			           message: 'Debe indicar el nombre del responsable'
+			        },
+					regexp: {
+			                regexp: /^[a-z\s]+$/i,
+			                message: 'El nombre debe contener solo caracteres alfabéticos'
+	                }
+			       }
+			     },
+			     apellRpb1: {
+			       validators: {
+			        notEmpty: {
+			           message: 'Debe indicar el apellido del responsable'
+			        },
+					regexp: {
+			                regexp: /^[a-z\s]+$/i,
+			                message: 'El apellido debe contener solo caracteres alfabéticos'
+	                }
+			       }
+			     },
+			     selciRpb: {
+			       validators: {
+			         notEmpty: {
+			           message: 'Seleccione el tipo de documento'
+			         }
+			       }
+			     },
+			     txtci: {
+			       validators: {
+			         notEmpty: {
+			           message: 'Debe indicar el número de cédula del responsable'
+			         },
+			        regexp: {
+		                regexp: /^[0-9]+$/,
+		                message: 'La cédula de identidad debe contener solo numeros'                            
+	                },
+			       }
+			     },
+			     cgoRpb: {
+			       validators: {
+			         notEmpty: {
+			           message: 'Debe indicar el cargo de la persona responsable'
+			         }
+			       }
+			     },
+			     seltlfmRpb: {
+			       validators: {
+			         notEmpty: {
+			           message: 'Debe indicar un código de area local'
+			         }
+			       }
+			     },
+			     numTelmvlRpb: {
+			       validators: {
+			         notEmpty: {
+			           message: 'Debe indicar un número de telefono local'
+			         },
+			         regexp: {
+		                regexp: /^[0-9]+$/,
+		                message: 'Solo debe contener caracteres númericos'                            
+	                },
+			       }
+			     },
+			     numTelclRpb:{
+			     	validators:{
+			     		regexp: {
+			                regexp: /^[0-9]+$/,
+			                message: 'Solo debe contener caracteres númericos'                            
+	                }
+			     	}
+			     },
+			     mail2: {
+			       validators: {
+			         notEmpty: {
+			           message: 'Debe indicar un correo electrónico'
+			        },
+			         emailAddress: {
+	                        message: 'El correo electronico debe tener el formato minombre@midominio.com'
+	                }
+			       }
+			     }
+			   }
+	  		}).on('success.form.bv',function(e,data){
+	  			e.preventDefault();
 					var form=$('#respSucForAgr').serialize();
  					var sucursal=$('#sucursal_id_resp').val();
  					var route="/menu/registros/clientes/responsable/agregar";
@@ -60,7 +354,7 @@ $(document).ready(function()
 
 
 
-		});
+	});
 
 		///////////////////////////////////////////check de status ///////////////////////////////////////////////////////////////////////
 

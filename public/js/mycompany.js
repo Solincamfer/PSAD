@@ -106,11 +106,6 @@ $(document).ready(function(){
   });
 
   $('#nuevaDireccion').bootstrapValidator({
-   feedbackIcons: {
-     valid: 'glyphicon glyphicon-ok',
-     invalid: 'glyphicon glyphicon-remove',
-     validating: 'glyphicon glyphicon-refresh'
-   },
    fields: {
      direccion: {
        validators: {
@@ -127,12 +122,7 @@ $(document).ready(function(){
        }
      }
    }
-  });
-
-  $('#nuevaDireccion').bootstrapValidator().on('submit', function (e) {
-    if (e.isDefaultPrevented()) {
-    } 
-    else {
+  }).on('success.form.bv',function(e,data){
       e.preventDefault();
       var form= $('#nuevaDireccion').serialize();
       var url="/menu/registros/estructura/ingresarDireccion";
@@ -171,8 +161,7 @@ $(document).ready(function(){
         }
         
       });
-    }
-  })
+  });
   $('#link-direcciones').on('click', function(event) {
     var form=0;
     var url="/menu/registros/estructura/buscarDirecciones";
@@ -192,11 +181,6 @@ $(document).ready(function(){
   
 
   $('#newDep').bootstrapValidator({
-   feedbackIcons: {
-     valid: 'glyphicon glyphicon-ok',
-     invalid: 'glyphicon glyphicon-remove',
-     validating: 'glyphicon glyphicon-refresh'
-   },
    fields: {
      departamento: {
        validators: {
@@ -213,12 +197,7 @@ $(document).ready(function(){
        }
      }
    }
-  });
-
-  $('body').bootstrapValidator().on('submit','#newDep', function (e) {
-    if (e.isDefaultPrevented()) {
-    } 
-    else {
+  }).on('success.form.bv',function(e,data){
       e.preventDefault();
       var departamentoSelect = new Array();
       var direccionSelect= $('#comboDireccion').val();
@@ -271,14 +250,9 @@ $(document).ready(function(){
           });
         } 
       });  
-    }
   });
+
   $('#newArea').bootstrapValidator({
-   feedbackIcons: {
-     valid: 'glyphicon glyphicon-ok',
-     invalid: 'glyphicon glyphicon-remove',
-     validating: 'glyphicon glyphicon-refresh'
-   },
    fields: {
      area: {
        validators: {
@@ -295,12 +269,7 @@ $(document).ready(function(){
        }
      }
    }
-  });
-
-  $('body').bootstrapValidator().on('submit','#newArea', function (e) {
-    if (e.isDefaultPrevented()) {
-    } 
-    else {
+  }).on('success.form.bv',function(e,data){
       e.preventDefault();
       var form= new FormData(document.getElementById('newArea'));
       var url="/menu/registros/estructura/ingresarArea";
@@ -348,16 +317,10 @@ $(document).ready(function(){
           });
         }
       });   
-    }
   });
 
 
   $('#newCargo').bootstrapValidator({
-   feedbackIcons: {
-     valid: 'glyphicon glyphicon-ok',
-     invalid: 'glyphicon glyphicon-remove',
-     validating: 'glyphicon glyphicon-refresh'
-   },
    fields: {
      cargo: {
        validators: {
@@ -374,12 +337,7 @@ $(document).ready(function(){
        }
      }
    }
-  });
-
-  $('body').bootstrapValidator().on('submit','#newCargo', function (e) {
-    if (e.isDefaultPrevented()) {
-    } 
-    else {
+  }).on('success.form.bv',function(e,data){
       e.preventDefault();
       var form= new FormData(document.getElementById('newCargo'));
       var url="/menu/registros/estructura/ingresarCargo";
@@ -427,7 +385,6 @@ $(document).ready(function(){
           });
         }
       });   
-    }
   });
 
 //-------------------------- VENTANAS MODIFICAR REGISTROS (direcciones, departamentos, areas y cargos) -------------------------
@@ -470,11 +427,6 @@ $(document).ready(function(){
   });
 
   $('#updateDireccion').bootstrapValidator({
-   feedbackIcons: {
-     valid: 'glyphicon glyphicon-ok',
-     invalid: 'glyphicon glyphicon-remove',
-     validating: 'glyphicon glyphicon-refresh'
-   },
    fields: {
      campoD: {
        validators: {
@@ -491,13 +443,8 @@ $(document).ready(function(){
        }
      }
    }
-  });
-
-  $('body').bootstrapValidator().on('submit','#updateDireccion', function (e) {
-    if(e.isDefaultPrevented()) {
-    } 
-    else {
-     e.preventDefault();
+  }).on('success.form.bv',function(e,data){
+      e.preventDefault();
       var form= new FormData(document.getElementById('updateDireccion'));
       var url="/menu/registros/estructura/actualizarDireccion";
  
@@ -546,15 +493,9 @@ $(document).ready(function(){
           setTimeout(function(){location.reload()},2200);
         }
       });   
-    }
   });
 
   $('#updateDepartamento').bootstrapValidator({
-   feedbackIcons: {
-     valid: 'glyphicon glyphicon-ok',
-     invalid: 'glyphicon glyphicon-remove',
-     validating: 'glyphicon glyphicon-refresh'
-   },
    fields: {
      campoD: {
        validators: {
@@ -571,13 +512,8 @@ $(document).ready(function(){
        }
      }
    }
-  });
-
-  $('body').bootstrapValidator().on('submit','#updateDepartamento', function (e) {
-    if(e.isDefaultPrevented()) {
-    } 
-    else {
-     e.preventDefault();
+  }).on('success.form.bv',function(e,data){
+      e.preventDefault();
       var form= new FormData(document.getElementById('updateDepartamento'));
       var url="/menu/registros/estructura/actualizarDepartamento";
       var direccionSelect=$('#comboDireccion').val();
@@ -638,15 +574,9 @@ $(document).ready(function(){
           });
         }
       });   
-    }
   });
 
   $('#updateArea').bootstrapValidator({
-   feedbackIcons: {
-     valid: 'glyphicon glyphicon-ok',
-     invalid: 'glyphicon glyphicon-remove',
-     validating: 'glyphicon glyphicon-refresh'
-   },
    fields: {
      campoD: {
        validators: {
@@ -663,13 +593,8 @@ $(document).ready(function(){
        }
      }
    }
-  });
-
-  $('body').bootstrapValidator().on('submit','#updateArea', function (e) {
-    if(e.isDefaultPrevented()) {
-    } 
-    else {
-     e.preventDefault();
+  }).on('success.form.bv',function(e,data){
+      e.preventDefault();
       var form= new FormData(document.getElementById('updateArea'));
       var url="/menu/registros/estructura/actualizarArea";
       var direccionSelect=$('#comboDireccion').val();
@@ -741,15 +666,9 @@ $(document).ready(function(){
           });
         }
       });   
-    }
   });
 
-    $('#updateCargo').bootstrapValidator({
-   feedbackIcons: {
-     valid: 'glyphicon glyphicon-ok',
-     invalid: 'glyphicon glyphicon-remove',
-     validating: 'glyphicon glyphicon-refresh'
-   },
+  $('#updateCargo').bootstrapValidator({
    fields: {
      campoD: {
        validators: {
@@ -766,13 +685,8 @@ $(document).ready(function(){
        }
      }
    }
-  });
-
-  $('body').bootstrapValidator().on('submit','#updateCargo', function (e) {
-    if(e.isDefaultPrevented()) {
-    } 
-    else {
-     e.preventDefault();
+  }).on('success.form.bv',function(e,data){
+      e.preventDefault();
       var form= new FormData(document.getElementById('updateCargo'));
       var url="/menu/registros/estructura/actualizarCargo";
       var direccionSelect=$('#comboDireccion').val();
@@ -843,7 +757,6 @@ $(document).ready(function(){
           });
         }
       });   
-    }
   });
 
 //////////////////////////////////////Funcion Check Status ///////////////////////////////////////////////////////

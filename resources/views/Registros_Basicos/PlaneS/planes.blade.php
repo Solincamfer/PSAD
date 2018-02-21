@@ -101,7 +101,7 @@
                                             <div class="col-md-8 col-md-offset-2">
                                                <div class="form-group row">
                                                    <label for="porDes">Porcentaje de descuento</label>
-                                                   <input type="text" name="porDes" id="porDes"><i class="fa fa-percent" id="icpn2"></i>
+                                                   <input type="number" min="0" max="100" name="porDes" id="porDes"><i class="fa fa-percent" id="icpn2"></i>
                                                </div>
                                             </div>
                                             <div class="col-md-8 col-md-offset-2">
@@ -176,4 +176,7 @@
                     </div>
                 </div>
             </div>
+    @endsection
+    @section('js')
+        <script src="{{asset('js/vista_planes.js')}}"></script>
     @endsection

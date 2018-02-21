@@ -10,35 +10,6 @@
 
 $( document ).ready(function() {
 
-/////Deshabilitar accion="" para formularios submit
-$( "#log" ).submit(function( event ){
-	event.preventDefault();
-});
-$( "#Formcliente" ).submit(function( event ){
-	event.preventDefault();
-});
-$( "#NewDep" ).submit(function( event ){
-	event.preventDefault();
-});
-$( "#NewCarg" ).submit(function( event ){
-	event.preventDefault();
-});
-$( "#NewPlan" ).submit(function( event ){
-	event.preventDefault();
-});
-$( ".NewServicio" ).submit(function( event ){
-	event.preventDefault();
-});
-$( "#mPlan" ).submit(function( event ){
-	event.preventDefault();
-});
-$("#NewEmp").submit(function(event){
-	event.preventDefault();
-});
-$('#updateEmp').submit(function(event){
-	event.preventDefault();
-});
-////////////////////
 ////Validacion + permisologia + AJAX del boton submit de la vista LOGIN////
 $('#log1').click(function(){
 	var user = $('#user').val();
@@ -104,61 +75,6 @@ $('#log1').click(function(){
 	}else{	
 	}
 });
-
-
-	// $(".modificarResponsable").click(function(){
-
-	// 	///////////BUSCADO BOTON CLICKEADO/////////////	
-	// 		ID = $(this).attr("id");///////ID DEL BOTTON MODIFICAR/////////
-	// 		idResponsable=$('#idresp'+ID).val();///////TRAER VALOR DEL ID DEL BOTTON MODIFICAR/////////
-	// 		$('#Registroid').val(idResponsable);///////ID DEL BOTTON MODIFICAR IGUALADA AL VALOR DEL CAMPO CORRESPONDIENTE AL ID SELECCIONADO/////////	
-	// 	///////////PASANDO VARIABLE Y CARGANDO LISTADO CORRESPONDIENTE A LA SELECCION PREVIA Y ESPERANDO DATA COMO RESPUESTA/////////////			        	
-	// 		$.get("/menu/registros/clientes/modificar/responsable", {idResponsable: idResponsable}, function(data){
-	//     ///////////ASIGNANDO LOS VALORES DEL ARRAY A LOS IMPUT CORRESPONDIENTES DEL MODAL MODIFICAR/////////////		        	
- //        		$('#RpMda1').val(data[0]);
- //        		$('#RpMda2').val(data[1]);
- //        		$('#RpMda3').val(data[4]);
- //        		$('#RpMda4').val(data[3]);
- //        		$('#RpMda5').val(data[2]);	        		
- //        		$('#RpMdaa1').val(data[6]);
- //        		$('#RpMdaa2').val(data[7]);
- //        		$('#RpMdaa3').val(data[8]);
- //        		$('#RpMdaa4').val(data[9]);
- //        		$('#RpMdaa5').val(data[11]);
-
- //        		///////Data para probar los campos rescibidos por el AJAX////->->->//alert(data);
-	//        });
-
-	// });
-
-
-
-	// $(".modificarResponsable_clinete").click(function(){
-
-	// 	///////////BUSCADO BOTON CLICKEADO/////////////	
-	// 		ID = $(this).attr("id");///////ID DEL BOTTON MODIFICAR/////////
-	// 		idResponsable=$('#idresp_c'+ID).val();///////TRAER VALOR DEL ID DEL BOTTON MODIFICAR/////////	
-	// 		$('#Responsableid').val(idResponsable);///////ID DEL BOTTON MODIFICAR IGUALADA AL VALOR DEL CAMPO CORRESPONDIENTE AL ID SELECCIONADO/////////	
-	// 	///////////PASANDO VARIABLE Y CARGANDO LISTADO CORRESPONDIENTE A LA SELECCION PREVIA Y ESPERANDO DATA COMO RESPUESTA/////////////			        	
-	// 		$.get("/menu/registros/clientes/modificar/responsable", {idResponsable: idResponsable}, function(data){
-	//     ///////////ASIGNANDO LOS VALORES DEL ARRAY A LOS IMPUT CORRESPONDIENTES DEL MODAL MODIFICAR/////////////		        	
- //        		$('#RpMdn1').val(data[0]);
- //        		$('#RpMdn2').val(data[1]);
- //        		$('#RpMdn3').val(data[4]);
- //        		$('#RpMdn4').val(data[3]);
- //        		$('#RpMdn5').val(data[2]);	        		
- //        		$('#RpMdnn1').val(data[6]);
- //        		$('#RpMdnn2').val(data[7]);
- //        		$('#RpMdnn3').val(data[8]);
- //        		$('#RpMdnn4').val(data[9]);
- //        		$('#RpMdnn5').val(data[11]);
-
- //        		//alert(data);///////Data para probar los campos resividos por el AJAX////->->->/
-	//        });
-
-	// });
-
-
 
 $("#btnLimipiarResponsable1").click(function(){
 	$('form-control-feedback').css('display','none');
@@ -612,7 +528,7 @@ $('#saveTR').click(function(){
 		});
 	}
 });
-/////////////////////   CARGA DE DATOS EN EL MODAL DE MODIFICAR PLANES    //////////////////////////
+
 
 
 /////////////////////////////////////// COMBOS DEPENDIENTES DEL MODAL DE AGREGAR EMPLEADO /////////////////////////////////
@@ -666,7 +582,7 @@ $("#edodhe").change(function(){
     $.get("/menu/registros/empleados/consulta",{ datos:datos }, function(data){
     	$.each(data, function(i, item) {
     		
-	////////////////////AGREGAR OPCION SEGUN CANTIDAD DE VALORES HABILITADOS////////////////////////////
+////////////////////AGREGAR OPCION SEGUN CANTIDAD DE VALORES HABILITADOS////////////////////////////
 
     		$('#mundhe').append('<option class="municipio" value="'+item.id+'">'+item.descripcion+'</option>');
 		})        
@@ -674,157 +590,6 @@ $("#edodhe").change(function(){
     $( ".municipio" ).remove();           
 });
 
-/////////////////////////////// VALIDAR E INSERTAR REGISTROS PARA EMPLEADOS /////////////////////////////
 
-// $("#saveEmpl").click(function(){
-// 	url= "/menu/registros/empleados/agregar"
-// 	var form = $("#NewEmp");
-// 	nombre=$('#nomEmp1').val();
-// 	datos = form.serialize();
-// 	var posting = $.post(url,datos,function(resultado){
-// 		if (resultado == 1) {
-// 			//SWALLLL mensajes de alerta y sucesos
-// 			swal({
-// 				title:'Guardado Exitoso',//Contenido del modal
-// 				text: 'El Empleado fue guardado Exitosamente',
-// 				type: "success",
-// 				timer:1600,
-// 				showConfirmButton:false,//Eliminar boton de confirmacion
-// 			});
-// 			//Retardo en ejecucion de ruta.
-// 			setTimeout(function(){location.href = "/menu/registros/empleados/";},1800); // 3000ms = 3s
-// 		}	
-// 		else {
-// 			swal({
-
-// 				title:'Registro Existente!!!.',//Contenido del modal
-// 				text: 'La Cédula, el Rif, o el Usuario ya estan asociados a un empleado, Revise estos datos',
-// 				type: "error",
-// 				timer:3000,
-// 				showConfirmButton:false,//Eliminar boton de confirmacion
-// 			});
-// 		}					
-// 	});
-// 	posting.fail(function() {
-// 		swal({
-// 			title:'Error inesperado!!',//Contenido del modal
-// 			text: 'Pongase en contacto con el administrador',
-// 			type: "error",
-// 			showConfirmButton:true,//Eliminar boton de confirmacion
-// 		});
-// 	});
-// });
-
-// /////////////////////////////// CARGAR DATOS EN MODAL DE MODIFICAR EMPLEADO /////////////////////////////
-
-// $(".modificarEmpleado").click(function(){
-// 	var parametro=$(this).attr('data-registro');
-// 	datos=[1,parametro]
-// 	$.get("/menu/registros/empleados/modificar",{datos:datos},function(respuesta){
-// 		$('#nomEmpm1').val(respuesta[0]);
-// 		$('#nomEmpm2').val(respuesta[1]);
-// 		$('#apellEmpm1').val(respuesta[2]);
-// 		$('#apellEmpm2').val(respuesta[3]);
-// 		$('#selRifEmpm').val(respuesta[4]);
-// 		$('#numRifEmpm').val(respuesta[5]);
-// 		$('#selCiEmpm').val(respuesta[6]);
-// 		$('#numCiEmpm').val(respuesta[7]);
-// 		$('#fnEmpm').val(respuesta[8]);
-// 		$('#dptoEmpm').val(respuesta[9]);
-
-// 		$('.opciones').remove();
-// 		$( ".region" ).remove();
-// 		$( ".estado" ).remove(); 
-// 		$( ".municipio" ).remove(); 
-		
-// //////////////////////// CARGANDO CAMPO DE CARGOS ///////////////////////////////////////////////////////
-// 		$("#dptoEmpm option:selected").each(function () {			
-//             elegido=$(this).val();
-//             var opcion=[1,elegido];
-// 			$.get("/menu/registros/empleados/cargar",{opcion:opcion}, function(data){
-// 		    	$.each(data, function(i, item) {
-// 		    		$('#cgoEmpm').append('<option class="opciones" value="'+item.id+'">'+item.descripcion+'</option>');
-// 		    		$('#cgoEmpm').val(respuesta[10]); 
-// 				}); 
-// 			}); 
-// 	    });
-// 	    $("#dptoEmpm").change(function(){
-// 	    	$('.opciones').remove();
-// 	        elegido=$(this).val();
-// 	        var vector=elegido;
-// 	        id=1;
-// 	        datos=[id,elegido]
-// 	        $.get("/menu/registros/empleados/consulta",{ datos:datos }, function(data){
-// 	        	$.each(data, function(i, item) {
-// 	        		$('#cgoEmpm').append('<option class="opciones" value="'+item.id+'">'+item.descripcion+'</option>');
-// 				})        
-//         	}); 			
-// 		});
-// 		$('#pdhem').val(respuesta[11]); 
-		
-// ////////////////////////// CARGANDO CAMPO DE REGIONES /////////////////////////////////////////////////////
-		
-// 		$("#pdhem option:selected").each(function () {			
-//             elegido=$(this).val();
-//             var opcion=[2,elegido];
-// 			$.get("/menu/registros/empleados/cargar",{opcion:opcion}, function(data){
-// 		    	$.each(data, function(i, item) {
-// 		    		$('#rgdhem').append('<option class="region" value="'+item.id+'">'+item.descripcion+'</option>');
-// 		    		$('#rgdhem').val(respuesta[12]); 
-// 				}); 
-// 			}); 
-// 	    });
-// 	    $("#pdhem").change(function(){	
-// 	    	$( ".region" ).remove();
-// 		    $( ".estado" ).remove();       
-// 		    $( ".municipio" ).remove();     
-// 		    elegido=$(this).val();
-// 		    id=2;
-// 		    var datos=[id,elegido];
-// 		    $.get("/menu/registros/empleados/consulta",{ datos:datos }, function(data){
-// 		    	$.each(data, function(i, item) {
-// 		    		$('#rgdhem').append('<option class="region" value="'+item.id+'">'+item.descripcion+'</option>');
-// 				});        
-// 			});  
-// 		});
-	     
-// //////////////////////////////// CARGANDO CAMPO DE ESTADOS ///////////////////////////////////////////////
-// 		$("#rgdhem option:selected").each(function () {			
-//             elegido=$(this).val();
-//             //alert(elegido)
-//             opcion=[3,elegido];
-// 			$.get("/menu/registros/empleados/cargar",{opcion:opcion}, function(data){
-// 		    	$.each(data, function(i, item) {
-// 		    		$('#edodhem').append('<option class="estado" value="'+item.id+'">'+item.descripcion+'</option>');
-// 		    		$('#edodhem').val(respuesta[13]); 
-// 				});
-// 			}); 
-// 	    });
-// 	    $("#rgdhem").change(function(){	
-// 		    $( ".estado" ).remove();       
-// 		    $( ".municipio" ).remove();     
-// 		    elegido=$(this).val();
-// 		    id=3;
-// 		    var datos=[id,elegido];
-// 		    $.get("/menu/registros/empleados/consulta",{ datos:datos }, function(data){
-// 		    	$.each(data, function(i, item) {
-// 		    		$('#edodhem').append('<option class="estado" value="'+item.id+'">'+item.descripcion+'</option>');
-// 				});        
-// 			});  
-// 		});
-	     
-// 	});
-// });
-
-////////////////// CARGANDO MODAL DE SERVICIOS OFERTADOS POR EL PLAN (SUBMODULO-CLIENTES) /////
-$(".consultarPlan").click(function(){
-	var plan=$(this).attr('data-id');
-	//alert(plan);
-	$('.lista').remove();
-	 $.get("/menu/registros/clientes/consultaplan",{plan:plan}, function(respuesta){
-	 	$(".servicios").append('<ul class="lista"><li>Hora de Inicio: '+respuesta[0]+'</li><li>Hora de Finalización: '+respuesta[1]+'</li><li>Días de Servicio: '+respuesta[2]+' - '+respuesta[3]+'</li><li>Tipo de Soporte Presencial: '+respuesta[4]+'</li><li>Soportes Presenciales/mes: '+respuesta[5]+'</li><li>Tipo de Soporte Remoto: '+respuesta[6]+'</li><li>Soportes Remotos/mes: '+respuesta[7]+'</li><li>Tipo de Soporte Telefónico: '+respuesta[8]+'</li><li>Soportes Telefónicos/mes: '+respuesta[9]+'</li><li>Tiempo Máximo de Atención: '+respuesta[10]+' horas</li><li class="precio"> BsF. '+respuesta[11]+'</li></ul>');
-	 $('.titulo').html('Plan: '+respuesta[12]);
-	 });
-});
 
 });

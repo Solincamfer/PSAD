@@ -221,7 +221,6 @@
                                                                 <label for="mundc">Municipio</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
                                                                 <select name="mundc" id="input14" class="form-control userEmail dirSucursal" data-caso="3" data-grupo="1">
                                                                     <option value="">-</option>
-                                                                    <option value="caracas">caracas</option>
                                                                 </select><i class="fa fa-map-signs" id="icc14"></i>
                                                         </div>  
                                                         </div>                                                  
@@ -293,11 +292,11 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <input type="text" name="categoria__id" id="categoria__id" value="{{$categoria->id}}">
-                                            <input type="text" name="cliente__id" id="cliente__id" value="{{$cliente->id}}">
+                                            <input type="hidden" name="categoria__id" id="categoria__id" value="{{$categoria->id}}">
+                                            <input type="hidden" name="cliente__id" id="cliente__id" value="{{$cliente->id}}">
                                         </div>                              
                                         <div class="modal-footer">
-                                             <button type="button" class="btn btn-primary" id="btnGuardarSucursal">Guardar<i class="fa fa-floppy-o"></i></button>  
+                                             <button type="submit" class="btn btn-primary" id="btnGuardarSucursal">Guardar<i class="fa fa-floppy-o"></i></button>  
                                         </div>
                                 </form>
 
@@ -406,7 +405,6 @@
                                                                     <label for="mundf">Municipio</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
                                                                     <select name="mundf" id="inputm9" class="form-control userEmail dirSucursal" data-caso="3" data-grupo="2" >
                                                                         <option value="">-</option>
-                                                                      
                                                                     </select><i class="fa fa-map-signs" id="micc9"></i>
                                                                 </div>  
                                                             </div>
@@ -520,12 +518,12 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <input type="text" name="registroSucursal" id="registroSucursal_" value="">
+                                                    <input type="hidden" name="registroSucursal" id="registroSucursal_" value="">
                                                 </div>
                                             </div>
                                         </div>                              
                                         <div class="modal-footer">
-                                           <button type="button" class="btn btn-primary" id="btnModificarSucursal">Guardar<i class="fa fa-floppy-o"></i></button>  
+                                           <button type="submit" class="btn btn-primary" id="btnModificarSucursal">Guardar<i class="fa fa-floppy-o"></i></button>  
                                         </div>
                                     </form>
 
@@ -533,4 +531,7 @@
                             </div>
                         </div>
                 </div>   
+    @endsection
+    @section('js')
+        <script src="{{asset('js/vistaSucursales.js')}}"></script>
     @endsection

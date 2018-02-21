@@ -205,7 +205,7 @@
                                         <input type="hidden" name="sucursal_id_resp" id="sucursal_id_resp" value="{{$extra->id}}">
                                     </div>
                                     <div class="modal-footer">
-                                       <button type="button" class="btn btn-primary" id="btnRespSucursal">Guardar<i class="fa fa-floppy-o"></i></button> 
+                                       <button type="submit" class="btn btn-primary" id="btnRespSucursal">Guardar<i class="fa fa-floppy-o"></i></button> 
                                         
                                     </div>
                                 </form>
@@ -339,11 +339,14 @@
                                          
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-primary btnModificarResp_" id="btnModificarResponsable3" data-caso="2" >Modificar <i class="fa fa-floppy-o"></i></button>
+                                        <button type="submit" class="btn btn-primary btnModificarResp_" id="btnModificarResponsable3" data-caso="2" >Modificar <i class="fa fa-floppy-o"></i></button>
                                     </div>
                                 </form>
                             </div>
                         </div>
                     </div>
                 </div>   
+    @endsection
+    @section('js')
+        <script src="{{asset('js/respSucursal.js')}}"></script>
     @endsection

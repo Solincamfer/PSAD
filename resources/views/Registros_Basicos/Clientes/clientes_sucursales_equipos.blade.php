@@ -156,10 +156,10 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <input type="text" name="_sucursal_id_" id="_sucursal_id_" value="{{$extra->id}}">
+                                            <input type="hidden" name="_sucursal_id_" id="_sucursal_id_" value="{{$extra->id}}">
                                         </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="bttnMd" id="btnSvEquipoAgr">Guardar <i class="fa fa-floppy-o"></i></button>
+                                        <button type="submit" class="bttnMd" id="btnSvEquipoAgr">Guardar <i class="fa fa-floppy-o"></i></button>
                                    
                                     </div></form>
                                 </div>
@@ -232,13 +232,16 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                             <input type="text" name="_sucursalRegistro" id="_sucursalRegistro" value="">
+                                             <input type="hidden" name="_sucursalRegistro" id="_sucursalRegistro" value="">
                                         </div>
                                         <div class="modal-footer">
-                                             <button type="button" class="btn btn-primary" id="_btnModificarEquipo_">Modificar<i class="fa fa-floppy-o"></i></button> 
+                                             <button type="submit" class="btn btn-primary" id="_btnModificarEquipo_">Modificar<i class="fa fa-floppy-o"></i></button> 
                                         </div></form>
                                 </div>
                             </div>
                         </div>
                     </div>   
     @endsection
+    @section('js')
+        <script src="{{asset('js/vistaEquipos.js')}}"></script>
+    @endsection 

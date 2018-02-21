@@ -141,3 +141,6 @@
                       </div>
                   </div>  
    @endsection
+   @section('js')
+    <script src="{{asset('js/sucursalPlanes.js')}}"></script>
+   @endsection

@@ -51,8 +51,7 @@
                     
 
                     </div>
-
-                        
-
-         
+     @endsection
+     @section('js')
+        <script src="{{asset('js/movUsuarios.js')}}"></script>
      @endsection

@@ -125,8 +125,157 @@ $(document).ready(function()
 	});
 
 	//////////////////////Guardar nueva sucursal ////////////////////////////////////////////////////////////////////
-			$('#btnGuardarSucursal').click(function() 
-			{
+		$('#sucursalCliente__').bootstrapValidator({
+			excluded: [':disabled'],
+		   	fields: {
+		     rs: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Debe indicar la razon social de la sucursal'
+		         }
+		       }
+		     },
+		     nc: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Debe indicar el nombre comercial de la sucursal'
+		         }
+		       }
+		     },
+		     rif: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Seleccione el tipo de rif'
+		         }
+		       }
+		     },
+		     df: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Debe indicar el número de rif'
+		         },
+		        regexp: {
+	                regexp: /^[0-9]+$/,
+	                message: 'El rif debe contener solo numeros'                            
+                },
+		       }
+		     },
+		     tipCon: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Debe indicar el tipo de contribuyente'
+		         }
+		       }
+		     },
+		     paisdc: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Debe indicar el país'
+		         }
+		       }
+		     },
+		     regiondc: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Debe indicar la región'
+		         }
+		       }
+		     },
+		     edodc: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Debe indicar el estado'
+		         }
+		       }
+		     },
+ 		     mundc: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Debe indicar el municipio'
+		         }
+		       }
+		     },
+		     descDirdc: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Especifique la direccion Fiscal de la sucursal'
+		         }
+		       }
+		     },
+		     paisdf: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Debe indicar el país'
+		         }
+		       }
+		     },
+		     regiondf: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Debe indicar la region'
+		         }
+		       }
+		     },
+		     edodf: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Debe indicar el estado'
+		         }
+		       } 
+		     },
+		     mundf: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Debe indicar el municipio'
+		         }
+		       }
+		     },
+		     descDirdf: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Especifique la direccion Comercial de la sucursal'
+		         }
+		       }
+		     },
+		     tlflcl: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Debe indicar un código de area local'
+		         }
+		       }
+		     },
+		     tcl: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Debe indicar un número de telefono local'
+		         },
+		         regexp: {
+	                regexp: /^[0-9]+$/,
+	                message: 'Solo debe contener caracteres númericos'                            
+                },
+		       }
+		     },
+		     tmvl:{
+		     	validators:{
+		     		regexp: {
+		                regexp: /^[0-9]+$/,
+		                message: 'Solo debe contener caracteres númericos'                            
+                }
+		     	}
+		     },
+		     mail: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Debe indicar un correo electrónico'
+		        },
+		         emailAddress: {
+                        message: 'El correo electronico debe tener el formato minombre@midominio.com'
+                }
+		       }
+		     }
+		   }
+	  	}).on('success.form.bv',function(e,data){
+	  		e.preventDefault();
 				var form=$('#sucursalCliente__').serialize();
 				var route='/menu/registros/clientes/agregar/sucursal';
 				var categoria=$('#categoria__id').val();
@@ -208,8 +357,157 @@ $(document).ready(function()
 			////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-			$('#btnModificarSucursal').click(function()
-				{
+			$('#Formclientem').bootstrapValidator({
+			excluded: [':disabled'],
+		   fields: {
+		     rs: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Debe indicar la razon social de la empresa'
+		         }
+		       }
+		     },
+		     nc: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Debe indicar el nombre comercial de la empresa'
+		         }
+		       }
+		     },
+		     rif: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Seleccione el tipo de rif'
+		         }
+		       }
+		     },
+		     df: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Debe indicar el número de rif'
+		         },
+		        regexp: {
+	                regexp: /^[0-9]+$/,
+	                message: 'El rif debe contener solo numeros'                            
+                },
+		       }
+		     },
+		     tipCon: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Debe indicar el tipo de contribuyente'
+		         }
+		       }
+		     },
+		     paisdc: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Debe indicar el país'
+		         }
+		       }
+		     },
+		     regiondc: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Debe indicar la región'
+		         }
+		       }
+		     },
+		     edodc: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Debe indicar el estado'
+		         }
+		       }
+		     },
+ 		     mundc: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Debe indicar el municipio'
+		         }
+		       }
+		     },
+		     descDirdc: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Especifique la direccion Fiscal de la empresa'
+		         }
+		       }
+		     },
+		     paisdf: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Debe indicar el país'
+		         }
+		       }
+		     },
+		     regiondf: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Debe indicar la region'
+		         }
+		       }
+		     },
+		     edodf: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Debe indicar el estado'
+		         }
+		       } 
+		     },
+		     mundf: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Debe indicar el municipio'
+		         }
+		       }
+		     },
+		     descDirdf: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Especifique la direccion Comercial de la empresa'
+		         }
+		       }
+		     },
+		     tlflcl: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Debe indicar un código de area local'
+		         }
+		       }
+		     },
+		     tcl: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Debe indicar un número de telefono local'
+		         },
+		         regexp: {
+	                regexp: /^[0-9]+$/,
+	                message: 'Solo debe contener caracteres númericos'                            
+                },
+		       }
+		     },
+		     tmvl:{
+		     	validators:{
+		     		regexp: {
+		                regexp: /^[0-9]+$/,
+		                message: 'Solo debe contener caracteres númericos'                            
+                }
+		     	}
+		     },
+		     mail: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Debe indicar un correo electrónico'
+		        },
+		         emailAddress: {
+                        message: 'El correo electronico debe tener el formato minombre@midominio.com'
+                }
+		       }
+		     }
+		   }
+	  	}).on('success.form.bv',function(e,data){
+	  		e.preventDefault();
 					var form=$('#Formclientem').serialize();
        				var route='/menu/registros/clientes/actualizar/sucursal';
        				var categoria=$('#categoria__id').val();

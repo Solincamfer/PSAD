@@ -102,58 +102,106 @@ $(document).ready(function()
 	});
 	/////////////////////////////////Agregar nuevo equipo //////////////////////////////////////
 
-	$('#btnSvEquipoAgr').click(function() 
-	{
-		var form=$('#equipoSucAgr').serialize();
-		var route='/menu/registros/clientes/insertar/equipo';
-		var sucursal=$('#_sucursal_id_').val();
-		$.post(route,form)
-				.done(function(answer)
-					{
+	$('#equipoSucAgr').bootstrapValidator({
+		excluded: [':disabled'],
+		   fields: {
+		     nomEq: {
+		       validators: {
+		        notEmpty: {
+		           message: 'Debe indicar el nombre del equipo'
+		        }
+		       }
+		     },
+		     _tpEq: {
+		       validators: {
+		        notEmpty: {
+		           message: 'Seleccione el tipo de equipo'
+		        }
+		       }
+		     },
+		     mkEq: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Seleccione la marca del equipo'
+		         }
+		       }
+		     },
+		     modEq: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Seleccione el modelo del equipo'
+		         }
+		       }
+		     },
+		     duPfl: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Indique el serial del equipo'
+		         }
+		       }
+		     },
+		     seltlfmRpb: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Debe indicar un código de area local'
+		         }
+		       }
+		     },
+		     stPfl: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Seleccione el estatus del equipo'
+		         }
+		     }
+		    }
+		   }
+  		}).on('success.form.bv',function(e,data){
+			e.preventDefault();
+			var form=$('#equipoSucAgr').serialize();
+			var route='/menu/registros/clientes/insertar/equipo';
+			var sucursal=$('#_sucursal_id_').val();
+			$.post(route,form)
+					.done(function(answer)
+						{
 
-						console.log(answer);
-							if(answer.codigo==1)
-							{
+							console.log(answer);
+								if(answer.codigo==1)
+								{
+										swal({
+												title:'Guardado exitoso',//Contenido del modal
+												text: '<p style="font-size: 1.0em;">'+'El equipo se agrego correctamente!!'+'</p>',
+												type: "success",
+												showConfirmButton:true,//Eliminar boton de confirmacion
+												html: true
+										},
+					  				 	function(isConfirm)
+					  				 	{
+					  				 		if(isConfirm)
+					  				 		{
+					  				 			window.location.href="/menu/registros/clientes/categoria/sucursal/equipos/"+sucursal;
+					  				 		}	
+
+					  				 	});
+					  				 
+								}
+
+								else if(answer.codigo==2)
+								{
+
 									swal({
-											title:'Isercion exitosa',//Contenido del modal
-											text: '<p style="font-size: 1.0em;">'+'El equipo se agrego correctamente!!'+'</p>',
-											type: "success",
-											showConfirmButton:true,//Eliminar boton de confirmacion
-											html: true
-									},
-				  				 	function(isConfirm)
-				  				 	{
-				  				 		if(isConfirm)
-				  				 		{
-				  				 			window.location.href="/menu/registros/clientes/categoria/sucursal/equipos/"+sucursal;
-				  				 		}	
-
-				  				 	});
-				  				 
-							}
-
-							else if(answer.codigo==2)
-							{
-
-								swal({
-											title:'Nombre duplicado!!!',//Contenido del modal
-											text: '<p style="font-size: 0.9em;">'+ answer.extra+'</p>',
-											type: "warning",
-											showConfirmButton:true,//Eliminar boton de confirmacion
-											html: true
-									});
-							}
-					})
-				.fail(function()
-					{
-						swal("Error Inesperado !!", "Comuniquese con el administrador", "error");
-					});
-
-
-
-
-
-	});
+												title:'Nombre duplicado!!!',//Contenido del modal
+												text: '<p style="font-size: 0.9em;">'+ answer.extra+'</p>',
+												type: "warning",
+												showConfirmButton:true,//Eliminar boton de confirmacion
+												html: true
+										});
+								}
+						})
+					.fail(function()
+						{
+							swal("Error Inesperado !!", "Comuniquese con el administrador", "error");
+						});
+		});
 
  ///////////////////////////////////////////////Boton modificar cargar modal ////////////////////////////////////
 
@@ -183,11 +231,65 @@ $(document).ready(function()
 
  });
  ////////////////////////////////////////Boton modificar : Actualizar registros ///////////////////////////////////////
- $('#_btnModificarEquipo_').click(function()
-	 {
-	 	
+$('#equipoSucMod').bootstrapValidator({
+		excluded: [':disabled'],
+		   fields: {
+		     nomEq: {
+		       validators: {
+		        notEmpty: {
+		           message: 'Debe indicar el nombre del equipo'
+		        }
+		       }
+		     },
+		     _tpEq: {
+		       validators: {
+		        notEmpty: {
+		           message: 'Seleccione el tipo de equipo'
+		        }
+		       }
+		     },
+		     mkEq: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Seleccione la marca del equipo'
+		         }
+		       }
+		     },
+		     modEq: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Seleccione el modelo del equipo'
+		         }
+		       }
+		     },
+		     duPfl: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Indique el serial del equipo'
+		         }
+		       }
+		     },
+		     seltlfmRpb: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Debe indicar un código de area local'
+		         }
+		       }
+		     },
+		     stPfl: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Seleccione el estatus del equipo'
+		         }
+		     }
+		    }
+		   }
+  		}).on('success.form.bv',function(e,data){
+			e.preventDefault();
+	 		
+	 		/// codigo ajax y respuesta.....
 
-	 });
+	 	});
 
 
 

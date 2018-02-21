@@ -19,13 +19,8 @@ $(document).ready(function()
 		}
 
 
-
-
-
-
-
-
  //////////////////////////////////////////////////funcion boton modificar, Modificar plan///////////////////////////////////////////////////////////////////////
+ 
  $('.ModificarPlan').click(function()
  	{
  		
@@ -47,9 +42,36 @@ $(document).ready(function()
 
 /////////////////////////////////////////////////////funcion boton guardar, del modal modificar plan //////////////////////////////////////
 
-
-$('#actualizarPlan').click(function() 
-{
+$('#mPlan').bootstrapValidator({
+   fields: {
+    nomPlan: {
+       validators: {
+         notEmpty: {
+           message: 'Debe indicar el nombre del nuevo plan'
+         }
+       }
+     },
+     porDesc: {
+       	validators: {
+         	notEmpty: {
+           		message: 'Debe indicar el porcentaje de descuento'
+         	},
+        	regexp: {
+                regexp: /^[0-9]+$/,
+                message: 'El porcentaje debe contener solo numeros'                            
+            },
+       	}
+     },
+     statusPlan: {
+	   validators: {
+	     notEmpty: {
+	       message: 'Seleccione el estatus del plan'
+	     }
+	   }
+	 }
+   }
+}).on('success.form.bv',function(e,data){
+	e.preventDefault();
 	var formulario=$('#mPlan').serialize();
     var route='/menu/registros/planes/actualizar';
 
@@ -62,7 +84,7 @@ $('#actualizarPlan').click(function()
 		  				
 		  				 if(answer.duplicate>0 && answer.update==false)
 		  				 {
-		  				 	swal("El plan existe en el sistema !!", "No debe crear planes duplicados", "warning");
+		  				 	swal("El plan existe en el sistema !!", "No puede crear planes con el mismo nombre", "warning");
 		  				 	
 		  				 }
 		  				 else if(answer.duplicate==0 && answer.update==false)
@@ -103,42 +125,69 @@ $('#actualizarPlan').click(function()
 
  /////////////////////////////////////////////////Agregar plan ///////////////////////////////////////////////////////////////////////////
 
- $('#savePlan').click(function() 
- {
- 	        var form=$('#NewPlan').serialize();
-			var route='/menu/registros/planes/registrar';
+$('#NewPlan').bootstrapValidator({
+   fields: {
+    nomPn: {
+       validators: {
+         notEmpty: {
+           message: 'Debe indicar el nombre del nuevo plan'
+         }
+       }
+     },
+     porDes: {
+       	validators: {
+         	notEmpty: {
+           		message: 'Debe indicar el porcentaje de descuento'
+         	},
+        	regexp: {
+                regexp: /^[0-9]+$/,
+                message: 'El porcentaje debe contener solo numeros'                            
+            },
+       	}
+     },
+     stPn: {
+	   validators: {
+	     notEmpty: {
+	       message: 'Seleccione el estatus del plan'
+	     }
+	   }
+	 }
+   }
+}).on('success.form.bv',function(e,data){
+	e.preventDefault();
+	var form=$('#NewPlan').serialize();
+	var route='/menu/registros/planes/registrar';
+	$.post(route,form)
+	.done(function(answer)
+		{
+			
+			if(answer.duplicate>0 && answer.insert==false)
+			{
+				swal("El plan existe en el sistema !!", "No debe crear planes duplicados", "warning");
+			}
+			else if(answer.duplicate==0 && answer.insert==true)
+			{
+				swal({
+							title:'Guardado exitoso',//Contenido del modal
+							text: '<p style="font-size: 1.0em;">'+'El plan se agrego correctamente'+'</p>',
+							type: "success",
+							showConfirmButton:true,//Eliminar boton de confirmacion
+							html: true
+					},
+					 	function(isConfirm)
+					 	{
+					 		if(isConfirm)
+					 		{
+					 			window.location.href="/menu/registros/planeservicios";
+					 		}	
 
-			$.post(route,form)
-			.done(function(answer)
-				{
-					
-					if(answer.duplicate>0 && answer.insert==false)
-					{
-						swal("El plan existe en el sistema !!", "No debe crear planes duplicados", "warning");
-					}
-					else if(answer.duplicate==0 && answer.insert==true)
-					{
-						swal({
-									title:'Isercion exitosa',//Contenido del modal
-									text: '<p style="font-size: 1.0em;">'+'El plan se agrego correctamente'+'</p>',
-									type: "success",
-									showConfirmButton:true,//Eliminar boton de confirmacion
-									html: true
-							},
-		  				 	function(isConfirm)
-		  				 	{
-		  				 		if(isConfirm)
-		  				 		{
-		  				 			window.location.href="/menu/registros/planeservicios";
-		  				 		}	
-
-		  				 	});
-					}
-				})
-			.fail(function()
-				{
-					swal("Error Inesperado !!", "Comuniquese con el administrador", "error");
-				});
+					 	});
+			}
+		})
+	.fail(function()
+		{
+			swal("Error Inesperado !!", "Comuniquese con el administrador", "error");
+		});
  });
 
 
