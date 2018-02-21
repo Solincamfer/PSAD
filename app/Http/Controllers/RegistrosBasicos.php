@@ -37,6 +37,9 @@ use App\Persona;
 use App\Categoria;
 use App\Sucursal;
 use App\Tipoequipo;
+use App\Marca;
+use App\Modelo;
+use App\Equipo;
 use Response;
 
 
@@ -1389,6 +1392,21 @@ public function traducirId($traducir,$campo,$registro_id=null)
 	else if($campo==11)
 	{
 		$retorno=DB::table('tipos')->where('id',$traducir)->select('descripcion AS descripcion')->first();
+		$retorno=$retorno->descripcion;
+	}
+	else if($campo==12)
+	{
+		$retorno=DB::table('tipoequipos')->where('id',$traducir)->select('descripcion AS descripcion')->first();
+		$retorno=$retorno->descripcion;
+	}
+	else if($campo==13)
+	{
+		$retorno=DB::table('marcas')->where('id',$traducir)->select('descripcion AS descripcion')->first();
+		$retorno=$retorno->descripcion;
+	}
+	else if($campo==14)
+	{
+		$retorno=DB::table('modelos')->where('id',$traducir)->select('descripcion AS descripcion')->first();
 		$retorno=$retorno->descripcion;
 	}
 
@@ -3969,7 +3987,7 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 			$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(37),false);///reisar vista 
 			$sucursal=Sucursal::find($sucursal_id);
 			$categoria=Categoria::find($sucursal->categoria_id);
-			//$consulta=DB::table('sucursales')->where('id',$sucursal_id)->first();
+			
 			$consultaPlan=DB::table('plan_sucursal')->where('sucursal_id',$sucursal->id)->first();
 			if ($consultaPlan!=null) 
 			{
@@ -4035,6 +4053,85 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 			return view ('Registros_Basicos\Clientes\clientes_sucursales_plan_servicios',$this->datos_vista($datos,$acciones,array()));
 							
 		}
+/////////////////////////////////////////////////////////equipos ////////////////////////////////////////////
+
+	public function datosEquipo()
+	{
+		$formulario=(object) array(
+							 		 'nombre'=>strtoupper(Request::get('nomEq')),
+							 		 'tipoEquipo'=>Request::get('_tpEq'),
+							 		 'marca'=>Request::get('mkEq'),
+							 		 'modelo'=>Request::get('modEq'),
+							 		 'serial'=>strtoupper(Request::get('duPfl')),
+							 		 'status'=>Request::get('stPfl'),
+							 		 'sucursal'=>Request::get('_sucursal_id_'),
+							 		 'registro'=>Request::get('_sucursalRegistro')
+
+
+
+								  );
+
+		return $formulario;
+	}
+
+
+	public function equipoDuplicado($nombre,$sucursal_id)
+	{
+		$duplicado=(object) array('codigo'=>0,'extra'=>0);
+
+		$consulta=DB::table('equipos')->where(['descripcion'=>$nombre,'sucursal_id'=>$sucursal_id])->first();
+		if($consulta!=null)
+		{
+			$sucursal=Sucursal::find($sucursal_id);
+			if($sucursal!=null)
+			{
+				$duplicado->extra='Ya existe un equipo de nombre: '.$nombre.' ,para la sucursal: '.$sucursal->nombre;
+				$duplicado->codigo=2;
+			}
+		}
+
+		return $duplicado;
+	}
+
+	
+
+	
+
+	public function equiposInsertar()
+	{
+		$datos=$this->datosEquipo();
+		$duplicado=$this->equipoDuplicado($datos->nombre,$datos->sucursal);
+		if($duplicado->codigo==0)
+		{
+
+				$equipo=new Equipo();
+				$equipo->descripcion=$datos->nombre;
+				$traduccion=$this->traducirId($datos->tipoEquipo,12);
+				$equipo->tipoEquipo=$traduccion;
+
+				$traduccion=$this->traducirId($datos->marca,13);
+				$equipo->marca=$traduccion;
+
+				$traduccion=$this->traducirId($datos->modelo,14);
+				$equipo->modelo=$traduccion;
+				$equipo->serial=$datos->serial;
+				$equipo->status=$datos->status;
+				$equipo->sucursal_id=$datos->sucursal;
+				$update=$equipo->save();
+
+				if($update)
+				{
+					$duplicado->codigo=1;
+					$this->registroBitacora('Id del registro creado: '.$equipo->id,'Agregar Equipo','{"Registro el Equipo":'.'"'.$equipo->descripcion.' - '.$equipo->serial.'"'.'}','Equipos -> Agregar Equipo');
+				}
+		}
+
+		return Response::json($duplicado);
+	}
+
+
+
+
 
 
 	public function clientes_sucursales_equipos($sucursal_id)//vista de equipos de una sucursal
@@ -4048,6 +4145,29 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 			return view ('Registros_Basicos\Clientes\clientes_sucursales_equipos',$this->datos_vista($datos,$acciones,DB::table('equipos')->where('sucursal_id',$sucursal_id)->paginate(11),$sucursal,$categoria,$tipoequipo));
 							
 		}
+
+
+	public function sucursalSelectEquipos()
+	{
+		
+
+		$registry=Request::get('registry');
+		$caso=Request::get('caso');
+		$retorno=null;
+
+		if($caso==0)//se selecciona el tipo de equipo
+		{
+			$tipoEquipo=Tipoequipo::find($registry);
+			$retorno=$tipoEquipo->marcas;
+		}
+		else if($caso==1)
+		{
+			$marca=Marca::find($registry);
+			$retorno=$marca->modelos;
+		}
+
+		return Response::json($retorno);
+	}
 
 	public function clientes_sucursales_equipos_componentes($equipo_id)//vista de componentes de un equipo
 		{
@@ -4175,47 +4295,48 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 			return($retorno);
 		}
 
+
+
 		public function btn_modificar_equipo()
 		{
-			$equipoId=Request::get('datos');
-			$registro=DB::table('equipos')->where('id',$equipoId)->first();
-			$retorno=0;
-			if (count($registro)!=0) 
-			{
-				$retorno=array($registro->descripcion,$registro->tipo,$registro->marca,$registro->modelo,$registro->serial,$registro->status,$registro->sucursal_id);
-				
-			}
-
-			return($retorno);
-		}
-
-		public function select_equipos()
-		{
-			$tablas=array("tequipos");
-			$intermedias=array("emarca_tequipo");
-			$datos=Request::get('datos');
-			$descripcionEq=$datos[0];
-			$tabla=$datos[1];
-			$registros=0;
-
-
-			//////////////////buscar la descripcion en la tabla/////////////////
 			
-			if ($tabla==0) 
-			{
-				$id=DB::table('tequipos')->where('descripcion',$descripcionEq)->first();//ya tengo el id
-				$marcas=array();
-				$dependencias=DB::table('emarca_tequipo')->where('tequipo_id',$id->id)->get();//obtiene el id de las marcas
-				foreach ($dependencias as $marca) 
-				{
-					array_push($marcas,DB::table('emarcas')->where('id',$marca->emarca_id)->first());
-				}
-				$registros=$marcas;
-			}
-		
-			return($registros);
+			$equip=(object)array('id'=>0,'descripcion'=>0,'tipoequipo'=>0,'marca'=>0,'modelo'=>0,'serial'=>0,'status'=>0,'sucursal_id'=>0);
+			$registry=Request::get('_sucursalRegistro');
+			$equipo=Equipo::find($registry);
 
+			
+			$tipoEquipo=DB::table('tipoequipos')->where('descripcion',$equipo->tipoequipo)->first();
+			$marca=DB::table('marcas')->where('descripcion',$equipo->marca)->first();
+			$modelo=DB::table('modelos')->where('descripcion',$equipo->modelo)->first();
+
+			/////////////////dependencias///////////////////////////////////
+			$te=Tipoequipo::find($tipoEquipo->id);
+			$tipoEq=Tipoequipo::all();
+			$marcas=$te->marcas;
+
+			$mr=Marca::find($marca->id);
+			$modelos=$mr->modelos;
+
+			// ///////////////////////////////////////////////////////////////
+			$equip->id=$equipo->id;
+			$equip->descripcion=$equipo->descripcion;
+			$equip->tipoequipo=$tipoEquipo->id;
+			$equip->marca=$marca->id;
+			$equip->modelo=$modelo->id;
+			$equip->serial=$equipo->serial;
+			$equip->status=$equipo->status;
+			$equip->sucursal_id=$equipo->sucursal_id;
+
+
+
+
+
+
+
+
+			return Response::json(['equipo'=>$equip,'tipoequipo'=>$tipoEq,'marcas'=>$marcas,'modelos'=>$modelos]);
 		}
+
 
 
 

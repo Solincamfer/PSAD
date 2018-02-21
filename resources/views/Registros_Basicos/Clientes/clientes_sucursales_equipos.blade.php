@@ -33,7 +33,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-2 despl-bttn">
-                                    <a href="/menu/registros/clientes/categorias/sucursales/{{$extra->id}}">
+                                    <a href="/menu/registros/clientes/categorias/sucursales/{{$datosC1->id}}">
                                         <div class="bttn-volver">
                                             <button id="btnBk" type="button" href="#" class="bttn-vol"><span class="fa fa-chevron-left"></span><span class="txt-bttn">VOLVER</span></button>
                                         </div>
@@ -50,8 +50,8 @@
                                             @if($accion->id!=43)
                                                 @if($accion->id==42)
                                                     <span class="iclsp">
-                                                        <a href="#myModal2" class="tltp" data-ttl="{{$accion->descripcion}}" data-toggle="modal" data-target="#myModal2"> 
-                                                            <i class="{{$accion->clase_css}} _ModificarEquipo_" data-equipo="{{$equipo->id}}"></i>
+                                                        <a  class="modificarEquipo_" data-reg="{{$equipo->id}}" data-ttl="{{$accion->descripcion}}" data-toggle="modal" > 
+                                                            <i class="{{$accion->clase_css}}" data-equipo="{{$equipo->id}}"></i>
                                                         </a>
                                                     </span>
                                                 @elseif($accion->id!=42)
@@ -107,7 +107,7 @@
                                                    <div class="col-md-8 col-md-offset-2">
                                                        <div class="form-group row">
                                                            <label for="_tpEq">Tipo de equipo</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
-                                                           <select name="_tpEq" id="_tpEq" class="form-control userEmail" data-tipo="0">
+                                                           <select name="_tpEq" id="_tpEq" class="form-control userEmail checkEquipos" data-caso="0" data-grupo="0">
                                                                <option value="">-</option>
                                                                @foreach($datosC2 as $tipoEquipo)
                                                                     <option value="{{$tipoEquipo->id}}" >{{$tipoEquipo->descripcion}}</option>
@@ -121,7 +121,7 @@
                                                     <div class="col-md-8 col-md-offset-2">
                                                         <div class="form-group row">
                                                             <label for="mkEq">Marca de equipo</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
-                                                            <select name="mkEq" id="mkEq" class="form-control userEmail">
+                                                            <select name="mkEq" id="mkEq" class="form-control userEmail checkEquipos" data-caso="1" data-grupo="0">
                                                                 <option value="">-</option>
                                                                 
                                                             </select><i class="fa fa-apple" id="ice3"></i>
@@ -132,8 +132,7 @@
                                                             <label for="modEq">Modelo de equipo</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
                                                             <select name="modEq" id="modEq" class="form-control userEmail">
                                                                 <option value="">-</option>
-                                                                <option value="1">Activo</option>
-                                                                <option value="2">Inactivo</option>
+                                                               
                                                             </select><i class="fa fa-laptop" id="ice4"></i>
                                                         </div>
                                                     </div> 
@@ -147,20 +146,21 @@
                                                     </div>  
                                                     <div class="col-md-8 col-md-offset-2">
                                                         <div class="form-group row">
-                                                            <label for="stPfl">Estatus de euipo</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
+                                                            <label for="stPfl">Estatus de equipo</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
                                                             <select name="stPfl" id="stPfl" class="form-control userEmail">
                                                                 <option value="">-</option>
                                                                 <option value="1">Activo</option>
-                                                                <option value="2">Inactivo</option>
+                                                                <option value="0">Inactivo</option>
                                                             </select><i class="fa fa-check" id="ice6"></i>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
+                                            <input type="text" name="_sucursal_id_" id="_sucursal_id_" value="{{$extra->id}}">
                                         </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="bttnMd" id="btnSv">Guardar <i class="fa fa-floppy-o"></i></button>
-                                        <button type="button" class="bttnMd" data-dismiss="modal" id="btnCs">Cerrar <i class="fa fa-times"></i></button>
+                                        <button type="button" class="bttnMd" id="btnSvEquipoAgr">Guardar <i class="fa fa-floppy-o"></i></button>
+                                   
                                     </div></form>
                                 </div>
                             </div>
@@ -175,7 +175,7 @@
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                         <h4 class="modal-title" id="myModalLabel2">Modificar Equipo</h4>
                                     </div>
-                                    <form  class="Validacion" id="equipoSucMod">
+                                    <form  class="Validacion" id="equipoSucMod" >
                                         <div class="modal-body">
                                             {{ csrf_field() }}
                                             <div class="container-fluid" id="conteqm">
@@ -189,10 +189,8 @@
                                                     <div class="col-md-8 col-md-offset-2">
                                                         <div class="form-group row">
                                                             <label for="tpEq">Tipo de equipo</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
-                                                            <select name="tpEq" id="tpEqm" class="form-control userEmail">
+                                                            <select name="_tpEq" id="tpEqm" class="form-control userEmail checkEquipos" data-caso="0" data-grupo="1">
                                                                 <option value="">-</option>
-                                                                <option value="DESKTOP">Desktop</option>
-                                                                <option value="LAPTOP">Laptop</option>
                                                             </select><i class="fa fa-desktop" id="mice2"></i>
                                                         </div>
                                                     </div>
@@ -201,22 +199,16 @@
                                                     <div class="col-md-8 col-md-offset-2">
                                                         <div class="form-group row">
                                                             <label for="mkEq">Marca de equipo</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
-                                                            <select name="mkEq" id="mkEqm" class="form-control userEmail">
-                                                                <option value="">-</option>
-                                                                <option value="HP">HP</option>
-                                                                <option value="SIRAGON">Siragon</option>
-                                                                <option value="DELL">Dell</option>
+                                                            <select name="mkEq" id="mkEqm" class="form-control userEmail checkEquipos" data-caso="1" data-grupo="1">
+                                                                 <option value="">-</option>
                                                             </select><i class="fa fa-apple" id="mice3"></i>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-8 col-md-offset-2">
                                                         <div class="form-group row">
                                                             <label for="modEq">Modelo de equipo</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
-                                                            <select name="modEq" id="modEqm" class="form-control userEmail">
+                                                            <select name="modEq" id="modEqm" class="form-control userEmail checkEquipos" data-caso="2" data-grupo="1">
                                                                 <option value="">-</option>
-                                                                <option value="1111">1111</option>
-                                                                <option value="2222">2222</option>
-                                                                <option value="3333">3333</option>
                                                             </select><i class="fa fa-laptop" id="mice4"></i>
                                                         </div>
                                                     </div> 
@@ -240,10 +232,10 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                             <input type="text" name="_sucursalRegistro" id="_sucursalRegistro" value="">
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="bttnMd" id="btnSvm">Guardar <i class="fa fa-floppy-o"></i></button>
-                                            <button type="button" class="bttnMd" data-dismiss="modal" id="btnCsm">Cerrar <i class="fa fa-times"></i></button>
+                                             <button type="button" class="btn btn-primary" id="_btnModificarEquipo_">Modificar<i class="fa fa-floppy-o"></i></button> 
                                         </div></form>
                                 </div>
                             </div>

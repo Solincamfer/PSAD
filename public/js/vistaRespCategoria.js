@@ -159,7 +159,7 @@ $(document).ready(function()
 	  			e.preventDefault();
  				
  					var form=$('#RespCatFor').serialize();
- 					var cliente_id=$('#_clienteMatriz_Resp').val();
+ 					var categoria_id=$('#categoriaId_').val();
  					var route="/menu/registros/clientes/responsable/agregar";
 		 					
 		 			$.post(route,form)
@@ -181,7 +181,7 @@ $(document).ready(function()
 				  				 	{
 				  				 		if(isConfirm)
 				  				 		{
-				  				 			window.location.href="/menu/registros/clientes/responsable/"+cliente_id;
+				  				 			window.location.href="/menu/registros/clientes/categoria/responsable/"+categoria_id;
 				  				 		}	
 
 				  				 	});
