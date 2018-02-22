@@ -176,9 +176,12 @@ Route::match(['post','get'],'/clientes/categoria/sucursal/usuarios/perfil',     
 
 	
 
-
-	Route::match(['post','get'],'/clientes/insertar/equipo',                                              						['uses'=>'RegistrosBasicos@equiposInsertar']);
+	Route::match(['post','get'],'/clientes/equipos/status',                                              	['uses'=>'RegistrosBasicos@equiposStatus']);
+	Route::match(['post','get'],'/clientes/insertar/equipo',                                              	['uses'=>'RegistrosBasicos@equiposInsertar']);
 	Route::match(['post','get'],'/datos/tipoequipo',                                              			['uses'=>'RegistrosBasicos@tipo_equipos']);
+
+	Route::match(['post','get'],'/clientes/actualizar/equipo',                                              			['uses'=>'RegistrosBasicos@equiposActualizar']);
+
 	Route::match(['post','get'],'/datos/consulta',                                              			['uses'=>'RegistrosBasicos@datos_tipo_equipos']);
 	Route::match(['post','get'],'/datos/consulta_comp',                                              		['uses'=>'RegistrosBasicos@datos_tequipo_componente']);
 	Route::match(['post','get'],'/datos/consulta_comp_',                                              		['uses'=>'RegistrosBasicos@insertar_componente_']);

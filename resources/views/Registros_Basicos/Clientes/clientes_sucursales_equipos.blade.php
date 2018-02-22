@@ -64,11 +64,11 @@
                                             @elseif($accion->id==43)
                                                 @if($equipo->status==1)
                                                     <div class="chbx">
-                                                        <input type="checkbox" class="btnAcc" name="status" id="{{'inchbx'. $equipo->id}}" value="{{$equipo->status}}" checked><label for="{{'inchbx'. $equipo->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
+                                                        <input type="checkbox" class="checkEquipos" name="status" id="{{'equipoCheck'. $equipo->id}}" value="{{$equipo->status}}" data-reg="{{$equipo->id}}" checked><label for="{{'equipoCheck'. $equipo->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
                                                     </div>
                                                 @elseif($equipo->status==0)
                                                     <div class="chbx">
-                                                        <input type="checkbox" class="btnAcc" name="status" id="{{'inchbx'. $equipo->id}}" value="{{$equipo->status}}"><label for="{{'inchbx'. $equipo->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
+                                                        <input type="checkbox" class="checkEquipos" name="status" id="{{'equipoCheck'. $equipo->id}}" value="{{$equipo->status}}"  data-reg="{{$equipo->id}}" ><label for="{{'equipoCheck'. $equipo->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
                                                     </div>
                                                 @endif
                                             @endif
@@ -233,6 +233,7 @@
                                                 </div>
                                             </div>
                                              <input type="hidden" name="_sucursalRegistro" id="_sucursalRegistro" value="">
+                                            <input type="hidden" name="_sucursal_id_" id="sucursal__id" value="{{$extra->id}}">
                                         </div>
                                         <div class="modal-footer">
                                              <button type="submit" class="btn btn-primary" id="_btnModificarEquipo_">Modificar<i class="fa fa-floppy-o"></i></button> 

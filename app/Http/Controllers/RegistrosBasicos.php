@@ -3773,6 +3773,27 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 		return Response::json(compact('sucursal','rif','direccionFiscal','direccionComercial','correo','telefonoLocal','telefonoMovil','dependenciasF','dependenciasC'));
 	}
 
+	public function equiposStatus()
+	{
+
+
+		$status=[1,0];
+		$status_=['HABILITADO','INHABILITADO'];
+		$status__=['INHABILITADO','HABILITADO'];
+		$registry=Request::get('registry');
+		$aux=false;
+		///////////// Busqueda del perfil y cambio de status ////////////////////////
+		$equipo=equipo::find($registry);
+		$equipo->status=$status[$equipo->status];
+		$aux=$equipo->save();
+		/////////////////////////////////////////////////////////////////////////////////////////////////////
+	    $this->registroBitacora('Equipo: '.$equipo->descripcion,'Cambiar Status','{"Status":"Cambio de: '.$status_[$equipo->status].' a: '.$status__[$equipo->status].'"}','Equipos');
+	    /////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		return Response()->json(['update'=>$aux]);
+
+
+	}
 
 	public function sucursalesActualizar()
 	{
@@ -4075,27 +4096,106 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 	}
 
 
-	public function equipoDuplicado($nombre,$sucursal_id)
+	public function equipoDuplicado($nombre,$sucursal_id,$equipo_id=0)
 	{
 		$duplicado=(object) array('codigo'=>0,'extra'=>0);
 
-		$consulta=DB::table('equipos')->where(['descripcion'=>$nombre,'sucursal_id'=>$sucursal_id])->first();
-		if($consulta!=null)
+		if($equipo_id==0)
 		{
-			$sucursal=Sucursal::find($sucursal_id);
-			if($sucursal!=null)
+
+			$consulta=DB::table('equipos')->where(['descripcion'=>$nombre,'sucursal_id'=>$sucursal_id])->first();
+			if($consulta!=null)
 			{
-				$duplicado->extra='Ya existe un equipo de nombre: '.$nombre.' ,para la sucursal: '.$sucursal->nombre;
-				$duplicado->codigo=2;
+				$sucursal=Sucursal::find($sucursal_id);
+				if($sucursal!=null)
+				{
+					$duplicado->extra='Ya existe un equipo de nombre: '.$nombre.' ,para la sucursal: '.$sucursal->nombreComercial;
+					$duplicado->codigo=2;
+				}
 			}
+		}
+		else
+		{
+			$consulta=DB::table('equipos')->where(['descripcion'=>$nombre,'sucursal_id'=>$sucursal_id])->where('id','<>',$equipo_id)->first();
+
+			if($consulta!=null)
+			{
+				$sucursal=Sucursal::find($sucursal_id);
+				if($sucursal!=null)
+				{
+					$duplicado->extra='Ya existe un equipo de nombre: '.$nombre.' ,para la sucursal: '.$sucursal->nombreComercial;
+					$duplicado->codigo=2;
+				}
+			}
+
 		}
 
 		return $duplicado;
 	}
 
-	
+		
 
-	
+	public function equiposActualizar()
+	{
+		$datos=$this->datosEquipo();
+		$duplicado=$this->equipoDuplicado($datos->nombre,$datos->sucursal,$datos->registro);
+		$cambios=array();
+		if($duplicado->codigo==0)
+		{
+			$equipo=Equipo::find($datos->registro);///obtener los datos del equipo
+			
+			$cambio=$this->detectarCambios($datos->nombre,$equipo->descripcion,'Nombre Equipo');
+   			$cambios=$this->agregarCambios($cambio,$cambios);
+			$equipo->descripcion=$datos->nombre;
+
+
+
+		
+			$traduccion=$this->traducirId($datos->tipoEquipo,12);
+			$cambio=$this->detectarCambios($traduccion,$equipo->tipoEquipo,'Tipo de Equipo');
+			$cambios=$this->agregarCambios($cambio,$cambios);
+			$equipo->tipoEquipo=$traduccion;
+
+			$traduccion=$this->traducirId($datos->marca,13);
+			$cambio=$this->detectarCambios($traduccion,$equipo->marca,'Marca');
+			$cambios=$this->agregarCambios($cambio,$cambios);
+			$equipo->marca=$traduccion;
+
+			$traduccion=$this->traducirId($datos->modelo,14);
+			$cambio=$this->detectarCambios($traduccion,$equipo->modelo,'Modelo');
+			$cambios=$this->agregarCambios($cambio,$cambios);
+			$equipo->modelo=$traduccion;
+			
+
+			$cambio=$this->detectarCambios($datos->serial,$equipo->serial,'Serial');
+			$cambios=$this->agregarCambios($cambio,$cambios);
+			$equipo->serial=$datos->serial;
+			
+
+			
+			$cambio=$this->detectarCambios($datos->status,$equipo->status,'Status');
+			$cambios=$this->agregarCambios($cambio,$cambios);
+			$equipo->status=$datos->status;
+			
+
+			$update=$equipo->save();
+
+			$longitud=count($cambios);
+			$cambios=$this->documentarCambios($cambios);
+
+			if($longitud>0)
+    	 	{
+
+    			$this->registroBitacora('Id del registro modificado: '.$equipo->id,'Modificar equipo ',$cambios,'Equipos -> Modificar Equipos');
+    			$duplicado->codigo=1;
+    		}
+		}
+
+
+
+		return Response::json($duplicado);
+
+	} 
 
 	public function equiposInsertar()
 	{
