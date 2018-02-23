@@ -64,11 +64,11 @@
                                     @elseif($accion->id==52)
                                         @if($aplicacion->status==1)
                                             <div class="chbx">
-                                                <input type="checkbox" class="btnAcc" name="status" id="{{'inchbx'. $aplicacion->id}}" value="{{$aplicacion->status}}" checked><label for="{{'inchbx'. $aplicacion->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
+                                                <input type="checkbox" class="checkAplicacion" name="statusApp" data-reg="{{$aplicacion->id}}" id="{{'app'. $aplicacion->id}}" value="{{$aplicacion->status}}" checked><label for="{{'app'. $aplicacion->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
                                             </div>
                                         @elseif($aplicacion->status==0)
                                             <div class="chbx">
-                                                <input type="checkbox" class="btnAcc" name="status" id="{{'inchbx'. $aplicacion->id}}" value="{{$aplicacion->status}}"><label for="{{'inchbx'. $aplicacion->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
+                                                <input type="checkbox" class="checkAplicacion" name="statusApp" data-reg="{{$aplicacion->id}}" id="{{'app'. $aplicacion->id}}" value="{{$aplicacion->status}}"><label for="{{'app'. $aplicacion->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
                                             </div>
                                         @endif
                                     @endif
@@ -131,7 +131,7 @@
                                                    </div>
                                                 </div>
                                             </div>
-                                            <input type="text" name="__equipo__id__" id="__equipo__id__" value="{{$extra->id}}">
+                                            <input type="hidden" name="__equipo__id__" id="__equipo__id__" value="{{$extra->id}}">
                                         </div>
 
                                     </form>
@@ -188,7 +188,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <input type="text" name="regAplicacion_" id="regAplicacion_" value="">
+                                            <input type="hidden" name="regAplicacion_" id="regAplicacion_" value="">
                                         </div>
                                     </form>
                                 </div>

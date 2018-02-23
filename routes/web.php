@@ -206,6 +206,8 @@ Route::match(['post','get'],'/clientes/categoria/sucursal/usuarios/perfil',     
 
 	Route::match(['post','get'],'/clientes/actualizar/aplicaciones',		                                    ['uses'=>'RegistrosBasicos@aplicacionesActualizar']);
 
+	Route::match(['post','get'],'/clientes/status/aplicaciones',		                                    ['uses'=>'RegistrosBasicos@aplicacionesStatus']);
+
 
 	Route::match(['post','get'],'/clientes/modificar_equipo',		                                        ['uses'=>'RegistrosBasicos@btn_modificar_equipo']);
 

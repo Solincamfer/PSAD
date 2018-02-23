@@ -4454,6 +4454,23 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 			return($retorno);
 		}
 
+		public function aplicacionesStatus()
+		{
+			$status=[1,0];
+			$status_=['HABILITADO','INHABILITADO'];
+			$status__=['INHABILITADO','HABILITADO'];
+			$registry=Request::get('registry');
+			$aux=false;
+			///////////// Busqueda del perfil y cambio de status ////////////////////////
+			$app=Aplicacion::find($registry);
+			$app->status=$status[$app->status];
+			$aux=$app->save();
+			/////////////////////////////////////////////////////////////////////////////////////////////////////
+		    $this->registroBitacora('Aplicacion: '.$app->descripcion,'Cambiar Status','{"Status":"Cambio de: '.$status_[$app->status].' a: '.$status__[$app->status].'"}','Aplicaciones ');
+		    /////////////////////////////////////////////////////////////////////////////////////////////////////
+
+			return Response()->json(['update'=>$aux]);
+		}
 
 		public function btn_modificar_aplicacion()
 		{
@@ -4469,18 +4486,19 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 			$datos=$this->datosAplicacion();
 			$duplicado=(object)array('codigo'=>0,'extra'=>0);
 			$cambios=array();
+
 			$app=Aplicacion::find($datos->registro);
 			$cambio=$this->detectarCambios($datos->nombre,$app->descripcion,'Nombre Aplicacion');
-			if($cambio)
+			if($cambio!=null)//si existen cambios
 			{
-				$aplicacion=DB::table('aplicaciones')->where(['descripcion'=>$datos->nombre,'id'=>$datos->registro])->first();
-				if($aplicacion!=null)
+				$aplicaciones=DB::table('aplicaciones')->where(['descripcion'=>$datos->nombre,'equipo_id'=>$app->equipo_id])->first();
+				if($aplicaciones!=null)
 				{
-					$equipo=Equipo::find($aplicacion->equipo_id);
+					$equipo=Equipo::find($app->equipo_id);
 					if($equipo!=null)
 					{
 						$duplicado->codigo=2;
-						$duplicado->extra="El Equipo: ".$equipo->descripcion.' Posee registrada la aplicacion de nombre: '.$aplicacion->descripcion;
+						$duplicado->extra="La aplicacion: ".$aplicaciones->descripcion.' ya se encuentra registrada, para el equipo: '.$equipo->descripcion;
 					}
 				}
 			}
@@ -4490,18 +4508,36 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 				$cambios=$this->agregarCambios($cambio,$cambios);
 				$app->descripcion=$datos->nombre;
 
+
 				$cambio=$this->detectarCambios($datos->licencia,$app->licencia,'Licencia Aplicacion');
 				$cambios=$this->agregarCambios($cambio,$cambios);
 				$app->licencia=$datos->licencia;
 
+				$cambio=$this->detectarCambios($datos->version,$app->version,'Version Aplicacion');
+				$cambios=$this->agregarCambios($cambio,$cambios);
+				$app->version=$datos->version;
 
-
+				
+				$traduccionFor=$this->traducirId($datos->status,10);
+				$traduccionBd=$this->traducirId($app->status,10);
+				$cambio=$this->detectarCambios($traduccionFor,$traduccionBd,'Version Status');
+				$cambios=$this->agregarCambios($cambio,$cambios);
+				$app->status=$datos->status;
 				$app->save();
 
-			}
 
+				$longitud=count($cambios);
+	    		$cambios=$this->documentarCambios($cambios);
+
+	    		if($longitud>0)
+	    	 	{
+
+	    			$this->registroBitacora('Id del registro modificado: '.$app->id,'Modificar Aplicacion ',$cambios,'Equipos -> Aplicaciones');
+	    			$duplicado->codigo=1;
+	    		}
+			}
 			
-			return Response::json($datos);
+			return Response::json($duplicado);
 		}
 
 

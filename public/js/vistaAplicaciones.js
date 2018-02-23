@@ -12,6 +12,7 @@ function loadModal(datos)
  $('#selStApm').val(datos.status);
 
  $('#regAplicacion_').val(datos.id);
+ $
 
 
  $('#myModal2').modal('show');
@@ -106,7 +107,42 @@ function loadModal(datos)
 			$.post(route,form)
 				.done(function(answer)
 				{
-					console.log(answer);
+						console.log(answer);
+						if(answer.codigo==1)
+								{
+										swal({
+												title:'Actualización Exitosa',//Contenido del modal
+												text: '<p style="font-size: 1.0em;">'+'EL aplicacion se modifico correctamente!!'+'</p>',
+												type: "success",
+												showConfirmButton:true,//Eliminar boton de confirmacion
+												html: true
+										},
+					  				 	function(isConfirm)
+					  				 	{
+					  				 		if(isConfirm)
+					  				 		{
+					  				 			window.location.href='/menu/registros/clientes/categoria/sucursal/equipos/aplicaciones/'+equipo;
+					  				 		}	
+
+					  				 	});
+					  				 
+								}
+
+								else if(answer.codigo==2)
+								{
+
+									swal({
+												title:'Aplicacion duplicada!!!',//Contenido del modal
+												text: '<p style="font-size: 0.9em;"> '+ answer.extra+' </p>',
+												type: "warning",
+												showConfirmButton:true,//Eliminar boton de confirmacion
+												html: true
+										});
+								}
+								else if(answer.codigo==0)//si no se produce ningun cambio en el modal lo cierra al oprimir el boton guardar
+								{
+									$('#myModal2').modal('hide');
+								}
 				})
 				.fail(function()
 				{
@@ -125,5 +161,70 @@ function loadModal(datos)
 
 
 	/////////////////////////////////////////////Check de status /////////////////////////////////////////////////////////
+
+	$('.checkAplicacion').change(function()
+		{
+
+			var estados=[false,true];
+			var valores=[1,0];
+            var colores=["#207D07","#EE1919"];
+            var acciones=['Habilitar','Deshabilitar'];
+            var mensajes=['Habilitado','Deshabilitado'];
+
+			////////////////////////////////////////////////////////////////////////////////////
+
+			var _token=$( "input[name^='_token']" ).val();
+			var actual=$(this);
+			var registry=actual.attr('data-reg');
+			var valor=actual.val();
+			var route='/menu/registros/clientes/status/aplicaciones';
+
+			swal({
+					title: "Cambio de status",
+					text: "¿Desea "+acciones[valor]+" La aplicacion seleccionada ?",
+					type: "warning",
+					showCancelButton: true,
+					confirmButtonColor:colores[valor],
+					confirmButtonText: acciones[valor]+' Aplicacion',
+					cancelButtonText: "Cancelar",
+					closeOnConfirm: false,
+					closeOnCancel: false
+				 },
+			 function(isConfirm)
+			 {
+
+			 		if(isConfirm)
+			 		{
+
+						$.post(route, {_token:_token,registry:registry})
+						.done(function(answer)
+						{
+							console.log(answer);
+							if(answer.update)
+							{
+								swal("Modificacion exitosa !!", "la aplicacion ha sido "+mensajes[valor]+" correctamente", "success");
+								$('#'+actual.attr('id')).val(valores[valor]);
+
+							}
+						})
+						.fail(function()
+							{ swal("Error Inesperado !!", "Comuniquese con el administrador", "error");});
+					}
+					else
+					{
+						 
+						 swal("Cambio de status cancelado !!", "No se modifico el status de la aplicacion", "error");
+						 actual.prop('checked',estados[valor]);
+						 $('#'+actual.attr('id')).val(valor);
+						 
+					}
+			});
+		});
+
+
+
+
+
+
 
 });

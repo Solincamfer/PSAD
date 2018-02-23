@@ -29,6 +29,7 @@ use App\Region;
 use App\Estado;
 use App\Municipio;
 use App\Sucursal;
+use App\Aplicacion;
 
 use Response;
 
@@ -104,39 +105,48 @@ class Buscador extends Controller
 
 			public function prueba_metodo()
 			{
-				$comercial=(object)array('pais'=>0,'region'=>0,'estado'=>0,'municipio'=>0);
-				$fiscal=(object)array('pais'=>0,'region'=>0,'estado'=>0,'municipio'=>0);
+				
+				$nombre=123;
+				$aplicacion_id=1;
+
+				$aplicacion=Aplicacion::find($aplicacion_id);
+				
+				return $aplicacion;
 
 
-				$sucursal=Sucursal::find(6);
-				$direccionComercial=Direccion::find($sucursal->direccionComercial_id);
-				$direccionFiscal=Direccion::find($sucursal->direccionFiscal_id);
-
-				$pais=DB::table('paises')->where('id',$direccionComercial->pais_id)->first();
-				$region=DB::table('regiones')->where('id',$direccionComercial->region_id)->first();
-				$estado=DB::table('estados')->where('id',$direccionComercial->estado_id)->first();
-				$municipio=DB::table('municipios')->where('id',$direccionComercial->municipio_id)->first();
-
-				$comercial->pais=$pais->descripcion;
-				$comercial->region=$region->descripcion;
-				$comercial->estado=$estado->descripcion;
-				$comercial->municipio=$municipio->descripcion;
+				// $comercial=(object)array('pais'=>0,'region'=>0,'estado'=>0,'municipio'=>0);
+				// $fiscal=(object)array('pais'=>0,'region'=>0,'estado'=>0,'municipio'=>0);
 
 
+				// $sucursal=Sucursal::find(6);
+				// $direccionComercial=Direccion::find($sucursal->direccionComercial_id);
+				// $direccionFiscal=Direccion::find($sucursal->direccionFiscal_id);
 
-				$pais=DB::table('paises')->where('id',$direccionFiscal->pais_id)->first();
-				$region=DB::table('regiones')->where('id',$direccionFiscal->region_id)->first();
-				$estado=DB::table('estados')->where('id',$direccionFiscal->estado_id)->first();
-				$municipio=DB::table('municipios')->where('id',$direccionFiscal->municipio_id)->first();
+				// $pais=DB::table('paises')->where('id',$direccionComercial->pais_id)->first();
+				// $region=DB::table('regiones')->where('id',$direccionComercial->region_id)->first();
+				// $estado=DB::table('estados')->where('id',$direccionComercial->estado_id)->first();
+				// $municipio=DB::table('municipios')->where('id',$direccionComercial->municipio_id)->first();
 
-				$fiscal->pais=$pais->descripcion;
-				$fiscal->region=$region->descripcion;
-				$fiscal->estado=$estado->descripcion;
-				$fiscal->municipio=$municipio->descripcion;
+				// $comercial->pais=$pais->descripcion;
+				// $comercial->region=$region->descripcion;
+				// $comercial->estado=$estado->descripcion;
+				// $comercial->municipio=$municipio->descripcion;
+
+
+
+				// $pais=DB::table('paises')->where('id',$direccionFiscal->pais_id)->first();
+				// $region=DB::table('regiones')->where('id',$direccionFiscal->region_id)->first();
+				// $estado=DB::table('estados')->where('id',$direccionFiscal->estado_id)->first();
+				// $municipio=DB::table('municipios')->where('id',$direccionFiscal->municipio_id)->first();
+
+				// $fiscal->pais=$pais->descripcion;
+				// $fiscal->region=$region->descripcion;
+				// $fiscal->estado=$estado->descripcion;
+				// $fiscal->municipio=$municipio->descripcion;
 
 				
 
-				return Response::json(['comercial'=>$comercial,'fiscal'=>$fiscal]);
+				// return Response::json(['comercial'=>$comercial,'fiscal'=>$fiscal]);
 
 			}
 
