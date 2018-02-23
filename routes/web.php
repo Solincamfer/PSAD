@@ -198,6 +198,10 @@ Route::match(['post','get'],'/clientes/categoria/sucursal/usuarios/perfil',     
 ///////////////////////Agregadas el viernes 20/01/2017//////////////////////////////////////////////////////////////////////////////
 	Route::match(['post','get'],'/clientes/modificar_pieza',		                                        ['uses'=>'RegistrosBasicos@btn_modificar_pieza']);
 	Route::match(['post','get'],'/clientes/modificar_componente',		                                    ['uses'=>'RegistrosBasicos@btn_modificar_componente']);
+
+	Route::match(['post','get'],'/clientes/insertar/aplicaciones',		                                    ['uses'=>'RegistrosBasicos@aplicacionesInsertar']);
+
+
 	Route::match(['post','get'],'/clientes/modificar_aplicacion',		                                    ['uses'=>'RegistrosBasicos@btn_modificar_aplicacion']);
 	Route::match(['post','get'],'/clientes/modificar_equipo',		                                        ['uses'=>'RegistrosBasicos@btn_modificar_equipo']);
 

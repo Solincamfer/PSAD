@@ -4281,8 +4281,56 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 		{
 			$datos=$this->cargar_header_sidebar_acciones();
 			$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(51,52),50);
-			return view ('Registros_Basicos\Clientes\clientes_sucursales_equipos_componentes_aplicaciones',$this->datos_vista($datos,$acciones,DB::table('aplicaciones')->where('equipo_id',$equipo_id)->paginate(11),$equipo_id,10));
+			$equipo=Equipo::find($equipo_id);
+			$sucursal=Sucursal::find($equipo->sucursal_id);
+
+			return view ('Registros_Basicos\Clientes\clientes_sucursales_equipos_componentes_aplicaciones',$this->datos_vista($datos,$acciones,DB::table('aplicaciones')->where('equipo_id',$equipo_id)->paginate(11),$equipo,$sucursal));
 							
+		}
+
+
+		public function aplicacionDuplicada($nombreAplicacion,$equipo_id)
+		{
+			$consulta=DB::table('aplicaciones')->where(['descripcion'=>$nombreAplicacion,'equipo_id'=>$equipo_id])->first();
+			$duplicado=(object)array('codigo'=>0,'extra'=>0);
+			if($consulta!=null)
+			{
+				$equipo=Equipo::find($equipo_id);
+				if($equipo!=null)
+				{
+					$duplicado->codigo=2;
+					$duplicado->extra="El equipo : ".$equipo->descripcion.' ya posee registrada la aplicacion : '.$nombreAplicacion;
+				}
+			}
+
+			return Response::json($duplicado);
+
+		}
+
+		public function datosAplicacion()
+		{
+
+			$formulario=(object) array(
+										'nombre'=>strtoupper(Request::get('nomAp')),
+										'licencia'=>strtoupper(Request::get('LicAp')),
+										'version'=>strtoupper(Request::get('VersAp')),
+										'status'=>Request::get('selStAp'),
+										'equipo'=>Request::get('__equipo__id__'),
+										'registro'=>Request::get('__aplicacionReg__')
+
+
+									);
+
+
+			return Response::json($formulario);
+		}
+
+		public function aplicacionesInsertar()
+		{
+			
+			
+			$datos=$this->datosAplicacion();
+			return Response::json($datos);
 		}
 	
 		public function clientes_sucursales_equipos_piezas($componente_id)//vista de piezas de un componente

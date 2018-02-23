@@ -9,7 +9,7 @@
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-md-4 ttlp">
-                                <h1>Equipos - Aplicaciones</h1>
+                                <h1>{{$extra->descripcion}} - Aplicaciones</h1>
                             </div>
                         </div>
                         <div class="row sep-div">
@@ -33,7 +33,7 @@
                                 </div>
                             </div>
                             <div class="col-md-2 despl-bttn">
-                                <a href="/menu/registros/clientes/categoria/sucursal/equipos/{{$extra}}">
+                                <a href="/menu/registros/clientes/categoria/sucursal/equipos/{{$datosC1->id}}">
                                     <div class="bttn-volver">
                                         <button id="btnBk" type="button" href="#" class="bttn-vol"><span class="fa fa-chevron-left"></span><span class="txt-bttn">VOLVER</span></button>
                                     </div>
@@ -80,7 +80,7 @@
                          <div class="paginador">
                              {{ $consulta->links() }}
                         </div>
-						<input type="hidden" name="TND" value="{{$datosC1}}">
+					
                     </div>
                     <!--    Registro -->
 
@@ -94,7 +94,7 @@
                                     <h4 class="modal-title" id="myModalLabel">Agregar Aplicación</h4>
                                 </div>
                                 <div class="modal-body">
-                                    <form action="">
+                                    <form id="regisAplicAgr" class="Validacion">
                                         {{ csrf_field() }}
                                         <div class="container-fluid" id="contas">
                                             <div id="rAs1">
@@ -115,28 +115,30 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group row">
                                                         <label for="selMap">Versión de la Aplicación</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
-                                                        <select name="selMap" class="form-control" id="selMap">
-                                                            <option value="0">-</option>
-                                                        </select><i class="fa fa-code-fork" id="icas5"></i>
+                                                        <input type="text" class="form-control" name="VersAp" id="VersAp" value="">
+                                                       
+                                                       
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                    <div class="form-group row">
                                                        <label for="selStAp">Estatus de Aplicación</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
                                                        <select name="selStAp" class="form-control" id="selStAp">
-                                                           <option value="0">-</option>
+                                                           <option value="">-</option>
                                                            <option value="1">Activo</option>
-                                                           <option value="2">Inactivo</option>
+                                                           <option value="0">Inactivo</option>
                                                        </select><i class="fa fa-check" id="icas6"></i>
                                                    </div>
                                                 </div>
                                             </div>
+                                            <input type="text" name="__equipo__id__" id="__equipo__id__" value="{{$extra->id}}">
                                         </div>
+
                                     </form>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="bttnMd" id="btnSv">Guardar <i class="fa fa-floppy-o"></i></button>
-                                    <button type="button" class="bttnMd" data-dismiss="modal" id="btnCs">Cerrar <i class="fa fa-times"></i></button>
+                                    <button type="button" class="bttnMd" id="__btnSvAplicacion___">Guardar <i class="fa fa-floppy-o"></i></button>
+                                   
                                 </div>
                             </div>
                         </div>
@@ -172,9 +174,7 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group row">
                                                         <label for="selMapm">Versión de la Aplicación</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
-                                                        <select name="selMapm" class="form-control" id="selMapm">
-                                                            <option value="0">-</option>
-                                                        </select><i class="fa fa-code-fork" id="micas5"></i>
+                                                         <input type="text" class="form-control" name="LicApMod" id="LicApMod">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">

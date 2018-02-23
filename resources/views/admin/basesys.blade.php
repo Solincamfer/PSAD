@@ -22,6 +22,7 @@
         <script src="{{asset('js/AJAX.js')}}"></script>
         <script src="{{asset('js/buscador.js')}}"></script>
         <script src="{{asset('js/botonGuardarMA.js')}}"></script>
+          <script src="{{asset('js/vistaAplicaciones.js')}}"></script>
         @yield('js')    
     </body>
 </html>
