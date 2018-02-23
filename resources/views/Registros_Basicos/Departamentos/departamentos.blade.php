@@ -79,11 +79,11 @@
                                                     @elseif($accion->id==94 )
                                                         @if($departamento->status==1)
                                                             <div class="chbx">
-                                                                <input type="checkbox" data-table="1" data-registro="{{ $departamento->id }}" class="btnAcc" name="status" id="{{'inchbx'. $departamento->id}}" value="{{$departamento->status}}" checked><label for="{{'inchbx'. $departamento->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
+                                                                <input type="checkbox" data-table="1" data-registro="{{ $departamento->id }}" class="btnAcc" name="status" id="{{'inchbx'. $departamento->id}}" value="{{$departamento->status}}" checked><label for="{{'inchbx'. $departamento->id}}" class="tltp" data-ttl="{{$accion->descripcion}}"></label>
                                                             </div>
                                                         @elseif($departamento->status==0)
                                                             <div class="chbx">
-                                                                <input type="checkbox" data-table="1" data-registro="{{ $departamento->id }}" class="btnAcc" name="status" id="{{'inchbx'. $departamento->id}}" value="{{$departamento->status}}"><label for="{{'inchbx'. $departamento->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
+                                                                <input type="checkbox" data-table="1" data-registro="{{ $departamento->id }}" class="btnAcc" name="status" id="{{'inchbx'. $departamento->id}}" value="{{$departamento->status}}"><label for="{{'inchbx'. $departamento->id}}" class="tltp" data-ttl="{{$accion->descripcion}}"></label>
                                                             </div>
                                                         @endif
                                                     @endif

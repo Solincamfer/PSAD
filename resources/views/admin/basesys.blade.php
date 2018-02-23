@@ -21,7 +21,6 @@
         <script src="{{asset('js/val.js')}}"></script>
         <script src="{{asset('js/AJAX.js')}}"></script>
         <script src="{{asset('js/buscador.js')}}"></script>
-        <script src="{{asset('js/botonGuardarMA.js')}}"></script>
         @yield('js')    
     </body>
 </html>

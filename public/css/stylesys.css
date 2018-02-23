@@ -539,8 +539,8 @@ input[type = "radio"] {
     position: absolute;
 }
 
-.tltp:after{
-    border-right: 6px solid transparent;
+/*.tltp:after{
+    border-right: px solid transparent;
     border-bottom: 6px solid rgba(0, 0, 0, .75);
     border-left: 6px solid transparent;
     content: '';
@@ -549,7 +549,7 @@ input[type = "radio"] {
     left: 4px;
     width: 0;
 }
-
+*/
 .tltpcd:after {
     border-right: 6px solid transparent;
     border-bottom: 6px solid rgba(0, 0, 0, .75);
@@ -605,7 +605,8 @@ input[type = "radio"] {
     content: attr(data-ttl);
     font-size: 14px;
     padding: 2px 6px;
-    top: 26px;
+    top: -25%;
+    right: 100%;
     white-space: nowrap;
     z-index: 1000;
 }
@@ -637,7 +638,7 @@ input[type = "radio"] {
 /*Efectos Tooltip*/
     /*fade*/
     .tltp:after, .tltp:before{
-        transform: translate3d(0,-10px,0);
+        transform: translate3d(-10px,0,0);
         transition: all .15s ease-in-out;
     }
 

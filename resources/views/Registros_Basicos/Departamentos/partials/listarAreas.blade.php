@@ -27,11 +27,11 @@
                                         @elseif($accion->id==1 )
                                             @if($area->status==1)
                                                 <div class="chbx">
-                                                    <input type="checkbox" data-table="2" data-registro="{{ $area->id }}" class="btnAcc" name="status" id="{{'inchbx'. $area->id}}" value="{{$area->status}}" checked><label for="{{'inchbx'. $area->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
+                                                    <input type="checkbox" data-table="2" data-registro="{{ $area->id }}" class="btnAcc" name="status" id="{{'inchbx'. $area->id}}" value="{{$area->status}}" checked><label for="{{'inchbx'. $area->id}}" class="tltp" data-ttl="{{$accion->descripcion}}"></label>
                                                 </div>
                                             @elseif($area->status==0)
                                                 <div class="chbx">
-                                                    <input type="checkbox" data-table="2" data-registro="{{ $area->id }}" class="btnAcc" name="status" id="{{'inchbx'. $area->id}}" value="{{$area->status}}"><label for="{{'inchbx'. $area->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
+                                                    <input type="checkbox" data-table="2" data-registro="{{ $area->id }}" class="btnAcc" name="status" id="{{'inchbx'. $area->id}}" value="{{$area->status}}"><label for="{{'inchbx'. $area->id}}" class="tltp" data-ttl="{{$accion->descripcion}}"></label>
                                                 </div>
                                             @endif
                                         @endif
@@ -77,11 +77,11 @@
                             @elseif($accion->id==1 )
                                 @if($area->status==1)
                                     <div class="chbx">
-                                        <input type="checkbox" class="btnAcc" name="status" data-table="2" data-registro="{{ $area->id }}" id="{{'inchbx'. $area->id}}" value="{{$area->status}}" checked><label for="{{'inchbx'. $area->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
+                                        <input type="checkbox" class="btnAcc" name="status" data-table="2" data-registro="{{ $area->id }}" id="{{'inchbx'. $area->id}}" value="{{$area->status}}" checked><label for="{{'inchbx'. $area->id}}" class="tltp" data-ttl="{{$accion->descripcion}}"></label>
                                     </div>
                                 @elseif($area->status==0)
                                     <div class="chbx">
-                                        <input type="checkbox" class="btnAcc" data-table="2" data-registro="{{ $area->id }}" name="status" id="{{'inchbx'. $area->id}}" value="{{$area->status}}"><label for="{{'inchbx'. $area->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
+                                        <input type="checkbox" class="btnAcc" data-table="2" data-registro="{{ $area->id }}" name="status" id="{{'inchbx'. $area->id}}" value="{{$area->status}}"><label for="{{'inchbx'. $area->id}}" class="tltp" data-ttl="{{$accion->descripcion}}"></label>
                                     </div>
                                 @endif
                             @endif

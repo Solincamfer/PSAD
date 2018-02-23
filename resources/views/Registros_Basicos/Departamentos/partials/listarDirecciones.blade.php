@@ -21,11 +21,11 @@
                 @elseif($accion->id==1 )
                     @if($direccion->status==1)
                         <div class="chbx">
-                            <input type="checkbox" class="btnAcc" data-table="0" data-registro="{{ $direccion->id }}" name="status" id="{{'inchbx'. $direccion->id}}" value="{{$direccion->status}}" checked><label for="{{'inchbx'. $direccion->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
+                            <input type="checkbox" class="btnAcc" data-table="0" data-registro="{{ $direccion->id }}" name="status" id="{{'inchbx'. $direccion->id}}" value="{{$direccion->status}}" checked><label for="{{'inchbx'. $direccion->id}}" class="tltp" data-ttl="{{$accion->descripcion}}"></label>
                         </div>
                     @elseif($direccion->status==0)
                         <div class="chbx">
-                            <input type="checkbox" class="btnAcc" data-table="0" data-registro="{{ $direccion->id }}" name="status" id="{{'inchbx'. $direccion->id}}" value="{{$direccion->status}}"><label for="{{'inchbx'. $direccion->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
+                            <input type="checkbox" class="btnAcc" data-table="0" data-registro="{{ $direccion->id }}" name="status" id="{{'inchbx'. $direccion->id}}" value="{{$direccion->status}}"><label for="{{'inchbx'. $direccion->id}}" class="tltp" data-ttl="{{$accion->descripcion}}"></label>
                         </div>
                     @endif
                 @endif

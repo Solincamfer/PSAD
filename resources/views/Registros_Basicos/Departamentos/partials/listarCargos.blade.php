@@ -22,11 +22,11 @@
                                     @elseif($accion->id==1 )
                                         @if($cargo->status==1)
                                             <div class="chbx">
-                                                <input type="checkbox" class="btnAcc" data-table="3" data-registro="{{ $cargo->id }}" name="status" id="{{'inchbx'. $cargo->id}}" value="{{$cargo->status}}" checked><label for="{{'inchbx'. $cargo->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
+                                                <input type="checkbox" class="btnAcc" data-table="3" data-registro="{{ $cargo->id }}" name="status" id="{{'inchbx'. $cargo->id}}" value="{{$cargo->status}}" checked><label for="{{'inchbx'. $cargo->id}}" class="tltp" data-ttl="{{$accion->descripcion}}"></label>
                                             </div>
                                         @elseif($cargo->status==0)
                                             <div class="chbx">
-                                                <input type="checkbox" class="btnAcc" data-table="3" data-registro="{{ $cargo->id }}" name="status" id="{{'inchbx'. $cargo->id}}" value="{{$cargo->status}}"><label for="{{'inchbx'. $cargo->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
+                                                <input type="checkbox" class="btnAcc" data-table="3" data-registro="{{ $cargo->id }}" name="status" id="{{'inchbx'. $cargo->id}}" value="{{$cargo->status}}"><label for="{{'inchbx'. $cargo->id}}" class="tltpc" data-ttl="{{$accion->descripcion}}"></label>
                                             </div>
                                         @endif
                                     @endif
@@ -64,11 +64,11 @@
                             @elseif($accion->id==1 )
                                 @if($cargo->status==1)
                                     <div class="chbx">
-                                        <input type="checkbox" data-table="3" data-registro="{{ $cargo->id }}" class="btnAcc" name="status" id="{{'inchbx'. $cargo->id}}" value="{{$cargo->status}}" checked><label for="{{'inchbx'. $cargo->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
+                                        <input type="checkbox" data-table="3" data-registro="{{ $cargo->id }}" class="btnAcc" name="status" id="{{'inchbx'. $cargo->id}}" value="{{$cargo->status}}" checked><label for="{{'inchbx'. $cargo->id}}" class="tltp" data-ttl="{{$accion->descripcion}}"></label>
                                     </div>
                                 @elseif($cargo->status==0)
                                     <div class="chbx">
-                                        <input type="checkbox" data-table="3" data-registro="{{ $cargo->id }}" class="btnAcc" name="status" id="{{'inchbx'. $cargo->id}}" value="{{$cargo->status}}"><label for="{{'inchbx'. $cargo->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
+                                        <input type="checkbox" data-table="3" data-registro="{{ $cargo->id }}" class="btnAcc" name="status" id="{{'inchbx'. $cargo->id}}" value="{{$cargo->status}}"><label for="{{'inchbx'. $cargo->id}}" class="tltp" data-ttl="{{$accion->descripcion}}"></label>
                                     </div>
                                 @endif
                             @endif
