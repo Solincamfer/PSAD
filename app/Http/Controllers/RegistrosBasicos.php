@@ -40,6 +40,7 @@ use App\Tipoequipo;
 use App\Marca;
 use App\Modelo;
 use App\Equipo;
+use App\Aplicacion;
 use Response;
 
 
@@ -4289,23 +4290,7 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 		}
 
 
-		public function aplicacionDuplicada($nombreAplicacion,$equipo_id)
-		{
-			$consulta=DB::table('aplicaciones')->where(['descripcion'=>$nombreAplicacion,'equipo_id'=>$equipo_id])->first();
-			$duplicado=(object)array('codigo'=>0,'extra'=>0);
-			if($consulta!=null)
-			{
-				$equipo=Equipo::find($equipo_id);
-				if($equipo!=null)
-				{
-					$duplicado->codigo=2;
-					$duplicado->extra="El equipo : ".$equipo->descripcion.' ya posee registrada la aplicacion : '.$nombreAplicacion;
-				}
-			}
-
-			return Response::json($duplicado);
-
-		}
+		
 
 		public function datosAplicacion()
 		{
@@ -4316,21 +4301,61 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 										'version'=>strtoupper(Request::get('VersAp')),
 										'status'=>Request::get('selStAp'),
 										'equipo'=>Request::get('__equipo__id__'),
-										'registro'=>Request::get('__aplicacionReg__')
-
+										'registro'=>Request::get('regAplicacion_')
 
 									);
 
 
-			return Response::json($formulario);
+			return $formulario;
+		}
+
+
+		public function aplicacionDuplicada($nombreApp,$equipo_id)
+		{
+			$duplicado=(object)array('codigo'=>0,'extra'=>0);
+
+			$app=DB::table('aplicaciones')->where(['equipo_id'=>$equipo_id,'descripcion'=>$nombreApp])->first();
+			if($app!=null)
+			{
+				$equipo=Equipo::find($equipo_id);
+				if($equipo!=null)
+				{
+					$duplicado->extra="El equipo".$equipo->descripcion.' ya posee registrado una aplicacion de nombre : '.$nombreApp;
+					$duplicado->codigo=2;
+				}
+			}
+
+			return $duplicado;
 		}
 
 		public function aplicacionesInsertar()
 		{
 			
-			
 			$datos=$this->datosAplicacion();
-			return Response::json($datos);
+			$duplicado=$this->aplicacionDuplicada($datos->nombre,$datos->equipo);
+
+			if($duplicado->codigo==0)
+			{
+					$app=new Aplicacion();
+					$app->descripcion=$datos->nombre;
+					$app->licencia=$datos->licencia;
+					$app->version=$datos->version;
+					$app->status=$datos->status;
+					$app->equipo_id=$datos->equipo;
+
+					$update=$app->save();
+
+					if($update)
+					{
+
+						$duplicado->codigo=1;
+							$this->registroBitacora('Id del registro creado: '.$app->id,'Agregar aplicacion','{"Registro  la aplicacion":'.'"'.$app->descripcion.' - Version: '.$app->version.'"'.'}','Equipos -> Agregar Aplicacion');
+
+					}
+			}
+		
+
+			return Response::json($duplicado);
 		}
 	
 		public function clientes_sucursales_equipos_piezas($componente_id)//vista de piezas de un componente
@@ -4429,18 +4454,54 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 			return($retorno);
 		}
 
+
 		public function btn_modificar_aplicacion()
 		{
-			$aplicacionId=Request::get('datos');
-			$registro=DB::table('aplicaciones')->where('id',$aplicacionId)->first();
-			$retorno=0;
-			if (count($registro)!=0) 
+			$registry=Request::get('registry');
+			$app=Aplicacion::find($registry);
+
+			return Response::json($app);
+		}
+
+
+		public function aplicacionesActualizar()
+		{
+			$datos=$this->datosAplicacion();
+			$duplicado=(object)array('codigo'=>0,'extra'=>0);
+			$cambios=array();
+			$app=Aplicacion::find($datos->registro);
+			$cambio=$this->detectarCambios($datos->nombre,$app->descripcion,'Nombre Aplicacion');
+			if($cambio)
 			{
-				$retorno=array($registro->descripcion,$registro->licencia,$registro->version,$registro->status,$registro->equipo_id);
-				
+				$aplicacion=DB::table('aplicaciones')->where(['descripcion'=>$datos->nombre,'id'=>$datos->registro])->first();
+				if($aplicacion!=null)
+				{
+					$equipo=Equipo::find($aplicacion->equipo_id);
+					if($equipo!=null)
+					{
+						$duplicado->codigo=2;
+						$duplicado->extra="El Equipo: ".$equipo->descripcion.' Posee registrada la aplicacion de nombre: '.$aplicacion->descripcion;
+					}
+				}
 			}
 
-			return($retorno);
+			if($duplicado->codigo==0)
+			{
+				$cambios=$this->agregarCambios($cambio,$cambios);
+				$app->descripcion=$datos->nombre;
+
+				$cambio=$this->detectarCambios($datos->licencia,$app->licencia,'Licencia Aplicacion');
+				$cambios=$this->agregarCambios($cambio,$cambios);
+				$app->licencia=$datos->licencia;
+
+
+
+				$app->save();
+
+			}
+
+			
+			return Response::json($datos);
 		}
 
 
