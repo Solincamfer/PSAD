@@ -8,14 +8,6 @@ class Modelo extends Model
 {
      public $timestamps=false;
   	 protected $table="modelos"; 
-  	 protected $fillable=['id','descripcion','marca_id'];
+  	 protected $fillable=['id','descripcion'];
 
-
-
-
-
-  	 public function marca()
-  	 {
-  	 	 return $this->belongsTo('App\Marca');
-  	 }
 }
