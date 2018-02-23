@@ -40,6 +40,7 @@ use App\Tipoequipo;
 use App\Marca;
 use App\Modelo;
 use App\Equipo;
+use App\Aplicacion;
 use Response;
 
 
@@ -4289,23 +4290,7 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 		}
 
 
-		public function aplicacionDuplicada($nombreAplicacion,$equipo_id)
-		{
-			$consulta=DB::table('aplicaciones')->where(['descripcion'=>$nombreAplicacion,'equipo_id'=>$equipo_id])->first();
-			$duplicado=(object)array('codigo'=>0,'extra'=>0);
-			if($consulta!=null)
-			{
-				$equipo=Equipo::find($equipo_id);
-				if($equipo!=null)
-				{
-					$duplicado->codigo=2;
-					$duplicado->extra="El equipo : ".$equipo->descripcion.' ya posee registrada la aplicacion : '.$nombreAplicacion;
-				}
-			}
-
-			return Response::json($duplicado);
-
-		}
+		
 
 		public function datosAplicacion()
 		{
@@ -4316,21 +4301,61 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 										'version'=>strtoupper(Request::get('VersAp')),
 										'status'=>Request::get('selStAp'),
 										'equipo'=>Request::get('__equipo__id__'),
-										'registro'=>Request::get('__aplicacionReg__')
-
+										'registro'=>Request::get('regAplicacion_')
 
 									);
 
 
-			return Response::json($formulario);
+			return $formulario;
+		}
+
+
+		public function aplicacionDuplicada($nombreApp,$equipo_id)
+		{
+			$duplicado=(object)array('codigo'=>0,'extra'=>0);
+
+			$app=DB::table('aplicaciones')->where(['equipo_id'=>$equipo_id,'descripcion'=>$nombreApp])->first();
+			if($app!=null)
+			{
+				$equipo=Equipo::find($equipo_id);
+				if($equipo!=null)
+				{
+					$duplicado->extra="El equipo".$equipo->descripcion.' ya posee registrado una aplicacion de nombre : '.$nombreApp;
+					$duplicado->codigo=2;
+				}
+			}
+
+			return $duplicado;
 		}
 
 		public function aplicacionesInsertar()
 		{
 			
-			
 			$datos=$this->datosAplicacion();
-			return Response::json($datos);
+			$duplicado=$this->aplicacionDuplicada($datos->nombre,$datos->equipo);
+
+			if($duplicado->codigo==0)
+			{
+					$app=new Aplicacion();
+					$app->descripcion=$datos->nombre;
+					$app->licencia=$datos->licencia;
+					$app->version=$datos->version;
+					$app->status=$datos->status;
+					$app->equipo_id=$datos->equipo;
+
+					$update=$app->save();
+
+					if($update)
+					{
+
+						$duplicado->codigo=1;
+							$this->registroBitacora('Id del registro creado: '.$app->id,'Agregar aplicacion','{"Registro  la aplicacion":'.'"'.$app->descripcion.' - Version: '.$app->version.'"'.'}','Equipos -> Agregar Aplicacion');
+
+					}
+			}
+		
+
+			return Response::json($duplicado);
 		}
 	
 		public function clientes_sucursales_equipos_piezas($componente_id)//vista de piezas de un componente
@@ -4429,18 +4454,90 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 			return($retorno);
 		}
 
+		public function aplicacionesStatus()
+		{
+			$status=[1,0];
+			$status_=['HABILITADO','INHABILITADO'];
+			$status__=['INHABILITADO','HABILITADO'];
+			$registry=Request::get('registry');
+			$aux=false;
+			///////////// Busqueda del perfil y cambio de status ////////////////////////
+			$app=Aplicacion::find($registry);
+			$app->status=$status[$app->status];
+			$aux=$app->save();
+			/////////////////////////////////////////////////////////////////////////////////////////////////////
+		    $this->registroBitacora('Aplicacion: '.$app->descripcion,'Cambiar Status','{"Status":"Cambio de: '.$status_[$app->status].' a: '.$status__[$app->status].'"}','Aplicaciones ');
+		    /////////////////////////////////////////////////////////////////////////////////////////////////////
+
+			return Response()->json(['update'=>$aux]);
+		}
+
 		public function btn_modificar_aplicacion()
 		{
-			$aplicacionId=Request::get('datos');
-			$registro=DB::table('aplicaciones')->where('id',$aplicacionId)->first();
-			$retorno=0;
-			if (count($registro)!=0) 
+			$registry=Request::get('registry');
+			$app=Aplicacion::find($registry);
+
+			return Response::json($app);
+		}
+
+
+		public function aplicacionesActualizar()
+		{
+			$datos=$this->datosAplicacion();
+			$duplicado=(object)array('codigo'=>0,'extra'=>0);
+			$cambios=array();
+
+			$app=Aplicacion::find($datos->registro);
+			$cambio=$this->detectarCambios($datos->nombre,$app->descripcion,'Nombre Aplicacion');
+			if($cambio!=null)//si existen cambios
 			{
-				$retorno=array($registro->descripcion,$registro->licencia,$registro->version,$registro->status,$registro->equipo_id);
-				
+				$aplicaciones=DB::table('aplicaciones')->where(['descripcion'=>$datos->nombre,'equipo_id'=>$app->equipo_id])->first();
+				if($aplicaciones!=null)
+				{
+					$equipo=Equipo::find($app->equipo_id);
+					if($equipo!=null)
+					{
+						$duplicado->codigo=2;
+						$duplicado->extra="La aplicacion: ".$aplicaciones->descripcion.' ya se encuentra registrada, para el equipo: '.$equipo->descripcion;
+					}
+				}
 			}
 
-			return($retorno);
+			if($duplicado->codigo==0)
+			{
+				$cambios=$this->agregarCambios($cambio,$cambios);
+				$app->descripcion=$datos->nombre;
+
+
+				$cambio=$this->detectarCambios($datos->licencia,$app->licencia,'Licencia Aplicacion');
+				$cambios=$this->agregarCambios($cambio,$cambios);
+				$app->licencia=$datos->licencia;
+
+				$cambio=$this->detectarCambios($datos->version,$app->version,'Version Aplicacion');
+				$cambios=$this->agregarCambios($cambio,$cambios);
+				$app->version=$datos->version;
+
+				
+				$traduccionFor=$this->traducirId($datos->status,10);
+				$traduccionBd=$this->traducirId($app->status,10);
+				$cambio=$this->detectarCambios($traduccionFor,$traduccionBd,'Version Status');
+				$cambios=$this->agregarCambios($cambio,$cambios);
+				$app->status=$datos->status;
+				$app->save();
+
+
+				$longitud=count($cambios);
+	    		$cambios=$this->documentarCambios($cambios);
+
+	    		if($longitud>0)
+	    	 	{
+
+	    			$this->registroBitacora('Id del registro modificado: '.$app->id,'Modificar Aplicacion ',$cambios,'Equipos -> Aplicaciones');
+	    			$duplicado->codigo=1;
+	    		}
+			}
+			
+			return Response::json($duplicado);
 		}
 
 

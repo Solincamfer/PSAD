@@ -50,8 +50,8 @@
                                     @if($accion->id!=52)
                                         @if($accion->id==51)
                                             <span class="iclsp">
-                                                <a href="#myModal2" class="tltp" data-ttl="{{$accion->descripcion}}" data-toggle="modal" data-target="#myModal2"> 
-                                                    <i class="{{$accion->clase_css}} _ModificarAplicacion_" data-aplicacion="{{$aplicacion->id}}"></i>
+                                                <a  class="modificarAplicacion"  data-reg="{{$aplicacion->id}}" data-ttl="{{$accion->descripcion}}" data-toggle="modal" d> 
+                                                    <i class="{{$accion->clase_css}} " data-aplicacion="{{$aplicacion->id}}"></i>
                                                 </a>
                                             </span>
                                         @elseif($accion->id!=51)
@@ -64,11 +64,11 @@
                                     @elseif($accion->id==52)
                                         @if($aplicacion->status==1)
                                             <div class="chbx">
-                                                <input type="checkbox" class="btnAcc" name="status" id="{{'inchbx'. $aplicacion->id}}" value="{{$aplicacion->status}}" checked><label for="{{'inchbx'. $aplicacion->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
+                                                <input type="checkbox" class="checkAplicacion" name="statusApp" data-reg="{{$aplicacion->id}}" id="{{'app'. $aplicacion->id}}" value="{{$aplicacion->status}}" checked><label for="{{'app'. $aplicacion->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
                                             </div>
                                         @elseif($aplicacion->status==0)
                                             <div class="chbx">
-                                                <input type="checkbox" class="btnAcc" name="status" id="{{'inchbx'. $aplicacion->id}}" value="{{$aplicacion->status}}"><label for="{{'inchbx'. $aplicacion->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
+                                                <input type="checkbox" class="checkAplicacion" name="statusApp" data-reg="{{$aplicacion->id}}" id="{{'app'. $aplicacion->id}}" value="{{$aplicacion->status}}"><label for="{{'app'. $aplicacion->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
                                             </div>
                                         @endif
                                     @endif
@@ -131,7 +131,7 @@
                                                    </div>
                                                 </div>
                                             </div>
-                                            <input type="text" name="__equipo__id__" id="__equipo__id__" value="{{$extra->id}}">
+                                            <input type="hidden" name="__equipo__id__" id="__equipo__id__" value="{{$extra->id}}">
                                         </div>
 
                                     </form>
@@ -153,20 +153,20 @@
                                     <h4 class="modal-title" id="myModalLabel2">Modificar Aplicación</h4>
                                 </div>
                                 <div class="modal-body">
-                                    <form action="">
+                                    <form id="regisAplicMod" class="Validacion">
                                         {{ csrf_field() }}
                                         <div class="container-fluid" id="contasm">
                                             <div id="rAsm1">
                                                 <div class="col-md-6">
                                                     <div class="form-group row">
                                                         <label for="nomApm">Nombre de la Aplicación</label>
-                                                        <input type="text" class="form-control" name="nomApm" id="nomApm"><i class="fa fa-windows" id="micas1"></i>
+                                                        <input type="text" class="form-control" name="nomAp" id="nomApm"><i class="fa fa-windows" id="micas1"></i>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group row">
                                                         <label for="LicApm">Licencia de la Aplicación</label>
-                                                        <input type="text" class="form-control" name="LicApm" id="LicApm"><i class="fa fa-barcode" id="micas2"></i>
+                                                        <input type="text" class="form-control" name="LicAp" id="LicApm"><i class="fa fa-barcode" id="micas2"></i>
                                                     </div>
                                                 </div>
                                             </div>
@@ -174,13 +174,13 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group row">
                                                         <label for="selMapm">Versión de la Aplicación</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
-                                                         <input type="text" class="form-control" name="LicApMod" id="LicApMod">
+                                                         <input type="text" class="form-control" name="VersAp" id="LicApMod">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group row">
                                                         <label for="selStApm">Estatus de Aplicación</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
-                                                        <select name="selStApm" class="form-control" id="selStApm">
+                                                        <select name="selStAp" class="form-control" id="selStApm">
                                                             <option value=" ">-</option>
                                                             <option value="1">Activo</option>
                                                             <option value="0">Inactivo</option>
@@ -188,12 +188,13 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <input type="hidden" name="regAplicacion_" id="regAplicacion_" value="">
                                         </div>
                                     </form>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="bttnMd" id="btnSvm">Guardar <i class="fa fa-floppy-o"></i></button>
-                                    <button type="button" class="bttnMd" data-dismiss="modal" id="btnCsm">Cerrar <i class="fa fa-times"></i></button>
+                                    <button type="button" class="bttnMd" id="btnSvmAplicacion__">Guardar <i class="fa fa-floppy-o"></i></button>
+                                   
                                 </div>
                             </div>
                         </div>

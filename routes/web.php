@@ -202,7 +202,13 @@ Route::match(['post','get'],'/clientes/categoria/sucursal/usuarios/perfil',     
 	Route::match(['post','get'],'/clientes/insertar/aplicaciones',		                                    ['uses'=>'RegistrosBasicos@aplicacionesInsertar']);
 
 
-	Route::match(['post','get'],'/clientes/modificar_aplicacion',		                                    ['uses'=>'RegistrosBasicos@btn_modificar_aplicacion']);
+	Route::match(['post','get'],'/clientes/modificar/aplicaciones',		                                    ['uses'=>'RegistrosBasicos@btn_modificar_aplicacion']);
+
+	Route::match(['post','get'],'/clientes/actualizar/aplicaciones',		                                    ['uses'=>'RegistrosBasicos@aplicacionesActualizar']);
+
+	Route::match(['post','get'],'/clientes/status/aplicaciones',		                                    ['uses'=>'RegistrosBasicos@aplicacionesStatus']);
+
+
 	Route::match(['post','get'],'/clientes/modificar_equipo',		                                        ['uses'=>'RegistrosBasicos@btn_modificar_equipo']);
 
 
