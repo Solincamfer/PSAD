@@ -10,21 +10,21 @@
                             <div class="contMd">
                                 <div class="icl">
                                     @foreach($acciones as $accion)
-                                        @if($accion->id!=1 )
-                                            @if($accion->id==2)
+                                        @if($accion->id!=99 )
+                                            @if($accion->id==98)
                                                 <span class="iclsp">
                                                     <a  class="tltp modificar" data-modal="2" data-padre="{{$area->departamento_id}}" data-reg="{{$area->id}}" id="ModificaDepar{{$area->id}}" data-ttl="{{$accion->descripcion}}" data-toggle="modal" >
                                                         <i class="{{$accion->clase_css}}"></i>
                                                     </a>
                                                 </span>
-                                            @elseif($accion->id==3)
+                                            @elseif($accion->id==7)
                                                 <span class="iclsp">
                                                     <a data-modal="2" class="tltp add-reg" data-reg="{{$area->id}}" data-ttl="{{$accion->descripcion}}">
                                                         <i class="{{$accion->clase_css}}"></i>
                                                     </a>
                                                 </span>
                                             @endif
-                                        @elseif($accion->id==1 )
+                                        @elseif($accion->id==99 )
                                             @if($area->status==1)
                                                 <div class="chbx">
                                                     <input type="checkbox" data-table="2" data-registro="{{ $area->id }}" class="btnAcc" name="status" id="{{'inchbx'. $area->id}}" value="{{$area->status}}" checked><label for="{{'inchbx'. $area->id}}" class="tltp" data-ttl="{{$accion->descripcion}}"></label>
@@ -60,21 +60,21 @@
                 <div class="contMd">
                     <div class="icl">
                         @foreach($acciones as $accion)
-                            @if($accion->id!=1 )
-                                @if($accion->id==2)
+                            @if($accion->id!=99 )
+                                @if($accion->id==98)
                                     <span class="iclsp">
                                         <a  class="tltp modificar" data-modal="2" data-reg="{{$area->id}}" data-padre="{{ $area->departamento_id }}" id="ModificaDepar{{$area->id}}" data-ttl="{{$accion->descripcion}}" data-toggle="modal" >
                                             <i class="{{$accion->clase_css}}"></i>
                                         </a>
                                     </span>
-                                @elseif($accion->id==3)
+                                @elseif($accion->id==7)
                                     <span class="iclsp">
                                         <a class="tltp add-reg" data-modal="2" data-reg="{{$area->id}}" data-ttl="{{$accion->descripcion}}">
                                             <i class="{{$accion->clase_css}}"></i>
                                         </a>
                                     </span>
                                 @endif
-                            @elseif($accion->id==1 )
+                            @elseif($accion->id==99 )
                                 @if($area->status==1)
                                     <div class="chbx">
                                         <input type="checkbox" class="btnAcc" name="status" data-table="2" data-registro="{{ $area->id }}" id="{{'inchbx'. $area->id}}" value="{{$area->status}}" checked><label for="{{'inchbx'. $area->id}}" class="tltp" data-ttl="{{$accion->descripcion}}"></label>

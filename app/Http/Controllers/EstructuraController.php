@@ -130,7 +130,6 @@ class EstructuraController extends Controller
 
 		$argumento=\Request::get('data');
 		$datos=$this->cargar_header_sidebar_acciones();
-		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(1,2,3),4);
 		if (empty($argumento[2])) {
 			$argumento[2]=[0];
 		}
@@ -151,6 +150,7 @@ class EstructuraController extends Controller
 									             ->distinct()
 									             ->get();
 			$query=\App\Departamento::where('director_id',$argumento[0])->get();
+			$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(94,95,96),4);
 			return view('Registros_Basicos.Departamentos.partials.listaDatos',$this->datos_vista(0,$acciones,$consulta,$query,$marcados[0]));
 		}
 		elseif ($argumento[1]=='area') {
@@ -165,7 +165,7 @@ class EstructuraController extends Controller
 									  ->join('directores','departamentos.director_id','=','directores.id')
 									  ->select('areas.*')
 									  ->where('directores.id',$argumento[0])->get();
-
+			$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(7,98,99),4);		  
 			return view('Registros_Basicos.Departamentos.partials.listarAreas',$this->datos_vista(0,$acciones,$consulta,$query,0,$areamarcada[0]));
 		}
 		else {
@@ -183,6 +183,7 @@ class EstructuraController extends Controller
 									   ->join('directores','departamentos.director_id','=','directores.id')
 									   ->select('cargos.*')
 									   ->where('directores.id',$argumento[0])->get();
+			$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(5,6),4);
 			return view('Registros_Basicos\Departamentos\partials\listarCargos',$this->datos_vista(0,$acciones,$consulta,$query));
 		}
 	}
@@ -191,7 +192,6 @@ class EstructuraController extends Controller
 	public function mostrarEstructuraTodos(){ // METODO UTILIZADO PARA MOSTRAR TODOS LOS REGISTROS EN CASO QUE NO SE SELECCIONE NINGUNA 											 DIRECCION, DEPENDIENDO DE LA PESTAÑA QUE ESTE ACTIVA
 		$argumento=\Request::get('data');
 		$datos=$this->cargar_header_sidebar_acciones();
-		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(1,2,3),4);
 		if (empty($argumento[2])) {
 			$argumento[2]=[0];
 		}
@@ -211,6 +211,7 @@ class EstructuraController extends Controller
 									             ->distinct()
 									             ->get();
 			$query=\App\Departamento::all();
+			$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(94,95,96),4);
 			return view('Registros_Basicos.Departamentos.partials.listaDatos',$this->datos_vista(0,$acciones,$consulta,$query,$marcados[0]));
 		}
 		elseif ($argumento[1]=='area') {
@@ -220,6 +221,7 @@ class EstructuraController extends Controller
 									             ->distinct()
 									             ->get();
 			$query=\App\Area::all();
+			$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(7,98,99),4);	
 			return view('Registros_Basicos.Departamentos.partials.listarAreas',$this->datos_vista(0,$acciones,$consulta,$query,0,$areamarcada[0]));
 		}
 		else {
@@ -229,13 +231,14 @@ class EstructuraController extends Controller
 									             ->distinct()
 									             ->get();
 			$query=\App\Cargo::all();
+			$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(5,6),4);
 			return view('Registros_Basicos.Departamentos.partials.listarCargos',$this->datos_vista(0,$acciones,$consulta,$query));
 		}
 	}
 
 	public Function buscarDepartamentos(){
 		$datos=$this->cargar_header_sidebar_acciones();
-		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(1,2,3),4);
+		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(94,95,96),4);
 		$data=\Request::get('data');
 		if(empty($data[1])){
 			$data[1]=[0];
@@ -269,7 +272,7 @@ class EstructuraController extends Controller
 
 	public Function buscarAreas(){
 		$datos=$this->cargar_header_sidebar_acciones();
-		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(1,2,3),4);
+		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(7,98,99),4);	
 		$data=\Request::get('data');
 		$parametro = 0;
 		if (empty($data[2])) {
@@ -330,7 +333,7 @@ class EstructuraController extends Controller
 
 	public function buscarCargos(){
 		$datos=$this->cargar_header_sidebar_acciones();
-		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(1,2,3),4);
+		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(5,6),4);
 		$data=\Request::get('data');
 		$parametro=0;
 		if(empty($data[1]) && empty($data[2])){
@@ -441,7 +444,7 @@ class EstructuraController extends Controller
 
 	public function ingresarDepartamento(){
 		$datos=$this->cargar_header_sidebar_acciones();
-		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(1,2,3),4);
+		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(94,95,96),4);
 		$data=Request::get('data');
 		$departamentoSelect=$data[0];
 		$direccionSelect=(int)$data[1];
@@ -569,7 +572,7 @@ class EstructuraController extends Controller
 
 	public function actualizarDepartamento(){
 		$datos=$this->cargar_header_sidebar_acciones();
-		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(1,2,3),4);
+		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(94,95,96),4);
 		$direccionSelect=(int)Request::get('direccionSelect');
 		$departamentoSelect=Request::get('departamentoSelect');
 		$padre=(int)Request::get('padre');
@@ -622,7 +625,7 @@ class EstructuraController extends Controller
 	public function actualizarArea(){
 		$parametro = 0;
 		$datos=$this->cargar_header_sidebar_acciones();
-		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(1,2,3),4);
+		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(7,98,99),4);	
 		$direccionSelect=(int)Request::get('direccionSelect');
 		$departamentoSelect=Request::get('departamentoSelect');
 		$areaSelect=Request::get('areaSelect');
@@ -700,7 +703,7 @@ class EstructuraController extends Controller
 	public function actualizarCargo(){
 		$parametro = 0;
 		$datos=$this->cargar_header_sidebar_acciones();
-		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(1,2,3),4);
+		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(5,6),4);
 		$direccionSelect=(int)Request::get('direccionSelect');
 		$departamentoSelect=Request::get('departamentoSelect');
 		$areaSelect=Request::get('areaSelect');

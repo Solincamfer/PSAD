@@ -11,15 +11,15 @@
 
                             <div class="icl">
                                 @foreach($acciones as $accion)
-                                    @if($accion->id!=1 )
-                                        @if($accion->id==2)
+                                    @if($accion->id!=5 )
+                                        @if($accion->id==6)
                                             <span class="iclsp">
                                                 <a  class="tltp modificar" data-modal="3" data-reg="{{$cargo->id}}" data-padre="{{$cargo->area_id}}" id="ModificaDepar{{$cargo->id}}" data-ttl="{{$accion->descripcion}}" data-toggle="modal" >
                                                     <i class="{{$accion->clase_css}}"></i>
                                                 </a>
                                             </span>
                                         @endif
-                                    @elseif($accion->id==1 )
+                                    @elseif($accion->id==5 )
                                         @if($cargo->status==1)
                                             <div class="chbx">
                                                 <input type="checkbox" class="btnAcc" data-table="3" data-registro="{{ $cargo->id }}" name="status" id="{{'inchbx'. $cargo->id}}" value="{{$cargo->status}}" checked><label for="{{'inchbx'. $cargo->id}}" class="tltp" data-ttl="{{$accion->descripcion}}"></label>
@@ -53,15 +53,15 @@
 
                     <div class="icl">
                         @foreach($acciones as $accion)
-                            @if($accion->id!=1 )
-                                @if($accion->id==2)
+                            @if($accion->id!=5 )
+                                @if($accion->id==6)
                                     <span class="iclsp">
                                         <a  class="tltp modificar" data-modal="3" data-padre="{{$cargo->area_id}}" data-reg="{{$cargo->id}}" id="ModificaDepar{{$cargo->id}}" data-ttl="{{$accion->descripcion}}" data-toggle="modal" >
                                             <i class="{{$accion->clase_css}}"></i>
                                         </a>
                                     </span>
                                 @endif
-                            @elseif($accion->id==1 )
+                            @elseif($accion->id==5 )
                                 @if($cargo->status==1)
                                     <div class="chbx">
                                         <input type="checkbox" data-table="3" data-registro="{{ $cargo->id }}" class="btnAcc" name="status" id="{{'inchbx'. $cargo->id}}" value="{{$cargo->status}}" checked><label for="{{'inchbx'. $cargo->id}}" class="tltp" data-ttl="{{$accion->descripcion}}"></label>
