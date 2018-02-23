@@ -176,9 +176,12 @@ Route::match(['post','get'],'/clientes/categoria/sucursal/usuarios/perfil',     
 
 	
 
-
-	Route::match(['post','get'],'/clientes/insertar/equipo',                                              						['uses'=>'RegistrosBasicos@equiposInsertar']);
+	Route::match(['post','get'],'/clientes/equipos/status',                                              	['uses'=>'RegistrosBasicos@equiposStatus']);
+	Route::match(['post','get'],'/clientes/insertar/equipo',                                              	['uses'=>'RegistrosBasicos@equiposInsertar']);
 	Route::match(['post','get'],'/datos/tipoequipo',                                              			['uses'=>'RegistrosBasicos@tipo_equipos']);
+
+	Route::match(['post','get'],'/clientes/actualizar/equipo',                                              			['uses'=>'RegistrosBasicos@equiposActualizar']);
+
 	Route::match(['post','get'],'/datos/consulta',                                              			['uses'=>'RegistrosBasicos@datos_tipo_equipos']);
 	Route::match(['post','get'],'/datos/consulta_comp',                                              		['uses'=>'RegistrosBasicos@datos_tequipo_componente']);
 	Route::match(['post','get'],'/datos/consulta_comp_',                                              		['uses'=>'RegistrosBasicos@insertar_componente_']);
@@ -195,6 +198,10 @@ Route::match(['post','get'],'/clientes/categoria/sucursal/usuarios/perfil',     
 ///////////////////////Agregadas el viernes 20/01/2017//////////////////////////////////////////////////////////////////////////////
 	Route::match(['post','get'],'/clientes/modificar_pieza',		                                        ['uses'=>'RegistrosBasicos@btn_modificar_pieza']);
 	Route::match(['post','get'],'/clientes/modificar_componente',		                                    ['uses'=>'RegistrosBasicos@btn_modificar_componente']);
+
+	Route::match(['post','get'],'/clientes/insertar/aplicaciones',		                                    ['uses'=>'RegistrosBasicos@aplicacionesInsertar']);
+
+
 	Route::match(['post','get'],'/clientes/modificar_aplicacion',		                                    ['uses'=>'RegistrosBasicos@btn_modificar_aplicacion']);
 	Route::match(['post','get'],'/clientes/modificar_equipo',		                                        ['uses'=>'RegistrosBasicos@btn_modificar_equipo']);
 

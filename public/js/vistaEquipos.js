@@ -66,6 +66,77 @@ $(document).ready(function()
 
 
 
+
+
+
+/////////////////////////Check de status //////////////////////////////////////////////
+
+
+$('.checkEquipos').change(function()
+			{
+
+					var estados=[false,true];
+					var valores=[1,0];
+		            var colores=["#207D07","#EE1919"];
+		            var acciones=['Habilitar','Deshabilitar'];
+		            var mensajes=['Habilitado','Deshabilitado'];
+					////////////////////////////////////////////////////////////////////////////////////
+
+					var _token=$( "input[name^='_token']" ).val();
+					var actual=$(this);
+					var registry=actual.attr('data-reg');
+					var valor=actual.val();
+					var route='/menu/registros/clientes/equipos/status';
+
+					swal({
+						title: "Cambio de status",
+						text: "¿Desea "+acciones[valor]+" El equipo seleccionado ?",
+						type: "warning",
+						showCancelButton: true,
+						confirmButtonColor:colores[valor],
+						confirmButtonText: acciones[valor]+' equipo',
+						cancelButtonText: "Cancelar",
+						closeOnConfirm: false,
+						closeOnCancel: false
+					 },
+					 function(isConfirm)
+					 {
+
+					 		if(isConfirm)
+					 		{
+
+								$.post(route, {_token:_token,registry:registry})
+								.done(function(answer)
+								{
+									if(answer.update)
+									{
+										swal("Modificacion exitosa !!", "El equipo ha sido "+mensajes[valor]+" correctamente", "success");
+										$('#'+actual.attr('id')).val(valores[valor]);
+
+									}
+								})
+								.fail(function()
+									{ swal("Error Inesperado !!", "Comuniquese con el administrador", "error");});
+							}
+							else
+							{
+								 
+								 swal("Cambio de status cancelado !!", "No se modifico el status del equipo", "error");
+								 actual.prop('checked',estados[valor]);
+								 $('#'+actual.attr('id')).val(valor);
+								 
+							}
+					});
+
+
+
+
+
+
+
+			});
+
+
  ///////////////////////Seleccionar select equipos ////////////////////////////////////
 
 	$('.checkEquipos').change(function()	
@@ -164,7 +235,7 @@ $(document).ready(function()
 					.done(function(answer)
 						{
 
-							console.log(answer);
+							
 								if(answer.codigo==1)
 								{
 										swal({
@@ -216,7 +287,7 @@ $(document).ready(function()
 				.done(function(answer)
 					{
 
-						console.log(answer);
+						
 						loadModal(answer);
 							
 					})
@@ -287,6 +358,53 @@ $('#equipoSucMod').bootstrapValidator({
   		}).on('success.form.bv',function(e,data){
 			e.preventDefault();
 	 		
+	 		var form=$('#equipoSucMod').serialize();
+	 		var route='/menu/registros/clientes/actualizar/equipo';
+	 		var sucursal=$('#sucursal__id').val();
+
+
+				$.post(route,form)
+				.done(function(answer)
+					{
+
+
+						
+						if(answer.codigo==1)
+						{
+								swal({
+										title:'Modificacion exitosa',//Contenido del modal
+										text: '<p style="font-size: 1.0em;">'+'El equipo se modifico correctamente!!'+'</p>',
+										type: "success",
+										showConfirmButton:true,//Eliminar boton de confirmacion
+										html: true
+								},
+			  				 	function(isConfirm)
+			  				 	{
+			  				 		if(isConfirm)
+			  				 		{
+			  				 			window.location.href="/menu/registros/clientes/categoria/sucursal/equipos/"+sucursal;
+			  				 		}	
+
+			  				 	});
+			  				 
+						}
+
+						else if(answer.codigo==2)
+						{
+
+							swal({
+										title:'Nombre de equipo duplicado!!!',//Contenido del modal
+										text: '<p style="font-size: 0.9em;">'+ answer.extra+'</p>',
+										type: "warning",
+										showConfirmButton:true,//Eliminar boton de confirmacion
+										html: true
+								});
+						}
+					})
+				.fail(function()
+					{
+						swal("Error Inesperado !!", "Comuniquese con el administrador", "error");
+					});
 	 		/// codigo ajax y respuesta.....
 
 	 	});
