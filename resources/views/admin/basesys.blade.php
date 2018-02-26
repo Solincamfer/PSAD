@@ -21,8 +21,6 @@
         <script src="{{asset('js/val.js')}}"></script>
         <script src="{{asset('js/AJAX.js')}}"></script>
         <script src="{{asset('js/buscador.js')}}"></script>
-        <script src="{{asset('js/vistaAplicaciones.js')}}"></script>
-        <script src="{{asset('js/vistaComponentes.js')}}"></script>
         @yield('js')    
     </body>
 </html>

@@ -1851,11 +1851,11 @@ input[type = "radio"] {
 #rEq1 input, #rEq1 select, #rEq2 input, #rEq2 select, #rEq3 input,#rEq3 select,
 #rEqm1 input, #rEqm1 select, #rEqm2 input, #rEqm2 select, #rEqm3 input,#rEqm3 select,
 #rComp1 input, #rComp2 select, #rComp3 select, #rComp4 select, 
-#rCompm1 input, #rCompm2 select, #rCompm3 select, #rCompm4 select, 
+#rCompm1 input, #rCompm2 select, #rCompm3 select, #rCompm4 select, #rCompm5 select,
 #rPz1 input, #rPz2 select, #rPz3 select, 
 #rPzm1 input, #rPzm2 select, #rPzm3 select,
 #rAs1 input, #rAs2 select, #rAs3 select, 
-#rAsm1 input, #rAsm2 select, #rAsm3 select{
+#rAsm1 input, #rAsm2 select, #rAsm3 select,#rComp5 select{
     display: block;
     padding: 3px 5px;
     margin-bottom: 10px;
@@ -1881,7 +1881,9 @@ input[type = "radio"] {
 #rPzm2 select:focus, #rPzm3 select:focus,
 #rAs1 input:focus, #rAs2 select:focus, 
 #rAs3 select:focus, #rAsm1 input:focus, 
-#rAsm2 select:focus, #rAsm3 select:focus{
+#rAsm2 select:focus, #rAsm3 select:focus,
+#rComp5 select:focus, #rCompm5 select:focus
+{
     outline: none;
     color: #444;
     border-color: #26a69d;
@@ -1924,9 +1926,9 @@ input[type = "radio"] {
 }
 
 /*Componentes, Piezas, Aplicaciones*/
-#rComp1 #iccp1, #rComp1 #iccp2, #rComp2 #iccp3, #rComp2 #iccp4,
+#rComp1 #iccp1, #rComp1 #iccp2, #rComp2 #iccp3, #rComp2 #iccp4,#rComp5 #iccp5,
 #rComp3 #iccp5, #rComp3 #iccp6, #rComp4 #iccp7, #rComp4 #iccp8,
-#rCompm1 #miccp1, #rCompm1 #miccp2, #rCompm2 #miccp3, #rCompm2 #miccp4,
+#rCompm1 #miccp1, #rCompm1 #miccp2, #rCompm2 #miccp3, #rCompm2 #miccp4, #rCompm5 #miccp5,
 #rCompm3 #miccp5, #rCompm3 #miccp6, #rCompm4 #miccp7, #rCompm4 #miccp8,
 #rPz1 #icpz1, #rPz1 #icpz2, #rPz2 #icpz3, #rPz2 #icpz4, #rPz3 #icpz5, #rPz3 #icpz6,
 #rPzm1 #micpz1, #rPzm1 #micpz2, #rPzm2 #micpz3, #rPzm2 #micpz4, #rPzm3 #micpz5, #rPzm3 #micpz6,
@@ -1942,7 +1944,7 @@ input[type = "radio"] {
     transition: all .1s ease-in;
 }
 
-#rComp2 .ic, #rComp3 .ic, #rComp4 .ic, 
+#rComp2 .ic, #rComp3 .ic, #rComp4 .ic,#rComp5 .ic, #rCompm5 .ic,
 #rCompm2 .ic, #rCompm3 .ic, #rCompm4 .ic,
 #rPz1 .ic, #rPz2 .ic, #rPz3 .ic,
 #rPzm1 .ic, #rPzm2 .ic, #rPzm3 .ic,

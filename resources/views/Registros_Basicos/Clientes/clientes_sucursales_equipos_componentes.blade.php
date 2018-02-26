@@ -98,20 +98,22 @@
                                         <div class="modal-body">
                                             {{ csrf_field() }}
                                             <div class="container-fluid" id="contcomp">
-                                                <div id="rComp1">
+                                                <div id="rComp5">
                                                     <div class="col-md-8 col-md-offset-2">
                                                         <div class="form-group row">
                                                             <label for="selectNC1">Nombre del Componente</label>
-                                                            <i class="fa fa-cogs" id="iccp1"></i>
+                                                            <span class="ic"><i class="fa fa-chevron-down"></i></span>
                                                             <select name="selectNC" class="form-control userEmail selectComponentes" id="selectNC1" data-caso="0" data-grupo="0">
                                                                 <option value="">-</option>
                                                                @foreach($datosC2 as $componente)
                                                                     <option value="{{$componente->id}}">{{$componente->descripcion}}</option>
                                                                @endforeach
-                                                            </select>
+                                                            </select><i class="fa fa-cog" id="iccp5"></i>
                                                             
                                                         </div>
                                                     </div>
+                                                </div>
+                                                <div id="rComp1">
                                                     <div class="col-md-8 col-md-offset-2">
                                                         <div class="form-group row">
                                                             <label for="serialCM1">Serial del Componente</label>
@@ -152,10 +154,10 @@
                                             </div>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="bttnMd" id="btnSvComponente_">Guardar <i class="fa fa-floppy-o"></i></button>
+                                            <button type="submit" class="bttnMd" id="btnSvComponente_">Guardar <i class="fa fa-floppy-o"></i></button>
                                             
                                         </div>
-                                        <input type="text" name="equipoPadre_" id='equipoPadre_' value="{{$datosC1->id}}">
+                                        <input type="hidden" name="equipoPadre_" id='equipoPadre_' value="{{$datosC1->id}}">
                                     </form>
                                 </div>
                             </div>
@@ -173,19 +175,21 @@
                                         <div class="modal-body">
                                             {{ csrf_field() }}
                                             <div class="container-fluid" id="contcompm">
-                                                <div id="rCompm1">
+                                                <div id="rCompm5">
                                                     <div class="col-md-8 col-md-offset-2">
                                                         <div class="form-group row">
                                                            <label for="selectNC2">Nombre del Componente</label>
-                                                            
+                                                           <span class="ic"><i class="fa fa-chevron-down"></i></span>
                                                             <select name="selectNC" class="form-control userEmail selectComponentes" id="selectNC2" data-caso="0" data-grupo="1">
                                                                 <option value="">-</option>
                                                                @foreach($datosC2 as $componente)
                                                                     <option value="{{$componente->id}}">{{$componente->descripcion}}</option>
                                                                @endforeach
-                                                            </select>
+                                                            </select><i class="fa fa-cog" id="miccp5"></i>
                                                         </div>
                                                     </div>
+                                                </div>
+                                                <div id="rCompm1">
                                                     <div class="col-md-8 col-md-offset-2">
                                                         <div class="form-group row">
                                                             <label for="serialCM2">Serial del Componente</label>
@@ -224,15 +228,17 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <input type="text" name="registroComp_" id="registroComp_" value="">
+                                            <input type="hidden" name="registroComp_" id="registroComp_" value="">
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="bttnMd" id="btnModificarComp_">Guardar <i class="fa fa-floppy-o"></i></button>
-                                           
+                                            <button type="submit" class="bttnMd" id="btnModificarComp_">Guardar <i class="fa fa-floppy-o"></i></button>  
                                         </div>
                                     </form>
                                 </div>
                             </div>
                         </div>
                     </div>   
+    @endsection
+    @section('js')
+        <script src="{{asset('js/vistaComponentes.js')}}"></script>
     @endsection

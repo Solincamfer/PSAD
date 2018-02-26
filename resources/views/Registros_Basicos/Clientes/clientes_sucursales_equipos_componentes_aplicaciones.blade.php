@@ -85,7 +85,7 @@
                     <!--    Registro -->
 
 
-                    <!-- Modal -->
+                    <!-- Modal Agregar-->
                     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
@@ -110,16 +110,14 @@
                                                         <input type="text" class="form-control" name="LicAp" id="LicAp"><i class="fa fa-barcode" id="icas2"></i>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div id="rAs3">
                                                 <div class="col-md-6">
                                                     <div class="form-group row">
-                                                        <label for="selMap">Versión de la Aplicación</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
-                                                        <input type="text" class="form-control" name="VersAp" id="VersAp" value="">
-                                                       
-                                                       
+                                                        <label for="selMap">Versión de la Aplicación</label>
+                                                        <input type="text" class="form-control" name="VersAp" id="VersAp" value=""><i class="fa fa-windows" id="icas1"></i>
                                                     </div>
                                                 </div>
+                                            </div>
+                                            <div id="rAs3">
                                                 <div class="col-md-6">
                                                    <div class="form-group row">
                                                        <label for="selStAp">Estatus de Aplicación</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
@@ -134,11 +132,11 @@
                                             <input type="hidden" name="__equipo__id__" id="__equipo__id__" value="{{$extra->id}}">
                                         </div>
 
-                                    </form>
+                                    
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="bttnMd" id="__btnSvAplicacion___">Guardar <i class="fa fa-floppy-o"></i></button>
-                                   
+                                    <button type="submit" class="bttnMd" id="__btnSvAplicacion___">Guardar <i class="fa fa-floppy-o"></i></button>
+                                   </form>
                                 </div>
                             </div>
                         </div>
@@ -169,14 +167,14 @@
                                                         <input type="text" class="form-control" name="LicAp" id="LicApm"><i class="fa fa-barcode" id="micas2"></i>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div id="rAsm3">
                                                 <div class="col-md-6">
                                                     <div class="form-group row">
-                                                        <label for="selMapm">Versión de la Aplicación</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
-                                                         <input type="text" class="form-control" name="VersAp" id="LicApMod">
+                                                        <label for="selMapm">Versión de la Aplicación</label>
+                                                         <input type="text" class="form-control" name="VersAp" id="LicApMod"><i class="fa fa-windows" id="micas1"></i>
                                                     </div>
                                                 </div>
+                                            </div>
+                                            <div id="rAsm3">
                                                 <div class="col-md-6">
                                                     <div class="form-group row">
                                                         <label for="selStApm">Estatus de Aplicación</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
@@ -190,14 +188,17 @@
                                             </div>
                                             <input type="hidden" name="regAplicacion_" id="regAplicacion_" value="">
                                         </div>
-                                    </form>
+                                    
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="bttnMd" id="btnSvmAplicacion__">Guardar <i class="fa fa-floppy-o"></i></button>
-                                   
+                                    <button type="submit" class="bttnMd" id="btnSvmAplicacion__">Guardar <i class="fa fa-floppy-o"></i></button>
+                                   </form>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>   
+    @endsection
+    @section('js')
+        <script src="{{asset('js/vistaAplicaciones.js')}}"></script>
     @endsection

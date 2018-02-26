@@ -21,59 +21,93 @@ function loadModal(datos)
 }
 
 //////////////////////////Guardar nueva aplicacion //////////////////////////////////////////////////////
-	$('#__btnSvAplicacion___').click(function() 
-	{
-		var form=$('#regisAplicAgr').serialize();
-		var route='/menu/registros/clientes/insertar/aplicaciones';
-		var equipo=$('#__equipo__id__').val();
-		alert(form);
+	
+	$('#regisAplicAgr').bootstrapValidator({
+		   excluded: [':disabled'],
+		   fields: {
+		     nomAp: {
+		       validators: {
+		        notEmpty: {
+		           message: 'Indique el nombre de la aplicación'
+		        }
+		       }
+		     },
+		     LicAp: {
+		       validators: {
+		        notEmpty: {
+		           message: 'Indique la licencia de la aplicación'
+		        }
+		       }
+		     },
+		     VersAp: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Indique la versión de la aplicación'
+		         }
+		       }
+		     },
+		     selStAp: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Seleccione el estatus de la aplicación'
+		         }
+		       }
+		     }
+		    }
+  		}).on('success.form.bv',function(e,data){
+			e.preventDefault();
+			var form=$('#regisAplicAgr').serialize();
+			var route='/menu/registros/clientes/insertar/aplicaciones';
+			var equipo=$('#__equipo__id__').val();
+			alert(form);
 
-		$.post(route,form)
+			$.post(route,form)
 
-			.done(function(answer)
-				{
-					if(answer.codigo==1)
-								{
+				.done(function(answer)
+					{
+						if(answer.codigo==1)
+									{
+											swal({
+													title:'Guardado Exitoso',//Contenido del modal
+													text: '<p style="font-size: 1.0em;">'+'La aplicacion se agrego correctamente!!'+'</p>',
+													type: "success",
+													showConfirmButton:true,//Eliminar boton de confirmacion
+													html: true
+											},
+						  				 	function(isConfirm)
+						  				 	{
+						  				 		if(isConfirm)
+						  				 		{
+						  				 			window.location.href='/menu/registros/clientes/categoria/sucursal/equipos/aplicaciones/'+equipo;
+						  				 		}	
+
+						  				 	});
+						  				 
+									}
+
+									else if(answer.codigo==2)
+									{
+
 										swal({
-												title:'Insercion Exitosa',//Contenido del modal
-												text: '<p style="font-size: 1.0em;">'+'La aplicacion se agrego correctamente!!'+'</p>',
-												type: "success",
-												showConfirmButton:true,//Eliminar boton de confirmacion
-												html: true
-										},
-					  				 	function(isConfirm)
-					  				 	{
-					  				 		if(isConfirm)
-					  				 		{
-					  				 			window.location.href='/menu/registros/clientes/categoria/sucursal/equipos/aplicaciones/'+equipo;
-					  				 		}	
-
-					  				 	});
-					  				 
-								}
-
-								else if(answer.codigo==2)
-								{
-
-									swal({
-												title:'Aplicacion duplicada!!!',
-												text: '<p style="font-size: 0.9em;">'+ answer.extra+'</p>',
-												type: "warning",
-												showConfirmButton:true,
-												html: true
-										});
-								}
-				})
-			.fail(function()
-						{
-							swal("Error Inesperado !!", "Comuniquese con el administrador", "error");
-						});
+													title:'Aplicacion duplicada!!!',
+													text: '<p style="font-size: 0.9em;">'+ answer.extra+'</p>',
+													type: "warning",
+													showConfirmButton:true,
+													html: true
+											});
+									}
+					})
+				.fail(function()
+							{
+								swal("Error Inesperado !!", "Comuniquese con el administrador", "error");
+							});
 	});
 
 
 	/////////////////////////////////////////////Modificar aplicacion ////////////////////////////////////////////////////
 	$('.modificarAplicacion').click(function() 
 	{
+		$('#regisAplicMod').data('bootstrapValidator').resetForm();
 		var route='/menu/registros/clientes/modificar/aplicaciones';
 		var registry=$(this).data('reg');
 		var equipo=$('#__equipo__id__').val();
@@ -98,8 +132,40 @@ function loadModal(datos)
 
 	//////////////////////////Guardar datos de la modificacion ////////////////////////////////////////////////////////////
 
-	$('#btnSvmAplicacion__').click(function()
-		{
+	$('#regisAplicMod').bootstrapValidator({
+		   excluded: [':disabled'],
+		   fields: {
+		     nomAp: {
+		       validators: {
+		        notEmpty: {
+		           message: 'Indique el nombre de la aplicación'
+		        }
+		       }
+		     },
+		     LicAp: {
+		       validators: {
+		        notEmpty: {
+		           message: 'Indique la licencia de la aplicación'
+		        }
+		       }
+		     },
+		     VersAp: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Indique la versión de la aplicación'
+		         }
+		       }
+		     },
+		     selStAp: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Seleccione el estatus de la aplicación'
+		         }
+		       }
+		     }
+		    }
+  		}).on('success.form.bv',function(e,data){
+			e.preventDefault();
 			var form=$('#regisAplicMod').serialize();
 			var route='/menu/registros/clientes/actualizar/aplicaciones';
 			var equipo=$('#__equipo__id__').val();

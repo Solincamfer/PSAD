@@ -98,54 +98,92 @@ $(document).ready(function()
 
 		});
 
-	////////////////////////// Agregar nuevo compoente ///////////////////////////////////////////////////////
+	////////////////////////// Agregar nuevo componente ///////////////////////////////////////////////////////
 
-	$('#btnSvComponente_').click(function() 
-	{
-		var form=$('#compAgr_').serialize();
-		var route='/menu/registros/clientes/insertar/componente';
-		var equipo=$('#equipoPadre_').val();
-		$.post(route,form)
-					.done(function(answer)
-						{
+	$('#compAgr_').bootstrapValidator({
+		   fields: {
+		     selectNC: {
+		       validators: {
+		        notEmpty: {
+		           message: 'Seleccione el componente'
+		        }
+		       }
+		     },
+		     serialCM: {
+		       validators: {
+		        notEmpty: {
+		           message: 'Indique el serial del componente'
+		        }
+		       }
+		     },
+		     selectMC: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Seleccione la marca del componente'
+		         }
+		       }
+		     },
+		     selectMOC: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Seleccione el modelo del componente'
+		         }
+		       }
+		     },
+		     selectSC: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Seleccione el estatus del equipo'
+		         }
+		       }
+		     }
+		    }
+  		}).on('success.form.bv',function(e,data){
+			e.preventDefault();
+			var form=$('#compAgr_').serialize();
+			var route='/menu/registros/clientes/insertar/componente';
+			var equipo=$('#equipoPadre_').val();
+			$.post(route,form)
+						.done(function(answer)
+							{
 
-							
-								if(answer.codigo==1)
-								{
+								
+									if(answer.codigo==1)
+									{
+											swal({
+													title:'Guardado exitoso',//Contenido del modal
+													text: '<p style="font-size: 1.0em;">'+'El componente se agrego correctamente!!'+'</p>',
+													type: "success",
+													showConfirmButton:true,//Eliminar boton de confirmacion
+													html: true
+											},
+						  				 	function(isConfirm)
+						  				 	{
+						  				 		if(isConfirm)
+						  				 		{
+						  				 			window.location.href="/menu/registros/clientes/categoria/sucursal/equipos/componentes/"+equipo;
+						  				 		}	
+
+						  				 	});
+						  				 
+									}
+
+									else if(answer.codigo==2)
+									{
+
 										swal({
-												title:'Guardado exitoso',//Contenido del modal
-												text: '<p style="font-size: 1.0em;">'+'El componente se agrego correctamente!!'+'</p>',
-												type: "success",
-												showConfirmButton:true,//Eliminar boton de confirmacion
-												html: true
-										},
-					  				 	function(isConfirm)
-					  				 	{
-					  				 		if(isConfirm)
-					  				 		{
-					  				 			window.location.href="/menu/registros/clientes/categoria/sucursal/equipos/componentes/"+equipo;
-					  				 		}	
-
-					  				 	});
-					  				 
-								}
-
-								else if(answer.codigo==2)
-								{
-
-									swal({
-												title:'Nombre duplicado!!!',//Contenido del modal
-												text: '<p style="font-size: 0.9em;">'+ answer.extra+'</p>',
-												type: "warning",
-												showConfirmButton:true,//Eliminar boton de confirmacion
-												html: true
-										});
-								}
-						})
-					.fail(function()
-						{
-							swal("Error Inesperado !!", "Comuniquese con el administrador", "error");
-						});
+													title:'Nombre duplicado!!!',//Contenido del modal
+													text: '<p style="font-size: 0.9em;">'+ answer.extra+'</p>',
+													type: "warning",
+													showConfirmButton:true,//Eliminar boton de confirmacion
+													html: true
+											});
+									}
+							})
+						.fail(function()
+							{
+								swal("Error Inesperado !!", "Comuniquese con el administrador", "error");
+							});
 	});
 
 
@@ -153,6 +191,7 @@ $(document).ready(function()
 
 	$('.modificarComponente').click(function() 
 	{
+		$('#compMod_').data('bootstrapValidator').resetForm();
 		var registry=$(this).data('reg');
 		$('#registroComp_').val(registry);
 		var equipo=$('#equipoPadre_').val();
@@ -161,11 +200,6 @@ $(document).ready(function()
 		$.post(route,form)
 				.done(function(answer)
 					{
-
-						
-						
-						
-
 						loadModal(answer);
 							
 					})
@@ -174,16 +208,54 @@ $(document).ready(function()
 						swal("Error Inesperado !!", "Comuniquese con el administrador", "error");
 					});
 
-
 	});
 
 	/////////////////////////Guardar Modificacion ////////////////////////////////////////////////////////
 
-	$('#btnModificarComp_').click(function() 
-	{
-		var form=$('#compMod_').serialize();
-		var route='/menu/registros/clientes/actualizar/componente';
-	 	var equipo=$('#equipoPadre_').val();
+	$('#compMod_').bootstrapValidator({
+		   excluded: [':disabled'],
+		   fields: {
+		     selectNC: {
+		       validators: {
+		        notEmpty: {
+		           message: 'Seleccione el componente'
+		        }
+		       }
+		     },
+		     serialCM: {
+		       validators: {
+		        notEmpty: {
+		           message: 'Indique el serial del componente'
+		        }
+		       }
+		     },
+		     selectMC: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Seleccione la marca del componente'
+		         }
+		       }
+		     },
+		     selectMOC: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Seleccione el modelo del componente'
+		         }
+		       }
+		     },
+		     selectSC: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Seleccione el estatus del equipo'
+		         }
+		       }
+		     }
+		    }
+  		}).on('success.form.bv',function(e,data){
+			e.preventDefault();
+			var form=$('#compMod_').serialize();
+			var route='/menu/registros/clientes/actualizar/componente';
+		 	var equipo=$('#equipoPadre_').val();
 
 				$.post(route,form)
 				.done(function(answer)
