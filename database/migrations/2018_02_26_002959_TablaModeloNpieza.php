@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTableModeloPieza extends Migration
+class TablaModeloNpieza extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,13 @@ class CreateTableModeloPieza extends Migration
      */
     public function up()
     {
-        Schema::create('modeloPieza', function (Blueprint $table) {
+        Schema::create('modelo_npieza', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('modelo_id');
-            $table->unsignedInteger('pieza_id');
+            $table->integer('modelo_id')->unsigned();
+            $table->integer('npieza_id')->unsigned();
+
             $table->foreign('modelo_id')->references('id')->on('modelos');
+            $table->foreign('npieza_id')->references('id')->on('npiezas');
         });
     }
 
@@ -28,6 +30,6 @@ class CreateTableModeloPieza extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('modeloPieza');
+        Schema::dropIfExists('modelo_npieza');
     }
 }

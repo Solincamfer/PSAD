@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTableMarcaPieza extends Migration
+class TablaNcomponente extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateTableMarcaPieza extends Migration
      */
     public function up()
     {
-        Schema::create('marcaPieza', function (Blueprint $table) {
+        Schema::create('ncomponentes', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('marca_id');
-            $table->unsignedInteger('pieza_id');
-            $table->foreign('marca_id')->references('id')->on('marcas');
+            $table->string('descripcion',100);
+            $table->integer('tipoequipo_id')->unsigned();
+
+            $table->foreign('tipoequipo_id')->references('id')->on('tipoequipos');
         });
     }
 
@@ -28,6 +29,6 @@ class CreateTableMarcaPieza extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('marcaPieza');
+        Schema::dropIfExists('ncomponentes');
     }
 }

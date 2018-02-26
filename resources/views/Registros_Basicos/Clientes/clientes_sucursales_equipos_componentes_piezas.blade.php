@@ -33,7 +33,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-2 despl-bttn">
-                                    <a href="/menu/registros/clientes/categoria/sucursal/equipos/componentes/{{$extra}}">
+                                    <a href="/menu/registros/clientes/categoria/sucursal/equipos/componentes/{{$extra->id}}">
                                         <div class="bttn-volver">
                                             <button id="btnBk" type="button" href="#" class="bttn-vol"><span class="fa fa-chevron-left"></span><span class="txt-bttn">VOLVER</span></button>
                                         </div>
@@ -80,7 +80,7 @@
                               <div class="paginador">
                                     {{ $consulta->links() }}
                               </div>
-							<input type="hidden" name="TND" value="{{$datosC1}}">
+							
                         </div>
                         <!-- 	Registro -->
 
@@ -100,8 +100,13 @@
                                                 <div id="rPz1">
                                                     <div class="col-md-8 col-md-offset-2">
                                                        <div class="form-group row">
-                                                           <label for="nomPz">Nombre de la Pieza</label>
-                                                           <input type="text" class="form-control" name="nomPz" id="nomPz"><i class="fa fa-cog" id="icpz1"></i>
+                                                           <label for="selectNP">Nombre de la Pieza</label>
+                                                            <select name="selectNP" class="form-control userEmail selectComponentes" id="selectNP1" data-caso="0" data-grupo="0">
+                                                                <option value="">-</option>
+                                                               @foreach($datosC1 as $pieza)
+                                                                    <option value="{{$pieza->id}}">{{$pieza->descripcion}}</option>
+                                                               @endforeach
+                                                            </select>
                                                        </div>
                                                     </div>
                                                     <div class="col-md-8 col-md-offset-2">

@@ -10,4 +10,25 @@ class Modelo extends Model
   	 protected $table="modelos"; 
   	 protected $fillable=['id','descripcion'];
 
+  	public function tipoequipos()
+    {
+        return $this->belongsToMany('App\Tipoequipo');
+    }
+
+    public function marcas()
+    {
+        return $this->belongsToMany('App\Marca');
+    }
+
+    public function ncomponentes()
+    {
+        return $this->belongsToMany('App\Ncomponente');
+    }
+
+    public function npiezas()
+    {
+        return $this->belongsToMany('App\Npieza');
+    }
+
+
 }

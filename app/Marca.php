@@ -18,6 +18,16 @@ class Marca extends Model
 
     public function modelos()
     {
-    	return $this->hasMany('App\Modelo');
+        return $this->belongsToMany('App\Modelo');
+    }
+
+    public function ncomponentes()
+    {
+        return $this->belongsToMany('App\Ncomponente');
+    }
+
+    public function npiezas()
+    {
+        return $this->belongsToMany('App\Npieza');
     }
 }

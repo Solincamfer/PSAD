@@ -139,7 +139,7 @@ $('.checkEquipos').change(function()
 
  ///////////////////////Seleccionar select equipos ////////////////////////////////////
 
-	$('.checkEquipos').change(function()	
+	$('.selectEquipos').change(function()	
 	{
 		var listas=[['_tpEq','mkEq','modEq'],['tpEqm','mkEqm','modEqm']];
 		var caso=$(this).data('caso');
@@ -147,6 +147,11 @@ $('.checkEquipos').change(function()
 		var registry=$(this).val();
 		var _token=$( "input[name^='_token']" ).val();
 		var route='/menu/registros/clientes/selectequipos/sucursal';
+		var auxiliar=0;
+
+		if (caso==1) 
+			{auxiliar=$('#'+listas[grupo][0]).val();}
+			
 
 		if(caso<2)
 		{
@@ -155,7 +160,7 @@ $('.checkEquipos').change(function()
 			if(registry!="")
 			{
 
-				$.post(route,{_token:_token,registry:registry,caso:caso})
+				$.post(route,{_token:_token,registry:registry,caso:caso,auxiliar:auxiliar})
 				  .done(function(answer)
 				  {
 				  	
@@ -399,6 +404,10 @@ $('#equipoSucMod').bootstrapValidator({
 										showConfirmButton:true,//Eliminar boton de confirmacion
 										html: true
 								});
+						}
+						else if(answer.codigo==0)
+						{
+							$('#myModal2').modal('hide');
 						}
 					})
 				.fail(function()

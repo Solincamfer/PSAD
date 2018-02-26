@@ -30,6 +30,10 @@ use App\Estado;
 use App\Municipio;
 use App\Sucursal;
 use App\Aplicacion;
+use App\Equipo;
+use App\Tipoequipo;
+use App\Ncomponente;
+use App\Npieza;
 
 use Response;
 
@@ -106,12 +110,12 @@ class Buscador extends Controller
 			public function prueba_metodo()
 			{
 				
-				$nombre=123;
-				$aplicacion_id=1;
+				$equipo=Equipo::find(1);
+				$sucursal=Sucursal::find($equipo->sucursal_id);
+				$tipoequipo=Tipoequipo::where('descripcion',$equipo->tipoequipo)->first();
+				$ncomponente=$tipoequipo->componentes;
 
-				$aplicacion=Aplicacion::find($aplicacion_id);
-				
-				return $aplicacion;
+				return Response::json($ncomponente);
 
 
 				// $comercial=(object)array('pais'=>0,'region'=>0,'estado'=>0,'municipio'=>0);

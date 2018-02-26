@@ -41,6 +41,8 @@ use App\Marca;
 use App\Modelo;
 use App\Equipo;
 use App\Aplicacion;
+use App\Ncomponente;
+use App\Componente;
 use Response;
 
 
@@ -634,7 +636,7 @@ public function movUsuariosReg()
 												 	 'regiones.id AS regionId',
 												 	 'regiones.descripcion AS nombreRegion',
 												 	 'direcciones.descripcion AS descripcionDireccion',
-												 	 'empleados.rif_id AS rifId')
+												 	 'empleados.rif_id AS ri')
 										->where('empleados.id',$registryId)->first();
 
 
@@ -1410,6 +1412,12 @@ public function traducirId($traducir,$campo,$registro_id=null)
 		$retorno=DB::table('modelos')->where('id',$traducir)->select('descripcion AS descripcion')->first();
 		$retorno=$retorno->descripcion;
 	}
+	else if($campo==15)
+	{
+		$retorno=DB::table('ncomponentes')->where('id',$traducir)->select('descripcion AS descripcion')->first();
+		$retorno=$retorno->descripcion;
+	}
+
 
 	
 
@@ -1419,7 +1427,7 @@ public function traducirId($traducir,$campo,$registro_id=null)
 public function detectarCambios($valorForm,$valorBd,$campo)
 {
 	$retorno=null;
-	if($valorForm!=$valorBd)
+	if(strcmp((string)$valorForm,(string)$valorBd)!=0)
 	{
 		$retorno=(object)array('campo'=>$campo,'cambio'=>$valorBd.' ,Fue cambiado a:  '.$valorForm);
 	}
@@ -4153,7 +4161,7 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 
 		
 			$traduccion=$this->traducirId($datos->tipoEquipo,12);
-			$cambio=$this->detectarCambios($traduccion,$equipo->tipoEquipo,'Tipo de Equipo');
+			$cambio=$this->detectarCambios($traduccion,$equipo->tipoequipo,'Tipo de Equipo');
 			$cambios=$this->agregarCambios($cambio,$cambios);
 			$equipo->tipoEquipo=$traduccion;
 
@@ -4254,6 +4262,7 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 
 		$registry=Request::get('registry');
 		$caso=Request::get('caso');
+		$auxiliar=Request::get('auxiliar');//para obtener el valor del tipo de equipo seleccionado
 		$retorno=null;
 
 		if($caso==0)//se selecciona el tipo de equipo
@@ -4263,8 +4272,15 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 		}
 		else if($caso==1)
 		{
-			$marca=Marca::find($registry);
-			$retorno=$marca->modelos;
+			//$marca=Marca::find($registry);
+
+			$retorno=DB::table('modelos')
+						->join('modelo_tipoequipo','modelo_tipoequipo.modelo_id','=','modelos.id')
+						->join('marca_modelo','marca_modelo.modelo_id','=','modelos.id')
+						->where(['modelo_tipoequipo.tipoequipo_id'=>$auxiliar,'marca_modelo.marca_id'=>$registry,'modelos.status'=>1])
+						->select('modelos.descripcion AS descripcion','modelos.id AS id')
+						->get();
+				return $retorno;
 		}
 
 		return Response::json($retorno);
@@ -4274,9 +4290,174 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 		{
 			$datos=$this->cargar_header_sidebar_acciones();
 			$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(46,47,48),45);
-			return view ('Registros_Basicos\Clientes\clientes_sucursales_equipos_componentes',$this->datos_vista($datos,$acciones,DB::table('componentes')->where('equipo_id',$equipo_id)->paginate(11),$equipo_id,8));
+			$equipo=Equipo::find($equipo_id);
+			$sucursal=Sucursal::find($equipo->sucursal_id);
+			$tipoequipo=Tipoequipo::where('descripcion',$equipo->tipoequipo)->first();
+			$ncomponente=$tipoequipo->componentes;
+			return view ('Registros_Basicos\Clientes\clientes_sucursales_equipos_componentes',$this->datos_vista($datos,$acciones,DB::table('componentes')->where('equipo_id',$equipo_id)->paginate(11),$sucursal,$equipo,$ncomponente));
 							
 		}
+
+	public function datosComponentes()
+	{
+		$formulario=(object)array('nombre'=>Request::get('selectNC'),
+								  'serial'=>strtoupper(Request::get('serialCM')),
+								  'marca'=>Request::get('selectMC'),
+								  'modelo'=>Request::get('selectMOC'),
+								  'equipo'=>Request::get('equipoPadre_'),
+								  'status'=>Request::get('selectSC'),
+								  'registro'=>Request::get('registroComp_')
+									);
+
+		return $formulario;
+	}
+
+	public function componentesInsertar()
+	{
+		$datos=$this->datosComponentes();
+		$duplicado=(object)array('codigo'=>0,'duplicado'=>0);
+		$componente=new Componente();
+			$traduccion=$this->traducirId($datos->nombre,15);
+			$componente->descripcion=$traduccion;
+
+			$componente->serial=$datos->serial;
+
+			$traduccion=$this->traducirId($datos->marca,13);
+			$componente->marca=$traduccion;
+
+			$traduccion=$this->traducirId($datos->modelo,14);
+			$componente->modelo=$traduccion;
+
+			$componente->status=$datos->status;
+
+			$componente->equipo_id=$datos->equipo;
+
+		$update=$componente->save();
+
+		if($update)
+		{
+			$duplicado->codigo=1;
+					$this->registroBitacora('Id del registro creado: '.$componente->id,'Agregar Componente','{"Registro el Componente":'.'"'.$componente->descripcion.'}','Equipos -> Agregar Componente');
+		}
+
+
+		return Response::json($duplicado);
+	}
+
+	public function componentesModificar()
+	{
+		$registry=Request::get('registroComp_');
+		$componente=Componente::find($registry);
+		$ncomponente=Ncomponente::where('descripcion',$componente->descripcion)->first();
+		$marca=Marca::where('descripcion',$componente->marca)->first();
+		$modelo=Modelo::where('descripcion',$componente->modelo)->first();
+		$marcas=$ncomponente->marcas;
+		$modelos=DB::table('modelos')
+						->join('modelo_ncomponente','modelo_ncomponente.modelo_id','=','modelos.id')
+						->join('marca_modelo','marca_modelo.modelo_id','=','modelos.id')
+						->where(['modelos.status'=>1,'marca_modelo.marca_id'=>$marca->id,'modelo_ncomponente.ncomponente_id'=>$ncomponente->id])
+						->select('modelos.descripcion AS descripcion ','modelos.id AS id')
+						->get();
+
+
+
+		return Response::json(['descripcion'=>$ncomponente->id,'marca'=>$marca->id,'modelo'=>$modelo->id,'serial'=>$componente->serial,'status'=>$componente->status,'marcas'=>$marcas,'modelos'=>$modelos]);
+	}
+
+
+	public function componentesActualizar()
+	{
+		$datos=$this->datosComponentes();
+		$duplicado=(object)array('codigo'=>0,'extra'=>0);
+		$cambios=array();
+		if($duplicado->codigo==0)
+		{
+			$componente=Componente::find($datos->registro);
+				$traducirForm=$this->traducirId($datos->nombre,15);
+				$cambio=$this->detectarCambios($traducirForm,$componente->descripcion,'Nombre Componente');
+				$cambios=$this->agregarCambios($cambio,$cambios);
+				$componente->descripcion=$traducirForm;
+
+				$cambio=$this->detectarCambios($datos->serial,$componente->serial,'Serial Componente');
+				$cambios=$this->agregarCambios($cambio,$cambios);
+				$componente->serial=$datos->serial;
+
+				$traducirForm=$this->traducirId($datos->marca,13);
+				$cambio=$this->detectarCambios($traducirForm,$componente->marca,'Marca Componente');
+				$cambios=$this->agregarCambios($cambio,$cambios);
+				$componente->marca=$traducirForm;
+
+				$traducirForm=$this->traducirId($datos->modelo,14);
+				$cambio=$this->detectarCambios($traducirForm,$componente->modelo,'Modelo Componente');
+				$cambios=$this->agregarCambios($cambio,$cambios);
+				$componente->modelo=$traducirForm;
+
+				$traducirForm=$this->traducirId($datos->status,10);
+				$traducirBd=$this->traducirId($componente->status,10);
+				$cambio=$this->detectarCambios($traducirForm,$traducirBd,'Status Componente');
+			$update=$componente->save();
+
+			$longitud=count($cambios);
+			$cambios=$this->documentarCambios($cambios);
+
+			if($longitud>0)
+    	 	{
+
+    			$this->registroBitacora('Id del registro modificado: '.$componente->id,'Modificar componente ',$cambios,'Equipos -> Modificar Componente');
+    			$duplicado->codigo=1;
+    		}
+		}
+
+
+		return Response::json($duplicado);
+	}
+
+	public function componentesSelect()
+	{
+
+		$registry=Request::get('registry');
+		$caso=Request::get('caso');
+		$auxiliar=Request::get('auxiliar');
+
+		if($caso==0)//carga las marcas
+		{
+			$componente=Ncomponente::find($registry);
+			$retorno=$componente->marcas;
+		}
+		else if($caso==1)
+		{
+			$retorno=DB::table('modelos')
+						->join('modelo_ncomponente','modelo_ncomponente.modelo_id','=','modelos.id')
+						->join('marca_modelo','marca_modelo.modelo_id','=','modelos.id')
+						->where(['modelos.status'=>1,'marca_modelo.marca_id'=>$registry,'modelo_ncomponente.ncomponente_id'=>$auxiliar])
+						->select('modelos.descripcion AS descripcion ','modelos.id AS id')
+						->get();
+		}
+		return Response::json($retorno);
+	}
+
+
+	public function componentesStatus()
+	{
+		$status=[1,0];
+		$status_=['HABILITADO','INHABILITADO'];
+		$status__=['INHABILITADO','HABILITADO'];
+		$registry=Request::get('registry');
+		$aux=false;
+		///////////// Busqueda del perfil y cambio de status ////////////////////////
+		$componente=componente::find($registry);
+		$componente->status=$status[$componente->status];
+		$aux=$componente->save();
+		/////////////////////////////////////////////////////////////////////////////////////////////////////
+	    $this->registroBitacora('Componente: '.$componente->descripcion,'Cambiar Status','{"Status":"Cambio de: '.$status_[$componente->status].' a: '.$status__[$componente->status].'"}','Componentes');
+	    /////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		return Response()->json(['update'=>$aux]);
+	}
+
+
+
+
 
 	public function clientes_sucursales_equipos_aplicaciones($equipo_id)//vista de aplicaciones de un equipo
 		{
@@ -4362,7 +4543,11 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 		{
 			$datos=$this->cargar_header_sidebar_acciones();
 			$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(54,55),53);
-			return view ('Registros_Basicos\Clientes\clientes_sucursales_equipos_componentes_piezas',$this->datos_vista($datos,$acciones,DB::table('piezas')->where('componente_id',$componente_id)->paginate(11),$componente_id,9));
+			$componente=Componente::find($componente_id);
+			$ncomponente=Ncomponente::where('descripcion',$componente->descripcion)->first();
+			$npiezas=DB::table('npiezas')->where('ncomponente_id',$componente->id)->get();
+
+			return view ('Registros_Basicos\Clientes\clientes_sucursales_equipos_componentes_piezas',$this->datos_vista($datos,$acciones,DB::table('piezas')->where('componente_id',$componente_id)->paginate(11),$componente,$npiezas));
 							
 		}
 
@@ -4440,19 +4625,7 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 			return($retorno);
 		}
 
-		public function btn_modificar_componente()
-		{
-			$componenteId=Request::get('datos');
-			$registro=DB::table('componentes')->where('id',$componenteId)->first();
-			$retorno=0;
-			if (count($registro)!=0) 
-			{
-				$retorno=array($registro->descripcion,$registro->serial,$registro->marca,$registro->modelo,$registro->status,$registro->equipo_id);
-				
-			}
-
-			return($retorno);
-		}
+		
 
 		public function aplicacionesStatus()
 		{

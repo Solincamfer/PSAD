@@ -15,4 +15,15 @@ class Tipoequipo extends Model
     {
         return $this->belongsToMany('App\Marca');
     }
+
+
+    public function modelos()
+    {
+        return $this->belongsToMany('App\Modelo');
+    }
+
+     public function componentes()
+    {
+        return $this->hasMany('App\Ncomponente');
+    }
 }

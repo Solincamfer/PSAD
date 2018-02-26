@@ -75,6 +75,23 @@ Route::group(['prefix'=>'/menu/registros','middleware'=>['v_menu']],function(){
 	Route::match(['post','get'],'/clientes/responsable/status/categoria',  					             ['uses'=>'RegistrosBasicos@respCatStatus']);
 
 
+
+
+
+
+	Route::match(['post','get'],'/clientes/insertar/componente',                   					    ['uses'=>'RegistrosBasicos@componentesInsertar']);
+
+	Route::match(['post','get'],'/clientes/modificar/componente',                   					    ['uses'=>'RegistrosBasicos@componentesModificar']);
+	
+
+	Route::match(['post','get'],'/clientes/actualizar/componente',                   					    ['uses'=>'RegistrosBasicos@componentesActualizar']);
+
+	Route::match(['post','get'],'/clientes/componentes/status',                   					    ['uses'=>'RegistrosBasicos@componentesStatus']);
+
+	
+
+	Route::match(['post','get'],'/clientes/selectequipos/componentes',                   					    ['uses'=>'RegistrosBasicos@componentesSelect']);
+
 	Route::match(['post','get'],'/clientes/selectequipos/sucursal',                   					    ['uses'=>'RegistrosBasicos@sucursalSelectEquipos']);
 
 	Route::match(['post','get'],'/clientes/responsable/asignar/sucursal',                   					    ['uses'=>'RegistrosBasicos@sucursalAsignarResponsable']);
@@ -197,7 +214,7 @@ Route::match(['post','get'],'/clientes/categoria/sucursal/usuarios/perfil',     
 	Route::match(['post','get'],'/datos/eliminar_componente',                                              	['uses'=>'RegistrosBasicos@eliminar_componentes']);
 ///////////////////////Agregadas el viernes 20/01/2017//////////////////////////////////////////////////////////////////////////////
 	Route::match(['post','get'],'/clientes/modificar_pieza',		                                        ['uses'=>'RegistrosBasicos@btn_modificar_pieza']);
-	Route::match(['post','get'],'/clientes/modificar_componente',		                                    ['uses'=>'RegistrosBasicos@btn_modificar_componente']);
+	
 
 	Route::match(['post','get'],'/clientes/insertar/aplicaciones',		                                    ['uses'=>'RegistrosBasicos@aplicacionesInsertar']);
 

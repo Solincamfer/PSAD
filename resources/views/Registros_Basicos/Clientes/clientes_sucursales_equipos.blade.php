@@ -107,7 +107,7 @@
                                                    <div class="col-md-8 col-md-offset-2">
                                                        <div class="form-group row">
                                                            <label for="_tpEq">Tipo de equipo</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
-                                                           <select name="_tpEq" id="_tpEq" class="form-control userEmail checkEquipos" data-caso="0" data-grupo="0">
+                                                           <select name="_tpEq" id="_tpEq" class="form-control userEmail selectEquipos" data-caso="0" data-grupo="0">
                                                                <option value="">-</option>
                                                                @foreach($datosC2 as $tipoEquipo)
                                                                     <option value="{{$tipoEquipo->id}}" >{{$tipoEquipo->descripcion}}</option>
@@ -121,7 +121,7 @@
                                                     <div class="col-md-8 col-md-offset-2">
                                                         <div class="form-group row">
                                                             <label for="mkEq">Marca de equipo</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
-                                                            <select name="mkEq" id="mkEq" class="form-control userEmail checkEquipos" data-caso="1" data-grupo="0">
+                                                            <select name="mkEq" id="mkEq" class="form-control userEmail selectEquipos" data-caso="1" data-grupo="0">
                                                                 <option value="">-</option>
                                                                 
                                                             </select><i class="fa fa-apple" id="ice3"></i>
@@ -189,7 +189,7 @@
                                                     <div class="col-md-8 col-md-offset-2">
                                                         <div class="form-group row">
                                                             <label for="tpEq">Tipo de equipo</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
-                                                            <select name="_tpEq" id="tpEqm" class="form-control userEmail checkEquipos" data-caso="0" data-grupo="1">
+                                                            <select name="_tpEq" id="tpEqm" class="form-control userEmail selectEquipos" data-caso="0" data-grupo="1">
                                                                 <option value="">-</option>
                                                             </select><i class="fa fa-desktop" id="mice2"></i>
                                                         </div>
@@ -199,7 +199,7 @@
                                                     <div class="col-md-8 col-md-offset-2">
                                                         <div class="form-group row">
                                                             <label for="mkEq">Marca de equipo</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
-                                                            <select name="mkEq" id="mkEqm" class="form-control userEmail checkEquipos" data-caso="1" data-grupo="1">
+                                                            <select name="mkEq" id="mkEqm" class="form-control userEmail selectEquipos" data-caso="1" data-grupo="1">
                                                                  <option value="">-</option>
                                                             </select><i class="fa fa-apple" id="mice3"></i>
                                                         </div>
@@ -207,7 +207,7 @@
                                                     <div class="col-md-8 col-md-offset-2">
                                                         <div class="form-group row">
                                                             <label for="modEq">Modelo de equipo</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
-                                                            <select name="modEq" id="modEqm" class="form-control userEmail checkEquipos" data-caso="2" data-grupo="1">
+                                                            <select name="modEq" id="modEqm" class="form-control userEmail " data-caso="2" data-grupo="1">
                                                                 <option value="">-</option>
                                                             </select><i class="fa fa-laptop" id="mice4"></i>
                                                         </div>
