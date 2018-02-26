@@ -202,6 +202,19 @@ Route::match(['post','get'],'/clientes/categoria/sucursal/usuarios/perfil',     
 	Route::match(['post','get'],'/datos/consulta',                                              			['uses'=>'RegistrosBasicos@datos_tipo_equipos']);
 	Route::match(['post','get'],'/datos/consulta_comp',                                              		['uses'=>'RegistrosBasicos@datos_tequipo_componente']);
 	Route::match(['post','get'],'/datos/consulta_comp_',                                              		['uses'=>'RegistrosBasicos@insertar_componente_']);
+
+	Route::match(['post','get'],'/clientes/insertar/pieza',                                              	['uses'=>'RegistrosBasicos@piezasInsertar']);
+   
+   Route::match(['post','get'],'/clientes/modificar/pieza',                                              	['uses'=>'RegistrosBasicos@piezasModificar']);
+
+   Route::match(['post','get'],'/clientes/actualizar/pieza',                                              	['uses'=>'RegistrosBasicos@piezasActualizar']);
+
+	
+
+	   Route::match(['post','get'],'/clientes/piezas/status',                                              	['uses'=>'RegistrosBasicos@piezasStatus']);
+
+	Route::match(['post','get'],'/clientes/select/piezas',                                              	['uses'=>'RegistrosBasicos@piezasSelect']);
+
 	Route::match(['post','get'],'/datos/consulta_comp_pieza',                                              	['uses'=>'RegistrosBasicos@datos_componentes_piezas']);
 	Route::match(['post','get'],'/datos/consulta_dinamica',                                              	['uses'=>'RegistrosBasicos@datos_consulta_dinamica']);
 	Route::match(['post','get'],'/datos/consulta_insertar_pieza',                                           ['uses'=>'RegistrosBasicos@insertar_piezas']);

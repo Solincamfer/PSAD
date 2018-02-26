@@ -25,16 +25,25 @@ use App\TIpo;
 use App\Modulo;
 use App\Submodulo;
 use App\Accion;
+use App\Pais;
 use App\Region;
 use App\Estado;
 use App\Municipio;
+use App\Respuesta;
+use App\Presencial;
+use App\Remoto;
+use App\Telefonico;
+use App\Cliente;
+use App\Persona;
+use App\Categoria;
 use App\Sucursal;
-use App\Aplicacion;
-use App\Equipo;
 use App\Tipoequipo;
+use App\Marca;
+use App\Modelo;
+use App\Equipo;
+use App\Aplicacion;
 use App\Ncomponente;
-use App\Npieza;
-
+use App\Componente;
 use Response;
 
 class Buscador extends Controller
@@ -109,48 +118,15 @@ class Buscador extends Controller
 
 			public function prueba_metodo()
 			{
-				
-				$equipo=Equipo::find(1);
-				$sucursal=Sucursal::find($equipo->sucursal_id);
-				$tipoequipo=Tipoequipo::where('descripcion',$equipo->tipoequipo)->first();
-				$ncomponente=$tipoequipo->componentes;
 
-				return Response::json($ncomponente);
+				$componente_id=3;
+				$equipo=Componente::find($componente_id);
+				$ncomponente=DB::table('ncomponentes')->where('descripcion',$equipo->descripcion)->first();
+				$npiezas=DB::table('npiezas')->where('ncomponente_id',$ncomponente->id)->get();
 
-
-				// $comercial=(object)array('pais'=>0,'region'=>0,'estado'=>0,'municipio'=>0);
-				// $fiscal=(object)array('pais'=>0,'region'=>0,'estado'=>0,'municipio'=>0);
-
-
-				// $sucursal=Sucursal::find(6);
-				// $direccionComercial=Direccion::find($sucursal->direccionComercial_id);
-				// $direccionFiscal=Direccion::find($sucursal->direccionFiscal_id);
-
-				// $pais=DB::table('paises')->where('id',$direccionComercial->pais_id)->first();
-				// $region=DB::table('regiones')->where('id',$direccionComercial->region_id)->first();
-				// $estado=DB::table('estados')->where('id',$direccionComercial->estado_id)->first();
-				// $municipio=DB::table('municipios')->where('id',$direccionComercial->municipio_id)->first();
-
-				// $comercial->pais=$pais->descripcion;
-				// $comercial->region=$region->descripcion;
-				// $comercial->estado=$estado->descripcion;
-				// $comercial->municipio=$municipio->descripcion;
-
-
-
-				// $pais=DB::table('paises')->where('id',$direccionFiscal->pais_id)->first();
-				// $region=DB::table('regiones')->where('id',$direccionFiscal->region_id)->first();
-				// $estado=DB::table('estados')->where('id',$direccionFiscal->estado_id)->first();
-				// $municipio=DB::table('municipios')->where('id',$direccionFiscal->municipio_id)->first();
-
-				// $fiscal->pais=$pais->descripcion;
-				// $fiscal->region=$region->descripcion;
-				// $fiscal->estado=$estado->descripcion;
-				// $fiscal->municipio=$municipio->descripcion;
+				return Response::json($npiezas);
 
 				
-
-				// return Response::json(['comercial'=>$comercial,'fiscal'=>$fiscal]);
 
 			}
 
