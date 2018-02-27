@@ -85,7 +85,7 @@
                         <!-- 	Registro -->
 
 
-                        <!-- Modal -->
+                        <!-- Modal Agregar-->
                         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
@@ -97,10 +97,10 @@
                                         <form id="pieZaAgr">
                                             {{ csrf_field() }}
                                             <div class="container-fluid" id="contpz">
-                                                <div id="rPz1">
+                                                <div id="rPz2">
                                                     <div class="col-md-8 col-md-offset-2">
                                                        <div class="form-group row">
-                                                           <label for="selectNP1">Nombre de la Pieza</label>
+                                                           <label for="selectNP1">Nombre de la Pieza</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
                                                             <select name="selectNP" class="form-control userEmail selectPiezas" id="selectNP1" data-caso="0" data-grupo="0">
                                                                 <option value="">-</option>
                                                                @foreach($datosC1 as $pieza)
@@ -109,6 +109,8 @@
                                                             </select>
                                                        </div>
                                                     </div>
+                                                </div>
+                                                <div id="rPz1">
                                                     <div class="col-md-8 col-md-offset-2">
                                                         <div class="form-group row">
                                                             <label for="serialPIZ1">Serial de la Pieza</label>
@@ -148,11 +150,10 @@
                                                     <input type="hidden" name="RegComponente__" id="RegComponente__" value={{$extra->id}}>
                                                 </div>
                                             </div>
-                                        </form>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="bttnMd" id="btnSvPieza__">Guardar <i class="fa fa-floppy-o"></i></button>
-                                      
+                                        <button type="submit" class="bttnMd" id="btnSvPieza__">Guardar <i class="fa fa-floppy-o"></i></button>
+                                      </form>
                                     </div>
                                 </div>
                             </div>
@@ -170,10 +171,10 @@
                                         <form id="pieZaMod">
                                             {{ csrf_field() }}
                                             <div class="container-fluid" id="contpzm">
-                                                <div id="rPzm1">
+                                                <div id="rPzm2">
                                                     <div class="col-md-8 col-md-offset-2">
                                                         <div class="form-group row">
-                                                            <label for="selectNP2">Nombre de la Pieza</label>
+                                                            <label for="selectNP2">Nombre de la Pieza</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
                                                             <select name="selectNP" class="form-control userEmail selectPiezas" id="selectNP2" data-caso="0" data-grupo="1">
                                                                 <option value="">-</option>
                                                                @foreach($datosC1 as $pieza)
@@ -182,6 +183,8 @@
                                                             </select>
                                                         </div>
                                                     </div>
+                                                </div>
+                                                <div id="rPzm1">
                                                     <div class="col-md-8 col-md-offset-2">
                                                         <div class="form-group row">
                                                              <label for="serialPIZ2">Serial de la Pieza</label>
@@ -221,11 +224,10 @@
                                                 </div>
                                                 <input type="hidden" name="RegPieza__" id="RegPieza__" value="">
                                             </div>
-                                        </form>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="bttnMd" id="btnSvmPieza__">Guardar <i class="fa fa-floppy-o"></i></button>
-                                     
+                                        <button type="submit" class="bttnMd" id="btnSvmPieza__">Guardar <i class="fa fa-floppy-o"></i></button>
+                                     </form>
                                     </div>
                                 </div>
                             </div>

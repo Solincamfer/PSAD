@@ -100,8 +100,47 @@ $(document).ready(function()
 
 
 		    //////////////////////////////////////////////////////Guardar nueva pieza /////////////////////////////////////////////
-		    $('#btnSvPieza__').click(function()
-		    	{
+		    $('#pieZaAgr').bootstrapValidator({
+			   excluded: [':disabled'],
+			   fields: {
+			     selectNP: {
+			       validators: {
+			        notEmpty: {
+			           message: 'Indique el nombre de la pieza'
+			        }
+			       }
+			     },
+			     serialPIZ: {
+			       validators: {
+			        notEmpty: {
+			           message: 'Indique el serial de la pieza'
+			        }
+			       }
+			     },
+			     selectMP: {
+			       validators: {
+			         notEmpty: {
+			           message: 'Seleccione la marca de la pieza'
+			         }
+			       }
+			     },
+			     selectMOP: {
+			       validators: {
+			         notEmpty: {
+			           message: 'Seleccione el modelo de la pieza'
+			         }
+			       }
+			     },
+			     selectSTP: {
+			       validators: {
+			         notEmpty: {
+			           message: 'Seleccione el estatus de la pieza'
+			         }
+			       }
+			     }
+			    }
+	  		}).on('success.form.bv',function(e,data){
+				e.preventDefault();
 
 		    		var form=$('#pieZaAgr').serialize();
 		    		var route='/menu/registros/clientes/insertar/pieza';
@@ -161,7 +200,7 @@ $(document).ready(function()
 		    $('.modificarPieza').click(function()
 		    	{
 		    		
-		    		
+		    		$('#pieZaMod').data('bootstrapValidator').resetForm();
 		    		var _token=$( "input[name^='_token']" ).val();
 		    		var registry=$(this).data('reg');
 		    		$('#RegPieza__').val(registry);
@@ -189,58 +228,97 @@ $(document).ready(function()
 
 		    ////////////////////////////////Actualizar pieza /////////////////////////////////////////////////////
 
-$('#btnSvmPieza__').click(function() 
-	{
+	$('#pieZaMod').bootstrapValidator({
+	   excluded: [':disabled'],
+	   fields: {
+	     selectNP: {
+	       validators: {
+	        notEmpty: {
+	           message: 'Indique el nombre de la pieza'
+	        }
+	       }
+	     },
+	     serialPIZ: {
+	       validators: {
+	        notEmpty: {
+	           message: 'Indique el serial de la pieza'
+	        }
+	       }
+	     },
+	     selectMP: {
+	       validators: {
+	         notEmpty: {
+	           message: 'Seleccione la marca de la pieza'
+	         }
+	       }
+	     },
+	     selectMOP: {
+	       validators: {
+	         notEmpty: {
+	           message: 'Seleccione el modelo de la pieza'
+	         }
+	       }
+	     },
+	     selectSTP: {
+	       validators: {
+	         notEmpty: {
+	           message: 'Seleccione el estatus de la pieza'
+	         }
+	       }
+	     }
+	    }
+		}).on('success.form.bv',function(e,data){
+		e.preventDefault();
 		var form=$('#pieZaMod').serialize();
 		var route='/menu/registros/clientes/actualizar/pieza';
 	 	var componente=$('#RegComponente__').val();
 
-				$.post(route,form)
-				.done(function(answer)
-					{
-						console.log(answer);
+		$.post(route,form)
+		.done(function(answer)
+			{
+				console.log(answer);
 
-						
-						if(answer.codigo==1)
-						{
-								swal({
-										title:'Modificacion exitosa',//Contenido del modal
-										text: '<p style="font-size: 1.0em;">'+'la pieza  se modifico correctamente!!'+'</p>',
-										type: "success",
-										showConfirmButton:true,//Eliminar boton de confirmacion
-										html: true
-								},
-			  				 	function(isConfirm)
-			  				 	{
-			  				 		if(isConfirm)
-			  				 		{
-			  				 			window.location.href="/menu/registros/clientes/categoria/sucursal/equipos/componentes/piezas/"+componente;
-			  				 		}	
+				
+				if(answer.codigo==1)
+				{
+						swal({
+								title:'Modificacion exitosa',//Contenido del modal
+								text: '<p style="font-size: 1.0em;">'+'la pieza  se modifico correctamente!!'+'</p>',
+								type: "success",
+								showConfirmButton:true,//Eliminar boton de confirmacion
+								html: true
+						},
+	  				 	function(isConfirm)
+	  				 	{
+	  				 		if(isConfirm)
+	  				 		{
+	  				 			window.location.href="/menu/registros/clientes/categoria/sucursal/equipos/componentes/piezas/"+componente;
+	  				 		}	
 
-			  				 	});
-			  				 
-						}
+	  				 	});
+	  				 
+				}
 
-						else if(answer.codigo==2)
-						{
+				else if(answer.codigo==2)
+				{
 
-							swal({
-										title:'Nombre de equipo duplicado!!!',//Contenido del modal
-										text: '<p style="font-size: 0.9em;">'+ answer.extra+'</p>',
-										type: "warning",
-										showConfirmButton:true,//Eliminar boton de confirmacion
-										html: true
-								});
-						}
-						else if(answer.codigo==0)
-						{
-							$('#myModal2').modal('hide');
-						}
-					})
-				.fail(function()
-					{
-						swal("Error Inesperado !!", "Comuniquese con el administrador", "error");
-					});
+					swal({
+								title:'Nombre de equipo duplicado!!!',//Contenido del modal
+								text: '<p style="font-size: 0.9em;">'+ answer.extra+'</p>',
+								type: "warning",
+								showConfirmButton:true,//Eliminar boton de confirmacion
+								html: true
+						});
+				}
+				else if(answer.codigo==0)
+				{
+					$('#myModal2').modal('hide');
+				}
+			})
+		.fail(function()
+			{
+				swal("Error Inesperado !!", "Comuniquese con el administrador", "error");
+			});
 	});
 
  ////////////////////////////////check de status ////////////////////////////////////////////////////////////
