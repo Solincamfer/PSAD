@@ -119,12 +119,14 @@ class Buscador extends Controller
 			public function prueba_metodo()
 			{
 
-				$componente_id=3;
-				$equipo=Componente::find($componente_id);
-				$ncomponente=DB::table('ncomponentes')->where('descripcion',$equipo->descripcion)->first();
-				$npiezas=DB::table('npiezas')->where('ncomponente_id',$ncomponente->id)->get();
+				$persona_id=1;
+				$tipo=0;
 
-				return Response::json($npiezas);
+				$telefono=DB::table('persona_telefono')
+					->join('telefonos','telefonos.id','=','persona_telefono.telefono_id')
+					->where(['telefonos.tipo'=>$tipo,'persona_telefono.persona_id'=>$persona_id])
+					->select('telefonos.id AS id ')->first();;
+				return Response::json($telefono);
 
 				
 

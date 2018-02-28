@@ -1,5 +1,7 @@
 $(document).ready(function() {
 	
+		$(document).ready(function() {
+	
 		/////////////////////Metodos comunes ////////////////////
 		function limpiarLista(caso,listas)
 		{
@@ -34,6 +36,7 @@ $(document).ready(function() {
 		function loadModal(datos)
 		{
 			
+		$('#myModalLabel2').text('MODIFICAR: '+datos.cliente.nombreComercial);
 		$('#in11').val(datos.cliente.razonSocial);
 		$('#in12').val(datos.cliente.nombreComercial);
 		$('#in13').val(datos.rif.tipo_id);
@@ -128,6 +131,8 @@ $(document).ready(function() {
 		////////////////////Boton Modificar para traer los datos del cliente al modal ///////////////////////////
 		$('.ModificarCliente').click(function() 
 		{
+			
+			$('#Formclientemd').data('bootstrapValidator').resetForm();
 			var registry=$(this).attr('data-reg');
 		 	var _token=$( "input[name^='_token']" ).val();
 		  	var route='/menu/registros/clientes/modificar';
@@ -258,14 +263,14 @@ $(document).ready(function() {
 		         }
 		       }
 		     },
-		     tlflcl: {
+		     tlflcl: {///Codigo del telefono local
 		       validators: {
 		         notEmpty: {
 		           message: 'Debe indicar un código de area local'
 		         }
 		       }
 		     },
-		     tcl: {
+		     tcl: {//telefono local 
 		       validators: {
 		         notEmpty: {
 		           message: 'Debe indicar un número de telefono local'
@@ -273,15 +278,29 @@ $(document).ready(function() {
 		         regexp: {
 	                regexp: /^[0-9]+$/,
 	                message: 'Solo debe contener caracteres númericos'                            
-                },
+                }
 		       }
-		     },
-		     tmvl:{
+		   	}
+		     ,
+		       tlfmvl: {///Codigo del telefono movil
+		       validators: {
+		         notEmpty: {
+		           message: 'Debe indicar un código de telefono movil'
+		         }
+		       }
+		   },
+
+
+
+		     tmvl:{//numero telefono movil
 		     	validators:{
 		     		regexp: {
 		                regexp: /^[0-9]+$/,
 		                message: 'Solo debe contener caracteres númericos'                            
-                }
+                },
+                  notEmpty: {
+		           message: 'Debe indicar un numero de telefono movil'
+		         }
 		     	}
 		     },
 		     mail: {
@@ -304,7 +323,7 @@ $(document).ready(function() {
 			.done(function(answer)
 				{
 					
-					console.log(answer);
+					
 					if(answer.codigo==2)
 					{
 						swal({
@@ -315,7 +334,7 @@ $(document).ready(function() {
 									html: true
 							});
 					}
-					else
+					else if(answer.codigo==1)
 					{
 						swal({
 									title:'Actualizacion exitosa',//Contenido del modal
@@ -332,6 +351,10 @@ $(document).ready(function() {
 		  				 		}	
 
 		  				 	});
+					}
+					else if(answer.codigo==0)
+					{
+						$('#myModal2').modal('hide');
 					}
 
 				})
@@ -478,9 +501,20 @@ $(document).ready(function() {
 		     		regexp: {
 		                regexp: /^[0-9]+$/,
 		                message: 'Solo debe contener caracteres númericos'                            
-                }
+                },
+                  notEmpty: {
+		           message: 'Debe indicar un número de telefono movil'
+		         }
 		     	}
 		     },
+		     	tlfmvlsv: {///Codigo del telefono movil
+		       validators: {
+		         notEmpty: {
+		           message: 'Debe indicar un código de telefono movil'
+		         }
+		       }
+		   }
+		     ,
 		     mailsv: {
 		       validators: {
 		         notEmpty: {
@@ -607,6 +641,10 @@ $(document).ready(function() {
 
 
 			});
+
+
+
+});	
 
 
 

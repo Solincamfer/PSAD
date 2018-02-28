@@ -2510,12 +2510,12 @@ public function clientes()//inicializacion del submodulo: clientes
 								 'rif_id'=>(int) Request::get('tiporif'),
 								 'numeroRif'=> Request::get('numerorif'),
 								 'tipoContribuyente_id'=>(int)Request::get('tipConnew'),
-								 'direccionFiscal'=>Request::get('descDirdf'),
+								 'direccionFiscal'=>strtoupper(Request::get('descDirdf')),
 								 'paisF'=>(int)Request::get('paisdf'),
 								 'regionF'=>(int)Request::get('regiondf'),
 								 'estadoF'=>(int)Request::get('edodf'),
 								 'municipioF'=>(int)Request::get('mundf'),
-								 'direccionComercial'=>Request::get('descDirdc'),
+								 'direccionComercial'=>strtoupper(Request::get('descDirdc')),
 								 'paisC'=>(int)Request::get('paisdc'),
 								 'regionC'=>(int)Request::get('regiondc'),
 								 'estadoC'=>(int)Request::get('edodc'),
@@ -2644,7 +2644,7 @@ public function clientes()//inicializacion del submodulo: clientes
 		
 	 return Response::json($duplicado);
 	}
-
+		
 public function consultarTelefono($cliente_id,$tipo)//0 local, 1 local, 2 movil
 {
 		$telefono=DB::table('telefonos')
@@ -2698,12 +2698,12 @@ public function clientes_modificar()//metodo que consulta los datos de un client
 								 'rif_id'=>(int) Request::get('rif'),
 								 'numeroRif'=>Request::get('df'),
 								 'tipoContribuyente_id'=>(int)Request::get('tipCon'),
-								 'direccionFiscal'=>Request::get('descDirdf'),
+								 'direccionFiscal'=>strtoupper(Request::get('descDirdf')),
 								 'paisF'=>(int)Request::get('paisdf'),
 								 'regionF'=>(int)Request::get('regiondf'),
 								 'estadoF'=>(int)Request::get('edodf'),
 								 'municipioF'=>(int)Request::get('mundf'),
-								 'direccionComercial'=>Request::get('descDirdc'),
+								 'direccionComercial'=>strtoupper(Request::get('descDirdc')),
 								 'paisC'=>(int)Request::get('paisdc'),
 								 'regionC'=>(int)Request::get('regiondc'),
 								 'estadoC'=>(int)Request::get('edodc'),
@@ -2811,7 +2811,7 @@ public function clientes_modificar()//metodo que consulta los datos de un client
 
 			$traduccionBd=$this->traducirId($direccionFiscal->municipio_id,5);
     		$traduccionFor=$this->traducirId($clienteForm->municipioF,5);
-    		$cambio=$this->detectarCambios($traduccionFor,$traduccionBd,'Estado Direccion Fiscal');
+    		$cambio=$this->detectarCambios($traduccionFor,$traduccionBd,'Municipio Direccion Fiscal');
     		$cambios=$this->agregarCambios($cambio,$cambios);
 			$direccionFiscal->municipio_id=$clienteForm->municipioF;
 			$direccionFiscal->save();
@@ -2846,7 +2846,7 @@ public function clientes_modificar()//metodo que consulta los datos de un client
 
 			$traduccionBd=$this->traducirId($direccionComercial->municipio_id,5);
     		$traduccionFor=$this->traducirId($clienteForm->municipioC,5);
-    		$cambio=$this->detectarCambios($traduccionFor,$traduccionBd,'Estado Direccion Comercial');
+    		$cambio=$this->detectarCambios($traduccionFor,$traduccionBd,'Municipio Direccion Comercial');
     		$cambios=$this->agregarCambios($cambio,$cambios);
 			$direccionComercial->municipio_id=$clienteForm->municipioC;
 			$direccionComercial->save();
@@ -2867,7 +2867,7 @@ public function clientes_modificar()//metodo que consulta los datos de un client
 			
 			$cambio=$this->detectarCambios($clienteForm->nombreComercial,$cliente->nombreComercial,'Nombre Comercial');
     		$cambios=$this->agregarCambios($cambio,$cambios);
-			$cliente->nombreComercial=$cliente->nombreComercial;
+			$cliente->nombreComercial=$clienteForm->nombreComercial;
 			
 			$traduccionBd=$this->traducirId($cliente->tipoContribuyente_id,11);
     		$traduccionFor=$this->traducirId($clienteForm->tipoContribuyente_id,11);
@@ -2929,7 +2929,7 @@ public function clientes_modificar()//metodo que consulta los datos de un client
 
 
 
-		return Response::json($cambios);
+		return Response::json($duplicado);
 		
 
 
@@ -3112,7 +3112,14 @@ public function clientes_modificar()//metodo que consulta los datos de un client
 		return $duplicado;
 	}
 
-
+	public function telefonoIdGetP($tipo,$persona_id)
+	{
+		$telefono=DB::table('persona_telefono')
+					->join('telefonos','telefonos.id','=','persona_telefono.telefono_id')
+					->where(['telefonos.tipo'=>$tipo,'persona_telefono.persona_id'=>$persona_id])
+					->select('telefonos.id AS id ')->first();
+		return $telefono->id;
+	}
 	public function clientes_actualizar_responsable()//modifica en la base de datos la informacion de los responsables de una matriz
 	{
 
@@ -3152,7 +3159,7 @@ public function clientes_modificar()//metodo que consulta los datos de un client
 
 			$correo->save();
 
-			/////////Actualizar persona////////////////////////
+			////////////////////////////////////////Actualizar persona///////////////////////////////////////////////////////////
 
 			$cambio=$this->detectarCambios($formulario->nombre,$persona->primerNombre,'Nombre');
     		$cambios=$this->agregarCambios($cambio,$cambios);
@@ -3168,6 +3175,43 @@ public function clientes_modificar()//metodo que consulta los datos de un client
 			$persona->cargo=strtoupper($formulario->cargo);
 
 			$update=$persona->save();
+
+			//////////////////////////////////////////Obtener datos del telefono local /////////////////////////////////////////////
+
+			$telefonoLocal=Telefono::find($this->telefonoIdGetP(0,$persona->id));
+
+			$cambio=$this->detectarCambios($formulario->numeroFijo,$telefonoLocal->telefono,'Nro.Telf. Local');
+    		$cambios=$this->agregarCambios($cambio,$cambios);
+			$telefonoLocal->telefono=$formulario->numeroFijo;
+			
+			$traduccionFor=$this->traducirId($formulario->codigoFijo,7);
+			$cambio=$this->detectarCambios($traduccionFor,$telefonoLocal->codigo,'Codigo Telf. Local');
+    		$cambios=$this->agregarCambios($cambio,$cambios);
+			$telefonoLocal->codigo=$traduccionFor;
+			
+
+			$telefonoLocal->save();
+
+			////////////////Obtener datos del telefono movil ////////////////////////////////////////
+
+			$telefonoMovil=Telefono::find($this->telefonoIdGetP(2,$persona->id));
+			
+			$cambio=$this->detectarCambios($formulario->numeroMovil,$telefonoMovil->telefono,'Nro.Telf. Movil');
+    		$cambios=$this->agregarCambios($cambio,$cambios);
+			$telefonoMovil->telefono=$formulario->numeroMovil;
+			
+			$traduccionFor=$this->traducirId($formulario->codigoMovil,7);
+			$cambio=$this->detectarCambios($traduccionFor,$telefonoMovil->codigo,'Codigo Telf. Movil');
+    		$cambios=$this->agregarCambios($cambio,$cambios);
+			$telefonoMovil->codigo=$traduccionFor;
+			
+			
+			$telefonoMovil->save();
+
+
+
+			/////////////////////////////////////////////////////////////////////////////////////////
+
 
 			$longitud=count($cambios);
     		$cambios=$this->documentarCambios($cambios);

@@ -40,6 +40,8 @@ $(document).ready(function()
 
  			$('.modificarResponsable').click(function()
  				{
+ 					$('#_responsableMatriz_Mod')[0].reset();//limpia el formulario
+ 					$('#_responsableMatriz_Mod').data('bootstrapValidator').resetForm();
  					var registry=$(this).attr('data-reg');
  					var caso=$(this).data('caso');
 
@@ -135,12 +137,24 @@ $(document).ready(function()
 	                },
 			       }
 			     },
+			   seltlfRpb: {
+			       validators: {
+			         notEmpty: {
+			           message: 'Debe indicar un código de telefono movil'
+			         }
+			       }
+			     }
+
+			     ,
 			     numTelclRpb:{
 			     	validators:{
 			     		regexp: {
 			                regexp: /^[0-9]+$/,
 			                message: 'Solo debe contener caracteres númericos'                            
-	                }
+	                },
+	                	 notEmpty: {
+			           message: 'Debe indicar un numero de telefono movil'
+			         }
 			     	}
 			     },
 			     mail2: {
@@ -156,13 +170,16 @@ $(document).ready(function()
 			   }
 	  		}).on('success.form.bv',function(e,data){
 	  			e.preventDefault();
-				var caso=$(this).attr('data-caso');////caso 0 resp Cliente//caso 1 resp Categoria
-				var formularios=['_responsableMatriz_Mod','categoriResp__','respSucForMod'];
-				var redirecciones=['_clienteMatriz_','categoriaId_','sucursal_id_resp'];
-				var rutas=['/menu/registros/clientes/responsable/','/menu/registros/clientes/categoria/responsable/','/menu/registros/clientes/categoria/sucursal/responsable/'];
+
+	  	// 		var caso=$(this).attr('data-caso');////caso 0 resp Cliente//caso 1 resp Categoria
+				// var formularios=['_responsableMatriz_Mod','categoriResp__','respSucForMod'];
+				// var redirecciones=['_clienteMatriz_','categoriaId_','sucursal_id_resp'];
+				// var rutas=['/menu/registros/clientes/responsable/','/menu/registros/clientes/categoria/responsable/','/menu/registros/clientes/categoria/sucursal/responsable/'];
 				var route='/menu/registros/clientes/responsables/actualizar';
-				var formulario=$('#'+formularios[caso]).serialize();
-				var redireccion=$('#'+redirecciones[caso]).val();
+				var formulario=$('#_responsableMatriz_Mod').serialize();
+				var redireccion=$('#_clienteMatriz_').val();
+
+				
  					
  					
 
@@ -184,7 +201,7 @@ $(document).ready(function()
 					  				 	{
 					  				 		if(isConfirm)
 					  				 		{
-					  				 			window.location.href=rutas[caso]+redireccion;
+					  				 			window.location.href='/menu/registros/clientes/responsable/'+redireccion ;
 					  				 		}	
 
 					  				 	});
@@ -202,6 +219,10 @@ $(document).ready(function()
 												html: true
 										});
 								}
+								else if(answer.codigo==0)
+								{
+									$('#myModal2').modal('hide');
+								}
 				  				
 				 			})
 
@@ -210,7 +231,7 @@ $(document).ready(function()
 						});
 			});
 
- 			///////////////////////// Guardar Responsable: Nuevo /////////////////////////////////////////////
+ 			/////////////////////// Guardar Responsable: Nuevo /////////////////////////////////////////////
  			$('#_responsableMatriz_').bootstrapValidator({
 				excluded: [':disabled'],
 			   fields: {
@@ -279,12 +300,24 @@ $(document).ready(function()
 	                },
 			       }
 			     },
+			     	seltlfRpb: {
+			       validators: {
+			         notEmpty: {
+			           message: 'Debe indicar un código de telefono movil'
+			         }
+			       }
+			     }
+
+			     ,
 			     numTelclRpb:{
 			     	validators:{
 			     		regexp: {
 			                regexp: /^[0-9]+$/,
 			                message: 'Solo debe contener caracteres númericos'                            
-	                }
+	                },
+	                	 notEmpty: {
+			           message: 'Debe indicar un numero de telefono movil'
+			         }
 			     	}
 			     },
 			     mail2: {
@@ -307,7 +340,7 @@ $(document).ready(function()
 			.done(function(answer)
 				{
 					
-					console.log(answer);
+					
 					
 					if(answer.codigo==1)
 					{
@@ -322,7 +355,7 @@ $(document).ready(function()
 		  				 	{
 		  				 		if(isConfirm)
 		  				 		{
-		  				 			window.location.href="/menu/registros/clientes/categoria/responsable"+cliente_id;
+		  				 			window.location.href="/menu/registros/clientes/responsable/"+cliente_id;
 		  				 		}	
 
 		  				 	});
@@ -420,8 +453,7 @@ $(document).ready(function()
 					var nuevo=$(this).attr('data-reg');
 					var route='/menu/registros/clientes/responsables/asignar';
 					if(!anterior){anterior=0;}
-					alert(anterior);
-
+				
 					swal({
 							title: "Asignacion de responsable",
 							text: '<p style="font-size: 0.9em;">'+'Desea asignar a la persona seleccionada como responsable del cliente:  <br>  '+$('#nombreClienteMatriz').val()+'?</p>',
@@ -446,7 +478,7 @@ $(document).ready(function()
 				  				 				{
 				  				 					$('#checkSeleccionado_').val(nuevo);//agrega el valor del nuevo registro
 				  				 					$('#'+'c_rsp'+nuevo).prop("checked",true);//chekea el nuevo registro
-				  				 					swal("Responsable asignado", "EL cliente tiene un nuevo responsable asignado", "success");
+				  				 					swal("Responsable asignado", "EL cliente : "+$('#nombreClienteMatriz').val()+" tiene un nuevo responsable asignado", "success");
 				  				 				}
 				  				 				else
 				  				 				{
@@ -463,7 +495,7 @@ $(document).ready(function()
 				  				 			$('#checkSeleccionado_').val(anterior);//agrega el valor del nuevo registro
 				  				 			$('#'+'c_rsp'+anterior).prop("checked",true);//chekea el nuevo registro
 				  				 			$('#'+'c_rsp'+nuevo).prop("checked",false);
-				  				 			swal("Perfil asignado", "Ha concedido al usuario actual los permisos asociados al perfil seleccionado", "error");
+				  				 			swal("Asignacion Cancelada", "", "warning");
 				  				 		}	
 
 				  				 	});

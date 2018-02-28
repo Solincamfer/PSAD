@@ -86,7 +86,7 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                        <h4 class="modal-title" id="myModalLabel">Agregar Responsable - {{$datosC5->nombreComercial}}</h4>
+                                        <h4 class="modal-title" id="myModalLabel">AGREGAR RESPONSABLE: {{$datosC5->nombreComercial}}</h4>
                                     </div>
                                     
                                         <form  class="form-horizontal Validacion" id="_responsableMatriz_">
