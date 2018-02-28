@@ -4448,6 +4448,10 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 				$traducirForm=$this->traducirId($datos->status,10);
 				$traducirBd=$this->traducirId($componente->status,10);
 				$cambio=$this->detectarCambios($traducirForm,$traducirBd,'Status Componente');
+
+				$cambio=$this->detectarCambios($datos->status,$componente->status,'Status');
+				$cambios=$this->agregarCambios($cambio,$cambios);
+				$componente->status=$datos->status;
 			$update=$componente->save();
 
 			$longitud=count($cambios);
@@ -4716,6 +4720,10 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 				$traducirForm=$this->traducirId($datos->status,10);
 				$traducirBd=$this->traducirId($pieza->status,10);
 				$cambio=$this->detectarCambios($traducirForm,$traducirBd,'Status Pieza');
+
+				$cambio=$this->detectarCambios($datos->status,$pieza->status,'Status');
+				$cambios=$this->agregarCambios($cambio,$cambios);
+				$pieza->status=$datos->status;
 			$update=$pieza->save();
 
 			$longitud=count($cambios);
@@ -4927,6 +4935,9 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 				$traduccionFor=$this->traducirId($datos->status,10);
 				$traduccionBd=$this->traducirId($app->status,10);
 				$cambio=$this->detectarCambios($traduccionFor,$traduccionBd,'Version Status');
+				$cambios=$this->agregarCambios($cambio,$cambios);
+
+				$cambio=$this->detectarCambios($datos->status,$app->status,'Status');
 				$cambios=$this->agregarCambios($cambio,$cambios);
 				$app->status=$datos->status;
 				$app->save();

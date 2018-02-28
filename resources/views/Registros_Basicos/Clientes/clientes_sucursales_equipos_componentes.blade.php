@@ -9,7 +9,7 @@
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-md-4 ttlp">
-                                    <h1>Equipos - Componentes</h1>
+                                    <h1>{{$datosC1->descripcion.'  '}} - Componentes</h1>
                                 </div>
                             </div>
                             <div class="row sep-div">

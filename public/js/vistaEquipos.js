@@ -284,6 +284,7 @@ $('.checkEquipos').change(function()
  $('.modificarEquipo_').click(function() 
  {
 	$('#equipoSucMod').data('bootstrapValidator').resetForm();
+
  	var registry=$(this).data('reg');
  	$('#_sucursalRegistro').val(registry);
  	var route='/menu/registros/clientes/modificar_equipo';

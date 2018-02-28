@@ -43,6 +43,7 @@ function loadModal(datos)
 
 //////////////////////////////////////Actualizar registro ///////////////////////////////////////////////////////////
 $('#categoriaActualizar').bootstrapValidator({
+   excluded: [':disabled'],
    fields: {
      nomCat: {
        validators: {
