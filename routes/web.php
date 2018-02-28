@@ -53,7 +53,7 @@ Route::group(['prefix'=>'/menu/registros','middleware'=>['v_menu']],function(){
 	Route::match(['post','get'],'/tiposequipos',														['uses'=>'RegistrosBasicos@tipos']);
 	Route::match(['post','get'],'/perfiles',															['uses'=>'RegistrosBasicos@perfiles']);
 	Route::match(['post','get'],'/empleados',															['uses'=>'RegistrosBasicos@empleados']);
-	Route::match(['post','get'],'/clientes',															['uses'=>'RegistrosBasicos@clientes']);
+	Route::match(['post','get'],'/clientes',															['uses'=>'RegistrosBasicos@clientesMostrar']);
 
 
 	Route::match(['post','get'],'/clientes/insertar',                   								['uses'=>'RegistrosBasicos@clientes_insertar']);

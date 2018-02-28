@@ -70,6 +70,10 @@
 										@endif
 
 									@endforeach
+									<div class="paginador">
+                         				 {{ $consulta->links() }}
+                        			</div>
+                       
 								</div>
 								<p class="ttlMd" style="display: inline-block;"><strong>{{$clientes->nombreComercial}}</strong></p>
 								

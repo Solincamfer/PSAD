@@ -255,12 +255,23 @@ $(document).ready(function()
                 },
 		       }
 		     },
+		   tlfmvl: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Debe indicar un código de telefono movil'
+		         }
+		       }
+		     }	
+		     ,
 		     tmvl:{
 		     	validators:{
 		     		regexp: {
 		                regexp: /^[0-9]+$/,
 		                message: 'Solo debe contener caracteres númericos'                            
-                }
+                },
+                 notEmpty: {
+		           message: 'Debe indicar un número de telefono movil'
+		         }
 		     	}
 		     },
 		     mail: {
@@ -283,7 +294,7 @@ $(document).ready(function()
 									.done(function(answer)
 										{
 											
-											//console.log(answer);
+											
 											
 											if(answer.codigo==1)
 											{
@@ -332,7 +343,7 @@ $(document).ready(function()
 			$('.modificarSucursal').click(function() 
 			{
 				
-
+					$('#Formclientem').data('bootstrapValidator').resetForm();
 					var registry=$(this).attr('data-reg');
 			        var _token=$( "input[name^='_token']" ).val();
 				  	var route='/menu/registros/clientes/modificar/sucursal';
@@ -342,7 +353,7 @@ $(document).ready(function()
 				  	  $.post(route,{_token:_token,registry:registry})
 					  .done(function(answer)
 					  {
-					  	console.log(answer);
+					  	
 					  	
 					  	 loadModal(answer);
 					  })
@@ -487,12 +498,23 @@ $(document).ready(function()
                 },
 		       }
 		     },
+		     	tlfmvl: {
+		       validators: {
+		         notEmpty: {
+		           message: 'Debe indicar un código de telefono movil'
+		         }
+		       }
+		     }	
+		     ,
 		     tmvl:{
 		     	validators:{
 		     		regexp: {
 		                regexp: /^[0-9]+$/,
 		                message: 'Solo debe contener caracteres númericos'                            
-                }
+                },
+                 notEmpty: {
+		           message: 'Debe indicar un número de telefono movil'
+		         }
 		     	}
 		     },
 		     mail: {
@@ -508,7 +530,10 @@ $(document).ready(function()
 		   }
 	  	}).on('success.form.bv',function(e,data){
 	  		e.preventDefault();
-					var form=$('#Formclientem').serialize();
+					
+					
+ 					$('#Formclientem').data('bootstrapValidator').resetForm();
+ 					var form=$('#Formclientem').serialize();
        				var route='/menu/registros/clientes/actualizar/sucursal';
        				var categoria=$('#categoria__id').val();
 
@@ -548,6 +573,11 @@ $(document).ready(function()
 																	html: true
 															});
 													}
+													else if(answer.codigo==0)
+													{
+														$('#myModal2').modal('hide');
+													}
+
 							})
 										
 						.fail(function()
@@ -558,6 +588,8 @@ $(document).ready(function()
 
 
 				});
+
+	  	//////////////////////////////////////STATUS DE UNA SUCURSAL ////////////////////////////////////////////////////
 
 			$('.checkSucursales').change(function()
 		{

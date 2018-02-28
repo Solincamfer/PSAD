@@ -2422,12 +2422,13 @@ public function mostrar_acciones()
 
 //////////////////////////////////Cliente Matriz//////////////////////////////////////////////////////////////////////////////
 
-public function clientes()//inicializacion del submodulo: clientes
+public function clientesMostrar()//inicializacion del submodulo: clientes
 	{
+		$paginas=10;
 		$datos=$this->cargar_header_sidebar_acciones();
 		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(9,10,11,12),8);
 
-		$consulta=DB::table('clientes')->get();
+		$consulta=DB::table('clientes')->paginate($paginas);
 		$tipoR=DB::table('tipos')->where('numero_c',1)->get();
 		$tipoC=DB::table('tipos')->where('numero_c',4)->get();
 		$paises=DB::table('paises')->get();
@@ -3909,7 +3910,7 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 
 			$traduccionBd=$this->traducirId($direccionFiscal->municipio_id,5);
     		$traduccionFor=$this->traducirId($formulario->municipioF,5);
-    		$cambio=$this->detectarCambios($traduccionFor,$traduccionBd,'Estado Direccion Fiscal');
+    		$cambio=$this->detectarCambios($traduccionFor,$traduccionBd,'Municipio Direccion Fiscal');
     		$cambios=$this->agregarCambios($cambio,$cambios);
 			$direccionFiscal->municipio_id=$formulario->municipioF;
 			$direccionFiscal->save();
@@ -3936,15 +3937,15 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 			$direccionComercial->region_id=$formulario->regionC;
 
 			$traduccionBd=$this->traducirId($direccionComercial->estado_id,4);
-    		$traduccionFor=$this->traducirId($formulario->estadoF,4);
+    		$traduccionFor=$this->traducirId($formulario->estadoC,4);
     		$cambio=$this->detectarCambios($traduccionFor,$traduccionBd,'Estado Direccion Comercial');
     		$cambios=$this->agregarCambios($cambio,$cambios);
 			$direccionComercial->estado_id=$formulario->estadoC;
 
 
 			$traduccionBd=$this->traducirId($direccionComercial->municipio_id,5);
-    		$traduccionFor=$this->traducirId($formulario->municipioF,5);
-    		$cambio=$this->detectarCambios($traduccionFor,$traduccionBd,'Estado Direccion Comercial');
+    		$traduccionFor=$this->traducirId($formulario->municipioC,5);
+    		$cambio=$this->detectarCambios($traduccionFor,$traduccionBd,'Municipio Direccion Comercial');
     		$cambios=$this->agregarCambios($cambio,$cambios);
 			$direccionComercial->municipio_id=$formulario->municipioC;
 			$direccionComercial->save();
@@ -3967,7 +3968,7 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 			
 			$cambio=$this->detectarCambios($formulario->nombreComercial,$sucursal->nombreComercial,'Nombre Comercial');
     		$cambios=$this->agregarCambios($cambio,$cambios);
-			$sucursal->nombreComercial=$sucursal->nombreComercial;
+			$sucursal->nombreComercial=$formulario->nombreComercial;
 			
 			$traduccionBd=$this->traducirId($sucursal->tipoContribuyente_id,11);
     		$traduccionFor=$this->traducirId($formulario->tipoContribuyente_id,11);

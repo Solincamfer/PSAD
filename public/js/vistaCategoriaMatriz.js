@@ -20,7 +20,7 @@ function loadModal(datos)
 	$('.ModificarCategoria').click(function() 
 		{
 		 
-
+		  $('#categoriaActualizar').data('bootstrapValidator').resetForm();
 		  var registry=$(this).attr('data-reg');
 		  var _token=$( "input[name^='_token']" ).val();
 		  var route='/menu/registros/clientes/modificar/categoria';
@@ -61,6 +61,8 @@ $('#categoriaActualizar').bootstrapValidator({
    }
 }).on('success.form.bv',function(e){
 	e.preventDefault();
+
+ 
 	var form=$('#categoriaActualizar').serialize();
     var route='/menu/registros/clientes/actualiar/categoria';
     var cliente_id=$('#cliente_id__').val();
@@ -68,6 +70,7 @@ $('#categoriaActualizar').bootstrapValidator({
        		$.post(route,form)
 			.done(function(answer)
 				{		
+					
 					if(answer.codigo==1)
 					{
 							swal({
@@ -98,6 +101,10 @@ $('#categoriaActualizar').bootstrapValidator({
 									showConfirmButton:true,//Eliminar boton de confirmacion
 									html: true
 							});
+					}
+					else if(answer.codigo==0)
+					{
+						$('#myModal2').modal('hide');
 					}
 
 				})

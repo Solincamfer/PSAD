@@ -38,6 +38,7 @@ $(document).ready(function()
 
  			$('.modificarResponsable').click(function()
  				{
+ 					$('#respSucForMod').data('bootstrapValidator').resetForm();
  					var registry=$(this).attr('data-reg');
  					var caso=$(this).data('caso');
 
@@ -133,12 +134,24 @@ $(document).ready(function()
 	                },
 			       }
 			     },
+			        seltlfRpb: {
+			       validators: {
+			         notEmpty: {
+			           message: 'Debe indicar un código de telefono movil'
+			         }
+			       }
+			     }
+
+			     ,
 			     numTelclRpb:{
 			     	validators:{
 			     		regexp: {
 			                regexp: /^[0-9]+$/,
 			                message: 'Solo debe contener caracteres númericos'                            
-	                }
+	                },
+	                	 notEmpty: {
+			           message: 'Debe indicar un numero de telefono movil'
+			         }
 			     	}
 			     },
 			     mail2: {
@@ -154,13 +167,13 @@ $(document).ready(function()
 			   }
 	  		}).on('success.form.bv',function(e,data){
 	  			e.preventDefault();
-				var caso=$(this).attr('data-caso');////caso 0 resp Cliente//caso 1 resp Categoria
-				var formularios=['_responsableMatriz_Mod','categoriResp__','respSucForMod'];
-				var redirecciones=['_clienteMatriz_','categoriaId_','sucursal_id_resp'];
-				var rutas=['/menu/registros/clientes/responsable/','/menu/registros/clientes/categoria/responsable/','/menu/registros/clientes/categoria/sucursal/responsable/'];
+				// var caso=$(this).attr('data-caso');////caso 0 resp Cliente//caso 1 resp Categoria
+				// var formularios=['_responsableMatriz_Mod','categoriResp__','respSucForMod'];
+				// var redirecciones=['_clienteMatriz_','categoriaId_','sucursal_id_resp'];
+				// var rutas=['/menu/registros/clientes/responsable/','/menu/registros/clientes/categoria/responsable/','/menu/registros/clientes/categoria/sucursal/responsable/'];
 				var route='/menu/registros/clientes/responsables/actualizar';
-				var formulario=$('#'+formularios[caso]).serialize();
-				var redireccion=$('#'+redirecciones[caso]).val();
+				var formulario=$('#respSucForMod').serialize();
+				var redireccion=$('#sucursal_id_resp').val();
  					
  					
 
@@ -182,7 +195,7 @@ $(document).ready(function()
 					  				 	{
 					  				 		if(isConfirm)
 					  				 		{
-					  				 			window.location.href=rutas[caso]+redireccion;
+					  				 			window.location.href='/menu/registros/clientes/categoria/sucursal/responsable/'+redireccion;
 					  				 		}	
 
 					  				 	});
@@ -199,6 +212,10 @@ $(document).ready(function()
 												showConfirmButton:true,//Eliminar boton de confirmacion
 												html: true
 										});
+								}
+								else if(answer.codigo==0)
+								{
+									$('#myModal2').modal('hide');
 								}
 				  				
 				 			})
@@ -278,12 +295,24 @@ $(document).ready(function()
 	                },
 			       }
 			     },
+			        seltlfRpb: {
+			       validators: {
+			         notEmpty: {
+			           message: 'Debe indicar un código de telefono movil'
+			         }
+			       }
+			     }
+
+			     ,
 			     numTelclRpb:{
 			     	validators:{
 			     		regexp: {
 			                regexp: /^[0-9]+$/,
 			                message: 'Solo debe contener caracteres númericos'                            
-	                }
+	                },
+	                	 notEmpty: {
+			           message: 'Debe indicar un numero de telefono movil'
+			         }
 			     	}
 			     },
 			     mail2: {
@@ -469,7 +498,7 @@ $(document).ready(function()
 				  				 			$('#_checkSeleccionadoSuc_').val(anterior);//agrega el valor del nuevo registro
 				  				 			$('#'+'s_resp'+anterior).prop("checked",true);//chekea el nuevo registro
 				  				 			$('#'+'s_resp'+nuevo).prop("checked",false);
-				  				 			swal("Asignacion cancelada", "No se asigno el responsable seleccionado a la sucursal", "error");
+				  				 			swal("Asignacion cancelada", "No se asigno el responsable seleccionado a la sucursal", "warning");
 				  				 		}	
 
 				  				 	});
