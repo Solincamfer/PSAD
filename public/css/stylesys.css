@@ -2907,3 +2907,20 @@ outline: none !important;
 .bttminimizar{
     background-color:#68d1bc;
 }
+
+/* plus & minus */
+.warper{ width:600px; height:80px; margin:0 auto;}
+a.button{ width:36px; height:36px; border-radius:50%; border:1px solid rgba(0,0,0,0.00); overflow:hidden; position:relative; display:inline-block;}
+a.plus{ background:#0076FF;transition:0.5s ease;} 
+a.plus:before{ width:16px; height:2px; background:#fff; position:absolute; top:50%; left:50%; margin:-1px 0 0 -8px;}
+a.plus:after{ width:2px; height:16px; background:#fff; position:absolute;top:50%; left:50%; margin:-8px 0 0 -1px;transition:0.5s ease;}
+a.plus:hover{ background:#44db5e;transition:0.5s ease;transform:rotate(180deg);}
+a.plus:hover:before{ transition:0.3s ease; transform:rotate(0deg);}
+a.plus:hover:after{ transition:0.3s ease; transform:rotate(90deg);}
+/* plus & close*/
+a.close{ background:#0076FF;transition:0.5s ease;} 
+a.close:before{ width:16px; height:2px; background:#fff; position:absolute; top:50%; left:50%; margin:-1px 0 0 -8px;}
+a.close:after{ width:2px; height:16px; background:#fff; position:absolute;top:50%; left:50%; margin:-8px 0 0 -1px;transition:0.5s ease;}
+a.close:hover{ background:#FF2851;transition:0.5s ease;transform:rotate(180deg);}
+a.close:hover:before{ transition:0.3s ease; transform:rotate(45deg);}
+a.close:hover:after{ transition:0.3s ease; transform:rotate(45deg);}

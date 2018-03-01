@@ -5017,21 +5017,39 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 //////////////////////////////////////////////////////////Datos complementarios////////////////////////////////////////////////////////////////////
 
 
-	public function datos_complementarios()
+	public function tipoEquipos()
 	{
 		$datos=$this->cargar_header_sidebar_acciones();//
-		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(88,89,90,91),false);
-		return view('Registros_Basicos\Datos_Complementarios\datos',$this->datos_vista($datos,$acciones,array()));// $datos (datos de la sesion ) $acciones(acciones para la vista) //array() consulta proveniente de la base d datos
+		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(89,90,91,100),88);
+		$tipo_equipos=Tipoequipo::paginate(11);
+		return view('Registros_Basicos\Datos_Complementarios\tipoequipos',$this->datos_vista($datos,$acciones,$tipo_equipos));// $datos (datos de la sesion ) $acciones(acciones para la vista) //array() consulta proveniente de la base d datos
 		
 	}
 
-	public function tipo_equipos()
+	public function Componentes($id){
+		$datos=$this->cargar_header_sidebar_acciones();//
+		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(102,103,104,105),101);
+		$tipo_equipos=Ncomponente::where('tipoequipo_id',$id)->paginate(11);
+		return view('Registros_Basicos\Datos_Complementarios\componentes',$this->datos_vista($datos,$acciones,$tipo_equipos));// $datos (datos de la sesion ) $acciones(acciones para la vista) //array() consulta proveniente de la base d datos
+
+	}	
+
+	public function Piezas($id){
+		$datos=$this->cargar_header_sidebar_acciones();//
+		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(107,108,109),106);
+		$tipo_equipos=Npieza::where('ncomponente_id',$id)->paginate(11);
+		return view('Registros_Basicos\Datos_Complementarios\piezas',$this->datos_vista($datos,$acciones,$tipo_equipos));// $datos (datos de la sesion ) $acciones(acciones para la vista) //array() consulta proveniente de la base d datos
+
+	}	
+
+	/*public function tipo_equipos()
 	{
 
 		$datos=$this->cargar_header_sidebar_acciones();
 		
 		return view('Registros_Basicos\Datos_Complementarios\tipoequipos',$this->datos_vista_($datos,DB::table('tequipos')->orderBy('id','desc')->get()));
 	}
+
 
 	public function marca_equipos()
 	{
@@ -5320,7 +5338,7 @@ public function eliminar_componentes()
 
 		return($registros);
 
-	}
+	}*/
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
