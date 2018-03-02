@@ -47,7 +47,7 @@
         border-collapse: collapse;
         border-spacing: 0
     }
-    
+
     body{
         overflow: hidden;
     }
@@ -71,7 +71,7 @@
     .bttn-vol, .bttn-agr:focus, .bttn-agr:active,
     .bttn-vol:focus, .bttn-vol:active{
         border: none;
-        outline: none;  
+        outline: none;
     }
 
 
@@ -102,7 +102,7 @@
 }
 .hdr{
     font-family: 'Ubuntu Condensed', sans-serif;
-    background: rgba(0, 167, 142, 0.5); 
+    background: rgba(0, 167, 142, 0.5);
     padding: 0;
     width: 100%;
     height: 3.5em;
@@ -358,7 +358,7 @@ header nav ul li .chld li div{
     box-shadow: 2px 3px 5px 1px rgba(0, 0, 0, .2);
     text-decoration: none;
 }
-   
+
 .btnAd {
     position: absolute;
     margin-left: 60px;
@@ -388,7 +388,7 @@ header nav ul li .chld li div{
     font-size: bold;
     letter-spacing: 2px;
     padding: 3px;
-    margin-top: 5px; 
+    margin-top: 5px;
     border-radius: 5px;
     outline: none;
     box-shadow: 10px 5px 10px 1px #aaa;
@@ -403,8 +403,8 @@ header nav ul li .chld li div{
 .contMd .btnAcc{
     background: transparent;
     outline: none;
-    margin-top:6px; 
-    margin-right:6px; 
+    margin-top:6px;
+    margin-right:6px;
     float: right;
     font-size: 15px;
     letter-spacing: 1px;
@@ -420,7 +420,7 @@ header nav ul li .chld li div{
 }
 
 .ttlMd, .ttlMd1{
-    margin-top: 3px; 
+    margin-top: 3px;
     margin-left: 30px;
     font-size: 14px;
     display: inline-block;
@@ -442,7 +442,7 @@ input[type = "radio"] {
     color: #e5e5e7;
 }
 
-.icl{ 
+.icl{
     float: right;
 }
 
@@ -475,7 +475,7 @@ input[type = "radio"] {
 }
 
 .chbx:after{
-    content: url('../img/xmark.png'); 
+    content: url('../img/xmark.png');
     position: absolute;
     right: 0;
     margin-right: 3px;
@@ -497,7 +497,7 @@ input[type = "radio"] {
     z-index: 0;
     font-weight: bold;
 }
-    
+
 .chbx label{
     display: block;
     width: 27px;
@@ -531,7 +531,7 @@ input[type = "radio"] {
     position: relative;
 }
 
-.tltp:before, .tltp:after, .tltpck:before, .tltpck:after, 
+.tltp:before, .tltp:after, .tltpck:before, .tltpck:after,
 .tltpcd:before, .tltpcd:after, .tltpcd2:before, .tltpcd2:after{
     display: block;
     opacity: 0;
@@ -647,7 +647,7 @@ input[type = "radio"] {
         transform: translate3d(0,0,0);
     }
 
-    /*expand*/ 
+    /*expand*/
     .tltpck:before, .tltpcd:before, .tltpcd2:before {
         transform: scale3d(.2,.2,1);
         transition: all .2s ease-in-out;
@@ -657,7 +657,7 @@ input[type = "radio"] {
         transition: all .1s ease-in-out;
     }
     .tltpck:hover:before,
-    .tltpck:hover:after, 
+    .tltpck:hover:after,
     .tltpcd:hover:before,
     .tltpcd:hover:after,
     .tltpcd2:hover:before,
@@ -860,16 +860,16 @@ input[type = "radio"] {
  /*Botones volver y agregar*/
 
 .sep-div{
-    margin: 1.5em 0px;    
+    margin: 1.5em 0px;
 }
 
 .sep-div1{
-    margin-top: 1.5em;   
+    margin-top: 1.5em;
 }
 
 .despl-bttn{
-    width: auto; 
-    float: right; 
+    width: auto;
+    float: right;
     right: 20em;
 }
 
@@ -983,10 +983,10 @@ input[type = "radio"] {
 
 #contDb, #contdf, #contdc, #contctt,
 #contDbm, #contdfm, #contdcm, #contcttm,
-#contdpto, #contcgo, #contPn, #contrpbdbr1, 
-#contrpbdbr2, #contrpbdbr3, #contrpbdbrm1, 
+#contdpto, #contcgo, #contPn, #contrpbdbr1,
+#contrpbdbr2, #contrpbdbr3, #contrpbdbrm1,
 #contrpbdbrm2, #contrpbdbrm3, #contcat, #contcatm,
-#contrpbdbrc1, #contrpbdbrc2, #contrpbdbrc3, 
+#contrpbdbrc1, #contrpbdbrc2, #contrpbdbrc3,
 #contrpbdbrcm1, #contrpbdbrcm2, #contrpbdbrcm3, #conteq, #conteqm,
 #contcomp, #contcompm, #contpz, #contpzm, #contas, #contasm{
     margin-top: 20px;
@@ -1072,7 +1072,7 @@ input[type = "radio"] {
     overflow-x:hidden;
     height: 350px;
 }
-        
+
 /*Cliente matriz & Sucursales*/
 /*modal Agregar*/
 /*Datos Basicos*/
@@ -1090,7 +1090,7 @@ input[type = "radio"] {
 
 
 
-#dbc1 input:focus, #dbc2 input:focus, #dbc2 select:focus, 
+#dbc1 input:focus, #dbc2 input:focus, #dbc2 select:focus,
 #dbc3 select:focus{
     outline: none;
     color: #444;
@@ -1183,9 +1183,9 @@ input[type = "radio"] {
     color: #ccc;
 }
 
-#dfc1 select:focus, #dfc2 select:focus, 
-#dfc3 select:focus, #dfc4 select:focus, #dfc5 textarea:focus, 
-#dcc1 select:focus, #dcc2 select:focus, 
+#dfc1 select:focus, #dfc2 select:focus,
+#dfc3 select:focus, #dfc4 select:focus, #dfc5 textarea:focus,
+#dcc1 select:focus, #dcc2 select:focus,
 #dcc3 select:focus, #dcc4 select:focus, #dcc5 textarea:focus{
     outline: none;
     color: #444;
@@ -1243,7 +1243,7 @@ input[type = "radio"] {
     border: none;
 }
 /*Contacto*/
-#ctoc1 select, #ctoc1 input, #ctoc2 select, #ctoc2 input, #ctoc3 input, 
+#ctoc1 select, #ctoc1 input, #ctoc2 select, #ctoc2 input, #ctoc3 input,
 #ctocm1 select, #ctocm1 input, #ctocm2 select, #ctocm2 input, #ctocm3 input{
     display: block;
     padding: 3px 5px;
@@ -1256,10 +1256,10 @@ input[type = "radio"] {
     color: #ccc;
 }
 
-#ctoc1 select:focus, #ctoc1 input:focus, 
-#ctoc2 select:focus, #ctoc2 input:focus, 
-#ctoc3 input:focus, #ctocm1 select:focus, 
-#ctocm1 input:focus, #ctocm2 select:focus, 
+#ctoc1 select:focus, #ctoc1 input:focus,
+#ctoc2 select:focus, #ctoc2 input:focus,
+#ctoc3 input:focus, #ctocm1 select:focus,
+#ctocm1 input:focus, #ctocm2 select:focus,
 #ctocm2 input:focus, #ctocm3 input:focus{
     outline: none;
     color: #444;
@@ -1301,7 +1301,7 @@ input[type = "radio"] {
     z-index: 1;
 }
 
-#ctoc1 #icc16, #ctoc2 #icc18, 
+#ctoc1 #icc16, #ctoc2 #icc18,
 #ctocm1 #micc16, #ctocm2 #micc18{
     color: #fff;
     font-size: 1em;
@@ -1331,7 +1331,7 @@ input[type = "radio"] {
 }
 /*Modal Modificar*/
 /*Datos Basicos*/
-#dbcm1 input, #dbcm2 select, #dbcm3 select, #ctocm1 select, 
+#dbcm1 input, #dbcm2 select, #dbcm3 select, #ctocm1 select,
 #ctocm2 input, #ctocm3 select, #ctocm4 input, #ctocm5 input{
     display: block;
     padding: 3px 5px;
@@ -1344,7 +1344,7 @@ input[type = "radio"] {
     color: #ccc;
 }
 
-#dbcm1 input:focus, #dbcm2 input:focus, #dbcm2 select:focus, 
+#dbcm1 input:focus, #dbcm2 input:focus, #dbcm2 select:focus,
 #dbcm3 select:focus{
     outline: none;
     color: #444;
@@ -1438,11 +1438,11 @@ input[type = "radio"] {
     color: #ccc;
 }
 
-#dfcm1 select:focus, #dfcm2 select:focus, 
-#dfcm3 select:focus, #dfcm4 select:focus, #dfcm5 textarea:focus, 
-#dccm1 select:focus, #dccm2 select:focus, 
-#dccm3 select:focus, #dccm4 select:focus, #dccm5 textarea:focus, 
-#ctocm1 select:focus, #ctocm2 input:focus, #ctocm3 select:focus, 
+#dfcm1 select:focus, #dfcm2 select:focus,
+#dfcm3 select:focus, #dfcm4 select:focus, #dfcm5 textarea:focus,
+#dccm1 select:focus, #dccm2 select:focus,
+#dccm3 select:focus, #dccm4 select:focus, #dccm5 textarea:focus,
+#ctocm1 select:focus, #ctocm2 input:focus, #ctocm3 select:focus,
 #ctocm4 input:focus, #ctocm5 input:focus {
     outline: none;
     color: #444;
@@ -1499,19 +1499,19 @@ input[type = "radio"] {
     color: #333;
     border: none;
 }
-    
+
 /*Cliente Responsable & Categoria Responsable & Sucursales Responsable*/
 /*Agregar y Modificar*/
 /*Datos Basicos Primarios, Secundarios y Contacto*/
-#rRpb1 input, #rRpb3 input, #rRpb5 select, #rRpb5 input, 
-#rRpb6 select, #rRpb9 select, #rRpb9 input, #rRpb10 select, 
-#rRpb10 input, #rRpb11 input, #rRpbm1 input, #rRpbm3 input, 
-#rRpbm5 select, #rRpbm5 input, #rRpbm6 select, #rRpbm9 select, 
+#rRpb1 input, #rRpb3 input, #rRpb5 select, #rRpb5 input,
+#rRpb6 select, #rRpb9 select, #rRpb9 input, #rRpb10 select,
+#rRpb10 input, #rRpb11 input, #rRpbm1 input, #rRpbm3 input,
+#rRpbm5 select, #rRpbm5 input, #rRpbm6 select, #rRpbm9 select,
 #rRpbm9 input, #rRpbm10 select, #rRpbm10 input, #rRpbm11 input,
-#rRpbc1 input, #rRpbc3 input, #rRpbc5 select, #rRpbc5 input, 
-#rRpbc6 select, #rRpbc9 select, #rRpbc9 input, #rRpbc10 select, 
-#rRpbc10 input, #rRpbc11 input, #rRpbcm1 input, #rRpbcm3 input, 
-#rRpbcm5 select, #rRpbcm5 input, #rRpbcm6 select, #rRpbcm9 select, 
+#rRpbc1 input, #rRpbc3 input, #rRpbc5 select, #rRpbc5 input,
+#rRpbc6 select, #rRpbc9 select, #rRpbc9 input, #rRpbc10 select,
+#rRpbc10 input, #rRpbc11 input, #rRpbcm1 input, #rRpbcm3 input,
+#rRpbcm5 select, #rRpbcm5 input, #rRpbcm6 select, #rRpbcm9 select,
 #rRpbcm9 input, #rRpbcm10 select, #rRpbcm10 input, #rRpbcm11 input{
     display: block;
     padding: 3px 5px;
@@ -1537,42 +1537,42 @@ input[type = "radio"] {
     color: #ccc;
 }
 
-#rRpb1 input:focus, #rRpb2 input:focus, 
-#rRpb3 input:focus, #rRpb4 input:focus, 
+#rRpb1 input:focus, #rRpb2 input:focus,
+#rRpb3 input:focus, #rRpb4 input:focus,
 #rRpb5 select:focus, #rRpb5 input:focus,
 #rRpb6 input:focus, #rRpb6 select:focus,
-#rRpb7 input:focus, #rRpb8 input:focus, 
-#rRpb9 select:focus, #rRpb9 input:focus, 
+#rRpb7 input:focus, #rRpb8 input:focus,
+#rRpb9 select:focus, #rRpb9 input:focus,
 #rRpb10 select:focus, #rRpb10 input:focus,
-#rRpb11 input:focus, #rRpbm1 input:focus, 
-#rRpbm2 input:focus, #rRpbm3 input:focus, 
-#rRpbm4 input:focus, #rRpbm5 select:focus, 
-#rRpbm5 input:focus, #rRpbm6 input:focus, 
-#rRpbm6 select:focus, #rRpbm7 input:focus, 
-#rRpbm8 input:focus,  #rRpbm9 select:focus, 
-#rRpbm9 input:focus,  #rRpbm10 select:focus, 
+#rRpb11 input:focus, #rRpbm1 input:focus,
+#rRpbm2 input:focus, #rRpbm3 input:focus,
+#rRpbm4 input:focus, #rRpbm5 select:focus,
+#rRpbm5 input:focus, #rRpbm6 input:focus,
+#rRpbm6 select:focus, #rRpbm7 input:focus,
+#rRpbm8 input:focus,  #rRpbm9 select:focus,
+#rRpbm9 input:focus,  #rRpbm10 select:focus,
 #rRpbm10 input:focus, #rRpbm11 input:focus,
-#rRpbc1 input:focus, #rRpbc2 input:focus, 
-#rRpbc3 input:focus, #rRpbc4 input:focus, 
+#rRpbc1 input:focus, #rRpbc2 input:focus,
+#rRpbc3 input:focus, #rRpbc4 input:focus,
 #rRpbc5 select:focus, #rRpbc5 input:focus,
 #rRpbc6 input:focus, #rRpbc6 select:focus,
-#rRpbc7 input:focus, #rRpbc8 input:focus, 
-#rRpbc9 select:focus, #rRpbc9 input:focus, 
+#rRpbc7 input:focus, #rRpbc8 input:focus,
+#rRpbc9 select:focus, #rRpbc9 input:focus,
 #rRpbc10 select:focus, #rRpbc10 input:focus,
-#rRpbc11 input:focus, #rRpbcm1 input:focus, 
-#rRpbcm2 input:focus, #rRpbcm3 input:focus, 
-#rRpbcm4 input:focus, #rRpbcm5 select:focus, 
-#rRpbcm5 input:focus, #rRpbcm6 input:focus, 
-#rRpbcm6 select:focus, #rRpbcm7 input:focus, 
-#rRpbcm8 input:focus,  #rRpbcm9 select:focus, 
-#rRpbcm9 input:focus,  #rRpbcm10 select:focus, 
+#rRpbc11 input:focus, #rRpbcm1 input:focus,
+#rRpbcm2 input:focus, #rRpbcm3 input:focus,
+#rRpbcm4 input:focus, #rRpbcm5 select:focus,
+#rRpbcm5 input:focus, #rRpbcm6 input:focus,
+#rRpbcm6 select:focus, #rRpbcm7 input:focus,
+#rRpbcm8 input:focus,  #rRpbcm9 select:focus,
+#rRpbcm9 input:focus,  #rRpbcm10 select:focus,
 #rRpbcm10 input:focus, #rRpbcm11 input:focus{
     outline: none;
     color: #444;
     border-color: #26a69d;
     border-left-width: 35px;
 }
-                
+
 #rRpbm1 #micr1, #rRpbm3 #micr3, #rRpb1 #icr1, #rRpb3 #icr3,
 #rRpbcm1 #micrc1, #rRpbcm3 #micrc3, #rRpbc1 #icrc1, #rRpbc3 #icrc3{
     color: #fff;
@@ -1585,7 +1585,7 @@ input[type = "radio"] {
     transition: all .1s ease-in;
 }
 
-#rRpbm2 #micr2, #rRpbm4 #micr4, #rRpb2 #icr2, #rRpb4 #icr4, 
+#rRpbm2 #micr2, #rRpbm4 #micr4, #rRpb2 #icr2, #rRpb4 #icr4,
 #rRpbcm2 #micrc2, #rRpbcm4 #micrc4, #rRpbc2 #icrc2, #rRpbc4 #icrc4{
     color: #fff;
     font-size: 1em;
@@ -1614,7 +1614,7 @@ input[type = "radio"] {
         border-radius: 2px;
         color: #ccc;
     }
-    
+
     #rRpb5 .ic, #rRpbm5 .ic,
     #rRpb9 .ic, #rRpb10 .ic, #rRpbm9 .ic, #rRpbm10 .ic,
     #rRpbc5 .ic, #rRpbcm5 .ic,
@@ -1653,7 +1653,7 @@ input[type = "radio"] {
         z-index: 1;
     }
 
-    #rRpb7 .ic, #rRpbm7 .ic, 
+    #rRpb7 .ic, #rRpbm7 .ic,
     #rRpbc7 .ic, #rRpbc8 .ic, #rRpbcm7 .ic, #rRpbcm8 .ic{
         background-color: #26a69d;
         position: absolute;
@@ -1685,7 +1685,7 @@ input[type = "radio"] {
         color: #ccc;
     }
 
-    #rRpbm6 input, #rRpb6 input, 
+    #rRpbm6 input, #rRpb6 input,
     #rRpbcm6 input, #rRpbc6 input{
         display: block;
         padding: 3px 5px;
@@ -1698,7 +1698,7 @@ input[type = "radio"] {
         color: #ccc;
     }
 
-    #rRpbm5 #micr5, #rRpb5 #icr5, 
+    #rRpbm5 #micr5, #rRpb5 #icr5,
     #rRpbcm5 #micrc5, #rRpbc5 #icrc5 {
         color: #fff;
         font-size: 1em;
@@ -1734,7 +1734,7 @@ input[type = "radio"] {
         transition: all .1s ease-i
     }
 
-    #rRpbm5 #micr6, #rRpb5 #icr6, 
+    #rRpbm5 #micr6, #rRpb5 #icr6,
     #rRpbcm5 #micrc6, #rRpbc5 #icrc6{
         color: #fff;
         font-size: 1em;
@@ -1748,7 +1748,7 @@ input[type = "radio"] {
 
 /*Contacto*/
 
-    #rRpbm9 #micr11, #rRpbm10 #micr13, #rRpb9 #icr11, #rRpb10 #icr13, 
+    #rRpbm9 #micr11, #rRpbm10 #micr13, #rRpb9 #icr11, #rRpb10 #icr13,
     #rRpbcm9 #micrc11, #rRpbcm10 #micrc13, #rRpbc9 #icrc11, #rRpbc10 #icrc13{
         color: #fff;
         font-size: 1em;
@@ -1759,8 +1759,8 @@ input[type = "radio"] {
         left: 0;
         transition: all .1s ease-in;
     }
-    
-    #rRpbm11 #micr15, #rRpb11 #icr15, 
+
+    #rRpbm11 #micr15, #rRpb11 #icr15,
     #rRpbcm11 #micrc15, #rRpbc11 #icrc15{
         color: #fff;
         font-size: 1em;
@@ -1772,7 +1772,7 @@ input[type = "radio"] {
         transition: all .1s ease-in;
     }
 
-    #rRpbm9 #micr12, #rRpb9 #icr12, 
+    #rRpbm9 #micr12, #rRpb9 #icr12,
     #rRpbcm9 #micrc12, #rRpbc9 #icrc12{
         color: #fff;
         font-size: 1em;
@@ -1785,7 +1785,7 @@ input[type = "radio"] {
         transition: all .1s ease-in;
     }
 
-    #rRpbm10 #micr14, #rRpb10 #icr14, 
+    #rRpbm10 #micr14, #rRpb10 #icr14,
     #rRpbcm10 #micrc14, #rRpbc10 #icrc14{
         color: #fff;
         font-size: 1em;
@@ -1850,11 +1850,11 @@ input[type = "radio"] {
 /*Agregar y Modificar*/
 #rEq1 input, #rEq1 select, #rEq2 input, #rEq2 select, #rEq3 input,#rEq3 select,
 #rEqm1 input, #rEqm1 select, #rEqm2 input, #rEqm2 select, #rEqm3 input,#rEqm3 select,
-#rComp1 input, #rComp2 select, #rComp3 select, #rComp4 select, 
+#rComp1 input, #rComp2 select, #rComp3 select, #rComp4 select,
 #rCompm1 input, #rCompm2 select, #rCompm3 select, #rCompm4 select, #rCompm5 select,
-#rPz1 input, #rPz2 select, #rPz3 select, 
+#rPz1 input, #rPz2 select, #rPz3 select,
 #rPzm1 input, #rPzm2 select, #rPzm3 select,
-#rAs1 input, #rAs2 select, #rAs3 select, 
+#rAs1 input, #rAs2 select, #rAs3 select,
 #rAsm1 input, #rAsm2 select, #rAsm3 select,#rComp5 select{
     display: block;
     padding: 3px 5px;
@@ -1866,21 +1866,21 @@ input[type = "radio"] {
     border-radius: 2px;
     color: #ccc;
 }
-#rEq1 input:focus, #rEq1 select:focus, 
-#rEq2 input:focus, #rEq2 select:focus, 
+#rEq1 input:focus, #rEq1 select:focus,
+#rEq2 input:focus, #rEq2 select:focus,
 #rEq3 input:focus, #rEq3 select:focus,
-#rEqm1 input:focus, #rEqm1 select:focus, 
-#rEqm2 input:focus, #rEqm2 select:focus, 
+#rEqm1 input:focus, #rEqm1 select:focus,
+#rEqm2 input:focus, #rEqm2 select:focus,
 #rEqm3 input:focus, #rEqm3 select:focus,
-#rComp1 input:focus, #rComp2 select:focus, 
-#rComp3 select:focus, #rComp4 select:focus, 
-#rCompm1 input:focus, #rCompm2 select:focus, 
+#rComp1 input:focus, #rComp2 select:focus,
+#rComp3 select:focus, #rComp4 select:focus,
+#rCompm1 input:focus, #rCompm2 select:focus,
 #rCompm3 select:focus, #rCompm4 select:focus,
-#rPz1 input:focus, #rPz2 select:focus, 
-#rPz3 select:focus, #rPzm1 input:focus, 
+#rPz1 input:focus, #rPz2 select:focus,
+#rPz3 select:focus, #rPzm1 input:focus,
 #rPzm2 select:focus, #rPzm3 select:focus,
-#rAs1 input:focus, #rAs2 select:focus, 
-#rAs3 select:focus, #rAsm1 input:focus, 
+#rAs1 input:focus, #rAs2 select:focus,
+#rAs3 select:focus, #rAsm1 input:focus,
 #rAsm2 select:focus, #rAsm3 select:focus,
 #rComp5 select:focus, #rCompm5 select:focus
 {
@@ -2049,7 +2049,7 @@ input[type = "radio"] {
     border: none;
     z-index: 1;
 }
-        
+
 /*Servicios*/
 
 .espFil{
@@ -2066,7 +2066,7 @@ input[type = "radio"] {
 }
 
 .hh{
-    background: #FCCA53; 
+    background: #FCCA53;
 }
 
 .sp{
@@ -2161,7 +2161,7 @@ input[type = "radio"] {
 }
 
 .ftside:hover {
-    background: rgba(70, 122, 184, .4); 
+    background: rgba(70, 122, 184, .4);
 }
 
 .bkside{
@@ -2173,8 +2173,8 @@ input[type = "radio"] {
     color: #e5e5e7;
     font-size: 16px;
     margin-top: 15px;
-    padding: 10px; 
-    
+    padding: 10px;
+
 }
 /*Modal*/
 
@@ -2183,7 +2183,7 @@ input[type = "radio"] {
 }
 
 .rSrv {
-    margin-top: 10px;   
+    margin-top: 10px;
 }
 
 .rSrv input, .rSrv select{
@@ -2297,10 +2297,10 @@ label input[type="checkbox"], label input[type="radio"] {
 }
 
 .desact {
-    visibility:hidden; 
+    visibility:hidden;
 }
 
-            
+
 
 /*Perfil*/
 /*Modal*/
@@ -2471,7 +2471,7 @@ label input[type="checkbox"], label input[type="radio"] {
 .card1 ul li{
     padding: 10px;
     margin-left: -15px;
-    margin-top: 0px; 
+    margin-top: 0px;
     width: 104.5%;
     background: #333;
     color: #e5e5e7;
@@ -2554,7 +2554,7 @@ label input[type="checkbox"], label input[type="radio"] {
 /*Empleados*/
 /*Modal*/
 .contdbe1, .contdbe2, .contdhe, .contcte,
-.contdbem1, .contdbem2, .contdhem, .contctem, 
+.contdbem1, .contdbem2, .contdhem, .contctem,
 .contuser, .contuserm{
     margin-top: 30px;
     margin-bottom: 20px;
@@ -2588,12 +2588,12 @@ label input[type="checkbox"], label input[type="radio"] {
 }
 
 .rEmp1 input:focus, .rEmp2 input:focus, .rEmp2 select:focus,
-.rEmp3 input:focus, .rEmp3 select:focus, .rEmp4 textarea:focus, 
+.rEmp3 input:focus, .rEmp3 select:focus, .rEmp4 textarea:focus,
 .rEmp4 select:focus, .rEmp5 select:focus, .rEmp5 input:focus,
 .rEmpm1 input:focus, .rEmpm2 input:focus, .rEmpm2 select:focus,
-.rEmpm3 input:focus, .rEmpm3 select:focus, .rEmpm4 textarea:focus, 
+.rEmpm3 input:focus, .rEmpm3 select:focus, .rEmpm4 textarea:focus,
 .rEmpm4 select:focus, .rEmpm5 select:focus, .rEmpm5 input:focus,
-.rEmp6 input:focus, .rEmp6 select:focus, .rEmpm6 input:focus, 
+.rEmp6 input:focus, .rEmp6 select:focus, .rEmpm6 input:focus,
 .rEmpm6 select:focus,.rEmp4 input:focus{
     outline: none;
     color: #444;
@@ -2696,7 +2696,7 @@ label input[type="checkbox"], label input[type="radio"] {
 }
 /*//////////////////////////datos complementarios////////////////////////////////////////////////////////////*/
 #encabezado{
-    font-size:30px 
+    font-size:30px
 }
 .busQ{
     margin-left: 48px;margin-top: 25px;
@@ -2721,7 +2721,7 @@ label input[type="checkbox"], label input[type="radio"] {
     background-color: #333;
     color:#FFFFFF;
 }
-.lista__{ 
+.lista__{
     background-color:  #333;
     border-bottom: 1px solid #26A69D;
     border-top: 1px solid #26A69D;
@@ -2732,8 +2732,8 @@ label input[type="checkbox"], label input[type="radio"] {
 }
 p.mensaje_{
     margin-left: 40px;
-}  
-      
+}
+
 
 
 /*///////////////////////TARJETAS DE GESTION//////////////////////////////////*/
@@ -2756,7 +2756,7 @@ p.mensaje_{
     left: 0;
     margin-top: 30px;
     margin-left: -10px;
-} 
+}
 
 .tge:hover{
             background: rgba(93, 109, 126, .4);
@@ -2877,7 +2877,7 @@ p.mensaje_{
     color:#000;
 }
 
-.lista__{ 
+.lista__{
     background-color:  #333;
     border-bottom: 1px solid #26A69D;
     border-top: 1px solid #26A69D;}
@@ -2894,10 +2894,10 @@ p.mensaje_{
 .BUSE{
     margin-left: 28px;
 }
-.BUSE:focus { 
+.BUSE:focus {
 outline: none !important;
 /* border-color: #719ECE;*/
-}   
+}
 .precio{
     color: #000;
     font-size: 35px;
@@ -2908,19 +2908,27 @@ outline: none !important;
     background-color:#68d1bc;
 }
 
-/* plus & minus */
-.warper{ width:600px; height:80px; margin:0 auto;}
-a.button{ width:36px; height:36px; border-radius:50%; border:1px solid rgba(0,0,0,0.00); overflow:hidden; position:relative; display:inline-block;}
-a.plus{ background:#0076FF;transition:0.5s ease;} 
-a.plus:before{ width:16px; height:2px; background:#fff; position:absolute; top:50%; left:50%; margin:-1px 0 0 -8px;}
-a.plus:after{ width:2px; height:16px; background:#fff; position:absolute;top:50%; left:50%; margin:-8px 0 0 -1px;transition:0.5s ease;}
-a.plus:hover{ background:#44db5e;transition:0.5s ease;transform:rotate(180deg);}
-a.plus:hover:before{ transition:0.3s ease; transform:rotate(0deg);}
-a.plus:hover:after{ transition:0.3s ease; transform:rotate(90deg);}
-/* plus & close*/
-a.close{ background:#0076FF;transition:0.5s ease;} 
-a.close:before{ width:16px; height:2px; background:#fff; position:absolute; top:50%; left:50%; margin:-1px 0 0 -8px;}
-a.close:after{ width:2px; height:16px; background:#fff; position:absolute;top:50%; left:50%; margin:-8px 0 0 -1px;transition:0.5s ease;}
-a.close:hover{ background:#FF2851;transition:0.5s ease;transform:rotate(180deg);}
-a.close:hover:before{ transition:0.3s ease; transform:rotate(45deg);}
-a.close:hover:after{ transition:0.3s ease; transform:rotate(45deg);}
+.button-radio{
+  color:white;
+  padding: 5px;
+  margin-top: 20px;
+  margin-left: 10px;
+  font-size: 20px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.plus{
+    background-color: #009688;
+}
+.plus:hover{
+    color:#EEEEEE;
+    background-color: #B2DFDB;
+
+}
+.minus{
+    background-color: #D84315;
+}
+.minus:hover{
+  color:#EEEEEE;
+  background-color: #FFAB91;
+}

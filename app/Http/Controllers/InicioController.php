@@ -49,7 +49,7 @@ class InicioController extends Controller
 
         if (empty($_usuario)==false)//si la consulta a la base de datos devuelve registros
             {
-                
+
                 if(strtoupper($usuario)=='SUPSAD')
                 {
                   $datos=array
@@ -72,7 +72,7 @@ class InicioController extends Controller
                 }
 
 
- 
+
                 $perfil=Perfil::find($datos['perfil']);
                 if ($perfil->status) //si el perfil esta habilitado  ///agregar la verificacion de status del usuario
                     {
@@ -120,7 +120,7 @@ class InicioController extends Controller
                 return $respuesta;
             }
 
-       
+
 
     }
 
