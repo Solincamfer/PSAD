@@ -5064,27 +5064,65 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 							->select('ncomponentes.*','tipoequipos.descripcion as descripcion_tipo')
 							->get();
 		$consultaEquipo=DB::table('tipoequipos')->where('id',$registro)->first();
+		DB::table('marca_tipoequipo')->where('tipoequipo_id',$registro)->delete();
+		DB::table('modelo_tipoequipo')->where('tipoequipo_id',$registro)->delete();
 		if(count($consultaPiezas)>0){
 			foreach ($consultaPiezas as $pieza) {
-				$this->registroBitacora('Id de la pieza borrada: '.$pieza->id,'Borrar Tipo de Equipos','Pieza borrada:'.$pieza->descripcion.'del tipo de equipo borrado:'.$pieza->descripcion_tipo,'Gestion de Tipo de Equipo -> Borrar Tipo de equipo');
+				$this->registroBitacora('Id de la pieza borrada: '.$pieza->id,'Borrar Tipo de Equipos','Pieza borrada: '.$pieza->descripcion.'del tipo de equipo borrado: '.$pieza->descripcion_tipo,'Gestion de Tipo de Equipo -> Borrar Tipo de equipo');
 				$pieza=Npieza::find($pieza->id);
 				$pieza->delete();
 			}
-
-
 		}
 		if(count($consultaComponentes)>0){
 			foreach ($consultaComponentes as $componente) {
-				$this->registroBitacora('Id del componente borrado: '.$componente->id,'Borrar Tipo de Equipos','Componente borrado:'.$componente->descripcion.'del tipo de equipo borrado:'.$componente->descripcion_tipo,'Gestion de Tipo de Equipo -> Borrar Tipo de equipo');
+				$this->registroBitacora('Id del componente borrado: '.$componente->id,'Borrar Tipo de Equipos','Componente borrado: '.$componente->descripcion.'del tipo de equipo borrado: '.$componente->descripcion_tipo,'Gestion de Tipo de Equipo -> Borrar Tipo de equipo');
 				$componente=Ncomponente::find($componente->id);
 				$componente->delete();
 			}
 		}
-		$this->registroBitacora('Id del tipo de equipo borrado: '.$consultaEquipo->id,'Borrar Tipo de Equipos','Tipo de equipo borrado:'.$consultaEquipo->descripcion,'Gestion de Tipo de Equipo -> Borrar Tipo de equipo');
+		$this->registroBitacora('Id del tipo de equipo borrado: '.$consultaEquipo->id,'Borrar Tipo de Equipos','Tipo de equipo borrado: '.$consultaEquipo->descripcion,'Gestion de Tipo de Equipo -> Borrar Tipo de equipo');
 		$tequipo=Tipoequipo::find($consultaEquipo->id);
 		$tequipo->delete();
 		$respuesta=1;
 		return $respuesta;
+	}
+
+	public function cargarListaMarcasTipoEquipo(){
+		$registro=Request::get('registry');
+		$consultaMarcas=DB::table('marca_tipoequipo')
+							->join('marcas','marca_tipoequipo.marca_id','marcas.id')
+							->where('marca_tipoequipo.tipoequipo_id',$registro)
+							->select('marca_tipoequipo.*','marcas.descripcion')
+							->get();
+		return $consultaMarcas;
+	}
+
+	public function cargarListaModelosTipoEquipo(){
+		$registro=Request::get('registro');// tipo de equipo seleccionado
+		$opcion=Request::get('valor'); // marca seleccionada
+		$consultaModelos=DB::table('modelo_tipoequipo')
+							->join('modelos','modelo_tipoequipo.modelo_id','modelos.id')
+							->join('marca_modelo','modelos.id','marca_modelo.modelo_id')
+							->join('marcas','marca_modelo.marca_id','marcas.id')
+							->join('marca_tipoequipo','marca_tipoequipo.marca_id','marcas.id')
+							->where('modelo_tipoequipo.tipoequipo_id',$registro)
+							->where('marca_tipoequipo.id',$opcion)
+							->select('modelo_tipoequipo.*','modelos.descripcion')
+							->get();
+		return $consultaModelos;
+	}
+
+	public function borrarMarcaTipoEquipo(){
+		$registro=Request::get('registro');// tipo de equipo seleccionado
+		$opcion=Request::get('valor'); // marca seleccionada
+		DB::table('marca_tipoequipo')->where('tipoequipo_id',$registro)->where('id',$opcion)->delete();
+		DB::table('modelo_tipoequipo')->where('tipoequipo_id',$registro)->delete();
+		$consultaMarcas=DB::table('marca_tipoequipo')
+							->join('marcas','marca_tipoequipo.marca_id','marcas.id')
+							->where('marca_tipoequipo.tipoequipo_id',$registro)
+							->select('marca_tipoequipo.*','marcas.descripcion')
+							->get();
+		return $consultaMarcas;
 	}
 
 	/*public function tipo_equipos()

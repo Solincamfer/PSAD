@@ -55,7 +55,7 @@
                                                    </span>
                                               @elseif($accion->id==91)
                                                    <span class="iclsp">
-                                                       <a class="tltp modificarperfil" id="m{{$tipoEquipo->id}}" data-reg="{{$tipoEquipo->id}}" data-ttl="{{$accion->descripcion}}">
+                                                       <a class="tltp Marca" id="m{{$tipoEquipo->id}}"  data-reg="{{$tipoEquipo->id}}" data-ttl="{{$accion->descripcion}}">
                                                            <i class="{{$accion->clase_css}}"></i>
                                                        </a>
                                                    </span>
@@ -86,20 +86,21 @@
                                 <form method="post" class="form-horizontal" id="NewPerfil">
                                   <div class="modal-body">
                                       {{ csrf_field() }}
+                                      <input type="hidden" class="form-control descripcion" name="registro" id="registry" value="">
                                         <div class="container-fluid contpfl">
                                            <div class="row">
                                                <div class="rPfl">
                                                   <div class="col-md-8 col-md-offset-2">
                                                       <div class="form-group">
                                                           <div class="col-md-8">
-                                                            <label for="StatusAdd">Marcas del Componente</label>
-                                                            <select name="StatusAdd" id="" class="form-control">
-                                                              <option value="">-</option>
+                                                            <label for="StatusAdd">Marcas del Tipo de equipo</label>
+                                                            <select  id="marca" class="form-control">
+                                                              <option value="">-- Marcas --</option>
                                                             </select><i class=" icpfl"></i>
                                                           </div>
                                                           <div class="col-md-4">
-                                                            <i class="fa fa-plus button-radio plus"></i>
-                                                            <i class="fa fa-minus button-radio minus"></i>
+                                                            <i class="fa fa-plus button-radio plus" id="plusMarca"></i>
+                                                            <i class="fa fa-minus button-radio minus" id="minusMarca"> </i>
                                                           </div>
                                                       </div>
 
@@ -108,13 +109,13 @@
                                                       <div class="form-group row">
                                                         <div class="col-md-8">
                                                           <label for="StatusAdd">Modelos</label>
-                                                          <select name="StatusAdd" id="" class="form-control">
-                                                            <option value="">-</option>
+                                                          <select  id="modelos" class="form-control">
+                                                            <option value="">-- Modelos --</option>
                                                           </select><i class=" icpfl"></i>
                                                         </div>
                                                         <div class="col-md-4">
-                                                          <i class="fa fa-plus button-radio plus"></i>
-                                                          <i class="fa fa-minus button-radio minus"></i>
+                                                          <i class="fa fa-plus button-radio plus" id="plusModelo"></i>
+                                                          <i class="fa fa-minus button-radio minus" id="minusModelo"></i>
                                                         </div>
                                                       </div>
                                                   </div>
@@ -132,7 +133,7 @@
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title" id="myModalLabel">Agregar Tipo de Equipo</h4>
+                                    <h4 class="modal-title" id="myModalLabel">Agregar Nueva marca</h4>
                                 </div>
                                 <form method="post" class="form-horizontal" id="NewPerfil">
                                   <div class="modal-body">
@@ -142,7 +143,7 @@
                                                <div class="rPfl">
                                                   <div class="col-md-8 col-md-offset-2">
                                                       <div class="form-group row">
-                                                          <label for="DescripcionAdd">Nombre del Tipo de Equipo</label>
+                                                          <label for="DescripcionAdd">Nombre de la Marca</label>
                                                           <input type="text" class="form-control" name="DescripcionAdd" id="DescripcionAdd"><i class="fa fa-id-badge icpfl"></i>
                                                       </div>
                                                   </div>
@@ -164,7 +165,7 @@
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title" id="myModalLabel">Agregar Tipo de Equipo</h4>
+                                    <h4 class="modal-title" id="myModalLabel">Agregar Modelo</h4>
                                 </div>
                                 <form method="post" class="form-horizontal" id="NewPerfil">
                                   <div class="modal-body">
@@ -174,7 +175,7 @@
                                                <div class="rPfl">
                                                   <div class="col-md-8 col-md-offset-2">
                                                       <div class="form-group row">
-                                                          <label for="DescripcionAdd">Nombre del Tipo de Equipo</label>
+                                                          <label for="DescripcionAdd">Nombre del Modelo</label>
                                                           <input type="text" class="form-control" name="DescripcionAdd" id="DescripcionAdd"><i class="fa fa-id-badge icpfl"></i>
                                                       </div>
                                                   </div>

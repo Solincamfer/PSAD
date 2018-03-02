@@ -63,8 +63,8 @@ $(document).ready(function()
           $.post(route, {_token:_token,registry:registry})
           .done(function(answer)
           {
-            console.log(answer);
-            /*if(answer==1)
+            //console.log(answer);
+            if(answer==1)
             {
               swal({
                 title:'Borrado exitoso',//Contenido del modal
@@ -82,7 +82,7 @@ $(document).ready(function()
 
               });
 
-            }*/
+            }
           })
           .fail(function()
             { swal("Error Inesperado !!", "Comuniquese con el administrador", "error");});
@@ -96,6 +96,134 @@ $(document).ready(function()
 
 	});
 
+ //////////////////////////////////////Funcion asociar marcas al tipo de equipo/////////////////////////////////////////////////////
+	
+	$('.Marca').click(function()
+	{
+		$('.marcas').remove();
+		$('.modelos').remove();
+		var registry=$(this).attr('data-reg');
+		$('#registry').val(registry);
+		var _token=$( "input[name^='_token']" ).val();
+		var route='/menu/registros/datos/mostrarmarcas';
+		$.post(route,{_token:_token,registry:registry})
+		.done(function(answer)
+		{
+			//console.log(answer);
+			$.each(answer,function(key, registro) {
+			$("#marca").append('<option class="marcas" value='+registro.id+'>'+registro.descripcion+'</option>');
+			});        
+			$('#myModal1').modal('show');
+		})
+
+		.fail(function()
+		{swal("Error Inesperado !!", "Comuniquese con el administrador", "error");});
+	});
+
+
+//////////////////////////////////////Funcion asociar modelos al tipo de equipo/////////////////////////////////////////////////////
+	
+	$('#marca').on("change",function()
+	{
+		$('.modelos').remove();
+		var registro=$('#registry').val();
+		var valor = $("#marca option:selected").val();
+		var _token=$( "input[name^='_token']" ).val();
+		var route='/menu/registros/datos/mostrarmodelos';
+		$.post(route,{_token:_token,registro:registro,valor:valor})
+		.done(function(answer)
+		{
+			console.log(answer);
+			$.each(answer,function(key, registro) {
+			$("#modelos").append('<option class="modelos" value='+registro.id+'>'+registro.descripcion+'</option>');
+			});        
+		})
+
+		.fail(function()
+		{swal("Error Inesperado !!", "Comuniquese con el administrador", "error");});
+	});
+////////////////////////////////////// Funcion mostrar modal agregar marca y modal para modelo /////////////////////////////////////////////////////
+	
+	$('#plusMarca').on("click",function()
+	{
+		$('#myModal2').modal('show');
+	});
+
+	$('#plusModelo').on("click",function()
+	{
+		$('#myModal3').modal('show');
+	});
+
+
+	//////////////////////////////////////   Funcion borrar marcas del tipo de equipo    /////////////////////////////////////////////////////
+	
+	$('#minusMarca').on("click",function()
+	{
+		var valor = $("#marca option:selected").val();
+		var registro=$('#registry').val();
+		if(valor==''){
+			swal({
+                title:'Campo Vacio',//Contenido del modal
+                text: '<p style="font-size: 1.0em;">'+'Debe seleccionar una marca para borrar'+'</p>',
+                type: "warning",
+                //showConfirmButton:true,//Eliminar boton de confirmacion
+                html: true
+			});
+		}
+		else{
+			swal({
+		      title: "Eliminar Marca",
+		      text: "Al borrar una marca para este tipo de equipo, borrara los modelos asociados ¿Desea Continuar?",
+		      type: "warning",
+		      showCancelButton: true,
+		      confirmButtonColor:'#EE1919',
+		      confirmButtonText: 'Si, borrar la marca',
+		      cancelButtonText: "Cancelar",
+		      closeOnConfirm: false,
+		      closeOnCancel: false
+		     },
+		     function(isConfirm){
+		        if(isConfirm){
+
+					var _token=$( "input[name^='_token']" ).val();
+					var route='/menu/registros/datos/borrarMarcaTipoEquipo';
+					$.post(route,{_token:_token,registro:registro,valor:valor})
+		          	.done(function(answer){
+			            //console.log(answer);
+			            if(answer) {
+
+			            	//console.log(answer); 
+			              	swal({
+				                title:'Borrado exitoso',//Contenido del modal
+				                text: '<p style="font-size: 1.0em;">'+'La marca y sus modelos fueron borrados correctamente'+'</p>',
+				                type: "success",
+				                showConfirmButton:true,//Eliminar boton de confirmacion
+				                html: true
+				            },						
+							function(isConfirm){
+				                if(isConfirm)
+				                {
+				                	$('.marcas').remove();
+				                	$('.modelos').remove();
+				                 $.each(answer,function(key, registro) {
+									$("#marca").append('<option class="marcas" value='+registro.id+'>'+registro.descripcion+'</option>');
+								});
+				                }
+							});
+			            }
+					})
+		          	.fail(function(){ 
+		          		swal("Error Inesperado !!", "Comuniquese con el administrador", "error");
+		          	});
+		        }
+		        else
+		        {
+
+		           swal("Eliminación cancelada !!", "No se borro el tipo de equipo selecconado", "error");
+		        }
+	    	});
+		}
+	});
 	//////////////////////////////////////////////////Funcion boton : guardar/modificar //////////////////////////////////
    $('#forActPerf').bootstrapValidator({
 		   fields: {
