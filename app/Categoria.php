@@ -10,5 +10,20 @@ class Categoria extends Model
     protected $table="categorias";
     protected $fillable=['id','nombre','status','cliente_id'];
 
+    public function cliente()
+    {
+        return $this->belongsTo('App\Cliente');
+    }
+
+     public function personas()
+    {
+        return $this->belongsToMany('App\Persona');
+    }
+
+     public function sucursales()
+    {
+        return $this->hasMany('App\Sucursal');
+    }
+
   
 }

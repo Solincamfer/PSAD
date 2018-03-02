@@ -9,4 +9,9 @@ class Pieza extends Model
     public $timestamps=false;
     protected $table='piezas';
     protected $fillable=['id','descripcion','serial','marca','modelo','status','componente_id'];
+
+    public function componente()
+    {
+        return $this->belongsTo('App\Componente');
+    }
 }

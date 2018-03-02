@@ -12,4 +12,24 @@ class Sucursal extends Model
 
 
 
+
+    public function categoria()
+    {
+        return $this->belongsTo('App\Categoria');
+    }
+
+    public function personas()
+    {
+        return $this->belongsToMany('App\Persona');
+    }
+
+    public function planes()
+    {
+        return $this->belongsToMany('App\Plan');
+    }
+
+     public function equipos()
+    {
+        return $this->hasMany('App\Equipo');
+    }
 }

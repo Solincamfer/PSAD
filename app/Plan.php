@@ -46,7 +46,10 @@ public function remotos()
 	return $this->hasMany('App\Remoto');
 }
 
-
+ public function sucursales()
+    {
+        return $this->belongsToMany('App\Sucursal');
+    }
 
 
 
