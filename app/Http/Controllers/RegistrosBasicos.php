@@ -5130,6 +5130,8 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 		$validarMarca=Equipo::where('tipoequipo',$nombreTipoEquipo->descripcion)
 												->where('marca',$nombreMarca->nombre_marca)
 												->first();
+
+		$consultaMarcas=0;
 		if (count($validarMarca)==0) {
 			MarcaTipoEquipo::where('tipoequipo_id',$registro)->where('id',$opcion)->delete();
 			DB::table('modelo_tipoequipo')
@@ -5148,7 +5150,7 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 			$respuesta=1;
 		}
 		$valores=[$respuesta,$consultaMarcas];
-		return  $valores;
+		return  Response::json($valores);//$valores;
 	}
 
 	public function borrarModeloTipoEquipo(){

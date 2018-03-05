@@ -418,9 +418,15 @@ $(document).ready(function()
 	 });
 
 	 //////////////////////////////////////////////////Funcion Agregar Marca Tipo de equipo //////////////////////////////////
-	 $('#prueba').on('submit',function(e){
+	 $('#newModelo').on('submit',function(e){
 		 alert('prueba');
 	 });
+	 $('#prueba_').click(function()
+	 {
+	 	var formulario=$('#descripcionMarca').val();
+	 	alert(formulario);
+	 });
+
 	  $('#newMarca').bootstrapValidator({
  		 	excluded: [':disabled'],
  			 fields: {
