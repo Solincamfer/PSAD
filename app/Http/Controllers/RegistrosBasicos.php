@@ -45,6 +45,7 @@ use App\Ncomponente;
 use App\Componente;
 use App\Npieza;
 use App\Pieza;
+use App\MarcaTipoEquipo;
 
 use Response;
 
@@ -283,7 +284,7 @@ public function movUsuariosReg()
 	$bitacora=Bitacora::where('usuario',$usuario->primerNombre.' '.$usuario->primerApellido)->get();
 
 
-	return view ('Registros_Basicos\Bitacoras\movimientos_usuario',compact('bitacora'));
+	return view ('Registros_Basicos.Bitacoras.movimientos_usuario',compact('bitacora'));
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -297,7 +298,7 @@ public function movUsuariosReg()
 		$acc=$this->obtener_acciones_submodulo(2,2);//obtiene las acciones de un submodulo
 		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],$acc,$boton_agregar);//obtiene las opciones validas para la vista
 		$nombre=DB::table('departamentos')->where('id',$departamento_id)->value('descripcion');
-		return view('Registros_Basicos\Departamentos\cargos',$this->datos_vista($datos,$acciones,DB::table('cargos')->where('departamento_id',$departamento_id)->paginate(4),1,(int)$departamento_id,$nombre));
+		return view('Registros_Basicos.Departamentos.cargos',$this->datos_vista($datos,$acciones,DB::table('cargos')->where('departamento_id',$departamento_id)->paginate(4),1,(int)$departamento_id,$nombre));
 
 	}
 
@@ -307,7 +308,7 @@ public function movUsuariosReg()
 		$datos=$this->cargar_header_sidebar_acciones();
 		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(1,2,3),4);
 
-		return view('Registros_Basicos\Departamentos\departamentos',$this->datos_vista($datos,$acciones,DB::table('departamentos')->paginate(11),0));
+		return view('Registros_Basicos.Departamentos.departamentos',$this->datos_vista($datos,$acciones,DB::table('departamentos')->paginate(11),0));
 
 	}
 
@@ -846,7 +847,7 @@ public function planes_servicios()
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
 		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(65,66,67),64);
-		return view ('Registros_Basicos\PlaneS\planes',$this->datos_vista($datos,$acciones,DB::table('planes')->paginate(11),5));
+		return view ('Registros_Basicos.PlaneS.planes',$this->datos_vista($datos,$acciones,DB::table('planes')->paginate(11),5));
 
 
 	}
@@ -906,7 +907,7 @@ public function planes_servicios_servicios($id_plan)
 		$datos=$this->cargar_header_sidebar_acciones();
 		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(),false);//identificar acciones para la vista de servicios
 		$nombre=DB::table('planes')->where('id',$id_plan)->value('nombreP');
-		return view ('Registros_Basicos\PlaneS\servicios',$this->datos_vista($datos,$acciones,array(),$id_plan,$nombre));
+		return view ('Registros_Basicos.PlaneS.servicios',$this->datos_vista($datos,$acciones,array(),$id_plan,$nombre));
 
 
 	}
@@ -1221,7 +1222,7 @@ public function empleados()
 
 	$datos=$this->cargar_header_sidebar_acciones();
 	$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(76,77,78),75);
-	return view ('Registros_Basicos\empleados\empleados',$this->datos_vista($datos,$acciones,DB::table('empleados')->get(),$tipoR,$tipoD,$paises,$codigoC,$codigoL,$directores,$empleados_usuario));//el 3 significa que es la vista 3
+	return view ('Registros_Basicos.empleados.empleados',$this->datos_vista($datos,$acciones,DB::table('empleados')->get(),$tipoR,$tipoD,$paises,$codigoC,$codigoL,$directores,$empleados_usuario));//el 3 significa que es la vista 3
 }
 
 public function empleados_perfiles($empleado_id)
@@ -1243,7 +1244,7 @@ public function empleados_perfiles($empleado_id)
 
 
 
-	return view ('Registros_Basicos\empleados\empleados_perfil',$this->datos_vista($datos,$acciones,
+	return view ('Registros_Basicos.empleados.empleados_perfil',$this->datos_vista($datos,$acciones,
 						DB::table('perfiles')->where('descripcion','<>','STANDAR')->where('descripcion','<>','ROOT')->get(),
 						$usuario->n_usuario,//extra
 						$perfil->id,//datosC1
@@ -2083,7 +2084,7 @@ public function perfiles()//ventana perfiles
 {
 	$datos=$this->cargar_header_sidebar_acciones();
 	$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(84,85,86),83);
-	return view('Registros_Basicos\Perfiles\perfiles',$this->datos_vista($datos,$acciones,DB::table('perfiles')->where('descripcion','<>','ROOT')->where('descripcion','<>','STANDAR')->paginate(11),2));
+	return view('Registros_Basicos.Perfiles.perfiles',$this->datos_vista($datos,$acciones,DB::table('perfiles')->where('descripcion','<>','ROOT')->where('descripcion','<>','STANDAR')->paginate(11),2));
 }
 
 
@@ -2287,7 +2288,7 @@ public function perfiles_permisos($perfil_id)
 	$modulos=$perfil->modulos;
 	$datos=$this->cargar_header_sidebar_acciones();
 	$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(84,85),83);
-	return view('Registros_Basicos\Perfiles\perfiles_modificar',$this->datos_vista($datos,$acciones,$registros,(int)$perfil_id,$perfil->descripcion));
+	return view('Registros_Basicos.Perfiles.perfiles_modificar',$this->datos_vista($datos,$acciones,$registros,(int)$perfil_id,$perfil->descripcion));
 }
 
 
@@ -2439,7 +2440,7 @@ public function clientesMostrar()//inicializacion del submodulo: clientes
 		$codigoL=DB::table('tipos')->where('numero_c',3)->get();
 
 
-		return view('Registros_Basicos\Clientes\clientes',
+		return view('Registros_Basicos.Clientes.clientes',
 															['modulos'=>$datos['modulos'],//side bar
 															 'submodulos'=>$datos['submodulos'],//side bar
 															 'nombre'=>$datos['nombre'],//header
@@ -2974,7 +2975,7 @@ public function clientes_modificar()//metodo que consulta los datos de un client
 		$datos=$this->cargar_header_sidebar_acciones();
 		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(14,15),13);
 
-		return view ('Registros_Basicos\Clientes\clientes_responsables',$this->datos_vista($datos,$acciones,
+		return view ('Registros_Basicos.Clientes.clientes_responsables',$this->datos_vista($datos,$acciones,
 					  DB::table('personas')->where('cliente_id',$cliente_id)->get(),$cliente_id,
 					  DB::table('tipos')->where('numero_c',5)->get(),//tipos de cedula para los select
 					  DB::table('tipos')->where('numero_c',2)->get(),//tipos de codigos de telefonos para los select
@@ -3292,7 +3293,7 @@ public function clientes_categoria($cliente_id)//vista de categorias de un clien
 		$datos=$this->cargar_header_sidebar_acciones();
 		$cliente=Cliente::find($cliente_id);
 		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(16,17,18,19),20);
-		return view ('Registros_Basicos\Clientes\clientes_categoria',$this->datos_vista($datos,$acciones,DB::table('categorias')->where('cliente_id',$cliente_id)->get(),$cliente));
+		return view ('Registros_Basicos.Clientes.clientes_categoria',$this->datos_vista($datos,$acciones,DB::table('categorias')->where('cliente_id',$cliente_id)->get(),$cliente));
 
 	}
 
@@ -3464,7 +3465,7 @@ public function clientes_categoria($cliente_id)//vista de categorias de un clien
 
 
 
-		return view ('Registros_Basicos\Clientes\clientes_categoria_responsable',$this->datos_vista($datos,$acciones,$responsables,$responsable,$cliente,$tiposCedula,$tiposCelular,$tiposFijo,$categoria));//tipos dle codigos loca
+		return view ('Registros_Basicos.Clientes.clientes_categoria_responsable',$this->datos_vista($datos,$acciones,$responsables,$responsable,$cliente,$tiposCedula,$tiposCelular,$tiposFijo,$categoria));//tipos dle codigos loca
 
 	}
 
@@ -3566,7 +3567,7 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 		$categoria=Categoria::find($categoria_id);
 
 
-		return view('Registros_Basicos\Clientes\clientes_sucursales',
+		return view('Registros_Basicos.Clientes.clientes_sucursales',
 															['modulos'=>$datos['modulos'],//side bar
 															 'submodulos'=>$datos['submodulos'],//side bar
 															 'nombre'=>$datos['nombre'],//header
@@ -4058,7 +4059,7 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 
 		return view
 		(
-			'Registros_Basicos\Clientes\clientes_sucursales_responsable',
+			'Registros_Basicos.Clientes.clientes_sucursales_responsable',
 			$this->datos_vista($datos,$acciones,$responsables,$sucursal,$categoria,$cliente_id->id,$tipoCedula,$tipoCodigoCel,$tipoCodigoFijo,$responsable)
 		);
 
@@ -4081,7 +4082,7 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 				$planId=0;
 			}
 
-			return view ('Registros_Basicos\Clientes\clientes_sucursales_plan',$this->datos_vista($datos,$acciones,DB::table('planes')->paginate(11),$sucursal,$categoria,$planId));
+			return view ('Registros_Basicos.Clientes.clientes_sucursales_plan',$this->datos_vista($datos,$acciones,DB::table('planes')->paginate(11),$sucursal,$categoria,$planId));
 
 		}
 
@@ -4133,7 +4134,7 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 		{
 			$datos=$this->cargar_header_sidebar_acciones();
 			$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(40,39),38);
-			return view ('Registros_Basicos\Clientes\clientes_sucursales_plan_servicios',$this->datos_vista($datos,$acciones,array()));
+			return view ('Registros_Basicos.Clientes.clientes_sucursales_plan_servicios',$this->datos_vista($datos,$acciones,array()));
 
 		}
 /////////////////////////////////////////////////////////equipos ////////////////////////////////////////////
@@ -4304,7 +4305,7 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 			$categoria=Categoria::find($sucursal->categoria_id);
 			$tipoequipo=Tipoequipo::all();
 
-			return view ('Registros_Basicos\Clientes\clientes_sucursales_equipos',$this->datos_vista($datos,$acciones,DB::table('equipos')->where('sucursal_id',$sucursal_id)->paginate(11),$sucursal,$categoria,$tipoequipo));
+			return view ('Registros_Basicos.Clientes.clientes_sucursales_equipos',$this->datos_vista($datos,$acciones,DB::table('equipos')->where('sucursal_id',$sucursal_id)->paginate(11),$sucursal,$categoria,$tipoequipo));
 
 		}
 
@@ -4347,7 +4348,7 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 			$sucursal=Sucursal::find($equipo->sucursal_id);
 			$tipoequipo=Tipoequipo::where('descripcion',$equipo->tipoequipo)->first();
 			$ncomponente=$tipoequipo->componentes;
-			return view ('Registros_Basicos\Clientes\clientes_sucursales_equipos_componentes',$this->datos_vista($datos,$acciones,DB::table('componentes')->where('equipo_id',$equipo_id)->paginate(11),$sucursal,$equipo,$ncomponente));
+			return view ('Registros_Basicos.Clientes.clientes_sucursales_equipos_componentes',$this->datos_vista($datos,$acciones,DB::table('componentes')->where('equipo_id',$equipo_id)->paginate(11),$sucursal,$equipo,$ncomponente));
 
 		}
 
@@ -4523,7 +4524,7 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 			$equipo=Equipo::find($equipo_id);
 			$sucursal=Sucursal::find($equipo->sucursal_id);
 
-			return view ('Registros_Basicos\Clientes\clientes_sucursales_equipos_componentes_aplicaciones',$this->datos_vista($datos,$acciones,DB::table('aplicaciones')->where('equipo_id',$equipo_id)->paginate(11),$equipo,$sucursal));
+			return view ('Registros_Basicos.Clientes.clientes_sucursales_equipos_componentes_aplicaciones',$this->datos_vista($datos,$acciones,DB::table('aplicaciones')->where('equipo_id',$equipo_id)->paginate(11),$equipo,$sucursal));
 
 		}
 
@@ -4604,7 +4605,7 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 			$ncomponente=DB::table('ncomponentes')->where('descripcion',$componente->descripcion)->first();
 			$npiezas=DB::table('npiezas')->where('ncomponente_id',$ncomponente->id)->get();
 
-			return view ('Registros_Basicos\Clientes\clientes_sucursales_equipos_componentes_piezas',$this->datos_vista($datos,$acciones,DB::table('piezas')->where('componente_id',$componente_id)->paginate(11),$componente,$npiezas));
+			return view ('Registros_Basicos.Clientes.clientes_sucursales_equipos_componentes_piezas',$this->datos_vista($datos,$acciones,DB::table('piezas')->where('componente_id',$componente_id)->paginate(11),$componente,$npiezas));
 
 		}
 
@@ -4797,7 +4798,7 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 			{
 				$datos=$this->cargar_header_sidebar_acciones();
 				$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(57,58,59),56);
-				return view ('Registros_Basicos\Clientes\clientes_sucursales_usuarios',$this->datos_vista($datos,$acciones,array()));
+				return view ('Registros_Basicos.Clientes.clientes_sucursales_usuarios',$this->datos_vista($datos,$acciones,array()));
 
 			}
 
@@ -4805,7 +4806,7 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 		{
 			$datos=$this->cargar_header_sidebar_acciones();//crear acciones
 			$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(61,62,63),60);
-			return view ('Registros_Basicos\Clientes\clientes_sucursales_usuarios_perfil',$this->datos_vista($datos,$acciones,array()));
+			return view ('Registros_Basicos.Clientes.clientes_sucursales_usuarios_perfil',$this->datos_vista($datos,$acciones,array()));
 		}
 
 		public function consultar_plan(){
@@ -5052,38 +5053,42 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 	public function eliminarTipoEquipo(){
 		$respuesta=0;
 		$registro=Request::get('registry');
-		$consultaPiezas=DB::table('tipoequipos')
-							->join('ncomponentes','tipoequipos.id','=','ncomponentes.tipoequipo_id')
-							->join('npiezas','npiezas.ncomponente_id','=','ncomponentes.id')
-							->where('tipoequipos.id',$registro)
-							->select('npiezas.*','tipoequipos.descripcion as descripcion_tipo')
-							->get();
-		$consultaComponentes=DB::table('tipoequipos')
-							->join('ncomponentes','tipoequipos.id','=','ncomponentes.tipoequipo_id')
-							->where('tipoequipos.id',$registro)
-							->select('ncomponentes.*','tipoequipos.descripcion as descripcion_tipo')
-							->get();
-		$consultaEquipo=DB::table('tipoequipos')->where('id',$registro)->first();
-		DB::table('marca_tipoequipo')->where('tipoequipo_id',$registro)->delete();
-		DB::table('modelo_tipoequipo')->where('tipoequipo_id',$registro)->delete();
-		if(count($consultaPiezas)>0){
-			foreach ($consultaPiezas as $pieza) {
-				$this->registroBitacora('Id de la pieza borrada: '.$pieza->id,'Borrar Tipo de Equipos','Pieza borrada: '.$pieza->descripcion.'del tipo de equipo borrado: '.$pieza->descripcion_tipo,'Gestion de Tipo de Equipo -> Borrar Tipo de equipo');
-				$pieza=Npieza::find($pieza->id);
-				$pieza->delete();
+		$nombreTipoEquipo=Tipoequipo::where('id',$registro)->first();
+		$validarTipoEquipo=Equipo::where('tipoequipo',$nombreTipoEquipo->descripcion)->first();
+		if (count($validarTipoEquipo)==0) {
+			$consultaPiezas=DB::table('tipoequipos')
+								->join('ncomponentes','tipoequipos.id','=','ncomponentes.tipoequipo_id')
+								->join('npiezas','npiezas.ncomponente_id','=','ncomponentes.id')
+								->where('tipoequipos.id',$registro)
+								->select('npiezas.*','tipoequipos.descripcion as descripcion_tipo')
+								->get();
+			$consultaComponentes=DB::table('tipoequipos')
+								->join('ncomponentes','tipoequipos.id','=','ncomponentes.tipoequipo_id')
+								->where('tipoequipos.id',$registro)
+								->select('ncomponentes.*','tipoequipos.descripcion as descripcion_tipo')
+								->get();
+			$consultaEquipo=DB::table('tipoequipos')->where('id',$registro)->first();
+			DB::table('marca_tipoequipo')->where('tipoequipo_id',$registro)->delete();
+			DB::table('modelo_tipoequipo')->where('tipoequipo_id',$registro)->delete();
+			if(count($consultaPiezas)>0){
+				foreach ($consultaPiezas as $pieza) {
+					$this->registroBitacora('Id de la pieza borrada: '.$pieza->id,'Borrar Tipo de Equipos','Pieza borrada: '.$pieza->descripcion.'del tipo de equipo borrado: '.$pieza->descripcion_tipo,'Gestion de Tipo de Equipo -> Borrar Tipo de equipo');
+					$pieza=Npieza::find($pieza->id);
+					$pieza->delete();
+				}
 			}
-		}
-		if(count($consultaComponentes)>0){
-			foreach ($consultaComponentes as $componente) {
-				$this->registroBitacora('Id del componente borrado: '.$componente->id,'Borrar Tipo de Equipos','Componente borrado: '.$componente->descripcion.'del tipo de equipo borrado: '.$componente->descripcion_tipo,'Gestion de Tipo de Equipo -> Borrar Tipo de equipo');
-				$componente=Ncomponente::find($componente->id);
-				$componente->delete();
+			if(count($consultaComponentes)>0){
+				foreach ($consultaComponentes as $componente) {
+					$this->registroBitacora('Id del componente borrado: '.$componente->id,'Borrar Tipo de Equipos','Componente borrado: '.$componente->descripcion.'del tipo de equipo borrado: '.$componente->descripcion_tipo,'Gestion de Tipo de Equipo -> Borrar Tipo de equipo');
+					$componente=Ncomponente::find($componente->id);
+					$componente->delete();
+				}
 			}
+			$this->registroBitacora('Id del tipo de equipo borrado: '.$consultaEquipo->id,'Borrar Tipo de Equipos','Tipo de equipo borrado: '.$consultaEquipo->descripcion,'Gestion de Tipo de Equipo -> Borrar Tipo de equipo');
+			$tequipo=Tipoequipo::find($consultaEquipo->id);
+			$tequipo->delete();
+			$respuesta=1;
 		}
-		$this->registroBitacora('Id del tipo de equipo borrado: '.$consultaEquipo->id,'Borrar Tipo de Equipos','Tipo de equipo borrado: '.$consultaEquipo->descripcion,'Gestion de Tipo de Equipo -> Borrar Tipo de equipo');
-		$tequipo=Tipoequipo::find($consultaEquipo->id);
-		$tequipo->delete();
-		$respuesta=1;
 		return $respuesta;
 	}
 
@@ -5113,24 +5118,131 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 	}
 
 	public function borrarMarcaTipoEquipo(){
+		$respuesta=0;
 		$registro=Request::get('registro');// tipo de equipo seleccionado
-		$opcion=Request::get('valor'); // marca seleccionada
-		DB::table('marca_tipoequipo')->where('tipoequipo_id',$registro)->where('id',$opcion)->delete();
-		DB::table('modelo_tipoequipo')->where('tipoequipo_id',$registro)->delete();
-		$consultaMarcas=DB::table('marca_tipoequipo')
+		$opcion=Request::get('valor'); // registro marca de la tabla marca_tipoequipo
+		$nombreTipoEquipo=Tipoequipo::where('id',$registro)->first();
+		$nombreMarca=DB::table('marca_tipoequipo')
 							->join('marcas','marca_tipoequipo.marca_id','marcas.id')
-							->where('marca_tipoequipo.tipoequipo_id',$registro)
-							->select('marca_tipoequipo.*','marcas.descripcion')
-							->get();
-		return $consultaMarcas;
+							->where('marca_tipoequipo.id',$opcion)
+							->select('marcas.descripcion as nombre_marca','marca_tipoequipo.marca_id')
+							->first();
+		$validarMarca=Equipo::where('tipoequipo',$nombreTipoEquipo->descripcion)
+												->where('marca',$nombreMarca->nombre_marca)
+												->first();
+		if (count($validarMarca)==0) {
+			MarcaTipoEquipo::where('tipoequipo_id',$registro)->where('id',$opcion)->delete();
+			DB::table('modelo_tipoequipo')
+				->join('tipo_equipo','modelo_tipoequipo.tipoequipo_id','tipo_equipo.id')
+				->join('marca_tipoequipo','tipo_equipo.id','marca_tipoequipo.tipoequipo_id')
+				->join('marcas','marca_tipoequipo.marca_id','marcas.id')
+				->where('modelo_tipoequipo.tipoequipo_id',$registro)
+				->where('modelo_tipoequipo.modelo_id',$modelo->modelo_id)
+				->where('marcas.id',$nombreMarca->marca_id)
+				->delete();
+			$consultaMarcas=DB::table('marca_tipoequipo')
+								->join('marcas','marca_tipoequipo.marca_id','marcas.id')
+								->where('marca_tipoequipo.tipoequipo_id',$registro)
+								->select('marca_tipoequipo.*','marcas.descripcion')
+								->get();
+			$respuesta=1;
+		}
+		$valores=[$respuesta,$consultaMarcas];
+		return  $valores;
 	}
+
+	public function borrarModeloTipoEquipo(){
+		$respuesta=0;
+		$registro=Request::get('registro');// tipo de equipo seleccionado
+		$opcion=Request::get('modelo'); // marca seleccionada
+		$nombreTipoEquipo=Tipoequipo::where('id',$registro)->first();
+		$nombreModelo=DB::table('modelo_tipoequipo')
+										->join('modelos','modelo_tipoequipo.modelo_id','modelos.id')
+										->where('modelo_tipoequipo.id',$opcion)
+										->select('modelos.*')
+										->first();
+		$nombreMarca=DB::table('marca_tipoequipo')
+									->join('marcas','marca_tipoequipo.marca_id','marcas.id')
+									->where('marca_tipoequipo.id',$opcion)
+									->select('marcas.*')
+									->first();
+		$validarModelo= Equipo::where('tipoequipo',$nombreTipoEquipo->descripcion)
+													->where('modelo',$nombreModelo->descripcion)
+													->where('marca',$nombreMarca->descripcion)
+													->first();
+		if (count($validarMarca)==0) {
+			/*DB::table('marca_tipoequipo')->where('tipoequipo_id',$registro)->where('id',$opcion)->delete();
+			DB::table('modelo_tipoequipo')->where('tipoequipo_id',$registro)->delete();
+			$consultaMarcas=DB::table('marca_tipoequipo')
+								->join('marcas','marca_tipoequipo.marca_id','marcas.id')
+								->where('marca_tipoequipo.tipoequipo_id',$registro)
+								->select('marca_tipoequipo.*','marcas.descripcion')
+								->get();*/
+			$respuesta=1;
+		}
+		return $respuesta;
+	}
+
+	public function agregarTipoEquipo(){
+		$respuesta=0;
+		$tipoEquipo=strtoupper(Request::get('descripcionTipoEquipo'));
+		$consulta=Tipoequipo::where('descripcion',$tipoEquipo)->first();
+		if (count($consulta)==0) {
+			$tipo= new Tipoequipo;
+			$tipo->descripcion=$tipoEquipo;
+			$tipo->save();
+			$respuesta=1;
+		}
+		return $respuesta;
+	}
+
+	public function modificarTipoEquipo(){
+		$respuesta=0;
+		$tipoEquipo=strtoupper(Request::get('descripcion'));
+		$idRegistro=(int)Request::get('registro');
+		$consulta=Tipoequipo::where('descripcion',$tipoEquipo)->where('id','<>',$idRegistro)->first();
+		if (count($consulta)==0) {
+			$tipo= Tipoequipo::find($idRegistro);
+			$tipo->descripcion=$tipoEquipo;
+			$tipo->save();
+			$respuesta=1;
+		}
+		return $respuesta;
+	}
+
+	public function agregarMarcaTipoEquipo(){
+		$respuesta=0;
+		$campoMarca=strtoupper(Request::get('descripcionMarca'));
+		$idTipoEquipo=(int)Request::get('padreMarca');
+		$consulta=Marca::where('descripcion',$campoMarca)->first();
+		if (count($consulta)==0) {
+			$idMarca=DB::table('marcas')->insertGetId(['descripcion'=>$campoMarca]);
+			$marca= new MarcaTipoEquipo;
+			$marca->marca_id=$idMarca;
+			$marca->tipoequipo_id=$idTipoEquipo;
+			$marca->save();
+			$respuesta=1;
+		}
+		else{
+			$relacion=MarcaTipoEquipo::where('tipoequipo_id',$idTipoEquipo)->where('marca_id',$consulta->id)->first();
+			if (count($relacion)==0) {
+				$marca= new MarcaTipoEquipo;
+				$marca->marca_id=$consulta->id;
+				$marca->tipoequipo_id=$idTipoEquipo;
+				$marca->save();
+				$respuesta=1;
+			}
+		}
+		return $respuesta;
+	}
+
 
 	/*public function tipo_equipos()
 	{
 
 		$datos=$this->cargar_header_sidebar_acciones();
 
-		return view('Registros_Basicos\Datos_Complementarios\tipoequipos',$this->datos_vista_($datos,DB::table('tequipos')->orderBy('id','desc')->get()));
+		return view('Registros_Basicos.Datos_Complementarios.tipoequipos',$this->datos_vista_($datos,DB::table('tequipos')->orderBy('id','desc')->get()));
 	}
 
 
@@ -5139,7 +5251,7 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 
 		$datos=$this->cargar_header_sidebar_acciones();
 
-		return view('Registros_Basicos\Datos_Complementarios\marcaequipos',$this->datos_vista_($datos,DB::table('tequipos')->orderBy('id','desc')->get()));
+		return view('Registros_Basicos.Datos_Complementarios.marcaequipos',$this->datos_vista_($datos,DB::table('tequipos')->orderBy('id','desc')->get()));
 	}
 
 	public function marca_componentes()
@@ -5147,7 +5259,7 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 
 		$datos=$this->cargar_header_sidebar_acciones();
 
-		return view('Registros_Basicos\Datos_Complementarios\marcacomponentes',$this->datos_vista_($datos,DB::table('tequipos')->orderBy('id','desc')->get()));
+		return view('Registros_Basicos.Datos_Complementarios.marcacomponentes',$this->datos_vista_($datos,DB::table('tequipos')->orderBy('id','desc')->get()));
 	}
 
 	public function marca_piezas()
@@ -5155,7 +5267,7 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 
 		$datos=$this->cargar_header_sidebar_acciones();
 
-		return view('Registros_Basicos\Datos_Complementarios\marcapiezas',$this->datos_vista_($datos,DB::table('tequipos')->orderBy('id','desc')->get()));
+		return view('Registros_Basicos.Datos_Complementarios.marcapiezas',$this->datos_vista_($datos,DB::table('tequipos')->orderBy('id','desc')->get()));
 	}
 
 

@@ -6,7 +6,7 @@ $(document).ready(function()
 	{
 
 		/////////////////indicar al boton guardar del modal modificar el registro que se desea modificar //////////////////////////////
-		$('#registry').val(id);
+		$('#registro').val(id);
 		/////////////////LLenar y desplegar modal///////////////////////////
 		$('#descripcion').val(descripcion);
 		$('#padre').val(padre);
@@ -20,6 +20,7 @@ $(document).ready(function()
 	//////////////////////////////////////Funcion boton: modificar llena el modal con los datos del registro que se desea modificar/////////////////////////////////////////////////////
 	$('.Modificar').click(function()
 	{
+		$('#modificarTipoEquipo').data('bootstrapValidator').resetForm();
     var tabla=$('#areaResultados').data('tabla');
 	  var registry=$(this).attr('data-reg');
 	  var _token=$( "input[name^='_token']" ).val();
@@ -28,7 +29,7 @@ $(document).ready(function()
 	  $.post(route,{_token:_token,registry:registry,tabla:tabla})
 	  .done(function(answer)
 	  {
-      //console.log(answer.descripcion);
+      //console.log(answer.id);
 	  	loadModal(answer.descripcion,answer.id,padre="");
 	  })
 
@@ -64,8 +65,7 @@ $(document).ready(function()
           .done(function(answer)
           {
             //console.log(answer);
-            if(answer==1)
-            {
+            if(answer==1){
               swal({
                 title:'Borrado exitoso',//Contenido del modal
                 text: '<p style="font-size: 1.0em;">'+'El tipo de equipo fue borrado correctamente'+'</p>',
@@ -79,11 +79,18 @@ $(document).ready(function()
                 {
                   window.location.href="/menu/registros/datos";
                 }
-
               });
-
             }
-          })
+						else if(answer==0){
+							swal({
+                title:'No se puede realizar la acción',//Contenido del modal
+                text: '<p style="font-size: 1.0em;">'+'El tipo de equipo seleccionado esta asociado con al menos un equipo, para continuar debe cambiar esta asociación'+'</p>',
+                type: "error",
+                //showConfirmButton:true,//Eliminar boton de confirmacion
+                html: true
+              });
+						}
+					})
           .fail(function()
             { swal("Error Inesperado !!", "Comuniquese con el administrador", "error");});
         }
@@ -97,7 +104,7 @@ $(document).ready(function()
 	});
 
  //////////////////////////////////////Funcion asociar marcas al tipo de equipo/////////////////////////////////////////////////////
-	
+
 	$('.Marca').click(function()
 	{
 		$('.marcas').remove();
@@ -112,7 +119,7 @@ $(document).ready(function()
 			//console.log(answer);
 			$.each(answer,function(key, registro) {
 			$("#marca").append('<option class="marcas" value='+registro.id+'>'+registro.descripcion+'</option>');
-			});        
+			});
 			$('#myModal1').modal('show');
 		})
 
@@ -122,7 +129,7 @@ $(document).ready(function()
 
 
 //////////////////////////////////////Funcion asociar modelos al tipo de equipo/////////////////////////////////////////////////////
-	
+
 	$('#marca').on("change",function()
 	{
 		$('.modelos').remove();
@@ -133,19 +140,22 @@ $(document).ready(function()
 		$.post(route,{_token:_token,registro:registro,valor:valor})
 		.done(function(answer)
 		{
-			console.log(answer);
+			//console.log(answer);
 			$.each(answer,function(key, registro) {
-			$("#modelos").append('<option class="modelos" value='+registro.id+'>'+registro.descripcion+'</option>');
-			});        
+			$("#modelo").append('<option class="modelos" value='+registro.id+'>'+registro.descripcion+'</option>');
+			});
 		})
 
 		.fail(function()
 		{swal("Error Inesperado !!", "Comuniquese con el administrador", "error");});
 	});
 ////////////////////////////////////// Funcion mostrar modal agregar marca y modal para modelo /////////////////////////////////////////////////////
-	
+
 	$('#plusMarca').on("click",function()
 	{
+		var tipo =$('#marcaModelo #registry').val();
+		$('#padreMarca').val(tipo);
+		$('#myModal1').modal('hide');
 		$('#myModal2').modal('show');
 	});
 
@@ -156,7 +166,7 @@ $(document).ready(function()
 
 
 	//////////////////////////////////////   Funcion borrar marcas del tipo de equipo    /////////////////////////////////////////////////////
-	
+
 	$('#minusMarca').on("click",function()
 	{
 		var valor = $("#marca option:selected").val();
@@ -187,227 +197,273 @@ $(document).ready(function()
 
 					var _token=$( "input[name^='_token']" ).val();
 					var route='/menu/registros/datos/borrarMarcaTipoEquipo';
-					$.post(route,{_token:_token,registro:registro,valor:valor})
+								$.ajax({
+				          url: route,
+				          type: "post",
+				          dataType: "json",
+				          data: {_token:_token,registro:registro,valor:valor}
+				        })
 		          	.done(function(answer){
-			            //console.log(answer);
-			            if(answer) {
-
-			            	//console.log(answer); 
+									console.log(answer);
+			            if(answer[0]==1) {
 			              	swal({
 				                title:'Borrado exitoso',//Contenido del modal
 				                text: '<p style="font-size: 1.0em;">'+'La marca y sus modelos fueron borrados correctamente'+'</p>',
 				                type: "success",
 				                showConfirmButton:true,//Eliminar boton de confirmacion
 				                html: true
-				            },						
-							function(isConfirm){
+				            	},
+											function(isConfirm){
 				                if(isConfirm)
 				                {
 				                	$('.marcas').remove();
 				                	$('.modelos').remove();
-				                 $.each(answer,function(key, registro) {
-									$("#marca").append('<option class="marcas" value='+registro.id+'>'+registro.descripcion+'</option>');
-								});
+				                 $.each(answer[1],function(key, registro) {
+													 $("#marca").append('<option class="marcas" value='+registro.id+'>'+registro.descripcion+'</option>');
+												 });
 				                }
-							});
+											});
 			            }
-					})
-		          	.fail(function(){ 
+									else if (answer[0]==0) {
+										swal({
+			                title:'No se puede realizar la acción',//Contenido del modal
+			                text: '<p style="font-size: 1.0em;">'+'La marca seleccionada para este tipo de equipo esta asociada con al menos un equipo, para continuar debe cambiar esta asociación'+'</p>',
+			                type: "error",
+			                //showConfirmButton:true,//Eliminar boton de confirmacion
+			                html: true
+			              });
+									}
+								})
+		          	.fail(function(){
+		          		swal("Error Inesperado !!", "Comuniquese con el administrador", "error");
+		          	});
+		        }
+		        else
+		        {
+		           swal("Eliminación cancelada !!", "No se borro La marca selecconada", "error");
+		        }
+	    	});
+		}
+	});
+	//////////////////////////////////////   Funcion borrar modelos del tipo de equipo    /////////////////////////////////////////////////////
+
+	$('#minusModelo').on("click",function()
+	{
+		var marca = $("#marca option:selected").val();
+		var modelo = $("#modelo option:selected").val();
+		var registro=$('#registry').val();
+		if(modelo=='' || marca==''){
+			swal({
+                title:'Campo Vacio',//Contenido del modal
+                text: '<p style="font-size: 1.0em;">'+'Debe seleccionar el modelo para borrar'+'</p>',
+                type: "warning",
+                //showConfirmButton:true,//Eliminar boton de confirmacion
+                html: true
+			});
+		}
+		else{
+			swal({
+		      title: "Eliminar Modelo",
+		      text: "¿Seguro que quiere borrar el modelo seleccionado para este tipo de equipo?",
+		      type: "warning",
+		      showCancelButton: true,
+		      confirmButtonColor:'#EE1919',
+		      confirmButtonText: 'Si, borrar el modelo',
+		      cancelButtonText: "Cancelar",
+		      closeOnConfirm: false,
+		      closeOnCancel: false
+		     },
+		     function(isConfirm){
+		        if(isConfirm){
+
+					var _token=$( "input[name^='_token']" ).val();
+					var route='/menu/registros/datos/borrarModeloTipoEquipo';
+					$.post(route,{_token:_token,registro:registro,modelo:modelo,marca:marca})
+		          	.done(function(answer){
+									console.log(answer);
+			            if(answer==1) {
+			              	swal({
+				                title:'Borrado exitoso',//Contenido del modal
+				                text: '<p style="font-size: 1.0em;">'+'El modelo fue borrado correctamente'+'</p>',
+				                type: "success",
+				                showConfirmButton:true,//Eliminar boton de confirmacion
+				                html: true
+				            	},
+											function(isConfirm){
+				                if(isConfirm)
+				                {
+				                	$('.modelos').remove();
+				                 $.each(answer,function(key, registro) {
+													 $("#modelo").append('<option class="modelos" value='+registro.id+'>'+registro.descripcion+'</option>');
+												 });
+				                }
+											});
+			            }
+									else if (answer==0) {
+										swal({
+			                title:'No se puede realizar la acción',//Contenido del modal
+			                text: '<p style="font-size: 1.0em;">'+'El modelo seleccionado para este tipo de equipo esta asociado con al menos un equipo, para continuar debe cambiar esta asociación'+'</p>',
+			                type: "error",
+			                //showConfirmButton:true,//Eliminar boton de confirmacion
+			                html: true
+			              });
+									}
+								})
+		          	.fail(function(){
 		          		swal("Error Inesperado !!", "Comuniquese con el administrador", "error");
 		          	});
 		        }
 		        else
 		        {
 
-		           swal("Eliminación cancelada !!", "No se borro el tipo de equipo selecconado", "error");
+		           swal("Eliminación cancelada !!", "No se borro el modelo seleccionado", "error");
 		        }
 	    	});
 		}
 	});
-	//////////////////////////////////////////////////Funcion boton : guardar/modificar //////////////////////////////////
-   $('#forActPerf').bootstrapValidator({
-		   fields: {
-		     Descripcion: {
+	//////////////////////////////////////////////////Funcion Agregar Tipo de equipo //////////////////////////////////
+   $('#newTipoEquipo').bootstrapValidator({
+		 	excluded: [':disabled'],
+			 fields: {
+		     descripcionTipoEquipo: {
 		       validators: {
 		         notEmpty: {
-		           message: 'Debe indicar el nombre del nuevo perfil'
-		         }
-		       }
-		     },
-		     Status: {
-		       validators: {
-		         notEmpty: {
-		           message: 'Debe seleccionar un estatus para el nuevo perfil'
+		           message: 'Debe indicar el nombre del tipo de equipo'
 		         }
 		       }
 		     }
 		   }
         }).on('success.form.bv',function(e,data){
 	  		e.preventDefault();
-			var $form = $(e.target);
-            var bv    = $form.data('bootstrapValidator');
-			var formulario=$('#forActPerf').serialize();
-			var route='/menu/registros/perfiles/actualizar';
-			$.post(route,formulario)
-		  		.done(function(answer)
-		  			{
-
-		  				 if(answer.duplicate>0 && answer.update==false)
-		  				 {
-		  				 	swal("El perfil existe en el sistema !!", "No puede crear perfiles con el mismo nombre", "warning");
-		  				 	//$('#forActPerf').data('bootstrapValidator').resetForm();
-		  				 }
-		  				 else if(answer.duplicate==0 && answer.update==false)
-		  				 {
-		  				 	swal("Actualizacion Fallida !!", "Comuniquese con el administrador", "error");
-		  				 }
-		  				 else if (answer.duplicate==0 && answer.update==true)
-		  				 {
-
-		  				 	swal({
-									title:'Actualizacion exitosa',//Contenido del modal
-									text: '<p style="font-size: 1.0em;">'+'El perfil se modifico correctamente'+'</p>',
+				var formulario=$('#newTipoEquipo').serialize();
+				var route='/menu/registros/agregar/tipoequipo';
+				$.post(route,formulario)
+		  		.done(function(answer){
+						if(answer==1){
+							 swal({
+									title:'Guardado exitoso',//Contenido del modal
+									text: '<p style="font-size: 1.0em;">'+'El tipo de equipo se guardo correctamente'+'</p>',
 									type: "success",
 									showConfirmButton:true,//Eliminar boton de confirmacion
 									html: true
 								},
-		  				 	function(isConfirm)
-		  				 	{
-		  				 		if(isConfirm)
-		  				 		{
-		  				 			window.location.href="/menu/registros/perfiles";
+		  				 	function(isConfirm){
+		  				 		if(isConfirm){
+		  				 			window.location.href="/menu/registros/datos";
 		  				 		}
-
 		  				 	});
-
-		  				 }
-
+						}
+						else{
+							$('#newTipoEquipo').data('bootstrapValidator').resetForm();
+							swal({
+								title:'No se puede realizar la acción',//Contenido del modal
+								text: '<p style="font-size: 1.0em;">'+'El tipo de equipo ya existe'+'</p>',
+								type: "error",
+								//showConfirmButton:true,//Eliminar boton de confirmacion
+								html: true
+							});
+						}
 		 			})
-
 		  		.fail(function()
 					{swal("Error Inesperado !!", "Comuniquese con el administrador", "error");});
     });
 
 
-	//////////////////////////////////////Funcion boton:  Agregar perfil ///////////////////////////////////////////////////
+	//////////////////////////////////////Funcion modificar tipo de equipo///////////////////////////////////////////////////
 
-		$('#NewPerfil').bootstrapValidator({
-		   fields: {
-		     DescripcionAdd: {
-		       validators: {
-		         notEmpty: {
-		           message: 'Debe indicar el nombre del nuevo perfil'
-		         }
-		       }
-		     },
-		     StatusAdd: {
-		       validators: {
-		         notEmpty: {
-		           message: 'Debe seleccionar un estatus para el nuevo perfil'
-		         }
-		       }
-		     }
-		   }
-        }).on('success.form.bv',function(e){
-      		e.preventDefault();
-      		var form=$('#NewPerfil').serialize();
-				var route='/menu/registros/perfiles/registrar';
-
-				$.post(route,form)
-				.done(function(answer)
-					{
-
-						if(answer.duplicate>0 && answer.insert==false)
-						{
-							swal("El perfil existe en el sistema !!", "No puede crear perfiles con el mismo nombre", "warning");
-						}
-						else if(answer.duplicate==0 && answer.insert==true)
-						{
-							swal({
-										title:'Isercion exitosa',//Contenido del modal
-										text: '<p style="font-size: 1.0em;">'+'El perfil se agrego correctamente'+'</p>',
-										type: "success",
-										showConfirmButton:true,//Eliminar boton de confirmacion
-										html: true
-								},
-			  				 	function(isConfirm)
-			  				 	{
-			  				 		if(isConfirm)
-			  				 		{
-			  				 			window.location.href="/menu/registros/perfiles";
-			  				 		}
-
-			  				 	});
-						}
-					})
+	$('#modificarTipoEquipo').bootstrapValidator({
+		excluded: [':disabled'],
+		 fields: {
+			 descripcion: {
+				 validators: {
+					 notEmpty: {
+						 message: 'Debe indicar el nombre del tipo de equipo'
+					 }
+				 }
+			 }
+		 }
+			 }).on('success.form.bv',function(e,data){
+			e.preventDefault();
+			var formulario=$('#modificarTipoEquipo').serialize();
+			var route='/menu/registros/modificar/tipoequipo';
+			$.post(route,formulario)
+				.done(function(answer){
+					if(answer==1){
+						 swal({
+								title:'Actualización Exitosa',//Contenido del modal
+								text: '<p style="font-size: 1.0em;">'+'El tipo de equipo se modifico correctamente'+'</p>',
+								type: "success",
+								showConfirmButton:true,//Eliminar boton de confirmacion
+								html: true
+							},
+							function(isConfirm){
+								if(isConfirm){
+									window.location.href="/menu/registros/datos";
+								}
+							});
+					}
+					else{
+						$('#modificarTipoEquipo').data('bootstrapValidator').resetForm();
+						swal({
+							title:'No se puede realizar la acción',//Contenido del modal
+							text: '<p style="font-size: 1.0em;">'+'El tipo de equipo ya existe'+'</p>',
+							type: "error",
+							//showConfirmButton:true,//Eliminar boton de confirmacion
+							html: true
+						});
+					}
+				})
 				.fail(function()
-					{
-						swal("Error Inesperado !!", "Comuniquese con el administrador", "error");
-					});
-      	});
+				{swal("Error Inesperado !!", "Comuniquese con el administrador", "error");});
+	 });
 
-
-
-
-		////////////////////////////////////Funcion Check Status /////////////////////////////////////////////////////
-
-		$('.checkPerfil').change(function()
-		{
-			///////////////////////////////Datos para el alert /////////////////////////////////
-			var estados=[false,true];
-			var valores=[1,0];
-            var colores=["#207D07","#EE1919"];
-            var acciones=['Habilitar','Deshabilitar'];
-            var mensajes=['Habilitado','Deshabilitado'];
-			////////////////////////////////////////////////////////////////////////////////////
-
-			var _token=$( "input[name^='_token']" ).val();
-			var actual=$(this);
-			var registry=actual.attr('data-reg');
-			var valor=actual.val();
-			var route='/menu/registros/perfiles/status';
-
-			swal({
-				title: "Cambio de status",
-				text: "¿Desea "+acciones[valor]+" El perfil seleccionado ?",
-				type: "warning",
-				showCancelButton: true,
-				confirmButtonColor:colores[valor],
-				confirmButtonText: acciones[valor]+' Perfil',
-				cancelButtonText: "Cancelar",
-				closeOnConfirm: false,
-				closeOnCancel: false
-			 },
-			 function(isConfirm)
-			 {
-
-			 		if(isConfirm)
-			 		{
-
-						$.post(route, {_token:_token,registry:registry})
-						.done(function(answer)
-						{
-							if(answer.update)
-							{
-								swal("Modificacion exitosa !!", "El perfil ha sido "+mensajes[valor]+" correctamente", "success");
-								$('#'+actual.attr('id')).val(valores[valor]);
-
-							}
-						})
-						.fail(function()
-							{ swal("Error Inesperado !!", "Comuniquese con el administrador", "error");});
-					}
-					else
-					{
-
-						 swal("Cambio de status cancelado !!", "No se modifico el status del perfil", "error");
-						 actual.prop('checked',estados[valor]);
-						 $('#'+actual.attr('id')).val(valor);
-
-					}
-			});
-
-
-		});
-
+	 //////////////////////////////////////////////////Funcion Agregar Marca Tipo de equipo //////////////////////////////////
+	 $('#prueba').on('submit',function(e){
+		 alert('prueba');
+	 });
+	  $('#newMarca').bootstrapValidator({
+ 		 	excluded: [':disabled'],
+ 			 fields: {
+ 		     descripcionMarca: {
+ 		       validators: {
+ 		         notEmpty: {
+ 		           message: 'Debe indicar el nombre de la marca'
+ 		         }
+ 		       }
+ 		     }
+ 		   }
+         }).on('success.form.bv',function(e,data){
+ 	  		e.preventDefault();
+ 				var formulario=$('#newMarca').serialize();
+ 				var route='/menu/registros/agregar/marca/tipoequipo';
+ 				$.post(route,formulario)
+ 		  		.done(function(answer){
+ 						if(answer==1){
+ 							 swal({
+ 									title:'Guardado exitoso',//Contenido del modal
+ 									text: '<p style="font-size: 1.0em;">'+'La marca se guardo correctamente'+'</p>',
+ 									type: "success",
+ 									showConfirmButton:true,//Eliminar boton de confirmacion
+ 									html: true
+ 								},
+ 		  				 	function(isConfirm){
+ 		  				 		if(isConfirm){
+										$('#newMarca').data('bootstrapValidator').resetForm();
+ 		  				 		}
+ 		  				 	});
+ 						}
+ 						else{
+ 							$('#newMarca').data('bootstrapValidator').resetForm();
+ 							swal({
+ 								title:'No se puede realizar la acción',//Contenido del modal
+ 								text: '<p style="font-size: 1.0em;">'+'La marca ya existe para este tipo de equipo'+'</p>',
+ 								type: "error",
+ 								//showConfirmButton:true,//Eliminar boton de confirmacion
+ 								html: true
+ 							});
+ 						}
+ 		 			})
+ 		  		.fail(function()
+ 					{swal("Error Inesperado !!", "Comuniquese con el administrador", "error");});
+     });
 });

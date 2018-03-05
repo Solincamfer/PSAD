@@ -81,9 +81,9 @@
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title" id="myModalLabel">Marcas y Modelos de tipo de equipo</h4>
+                                    <h4 class="modal-title">Marcas y Modelos de tipo de equipo</h4>
                                 </div>
-                                <form method="post" class="form-horizontal" id="NewPerfil">
+                                <form method="post" class="form-horizontal" id="marcaModelo">
                                   <div class="modal-body">
                                       {{ csrf_field() }}
                                       <input type="hidden" class="form-control descripcion" name="registro" id="registry" value="">
@@ -93,7 +93,7 @@
                                                   <div class="col-md-8 col-md-offset-2">
                                                       <div class="form-group">
                                                           <div class="col-md-8">
-                                                            <label for="StatusAdd">Marcas del Tipo de equipo</label>
+                                                            <label for="marca">Marcas del Tipo de equipo</label>
                                                             <select  id="marca" class="form-control">
                                                               <option value="">-- Marcas --</option>
                                                             </select><i class=" icpfl"></i>
@@ -108,8 +108,8 @@
                                                   <div class="col-md-8 col-md-offset-2">
                                                       <div class="form-group row">
                                                         <div class="col-md-8">
-                                                          <label for="StatusAdd">Modelos</label>
-                                                          <select  id="modelos" class="form-control">
+                                                          <label for="modelo">Modelos</label>
+                                                          <select  id="modelo" class="form-control">
                                                             <option value="">-- Modelos --</option>
                                                           </select><i class=" icpfl"></i>
                                                         </div>
@@ -128,46 +128,48 @@
                     </div>
 
                 <!--   Modal Agregar Marca -->
+                <form id="prueba" action="index.html" method="post">
                     <div class="modal fade" id="myModal2"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title" id="myModalLabel">Agregar Nueva marca</h4>
+                                    <h4 class="modal-title" >Agregar Nueva marca</h4>
                                 </div>
-                                <form method="post" class="form-horizontal" id="NewPerfil">
                                   <div class="modal-body">
+
                                       {{ csrf_field() }}
                                         <div class="container-fluid contpfl">
                                            <div class="row">
                                                <div class="rPfl">
                                                   <div class="col-md-8 col-md-offset-2">
                                                       <div class="form-group row">
-                                                          <label for="DescripcionAdd">Nombre de la Marca</label>
-                                                          <input type="text" class="form-control" name="DescripcionAdd" id="DescripcionAdd"><i class="fa fa-id-badge icpfl"></i>
+                                                          <label for="descripcion">Nombre de la Marca</label>
+                                                          <input type="text" class="form-control" name="descripcionMarca" id="descripcionMarca"><i class="fa fa-id-badge icpfl"></i>
                                                       </div>
                                                   </div>
                                                </div>
                                            </div>
                                         </div>
                                   </div>
+                                  <input type="hidden" class="form-control descripcion" name="padre" id="padreMarca" value="">
                                   <div class="modal-footer">
-                                      <button type="submit" class="bttnMd btn" id="savePerfil">Guardar <i class="fa fa-floppy-o"></i></button>
+                                      <button type="submit" class="bttnMd btn" id="prueba" >Guardar <i class="fa fa-floppy-o"></i></button>
                                   </div>
-                                </form>
+
                             </div>
                         </div>
                     </div>
-
+                  </form>
                 <!--   Modal Agregar Modelo -->
                     <div class="modal fade" id="myModal3"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title" id="myModalLabel">Agregar Modelo</h4>
+                                    <h4 class="modal-title">Agregar Modelo</h4>
                                 </div>
-                                <form method="post" class="form-horizontal" id="NewPerfil">
+                                <form method="post" class="form-horizontal" id="newModelo">
                                   <div class="modal-body">
                                       {{ csrf_field() }}
                                         <div class="container-fluid contpfl">
@@ -175,8 +177,8 @@
                                                <div class="rPfl">
                                                   <div class="col-md-8 col-md-offset-2">
                                                       <div class="form-group row">
-                                                          <label for="DescripcionAdd">Nombre del Modelo</label>
-                                                          <input type="text" class="form-control" name="DescripcionAdd" id="DescripcionAdd"><i class="fa fa-id-badge icpfl"></i>
+                                                          <label for="descripcionModelo">Nombre del Modelo</label>
+                                                          <input type="text" class="form-control" name="descripcionModelo" id="descripcionModelo"><i class="fa fa-id-badge icpfl"></i>
                                                       </div>
                                                   </div>
                                                </div>
@@ -184,7 +186,7 @@
                                         </div>
                                   </div>
                                   <div class="modal-footer">
-                                      <button type="submit" class="bttnMd btn" id="savePerfil">Guardar <i class="fa fa-floppy-o"></i></button>
+                                      <button type="submit" class="bttnMd btn">Guardar <i class="fa fa-floppy-o"></i></button>
                                   </div>
                                 </form>
                             </div>
@@ -199,9 +201,9 @@
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title" id="myModalLabel">Agregar Tipo de Equipo</h4>
+                                    <h4 class="modal-title" >Agregar Tipo de Equipo</h4>
                                 </div>
-                                <form method="post" class="form-horizontal" id="NewPerfil">
+                                <form method="post" class="form-horizontal" id="newTipoEquipo">
                                   <div class="modal-body">
                                       {{ csrf_field() }}
                                         <div class="container-fluid contpfl">
@@ -209,8 +211,8 @@
                                                <div class="rPfl">
                                                   <div class="col-md-8 col-md-offset-2">
                                                       <div class="form-group row">
-                                                          <label for="DescripcionAdd">Nombre del Tipo de Equipo</label>
-                                                          <input type="text" class="form-control" name="DescripcionAdd" id="DescripcionAdd"><i class="fa fa-id-badge icpfl"></i>
+                                                          <label for="descripcion">Nombre del Tipo de Equipo</label>
+                                                          <input type="text" class="form-control" name="descripcionTipoEquipo" id="descripcionTipoEquipo" ><i class="fa fa-id-badge icpfl"></i>
                                                       </div>
                                                   </div>
                                                </div>
@@ -218,7 +220,7 @@
                                         </div>
                                   </div>
                                   <div class="modal-footer">
-                                      <button type="submit" class="bttnMd btn" id="savePerfil">Guardar <i class="fa fa-floppy-o"></i></button>
+                                      <button type="submit" class="bttnMd btn">Guardar <i class="fa fa-floppy-o"></i></button>
                                   </div>
                                 </form>
                             </div>
@@ -226,34 +228,31 @@
                     </div>
                   @endif
 
-                <!--   modal modificar -->
+                <!--   modal modificar tipo de equipo -->
                   <div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title" id="myModalLabel2">Modificar Tipo de Equipo</h4>
+                                    <h4 class="modal-title">Modificar Tipo de Equipo</h4>
                                 </div>
                                 <div class="modal-body">
-                                    <form  method="post" id="modificar">
+                                    <form  method="post" id="modificarTipoEquipo">
                                       {{ csrf_field() }}
                                         <div class="container-fluid contpfl">
                                            <div class="row">
                                                <div class="rPfl">
                                                  <div class="col-md-8 col-md-offset-2">
                                                      <div class="form-group row">
-                                                         <label for="DescripcionAdd">Nombre del Tipo de Equipo</label>
+                                                         <label for="Descripcion">Nombre del Tipo de Equipo</label>
                                                          <input type="text" class="form-control" name="descripcion" id="descripcion" value=""><i class="fa fa-id-badge icpfl"></i>
                                                      </div>
                                                  </div>
-
-                                                  <input type="hidden" class="form-control descripcion" name="registro" id="registry" value="">
-                                                  <input type="hidden" class="form-control descripcion" name="padre" id="padre" value="">
+                                                  <input type="hidden" class="form-control descripcion" name="registro" id="registro" value="">
                                                </div>
 
                                            </div>
                                         </div>
-
                                 </div>
                                 <div class="modal-footer">
                                   <div class="form-group">
