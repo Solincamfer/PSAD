@@ -204,7 +204,7 @@ $(document).ready(function()
 				        })
 		          	.done(function(answer){
 						console.log(answer);
-			           /* if(answer[0]==1) {
+			            if(answer[0]==1) {
 			              	swal({
 				                title:'Borrado exitoso',//Contenido del modal
 				                text: '<p style="font-size: 1.0em;">'+'La marca y sus modelos fueron borrados correctamente'+'</p>',
@@ -226,12 +226,12 @@ $(document).ready(function()
 									else if (answer[0]==0) {
 										swal({
 			                title:'No se puede realizar la acción',//Contenido del modal
-			                text: '<p style="font-size: 1.0em;">'+'La marca seleccionada para este tipo de equipo esta asociada con al menos un equipo, para continuar debe cambiar esta asociación'+'</p>',
+			                text: '<p style="font-size: 1.0em;">'+'Existe al menos un equipo con esta marca asignada, cambie esta asociacion para poder borrarla'+'</p>',
 			                type: "error",
 			                //showConfirmButton:true,//Eliminar boton de confirmacion
 			                html: true
 			              });
-									}*/
+									}
 								})
 		          	.fail(function(){
 		          		swal("Error Inesperado !!", "Comuniquese con el administrador", "error");
@@ -239,7 +239,7 @@ $(document).ready(function()
 		        }
 		        else
 		        {
-		           swal("Eliminación cancelada !!", "No se borro La marca selecconada", "error");
+		           swal("Eliminación cancelada !!", "No se borro La marca seleccionada", "error");
 		        }
 	    	});
 		}

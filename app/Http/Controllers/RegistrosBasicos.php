@@ -5137,11 +5137,11 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 				->where('modelo_tipoequipo.modelo_id',$modelo->modelo_id)
 				->where('marcas.id',$nombreMarca->marca_id)
 				->delete();
-			$consultaMarcas=DB::table('marca_tipoequipo')
+			/*$consultaMarcas=DB::table('marca_tipoequipo')
 								->join('marcas','marca_tipoequipo.marca_id','marcas.id')
 								->where('marca_tipoequipo.tipoequipo_id',$registro)
 								->select('marca_tipoequipo.*','marcas.descripcion')
-								->get();
+								->get();*/
 			$respuesta=1;
 		}
 		$valores=[$respuesta,$consultaMarcas];
