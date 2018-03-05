@@ -5097,14 +5097,14 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 		$consultaMarcas=DB::table('marca_tipoequipo')
 							->join('marcas','marca_tipoequipo.marca_id','marcas.id')
 							->where('marca_tipoequipo.tipoequipo_id',$registro)
-							->select('marca_tipoequipo.*','marcas.descripcion')
+							->select('marcas.*')
 							->get();
 		return $consultaMarcas;
 	}
 
 	public function cargarListaModelosTipoEquipo(){
-		$registro=Request::get('registro');// tipo de equipo seleccionado
-		$opcion=Request::get('valor'); // marca seleccionada
+		$registro=Request::get('registro');// id tipo de equipo seleccionado
+		$opcion=Request::get('valor'); // id marca seleccionada
 		$consultaModelos=DB::table('modelo_tipoequipo')
 							->join('modelos','modelo_tipoequipo.modelo_id','modelos.id')
 							->join('marca_modelo','modelos.id','marca_modelo.modelo_id')
@@ -5112,28 +5112,23 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 							->join('marca_tipoequipo','marca_tipoequipo.marca_id','marcas.id')
 							->where('modelo_tipoequipo.tipoequipo_id',$registro)
 							->where('marca_tipoequipo.id',$opcion)
-							->select('modelo_tipoequipo.*','modelos.descripcion')
+							->select('modelos.*')
 							->get();
 		return $consultaModelos;
 	}
 
 	public function borrarMarcaTipoEquipo(){
 		$respuesta=0;
-		$registro=Request::get('registro');// tipo de equipo seleccionado
-		$opcion=Request::get('valor'); // registro marca de la tabla marca_tipoequipo
-		$nombreTipoEquipo=Tipoequipo::where('id',$registro)->first();
-		$nombreMarca=DB::table('marca_tipoequipo')
-							->join('marcas','marca_tipoequipo.marca_id','marcas.id')
-							->where('marca_tipoequipo.id',$opcion)
-							->select('marcas.descripcion as nombre_marca','marca_tipoequipo.marca_id')
-							->first();
-		$validarMarca=Equipo::where('tipoequipo',$nombreTipoEquipo->descripcion)
-												->where('marca',$nombreMarca->nombre_marca)
-												->first();
-
 		$consultaMarcas=0;
+		$registro=Request::get('registro');// tipo de equipo seleccionado
+		$opcion=Request::get('valor'); // id de la marca seleccionada
+		$nombreTipoEquipo=Tipoequipo::where('id',$registro)->first();
+		$nombreMarca=Marca::where('id',$opcion)->first();
+		$validarMarca=Equipo::where('tipoequipo',$nombreTipoEquipo->descripcion)
+												->where('marca',$nombreMarca->descripcion)
+												->first();
 		if (count($validarMarca)==0) {
-			MarcaTipoEquipo::where('tipoequipo_id',$registro)->where('id',$opcion)->delete();
+			MarcaTipoEquipo::where('tipoequipo_id',$registro)->where('marca_id',$opcion)->delete();
 			DB::table('modelo_tipoequipo')
 				->join('tipo_equipo','modelo_tipoequipo.tipoequipo_id','tipo_equipo.id')
 				->join('marca_tipoequipo','tipo_equipo.id','marca_tipoequipo.tipoequipo_id')
@@ -5215,7 +5210,7 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 	public function agregarMarcaTipoEquipo(){
 		$respuesta=0;
 		$campoMarca=strtoupper(Request::get('descripcionMarca'));
-		$idTipoEquipo=(int)Request::get('padreMarca');
+		$idTipoEquipo=(int)Request::get('padre');
 		$consulta=Marca::where('descripcion',$campoMarca)->first();
 		if (count($consulta)==0) {
 			$idMarca=DB::table('marcas')->insertGetId(['descripcion'=>$campoMarca]);

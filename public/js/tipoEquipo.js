@@ -155,7 +155,6 @@ $(document).ready(function()
 	{
 		var tipo =$('#marcaModelo #registry').val();
 		$('#padreMarca').val(tipo);
-		$('#myModal1').modal('hide');
 		$('#myModal2').modal('show');
 	});
 
@@ -204,8 +203,8 @@ $(document).ready(function()
 				          data: {_token:_token,registro:registro,valor:valor}
 				        })
 		          	.done(function(answer){
-									console.log(answer);
-			            if(answer[0]==1) {
+						console.log(answer);
+			           /* if(answer[0]==1) {
 			              	swal({
 				                title:'Borrado exitoso',//Contenido del modal
 				                text: '<p style="font-size: 1.0em;">'+'La marca y sus modelos fueron borrados correctamente'+'</p>',
@@ -232,7 +231,7 @@ $(document).ready(function()
 			                //showConfirmButton:true,//Eliminar boton de confirmacion
 			                html: true
 			              });
-									}
+									}*/
 								})
 		          	.fail(function(){
 		          		swal("Error Inesperado !!", "Comuniquese con el administrador", "error");
@@ -418,14 +417,6 @@ $(document).ready(function()
 	 });
 
 	 //////////////////////////////////////////////////Funcion Agregar Marca Tipo de equipo //////////////////////////////////
-	 $('#newModelo').on('submit',function(e){
-		 alert('prueba');
-	 });
-	 $('#prueba_').click(function()
-	 {
-	 	var formulario=$('#descripcionMarca').val();
-	 	alert(formulario);
-	 });
 
 	  $('#newMarca').bootstrapValidator({
  		 	excluded: [':disabled'],
@@ -444,6 +435,7 @@ $(document).ready(function()
  				var route='/menu/registros/agregar/marca/tipoequipo';
  				$.post(route,formulario)
  		  		.done(function(answer){
+ 		  				console.log(answer)
  						if(answer==1){
  							 swal({
  									title:'Guardado exitoso',//Contenido del modal
@@ -454,6 +446,7 @@ $(document).ready(function()
  								},
  		  				 	function(isConfirm){
  		  				 		if(isConfirm){
+ 		  				 				$('#descripcionMarca').val('');
 										$('#newMarca').data('bootstrapValidator').resetForm();
  		  				 		}
  		  				 	});

@@ -103,7 +103,6 @@
                                                             <i class="fa fa-minus button-radio minus" id="minusMarca"> </i>
                                                           </div>
                                                       </div>
-
                                                   </div>
                                                   <div class="col-md-8 col-md-offset-2">
                                                       <div class="form-group row">
@@ -123,12 +122,13 @@
                                            </div>
                                         </div>
                                   </div>
+                                </form>
                             </div>
                         </div>
                     </div>
 
                 <!--   Modal Agregar Marca -->
-                <form id="prueba" action="index.html" method="post">
+                
                     <div class="modal fade" id="myModal2"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
@@ -137,14 +137,14 @@
                                     <h4 class="modal-title" >Agregar Nueva marca</h4>
                                 </div>
                                   <div class="modal-body">
-
+                                <form id="newMarca" >
                                       {{ csrf_field() }}
                                         <div class="container-fluid contpfl">
                                            <div class="row">
                                                <div class="rPfl">
                                                   <div class="col-md-8 col-md-offset-2">
                                                       <div class="form-group row">
-                                                          <label for="descripcion">Nombre de la Marca</label>
+                                                          <label for="descripcionMarca">Nombre de la Marca</label>
                                                           <input type="text" class="form-control" name="descripcionMarca" id="descripcionMarca"><i class="fa fa-id-badge icpfl"></i>
                                                       </div>
                                                   </div>
@@ -156,11 +156,11 @@
                                   <div class="modal-footer">
                                       <button type="submit" class="bttnMd btn" id="prueba" >Guardar <i class="fa fa-floppy-o"></i></button>
                                   </div>
-
+                                </form>
                             </div>
                         </div>
                     </div>
-                  </form>
+
                 <!--   Modal Agregar Modelo -->
                     <div class="modal fade" id="myModal3"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                         <div class="modal-dialog" role="document">
