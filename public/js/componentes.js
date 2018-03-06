@@ -9,7 +9,6 @@ $(document).ready(function()
 		$('#registro').val(id);
 		/////////////////LLenar y desplegar modal///////////////////////////
 		$('#descripcion').val(descripcion);
-		$('#padre').val(padre);
 		$('#myModal4').modal('show');
 
 		return 0;
@@ -20,18 +19,17 @@ $(document).ready(function()
 	//////////////////////////////////////Funcion boton: modificar llena el modal con los datos del registro que se desea modificar/////////////////////////////////////////////////////
 	$('.Modificar').click(function()
 	{
-		$('#modificarTipoEquipo').data('bootstrapValidator').resetForm();
-    var tabla=$('#areaResultados').data('tabla');
-	  var registry=$(this).attr('data-reg');
-	  var _token=$( "input[name^='_token']" ).val();
-	  var route='/menu/registros/datos/modificar';
-    var padre;
-	  $.post(route,{_token:_token,registry:registry,tabla:tabla})
+		$('#modificarComponente').data('bootstrapValidator').resetForm();
+    	var tabla=$('#areaResultados').data('tabla');
+	  	var registry=$(this).attr('data-reg');
+	  	var _token=$( "input[name^='_token']" ).val();
+	  	var route='/menu/registros/datos/modificar';
+	  	$.post(route,{_token:_token,registry:registry,tabla:tabla})
 	  .done(function(answer)
-	  {
+	  	{
       //console.log(answer.id);
-	  	loadModal(answer.descripcion,answer.id,padre="");
-	  })
+	  	loadModal(answer.descripcion,answer.id);
+	  	})
 
 	  .fail(function()
 		{swal("Error Inesperado !!", "Comuniquese con el administrador", "error");});
@@ -43,14 +41,14 @@ $(document).ready(function()
 	{
 	  var registry=$(this).attr('data-reg');
 	  var _token=$( "input[name^='_token']" ).val();
-	  var route='/menu/registros/datos/eliminar/tipoEquipo';
+	  var route='/menu/registros/datos/eliminar/componente';
     swal({
-      title: "Eliminar tipo de Equipo",
-      text: "Al borrar un tipo de equipo, borrara los componentes y piezas asociados ¿Desea eliminar el tipo de equipo seleccionado?",
+      title: "Eliminar tipo de Componente",
+      text: "Al borrar un Componente, borrara las piezas asociadas ¿Desea eliminar el Componente seleccionado?",
       type: "warning",
       showCancelButton: true,
       confirmButtonColor:'#EE1919',
-      confirmButtonText: 'Si, borrar tipo de equipo',
+      confirmButtonText: 'Si, borrar componente',
       cancelButtonText: "Cancelar",
       closeOnConfirm: false,
       closeOnCancel: false
@@ -64,11 +62,11 @@ $(document).ready(function()
           $.post(route, {_token:_token,registry:registry})
           .done(function(answer)
           {
-            //console.log(answer);
-            if(answer==1){
+            console.log(answer);
+            if(answer[0]==1){
               swal({
                 title:'Borrado exitoso',//Contenido del modal
-                text: '<p style="font-size: 1.0em;">'+'El tipo de equipo fue borrado correctamente'+'</p>',
+                text: '<p style="font-size: 1.0em;">'+'El componente fue borrado correctamente'+'</p>',
                 type: "success",
                 showConfirmButton:true,//Eliminar boton de confirmacion
                 html: true
@@ -77,20 +75,20 @@ $(document).ready(function()
               {
                 if(isConfirm)
                 {
-                  window.location.href="/menu/registros/datos";
+                  window.location.href="/menu/registros/tipoequipo/componentes/"+answer[1];
                 }
               });
             }
-						else if(answer==0){
+			else if(answer[0]==0){
 							swal({
                 title:'No se puede realizar la acción',//Contenido del modal
-                text: '<p style="font-size: 1.0em;">'+'El tipo de equipo seleccionado esta asociado con al menos un equipo, para continuar debe cambiar esta asociación'+'</p>',
+                text: '<p style="font-size: 1.0em;">'+'El componente seleccionado esta asociado con al menos un equipo, para continuar debe cambiar esta asociación'+'</p>',
                 type: "error",
                 //showConfirmButton:true,//Eliminar boton de confirmacion
                 html: true
               });
-						}
-					})
+			}
+			})
           .fail(function()
             { swal("Error Inesperado !!", "Comuniquese con el administrador", "error");});
         }
@@ -381,7 +379,7 @@ $(document).ready(function()
 
 	//////////////////////////////////////Funcion modificar tipo de equipo///////////////////////////////////////////////////
 
-	$('#modificarTipoEquipo').bootstrapValidator({
+	$('#modificarComponente').bootstrapValidator({
 		excluded: [':disabled'],
 		 fields: {
 			 descripcion: {

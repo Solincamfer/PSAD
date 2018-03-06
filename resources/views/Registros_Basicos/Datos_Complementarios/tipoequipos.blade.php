@@ -185,6 +185,8 @@
                                            </div>
                                         </div>
                                   </div>
+                                  <input type="hidden" class="form-control descripcion" name="tipoPadre" id="padreModelo" value="">
+                                  <input type="hidden" class="form-control descripcion" name="marcaPadre" id="marcaPadre" value="">
                                   <div class="modal-footer">
                                       <button type="submit" class="bttnMd btn">Guardar <i class="fa fa-floppy-o"></i></button>
                                   </div>

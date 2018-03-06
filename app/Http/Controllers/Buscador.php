@@ -259,7 +259,7 @@ class Buscador extends Controller
            				->join('persona_telefono','persona_telefono.telefono_id','=','telefonos.id')
            				->where(['persona_telefono.persona_id'=>$persona->id])
            				->delete();
-           			DB::table('persona_telefono')->where('persona_id'=>$persona->id)->delete();
+           			DB::table('persona_telefono')->where(['persona_id'=>$persona->id])->delete();
 
            		    ///////////obtener datos de la persona ////////////////
            			$cedula=Cedula::find($persona->cedula_id);
@@ -301,13 +301,15 @@ class Buscador extends Controller
 			public function prueba_metodo()
 			{
 
-				///////obtener todo lo relacionado a una sucursal////////////////////
-
-				dd($this->eliminarClienteMatriz(2));
-				//dd($this->eliminarCategorias(2));
-				//dd($this->eliminarSucursales(1));
-				//dd($this->eliminarEquipos(2));
-
+				  $consultaModelos=DB::table('modelos')
+            ->join('modelo_tipoequipo','modelo_tipoequipo.modelo_id','=','modelos.id')
+            ->join('marca_modelo','marca_modelo.modelo_id','=','modelos.id')
+            ->join('marca_tipoequipo','marca_tipoequipo.marca_id','=','marca_modelo.marca_id')
+            ->where(['modelo_tipoequipo.tipoequipo_id'=>6,'marca_modelo.marca_id'=>1])
+            ->select('modelo_tipoequipo.id AS modeloTipoEquipo_id','modelo_tipoequipo.modelo_id AS modeloTipoEquipo_modelo_id')
+            
+            ->get();
+            dd($consultaModelos);
 			}
 
 }
