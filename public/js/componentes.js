@@ -75,7 +75,7 @@ $(document).ready(function()
               {
                 if(isConfirm)
                 {
-                  window.location.href="/menu/registros/tipoequipo/componentes/"+answer[1];
+                  window.location.href="/menu/registros/tipoequipo/componentes/"+answer[1].tipoequipo_id;
                 }
               });
             }

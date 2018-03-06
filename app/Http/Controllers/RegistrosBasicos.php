@@ -5340,6 +5340,7 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 	
 	public function eliminarComponente(){
 		$respuesta=0;
+		$consultaComponente=0;
 		$registro=Request::get('registry');
 		$nombreComponente=Ncomponente::where('id',$registro)->first();
 		$nombreTipo=Tipoequipo::where('id',$nombreComponente->tipoequipo_id)->first();
@@ -5369,7 +5370,7 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 			$componente->delete();
 			$respuesta=1;
 		}
-		return [$respuesta,$consultaComponente->tipoequipo_id];
+		return [$respuesta,$consultaComponente];
 	}
 
 	// public function cargarListaMarcasTipoEquipo(){
