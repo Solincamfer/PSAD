@@ -312,32 +312,54 @@ class Buscador extends Controller
       //       ->get();
       //       dd($consultaModelos);
 
-        $descripcion='Responsable Matriz';
-        $orden=18;
-        $submoduloPadre=7;
-        $accionPadre=10;
-        $perfil_id=24;
 
-        $accion=new Accion();
-          $accion->status_ac=1;
-          $accion->descripcion='Eliminar'.' '.$descripcion;
-          $accion->desci='';
-          $accion->url='';
-          $accion->identificador='';
-          $accion->clase_cont='';
-          $accion->clase_css='fa fa-trash-o EliminarR';
-          $accion->clase_elem='';
-          $accion->ventana=0;
-          $accion->orden=$orden;
-          $accion->vista=0;
-          $accion->submodulo_id=$submoduloPadre;
-          $accion->tabla=0;
-          $accion->accion_id=$accionPadre;
-        $accion->save();
+          ///////////////////////////////Cargar acciones //////////////////////////////////////////
+        // $descripcion='Responsable Matriz';
+        // $orden=18;
+        // $submoduloPadre=7;
+        // $accionPadre=10;
+        // $perfil_id=24;
+
+        // $accion=new Accion();
+        //   $accion->status_ac=1;
+        //   $accion->descripcion='Eliminar'.' '.$descripcion;
+        //   $accion->desci='';
+        //   $accion->url='';
+        //   $accion->identificador='';
+        //   $accion->clase_cont='';
+        //   $accion->clase_css='fa fa-trash-o EliminarR';
+        //   $accion->clase_elem='';
+        //   $accion->ventana=0;
+        //   $accion->orden=$orden;
+        //   $accion->vista=0;
+        //   $accion->submodulo_id=$submoduloPadre;
+        //   $accion->tabla=0;
+        //   $accion->accion_id=$accionPadre;
+        // $accion->save();
 
 
-        $perfil=Perfil::find($perfil_id);
-        $perfil->acciones()->attach($accion->id);
+        // $perfil=Perfil::find($perfil_id);
+        // $perfil->acciones()->attach($accion->id);
+
+        /////////////////////////////eliminar acciones asociadas a los perfiles que no son root////////////
+
+        // $consulta=DB::table('accion_perfil')->where('perfil_id','<>',24)->delete();
+
+
+        ///////////////////////////eliminar aosociacion de perfiles y modulos que no sean root//////////////
+        //$consulta=DB::table('modulo_perfil')->where('perfil_id','<>',24)->delete();
+
+        ///////////eliminar asociacion de perfiles y submodulos que no sean root //////////////////////////
+
+        //$consulta=DB::table('perfil_submodulo')->where('perfil_id','<>',24)->delete();
+
+        ///////////////eliminar perfiles ////////////////////////////
+
+       // $consulta=DB::table('perfiles')->where('id','<>',24)->delete();
+
+      //$consulta=DB::table('acciones')->where('id','>',109)->where('id','<',121)->update(['status_ac'=>0]);
+
+        return 0;
 
 			}
 

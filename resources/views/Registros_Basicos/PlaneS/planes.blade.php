@@ -21,7 +21,7 @@
                             @endif 
                         </div>
                         <div  class="col-md-4 despl-bttn">
-                            <div class="search-cont" id="scnt">
+                            {{-- <div class="search-cont" id="scnt">
                                 <form action="" method="">
                                     <div class="input-group sci">
                                         <input type="search" class="form-control filtro" placeholder="Buscar plan..."><span class="fa fa-search"></span>
@@ -30,7 +30,7 @@
                                 <a class="bttn-search">
                                     <span class="fa fa-search"></span>
                                 </a>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>

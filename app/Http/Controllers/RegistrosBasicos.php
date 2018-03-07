@@ -2003,10 +2003,10 @@ public function insertar_empleado()
 		$empleado->telefonos()->attach($telefonoMovil->id);
 
 		$usuario=new Usuario();
-		$usuario->n_usuario=$formulario['numeroCedula'];
+		$usuario->n_usuario=$formulario['nombreUsuario'];
 		$usuario->clave=$formulario['password'];
 		$usuario->status=$formulario['status'];
-		$usuario->perfil_id=27;
+		$usuario->perfil_id=35;
 		$usuario->save();
 		$usuario->empleados()->attach($empleado->id);
 

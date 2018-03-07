@@ -44,7 +44,7 @@
                                       
                                         <span class="ttlMd radioEmp"> <input type="radio" name="c_rsp" id="radio{{$perfiles->id}}" value="{{$perfiles->id}}" checked> 
                                         <label for="c_rsp"><strong>{{$perfiles->descripcion}}</strong></label></span>
-                                        <input type="text" name="perfil" value="{{$perfiles->id}}" id="valor_radio">
+                                        <input type="hidden" name="perfil" value="{{$perfiles->id}}" id="valor_radio">
                                     @else
                                         <span class="ttlMd radioEmp"><input type="radio" name="c_rsp" id="radio{{$perfiles->id}}" value="{{$perfiles->id}}"  > 
                                         <label for="c_rsp"><strong>{{$perfiles->descripcion}}</strong></label></span>
