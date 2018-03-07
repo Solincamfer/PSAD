@@ -5651,40 +5651,28 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 	////////////////////////////////////////////////////// NOMBRE DE PIEZAS ////////////////////////////////////////////////////////////////////////
 
 
-	// public function eliminarComponente(){
-	// 	$respuesta=0;
-	// 	$consultaComponente=0;
-	// 	$registro=Request::get('registry');
-	// 	$nombreComponente=Ncomponente::where('id',$registro)->first();
-	// 	$nombreTipo=Tipoequipo::where('id',$nombreComponente->tipoequipo_id)->first();
-	// 	$validarComponente=DB::table('componentes')
-	// 							->join('equipos','componentes.equipo_id','equipos.id')
-	// 							->where('componentes.descripcion',$nombreComponente->descripcion)
-	// 							->where('equipos.tipoequipo', $nombreTipo->descripcion)
-	// 							->get();
-	// 	if (count($validarComponente)==0) {
-	// 		$consultaPiezas=DB::table('npiezas')
-	// 							->join('ncomponentes','ncomponentes.id','npiezas.ncomponente_id')
-	// 							->where('ncomponentes.id',$registro)
-	// 							->select('npiezas.*','ncomponentes.descripcion as descripcion_tipo')
-	// 							->get();
-	// 		$consultaComponente=DB::table('ncomponentes')->where('id',$registro)->first();
-	// 		DB::table('marca_ncomponente')->where('ncomponente_id',$registro)->delete();
-	// 		DB::table('modelo_ncomponente')->where('ncomponente_id',$registro)->delete();
-	// 		if(count($consultaPiezas)>0){
-	// 			foreach ($consultaPiezas as $pieza) {
-	// 				$this->registroBitacora('Id de la pieza borrada: '.$pieza->id,'Borrar Nombres de Componentes','Pieza borrada: '.$pieza->descripcion.'del componente borrado: '.$pieza->descripcion_tipo,'Gestion de nombres de componentes -> Borrar Componentes');
-	// 				$pieza=Npieza::find($pieza->id);
-	// 				$pieza->delete();
-	// 			}
-	// 		}
-	// 		$this->registroBitacora('Id del Componente borrado: '.$consultaComponente->id,' Borrar Nombres de Componentes',' Componente borrado: '.$consultaComponente->descripcion,' Gestion de Componentes -> Borrar Componente');
-	// 		$componente=Ncomponente::find($consultaComponente->id);
-	// 		$componente->delete();
-	// 		$respuesta=1;
-	// 	}
-	// 	return [$respuesta,$consultaComponente];
-	// }
+	public function eliminarPieza(){
+		$respuesta=0;
+		$consultaComponente=0;
+		$registro=Request::get('registry');
+		$nombrePieza=Npieza::where('id',$registro)->first();
+		$nombreTipo=Ncomponente::where('id',$nombrePieza->ncomponente_id)->first();
+		$validarPieza=DB::table('piezas')
+						->join('componentes','piezas.componente_id','componentes.id')
+						->where('piezas.descripcion',$nombrePieza->descripcion)
+						->where('componentes.descripcion', $nombreTipo->descripcion)
+						->get();
+		if (count($validarPieza)==0) {
+			$consultaPieza=DB::table('npiezas')->where('id',$registro)->first();
+			DB::table('marca_npieza')->where('npieza_id',$registro)->delete();
+			DB::table('modelo_npieza')->where('npieza_id',$registro)->delete();
+			$this->registroBitacora('Id de la Pieza borrada: '.$consultaPieza->id,' Borrar Nombres de Piezas',' Pieza borrada: '.$consultaPieza->descripcion,' Gestion de Piezas -> Borrar Pieza');
+			$pieza=Npieza::find($consultaPieza->id);
+			$pieza->delete();
+			$respuesta=1;
+		}
+		return [$respuesta,$consultaPieza];
+	}
 
 	// public function cargarListaMarcasComponente(){
 	// 	$registro=Request::get('registry');
@@ -5807,28 +5795,27 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 		$pieza=strtoupper(Request::get('descripcion')); //Nombre nuevo del tipo de equipo
 		$idRegistro=(int)Request::get('registro'); // id del registro que se desea actualizar
 		$idTipo=(int)Request::get('padreTipoPiezaM');// id del componente padre
-		$nombreTipoEquipo=Tipoequipo::where('id',$idTipo)->first(); 
-		$nombreComponente=Ncomponente::where('id',$idTipo)->first();//consulta del nombre del tipo de equipo padre
+		$nombrePieza=Npieza::where('id',$idRegistro)->first(); 
+		$nombreComponente=Ncomponente::where('id',$idTipo)->first();//consulta del nombre del tipo de componente padre
 		$validarPieza=DB::table('piezas')
 						->join('componentes','piezas.componente_id','componentes.id')
-
-						->where('piezas.descripcion',$nombreComponente->descripcion)
-						->where('equipos.tipoequipo', $nombreTipoEquipo->descripcion)
+						->where('piezas.descripcion',$nombrePieza->descripcion)
+						->where('componentes.descripcion', $nombreComponente->descripcion)
 						->get();
-		if (count($validarComponente)==0) {
-			$consulta=Ncomponente::where('descripcion',$tipoEquipo)->where('id','<>',$idRegistro)->where('tipoequipo_id',$idTipo)->first();
+		if (count($validarPieza)==0) {
+			$consulta=Npieza::where('descripcion',$pieza)->where('id','<>',$idRegistro)->where('ncomponente_id',$idTipo)->first();
 			if (count($consulta)==0) {
-				$tipo= Ncomponente::find($idRegistro);
-				$tipo->descripcion=$tipoEquipo;
-				$tipo->tipoequipo_id=$idTipo;
-				$tipo->save();
+				$Npieza= Npieza::find($idRegistro);
+				$Npieza->descripcion=$pieza;
+				$Npieza->ncomponente_id=$idTipo;
+				$Npieza->save();
 				$respuesta=1;
 			}
 			else{
 				$respuesta=2;
 			}
 		}
-		return [$respuesta,$nombreTipoEquipo];
+		return [$respuesta,$nombreComponente];
 	}
 
 	// public function agregarMarcaComponente(){

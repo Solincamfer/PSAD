@@ -41,14 +41,14 @@ $(document).ready(function()
 	{
 	  var registry=$(this).attr('data-reg');
 	  var _token=$( "input[name^='_token']" ).val();
-	  var route='/menu/registros/datos/eliminar/componente';
+	  var route='/menu/registros/datos/eliminar/pieza';
     swal({
-      title: "Eliminar tipo de Componente",
-      text: "Al borrar un Componente, borrara las piezas asociadas ¿Desea eliminar el Componente seleccionado?",
+      title: "Eliminar tipo de Pieza",
+      text: "¿Desea eliminar la pieza seleccionada?",
       type: "warning",
       showCancelButton: true,
       confirmButtonColor:'#EE1919',
-      confirmButtonText: 'Si, borrar componente',
+      confirmButtonText: 'Si, borrar pieza',
       cancelButtonText: "Cancelar",
       closeOnConfirm: false,
       closeOnCancel: false
@@ -66,7 +66,7 @@ $(document).ready(function()
             if(answer[0]==1){
               swal({
                 title:'Borrado exitoso',//Contenido del modal
-                text: '<p style="font-size: 1.0em;">'+'El componente fue borrado correctamente'+'</p>',
+                text: '<p style="font-size: 1.0em;">'+'La pieza fue borrada correctamente'+'</p>',
                 type: "success",
                 showConfirmButton:true,//Eliminar boton de confirmacion
                 html: true
@@ -75,14 +75,14 @@ $(document).ready(function()
               {
                 if(isConfirm)
                 {
-                  window.location.href="/menu/registros/tipoequipo/componentes/"+answer[1].tipoequipo_id;
+                  window.location.href="/menu/registros/tipoequipo/componentes/piezas/"+answer[1].ncomponente_id;
                 }
               });
             }
 			else if(answer[0]==0){
 							swal({
                 title:'No se puede realizar la acción',//Contenido del modal
-                text: '<p style="font-size: 1.0em;">'+'El componente seleccionado esta asociado con al menos un equipo, para continuar debe cambiar esta asociación'+'</p>',
+                text: '<p style="font-size: 1.0em;">'+'La pieza seleccionada esta asociada con al menos un equipo, para continuar debe cambiar esta asociación'+'</p>',
                 type: "error",
                 //showConfirmButton:true,//Eliminar boton de confirmacion
                 html: true
