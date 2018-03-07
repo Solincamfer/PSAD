@@ -21,16 +21,7 @@
                                     @endif 
                                 </div>
                                 <div  class="col-md-4 despl-bttn">
-                                    <div class="search-cont" id="scnt">
-                                        <form action="" method="">
-                                            <div class="input-group sci">
-                                                <input type="search" class="form-control filtro" placeholder="Buscar sucursal..."><span class="fa fa-search"></span>
-                                            </div>
-                                        </form> 
-                                        <a class="bttn-search">
-                                            <span class="fa fa-search"></span>
-                                        </a>
-                                    </div>
+                                   {{-- s --}}
                                 </div>
                                 <div class="col-md-2 despl-bttn">
                                     <a href="/menu/registros/clientes/categoria/{{$cliente->id}}">
@@ -71,6 +62,12 @@
                                                         <input type="checkbox" class="checkSucursales" name="status" id="{{'inchbx'. $sucursal->id}}" value="{{$sucursal->status}}" data-reg="{{$sucursal->id}}"><label for="{{'inchbx'. $sucursal->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
                                                     </div>
                                                 @endif
+                                             @elseif($accion->id==115)
+                                                <span class="iclsp">
+                                                    <a class="eliminarSuc_" id="Suc{{$sucursal->id}}" data-reg="{{$sucursal->id}}" data-ttl="{{$accion->descripcion}}">
+                                                       <i class="{{$accion->clase_css}}"></i>
+                                                  </a>
+                                            </span>
                                             @endif
                                         @endforeach
                                     </div>

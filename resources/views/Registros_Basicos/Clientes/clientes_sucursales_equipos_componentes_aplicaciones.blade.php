@@ -21,7 +21,7 @@
                                 @endif 
                             </div>
                             <div  class="col-md-4 despl-bttn">
-                                <div class="search-cont" id="scnt">
+                               {{--  <div class="search-cont" id="scnt">
                                     <form action="" method="">
                                         <div class="input-group sci">
                                             <input type="search" class="form-control filtro" placeholder="Buscar aplicación..."><span class="fa fa-search"></span>
@@ -30,7 +30,7 @@
                                     <a class="bttn-search">
                                         <span class="fa fa-search"></span>
                                     </a>
-                                </div>
+                                </div> --}}
                             </div>
                             <div class="col-md-2 despl-bttn">
                                 <a href="/menu/registros/clientes/categoria/sucursal/equipos/{{$datosC1->id}}">
@@ -71,7 +71,13 @@
                                                 <input type="checkbox" class="checkAplicacion" name="statusApp" data-reg="{{$aplicacion->id}}" id="{{'app'. $aplicacion->id}}" value="{{$aplicacion->status}}"><label for="{{'app'. $aplicacion->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
                                             </div>
                                         @endif
-                                    @endif
+                                    @elseif($accion->id==110)
+                                     <span class="iclsp">
+                                            <a class="eliminarApp_" id="app{{$aplicacion->id}}" data-reg="{{$aplicacion->id}}" data-ttl="{{$accion->descripcion}}">
+                                               <i class="{{$accion->clase_css}}"></i>
+                                          </a>
+                                        </span>
+                                   @endif
                                 @endforeach
                             </div>
                             <p class="ttlMd"><strong>{{$aplicacion->descripcion}}</strong></p>

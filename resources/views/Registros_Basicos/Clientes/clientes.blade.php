@@ -21,7 +21,7 @@
 								@endif 
 							</div>
 							<div  class="col-md-4 despl-bttn">
-								<div class="search-cont" id="scnt">
+								{{-- <div class="search-cont" id="scnt">
 									<form action="" method="">
 										<div class="input-group sci">
 											<input type="search" class="form-control filtro" placeholder="Buscar cliente..."><span class="fa fa-search"></span>
@@ -30,7 +30,7 @@
 									<a class="bttn-search">
 										<span class="fa fa-search"></span>
 									</a>
-								</div>
+								</div> --}}
 							</div>
 						</div>
 					</div>
@@ -66,6 +66,13 @@
 													<input type="checkbox" class="checkClientes" name="status" id="{{'inchbx'. $clientes->id}}" value="{{$clientes->status}}" data-reg="{{$clientes->id}}"><label for="{{'inchbx'. $clientes->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
 												</div>
 											@endif
+
+										 @elseif($accion->id==119)
+                                                <span class="iclsp">
+                                                    <a class="eliminarClie_" id="Clie{{$clientes->id}}" data-reg="{{$clientes->id}}" data-ttl="{{$accion->descripcion}}">
+                                                       <i class="{{$accion->clase_css}}"></i>
+                                                  </a>
+                                            </span>
 											
 										@endif
 

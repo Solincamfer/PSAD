@@ -60,6 +60,12 @@
                                                 <input type="checkbox" class="checkResponsable" data-reg="{{$responsable->id}}" name="status" id="{{'inchbx'. $responsable->id}}" value="{{$responsable->status}}"><label for="{{'inchbx'. $responsable->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
                                             </div>
                                             @endif
+                                        @elseif($accion->id==120)
+                                                <span class="iclsp">
+                                                    <a class="eliminarRespCli_" id="RespCli{{$responsable->id}}" data-reg="{{$responsable->id}}" data-ttl="{{$accion->descripcion}}">
+                                                       <i class="{{$accion->clase_css}}"></i>
+                                                  </a>
+                                            </span>
                                         @endif
                                     @endforeach
                                 </div>

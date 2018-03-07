@@ -47,6 +47,7 @@ use App\Componente;
 use App\Npieza;
 use App\Pieza;
 
+
 use Response;
 
 class Buscador extends Controller
@@ -301,15 +302,43 @@ class Buscador extends Controller
 			public function prueba_metodo()
 			{
 
-				  $consultaModelos=DB::table('modelos')
-            ->join('modelo_tipoequipo','modelo_tipoequipo.modelo_id','=','modelos.id')
-            ->join('marca_modelo','marca_modelo.modelo_id','=','modelos.id')
-            ->join('marca_tipoequipo','marca_tipoequipo.marca_id','=','marca_modelo.marca_id')
-            ->where(['modelo_tipoequipo.tipoequipo_id'=>6,'marca_modelo.marca_id'=>1])
-            ->select('modelo_tipoequipo.id AS modeloTipoEquipo_id','modelo_tipoequipo.modelo_id AS modeloTipoEquipo_modelo_id')
+				  // $consultaModelos=DB::table('modelos')
+      //       ->join('modelo_tipoequipo','modelo_tipoequipo.modelo_id','=','modelos.id')
+      //       ->join('marca_modelo','marca_modelo.modelo_id','=','modelos.id')
+      //       ->join('marca_tipoequipo','marca_tipoequipo.marca_id','=','marca_modelo.marca_id')
+      //       ->where(['modelo_tipoequipo.tipoequipo_id'=>6,'marca_modelo.marca_id'=>1])
+      //       ->select('modelo_tipoequipo.id AS modeloTipoEquipo_id','modelo_tipoequipo.modelo_id AS modeloTipoEquipo_modelo_id')
             
-            ->get();
-            dd($consultaModelos);
+      //       ->get();
+      //       dd($consultaModelos);
+
+        $descripcion='Responsable Matriz';
+        $orden=18;
+        $submoduloPadre=7;
+        $accionPadre=10;
+        $perfil_id=24;
+
+        $accion=new Accion();
+          $accion->status_ac=1;
+          $accion->descripcion='Eliminar'.' '.$descripcion;
+          $accion->desci='';
+          $accion->url='';
+          $accion->identificador='';
+          $accion->clase_cont='';
+          $accion->clase_css='fa fa-trash-o EliminarR';
+          $accion->clase_elem='';
+          $accion->ventana=0;
+          $accion->orden=$orden;
+          $accion->vista=0;
+          $accion->submodulo_id=$submoduloPadre;
+          $accion->tabla=0;
+          $accion->accion_id=$accionPadre;
+        $accion->save();
+
+
+        $perfil=Perfil::find($perfil_id);
+        $perfil->acciones()->attach($accion->id);
+
 			}
 
 }
