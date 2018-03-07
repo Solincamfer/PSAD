@@ -58,6 +58,12 @@
                                                 <div class="chbx">
                                                     <input type="checkbox" class="checkResponsableSuc" data-reg="{{$responsable->id}}" name="status" id="{{'checkSuc'. $responsable->id}}" value="{{$responsable->status}}"><label for="{{'checkSuc'.$responsable->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
                                                 </div>
+                                             @elseif($accion->id==116)
+                                                <span class="iclsp">
+                                                    <a class="eliminarRespSuc_" id="Respsuc_{{$responsable->id}}" data-reg="{{$responsable->id}}" data-ttl="{{$accion->descripcion}}">
+                                                       <i class="{{$accion->clase_css}}"></i>
+                                                  </a>
+                                            </span>
                                             @endif
                                         @endif
                                     @endforeach

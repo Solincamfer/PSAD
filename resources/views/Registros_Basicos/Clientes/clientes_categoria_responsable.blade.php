@@ -60,6 +60,12 @@
                                                    <input type="checkbox" class="btnAcc checkRespCat" name="status" id="{{'inchbx'. $responsable->id}}" value="{{$responsable->status}}" data-reg="{{$responsable->id}}"><label for="{{'inchbx'. $responsable->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
                                                </div>
                                            @endif
+                                         @elseif($accion->id==118)
+                                                <span class="iclsp">
+                                                    <a class="eliminarRspCat_" id="RespCat{{$responsable->id}}" data-reg="{{$responsable->id}}" data-ttl="{{$accion->descripcion}}">
+                                                       <i class="{{$accion->clase_css}}"></i>
+                                                  </a>
+                                            </span>
                                        @endif
                                    @endforeach
                                </div>
