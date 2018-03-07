@@ -109,14 +109,15 @@ $(document).ready(function()
 		$('.modelos').remove();
 		var registry=$(this).attr('data-reg');
 		$('#registry').val(registry);
+		var padreTipo= $('#padreTipo').val();
 		var _token=$( "input[name^='_token']" ).val();
-		var route='/menu/registros/datos/mostrarmarcas';
-		$.post(route,{_token:_token,registry:registry})
+		var route='/menu/registros/datos/mostrarmarcas/componente';
+		$.post(route,{_token:_token,registry:registry,padreTipo})
 		.done(function(answer)
 		{
-			//console.log(answer);
+			console.log(answer);
 			$.each(answer,function(key, registro) {
-			$("#marca").append('<option class="marcas" value='+registro.id+'>'+registro.descripcion+'</option>');
+				$("#marca").append('<option class="marcas" value='+registro.id+'>'+registro.descripcion+'</option>');
 			});
 			$('#myModal1').modal('show');
 		})
@@ -132,9 +133,10 @@ $(document).ready(function()
 	{
 		$('.modelos').remove();
 		var registro=$('#registry').val();
+		console.log(registro);
 		var valor = $("#marca option:selected").val();
 		var _token=$( "input[name^='_token']" ).val();
-		var route='/menu/registros/datos/mostrarmodelos';
+		var route='/menu/registros/datos/mostrarmodelos/componente';
 		$.post(route,{_token:_token,registro:registro,valor:valor})
 		.done(function(answer)
 		{
@@ -169,7 +171,7 @@ $(document).ready(function()
 		else{
 			{swal("Campo Vacio!!", "Debe seleccionar una marca", "warning");};
 		}
-		
+
 	});
 
 
@@ -329,43 +331,45 @@ $(document).ready(function()
 	    	});
 		}
 	});
-	//////////////////////////////////////////////////Funcion Agregar Tipo de equipo //////////////////////////////////
-   $('#newTipoEquipo').bootstrapValidator({
+	//////////////////////////////////////////////////Funcion Agregar Componente //////////////////////////////////
+
+	 $('#newComponente').bootstrapValidator({
 		 	excluded: [':disabled'],
 			 fields: {
-		     descripcionTipoEquipo: {
+		     descripcionComponente: {
 		       validators: {
 		         notEmpty: {
-		           message: 'Debe indicar el nombre del tipo de equipo'
+		           message: 'Debe indicar el nombre del Componente'
 		         }
 		       }
 		     }
 		   }
-        }).on('success.form.bv',function(e,data){
+        }).on('success.form.bv',function(e){
 	  		e.preventDefault();
-				var formulario=$('#newTipoEquipo').serialize();
-				var route='/menu/registros/agregar/tipoequipo';
+				var formulario=$('#newComponente').serialize();
+				var route='/menu/registros/agregar/componente';
 				$.post(route,formulario)
 		  		.done(function(answer){
-						if(answer==1){
+						//console.log(answer)
+						if(answer[0]==1){
 							 swal({
 									title:'Guardado exitoso',//Contenido del modal
-									text: '<p style="font-size: 1.0em;">'+'El tipo de equipo se guardo correctamente'+'</p>',
+									text: '<p style="font-size: 1.0em;">'+'El componente se guardo correctamente'+'</p>',
 									type: "success",
 									showConfirmButton:true,//Eliminar boton de confirmacion
 									html: true
 								},
 		  				 	function(isConfirm){
 		  				 		if(isConfirm){
-		  				 			window.location.href="/menu/registros/datos";
+		  				 			window.location.href="/menu/registros/tipoequipo/componentes/"+answer[1].id;
 		  				 		}
 		  				 	});
 						}
 						else{
-							$('#newTipoEquipo').data('bootstrapValidator').resetForm();
+							$('#newComponente').data('bootstrapValidator').resetForm();
 							swal({
 								title:'No se puede realizar la acción',//Contenido del modal
-								text: '<p style="font-size: 1.0em;">'+'El tipo de equipo ya existe'+'</p>',
+								text: '<p style="font-size: 1.0em;">'+'El Componente ya existe para el tipo de equipo '+answer[1].descripcion+'</p>',
 								type: "warning",
 								//showConfirmButton:true,//Eliminar boton de confirmacion
 								html: true
@@ -377,7 +381,7 @@ $(document).ready(function()
     });
 
 
-	//////////////////////////////////////Funcion modificar tipo de equipo///////////////////////////////////////////////////
+	////////////////////////////////////// Funcion modificar tipo Componente ///////////////////////////////////////////////////
 
 	$('#modificarComponente').bootstrapValidator({
 		excluded: [':disabled'],
@@ -385,58 +389,58 @@ $(document).ready(function()
 			 descripcion: {
 				 validators: {
 					 notEmpty: {
-						 message: 'Debe indicar el nombre del tipo de equipo'
+						 message: 'Debe indicar el nombre del Componente'
 					 }
 				 }
 			 }
 		 }
 			 }).on('success.form.bv',function(e,data){
 			e.preventDefault();
-			var formulario=$('#modificarTipoEquipo').serialize();
-			var route='/menu/registros/modificar/tipoequipo';
+			var formulario=$('#modificarComponente').serialize();
+			var route='/menu/registros/modificar/componente';
 			$.post(route,formulario)
 				.done(function(answer){
-					if(answer==1){
+					//console.log(answer)
+				if(answer[0]==1){
 						 swal({
 								title:'Actualización Exitosa',//Contenido del modal
-								text: '<p style="font-size: 1.0em;">'+'El tipo de equipo se modifico correctamente'+'</p>',
+								text: '<p style="font-size: 1.0em;">'+'El componente se modifico correctamente'+'</p>',
 								type: "success",
 								showConfirmButton:true,//Eliminar boton de confirmacion
 								html: true
 							},
 							function(isConfirm){
 								if(isConfirm){
-									window.location.href="/menu/registros/datos";
+									window.location.href="/menu/registros/tipoequipo/componentes/"+answer[1].id;
 								}
 							});
 					}
-					else if(answer==2){
-						$('#modificarTipoEquipo').data('bootstrapValidator').resetForm();
+					else if(answer[0]==2){
+						$('#modificarComponente').data('bootstrapValidator').resetForm();
 						swal({
 							title:'No se puede realizar la acción',//Contenido del modal
-							text: '<p style="font-size: 1.0em;">'+'El tipo de equipo ya existe'+'</p>',
+							text: '<p style="font-size: 1.0em;">'+'El componente ya existe para el tipo de equipo '+answer[1].descripcion+'</p>',
 							type: "warning",
 							//showConfirmButton:true,//Eliminar boton de confirmacion
 							html: true
 						});
 					}
 					else{
-						$('#modificarTipoEquipo').data('bootstrapValidator').resetForm();
+						$('#modificarComponente').data('bootstrapValidator').resetForm();
 						swal({
 							title:'No se puede realizar la acción',//Contenido del modal
-							text: '<p style="font-size: 1.0em;">'+'El tipo de equipo seleccionado esta asociado con al menos un equipo, para continuar debe cambiar esta asociación'+'</p>',
+							text: '<p style="font-size: 1.0em;">'+'El Componente seleccionado esta asociado con al menos un equipo, para continuar debe cambiar esta asociación'+'</p>',
 							type: "warning",
 							//showConfirmButton:true,//Eliminar boton de confirmacion
 							html: true
 						});
 					}
-
 				})
 				.fail(function()
 				{swal("Error Inesperado !!", "Comuniquese con el administrador", "error");});
 	 });
 
-	 //////////////////////////////////////////////////Funcion Agregar Marca Tipo de equipo //////////////////////////////////
+	 //////////////////////////////////////////////////Funcion Agregar Marca Componente //////////////////////////////////
 
 	  $('#newMarca').bootstrapValidator({
  		 	excluded: [':disabled'],
@@ -452,10 +456,10 @@ $(document).ready(function()
          }).on('success.form.bv',function(e,data){
  	  		e.preventDefault();
  				var formulario=$('#newMarca').serialize();
- 				var route='/menu/registros/agregar/marca/tipoequipo';
+ 				var route='/menu/registros/agregar/marca/componente';
  				$.post(route,formulario)
  		  		.done(function(answer){
- 		  				console.log(answer)
+ 		  				//console.log(answer)
  						if(answer[0]==1){
  							 swal({
  									title:'Guardado exitoso',//Contenido del modal
@@ -479,7 +483,7 @@ $(document).ready(function()
  							$('#newMarca').data('bootstrapValidator').resetForm();
  							swal({
  								title:'No se puede realizar la acción',//Contenido del modal
- 								text: '<p style="font-size: 1.0em;">'+'La marca ya existe para este tipo de equipo'+'</p>',
+ 								text: '<p style="font-size: 1.0em;">'+'La marca ya existe para este tipo de componente'+'</p>',
  								type: "warning",
  								//showConfirmButton:true,//Eliminar boton de confirmacion
  								html: true
@@ -495,7 +499,7 @@ $(document).ready(function()
 	  $('#newModelo').bootstrapValidator({
  		 	excluded: [':disabled'],
  			 fields: {
- 		     descripcionMarca: {
+ 		     descripcionModelo: {
  		       validators: {
  		         notEmpty: {
  		           message: 'Debe indicar el nombre del modelo'
@@ -506,7 +510,7 @@ $(document).ready(function()
          }).on('success.form.bv',function(e,data){
  	  		e.preventDefault();
  				var formulario=$('#newModelo').serialize();
- 				var route='/menu/registros/agregar/modelo/tipoequipo';
+ 				var route='/menu/registros/agregar/modelo/componente';
  				$.post(route,formulario)
  		  		.done(function(answer){
  		  				console.log(answer)
@@ -533,7 +537,7 @@ $(document).ready(function()
  							$('#newModelo').data('bootstrapValidator').resetForm();
  							swal({
  								title:'No se puede realizar la acción',//Contenido del modal
- 								text: '<p style="font-size: 1.0em;">'+'El modelo ya existe para este tipo de equipo'+'</p>',
+ 								text: '<p style="font-size: 1.0em;">'+'El modelo ya existe para este tipo de componente'+'</p>',
  								type: "warning",
  								//showConfirmButton:true,//Eliminar boton de confirmacion
  								html: true

@@ -136,7 +136,7 @@
                     </div>
 
                 <!--   Modal Agregar Marca -->
-                
+
                     <div class="modal fade" id="myModal2"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
@@ -161,6 +161,7 @@
                                         </div>
                                   </div>
                                   <input type="hidden" class="form-control descripcion" name="padre" id="padreMarca" value="">
+                                  <input type="hidden" name="padreTipoMarca" id="padreTipoMarca" val='{{$extra->id}}'>
                                   <div class="modal-footer">
                                       <button type="submit" class="bttnMd btn" id="prueba" >Guardar <i class="fa fa-floppy-o"></i></button>
                                   </div>
@@ -193,7 +194,8 @@
                                            </div>
                                         </div>
                                   </div>
-                                  <input type="hidden" class="form-control descripcion" name="tipoPadre" id="padreModelo" value="">
+                                  <input type="hidden" name="padreTipoModelo" id="padreTipoModelo" val='{{$extra->id}}'>
+                                  <input type="hidden" class="form-control descripcion" name="componentePadre" id="padreModelo" value="">
                                   <input type="hidden" class="form-control descripcion" name="marcaPadre" id="marcaPadre" value="">
                                   <div class="modal-footer">
                                       <button type="submit" class="bttnMd btn">Guardar <i class="fa fa-floppy-o"></i></button>
@@ -213,7 +215,7 @@
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                     <h4 class="modal-title" >Agregar Componente</h4>
                                 </div>
-                                <form method="post" class="form-horizontal" id="newTipoEquipo">
+                                <form method="post" class="form-horizontal" id="newComponente">
                                   <div class="modal-body">
                                       {{ csrf_field() }}
                                         <div class="container-fluid contpfl">
@@ -221,14 +223,15 @@
                                                <div class="rPfl">
                                                   <div class="col-md-8 col-md-offset-2">
                                                       <div class="form-group row">
-                                                          <label for="descripcion">Nombre del Componente</label>
-                                                          <input type="text" class="form-control" name="descripcionTipoEquipo" id="descripcionTipoEquipo" ><i class="fa fa-id-badge icpfl"></i>
+                                                          <label for="descripcionComponente">Nombre del Componente</label>
+                                                          <input type="text" class="form-control" name="descripcionComponente" id="descripcionComponente" ><i class="fa fa-id-badge icpfl"></i>
                                                       </div>
                                                   </div>
                                                </div>
                                            </div>
                                         </div>
                                   </div>
+                                  <input type="hidden" id="padreTipoComponente" name="padreTipoComponente" value='{{$extra->id}}'>
                                   <div class="modal-footer">
                                       <button type="submit" class="bttnMd btn">Guardar <i class="fa fa-floppy-o"></i></button>
                                   </div>
@@ -259,6 +262,7 @@
                                                      </div>
                                                  </div>
                                                   <input type="hidden" class="form-control descripcion" name="registro" id="registro" value="">
+                                                  <input type="hidden" id="padreTipoComponenteM" name="padreTipoComponenteM" value='{{$extra->id}}'>
                                                </div>
 
                                            </div>

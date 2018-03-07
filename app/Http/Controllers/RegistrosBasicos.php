@@ -48,7 +48,8 @@ use App\Pieza;
 use App\MarcaTipoEquipo;
 use App\ModeloTipoEquipo;
 use App\MarcaModelo;
-
+use App\MarcaNcomponente;
+use App\ModeloNcomponente;
 use Response;
 
 
@@ -5111,7 +5112,7 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 	public function cargarListaModelosTipoEquipo(){
 		$registro=Request::get('registro');// id tipo de equipo seleccionado
 		$opcion=Request::get('valor'); // id marca seleccionada
-		
+
 		$consultaModelos=DB::table('modelos')
 						->join('modelo_tipoequipo','modelo_tipoequipo.modelo_id','=','modelos.id')
 						->join('marca_modelo','marca_modelo.modelo_id','=','modelos.id')
@@ -5259,7 +5260,7 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 		if (count($consulta)==0) {
 
 			$idModelo=DB::table('modelos')->insertGetId(['descripcion'=>$campoModelo]);
-			
+
 			$modelo= new ModeloTipoEquipo;
 			$modelo->modelo_id=$idModelo;
 			$modelo->tipoequipo_id=$idTipoEquipo;
@@ -5283,7 +5284,7 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 		else{
 			$relacionMarcaModelo=MarcaModelo::where('marca_id',$idMarca)->where('modelo_id',$consulta->id)->first();
 			if (count($relacionMarcaModelo)==0) {
-				
+
 				$marcaModelo= new MarcaModelo;
 				$marcaModelo->modelo_id=$consulta->id;
 				$marcaModelo->marca_id=$idMarca;
@@ -5297,7 +5298,7 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 					$modelo->save();
 
 				}
-				
+
 				$respuesta=1;
 				$consultaModelos=DB::table('modelo_tipoequipo')
 							->join('modelos','modelo_tipoequipo.modelo_id','modelos.id')
@@ -5313,7 +5314,7 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 			else{
 				$relacionModeloTipoEquipo=ModeloTipoEquipo::where('tipoequipo_id',$idTipoEquipo)->where('modelo_id',$consulta->id)->first();
 				if (count($relacionModeloTipoEquipo)==0) {
-					
+
 					$modelo= new ModeloTipoEquipo;
 					$modelo->modelo_id=$consulta->id;
 					$modelo->tipoequipo_id=$idTipoEquipo;
@@ -5337,7 +5338,7 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 
 	////////////////////////////////////////////////////// NOMBRE DE COMPONENTES ////////////////////////////////////////////////////////////////////////
 
-	
+
 	public function eliminarComponente(){
 		$respuesta=0;
 		$consultaComponente=0;
@@ -5373,30 +5374,33 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 		return [$respuesta,$consultaComponente];
 	}
 
-	// public function cargarListaMarcasTipoEquipo(){
-	// 	$registro=Request::get('registry');
-	// 	$consultaMarcas=DB::table('marca_tipoequipo')
-	// 						->join('marcas','marca_tipoequipo.marca_id','marcas.id')
-	// 						->where('marca_tipoequipo.tipoequipo_id',$registro)
-	// 						->select('marcas.*','marca_tipoequipo.id as id_relacion')
-	// 						->get();
-	// 	return $consultaMarcas;
-	// }
+	public function cargarListaMarcasComponente(){
+		$registro=Request::get('registry');
+		$padreTipo=Request::get('padreTipo');
+		$consultaMarcas=DB::table('marca_ncomponente')
+											->join('marcas','marca_ncomponente.marca_id','marcas.id')
+											->join('ncomponentes','marca_ncomponente.ncomponente_id','ncomponentes.id')
+											->where('marca_ncomponente.ncomponente_id',$registro)
+											//->where('ncomponentes.tipoequipo_id',$padreTipo)
+											->select('marcas.*')
+											->get();
+		return $consultaMarcas;
+	}
 
-	// public function cargarListaModelosTipoEquipo(){
-	// 	$registro=Request::get('registro');// id tipo de equipo seleccionado
-	// 	$opcion=Request::get('valor'); // id marca seleccionada
-		
-	// 	$consultaModelos=DB::table('modelos')
-	// 					->join('modelo_tipoequipo','modelo_tipoequipo.modelo_id','=','modelos.id')
-	// 					->join('marca_modelo','marca_modelo.modelo_id','=','modelos.id')
-	// 					->join('marca_tipoequipo','marca_tipoequipo.marca_id','=','marca_modelo.marca_id')
-	// 					->where(['modelo_tipoequipo.tipoequipo_id'=>$registro,'marca_modelo.marca_id'=>$opcion])
-	// 					->select('modelos.descripcion AS descripcion','modelos.id AS id')
-	// 					->get();
+	public function cargarListaModelosComponente(){
+		$registro=(int)Request::get('registro');// id componente seleccionado
+		$opcion=Request::get('valor'); // id marca seleccionada
+		$padreTipo=Request::get('padreTipo');
 
-	// 	return $consultaModelos;
-	// }
+		$consultaModelos=DB::table('modelos')
+												->join('marca_modelo','modelos.id','marca_modelo.modelo_id')
+												->join('modelo_ncomponente','modelos.id','modelo_ncomponente.modelo_id')
+												->where('modelo_ncomponente.ncomponente_id',$registro)
+												->where('marca_modelo.marca_id',$opcion)
+												->get();
+
+		return $consultaModelos;
+	}
 
 	// public function borrarMarcaTipoEquipo(){
 	// 	$respuesta=0;
@@ -5453,161 +5457,180 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 	// 	return [$respuesta,$consultaModelos];
 	// }
 
-	// public function agregarTipoEquipo(){
-	// 	$respuesta=0;
-	// 	$tipoEquipo=strtoupper(Request::get('descripcionTipoEquipo'));
-	// 	$consulta=Tipoequipo::where('descripcion',$tipoEquipo)->first();
-	// 	if (count($consulta)==0) {
-	// 		$tipo= new Tipoequipo;
-	// 		$tipo->descripcion=$tipoEquipo;
-	// 		$tipo->save();
-	// 		$respuesta=1;
-	// 	}
-	// 	return $respuesta;
-	// }
+	public function agregarComponente(){
+		$respuesta=0;
+		$componente=strtoupper(Request::get('descripcionComponente'));
+		$idTipoEquipo=Request::get('padreTipoComponente');
+		$consultaTipo=Tipoequipo::where('id',$idTipoEquipo)->first();
+		$consulta=Ncomponente::where('descripcion',$componente)->where('tipoequipo_id',$idTipoEquipo)->first();
+		if (count($consulta)==0) {
+			$Ncomponente= new Ncomponente;
+			$Ncomponente->descripcion=$componente;
+			$Ncomponente->tipoequipo_id=$idTipoEquipo;
+			$Ncomponente->save();
+			$respuesta=1;
+		}
+		return [$respuesta,$consultaTipo];
+	}
 
-	// public function modificarTipoEquipo(){
-	// 	$respuesta=0;
-	// 	$tipoEquipo=strtoupper(Request::get('descripcion')); //Nombre nuevo del tipo de equipo
-	// 	$idRegistro=(int)Request::get('registro'); // id del registro que se desea actualizar
-	// 	$nombreTipoEquipo=Tipoequipo::where('id',$idRegistro)->first(); //consulta del nombre que tiene el registro antes de modificar
-	// 	$validarTipoEquipo=Equipo::where('tipoequipo',$nombreTipoEquipo->descripcion)->first(); // validar que el tipo de equipo no este siendo usado
-	// 	if (count($validarTipoEquipo)==0) {
-	// 		$consulta=Tipoequipo::where('descripcion',$tipoEquipo)->where('id','<>',$idRegistro)->first();
-	// 		if (count($consulta)==0) {
-	// 			$tipo= Tipoequipo::find($idRegistro);
-	// 			$tipo->descripcion=$tipoEquipo;
-	// 			$tipo->save();
-	// 			$respuesta=1;
-	// 		}
-	// 		else{
-	// 			$respuesta=2;
-	// 		}
-	// 	}
-	// 	return $respuesta;
-	// }
+	public function modificarComponente(){
+		$respuesta=0;
+		$tipoEquipo=strtoupper(Request::get('descripcion')); //Nombre nuevo del tipo de equipo
+		$idRegistro=(int)Request::get('registro'); // id del registro que se desea actualizar
+		$idTipo=(int)Request::get('padreTipoComponenteM');
+		$nombreTipoEquipo=Tipoequipo::where('id',$idTipo)->first(); //consulta del nombre que tiene el registro antes de modificar
+		$nombreComponente=Ncomponente::where('id',$idRegistro)->first();//consulta del nombre del tipo de equipo padre
+		$validarComponente=DB::table('componentes')
+													->join('equipos','componentes.equipo_id','equipos.id')
+													->where('componentes.descripcion',$nombreComponente->descripcion)
+													->where('equipos.tipoequipo', $nombreTipoEquipo->descripcion)
+													->get();
+		if (count($validarComponente)==0) {
+			$consulta=Ncomponente::where('descripcion',$tipoEquipo)->where('id','<>',$idRegistro)->where('tipoequipo_id',$idTipo)->first();
+			if (count($consulta)==0) {
+				$tipo= Ncomponente::find($idRegistro);
+				$tipo->descripcion=$tipoEquipo;
+				$tipo->tipoequipo_id=$idTipo;
+				$tipo->save();
+				$respuesta=1;
+			}
+			else{
+				$respuesta=2;
+			}
+		}
+		return [$respuesta,$nombreTipoEquipo];
+	}
 
-	// public function agregarMarcaTipoEquipo(){
-	// 	$respuesta=0;
-	// 	$consultaMarcas=0;
-	// 	$campoMarca=strtoupper(Request::get('descripcionMarca'));
-	// 	$idTipoEquipo=(int)Request::get('padre');
-	// 	$consulta=Marca::where('descripcion',$campoMarca)->first();
-	// 	if (count($consulta)==0) {
-	// 		$idMarca=DB::table('marcas')->insertGetId(['descripcion'=>$campoMarca]);
-	// 		$marca= new MarcaTipoEquipo;
-	// 		$marca->marca_id=$idMarca;
-	// 		$marca->tipoequipo_id=$idTipoEquipo;
-	// 		$marca->save();
-	// 		$respuesta=1;
-	// 		$consultaMarcas=DB::table('marca_tipoequipo')
-	// 						->join('marcas','marca_tipoequipo.marca_id','marcas.id')
-	// 						->where('marca_tipoequipo.tipoequipo_id',$idTipoEquipo)
-	// 						->select('marcas.*')
-	// 						->get();
-	// 	}
-	// 	else{
-	// 		$relacion=MarcaTipoEquipo::where('tipoequipo_id',$idTipoEquipo)->where('marca_id',$consulta->id)->first();
-	// 		if (count($relacion)==0) {
-	// 			$marca= new MarcaTipoEquipo;
-	// 			$marca->marca_id=$consulta->id;
-	// 			$marca->tipoequipo_id=$idTipoEquipo;
-	// 			$marca->save();
-	// 			$respuesta=1;
-	// 			$consultaMarcas=DB::table('marca_tipoequipo')
-	// 						->join('marcas','marca_tipoequipo.marca_id','marcas.id')
-	// 						->where('marca_tipoequipo.tipoequipo_id',$idTipoEquipo)
-	// 						->select('marcas.*')
-	// 						->get();
-	// 		}
-	// 	}
-	// 	return [$respuesta,$consultaMarcas];
-	// }
+	public function agregarMarcaComponente(){
+		$respuesta=0;
+		$consultaMarcas=0;
+		$campoMarca=strtoupper(Request::get('descripcionMarca')); // nombre de la marca que se desea asociar
+		$idComponente=(int)Request::get('padre'); // id del registro seleccionado Componente
+		$idTipoEquipo=(int)Request::get('padre'); // id del tipo de equipo padre
+		$consulta=Marca::where('descripcion',$campoMarca)->first();
+		if (count($consulta)==0) {
+			$idMarca=DB::table('marcas')->insertGetId(['descripcion'=>$campoMarca]);
+			$marca= new MarcaNcomponente;
+			$marca->marca_id=$idMarca;
+			$marca->ncomponente_id=$idComponente;
+			$marca->save();
+			$respuesta=1;
+			$consultaMarcas=DB::table('marca_ncomponente')
+												->join('marcas','marca_ncomponente.marca_id','marcas.id')
+												->join('ncomponentes','marca_ncomponente.ncomponente_id','ncomponentes.id')
+												->where('marca_ncomponente.ncomponente_id',$idComponente)
+												//->where('ncomponentes.tipoequipo_id',$padreTipo)
+												->select('marcas.*')
+												->get();
+		}
+		else{
+			$relacion=MarcaNcomponente::where('ncomponente_id',$idComponente)->where('marca_id',$consulta->id)->first();
+			if (count($relacion)==0) {
+				$marca= new MarcaNcomponente;
+				$marca->marca_id=$consulta->id;
+				$marca->ncomponente_id=$idComponente;
+				$marca->save();
+				$respuesta=1;
+				$consultaMarcas=DB::table('marca_ncomponente')
+													->join('marcas','marca_ncomponente.marca_id','marcas.id')
+													->join('ncomponentes','marca_ncomponente.ncomponente_id','ncomponentes.id')
+													->where('marca_ncomponente.ncomponente_id',$idComponente)
+													//->where('ncomponentes.tipoequipo_id',$padreTipo)
+													->select('marcas.*')
+													->get();
+			}
+		}
+		return [$respuesta,$consultaMarcas];
+	}
 
-	// public function agregarModeloTipoEquipo(){
-	// 	$respuesta=0;
-	// 	$consultaModelos=0;
-	// 	$campoModelo=strtoupper(Request::get('descripcionModelo'));
-	// 	$idTipoEquipo=(int)Request::get('tipoPadre');
-	// 	$idMarca=(int)Request::get('marcaPadre');
-	// 	$consulta=Modelo::where('descripcion',$campoModelo)->first();
-	// 	if (count($consulta)==0) {
+	public function agregarModeloComponente(){
+		$respuesta=0;
+		$consultaModelos=0;
+		$campoModelo=strtoupper(Request::get('descripcionModelo'));
+		$idTipoEquipo=(int)Request::get('padreTipoModelo');
+		$idComponente=(int)Request::get('componentePadre');
+		$idMarca=(int)Request::get('marcaPadre');
+		$consulta=Modelo::where('descripcion',$campoModelo)->first();
+		if (count($consulta)==0) {
 
-	// 		$idModelo=DB::table('modelos')->insertGetId(['descripcion'=>$campoModelo]);
-			
-	// 		$modelo= new ModeloTipoEquipo;
-	// 		$modelo->modelo_id=$idModelo;
-	// 		$modelo->tipoequipo_id=$idTipoEquipo;
-	// 		$modelo->save();
+			$idModelo=DB::table('modelos')->insertGetId(['descripcion'=>$campoModelo]);
 
-	// 		$marcaModelo= new MarcaModelo;
-	// 		$marcaModelo->modelo_id=$idModelo;
-	// 		$marcaModelo->marca_id=$idMarca;
-	// 		$marcaModelo->save();
-	// 		$respuesta=1;
-	// 		$consultaModelos=DB::table('modelo_tipoequipo')
-	// 						->join('modelos','modelo_tipoequipo.modelo_id','modelos.id')
-	// 						->join('marca_modelo','modelos.id','marca_modelo.modelo_id')
-	// 						->join('marcas','marca_modelo.marca_id','marcas.id')
-	// 						->join('marca_tipoequipo','marca_tipoequipo.marca_id','marcas.id')
-	// 						->where('modelo_tipoequipo.tipoequipo_id',$idTipoEquipo)
-	// 						->where('marca_tipoequipo.marca_id',$idMarca)
-	// 						->select('modelos.*')
-	// 						->get();
-	// 	}
-	// 	else{
-	// 		$relacionMarcaModelo=MarcaModelo::where('marca_id',$idMarca)->where('modelo_id',$consulta->id)->first();
-	// 		if (count($relacionMarcaModelo)==0) {
-				
-	// 			$marcaModelo= new MarcaModelo;
-	// 			$marcaModelo->modelo_id=$consulta->id;
-	// 			$marcaModelo->marca_id=$idMarca;
-	// 			$marcaModelo->save();
+			$modelo= new ModeloNcomponente;
+			$modelo->modelo_id=$idModelo;
+			$modelo->ncomponente_id=$idComponente;
+			$modelo->save();
 
-	// 			$relacionModeloTipoEquipo=ModeloTipoEquipo::where('tipoequipo_id',$idTipoEquipo)->where('modelo_id',$consulta->id)->first();
-	// 			if (count($relacionModeloTipoEquipo)==0) {
-	// 				$modelo= new ModeloTipoEquipo;
-	// 				$modelo->modelo_id=$consulta->id;
-	// 				$modelo->tipoequipo_id=$idTipoEquipo;
-	// 				$modelo->save();
+			$marcaModelo= new MarcaModelo;
+			$marcaModelo->modelo_id=$idModelo;
+			$marcaModelo->marca_id=$idMarca;
+			$marcaModelo->save();
+			$respuesta=1;
 
-	// 			}
-				
-	// 			$respuesta=1;
-	// 			$consultaModelos=DB::table('modelo_tipoequipo')
-	// 						->join('modelos','modelo_tipoequipo.modelo_id','modelos.id')
-	// 						->join('marca_modelo','modelos.id','marca_modelo.modelo_id')
-	// 						->join('marcas','marca_modelo.marca_id','marcas.id')
-	// 						->join('marca_tipoequipo','marca_tipoequipo.marca_id','marcas.id')
-	// 						->where('modelo_tipoequipo.tipoequipo_id',$idTipoEquipo)
-	// 						->where('marca_tipoequipo.marca_id',$idMarca)
-	// 						->select('modelos.*')
-	// 						->get();
+			$consultaModelos=DB::table('modelo_ncomponente')
+							->join('modelos','modelo_ncomponente.modelo_id','modelos.id')
+							->join('marca_modelo','modelos.id','marca_modelo.modelo_id')
+							->join('marcas','marca_modelo.marca_id','marcas.id')
+							->join('marca_ncomponente','marca_ncomponente.marca_id','marcas.id')
+							->where('modelo_ncomponente.ncomponente_id',$idComponente)
+							->where('marca_ncomponente.marca_id',$idMarca)
+							->select('modelos.*')
+							->get();
 
-	// 		}
-	// 		else{
-	// 			$relacionModeloTipoEquipo=ModeloTipoEquipo::where('tipoequipo_id',$idTipoEquipo)->where('modelo_id',$consulta->id)->first();
-	// 			if (count($relacionModeloTipoEquipo)==0) {
-					
-	// 				$modelo= new ModeloTipoEquipo;
-	// 				$modelo->modelo_id=$consulta->id;
-	// 				$modelo->tipoequipo_id=$idTipoEquipo;
-	// 				$modelo->save();
-	// 				$respuesta=1;
-	// 				$consultaModelos=DB::table('modelo_tipoequipo')
-	// 						->join('modelos','modelo_tipoequipo.modelo_id','modelos.id')
-	// 						->join('marca_modelo','modelos.id','marca_modelo.modelo_id')
-	// 						->join('marcas','marca_modelo.marca_id','marcas.id')
-	// 						->join('marca_tipoequipo','marca_tipoequipo.marca_id','marcas.id')
-	// 						->where('modelo_tipoequipo.tipoequipo_id',$idTipoEquipo)
-	// 						->where('marca_tipoequipo.marca_id',$idMarca)
-	// 						->select('modelos.*')
-	// 						->get();
-	// 			}
-	// 		}
-	// 	}
-	// 	return [$respuesta,$consultaModelos];
-	// }
+
+		}
+		else{
+			$relacionMarcaModelo=MarcaModelo::where('marca_id',$idMarca)->where('modelo_id',$consulta->id)->first();
+			if (count($relacionMarcaModelo)==0) {
+
+				$marcaModelo= new MarcaModelo;
+				$marcaModelo->modelo_id=$consulta->id;
+				$marcaModelo->marca_id=$idMarca;
+				$marcaModelo->save();
+
+				$relacionModeloNcomponente=ModeloNcomponente::where('ncomponente_id',$idComponente)->where('modelo_id',$consulta->id)->first();
+				if (count($relacionModeloNcomponente)==0) {
+					$modelo= new ModeloNcomponente;
+					$modelo->modelo_id=$consulta->id;
+					$modelo->ncomponente_id=$idComponente;
+					$modelo->save();
+
+				}
+
+				$respuesta=1;
+				$consultaModelos=DB::table('modelo_ncomponente')
+								->join('modelos','modelo_ncomponente.modelo_id','modelos.id')
+								->join('marca_modelo','modelos.id','marca_modelo.modelo_id')
+								->join('marcas','marca_modelo.marca_id','marcas.id')
+								->join('marca_ncomponente','marca_ncomponente.marca_id','marcas.id')
+								->where('modelo_ncomponente.ncomponente_id',$idComponente)
+								->where('marca_ncomponente.marca_id',$idMarca)
+								->select('modelos.*')
+								->get();
+
+			}
+			else{
+				$relacionModeloNcomponente=ModeloNcomponente::where('ncomponente_id',$idComponente)->where('modelo_id',$consulta->id)->first();
+				if (count($relacionModeloNcomponente)==0) {
+					$modelo= new ModeloNcomponente;
+					$modelo->modelo_id=$consulta->id;
+					$modelo->ncomponente_id=$idComponente;
+					$modelo->save();
+
+				}
+				$respuesta=1;
+				$consultaModelos=DB::table('modelo_ncomponente')
+								->join('modelos','modelo_ncomponente.modelo_id','modelos.id')
+								->join('marca_modelo','modelos.id','marca_modelo.modelo_id')
+								->join('marcas','marca_modelo.marca_id','marcas.id')
+								->join('marca_ncomponente','marca_ncomponente.marca_id','marcas.id')
+								->where('modelo_ncomponente.ncomponente_id',$idComponente)
+								->where('marca_ncomponente.marca_id',$idMarca)
+								->select('modelos.*')
+								->get();
+			}
+		}
+		return [$respuesta,$consultaModelos];
+	}
 
 
 	/*public function tipo_equipos()
