@@ -189,14 +189,14 @@ Route::match(['post','get'],'/clientes/categoria/sucursal/usuarios/perfil',     
 	Route::match(['post','get'],'/planes/servicios/insertar',                                               ['uses'=>'RegistrosBasicos@insertar_servicios']);
 
 ////////////////////////// DATOS COMPLEMENTARIOS  //////////////////////////////////////////////////////////////////////////////////////////////////////////
-	Route::match(['post','get'],'/datos',                                              	['uses'=>'RegistrosBasicos@tipoEquipos']);
+	Route::match(['post','get'],'/datos',                                              						['uses'=>'RegistrosBasicos@tipoEquipos']);
 	Route::match(['post','get'],'/tipoequipo/componentes/{id}',											    ['uses'=>'RegistrosBasicos@Componentes']);
-	Route::match(['post','get'],'/tipoequipo/componentes/piezas/{id}',								  ['uses'=>'RegistrosBasicos@Piezas']);
-	Route::match(['post','get'],'/datos/modificar',										                  ['uses'=>'RegistrosBasicos@llenarModalModificar']);
+	Route::match(['post','get'],'/tipoequipo/componentes/piezas/{id}',								    	['uses'=>'RegistrosBasicos@Piezas']);
+	Route::match(['post','get'],'/datos/modificar',										                  	['uses'=>'RegistrosBasicos@llenarModalModificar']);
 	Route::match(['post','get'],'/datos/eliminar/tipoEquipo',										        ['uses'=>'RegistrosBasicos@eliminarTipoEquipo']);
-	Route::match(['post','get'],'/datos/mostrarmarcas',										              ['uses'=>'RegistrosBasicos@cargarListaMarcasTipoEquipo']);
+	Route::match(['post','get'],'/datos/mostrarmarcas',										                ['uses'=>'RegistrosBasicos@cargarListaMarcasTipoEquipo']);
 	Route::match(['post','get'],'/datos/mostrarmodelos',										            ['uses'=>'RegistrosBasicos@cargarListaModelosTipoEquipo']);
-	Route::match(['post','get'],'/datos/borrarMarcaTipoEquipo',										      ['uses'=>'RegistrosBasicos@borrarMarcaTipoEquipo']);
+	Route::match(['post','get'],'/datos/borrarMarcaTipoEquipo',										        ['uses'=>'RegistrosBasicos@borrarMarcaTipoEquipo']);
 	Route::match(['post','get'],'/datos/borrarModeloTipoEquipo',										    ['uses'=>'RegistrosBasicos@borrarModeloTipoEquipo']);
 	Route::match(['post','get'],'/agregar/tipoequipo',										            	['uses'=>'RegistrosBasicos@agregarTipoEquipo']);
 	Route::match(['post','get'],'/modificar/tipoequipo',										            ['uses'=>'RegistrosBasicos@modificarTipoEquipo']);
@@ -204,13 +204,27 @@ Route::match(['post','get'],'/clientes/categoria/sucursal/usuarios/perfil',     
 	Route::match(['post','get'],'/agregar/modelo/tipoequipo',										        ['uses'=>'RegistrosBasicos@agregarModeloTipoEquipo']);
 
 	Route::match(['post','get'],'/datos/eliminar/componente',										        ['uses'=>'RegistrosBasicos@eliminarComponente']);
-  Route::match(['post','get'],'/datos/mostrarmarcas/componente',										  ['uses'=>'RegistrosBasicos@cargarListaMarcasComponente']);
-  Route::match(['post','get'],'/datos/mostrarmodelos/componente',										  ['uses'=>'RegistrosBasicos@cargarListaModelosComponente']);
-  Route::match(['post','get'],'/agregar/componente',										            	['uses'=>'RegistrosBasicos@agregarComponente']);
-  Route::match(['post','get'],'/modificar/componente',										            ['uses'=>'RegistrosBasicos@modificarComponente']);
-  Route::match(['post','get'],'/agregar/marca/componente',										        ['uses'=>'RegistrosBasicos@agregarMarcaComponente']);
-  Route::match(['post','get'],'/agregar/modelo/componente',										        ['uses'=>'RegistrosBasicos@agregarModeloComponente']);
+	Route::match(['post','get'],'/datos/mostrarmarcas/componente',										  	['uses'=>'RegistrosBasicos@cargarListaMarcasComponente']);
+	Route::match(['post','get'],'/datos/mostrarmodelos/componente',										  	['uses'=>'RegistrosBasicos@cargarListaModelosComponente']);
+	Route::match(['post','get'],'/agregar/componente',										            	['uses'=>'RegistrosBasicos@agregarComponente']);
+	Route::match(['post','get'],'/modificar/componente',										            ['uses'=>'RegistrosBasicos@modificarComponente']);
+	Route::match(['post','get'],'/agregar/marca/componente',										        ['uses'=>'RegistrosBasicos@agregarMarcaComponente']);
+	Route::match(['post','get'],'/agregar/modelo/componente',										        ['uses'=>'RegistrosBasicos@agregarModeloComponente']);
+	Route::match(['post','get'],'/datos/borrarmarcacomponente',										      	['uses'=>'RegistrosBasicos@borrarMarcaComponente']);
+	Route::match(['post','get'],'/datos/borrarmodelocomponente',										    ['uses'=>'RegistrosBasicos@borrarModeloComponente']);
 
+
+	Route::match(['post','get'],'/datos/eliminar/pieza',										        	['uses'=>'RegistrosBasicos@eliminarPieza']);
+	Route::match(['post','get'],'/datos/mostrarmarcas/pieza',										  		['uses'=>'RegistrosBasicos@cargarListaMarcasPieza']);
+	Route::match(['post','get'],'/datos/mostrarmodelos/pieza',										  		['uses'=>'RegistrosBasicos@cargarListaModelosPieza']);
+	Route::match(['post','get'],'/agregar/pieza',										            		['uses'=>'RegistrosBasicos@agregarPieza']);
+	Route::match(['post','get'],'/modificar/pieza',										            		['uses'=>'RegistrosBasicos@modificarPieza']);
+	Route::match(['post','get'],'/agregar/marca/pieza',										        		['uses'=>'RegistrosBasicos@agregarMarcaPieza']);
+	Route::match(['post','get'],'/agregar/modelo/pieza',										        	['uses'=>'RegistrosBasicos@agregarModeloPieza']);
+	Route::match(['post','get'],'/datos/borrarmarcapieza',										      		['uses'=>'RegistrosBasicos@borrarMarcaPieza']);
+	Route::match(['post','get'],'/datos/borrarmodelopieza',										      		['uses'=>'RegistrosBasicos@borrarModeloPieza']);
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 

@@ -19,7 +19,7 @@ $(document).ready(function()
 	//////////////////////////////////////Funcion boton: modificar llena el modal con los datos del registro que se desea modificar/////////////////////////////////////////////////////
 	$('.Modificar').click(function()
 	{
-		$('#modificarComponente').data('bootstrapValidator').resetForm();
+		$('#modificarPieza').data('bootstrapValidator').resetForm();
     	var tabla=$('#areaResultados').data('tabla');
 	  	var registry=$(this).attr('data-reg');
 	  	var _token=$( "input[name^='_token']" ).val();
@@ -334,43 +334,43 @@ $(document).ready(function()
 	});
 	//////////////////////////////////////////////////Funcion Agregar Componente //////////////////////////////////
 
-	 $('#newComponente').bootstrapValidator({
+	 $('#newPieza').bootstrapValidator({
 		 	excluded: [':disabled'],
 			 fields: {
-		     descripcionComponente: {
+		     descripcionPieza: {
 		       validators: {
 		         notEmpty: {
-		           message: 'Debe indicar el nombre del Componente'
+		           message: 'Debe indicar el nombre de la Pieza'
 		         }
 		       }
 		     }
 		   }
         }).on('success.form.bv',function(e){
 	  		e.preventDefault();
-				var formulario=$('#newComponente').serialize();
-				var route='/menu/registros/agregar/componente';
+				var formulario=$('#newPieza').serialize();
+				var route='/menu/registros/agregar/pieza';
 				$.post(route,formulario)
 		  		.done(function(answer){
 						//console.log(answer)
 						if(answer[0]==1){
 							 swal({
 									title:'Guardado exitoso',//Contenido del modal
-									text: '<p style="font-size: 1.0em;">'+'El componente se guardo correctamente'+'</p>',
+									text: '<p style="font-size: 1.0em;">'+'La pieza se guardo correctamente'+'</p>',
 									type: "success",
 									showConfirmButton:true,//Eliminar boton de confirmacion
 									html: true
 								},
 		  				 	function(isConfirm){
 		  				 		if(isConfirm){
-		  				 			window.location.href="/menu/registros/tipoequipo/componentes/"+answer[1].id;
+		  				 			window.location.href="/menu/registros/tipoequipo/componentes/piezas/"+answer[1].id;
 		  				 		}
 		  				 	});
 						}
 						else{
-							$('#newComponente').data('bootstrapValidator').resetForm();
+							$('#newPieza').data('bootstrapValidator').resetForm();
 							swal({
 								title:'No se puede realizar la acción',//Contenido del modal
-								text: '<p style="font-size: 1.0em;">'+'El Componente ya existe para el tipo de equipo '+answer[1].descripcion+'</p>',
+								text: '<p style="font-size: 1.0em;">'+'La pieza ya existe para el Componente '+answer[1].descripcion+'</p>',
 								type: "warning",
 								//showConfirmButton:true,//Eliminar boton de confirmacion
 								html: true
@@ -384,53 +384,53 @@ $(document).ready(function()
 
 	////////////////////////////////////// Funcion modificar tipo Componente ///////////////////////////////////////////////////
 
-	$('#modificarComponente').bootstrapValidator({
+	$('#modificarPieza').bootstrapValidator({
 		excluded: [':disabled'],
 		 fields: {
 			 descripcion: {
 				 validators: {
 					 notEmpty: {
-						 message: 'Debe indicar el nombre del Componente'
+						 message: 'Debe indicar el nombre de la  Pieza'
 					 }
 				 }
 			 }
 		 }
 			 }).on('success.form.bv',function(e,data){
 			e.preventDefault();
-			var formulario=$('#modificarComponente').serialize();
-			var route='/menu/registros/modificar/componente';
+			var formulario=$('#modificarPieza').serialize();
+			var route='/menu/registros/modificar/pieza';
 			$.post(route,formulario)
 				.done(function(answer){
 					//console.log(answer)
 				if(answer[0]==1){
 						 swal({
 								title:'Actualización Exitosa',//Contenido del modal
-								text: '<p style="font-size: 1.0em;">'+'El componente se modifico correctamente'+'</p>',
+								text: '<p style="font-size: 1.0em;">'+'La pieza se modifico correctamente'+'</p>',
 								type: "success",
 								showConfirmButton:true,//Eliminar boton de confirmacion
 								html: true
 							},
 							function(isConfirm){
 								if(isConfirm){
-									window.location.href="/menu/registros/tipoequipo/componentes/"+answer[1].id;
+									window.location.href="/menu/registros/tipoequipo/componentes/piezas/"+answer[1].id;
 								}
 							});
 					}
 					else if(answer[0]==2){
-						$('#modificarComponente').data('bootstrapValidator').resetForm();
+						$('#modificarPieza').data('bootstrapValidator').resetForm();
 						swal({
 							title:'No se puede realizar la acción',//Contenido del modal
-							text: '<p style="font-size: 1.0em;">'+'El componente ya existe para el tipo de equipo '+answer[1].descripcion+'</p>',
+							text: '<p style="font-size: 1.0em;">'+'La pieza ya existe para el tipo de componente '+answer[1].descripcion+'</p>',
 							type: "warning",
 							//showConfirmButton:true,//Eliminar boton de confirmacion
 							html: true
 						});
 					}
 					else{
-						$('#modificarComponente').data('bootstrapValidator').resetForm();
+						$('#modificarPieza').data('bootstrapValidator').resetForm();
 						swal({
 							title:'No se puede realizar la acción',//Contenido del modal
-							text: '<p style="font-size: 1.0em;">'+'El Componente seleccionado esta asociado con al menos un equipo, para continuar debe cambiar esta asociación'+'</p>',
+							text: '<p style="font-size: 1.0em;">'+'La pieza seleccionada esta asociada con al menos un equipo, para continuar debe cambiar esta asociación'+'</p>',
 							type: "warning",
 							//showConfirmButton:true,//Eliminar boton de confirmacion
 							html: true

@@ -24,7 +24,7 @@
                                 @if($agregar)
                                 <div class="bttn-agregar">
                                     <button id="btnAdd" type="button" class="bttn-agr" data-toggle="modal" data-target="#myModal" href="#myModal"><span class="fa fa-plus"></span><span class="txt-bttn">AGREGAR</span></button>
-                                    <input type="hidden" id="padreTipo" val='{{$extra->id}}'>
+                                    <input type="hidden" id="padreTipo" value='{{$extra->id}}'>
                                 </div>
                                 @endif
                             </div>
