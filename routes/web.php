@@ -308,4 +308,13 @@ Route::match(['post','get'],'/estructura/actualizarDepartamento',								['uses'
 Route::match(['post','get'],'/estructura/actualizarArea',										['uses'=>'EstructuraController@actualizarArea']);
 Route::match(['post','get'],'/estructura/actualizarCargo',										['uses'=>'EstructuraController@actualizarCargo']);
 Route::match(['post','get'],'/estructura/status',												['uses'=>'EstructuraController@modificarStatus']);
+
+
+
+///////////////////////////////////////////////BOTONES ELIMINAR///////////////////////////////////////////////////////////////////////////////////
+Route::match(['post','get'],'/clientes/eliminar/aplicaciones',						   	['uses'=>'Eliminar@eliminarAplicacion']);
+Route::match(['post','get'],'/clientes/eliminar/piezas',						   		['uses'=>'Eliminar@eliminarPieza']);
+Route::match(['post','get'],'/clientes/eliminar/componentes',						   	['uses'=>'Eliminar@eliminarComponente']);
+Route::match(['post','get'],'/clientes/eliminar/equipos',						   		['uses'=>'Eliminar@eliminarEquipo']);
+
 });

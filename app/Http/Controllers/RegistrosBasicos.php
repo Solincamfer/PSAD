@@ -4303,7 +4303,7 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 	public function clientes_sucursales_equipos($sucursal_id)//vista de equipos de una sucursal
 		{
 			$datos=$this->cargar_header_sidebar_acciones();
-			$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(42,43,44,49),41);
+			$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(42,43,44,49,114),41);
 			$sucursal=Sucursal::find($sucursal_id);
 			$categoria=Categoria::find($sucursal->categoria_id);
 			$tipoequipo=Tipoequipo::all();
@@ -4346,7 +4346,7 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 	public function clientes_sucursales_equipos_componentes($equipo_id)//vista de componentes de un equipo
 		{
 			$datos=$this->cargar_header_sidebar_acciones();
-			$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(46,47,48),45);
+			$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(46,47,48,112),45);
 			$equipo=Equipo::find($equipo_id);
 			$sucursal=Sucursal::find($equipo->sucursal_id);
 			$tipoequipo=Tipoequipo::where('descripcion',$equipo->tipoequipo)->first();
@@ -4409,6 +4409,7 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 		$marca=Marca::where('descripcion',$componente->marca)->first();
 		$modelo=Modelo::where('descripcion',$componente->modelo)->first();
 		$marcas=$ncomponente->marcas;
+
 		$modelos=DB::table('modelos')
 						->join('modelo_ncomponente','modelo_ncomponente.modelo_id','=','modelos.id')
 						->join('marca_modelo','marca_modelo.modelo_id','=','modelos.id')
@@ -4523,7 +4524,7 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 	public function clientes_sucursales_equipos_aplicaciones($equipo_id)//vista de aplicaciones de un equipo
 		{
 			$datos=$this->cargar_header_sidebar_acciones();
-			$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(51,52),50);
+			$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(51,52,110),50);
 			$equipo=Equipo::find($equipo_id);
 			$sucursal=Sucursal::find($equipo->sucursal_id);
 
@@ -4603,7 +4604,7 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 		public function clientes_sucursales_equipos_piezas($componente_id)//vista de piezas de un componente
 		{
 			$datos=$this->cargar_header_sidebar_acciones();
-			$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(54,55),53);
+			$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(54,55,113),53);
 			$componente=Componente::find($componente_id);
 			$ncomponente=DB::table('ncomponentes')->where('descripcion',$componente->descripcion)->first();
 			$npiezas=DB::table('npiezas')->where('ncomponente_id',$ncomponente->id)->get();
@@ -4981,7 +4982,13 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 			$marcas=$te->marcas;
 
 			$mr=Marca::find($marca->id);
-			$modelos=$mr->modelos;
+			 $modelos=DB::table('modelos')
+		           ->join('modelo_tipoequipo','modelo_tipoequipo.modelo_id','=','modelos.id')
+		           ->join('marca_modelo','marca_modelo.modelo_id','=','modelos.id')
+		           ->where(['marca_modelo.marca_id'=>$marca->id,'modelo_tipoequipo.tipoequipo_id'=>$tipoEquipo->id])
+		           ->select('modelos.id AS id','modelos.descripcion AS descripcion')
+		           ->get();
+					
 
 			// ///////////////////////////////////////////////////////////////
 			$equip->id=$equipo->id;
@@ -5000,7 +5007,7 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 
 
 
-			return Response::json(['equipo'=>$equip,'tipoequipo'=>$tipoEq,'marcas'=>$marcas,'modelos'=>$modelos]);
+			return Response::json(['equipo'=>$equip,'tipoequipo'=>$tipoEq,'marcas'=>$marcas,'modelos'=>$modelos,'modelo'=>$modelo,'marca'=>$marca]);
 		}
 
 

@@ -54,11 +54,17 @@
                                                             <i class="{{$accion->clase_css}}" data-equipo="{{$equipo->id}}"></i>
                                                         </a>
                                                     </span>
-                                                @elseif($accion->id!=42)
+                                                @elseif($accion->id==44 || $accion->id==49)
                                                     <span class="iclsp">
                                                         <a href="{{$accion->url.$equipo->id}}" class="tltp" data-ttl="{{$accion->descripcion}}">
                                                             <i class="{{$accion->clase_css}}"></i>
                                                         </a>
+                                                    </span>
+                                                @elseif($accion->id==114)
+                                                    <span class="iclsp">
+                                                        <a class="_eliminarEquip_" id="elimEquip{{$equipo->id}}" data-reg="{{$equipo->id}}" data-ttl="{{$accion->descripcion}}">
+                                                           <i class="{{$accion->clase_css}}"></i>
+                                                      </a>
                                                     </span>
                                                 @endif
                                             @elseif($accion->id==43)
@@ -71,12 +77,7 @@
                                                         <input type="checkbox" class="checkEquipos" name="status" id="{{'equipoCheck'. $equipo->id}}" value="{{$equipo->status}}"  data-reg="{{$equipo->id}}" ><label for="{{'equipoCheck'. $equipo->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
                                                     </div>
                                                 @endif
-                                            @elseif($accion->id==114)
-                                                <span class="iclsp">
-                                                    <a class="eliminarEquip_" id="Equip{{$equipo->id}}" data-reg="{{$equipo->id}}" data-ttl="{{$accion->descripcion}}">
-                                                       <i class="{{$accion->clase_css}}"></i>
-                                                  </a>
-                                            </span>
+                                            
                                             @endif
                                         @endforeach
                                     </div>

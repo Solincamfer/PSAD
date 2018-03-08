@@ -47,7 +47,7 @@
                             <div class="contMd" style="">
                                 <div class="icl">
                                     @foreach($acciones as $accion)
-                                        @if($accion->id!=55)
+                                        @if($accion->id!=55 && $accion->id!=113)
                                             @if($accion->id==54)
                                                 <span class="iclsp">
                                                     <a  class="modificarPieza" data-reg="{{$pieza->id}}" data-ttl="{{$accion->descripcion}}" data-toggle="modal" > 
@@ -73,7 +73,7 @@
                                             @endif
                                         @elseif($accion->id==113)
                                             <span class="iclsp">
-                                                    <a class="eliminarPiez_" id="Piez{{$pieza->id}}" data-reg="{{$pieza->id}}" data-ttl="{{$accion->descripcion}}">
+                                                    <a class="_eliminarPiez_" id="Piez{{$pieza->id}}" data-reg="{{$pieza->id}}" data-ttl="{{$accion->descripcion}}">
                                                        <i class="{{$accion->clase_css}}"></i>
                                                   </a>
                                             </span>

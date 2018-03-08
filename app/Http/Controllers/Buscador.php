@@ -357,9 +357,160 @@ class Buscador extends Controller
 
        // $consulta=DB::table('perfiles')->where('id','<>',24)->delete();
 
-      //$consulta=DB::table('acciones')->where('id','>',109)->where('id','<',121)->update(['status_ac'=>0]);
+      $consulta=DB::table('acciones')->where('id','>',109)->where('id','<',121)->update(['status_ac'=>1]);
 
-        return 0;
+        /////////////////////////consulta modificar equipos/////////////////////////////////
+
+        // $tipoEquipo=DB::table('tipoequipos')->where('descripcion','DESKTOP')->first();
+        // $marca=DB::table('marcas')->where('descripcion','HP')->first();
+
+        //  $modelos=DB::table('modelos')
+        //    ->join('modelo_tipoequipo','modelo_tipoequipo.modelo_id','=','modelos.id')
+        //    ->join('marca_modelo','marca_modelo.modelo_id','=','modelos.id')
+        //    ->where(['marca_modelo.marca_id'=>$marca->id,'modelo_tipoequipo.tipoequipo_id'=>$tipoEquipo->id])
+        //    ->select('modelos.id AS id','modelos.descripcion AS descripcion')
+        //    ->get();
+
+        // return Response::json($modelos);
+
+
+        ////////////////////Inserciones Tipoequipo, componentes y piezas///////////////////////////
+
+        $modelos=[
+                    'PCHP-00','PCDELL-00',
+                    'PCVIT-00','PCLG-00',
+                    'LAPBENQ-00','LAPDELL-00',
+                    'CASEHP-00','CASEVIT-00',
+                    'MONTLG-00','MONTDELL-00',
+                    'TECLBENQ-00','TECLHP-00',
+                    'MOUSEBENQ-00','MOUSEHP-00',
+                    'UPSVIT-00','UPSLG-00',
+                    'CORNLG-00','CORNBENQ-00',
+                    'TMVIT-00','TMBENQ-00',
+                    'TVLG-00','TVDELL-00',
+                    'MRHP-00','MRLG-00',
+                    'DRHP-00','DRVIT-00'
+                  ];
+
+        $marcas=['HP','DELL','BENQ','VIT','LG'];
+
+
+        $tipoequipos=['DESKTOP','LAPTOP'];
+
+        $tipocomponentes=array(['CASE',1],['MONITOR',1],['TECLADO',1],['MOUSE',1],['UPS',1],['CORNETAS',1],['MOUSE',2],['UPS',2],['CORNETAS',2]);
+
+        $tipopiezas=[['TARJETA MADRE',1],['TARJETA DE VIDEO',1],['MEMORIA RAM',1],['DISCO DURO',1]];
+
+
+        ////////////////////////Relaciones (correr luego de crear todos los registros anteriores)//////////////////////////////
+
+        $marca_tipoequipo=[[1,1],[2,1],[4,1],[5,1],[3,2],[2,2]];//campo 0 marca, campo 1 tipoequipo
+        $modelo_tipoequipo=[[1,1],[2,1],[3,1],[4,1],[5,2],[6,2]];//campo 0 modelo, campo 1 tipoequipo
+
+
+        $marca_ncomponente=[[1,1],[4,1],[5,2],[2,2],[3,3],[1,3],[3,4],[1,4],[4,5],[5,5],[5,6],[3,6]];//campo 0 marca_id, campo 1 ncomponente_id
+        $modelo_ncomponente=[[7,1],[8,1],[9,2],[10,2],[11,3],[12,3],[13,4],[14,4],[15,5],[16,5],[17,6],[18,6]];//campo 0 modelo_id, campo 1 ncomponente_id
+
+
+        $marca_npieza=[[4,1],[3,1],[5,2],[2,2],[1,3],[5,3],[1,4],[4,4]];//campo 0 marca_id, campo 1 npieza_id
+        $modelo_npieza=[[19,1],[20,1],[21,2],[22,2],[23,3],[24,3],[25,4],[26,4]];//campo 0 modelo_id, campo 1 npieza_id
+
+       
+
+        $marca_modelo=[[1,1],[2,2],[4,3],[5,4],[3,5],[2,6],[1,7],[4,8],[5,9],[2,10],[3,11],[1,12],[3,13],[1,14],[4,15],[5,16],[5,17],[3,18],[4,19],[3,20],[5,21],[2,22],[1,23],[5,24],[1,25],[4,26]];//campo 0 marca campo 1 modelo
+
+       
+       
+          //////////////marca piezas y modelo piezas////////
+        // foreach ($marca_npieza as $MarP) 
+        // {
+        //   DB::table('marca_npieza')->insert(['marca_id'=>$MarP[0],'npieza_id'=>$MarP[1]]);
+        // }
+
+        // foreach ($modelo_npieza as $MarMod)
+        // {
+        //   DB::table('modelo_npieza')->insert(['modelo_id'=>$MarMod[0],'npieza_id'=>$MarMod[1]]);
+        // }
+
+        // /////////////marca componente y modeo componente///////////////
+        // foreach ($marca_ncomponente as $MarNc) 
+        // {
+        //   DB::table('marca_ncomponente')->insert(['marca_id'=>$MarNc[0],'ncomponente_id'=>$MarNc[1]]);
+        // }
+
+        // foreach ($modelo_ncomponente as $ModNc) 
+        // {
+        //   DB::table('modelo_ncomponente')->insert(['modelo_id'=>$ModNc[0],'ncomponente_id'=>$ModNc[1]]);
+        // }
+
+
+        ////////////marca_modelo/////////////////////
+        // foreach ($marca_modelo as $marM ) 
+        // {
+        //   DB::table('marca_modelo')->insert(['marca_id'=>$marM[0],'modelo_id'=>$marM[1]]);
+        // }
+
+        /////////////////////marca tipoequipo/////////////////////////////////////
+        // foreach ($marca_tipoequipo as $marE) 
+        // {
+        //   DB::table('marca_tipoequipo')->insert(['marca_id'=>$marE[0],'tipoequipo_id'=>$marE[1]]);
+        // }
+
+        ///////////modelo_tipoequipo//////////////////////////////////////////////
+        // foreach ($modelo_tipoequipo as $modT) 
+        // {
+        //   DB::table('modelo_tipoequipo')->insert(['modelo_id'=>$modT[0],'tipoequipo_id'=>$modT[1]]);
+        // }
+
+
+        ////////
+
+        /////////////////////////////////Cargar modelos///////////////
+        // foreach ($modelos as $descripcion) 
+        // {
+        //   $modelo=new Modelo();
+        //     $modelo->descripcion=$descripcion;
+        //   $modelo->save();
+        // }
+
+        ///////////Cargar marcas//////////////////////////////
+        // foreach ($marcas as $descripcion) 
+        // {
+        //   $marca=new Marca();
+        //     $marca->descripcion=$descripcion;
+        //   $marca->save();
+        // }
+
+        ////////Cargar tipo Equipo /////////////////////
+        // foreach ($tipoequipos as $descripcion) 
+        // {
+        //    $tipoequipo=new Tipoequipo();
+        //       $tipoequipo->descripcion=$descripcion;
+        //    $tipoequipo->save();
+        // }
+
+        ///////////////cargar ncomponentes /////////////////////
+
+        // foreach ($tipocomponentes as $ncomponente) 
+        // {
+        //   $componente=new Ncomponente();
+        //     $componente->descripcion=$ncomponente[0];
+        //     $componente->tipoequipo_id=$ncomponente[1];
+        //   $componente->save();
+        // }
+
+
+        ////////////cargar piezas //////////////////////////////
+
+        // foreach ($tipopiezas as $npieza) 
+        // {
+        //   $pieza=new Npieza();
+        //       $pieza->descripcion=$npieza[0];
+        //       $pieza->ncomponente_id=$npieza[1];
+        //   $pieza->save();
+        // }
+        
+        return $consulta;
 
 			}
 

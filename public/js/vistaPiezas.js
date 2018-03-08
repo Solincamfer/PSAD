@@ -60,7 +60,72 @@ $(document).ready(function()
 		}
 
 		
+		///////////////////////////////Eliminar piezas ////////////////////////////////////////////////
+		$('._eliminarPiez_').click(function()
+		{
+			var registry=$(this).data('reg');
+			var route='/menu/registros/clientes/eliminar/piezas';
+			var _token=$( "input[name^='_token']" ).val();
+			var componente=$('#RegComponente__').val();
 
+				swal({
+							title: "Eliminar Pieza",
+							text: "¿Desea eliminar la pieza para el componente seleccionado?",
+							type: "warning",
+							showCancelButton: true,
+							confirmButtonColor:'#EE1919',
+							confirmButtonText:'Eliminar Pieza',
+							cancelButtonText: "Cancelar",
+							closeOnConfirm: false,
+							closeOnCancel: false
+						 },
+					 function(isConfirm)
+					 {
+
+					 		if(isConfirm)
+					 		{
+
+								$.post(route, {_token:_token,registry:registry})
+								.done(function(answer)
+								{
+									
+									if(answer==1)
+									{
+										swal({
+												title:'Eliminacion Exitosa',//Contenido del modal
+												text: '<p style="font-size: 1.0em;">'+''+'</p>',
+												type: "success",
+												showConfirmButton:true,//Eliminar boton de confirmacion
+												html: true
+											},
+								  		function(isConfirm)
+								  			{
+								  				if(isConfirm)
+								  				 {
+								  				 	window.location.href='/menu/registros/clientes/categoria/sucursal/equipos/componentes/piezas/'+componente;
+								  				 }	
+
+								  			});
+										
+
+									}
+									else
+										{
+											 swal("No se elimino la pieza!!!", "", "error");
+										}
+								})
+								.fail(function()
+									{ swal("Error Inesperado !!", "Comuniquese con el administrador", "error");});
+							}
+							else
+							{
+								 
+								 swal("Eliminacion Cancelada !!", "", "error");
+								
+								 
+							}
+					});
+		});
 		///////////////////////////////select dependientes //////////////////////////////////////////////
 
 		    $('.selectPiezas').change(function()

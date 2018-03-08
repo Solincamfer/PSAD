@@ -59,7 +59,72 @@ $(document).ready(function()
 			return 0;
 		}
 
+	/////////////////////////////Eliminar componente //////////////////////////
+	$('._eliminarComp_').click(function() 
+	{
+			var registry=$(this).data('reg');
+			var route='/menu/registros/clientes/eliminar/componentes';
+			var _token=$( "input[name^='_token']" ).val();
+			var equipo=$('#equipoPadre_').val();
 
+				swal({
+							title: "Eliminar Componente",
+							text: "Recuerde que al eliminar el componente, se eliminaran todas sus piezas asociadas, ¿ Desea eliminar el componente ? ",
+							type: "warning",
+							showCancelButton: true,
+							confirmButtonColor:'#EE1919',
+							confirmButtonText:'Eliminar Componente',
+							cancelButtonText: "Cancelar",
+							closeOnConfirm: false,
+							closeOnCancel: false
+						 },
+					 function(isConfirm)
+					 {
+
+					 		if(isConfirm)
+					 		{
+
+								$.post(route, {_token:_token,registry:registry})
+								.done(function(answer)
+								{
+									
+									if(answer==1)
+									{
+										swal({
+												title:'Eliminacion Exitosa',//Contenido del modal
+												text: '<p style="font-size: 1.0em;">'+''+'</p>',
+												type: "success",
+												showConfirmButton:true,//Eliminar boton de confirmacion
+												html: true
+											},
+								  		function(isConfirm)
+								  			{
+								  				if(isConfirm)
+								  				 {
+								  				 	window.location.href='/menu/registros/clientes/categoria/sucursal/equipos/componentes/'+equipo;
+								  				 }	
+
+								  			});
+										
+
+									}
+									else
+										{
+											 swal("No se elimino el componente!!!", "", "error");
+										}
+								})
+								.fail(function()
+									{ swal("Error Inesperado !!", "Comuniquese con el administrador", "error");});
+							}
+							else
+							{
+								 
+								 swal("Eliminacion Cancelada !!", "", "error");
+								
+								 
+							}
+					});
+	});
 	/////////////////////////////Select dependientes //////////////////////////
 	$('.selectComponentes').change(function()
 		{
@@ -84,7 +149,6 @@ $(document).ready(function()
 					$.post(route,{_token:_token,registry:registry,caso:caso,auxiliar:auxiliar})
 						  .done(function(answer)
 						  {
-						  	
 						  	
 						  	cargarSelect(answer,listas[grupo][parseInt(caso)+1]);
 
@@ -260,7 +324,6 @@ $(document).ready(function()
 				$.post(route,form)
 				.done(function(answer)
 					{
-						console.log(answer);
 
 						
 						if(answer.codigo==1)

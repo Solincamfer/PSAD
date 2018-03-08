@@ -54,12 +54,18 @@
                                                             <i class="{{$accion->clase_css}} _ModificarComponente_" data-componente="{{$componente->id}}"></i>
                                                         </a>
                                                     </span>
-                                                @elseif($accion->id!=46)
+                                                @elseif($accion->id==48)
                                                     <span class="iclsp">
                                                         <a href="{{$accion->url.$componente->id}}" class="tltp" data-ttl="{{$accion->descripcion}}">
                                                             <i class="{{$accion->clase_css}}"></i>
                                                         </a>
                                                     </span>
+                                                @elseif($accion->id==112)
+                                                     <span class="iclsp">
+                                                            <a class="_eliminarComp_" id="elComp{{$componente->id}}" data-reg="{{$componente->id}}" data-ttl="{{$accion->descripcion}}">
+                                                               <i class="{{$accion->clase_css}}"></i>
+                                                          </a>
+                                                        </span>
                                                 @endif
                                             @elseif($accion->id==47)
                                                 @if($componente->status==1)
@@ -71,12 +77,7 @@
                                                         <input type="checkbox" class="checkComponente" data-reg="{{$componente->id}}" name="status" id="{{'checkComp'. $componente->id}}" value="{{$componente->status}}"><label for="{{'checkComp'. $componente->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
                                                     </div>
                                                 @endif
-                                            @elseif($accion->id==112)
-                                             <span class="iclsp">
-                                                    <a class="eliminarComp_" id="app{{$componente->id}}" data-reg="{{$componente->id}}" data-ttl="{{$accion->descripcion}}">
-                                                       <i class="{{$accion->clase_css}}"></i>
-                                                  </a>
-                                                </span>
+                                            
                                  
                                             @endif
                                         @endforeach

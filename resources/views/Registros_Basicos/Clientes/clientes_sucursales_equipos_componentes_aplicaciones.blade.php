@@ -54,12 +54,18 @@
                                                     <i class="{{$accion->clase_css}} " data-aplicacion="{{$aplicacion->id}}"></i>
                                                 </a>
                                             </span>
-                                        @elseif($accion->id!=51)
+                                        @elseif($accion->id!=110)
                                             <span class="iclsp">
                                                 <a href="{{$accion->url}}" class="tltp" data-ttl="{{$accion->descripcion}}">
                                                     <i class="{{$accion->clase_css}}"></i>
                                                 </a>
                                             </span>
+                                        @elseif($accion->id==110)
+                                         <span class="iclsp">
+                                            <a class="_eliminarApp_" id="app{{$aplicacion->id}}" data-reg="{{$aplicacion->id}}" data-ttl="{{$accion->descripcion}}">
+                                               <i class="{{$accion->clase_css}}"></i>
+                                            </a>
+                                        </span>
                                         @endif
                                     @elseif($accion->id==52)
                                         @if($aplicacion->status==1)
@@ -71,12 +77,7 @@
                                                 <input type="checkbox" class="checkAplicacion" name="statusApp" data-reg="{{$aplicacion->id}}" id="{{'app'. $aplicacion->id}}" value="{{$aplicacion->status}}"><label for="{{'app'. $aplicacion->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
                                             </div>
                                         @endif
-                                    @elseif($accion->id==110)
-                                     <span class="iclsp">
-                                            <a class="eliminarApp_" id="app{{$aplicacion->id}}" data-reg="{{$aplicacion->id}}" data-ttl="{{$accion->descripcion}}">
-                                               <i class="{{$accion->clase_css}}"></i>
-                                          </a>
-                                        </span>
+                                   
                                    @endif
                                 @endforeach
                             </div>

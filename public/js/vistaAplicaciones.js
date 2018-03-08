@@ -12,17 +12,77 @@ function loadModal(datos)
  $('#selStApm').val(datos.status);
 
  $('#regAplicacion_').val(datos.id);
- $
-
 
  $('#myModal2').modal('show');
 
  return 0;
 }
-//////////////////////////Opcion eliminar  //////////////////////////////////////////////////////////////
-$('.eliminarApp_').click(function()
+//////////////////////////Opcion eliminar  aplicacion //////////////////////////////////////////////////////////////
+$('._eliminarApp_').click(function()
 	{
-		alert('Hola');
+		var registry=$(this).data('reg');
+		var route='/menu/registros/clientes/eliminar/aplicaciones';
+		var _token=$( "input[name^='_token']" ).val();
+		var equipo=$('#__equipo__id__').val();
+
+		swal({
+					title: "Eliminar Aplicacion",
+					text: "¿Desea eliminar la aplicacion para el equipo seleccionado?",
+					type: "warning",
+					showCancelButton: true,
+					confirmButtonColor:'#EE1919',
+					confirmButtonText:'Eliminar Aplicacion',
+					cancelButtonText: "Cancelar",
+					closeOnConfirm: false,
+					closeOnCancel: false
+				 },
+			 function(isConfirm)
+			 {
+
+			 		if(isConfirm)
+			 		{
+
+						$.post(route, {_token:_token,registry:registry})
+						.done(function(answer)
+						{
+							
+							if(answer==1)
+							{
+								swal({
+										title:'Eliminacion Exitosa',//Contenido del modal
+										text: '<p style="font-size: 1.0em;">'+''+'</p>',
+										type: "success",
+										showConfirmButton:true,//Eliminar boton de confirmacion
+										html: true
+									},
+						  		function(isConfirm)
+						  			{
+						  				if(isConfirm)
+						  				 {
+						  				 	window.location.href='/menu/registros/clientes/categoria/sucursal/equipos/aplicaciones/'+equipo;
+						  				 }	
+
+						  			});
+								
+
+							}
+							else
+								{
+									 swal("No se elimino la aplicacion!!", "", "error");
+								}
+						})
+						.fail(function()
+							{ swal("Error Inesperado !!", "Comuniquese con el administrador", "error");});
+					}
+					else
+					{
+						 
+						 swal("Eliminacion Cancelada !!", "", "error");
+						
+						 
+					}
+			});
+
 	});
 
 //////////////////////////Guardar nueva aplicacion //////////////////////////////////////////////////////
@@ -64,7 +124,7 @@ $('.eliminarApp_').click(function()
 			var form=$('#regisAplicAgr').serialize();
 			var route='/menu/registros/clientes/insertar/aplicaciones';
 			var equipo=$('#__equipo__id__').val();
-			alert(form);
+			
 
 			$.post(route,form)
 
@@ -178,7 +238,7 @@ $('.eliminarApp_').click(function()
 			$.post(route,form)
 				.done(function(answer)
 				{
-						console.log(answer);
+						
 						if(answer.codigo==1)
 								{
 										swal({
@@ -270,7 +330,7 @@ $('.eliminarApp_').click(function()
 						$.post(route, {_token:_token,registry:registry})
 						.done(function(answer)
 						{
-							console.log(answer);
+							
 							if(answer.update)
 							{
 								swal("Modificacion exitosa !!", "la aplicacion ha sido "+mensajes[valor]+" correctamente", "success");
