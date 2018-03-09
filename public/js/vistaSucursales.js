@@ -82,7 +82,77 @@ $(document).ready(function()
 		$('#myModal2').modal('show');
 		}
 
+	////////////////////////Eliminar sucursal //////////////////////////////////////////////////////////////////////
+	$('._eliminarSuc_').click(function()
+		{
+			var registry=$(this).data('reg');
+			var route='/menu/registros/clientes/eliminar/sucursales';
+			var _token=$("input[name^='_token']").val();
+			var cliente=$('#cliente__id').val();
+		
+				swal({
+							title: "Eliminar Sucursal",
+							text: "Al eliminar la sucursal seleccionada, eliminara toda la informacion asociada a ella, incluyendo equipos completos,planes,responsables y todo lo relacionado . ¿Desea eliminar la sucursal?",
+							type: "warning",
+							showCancelButton: true,
+							confirmButtonColor:'#EE1919',
+							confirmButtonText:'Eliminar Sucursal',
+							cancelButtonText: "Cancelar",
+							closeOnConfirm: false,
+							closeOnCancel: false
+						 },
+					 function(isConfirm)
+					 {
+
+					 		if(isConfirm)
+					 		{
+
+								$.post(route, {_token:_token,registry:registry})
+								.done(function(answer)
+								{
+									console.log(answer);
+									if(answer==1)
+									{
+										console.log(answer);
+										swal({
+												title:'Eliminacion Exitosa',//Contenido del modal
+												text: '<p style="font-size: 1.0em;">'+''+'</p>',
+												type: "success",
+												showConfirmButton:true,//Eliminar boton de confirmacion
+												html: true
+											},
+								  		function(isConfirm)
+								  			{
+								  				if(isConfirm)
+								  				 {
+								  				 	window.location.href='/menu/registros/clientes/categorias/sucursales/'+cliente;
+								  				 }	
+
+								  			});
+										
+
+									}
+									else
+										{
+											 swal("No se elimino la sucursal!!!", "", "error");
+										}
+								})
+								.fail(function()
+									{ swal("Error Inesperado !!", "Comuniquese con el administrador", "error");});
+							}
+							else
+							{
+								 
+								 swal("Eliminacion Cancelada !!", "", "error");
+								
+								 
+							}
+					});
+
+		});
+
 	///////////////////////select de direccion /////////////////////////////////////////////////////////////////////
+
 
 
 	$('.dirSucursal').change(function() 

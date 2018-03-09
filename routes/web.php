@@ -316,5 +316,7 @@ Route::match(['post','get'],'/clientes/eliminar/aplicaciones',						   	['uses'=
 Route::match(['post','get'],'/clientes/eliminar/piezas',						   		['uses'=>'Eliminar@eliminarPieza']);
 Route::match(['post','get'],'/clientes/eliminar/componentes',						   	['uses'=>'Eliminar@eliminarComponente']);
 Route::match(['post','get'],'/clientes/eliminar/equipos',						   		['uses'=>'Eliminar@eliminarEquipo']);
+Route::match(['post','get'],'/clientes/eliminar/respsuc',						   		['uses'=>'Eliminar@eliminarRespSuc']);
+Route::match(['post','get'],'/clientes/eliminar/sucursales',						   		['uses'=>'Eliminar@eliminarSucursal']);
 
 });

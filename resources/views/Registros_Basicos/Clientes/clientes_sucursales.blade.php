@@ -45,12 +45,18 @@
                                                             <i class="{{$accion->clase_css}}"></i>
                                                         </a>
                                                     </span>
-                                                @elseif($accion->id!=25)
+                                                @elseif($accion->id!=25 && $accion->id!=115)
 														<span class="iclsp">
 															<a href="{{$accion->url.$sucursal->id}}" class="tltp" data-ttl="{{$accion->descripcion}}">
 																<i class="{{$accion->clase_css}}"></i>
 															</a>
 														</span>
+                                                 @elseif($accion->id==115)
+                                                        <span class="iclsp">
+                                                            <a class="_eliminarSuc_" id="elimSuc{{$sucursal->id}}" data-reg="{{$sucursal->id}}" data-ttl="{{$accion->descripcion}}">
+                                                               <i class="{{$accion->clase_css}}"></i>
+                                                           </a>
+                                                        </span>
                                                 @endif
                                             @elseif($accion->id==30)
                                                 @if($sucursal->status==1)
@@ -62,12 +68,7 @@
                                                         <input type="checkbox" class="checkSucursales" name="status" id="{{'inchbx'. $sucursal->id}}" value="{{$sucursal->status}}" data-reg="{{$sucursal->id}}"><label for="{{'inchbx'. $sucursal->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
                                                     </div>
                                                 @endif
-                                             @elseif($accion->id==115)
-                                                <span class="iclsp">
-                                                    <a class="eliminarSuc_" id="Suc{{$sucursal->id}}" data-reg="{{$sucursal->id}}" data-ttl="{{$accion->descripcion}}">
-                                                       <i class="{{$accion->clase_css}}"></i>
-                                                  </a>
-                                            </span>
+                                            
                                             @endif
                                         @endforeach
                                     </div>

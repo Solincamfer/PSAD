@@ -3552,7 +3552,7 @@ public function clientes_categoria($cliente_id)//vista de categorias de un clien
 public function clientes_sucursales($categoria_id)//vista de sucursales de una categoria,lista las sucursales asociadas a un cliente matriz
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
-		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(25,26,27,28,29,30),24);//acciones
+		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(25,26,27,28,29,30,115),24);//acciones
 
 
 
@@ -4036,7 +4036,7 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 	public function clientes_sucursales_responsable($sucursal_id)
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
-		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(32,33),31);
+		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(32,33,116),31);
 		$cliente_id=DB::table('sucursales')
 								->join('categorias','categorias.id','=','sucursales.categoria_id')
 								->join('clientes','clientes.id','=','categorias.cliente_id')
@@ -4099,6 +4099,7 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 			if ($anterior==0)
 			{
 				$update=DB::table('persona_sucursal')->insert(['persona_id'=>$nuevo,'sucursal_id'=>$sucursal]);
+				$delete=DB::table('persona_sucursal')->where('persona_id','<>',$nuevo)->where('sucursal_id','=',$sucursal)->delete();
 			}
 			else
 			{

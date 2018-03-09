@@ -58,6 +58,102 @@ class Eliminar extends Controller
 
 ////////////////Metodos usados por otros//////////////////////////////
 
+ public function eliminarSucursal_($sucursal_id)
+    {
+    	$retorno=0;
+    	$sucursal=Sucursal::find($sucursal_id);
+    	/////////////capturar los datos FK////////////////////////////////////////////////
+
+    	$rif=Rif::find($sucursal->rif_id);
+    	$direccionFiscal=Direccion::find($sucursal->direccionFiscal_id);
+    	$direccionComercial=Direccion::find($sucursal->direccionComercial_id);
+    	$correo=Correo::find($sucursal->correo_id);
+
+    	///////////////////////Obtener los equipos asociados a una sucursal ///////////
+    	$equipos=DB::table('equipos')->where('sucursal_id',$sucursal->id)->get();
+    	//////////////////////////////////////////////////////////////////////////////
+
+    	//////////////////////Eliminar los equipos asociados a una sucursal //////////
+    	$equip=0;
+    	foreach ($equipos as $equipo) 
+    	{
+    		$equip=$equip+$this->eliminarEquipo_($equipo->id);
+    	}
+
+    	// //////////////////////////////////////////////////////////////////////////////
+
+    	////////////////////eliminar los datos de telefono////////////////////////////
+    	$telefonos=DB::table('sucursal_telefono')->where('sucursal_id',$sucursal->id)->get();
+
+    	foreach ($telefonos as $telefono) 
+    	{
+    		DB::table('telefonos')->where('id',$telefono->telefono_id)->delete();
+    		DB::table('sucursal_telefono')->where('id',$telefono->id)->delete();
+    	}
+
+    	// ///////////////////eliminar asociacion con personas /////////////////////////////
+    	DB::table('persona_sucursal')->where('sucursal_id',$sucursal->id)->delete();
+
+    	//////////////////eliminar asociacion con planes    ////////////////////////////
+    	DB::table('plan_sucursal')->where('sucursal_id',$sucursal->id)->delete();
+    	/////////////////eliminar sucursal////////////////////////////////////////////
+    	$delete=$sucursal->delete();
+
+    	////////////////eliminar resto de datos///////////////////////////
+    	$rif->delete();
+    	$correo->delete();
+    	$direccionComercial->delete();
+    	$direccionFiscal->delete();
+
+    	if($delete)
+    	{
+    		$retorno=1;
+    	}
+
+    	return $retorno;
+
+
+    }
+
+
+public function eliminarPersona($persona_id)
+{
+	$retorno=0;
+	$persona=Persona::find($persona_id);
+	$correo_id=$persona->correo_id;
+	$cedula_id=$persona->cedula_id;
+
+	////////////Eliminar datos de telefono///////////////////////
+	$telefonos=DB::table('persona_telefono')->where('persona_id',$persona_id)->get();
+	foreach ($telefonos as $telefono) 
+	{
+		DB::table('telefonos')->where('id',$telefono->telefono_id)->delete();
+		DB::table('persona_telefono')->where('id',$telefono->id)->delete();
+	}
+	//////////////eliminar asociaciones a una categoria y a una sucursal ///////////////////////////
+		DB::table('categoria_persona')->where('persona_id',$persona->id)->delete();
+		DB::table('persona_sucursal')->where('persona_id',$persona->id)->delete();
+	////////////////////////////////////////////////////////////////////////////////////////////////
+
+	/////////////////////////////Eliminar el registro de la persona ////////////////////////////////
+	$delete=$persona->delete();
+	////////////////////////////////////////////////////////////////////////////////////////////////
+	$deleteCorreo=Correo::find($correo_id);
+	$deleteCedula=Cedula::find($cedula_id);
+
+	$deleteCorreo->delete();
+	$deleteCedula->delete();
+	///////////////////////////////////////////////////////////////////////////////////////////////
+
+	if(($delete && $deleteCorreo)&&($deleteCedula))
+	{
+		$retorno=1;
+	}
+
+	return $retorno;
+
+}
+
 public function eliminarEquipo_($equipo_id)
 {
 	$retorno=0;
@@ -156,6 +252,28 @@ public function eliminarEquipo_($equipo_id)
     	return Response::json($retorno);
 
     }
+
+
+
+    public function eliminarRespSuc()
+    {
+    	$persona=Request::get('registry');
+    	$retorno=$this->eliminarPersona($persona);
+
+    	return Response::json($retorno);
+    }
+
+
+   
+
+    public function eliminarSucursal()
+    {
+    	$sucursal=Request::get('registry');
+    	$retorno=$this->eliminarSucursal_($sucursal);
+
+    	return Response::json($retorno);
+    }
+
 
 
 

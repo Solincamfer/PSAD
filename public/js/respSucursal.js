@@ -32,6 +32,73 @@ $(document).ready(function()
 
 			return 0;
 		}
+			/////////////////////////-Eliminar resp desde la ventana sucursales ///////////////////////////////////
+			$('._eliminarRespSuc_').click(function() 
+			{
+			var registry=$(this).data('reg');
+			var route='/menu/registros/clientes/eliminar/respsuc';
+			var _token=$( "input[name^='_token']" ).val();
+			var sucursal=$('#sucursal_id_resp').val();
+		
+
+				swal({
+							title: "Eliminar Responsable",
+							text: "Al eliminar un responsable, dejara de estar disponible en el sistema para cualquier rol que tenga asociado. ¿ Desea eliminar al responsable seleccionado?",
+							type: "warning",
+							showCancelButton: true,
+							confirmButtonColor:'#EE1919',
+							confirmButtonText:'Eliminar Responsable',
+							cancelButtonText: "Cancelar",
+							closeOnConfirm: false,
+							closeOnCancel: false
+						 },
+					 function(isConfirm)
+					 {
+
+					 		if(isConfirm)
+					 		{
+
+								$.post(route, {_token:_token,registry:registry})
+								.done(function(answer)
+								{
+									
+									if(answer==1)
+									{
+										swal({
+												title:'Eliminacion Exitosa',//Contenido del modal
+												text: '<p style="font-size: 1.0em;">'+''+'</p>',
+												type: "success",
+												showConfirmButton:true,//Eliminar boton de confirmacion
+												html: true
+											},
+								  		function(isConfirm)
+								  			{
+								  				if(isConfirm)
+								  				 {
+								  				 	window.location.href='/menu/registros/clientes/categoria/sucursal/responsable/'+sucursal;
+								  				 }	
+
+								  			});
+										
+
+									}
+									else
+										{
+											 swal("No se elimino el responsable!!!", "", "error");
+										}
+								})
+								.fail(function()
+									{ swal("Error Inesperado !!", "Comuniquese con el administrador", "error");});
+							}
+							else
+							{
+								 
+								 swal("Eliminacion Cancelada !!", "", "error");
+								
+								 
+							}
+					});
+			});
 
 
  			///////////////////////// Modificar Responsable: Cargar modal//////////////////////////////////////////
@@ -336,7 +403,7 @@ $(document).ready(function()
 					.done(function(answer)
 						{
 							
-							console.log(answer);
+							
 							
 							if(answer.codigo==1)
 							{
