@@ -13,7 +13,73 @@ function loadModal(datos)
 	return 0;
 }
 
+////////////////////////////////////////////////////Eliminar Categorias //////////////////////////////////////////////
+$('._eliminarCat_').click(function() 
+{
+	var registry=$(this).data('reg');
+			var route='/menu/registros/clientes/eliminar/categorias';
+			var _token=$("input[name^='_token']").val();
+			var cliente=$('#cliente_id__').val();
+		
+				swal({
+							title: "Eliminar Categoria",
+							text: "Al eliminar la categoria seleccionada, eliminara toda la informacion asociada a ella, incluyendo sucursales junto a sus equipos completos,planes,responsables y todo lo relacionado . ¿Desea eliminar la categoria?",
+							type: "warning",
+							showCancelButton: true,
+							confirmButtonColor:'#EE1919',
+							confirmButtonText:'Eliminar Categoria',
+							cancelButtonText: "Cancelar",
+							closeOnConfirm: false,
+							closeOnCancel: false
+						 },
+					 function(isConfirm)
+					 {
 
+					 		if(isConfirm)
+					 		{
+
+								$.post(route, {_token:_token,registry:registry})
+								.done(function(answer)
+								{
+									
+									if(answer==1)
+									{
+										console.log(answer);
+										swal({
+												title:'Eliminacion Exitosa',//Contenido del modal
+												text: '<p style="font-size: 1.0em;">'+''+'</p>',
+												type: "success",
+												showConfirmButton:true,//Eliminar boton de confirmacion
+												html: true
+											},
+								  		function(isConfirm)
+								  			{
+								  				if(isConfirm)
+								  				 {
+								  				 	window.location.href='/menu/registros/clientes/categoria/'+cliente;
+								  				 }	
+
+								  			});
+										
+
+									}
+									else
+										{
+											 swal("No se elimino la categoria!!!", "", "error");
+										}
+								})
+								.fail(function()
+									{ swal("Error Inesperado !!", "Comuniquese con el administrador", "error");});
+							}
+							else
+							{
+								 
+								 swal("Eliminacion Cancelada !!", "", "error");
+								
+								 
+							}
+					});
+});
 
 /////////////////////////////////////////////////// Modificar Cargar boton modificar ////////////////////////////////
 

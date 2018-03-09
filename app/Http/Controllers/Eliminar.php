@@ -275,6 +275,38 @@ public function eliminarEquipo_($equipo_id)
     }
 
 
+    public function eliminarCategoria_($categoria_id)
+    {
+    	$retorno=0;
+    	$categoria=Categoria::find($categoria_id);
+    	$sucursales=DB::table('sucursales')->where('categoria_id',$categoria->id)->get();
+    	//////////////////eliminar sucursales///////////////////////////////////////////
+    	foreach ($sucursales as $sucursal) 
+    	{
+    		$this->eliminarSucursal_($sucursal->id);
+    	}
+    	////////////////////////////////////////////////////////////////////////////////
+
+    	/////////////////limpiar asociaciones con personas//////////////////////////////
+    	DB::table('categoria_persona')->where('categoria_id',$categoria->id)->delete();
+    	/////////////////Eliminar categoria////////////////////////////////////////////
+    	$delete=$categoria->delete();
+
+    	if($delete){$retorno=1;}
+
+    	return $retono;
+
+    }
+
+    public function eliminarCategoria()
+    {
+    	$categoria=Request::get('registry');
+    	$retorno=$this->eliminarCategoria_($categoria);
+
+    	return Response::json($retorno);
+    }
+
+
 
 
 }

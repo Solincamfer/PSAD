@@ -54,12 +54,18 @@
                                                            <i class="{{$accion->clase_css}}"></i>
                                                        </a>
                                                     </span>
-                                               @elseif($accion->id!=16)
+                                               @elseif($accion->id!=16 && $accion->id!=117)
                                                     <span class="iclsp">
                                                         <a href="{{$accion->url.$categoria->id}}" class="tltp" data-ttl="{{$accion->descripcion}}">
                                                            <i class="{{$accion->clase_css}}"></i>
                                                         </a>
                                                     </span>
+                                                @elseif($accion->id==117)
+                                                    <span class="iclsp">
+                                                            <a class="_eliminarCat_" id="elimCat{{$categoria->id}}" data-reg="{{$categoria->id}}" data-ttl="{{$accion->descripcion}}">
+                                                               <i class="{{$accion->clase_css}}"></i>
+                                                          </a>
+                                                      </span>
                                                @endif
                                            @elseif($accion->id==18)
                                                @if($categoria->status==1)
@@ -72,12 +78,7 @@
                                                    </div>
                                                @endif
 
-                                             @elseif($accion->id==117)
-                                                <span class="iclsp">
-                                                    <a class="eliminarCat_" id="Cat{{$categoria->id}}" data-reg="{{$categoria->id}}" data-ttl="{{$accion->descripcion}}">
-                                                       <i class="{{$accion->clase_css}}"></i>
-                                                  </a>
-                                            </span>
+                                            
                                            @endif
                                        @endforeach
                                    </div>
