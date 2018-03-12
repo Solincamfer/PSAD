@@ -205,13 +205,19 @@ Route::match(['post','get'],'/clientes/categoria/sucursal/usuarios/perfil',     
 
 	Route::match(['post','get'],'/datos/eliminar/componente',										        ['uses'=>'RegistrosBasicos@eliminarComponente']);
 	Route::match(['post','get'],'/datos/mostrarmarcas/componente',										  	['uses'=>'RegistrosBasicos@cargarListaMarcasComponente']);
+	Route::match(['post','get'],'/datos/mostrarmarcas/piezas',										  	['uses'=>'RegistrosBasicos@cargarListaMarcasPiezas']);
 	Route::match(['post','get'],'/datos/mostrarmodelos/componente',										  	['uses'=>'RegistrosBasicos@cargarListaModelosComponente']);
+	Route::match(['post','get'],'/datos/mostrarmodelos/piezas',										  	['uses'=>'RegistrosBasicos@cargarListaModelosPieza']);
 	Route::match(['post','get'],'/agregar/componente',										            	['uses'=>'RegistrosBasicos@agregarComponente']);
 	Route::match(['post','get'],'/modificar/componente',										            ['uses'=>'RegistrosBasicos@modificarComponente']);
 	Route::match(['post','get'],'/agregar/marca/componente',										        ['uses'=>'RegistrosBasicos@agregarMarcaComponente']);
+	Route::match(['post','get'],'/agregar/marca/pieza',										        ['uses'=>'RegistrosBasicos@agregarMarcaPieza']);
+	Route::match(['post','get'],'/agregar/modelo/piezas',										        ['uses'=>'RegistrosBasicos@agregarModeloPieza']);
 	Route::match(['post','get'],'/agregar/modelo/componente',										        ['uses'=>'RegistrosBasicos@agregarModeloComponente']);
 	Route::match(['post','get'],'/datos/borrarmarcacomponente',										      	['uses'=>'RegistrosBasicos@borrarMarcaComponente']);
+	Route::match(['post','get'],'/datos/borrarmarcapieza',										      	['uses'=>'RegistrosBasicos@borrarMarcaPieza']);
 	Route::match(['post','get'],'/datos/borrarmodelocomponente',										    ['uses'=>'RegistrosBasicos@borrarModeloComponente']);
+	Route::match(['post','get'],'/datos/borrarmodelopieza',										    ['uses'=>'RegistrosBasicos@borrarModeloPieza']);
 
 
 	Route::match(['post','get'],'/datos/eliminar/pieza',										        	['uses'=>'RegistrosBasicos@eliminarPieza']);
@@ -317,6 +323,9 @@ Route::match(['post','get'],'/clientes/eliminar/piezas',						   		['uses'=>'Eli
 Route::match(['post','get'],'/clientes/eliminar/componentes',						   	['uses'=>'Eliminar@eliminarComponente']);
 Route::match(['post','get'],'/clientes/eliminar/equipos',						   		['uses'=>'Eliminar@eliminarEquipo']);
 Route::match(['post','get'],'/clientes/eliminar/respsuc',						   		['uses'=>'Eliminar@eliminarRespSuc']);
+Route::match(['post','get'],'/clientes/eliminar/respcat',						   		['uses'=>'Eliminar@eliminarRespCat']);
+Route::match(['post','get'],'/clientes/eliminar/respclie',						   	['uses'=>'Eliminar@eliminarRespClie']);
 Route::match(['post','get'],'/clientes/eliminar/sucursales',						   	['uses'=>'Eliminar@eliminarSucursal']);
 Route::match(['post','get'],'/clientes/eliminar/categorias',						   	['uses'=>'Eliminar@eliminarCategoria']);
+Route::match(['post','get'],'/clientes/eliminar/clientes',						   	['uses'=>'Eliminar@eliminarCliente']);
 });

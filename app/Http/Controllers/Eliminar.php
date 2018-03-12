@@ -58,6 +58,96 @@ class Eliminar extends Controller
 
 ////////////////Metodos usados por otros//////////////////////////////
 
+public function eliminarCliente_($cliente_id)
+{
+    $retorno=0;
+    $cliente=Cliente::find($cliente_id);
+    $rif=Rif::find($cliente->rif_id);
+    $direccionFiscal=Direccion::find($cliente->direccionFiscal_id);
+    $direccionComercial=Direccion::find($cliente->direccionComercial_id);
+    $correo=Correo::find($cliente->correo_id);
+
+    $categorias=DB::table('categorias')->where('cliente_id',$cliente->id)->get();
+    $personas=DB::table('personas')->where('cliente_id',$cliente->id)->get();
+    $telefonos=DB::table('cliente_telefono')->where('cliente_id',$cliente->id)->get();
+
+    /////////////////eliminar personas///////////////////////////////////////////
+    if(count($personas)>0)
+    {
+        foreach ($personas as $persona) 
+        {
+            $this->eliminarPersona($persona->id);
+        }
+    }
+
+    //////////////eliminar categorias /////////////////////////////////////////////
+
+
+    if(count($categorias)>0)
+    {
+        foreach ($categorias as $categoria) 
+        {
+            $this->eliminarCategoria_($categoria->id);
+        }
+    }
+
+    //////////////////////////////eliminar telefonos////////////////////////////////
+    if(count($telefonos)>0)
+    {
+        foreach ($telefonos as $telefono) 
+        {
+          
+             DB::table('telefonos')->where('id',$telefono->telefono_id)->delete();
+             DB::table('cliente_telefono')->where('id',$telefono->id)->delete();
+        }
+    }
+
+    ///////////////////////////eliminar cliente ////////////////////////////////////
+    $delete=$cliente->delete();
+    //////////////////////////eliminar resto de datos del cliente//////////////////
+
+    $rif->delete();
+    $direccionFiscal->delete();
+    $direccionComercial->delete();
+    $correo->delete();
+
+    if($delete)
+    {
+        $retorno=1;
+    }
+
+
+    return $retorno;
+
+}
+
+ public function eliminarCategoria_($categoria_id)
+    {
+        $retorno=0;
+        $categoria=Categoria::find($categoria_id);
+        $sucursales=DB::table('sucursales')->where('categoria_id',$categoria->id)->get();
+        //////////////////eliminar sucursales///////////////////////////////////////////
+        if (count($sucursales)>0) 
+        {
+            
+                foreach ($sucursales as $sucursal) 
+                {
+                    $this->eliminarSucursal_($sucursal->id);
+                }
+        }
+        ////////////////////////////////////////////////////////////////////////////////
+
+        /////////////////limpiar asociaciones con personas//////////////////////////////
+        DB::table('categoria_persona')->where('categoria_id',$categoria->id)->delete();
+        /////////////////Eliminar categoria////////////////////////////////////////////
+        $delete=$categoria->delete();
+
+        if($delete){$retorno=1;}
+
+        return $retorno;
+
+    }
+
  public function eliminarSucursal_($sucursal_id)
     {
     	$retorno=0;
@@ -74,22 +164,27 @@ class Eliminar extends Controller
     	//////////////////////////////////////////////////////////////////////////////
 
     	//////////////////////Eliminar los equipos asociados a una sucursal //////////
-    	$equip=0;
-    	foreach ($equipos as $equipo) 
-    	{
-    		$equip=$equip+$this->eliminarEquipo_($equipo->id);
-    	}
+    	if (count($equipos)>0) 
+        {
+           
+        	foreach ($equipos as $equipo) 
+        	{
+        		$this->eliminarEquipo_($equipo->id);
+        	}
+        }
 
     	// //////////////////////////////////////////////////////////////////////////////
 
     	////////////////////eliminar los datos de telefono////////////////////////////
     	$telefonos=DB::table('sucursal_telefono')->where('sucursal_id',$sucursal->id)->get();
-
-    	foreach ($telefonos as $telefono) 
-    	{
-    		DB::table('telefonos')->where('id',$telefono->telefono_id)->delete();
-    		DB::table('sucursal_telefono')->where('id',$telefono->id)->delete();
-    	}
+        if (count($telefonos)>0) 
+        {
+           	foreach ($telefonos as $telefono) 
+        	{
+        		DB::table('telefonos')->where('id',$telefono->telefono_id)->delete();
+        		DB::table('sucursal_telefono')->where('id',$telefono->id)->delete();
+        	}
+        }
 
     	// ///////////////////eliminar asociacion con personas /////////////////////////////
     	DB::table('persona_sucursal')->where('sucursal_id',$sucursal->id)->delete();
@@ -125,11 +220,15 @@ public function eliminarPersona($persona_id)
 
 	////////////Eliminar datos de telefono///////////////////////
 	$telefonos=DB::table('persona_telefono')->where('persona_id',$persona_id)->get();
-	foreach ($telefonos as $telefono) 
-	{
-		DB::table('telefonos')->where('id',$telefono->telefono_id)->delete();
-		DB::table('persona_telefono')->where('id',$telefono->id)->delete();
-	}
+    if(count($telefonos)>0) 
+    {
+        
+    	foreach ($telefonos as $telefono) 
+    	{
+    		DB::table('telefonos')->where('id',$telefono->telefono_id)->delete();
+    		DB::table('persona_telefono')->where('id',$telefono->id)->delete();
+    	}
+    }
 	//////////////eliminar asociaciones a una categoria y a una sucursal ///////////////////////////
 		DB::table('categoria_persona')->where('persona_id',$persona->id)->delete();
 		DB::table('persona_sucursal')->where('persona_id',$persona->id)->delete();
@@ -160,17 +259,20 @@ public function eliminarEquipo_($equipo_id)
 	$equipo=Equipo::find($equipo_id);
 	
 	////////////obtener componentes del equipo ///////////////////////////////////////
-		$componentes=DB::table('componentes')->where('equipo_id',$equipo->id)->get();
+	$componentes=DB::table('componentes')->where('equipo_id',$equipo->id)->get();
 	///////////eliminar las piezas del componente ///////////////////////////////////
-		foreach ($componentes as $componente ) 
-		{
-			//////////eliminar piezas del componente //////////////////////////////
-			DB::table('piezas')->where('componente_id',$componente->id)->delete();
-			/////////eliminar componente //////////////////////////////////////////
+    if(count($componentes))	
+    {	
+        foreach ($componentes as $componente ) 
+    		{
+    			//////////eliminar piezas del componente //////////////////////////////
+    			DB::table('piezas')->where('componente_id',$componente->id)->delete();
+    			/////////eliminar componente //////////////////////////////////////////
 
-			$cmp=Componente::find($componente->id);
-			$cmp->delete();
-		}
+    			$cmp=Componente::find($componente->id);
+    			$cmp->delete();
+    		}
+    }
 	/////////eliminar las aplicaciones que posee el equipo/////////////////////////
 		DB::table('aplicaciones')->where('equipo_id',$equipo->id)->delete();
 	///////////////////////////////////////////////////////////////////////////////
@@ -231,7 +333,7 @@ public function eliminarEquipo_($equipo_id)
     	$registro=Componente::find($componente);
 
     	////////////////////eliminar piezas asociadas /////////////////////////////////////////////
-    		$piezas=DB::table('piezas')->where('componente_id',$registro->id)->delete();
+    	$piezas=DB::table('piezas')->where('componente_id',$registro->id)->delete();
     	/////////////////////////////////////////////////////////////////////////////////
 
     	$update=$registro->delete();
@@ -264,7 +366,21 @@ public function eliminarEquipo_($equipo_id)
     }
 
 
-   
+    public function eliminarRespCat()
+    {
+        $persona=Request::get('registry');
+        $retorno=$this->eliminarPersona($persona);
+
+        return Response::json($retorno);
+    }
+
+    public function eliminarRespClie()
+    {
+        $persona=Request::get('registry');
+        $retorno=$this->eliminarPersona($persona);
+
+        return Response::json($retorno);
+    }
 
     public function eliminarSucursal()
     {
@@ -275,28 +391,7 @@ public function eliminarEquipo_($equipo_id)
     }
 
 
-    public function eliminarCategoria_($categoria_id)
-    {
-    	$retorno=0;
-    	$categoria=Categoria::find($categoria_id);
-    	$sucursales=DB::table('sucursales')->where('categoria_id',$categoria->id)->get();
-    	//////////////////eliminar sucursales///////////////////////////////////////////
-    	foreach ($sucursales as $sucursal) 
-    	{
-    		$this->eliminarSucursal_($sucursal->id);
-    	}
-    	////////////////////////////////////////////////////////////////////////////////
-
-    	/////////////////limpiar asociaciones con personas//////////////////////////////
-    	DB::table('categoria_persona')->where('categoria_id',$categoria->id)->delete();
-    	/////////////////Eliminar categoria////////////////////////////////////////////
-    	$delete=$categoria->delete();
-
-    	if($delete){$retorno=1;}
-
-    	return $retono;
-
-    }
+   
 
     public function eliminarCategoria()
     {
@@ -304,6 +399,14 @@ public function eliminarEquipo_($equipo_id)
     	$retorno=$this->eliminarCategoria_($categoria);
 
     	return Response::json($retorno);
+    }
+
+    public function eliminarCliente()
+    {
+        $cliente=Request::get('registry');
+        $retorno=$this->eliminarCliente_($cliente);
+
+        return Response::json($retorno);
     }
 
 

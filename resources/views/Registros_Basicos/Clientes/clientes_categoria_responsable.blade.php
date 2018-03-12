@@ -43,12 +43,18 @@
                                                    <i class="{{$accion->clase_css}}"></i>
                                                </a>
                                            </span>
-                                           @elseif($accion->id!=23)
+                                           @elseif($accion->id!=23 && $accion->id!=118)
                                            <span class="iclsp">
                                                <a href="{{$accion->url}}" class="tltp" data-ttl="{{$accion->descripcion}}">
                                                    <i class="{{$accion->clase_css}}"></i>
                                                </a>
                                            </span>
+                                           @elseif($accion->id==118)
+                                                <span class="iclsp">
+                                                    <a class="_eliminarRspCat_" id="RespCat{{$responsable->id}}" data-reg="{{$responsable->id}}" data-ttl="{{$accion->descripcion}}">
+                                                       <i class="{{$accion->clase_css}}"></i>
+                                                  </a>
+                                                </span>
                                            @endif
                                        @elseif($accion->id==22)
                                            @if($responsable->status==1)
@@ -60,12 +66,7 @@
                                                    <input type="checkbox" class="btnAcc checkRespCat" name="status" id="{{'inchbx'. $responsable->id}}" value="{{$responsable->status}}" data-reg="{{$responsable->id}}"><label for="{{'inchbx'. $responsable->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
                                                </div>
                                            @endif
-                                         @elseif($accion->id==118)
-                                                <span class="iclsp">
-                                                    <a class="eliminarRspCat_" id="RespCat{{$responsable->id}}" data-reg="{{$responsable->id}}" data-ttl="{{$accion->descripcion}}">
-                                                       <i class="{{$accion->clase_css}}"></i>
-                                                  </a>
-                                            </span>
+                                         
                                        @endif
                                    @endforeach
                                </div>

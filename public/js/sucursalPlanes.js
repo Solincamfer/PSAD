@@ -6,7 +6,7 @@ $(document).ready(function()
 		var anterior=$('#planSeleccionado_').val()
 		var nuevo=$(this).attr('data-reg');
 		var sucursal=$(this).attr('data-sucursal');
-		alert('nuevo: '+nuevo+' sucursal: '+sucursal);
+		
 
 		if(!anterior){anterior=0;}
 					

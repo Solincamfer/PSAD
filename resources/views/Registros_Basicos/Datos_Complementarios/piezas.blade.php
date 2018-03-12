@@ -45,32 +45,32 @@
 
                     <div class="col-xs-5 col-sm-5 col-md-6 col-md-offset-3" id="areaResultados" data-tabla="2">
                         {{ csrf_field() }}
-                        @foreach($consulta as $tipoEquipo)
+                        @foreach($consulta as $pieza)
                             <div class="contMd" style="">
                                 <div class="icl">
                                     @foreach($acciones as $accion)
                                               @if($accion->id==107)
                                                     <span class="iclsp">
-                                                        <a class="tltp Modificar" id="ModificaEquipo{{$tipoEquipo->id}}" data-reg="{{$tipoEquipo->id}}" data-ttl="{{$accion->descripcion}}" data-toggle="modal">
+                                                        <a class="tltp Modificar" id="modificarPieza{{$pieza->id}}" data-reg="{{$pieza->id}}" data-ttl="{{$accion->descripcion}}" data-toggle="modal">
                                                           <i class="{{$accion->clase_css}}"></i>
                                                        </a>
                                                     </span>
                                               @elseif($accion->id==108)
                                                    <span class="iclsp">
-                                                       <a class="tltp Eliminar" id="e{{$tipoEquipo->id}}" data-reg="{{$tipoEquipo->id}}" data-ttl="{{$accion->descripcion}}">
+                                                       <a class="tltp Eliminar" id="ep{{$pieza->id}}" data-reg="{{$pieza->id}}" data-ttl="{{$accion->descripcion}}">
                                                            <i class="{{$accion->clase_css}}"></i>
                                                        </a>
                                                    </span>
                                                @elseif($accion->id==109)
                                                    <span class="iclsp">
-                                                       <a class="tltp Marca" id="m{{$tipoEquipo->id}}"  data-reg="{{$tipoEquipo->id}}" data-ttl="{{$accion->descripcion}}">
+                                                       <a class="tltp Marca" id="mp{{$pieza->id}}"  data-reg="{{$pieza->id}}" data-ttl="{{$accion->descripcion}}">
                                                            <i class="{{$accion->clase_css}}"></i>
                                                        </a>
                                                    </span>
                                               @endif
                                     @endforeach
                                 </div>
-                                <p class="ttlMd"><strong>{{$tipoEquipo->descripcion}}</strong></p>
+                                <p class="ttlMd"><strong>{{$pieza->descripcion}}</strong></p>
 
                             </div>
                         @endforeach
@@ -83,40 +83,40 @@
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title">Marcas y Modelos de Componentes</h4>
+                                    <h4 class="modal-title">Marcas y Modelos de Piezas</h4>
                                 </div>
                                 <form method="post" class="form-horizontal" id="marcaModelo">
                                   <div class="modal-body">
                                       {{ csrf_field() }}
-                                      <input type="hidden" class="form-control descripcion" name="registro" id="registry" value="">
+                                      <input type="text" class="form-control descripcion" name="registro" id="registry" value="">
                                         <div class="container-fluid contpfl">
                                            <div class="row">
                                                <div class="rPfl">
                                                   <div class="col-md-8 col-md-offset-2">
                                                       <div class="form-group">
                                                           <div class="col-md-8">
-                                                            <label for="marca">Marcas del Componente</label>
-                                                            <select  id="marca" class="form-control">
+                                                            <label for="marcaP">Marcas de la Pieza</label>
+                                                            <select  id="marcaP" class="form-control">
                                                               <option value="">-- Marcas --</option>
                                                             </select><i class=" icpfl"></i>
                                                           </div>
                                                           <div class="col-md-4">
-                                                            <i class="fa fa-plus button-radio plus" id="plusMarca"></i>
-                                                            <i class="fa fa-minus button-radio minus" id="minusMarca"> </i>
+                                                            <i class="fa fa-plus button-radio plus" id="plusMarcaP"></i>
+                                                            <i class="fa fa-minus button-radio minus" id="minusMarcaP"> </i>
                                                           </div>
                                                       </div>
                                                   </div>
                                                   <div class="col-md-8 col-md-offset-2">
                                                       <div class="form-group row">
                                                         <div class="col-md-8">
-                                                          <label for="modelo">Modelos</label>
-                                                          <select  id="modelo" class="form-control">
+                                                          <label for="modelosP">Modelos de la Pieza</label>
+                                                          <select  id="modelosP" class="form-control">
                                                             <option value="">-- Modelos --</option>
                                                           </select><i class=" icpfl"></i>
                                                         </div>
                                                         <div class="col-md-4">
-                                                          <i class="fa fa-plus button-radio plus" id="plusModelo"></i>
-                                                          <i class="fa fa-minus button-radio minus" id="minusModelo"></i>
+                                                          <i class="fa fa-plus button-radio plus" id="plusModeloP"></i>
+                                                          <i class="fa fa-minus button-radio minus" id="minusModeloP"></i>
                                                         </div>
                                                       </div>
                                                   </div>
@@ -139,7 +139,7 @@
                                     <h4 class="modal-title" >Agregar Nueva marca</h4>
                                 </div>
                                   <div class="modal-body">
-                                <form id="newMarca" >
+                                <form id="newMarcaP" >
                                       {{ csrf_field() }}
                                         <div class="container-fluid contpfl">
                                            <div class="row">
@@ -147,15 +147,14 @@
                                                   <div class="col-md-8 col-md-offset-2">
                                                       <div class="form-group row">
                                                           <label for="descripcionMarca">Nombre de la Marca</label>
-                                                          <input type="text" class="form-control" name="descripcionMarca" id="descripcionMarca"><i class="fa fa-id-badge icpfl"></i>
+                                                          <input type="text" class="form-control" name="descripcionMarcaP" id="descripcionMarcaP"><i class="fa fa-id-badge icpfl"></i>
                                                       </div>
                                                   </div>
                                                </div>
                                            </div>
                                         </div>
                                   </div>
-                                  <input type="hidden" class="form-control descripcion" name="padre" id="padreMarca" value="">
-                                  <input type="hidden" name="padreTipoMarca" id="padreTipoMarca" val='{{$extra->id}}'>
+                                  <input type="text" name="_piezaMarca_" id="_piezaMarca_" val="">
                                   <div class="modal-footer">
                                       <button type="submit" class="bttnMd btn" id="prueba" >Guardar <i class="fa fa-floppy-o"></i></button>
                                   </div>
@@ -172,7 +171,7 @@
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                     <h4 class="modal-title">Agregar Modelo</h4>
                                 </div>
-                                <form method="post" class="form-horizontal" id="newModelo">
+                                <form method="post" class="form-horizontal" id="newModeloP">
                                   <div class="modal-body">
                                       {{ csrf_field() }}
                                         <div class="container-fluid contpfl">
@@ -180,17 +179,17 @@
                                                <div class="rPfl">
                                                   <div class="col-md-8 col-md-offset-2">
                                                       <div class="form-group row">
-                                                          <label for="descripcionModelo">Nombre del Modelo</label>
-                                                          <input type="text" class="form-control" name="descripcionModelo" id="descripcionModelo"><i class="fa fa-id-badge icpfl"></i>
+                                                          <label for="descripcionModeloP">Nombre del Modelo</label>
+                                                          <input type="text" class="form-control" name="descripcionModeloP" id="descripcionModeloP"><i class="fa fa-id-badge icpfl"></i>
                                                       </div>
                                                   </div>
                                                </div>
                                            </div>
                                         </div>
                                   </div>
-                                  <input type="hidden" name="padreTipoModelo" id="padreTipoModelo" val='{{$extra->id}}'>
-                                  <input type="hidden" class="form-control descripcion" name="componentePadre" id="padreModelo" value="">
-                                  <input type="hidden" class="form-control descripcion" name="marcaPadre" id="marcaPadre" value="">
+                                 
+                                  <input type="text" class="form-control descripcion" name="piezaMod_" id="piezaMod_" value="">
+                                  <input type= "text" class="form-control descripcion" name="marcaMod_" id="marcaMod_" value="">
                                   <div class="modal-footer">
                                       <button type="submit" class="bttnMd btn">Guardar <i class="fa fa-floppy-o"></i></button>
                                   </div>

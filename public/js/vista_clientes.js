@@ -85,8 +85,73 @@ $(document).ready(function() {
 		$('#myModal2').modal('show');
 
 		}
-		///////////////////////////////////////////////////////////////////////////////////////////
+		////////////////////////////////eliminar cliente matriz//////////////////
+		$('._eliminarClie_').click(function() 
+			{
+			var registry=$(this).data('reg');
+			var route='/menu/registros/clientes/eliminar/clientes';
+			var _token=$( "input[name^='_token']" ).val();
+			
+		
 
+				swal({
+							title: "Eliminar Cliente",
+							text: "Al eliminar un cliente, dejara de estar disponible toda la informacion relacionada con el, incluyendo: categorias, sucursales, equipos y toda la informacion asociada al cliente. ¿ Desea eliminar al cliente seleccionado?",
+							type: "warning",
+							showCancelButton: true,
+							confirmButtonColor:'#EE1919',
+							confirmButtonText:'Eliminar Cliente',
+							cancelButtonText: "Cancelar",
+							closeOnConfirm: false,
+							closeOnCancel: false
+						 },
+					 function(isConfirm)
+					 {
+
+					 		if(isConfirm)
+					 		{
+
+								$.post(route, {_token:_token,registry:registry})
+								.done(function(answer)
+								{
+									
+									if(answer==1)
+									{
+										swal({
+												title:'Eliminacion Exitosa',//Contenido del modal
+												text: '<p style="font-size: 1.0em;">'+''+'</p>',
+												type: "success",
+												showConfirmButton:true,//Eliminar boton de confirmacion
+												html: true
+											},
+								  		function(isConfirm)
+								  			{
+								  				if(isConfirm)
+								  				 {
+								  				 	window.location.href='/menu/registros/clientes/';
+								  				 }	
+
+								  			});
+										
+
+									}
+									else
+										{
+											 swal("No se elimino el cliente!!!", "", "error");
+										}
+								})
+								.fail(function()
+									{ swal("Error Inesperado !!", "Comuniquese con el administrador", "error");});
+							}
+							else
+							{
+								 
+								 swal("Eliminacion Cancelada !!", "", "error");
+								
+								 
+							}
+					});
+			});
 
 		////////////////////Control de los select de direccion ///////////////////
 		$('.dirCliente').change(function()

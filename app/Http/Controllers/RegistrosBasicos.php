@@ -2430,7 +2430,7 @@ public function clientesMostrar()//inicializacion del submodulo: clientes
 	{
 		$paginas=10;
 		$datos=$this->cargar_header_sidebar_acciones();
-		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(9,10,11,12),8);
+		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(9,10,11,12,119),8);
 
 		$consulta=DB::table('clientes')->paginate($paginas);
 		$tipoR=DB::table('tipos')->where('numero_c',1)->get();
@@ -2976,7 +2976,7 @@ public function clientes_modificar()//metodo que consulta los datos de un client
 	public function clientes_responsables($cliente_id)//ventana de responsables para un cliente matriz
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
-		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(14,15),13);
+		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(14,15,120),13);
 
 		return view ('Registros_Basicos.Clientes.clientes_responsables',$this->datos_vista($datos,$acciones,
 					  DB::table('personas')->where('cliente_id',$cliente_id)->get(),$cliente_id,
@@ -3456,7 +3456,7 @@ public function clientes_categoria($cliente_id)//vista de categorias de un clien
 	{
 
 		$datos=$this->cargar_header_sidebar_acciones();
-		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(22,23),21);
+		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(22,23,118),21);
 		$categoria=Categoria::find($categoria_id);
 		$cliente=Cliente::find($categoria->cliente_id);
 		$responsable=$this->retornarResponsable($categoria_id);
@@ -5050,6 +5050,205 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 
 	}
 
+
+
+	public function cargarListaMarcasPiezas()
+	{
+		$registry=Request::get('registry');
+		$npieza=Npieza::find($registry);
+		$marcas=$npieza->marcas;
+
+		return Response::json($marcas);
+	}
+
+	public function cargarListaModelosPieza()
+	{
+		$pieza=Request::get('registro');
+		$marca=Request::get('valor');
+
+		$modelos=DB::table('modelos')
+					->join('modelo_npieza','modelo_npieza.modelo_id','=','modelos.id')
+					->join('marca_modelo','marca_modelo.modelo_id','=','modelos.id')
+					->where(['modelo_npieza.npieza_id'=>$pieza,'marca_modelo.marca_id'=>$marca])
+					->select('modelos.descripcion AS descripcion','modelos.id AS id')
+					->get();
+
+		return $modelos;
+
+	}
+
+	public function borrarModeloPieza()
+	{
+		$respuesta=0;
+		$pieza=Request::get('pieza');
+		$modelo=Request::get('modelo');
+		$marca=Request::get('marca');
+
+		$npieza=Pieza::find($pieza);
+		$nmodelo=Modelo::find($modelo);
+		$nmarca=Marca::find($marca);
+
+		/////////////////consultar la tabla piezas ////////////////////////////////////////////
+
+		$consultarTablaPiezas=DB::table('piezas')->where(['descripcion'=>$npieza->descripcion,'modelo'=>$nmodelo->descripcion,'marca'=>$nmarca->descripcion])->get();
+
+		if(count($consultarTablaPiezas)==0)//si no existen piezas que utilicen el nombre de pieza seleccionado
+		{
+			/////eliminar asociaciones del modelo
+			$del=DB::table('modelo_npieza')->where(['modelo_id'=>$modelo,'npieza_id'=>$pieza])->delete();
+			$del_=DB::table('marca_modelo')->where(['marca_id'=>$marca,'modelo_id'=>$modelo])->delete();
+			$del__=DB::table('modelos')->where('id',$modelo)->delete();
+			if(($del&&$del_)&&($del__))
+				{$respuesta=1;}
+		}
+
+		$consultaModelo=DB::table('modelos')
+					->join('modelo_npieza','modelo_npieza.modelo_id','=','modelos.id')
+					->join('marca_modelo','marca_modelo.modelo_id','=','modelos.id')
+					->where(['modelo_npieza.npieza_id'=>$pieza,'marca_modelo.marca_id'=>$marca])
+					->select('modelos.descripcion AS descripcion','modelos.id AS id')
+					->get();
+
+		$valores=[$respuesta,$consultaModelo];
+		return  Response::json($valores);//$valores;
+
+	}
+
+	public function borrarMarcaPieza()
+	{
+		$respuesta=0;
+		$pieza=Request::get('pieza');
+		$marca=Request::get('marca');
+
+		////////////obtener la descripcion de marca y descripcion de pieza a consultar///////////////////
+		$npieza=Npieza::find($pieza);
+		$nmarca=Marca::find($marca);
+		//////////////////////////////verificar si la estan usando en la tabla piezas ///////////////////
+
+		$consultarPiezas=DB::table('piezas')->where(['descripcion'=>$npieza->descripcion,'marca'=>$nmarca->descripcion])->get();
+
+		if(count($consultarPiezas)==0)//si no existen se eliminan
+		{
+			$respuesta=1;
+			//////////obtener los modelos asociados a la marca pertenecientes al tipo de pieza seleccionado///////
+			$modelos=DB::table('modelo_npieza')
+            ->join('marca_modelo','marca_modelo.modelo_id','=','modelo_npieza.modelo_id')
+            ->where(['marca_modelo.marca_id'=>$marca,'modelo_npieza.npieza_id'=>$pieza])
+            ->select('marca_modelo.modelo_id AS modelo_id')
+            ->get();
+
+            if($modelos)
+            {
+            	foreach ($modelos as $modelo) 
+            	{
+            		DB::table('marca_modelo')->where(['marca_id'=>$marca,'modelo_id'=>$modelo->modelo_id])->delete();
+            		DB::table('modelo_npieza')->where(['modelo_id'=>$modelo->modelo_id,'npieza_id'=>$pieza])->delete();
+            		DB::table('modelos')->where('id',$modelo->modelo_id)->delete();
+            	}
+
+            }
+
+             DB::table('marca_npieza')->where(['marca_id'=>$marca,'npieza_id'=>$pieza])->delete();
+
+
+
+		}
+
+		$consultaMarca=$npieza->marcas;
+		$valores=[$respuesta,$consultaMarca];
+		return  Response::json($valores);//$valores;
+
+	}
+
+	public function agregarMarcaPieza()
+	{
+		$respuesta=0;
+		$descripcion=strtoupper(Request::get('descripcionMarcaP'));
+		$pieza=Request::get('_piezaMarca_');
+		$marca=Marca::where('descripcion',$descripcion)->first();
+
+		if($marca==null)//si no existe
+		{
+			$marcaNew=new Marca();
+			$marcaNew->descripcion=$descripcion;
+			$marcaNew->save();
+			$consulta=DB::table('marca_npieza')->insert(['marca_id'=>$marcaNew->id,'npieza_id'=>$pieza]);
+
+			if($consulta){$respuesta=1;}
+		}
+		else
+		{
+			//si existe se verifica si esta asociada con la pieza indicada
+			$consulta=DB::table('marca_npieza')->where(['marca_id'=>$marca->id,'npieza_id'=>$pieza])->first();
+			if($consulta==null)//si no existe la sociacion
+			{
+				$consulta=DB::table('marca_npieza')->insert(['marca_id'=>$marca->id,'npieza_id'=>$pieza]);
+				if($consulta){$respuesta=1;}
+			}
+		}
+		$pieza=Npieza::find($pieza);
+		$marcas=$pieza->marcas;
+		return [$respuesta,$marcas];
+	}
+
+
+	public function agregarModeloPieza()
+	{
+		$respuesta=0;
+		$descripcion=strtoupper(Request::get('descripcionModeloP'));
+		$pieza=Request::get('piezaMod_');
+		$marca=Request::get('marcaMod_');
+
+		$consultarModelo=Modelo::where('descripcion',$descripcion)->first();
+
+		if($consultarModelo==null)//si no existe se debe agregar
+		{
+			$modeloNew=new Modelo();
+				$modeloNew->descripcion=$descripcion;
+			$modeloNew->save();
+
+			$insertarModeloNpieza=DB::table('modelo_npieza')->insert(['modelo_id'=>$modeloNew->id,'npieza_id'=>$pieza]);
+			if($insertarModeloNpieza)
+			{
+				$insertarMarcamodelo=DB::table('marca_modelo')->insert(['marca_id'=>$marca,'modelo_id'=>$modeloNew->id]);
+				if($insertarMarcamodelo)
+					{$respuesta=1;}
+			}
+		}
+		else //si existe se debe verificar si existen las asociaciones con  modelo_npieza y marca_modelo
+		{
+
+			//////consultar modelo_npieza
+			$consultarModeloNpieza=DB::table('modelo_npieza')->where(['modelo_id'=>$consultarModelo->id,'npieza_id'=>$pieza])->first();
+			if($consultarModeloNpieza==null)//si no existe
+			{
+				$insertarModeloNpieza=DB::table('modelo_npieza')->insert(['modelo_id'=>$consultarModelo->id,'npieza_id'=>$pieza])->first();
+				$respuesta=1;
+			}
+
+			/////consultar marca_modelo
+			$consultarMarcaModelo=DB::table('marca_modelo')->where(['marca_id'=>$marca,'modelo_id'=>$consultarModelo->id])->first();
+			if($consultarMarcaModelo==null)
+			{
+				$insertarMarcamodelo=DB::table('marca_modelo')->insert(['marca_id'=>$marca,'modelo_id'=>$consultarModelo->id]);
+				$respuesta=1;
+			}
+
+
+
+
+		}
+
+		$modelos=DB::table('modelos')
+          ->join('modelo_npieza','modelo_npieza.modelo_id','=','modelos.id')
+          ->join('marca_modelo','marca_modelo.modelo_id','=','modelos.id')
+          ->where(['modelo_npieza.npieza_id'=>$pieza,'marca_modelo.marca_id'=>$marca])
+          ->select('modelos.descripcion AS descripcion','modelos.id AS id')
+          ->get();
+					
+		return [$respuesta,$modelos];
+	}
+
 	public function Piezas($id){
 		$datos=$this->cargar_header_sidebar_acciones();//
 		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(107,108,109),106);
@@ -5125,7 +5324,6 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 		$consultaModelos=DB::table('modelos')
 						->join('modelo_tipoequipo','modelo_tipoequipo.modelo_id','=','modelos.id')
 						->join('marca_modelo','marca_modelo.modelo_id','=','modelos.id')
-						->join('marca_tipoequipo','marca_tipoequipo.marca_id','=','marca_modelo.marca_id')
 						->where(['modelo_tipoequipo.tipoequipo_id'=>$registro,'marca_modelo.marca_id'=>$opcion])
 						->select('modelos.descripcion AS descripcion','modelos.id AS id')
 						->get();
@@ -5825,6 +6023,8 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 		}
 		return [$respuesta,$nombreComponente];
 	}
+
+
 
 	// public function agregarMarcaComponente(){
 	// 	$respuesta=0;

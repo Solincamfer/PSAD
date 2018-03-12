@@ -49,12 +49,18 @@
 													<i class="{{$accion->clase_css}}"></i>
 												</a>
 											</span>
-											@elseif($accion->id!=9)
+											@elseif($accion->id!=9 && $accion->id!=119)
 											<span class="iclsp">
 												<a href="{{$accion->url.$clientes->id}}" class="tltp responsableMatriz" data-ttl="{{$accion->descripcion}}" data-reg="{{$clientes->id}}">
 													<i class="{{$accion->clase_css}}"></i>
 												</a>
 											</span>
+											 @elseif($accion->id==119)
+                                                <span class="iclsp">
+	                                                    <a class="_eliminarClie_" id="elimClie{{$clientes->id}}" data-reg="{{$clientes->id}}" data-ttl="{{$accion->descripcion}}">
+	                                                       <i class="{{$accion->clase_css}}"></i>
+	                                                  </a>
+                                            	</span>
 											@endif
 										@elseif($accion->id==12)
 											@if($clientes->status==1)
@@ -66,14 +72,6 @@
 													<input type="checkbox" class="checkClientes" name="status" id="{{'inchbx'. $clientes->id}}" value="{{$clientes->status}}" data-reg="{{$clientes->id}}"><label for="{{'inchbx'. $clientes->id}}" class="tltpck" data-ttl="{{$accion->descripcion}}"></label>
 												</div>
 											@endif
-
-										 @elseif($accion->id==119)
-                                                <span class="iclsp">
-                                                    <a class="eliminarClie_" id="Clie{{$clientes->id}}" data-reg="{{$clientes->id}}" data-ttl="{{$accion->descripcion}}">
-                                                       <i class="{{$accion->clase_css}}"></i>
-                                                  </a>
-                                            </span>
-											
 										@endif
 
 									@endforeach

@@ -357,7 +357,7 @@ class Buscador extends Controller
 
        // $consulta=DB::table('perfiles')->where('id','<>',24)->delete();
 
-      $consulta=DB::table('acciones')->where('id','>',109)->where('id','<',121)->update(['status_ac'=>1]);
+      //$consulta=DB::table('acciones')->where('id','>',109)->where('id','<',121)->update(['status_ac'=>1]);
 
         /////////////////////////consulta modificar equipos/////////////////////////////////
 
@@ -509,8 +509,16 @@ class Buscador extends Controller
         //       $pieza->ncomponente_id=$npieza[1];
         //   $pieza->save();
         // }
-        
-        return $consulta;
+      // $pieza=1;
+      // $marca=4;
+      // $consulta=DB::table('modelo_npieza')
+      //       ->join('marca_modelo','marca_modelo.modelo_id','=','modelo_npieza.modelo_id')
+      //       ->where(['marca_modelo.marca_id'=>$marca,'modelo_npieza.npieza_id'=>$pieza])
+      //       ->select('marca_modelo.modelo_id AS modelo_id')
+      //       ->get();
+      $consulta=DB::table('modelos')->where('descripcion','=','TMVIT-01')->get();
+
+      dd($consulta);
 
 			}
 

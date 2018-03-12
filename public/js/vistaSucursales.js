@@ -88,7 +88,8 @@ $(document).ready(function()
 			var registry=$(this).data('reg');
 			var route='/menu/registros/clientes/eliminar/sucursales';
 			var _token=$("input[name^='_token']").val();
-			var cliente=$('#cliente__id').val();
+			var categoria=$('#categoria__id').val();
+			
 		
 				swal({
 							title: "Eliminar Sucursal",
@@ -125,7 +126,7 @@ $(document).ready(function()
 								  			{
 								  				if(isConfirm)
 								  				 {
-								  				 	window.location.href='/menu/registros/clientes/categorias/sucursales/'+cliente;
+								  				 	window.location.href='/menu/registros/clientes/categorias/sucursales/'+categoria;
 								  				 }	
 
 								  			});

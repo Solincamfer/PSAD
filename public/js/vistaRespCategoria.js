@@ -34,8 +34,74 @@ $(document).ready(function()
 			return 0;
 		}
 
+		/////////////////////////////Eliminar responsable desde la ventana categorias///////////////////////////////
+		$('._eliminarRspCat_').click(function() 
+			{
+			var registry=$(this).data('reg');
+			var route='/menu/registros/clientes/eliminar/respcat';
+			var _token=$( "input[name^='_token']" ).val();
+			var categoria=$('#categoriaId_').val();
+		
 
- 			///////////////////////// Modificar Responsable: Cargar modal//////////////////////////////////////////
+				swal({
+							title: "Eliminar Responsable",
+							text: "Al eliminar un responsable, dejara de estar disponible en el sistema para cualquier rol que tenga asociado. ¿ Desea eliminar al responsable seleccionado?",
+							type: "warning",
+							showCancelButton: true,
+							confirmButtonColor:'#EE1919',
+							confirmButtonText:'Eliminar Responsable',
+							cancelButtonText: "Cancelar",
+							closeOnConfirm: false,
+							closeOnCancel: false
+						 },
+					 function(isConfirm)
+					 {
+
+					 		if(isConfirm)
+					 		{
+
+								$.post(route, {_token:_token,registry:registry})
+								.done(function(answer)
+								{
+									
+									if(answer==1)
+									{
+										swal({
+												title:'Eliminacion Exitosa',//Contenido del modal
+												text: '<p style="font-size: 1.0em;">'+''+'</p>',
+												type: "success",
+												showConfirmButton:true,//Eliminar boton de confirmacion
+												html: true
+											},
+								  		function(isConfirm)
+								  			{
+								  				if(isConfirm)
+								  				 {
+								  				 	window.location.href='/menu/registros/clientes/categoria/responsable/'+categoria;
+								  				 }	
+
+								  			});
+										
+
+									}
+									else
+										{
+											 swal("No se elimino el responsable!!!", "", "error");
+										}
+								})
+								.fail(function()
+									{ swal("Error Inesperado !!", "Comuniquese con el administrador", "error");});
+							}
+							else
+							{
+								 
+								 swal("Eliminacion Cancelada !!", "", "error");
+								
+								 
+							}
+					});
+			});
+ 		///////////////////////// Modificar Responsable: Cargar modal//////////////////////////////////////////
 
  			$('.modificarResponsable').click(function()
  				{
