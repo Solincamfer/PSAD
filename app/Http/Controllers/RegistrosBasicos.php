@@ -4163,7 +4163,7 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 	}
 
 
-	public function equipoDuplicado($nombre,$sucursal_id,$equipo_id=0)
+	public function equipoDuplicado($nombre,$serial,$sucursal_id,$equipo_id=0)
 	{
 		$duplicado=(object) array('codigo'=>0,'extra'=>0);
 
@@ -4179,7 +4179,29 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 					$duplicado->extra='Ya existe un equipo de nombre: '.$nombre.' ,para la sucursal: '.$sucursal->nombreComercial;
 					$duplicado->codigo=2;
 				}
+				
 			}
+			else if($consulta==null)//si no existe equipo con un mismo nombre verificar que el serial no sea repetido
+				{
+					 $serialPiezas=DB::table('piezas')->where('serial',$serial)->where('serial','<>','NA')->first();
+					 $serialComponentes=DB::table('componentes')->where('serial',$serial)->where('serial','<>','NA')->first();
+					 $serialEquipos=DB::table('equipos')->where('serial',$serial)->where('serial','<>','NA')->first();
+					 if($serialPiezas!=null)
+					 {
+					 	$duplicado->extra='El serial: '.$serial.' , se encuetra asociado a una de las piezas: '.$serialPiezas->descripcion.' , que se encuentran registradas en el sistema';
+					 	$duplicado->codigo=3;//serial duplicado
+					 }
+					 else if($serialComponentes!=null)
+					 {
+					 	$duplicado->extra='El serial: '.$serial.' , se encuetra asociado a una de los componentes: '.$serialComponentes->descripcion.' , que se encuentran registradas en el sistema';
+					 	$duplicado->codigo=3;//serial duplicado
+					 }
+					 else if($serialEquipos!=null)
+					 {
+					 	$duplicado->extra='El serial: '.$serial.' , se encuetra asociado a una de los equipos: '.$serialEquipos->descripcion.' , que se encuentran registrados en el sistema';
+					 	$duplicado->codigo=3;//serial duplicado
+					 }
+				}
 		}
 		else
 		{
@@ -4193,19 +4215,59 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 					$duplicado->extra='Ya existe un equipo de nombre: '.$nombre.' ,para la sucursal: '.$sucursal->nombreComercial;
 					$duplicado->codigo=2;
 				}
+				
 			}
+			else if($consulta==null)
+			{
+					$serialEquipos=DB::table('equipos')->where('serial',$serial)->where('serial','<>','NA')->where('id','<>',$equipo_id)->first();
+					$serialPiezas=DB::table('piezas')->where('serial',$serial)->where('serial','<>','NA')->first();
+					 $serialComponentes=DB::table('componentes')->where('serial',$serial)->where('serial','<>','NA')->first();
+					
+
+					if($serialEquipos!=null)
+					{
+						$duplicado->extra='El serial: '.$serial.' , se encuetra asociado a una de los equipos: '.$serialEquipos->descripcion.' , que se encuentran registrados en el sistema';
+					 	$duplicado->codigo=3;//serial duplicado
+					}
+					else if($serialPiezas!=null)
+					{
+						$duplicado->extra='El serial: '.$serial.' , se encuetra asociado a una de las piezas: '.$serialPiezas->descripcion.' , que se encuentran registradas en el sistema';
+					 	$duplicado->codigo=3;//serial duplicado
+					}
+					else if($serialComponentes)
+					{
+						$duplicado->extra='El serial: '.$serial.' , se encuetra asociado a una de los componentes: '.$serialComponentes->descripcion.' , que se encuentran registradas en el sistema';
+					 	$duplicado->codigo=3;//serial duplicado
+					}
+
+
+
+			}
+			
 
 		}
 
 		return $duplicado;
 	}
 
+	public function ActualizarTipoEquipo__($equipo_id)
+	{
 
+		$componentes=DB::table('componentes')->where('equipo_id',$equipo_id)->get();
+		foreach ($componentes as $componente) 
+		{
+			$piezas=DB::table('piezas')->where('componente_id',$componente->id)->delete();
+			$comp=Componente::find($componente->id);
+			$comp->delete();
+		}
+
+		return 0;
+	}
 
 	public function equiposActualizar()
 	{
 		$datos=$this->datosEquipo();
-		$duplicado=$this->equipoDuplicado($datos->nombre,$datos->sucursal,$datos->registro);
+		$duplicado=$this->equipoDuplicado($datos->nombre,$datos->serial,$datos->sucursal,$datos->registro);
 		$cambios=array();
 		if($duplicado->codigo==0)
 		{
@@ -4222,6 +4284,12 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 			$cambio=$this->detectarCambios($traduccion,$equipo->tipoequipo,'Tipo de Equipo');
 			$cambios=$this->agregarCambios($cambio,$cambios);
 			$equipo->tipoEquipo=$traduccion;
+			////////////////Actualizar al nuevo tipo de equipo seleccionado ///////
+			if($cambio)
+				{
+					$this->ActualizarTipoEquipo__($equipo->id);
+				}
+			/////////////////////////////////////////////////////////////////////
 
 			$traduccion=$this->traducirId($datos->marca,13);
 			$cambio=$this->detectarCambios($traduccion,$equipo->marca,'Marca');
@@ -4267,7 +4335,7 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 	public function equiposInsertar()
 	{
 		$datos=$this->datosEquipo();
-		$duplicado=$this->equipoDuplicado($datos->nombre,$datos->sucursal);
+		$duplicado=$this->equipoDuplicado($datos->nombre,$datos->serial,$datos->sucursal);
 		if($duplicado->codigo==0)
 		{
 
@@ -4424,6 +4492,16 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 	}
 
 
+	public function ActualizarTipoComponente_($componente_id)
+	{
+		$piezas=DB::table('piezas')->where('componente_id',$componente_id)->get();
+		foreach($piezas as $pieza)
+		{
+			$pie=Pieza::find($pieza->id);
+			$pie->delete();
+		}
+		return 0;
+	}
 	public function componentesActualizar()
 	{
 		$datos=$this->datosComponentes();
@@ -4431,11 +4509,15 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 		$cambios=array();
 		if($duplicado->codigo==0)
 		{
-			$componente=Componente::find($datos->registro);
+				$componente=Componente::find($datos->registro);
 				$traducirForm=$this->traducirId($datos->nombre,15);
 				$cambio=$this->detectarCambios($traducirForm,$componente->descripcion,'Nombre Componente');
 				$cambios=$this->agregarCambios($cambio,$cambios);
 				$componente->descripcion=$traducirForm;
+				if($cambio)
+				{
+					$this->ActualizarTipoComponente_($componente->id);
+				}
 
 				$cambio=$this->detectarCambios($datos->serial,$componente->serial,'Serial Componente');
 				$cambios=$this->agregarCambios($cambio,$cambios);

@@ -12,7 +12,8 @@ $(document).ready(function()
 		$('.selectMOC2').remove();
 		cargarSelect(datos.modelos,'selectMOC2');
 
-		
+		//////////////cargar id del nombre del componente seleccionado///
+		$('#tipoComponente__').val(datos.descripcion);
 		/////////////////////////////////////////////////////////////////
 
 		$('#selectNC2').val(datos.descripcion);
@@ -125,6 +126,35 @@ $(document).ready(function()
 							}
 					});
 	});
+
+
+	function actualizarTipoComponente(caso,registry,route,_token,auxiliar,grupo,listas)
+{
+	var aux=parseInt(caso);
+	aux=aux+1;
+	
+	if(caso<2)
+		{
+
+
+			if(registry!="")
+			{
+
+				$.post(route,{_token:_token,registry:registry,caso:caso,auxiliar:auxiliar})
+				  .done(function(answer)
+				  {
+				  	
+				  	
+				  	cargarSelect(answer,listas[grupo][aux]);
+
+				  })
+
+				  .fail(function()
+					{swal("Error Inesperado !!", "Comuniquese con el administrador", "error");});
+			}
+		}
+	return 0;
+}
 	/////////////////////////////Select dependientes //////////////////////////
 	$('.selectComponentes').change(function()
 		{
@@ -136,28 +166,48 @@ $(document).ready(function()
 			var registry=$(this).val();
 			var auxiliar=0;
 
-			if (caso==1) 
+			
+		if (caso==1) 
 			{auxiliar=$('#'+listas[grupo][0]).val();}
+		
+		if(listas[grupo][caso]=='selectNC2')//si se desea moodificar el tipo de equipo
+		{
+			swal({
+							title: "Modificar nombre del componente",
+							text: "Al modificar el nombre del componente del equipo seleccionado, perdera las piezas asociadas al mismo . ¿Desea cambiar el nombre del componente?",
+							type: "warning",
+							showCancelButton: true,
+							confirmButtonColor:'#207D07',
+							confirmButtonText:'Modificar nombre componente',
+							cancelButtonText: "Cancelar",
+							closeOnConfirm: false,
+							closeOnCancel: false
+				},
 
-			if(caso<2)
-			{
-				limpiarLista(parseInt(caso)+1,listas[grupo]);
+				function(isConfirm)
+					 {
 
-				if(registry!='')
-				{
+					 	if(isConfirm)
+					 		{
+					 			limpiarLista(parseInt(caso)+1,listas[grupo]);
+								actualizarTipoComponente(caso,registry,route,_token,auxiliar,grupo,listas);	
+								swal("Nombre de componente actualizado!!", "", "success");
+							}
+						else
+							{
+								  
+								swal("Actualizacion Cancelada!!", "", "warning");
+								valor.val($('#tipoComponente__').val());
+							}
+					});
 
-					$.post(route,{_token:_token,registry:registry,caso:caso,auxiliar:auxiliar})
-						  .done(function(answer)
-						  {
-						  	
-						  	cargarSelect(answer,listas[grupo][parseInt(caso)+1]);
-
-						  })
-
-						  .fail(function()
-							{swal("Error Inesperado !!", "Comuniquese con el administrador", "error");});
-				}
-			}
+		}
+		else
+		{
+			limpiarLista(parseInt(caso)+1,listas[grupo]);
+			actualizarTipoComponente(caso,registry,route,_token,auxiliar,grupo,listas);	
+		}
+		
 
 
 		});

@@ -18,6 +18,9 @@ $(document).ready(function()
 
 		$('.modEqm').remove();
 		cargarSelect(datos.modelos,'modEqm');
+
+		////////////////Tipo de equipo seleccionado previamente//////////
+		$('#tipoEquipo__').val(datos.equipo.tipoequipo);
 		/////////////////////////////////////////////////////////////////
 
 		///////////////cargar resto de campos del modal /////////////////
@@ -204,26 +207,14 @@ $('.checkEquipos').change(function()
 
 			});
 
-
- ///////////////////////Seleccionar select equipos ////////////////////////////////////
-
-	$('.selectEquipos').change(function()	
-	{
-		var listas=[['_tpEq','mkEq','modEq'],['tpEqm','mkEqm','modEqm']];
-		var caso=$(this).data('caso');
-		var grupo=$(this).data('grupo');
-		var registry=$(this).val();
-		var _token=$( "input[name^='_token']" ).val();
-		var route='/menu/registros/clientes/selectequipos/sucursal';
-		var auxiliar=0;
-
-		if (caso==1) 
-			{auxiliar=$('#'+listas[grupo][0]).val();}
-			
-
-		if(caso<2)
+function actualizarTipoEquipo(caso,registry,route,_token,auxiliar,grupo,listas)
+{
+	var aux=parseInt(caso);
+	aux=aux+1;
+	console.log(listas);
+	if(caso<2)
 		{
-			limpiarLista(parseInt(caso)+1,listas[grupo]);
+
 
 			if(registry!="")
 			{
@@ -232,13 +223,70 @@ $('.checkEquipos').change(function()
 				  .done(function(answer)
 				  {
 				  	
-				  	cargarSelect(answer,listas[grupo][parseInt(caso)+1]);
+				  	
+				  	cargarSelect(answer,listas[grupo][aux]);
 
 				  })
 
 				  .fail(function()
 					{swal("Error Inesperado !!", "Comuniquese con el administrador", "error");});
 			}
+		}
+	return 0;
+}
+ ///////////////////////Seleccionar select equipos ////////////////////////////////////
+
+	$('.selectEquipos').change(function()	
+	{
+		var listas=[['_tpEq','mkEq','modEq'],['tpEqm','mkEqm','modEqm']];
+		var valor=$(this);
+		var caso=$(this).data('caso');
+		var grupo=$(this).data('grupo');
+		var registry=$(this).val();
+		var _token=$( "input[name^='_token']" ).val();
+		var route='/menu/registros/clientes/selectequipos/sucursal';
+		var auxiliar=0;
+
+		
+		if (caso==1) 
+			{auxiliar=$('#'+listas[grupo][0]).val();}
+		
+		if(listas[grupo][caso]=='tpEqm')//si se desea moodificar el tipo de equipo
+		{
+			swal({
+							title: "Modificar tipo de equipo",
+							text: "Al modificar el tipo de equipo para el equipo seleccionado, perdera los componentes y piezas asociadas al tipo de equipo anterior asi como sus aplicaciones . ¿Desea cambiar el tipo de equipo?",
+							type: "warning",
+							showCancelButton: true,
+							confirmButtonColor:'#207D07',
+							confirmButtonText:'Modificar tipo de equipo',
+							cancelButtonText: "Cancelar",
+							closeOnConfirm: false,
+							closeOnCancel: false
+				},
+
+				function(isConfirm)
+					 {
+
+					 	if(isConfirm)
+					 		{
+					 			limpiarLista(parseInt(caso)+1,listas[grupo]);
+								actualizarTipoEquipo(caso,registry,route,_token,auxiliar,grupo,listas);	
+								swal("Tipo de equipo actualizado!!", "", "success");
+							}
+						else
+							{
+								  
+								swal("Actualizacion Cancelada!!", "", "warning");
+								valor.val($('#tipoEquipo__').val());
+							}
+					});
+
+		}
+		else
+		{
+			limpiarLista(parseInt(caso)+1,listas[grupo]);
+			actualizarTipoEquipo(caso,registry,route,_token,auxiliar,grupo,listas);	
 		}
 		
 
@@ -307,7 +355,7 @@ $('.checkEquipos').change(function()
 			$.post(route,form)
 					.done(function(answer)
 						{
-
+								console.log(answer);
 							
 								if(answer.codigo==1)
 								{
@@ -334,6 +382,16 @@ $('.checkEquipos').change(function()
 
 									swal({
 												title:'Nombre duplicado!!!',//Contenido del modal
+												text: '<p style="font-size: 0.9em;">'+ answer.extra+'</p>',
+												type: "warning",
+												showConfirmButton:true,//Eliminar boton de confirmacion
+												html: true
+										});
+								}
+								else if(answer.codigo==3)
+								{
+									swal({
+												title:'Serial duplicado!!!',//Contenido del modal
 												text: '<p style="font-size: 0.9em;">'+ answer.extra+'</p>',
 												type: "warning",
 												showConfirmButton:true,//Eliminar boton de confirmacion
@@ -475,6 +533,16 @@ $('#equipoSucMod').bootstrapValidator({
 										html: true
 								});
 						}
+						else if(answer.codigo==3)
+								{
+									swal({
+												title:'Serial duplicado!!!',//Contenido del modal
+												text: '<p style="font-size: 0.9em;">'+ answer.extra+'</p>',
+												type: "warning",
+												showConfirmButton:true,//Eliminar boton de confirmacion
+												html: true
+										});
+								}
 						else if(answer.codigo==0)
 						{
 							$('#myModal2').modal('hide');

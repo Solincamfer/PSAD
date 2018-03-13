@@ -516,7 +516,7 @@ class Buscador extends Controller
       //       ->where(['marca_modelo.marca_id'=>$marca,'modelo_npieza.npieza_id'=>$pieza])
       //       ->select('marca_modelo.modelo_id AS modelo_id')
       //       ->get();
-      $consulta=DB::table('modelos')->where('descripcion','=','TMVIT-01')->get();
+       $consulta=DB::table('equipos')->where('serial','45564578')->where('serial','<>','NA')->get();
 
       dd($consulta);
 

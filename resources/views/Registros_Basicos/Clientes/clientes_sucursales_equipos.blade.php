@@ -239,7 +239,8 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                             <input type="hidden" name="_sucursalRegistro" id="_sucursalRegistro" value="">
+                                            <input type="hidden" name="_sucursalRegistro" id="_sucursalRegistro" value="">
+                                            <input type="hidden" name="tipoEquipo__" id="tipoEquipo__" value="">
                                             <input type="hidden" name="_sucursal_id_" id="sucursal__id" value="{{$extra->id}}">
                                         </div>
                                         <div class="modal-footer">

@@ -592,6 +592,7 @@ $(document).ready(function() {
 		     }
 		   }
 	  	}).on('success.form.bv',function(e,data){
+	  			e.preventDefault();
 				var form=$('#Formclientesv').serialize();
 				console.log(form);
 				var route='/menu/registros/clientes/insertar';
@@ -599,7 +600,6 @@ $(document).ready(function() {
 				.done(function(answer)
 					{
 						
-						console.log(answer);
 						
 						if(answer.codigo==1)
 						{

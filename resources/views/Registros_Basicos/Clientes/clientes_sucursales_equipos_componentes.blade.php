@@ -237,6 +237,7 @@
                                                 </div>
                                             </div>
                                             <input type="hidden" name="registroComp_" id="registroComp_" value="">
+                                            <input type="hidden" name="tipoComponente__" id="tipoComponente__" value="">
                                         </div>
                                         <div class="modal-footer">
                                             <button type="submit" class="bttnMd" id="btnModificarComp_">Guardar <i class="fa fa-floppy-o"></i></button>  
