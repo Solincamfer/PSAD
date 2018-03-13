@@ -516,10 +516,16 @@ class Buscador extends Controller
       //       ->where(['marca_modelo.marca_id'=>$marca,'modelo_npieza.npieza_id'=>$pieza])
       //       ->select('marca_modelo.modelo_id AS modelo_id')
       //       ->get();
-       $consulta=DB::table('equipos')->where('serial','45564578')->where('serial','<>','NA')->get();
+       $perfiles=[33,34];
 
-      dd($consulta);
-
+       foreach ($perfiles as $perfil) 
+       {
+          $perfil_submodulo=DB::table('perfil_submodulo')->where('perfil_id',$perfil)->delete();
+          $modulo_perfil=DB::table('modulo_perfil')->where('perfil_id',$perfil)->delete();
+          $accion_perfil=DB::table('accion_perfil')->where('perfil_id',$perfil)->delete();
+       }
+      
+      return 0;
 			}
 
 }

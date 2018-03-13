@@ -215,6 +215,9 @@ $(document).ready(function()
 				},
 			    nomEmp2: {
 			       	validators: {
+			       		 notEmpty: {
+				           message: 'Indique el nombre del empleado'
+				        },
 			       		regexp:{
 				       		regexp: /^[a-z\s]+$/i,
 			                message: 'El nombre debe contener solo caracteres alfabéticos'
@@ -234,6 +237,9 @@ $(document).ready(function()
 			    },
 			     apellEmp2: {
 			       validators: {
+			       	notEmpty: {
+			           		message: 'Indique el apellido del empleado'
+			        	},
 			        regexp: {
 		                regexp: /^[a-z\s]+$/i,
 		                message: 'El apellido debe contener solo caracteres alfabéticos'
@@ -364,6 +370,16 @@ $(document).ready(function()
 				        }
 			       	}
 			   	},
+			   		tlfmvle:{
+			   			validators: {
+						notEmpty: {
+				           message: 'Debe indicar el código de área'
+				        }
+			       	}
+			   		}
+			   	,
+
+			  
 			   	numerol_1t:{
 			       	validators: {
 						notEmpty: {
@@ -384,7 +400,9 @@ $(document).ready(function()
 			       	}
 			   	},
 			   	numerol_2t:{
-			       	validators: {
+			       	validators: {notEmpty: {
+				           message: 'Debe indicar el número de telefono'
+				        },
 				        regexp: {
 			                regexp: /^[0-9]+$/,
 			                message: 'El telefono local debe ser solo números'                            
@@ -419,6 +437,17 @@ $(document).ready(function()
                 		}
 			       	}
 			   	}
+			   	,nomUs_agr:{	validators: {
+			       		notEmpty: {
+				           	message: 'Debe indicar un nombre de usuario'
+				        }
+			       	}},
+			      psw_agr:{
+			      	validators: {
+			       		notEmpty: {
+				           	message: 'Debe ingresar una contraseña para el usuario creado'
+				        }
+			       	}}
 		   	}
 	  	}).on('success.form.bv',function(e,data){
 	  		e.preventDefault();

@@ -97,7 +97,7 @@ $('._eliminarEquip_').click(function()
 								$.post(route, {_token:_token,registry:registry})
 								.done(function(answer)
 								{
-									console.log(answer);
+									
 									if(answer==1)
 									{
 										
@@ -211,7 +211,7 @@ function actualizarTipoEquipo(caso,registry,route,_token,auxiliar,grupo,listas)
 {
 	var aux=parseInt(caso);
 	aux=aux+1;
-	console.log(listas);
+	
 	if(caso<2)
 		{
 
@@ -355,7 +355,7 @@ function actualizarTipoEquipo(caso,registry,route,_token,auxiliar,grupo,listas)
 			$.post(route,form)
 					.done(function(answer)
 						{
-								console.log(answer);
+								
 							
 								if(answer.codigo==1)
 								{

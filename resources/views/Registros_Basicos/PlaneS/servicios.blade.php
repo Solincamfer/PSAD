@@ -109,7 +109,7 @@
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                         <h4 class="modal-title" id="myModalLabel1">Modificar Servicio "Horarios"</h4>
                                     </div>
-                                    <form action="/menu/registros/planes/servicios/insertar" method="post" id="NewHorario" class="NewServicio">
+                                    <form  id="NewHorario" class="NewServicio">
                                         {{ csrf_field() }}  
                                         <div class="modal-body">
                                             <div class="container-fluid contsr1">
@@ -302,7 +302,7 @@
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                         <h4 class="modal-title" id="myModalLabel5">Modificar Servicio "Tiempo de Respuesta"</h4>
                                     </div>
-                                    <form action="" id="NewTR" class="NewServicio">
+                                    <form  id="NewTR" class="NewServicio">
                                         <div class="modal-body">
                                             <div class="container-fluid contsr">
                                                 <div class="rSrv">

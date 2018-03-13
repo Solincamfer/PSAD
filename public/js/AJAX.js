@@ -314,7 +314,8 @@ $("input[name=radio3]").change(function () {
 
 //////////////////////////////// INSERTAR VALORES EN BD PARA SERVICIO DE HORARIOS ///////////////////////////
 
-$('#saveHorario').click(function(){
+$('#saveHorario').click(function(e){
+	e.preventDefault();
 	idplan=$('#plan').val();	
 	var url= '/menu/registros/planes/servicios/insertar';
 	var inicio = $('#horaI').val();
@@ -331,13 +332,24 @@ $('#saveHorario').click(function(){
 				//SWALLLL mensajes de alerta y sucesos
 				swal({
 					title:'Guardado Exitoso',//Contenido del modal
-					text: 'El Horario fue Guardado Exitosamente para este Plan',
+					text: 'El Servicio: Horarios, fue Guardado Exitosamente para este Plan',
 					type: "success",
-					timer:1600,
-					showConfirmButton:false,//Eliminar boton de confirmacion
-				});
-				//Retardo en ejecucion de ruta.
-				//setTimeout(function(){location.href = "/menu/registros/planeservicios";},1200); // 3000ms = 3s
+					showConfirmButton:true,//Eliminar boton de confirmacion
+				},
+				function(isConfirm)
+					 {
+					  		if(isConfirm)
+					  			{
+					  				$('#myModal1').modal('hide');
+					  			}	
+
+					 });
+				
+				
+			}
+			else if(resultado==2)
+			{
+				$('#myModal1').modal('hide');
 			}	
 			else {
 				swal({
@@ -362,7 +374,8 @@ $('#saveHorario').click(function(){
 });
 //////////////////////////////// INSERTAR VALORES EN BD PARA SERVICIO DE SOPORTES PRESENCIALES ///////////////////////////
 
-$('#savePresencial').click(function(){
+$('#savePresencial').click(function(e){
+	e.preventDefault();
 	idplan=$('#plan').val();	
 	var url= '/menu/registros/planes/servicios/insertar';
 	var etiqueta = $("input[name=radio1]:checked").val();
@@ -374,17 +387,25 @@ $('#savePresencial').click(function(){
 	if (etiqueta != '' && valor != '' && precio != ''){
 		var posting = $.get(url,{datos:datos},function(resultado){
 			if (resultado == 1) {
-				//SWALLLL mensajes de alerta y sucesos
 				swal({
 					title:'Guardado Exitoso',//Contenido del modal
-					text: 'El Servicio de Soporte Presencial fue Guardado Exitosamente para este Plan',
+					text: 'El Servicio: Soporte Presecial, fue Guardado Exitosamente para este Plan',
 					type: "success",
-					timer:1600,
-					showConfirmButton:false,//Eliminar boton de confirmacion
-				});
-				//Retardo en ejecucion de ruta.
-				//setTimeout(function(){location.href = "/menu/registros/planeservicios";},1200); // 3000ms = 3s
+					showConfirmButton:true,//Eliminar boton de confirmacion
+				},
+				function(isConfirm)
+					 {
+					  		if(isConfirm)
+					  			{
+					  				$('#myModal2').modal('hide');
+					  			}	
+
+					 });
 			}	
+			else if(resultado==2)
+			{
+				$('#myModal2').modal('hide');
+			}
 			else {
 				swal({
 
@@ -407,7 +428,8 @@ $('#savePresencial').click(function(){
 	}
 });
 //////////////////////////////// INSERTAR VALORES EN BD PARA SERVICIO DE SOPORTES REMOTOS ///////////////////////////
-$('#saveRemoto').click(function(){
+$('#saveRemoto').click(function(e){
+	e.preventDefault();
 	idplan=$('#plan').val();	
 	var url= '/menu/registros/planes/servicios/insertar';
 	var etiqueta = $("input[name=radio2]:checked").val();
@@ -419,16 +441,24 @@ $('#saveRemoto').click(function(){
 	if (etiqueta != '' && valor != '' && precio != ''){
 		var posting = $.get(url,{datos:datos},function(resultado){
 			if (resultado == 1) {
-				//SWALLLL mensajes de alerta y sucesos
 				swal({
 					title:'Guardado Exitoso',//Contenido del modal
-					text: 'El Servicio de Soporte Remoto fue Guardado Exitosamente para este Plan',
+					text: 'El Servicio: Soporte Remoto, fue Guardado Exitosamente para este Plan',
 					type: "success",
-					timer:1600,
-					showConfirmButton:false,//Eliminar boton de confirmacion
-				});
-				//Retardo en ejecucion de ruta.
-				//setTimeout(function(){location.href = "/menu/registros/planeservicios";},1200); // 3000ms = 3s
+					showConfirmButton:true,//Eliminar boton de confirmacion
+				},
+				function(isConfirm)
+					 {
+					  		if(isConfirm)
+					  			{
+					  				$('#myModal3').modal('hide');
+					  			}	
+
+					 });
+			}
+			else if(resultado==2)
+			{
+				$('#myModal3').modal('hide');	
 			}	
 			else {
 				swal({
@@ -452,7 +482,8 @@ $('#saveRemoto').click(function(){
 	}
 });
 //////////////////////////////// INSERTAR VALORES EN BD PARA SERVICIO DE SOPORTES TELEFONICOS ///////////////////////////
-$('#saveTelefonico').click(function(){
+$('#saveTelefonico').click(function(e){
+	e.preventDefault();
 	idplan=$('#plan').val();	
 	var url= '/menu/registros/planes/servicios/insertar';
 	var etiqueta = $("input[name=radio3]:checked").val();
@@ -464,16 +495,25 @@ $('#saveTelefonico').click(function(){
 	if (etiqueta != '' && valor != '' && precio != ''){
 		var posting = $.get(url,{datos:datos},function(resultado){
 			if (resultado == 1) {
-				//SWALLLL mensajes de alerta y sucesos
+				//SWALLLL mensajes 
 				swal({
 					title:'Guardado Exitoso',//Contenido del modal
-					text: 'El Servicio de Soporte Telefónico fue Guardado Exitosamente para este Plan',
+					text: 'El Servicio: Soporte Telefonico, fue Guardado Exitosamente para este Plan',
 					type: "success",
-					timer:1600,
-					showConfirmButton:false,//Eliminar boton de confirmacion
-				});
-				//Retardo en ejecucion de ruta.
-				//setTimeout(function(){location.href = "/menu/registros/planeservicios";},1200); // 3000ms = 3s
+					showConfirmButton:true,//Eliminar boton de confirmacion
+				},
+				function(isConfirm)
+					 {
+					  		if(isConfirm)
+					  			{
+					  				$('#myModal4').modal('hide');
+					  			}	
+
+					 });
+			}
+			else if(resultado==2)
+			{
+				$('#myModal4').modal('hide');
 			}	
 			else {
 				swal({
@@ -497,7 +537,8 @@ $('#saveTelefonico').click(function(){
 	}
 });
 //////////////////////////////// INSERTAR VALORES EN BD PARA SERVICIO DE TIEMPO DE RESPUESTA /////////////////////////
-$('#saveTR').click(function(){
+$('#saveTR').click(function(e){
+	e.preventDefault();
 	idplan=$('#plan').val();	
 	var url= '/menu/registros/planes/servicios/insertar';
 	var etiqueta = $("input[name=radio3]:checked").val();
@@ -509,16 +550,24 @@ $('#saveTR').click(function(){
 	if (maximo != '' && precio != ''){
 		var posting = $.get(url,{datos:datos},function(resultado){
 			if (resultado == 1) {
-				//SWALLLL mensajes de alerta y sucesos
 				swal({
 					title:'Guardado Exitoso',//Contenido del modal
-					text: 'El Servicio de Tiempo de Respuesta fue Guardado Exitosamente para este Plan',
+					text: 'El Servicio: Tiempo de Respuesta, fue Guardado Exitosamente para este Plan',
 					type: "success",
-					timer:2000,
-					showConfirmButton:false,//Eliminar boton de confirmacion
-				});
-				//Retardo en ejecucion de ruta.
-				//setTimeout(function(){location.href = "/menu/registros/planeservicios";},1200); // 3000ms = 3s
+					showConfirmButton:true,//Eliminar boton de confirmacion
+				},
+				function(isConfirm)
+					 {
+					  		if(isConfirm)
+					  			{
+					  				$('#myModal5').modal('hide');
+					  			}	
+
+					 });
+			}
+			else if(resultado==2)
+			{
+				$('#myModal5').modal('hide');
 			}	
 			else {
 				swal({

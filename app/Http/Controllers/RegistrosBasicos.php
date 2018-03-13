@@ -988,13 +988,17 @@ public function insertar_servicios(){
 		$horario->precio=$datos[0][4];
 
 		$update=$horario->save();
-		if($update)
+		if($update && count($cambios)>0)
 		{
 
 			$cambios=$this->documentarCambios($cambios);
        		$this->registroBitacora('Plan:  '.$planPadre->nombreP.' , Servicio: Horarios','Crear/Modificar servicios',$cambios,$planPadre->nombreP.' - '.'Horarios');
 
        		$respuesta= 1;
+		}
+		else
+		{
+			$respuesta=2;
 		}
 
 
@@ -1020,13 +1024,17 @@ public function insertar_servicios(){
 
 
 		$update=$presencial->save();
-		if($update)
+		if($update && count($cambios)>0)
 		{
 
 			$cambios=$this->documentarCambios($cambios);
        		$this->registroBitacora('Plan:  '.$planPadre->nombreP.' , Servicio: Soporte Presencial','Crear/Modificar servicios',$cambios,$planPadre->nombreP.' - '.'Soporte Presencial');
 
        		$respuesta= 1;
+		}
+		else
+		{
+			$respuesta=2;
 		}
 
 	}
@@ -1050,13 +1058,17 @@ public function insertar_servicios(){
 
 
 		$update=$remoto->save();
-		if($update)
+		if($update && count($cambios)>0)
 		{
 
 			$cambios=$this->documentarCambios($cambios);
        		$this->registroBitacora('Plan:  '.$planPadre->nombreP.' , Servicio: Soporte Remoto','Crear/Modificar servicios',$cambios,$planPadre->nombreP.' - '.'Soporte Remoto');
 
        		$respuesta= 1;
+		}
+		else
+		{
+			$respuesta=2;
 		}
 
 	}
@@ -1079,13 +1091,17 @@ public function insertar_servicios(){
 
 
 		$update=$telefonico->save();
-		if($update)
+		if($update && count($cambios)>0)
 		{
 
 			$cambios=$this->documentarCambios($cambios);
        		$this->registroBitacora('Plan:  '.$planPadre->nombreP.' , Servicio: Soporte Telefonico','Crear/Modificar servicios',$cambios,$planPadre->nombreP.' - '.'Soporte Telefonico');
 
        		$respuesta= 1;
+		}
+		else
+		{
+			$respuesta=2;
 		}
 
 
@@ -1105,13 +1121,17 @@ public function insertar_servicios(){
 		$respuesta->precio=$datos[0][1];
 
 		$update=$respuesta->save();
-		if($update)
+		if($update && count($cambios)>0)
 		{
 
 			$cambios=$this->documentarCambios($cambios);
        		$this->registroBitacora('Plan:  '.$planPadre->nombreP.' , Servicio: Tiempo de respuesta','Crear/Modificar servicios',$cambios,$planPadre->nombreP.' - '.'Tiempo de respuesta');
 
        		$respuesta= 1;
+		}
+		else
+		{
+			$respuesta=2;
 		}
 
 
@@ -4438,32 +4458,87 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 		return $formulario;
 	}
 
+	public function componenteDuplicado($serial,$componente_id=0)
+	{
+		$duplicado=(object)array('codigo'=>0,'extra'=>0);
+		if($componente_id==0)
+		{
+			$serialComponentes=DB::table('componentes')->where('serial',$serial)->where('serial','<>','NA')->first();
+			$serialEquipos=DB::table('equipos')->where('serial',$serial)->where('serial','<>','NA')->first();
+			$serialPiezas=DB::table('piezas')->where('serial',$serial)->where('serial','<>','NA')->first();
+			if($serialComponentes!=null)
+			{
+				$duplicado->extra='El serial: '.$serial.' , se encuetra asociado a una de los componentes: '.$serialComponentes->descripcion.' , que se encuentran registrados en el sistema';
+				$duplicado->codigo=3;//serial duplicado
+			}
+			else if($serialEquipos!=null)
+			{
+				$duplicado->extra='El serial: '.$serial.' , se encuetra asociado a una de los equipos: '.$serialEquipos->descripcion.' , que se encuentran registrados en el sistema';
+				$duplicado->codigo=3;//serial duplicado
+			}
+			else if($serialPiezas!=null)
+			{
+				$duplicado->extra='El serial: '.$serial.' , se encuetra asociado a una de las piezas: '.$serialPiezas->descripcion.' , que se encuentran registradas en el sistema';
+				$duplicado->codigo=3;//serial duplicado
+			}
+		}
+		else if($componente_id!=0)
+		{
+			$serialComponentes=DB::table('componentes')->where('serial',$serial)->where('serial','<>','NA')->where('id','<>',$componente_id)->first();
+
+			$serialEquipos=DB::table('equipos')->where('serial',$serial)->where('serial','<>','NA')->first();
+			$serialPiezas=DB::table('piezas')->where('serial',$serial)->where('serial','<>','NA')->first();
+			if($serialComponentes!=null)
+			{
+				$duplicado->extra='El serial: '.$serial.' , se encuetra asociado a una de los componentes: '.$serialComponentes->descripcion.' , que se encuentran registrados en el sistema';
+				$duplicado->codigo=3;//serial duplicado
+			}
+			else if($serialEquipos!=null)
+			{
+				$duplicado->extra='El serial: '.$serial.' , se encuetra asociado a una de los equipos: '.$serialEquipos->descripcion.' , que se encuentran registrados en el sistema';
+				$duplicado->codigo=3;//serial duplicado
+			}
+			else if($serialPiezas!=null)
+			{
+				$duplicado->extra='El serial: '.$serial.' , se encuetra asociado a una de las piezas: '.$serialPiezas->descripcion.' , que se encuentran registradas en el sistema';
+				$duplicado->codigo=3;//serial duplicado
+			}
+
+
+		}
+
+		return $duplicado;
+	}
+
 	public function componentesInsertar()
 	{
 		$datos=$this->datosComponentes();
-		$duplicado=(object)array('codigo'=>0,'duplicado'=>0);
-		$componente=new Componente();
-			$traduccion=$this->traducirId($datos->nombre,15);
-			$componente->descripcion=$traduccion;
-
-			$componente->serial=$datos->serial;
-
-			$traduccion=$this->traducirId($datos->marca,13);
-			$componente->marca=$traduccion;
-
-			$traduccion=$this->traducirId($datos->modelo,14);
-			$componente->modelo=$traduccion;
-
-			$componente->status=$datos->status;
-
-			$componente->equipo_id=$datos->equipo;
-
-		$update=$componente->save();
-
-		if($update)
+		$duplicado=$this->componenteDuplicado($datos->serial);
+		if($duplicado->codigo==0)
 		{
-			$duplicado->codigo=1;
-					$this->registroBitacora('Id del registro creado: '.$componente->id,'Agregar Componente','{"Registro el Componente":'.'"'.$componente->descripcion.'}','Equipos -> Agregar Componente');
+			$componente=new Componente();
+				$traduccion=$this->traducirId($datos->nombre,15);
+				$componente->descripcion=$traduccion;
+
+				$componente->serial=$datos->serial;
+
+				$traduccion=$this->traducirId($datos->marca,13);
+				$componente->marca=$traduccion;
+
+				$traduccion=$this->traducirId($datos->modelo,14);
+				$componente->modelo=$traduccion;
+
+				$componente->status=$datos->status;
+
+				$componente->equipo_id=$datos->equipo;
+
+			$update=$componente->save();
+
+			if($update)
+			{
+				$duplicado->codigo=1;
+						$this->registroBitacora('Id del registro creado: '.$componente->id,'Agregar Componente','{"Registro el Componente":'.'"'.$componente->descripcion.'}','Equipos -> Agregar Componente');
+			}
 		}
 
 
@@ -4505,7 +4580,7 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 	public function componentesActualizar()
 	{
 		$datos=$this->datosComponentes();
-		$duplicado=(object)array('codigo'=>0,'extra'=>0);
+		$duplicado=$this->componenteDuplicado($datos->serial,$datos->registro);
 		$cambios=array();
 		if($duplicado->codigo==0)
 		{
@@ -4714,35 +4789,87 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 		}
 
 
+		public function piezaDuplicada($serial,$pieza_id=0)
+		{
+			$duplicado=(object)array('codigo'=>0,'extra'=>0);
+			if($pieza_id==0)
+			{
+				$serialComponentes=DB::table('componentes')->where('serial',$serial)->where('serial','<>','NA')->first();
+				$serialEquipos=DB::table('equipos')->where('serial',$serial)->where('serial','<>','NA')->first();
+				$serialPiezas=DB::table('piezas')->where('serial',$serial)->where('serial','<>','NA')->first();
+					if($serialComponentes!=null)
+					{
+						$duplicado->extra='El serial: '.$serial.' , se encuetra asociado a una de los componentes: '.$serialComponentes->descripcion.' , que se encuentran registrados en el sistema';
+						$duplicado->codigo=3;//serial duplicado
+					}
+					else if($serialEquipos!=null)
+					{
+						$duplicado->extra='El serial: '.$serial.' , se encuetra asociado a una de los equipos: '.$serialEquipos->descripcion.' , que se encuentran registrados en el sistema';
+						$duplicado->codigo=3;//serial duplicado
+					}
+					else if($serialPiezas!=null)
+					{
+						$duplicado->extra='El serial: '.$serial.' , se encuetra asociado a una de las piezas: '.$serialPiezas->descripcion.' , que se encuentran registradas en el sistema';
+						$duplicado->codigo=3;//serial duplicado
+					}
 
+			}
+			else if($pieza_id!=0)
+			{
+				$serialComponentes=DB::table('componentes')->where('serial',$serial)->where('serial','<>','NA')->first();
+				$serialEquipos=DB::table('equipos')->where('serial',$serial)->where('serial','<>','NA')->first();
+				$serialPiezas=DB::table('piezas')->where('serial',$serial)->where('serial','<>','NA')->where('id','<>',$pieza_id)->first();
+					if($serialComponentes!=null)
+					{
+						$duplicado->extra='El serial: '.$serial.' , se encuetra asociado a una de los componentes: '.$serialComponentes->descripcion.' , que se encuentran registrados en el sistema';
+						$duplicado->codigo=3;//serial duplicado
+					}
+					else if($serialEquipos!=null)
+					{
+						$duplicado->extra='El serial: '.$serial.' , se encuetra asociado a una de los equipos: '.$serialEquipos->descripcion.' , que se encuentran registrados en el sistema';
+						$duplicado->codigo=3;//serial duplicado
+					}
+					else if($serialPiezas!=null)
+					{
+						$duplicado->extra='El serial: '.$serial.' , se encuetra asociado a una de las piezas: '.$serialPiezas->descripcion.' , que se encuentran registradas en el sistema';
+						$duplicado->codigo=3;//serial duplicado
+					}
+
+			}
+
+			return $duplicado;
+		}
 		public function piezasInsertar()
 		{
 			$datos=$this->datosPieza();
+			$duplicado=$this->piezaDuplicada($datos->serial);
 
-			$duplicado=(object)array('codigo'=>0,'duplicado'=>0);
-			$pieza=new Pieza();
-			$traduccion=$this->traducirId($datos->nombre,16);
-			$pieza->descripcion=$traduccion;
+			if($duplicado->codigo==0)
+			{
+					$pieza=new Pieza();
+					$traduccion=$this->traducirId($datos->nombre,16);
+					$pieza->descripcion=$traduccion;
 
-			$pieza->serial=$datos->serial;
+					$pieza->serial=$datos->serial;
 
-			$traduccion=$this->traducirId($datos->marca,13);
-			$pieza->marca=$traduccion;
+					$traduccion=$this->traducirId($datos->marca,13);
+					$pieza->marca=$traduccion;
 
-			$traduccion=$this->traducirId($datos->modelo,14);
-			$pieza->modelo=$traduccion;
+					$traduccion=$this->traducirId($datos->modelo,14);
+					$pieza->modelo=$traduccion;
 
-			$pieza->status=$datos->status;
+					$pieza->status=$datos->status;
 
-			$pieza->componente_id=$datos->componente;
+					$pieza->componente_id=$datos->componente;
 
-		$update=$pieza->save();
+				$update=$pieza->save();
 
-		if($update)
-		{
-			$duplicado->codigo=1;
-					$this->registroBitacora('Id del registro creado: '.$pieza->id,'Agregar Componente','{"Registro la pieza":'.'"'.$pieza->descripcion.'}','Equipos -> Agregar pieza');
-		}
+				if($update)
+				{
+					$duplicado->codigo=1;
+							$this->registroBitacora('Id del registro creado: '.$pieza->id,'Agregar Componente','{"Registro la pieza":'.'"'.$pieza->descripcion.'}','Equipos -> Agregar pieza');
+				}
+		  }
 
 
 			return Response::json($duplicado);
@@ -4781,7 +4908,7 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 	public function piezasActualizar()
 	{
 		$datos=$this->datosPieza();
-		$duplicado=(object)array('codigo'=>0,'extra'=>0);
+		$duplicado=$this->piezaDuplicada($datos->serial,$datos->registro);
 		$cambios=array();
 		if($duplicado->codigo==0)
 		{
@@ -5560,15 +5687,12 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 			$marcaModelo->marca_id=$idMarca;
 			$marcaModelo->save();
 			$respuesta=1;
-			$consultaModelos=DB::table('modelo_tipoequipo')
-							->join('modelos','modelo_tipoequipo.modelo_id','modelos.id')
-							->join('marca_modelo','modelos.id','marca_modelo.modelo_id')
-							->join('marcas','marca_modelo.marca_id','marcas.id')
-							->join('marca_tipoequipo','marca_tipoequipo.marca_id','marcas.id')
-							->where('modelo_tipoequipo.tipoequipo_id',$idTipoEquipo)
-							->where('marca_tipoequipo.marca_id',$idMarca)
-							->select('modelos.*')
-							->get();
+			$consultaModelos=DB::table('modelos')
+						->join('modelo_tipoequipo','modelo_tipoequipo.modelo_id','=','modelos.id')
+						->join('marca_modelo','marca_modelo.modelo_id','=','modelos.id')
+						->where(['modelo_tipoequipo.tipoequipo_id'=>$idTipoEquipo,'marca_modelo.marca_id'=>$idMarca])
+						->select('modelos.descripcion AS descripcion','modelos.id AS id')
+						->get();
 		}
 		else{
 			$relacionMarcaModelo=MarcaModelo::where('marca_id',$idMarca)->where('modelo_id',$consulta->id)->first();
@@ -5589,15 +5713,21 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 				}
 
 				$respuesta=1;
-				$consultaModelos=DB::table('modelo_tipoequipo')
-							->join('modelos','modelo_tipoequipo.modelo_id','modelos.id')
-							->join('marca_modelo','modelos.id','marca_modelo.modelo_id')
-							->join('marcas','marca_modelo.marca_id','marcas.id')
-							->join('marca_tipoequipo','marca_tipoequipo.marca_id','marcas.id')
-							->where('modelo_tipoequipo.tipoequipo_id',$idTipoEquipo)
-							->where('marca_tipoequipo.marca_id',$idMarca)
-							->select('modelos.*')
-							->get();
+				$consultaModelos=DB::table('modelos')
+						->join('modelo_tipoequipo','modelo_tipoequipo.modelo_id','=','modelos.id')
+						->join('marca_modelo','marca_modelo.modelo_id','=','modelos.id')
+						->where(['modelo_tipoequipo.tipoequipo_id'=>$idTipoEquipo,'marca_modelo.marca_id'=>$idMarca])
+						->select('modelos.descripcion AS descripcion','modelos.id AS id')
+						->get();
+				// $consultaModelos=DB::table('modelo_tipoequipo')
+				// 			->join('modelos','modelo_tipoequipo.modelo_id','modelos.id')
+				// 			->join('marca_modelo','modelos.id','marca_modelo.modelo_id')
+				// 			->join('marcas','marca_modelo.marca_id','marcas.id')
+				// 			->join('marca_tipoequipo','marca_tipoequipo.marca_id','marcas.id')
+				// 			->where('modelo_tipoequipo.tipoequipo_id',$idTipoEquipo)
+				// 			->where('marca_tipoequipo.marca_id',$idMarca)
+				// 			->select('modelos.*')
+				// 			->get();
 
 			}
 			else{
@@ -5609,15 +5739,12 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 					$modelo->tipoequipo_id=$idTipoEquipo;
 					$modelo->save();
 					$respuesta=1;
-					$consultaModelos=DB::table('modelo_tipoequipo')
-							->join('modelos','modelo_tipoequipo.modelo_id','modelos.id')
-							->join('marca_modelo','modelos.id','marca_modelo.modelo_id')
-							->join('marcas','marca_modelo.marca_id','marcas.id')
-							->join('marca_tipoequipo','marca_tipoequipo.marca_id','marcas.id')
-							->where('modelo_tipoequipo.tipoequipo_id',$idTipoEquipo)
-							->where('marca_tipoequipo.marca_id',$idMarca)
-							->select('modelos.*')
-							->get();
+					$consultaModelos=DB::table('modelos')
+						->join('modelo_tipoequipo','modelo_tipoequipo.modelo_id','=','modelos.id')
+						->join('marca_modelo','marca_modelo.modelo_id','=','modelos.id')
+						->where(['modelo_tipoequipo.tipoequipo_id'=>$idTipoEquipo,'marca_modelo.marca_id'=>$idMarca])
+						->select('modelos.descripcion AS descripcion','modelos.id AS id')
+						->get();
 				}
 			}
 		}

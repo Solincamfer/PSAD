@@ -293,6 +293,16 @@ $(document).ready(function()
 													html: true
 											});
 									}
+									else if(answer.codigo==3)
+									{
+										swal({
+													title:'Serial duplicado!!!',//Contenido del modal
+													text: '<p style="font-size: 0.9em;">'+ answer.extra+'</p>',
+													type: "warning",
+													showConfirmButton:true,//Eliminar boton de confirmacion
+													html: true
+											});
+									}
 							})
 						.fail(function()
 							{
@@ -405,6 +415,16 @@ $(document).ready(function()
 										type: "warning",
 										showConfirmButton:true,//Eliminar boton de confirmacion
 										html: true
+								});
+						}
+						else if(answer.codigo==3)
+						{
+							swal({
+									title:'Serial duplicado!!!',//Contenido del modal
+									text: '<p style="font-size: 0.9em;">'+ answer.extra+'</p>',
+									type: "warning",
+									showConfirmButton:true,//Eliminar boton de confirmacion
+									html: true
 								});
 						}
 						else if(answer.codigo==0)

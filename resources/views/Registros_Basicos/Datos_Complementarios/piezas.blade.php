@@ -88,7 +88,7 @@
                                 <form method="post" class="form-horizontal" id="marcaModelo">
                                   <div class="modal-body">
                                       {{ csrf_field() }}
-                                      <input type="text" class="form-control descripcion" name="registro" id="registry" value="">
+                                      <input type="hidden" class="form-control descripcion" name="registro" id="registry" value="">
                                         <div class="container-fluid contpfl">
                                            <div class="row">
                                                <div class="rPfl">
@@ -154,7 +154,7 @@
                                            </div>
                                         </div>
                                   </div>
-                                  <input type="text" name="_piezaMarca_" id="_piezaMarca_" val="">
+                                  <input type="hidden" name="_piezaMarca_" id="_piezaMarca_" val="">
                                   <div class="modal-footer">
                                       <button type="submit" class="bttnMd btn" id="prueba" >Guardar <i class="fa fa-floppy-o"></i></button>
                                   </div>
@@ -188,8 +188,8 @@
                                         </div>
                                   </div>
                                  
-                                  <input type="text" class="form-control descripcion" name="piezaMod_" id="piezaMod_" value="">
-                                  <input type= "text" class="form-control descripcion" name="marcaMod_" id="marcaMod_" value="">
+                                  <input type="hidden" class="form-control descripcion" name="piezaMod_" id="piezaMod_" value="">
+                                  <input type= "hidden" class="form-control descripcion" name="marcaMod_" id="marcaMod_" value="">
                                   <div class="modal-footer">
                                       <button type="submit" class="bttnMd btn">Guardar <i class="fa fa-floppy-o"></i></button>
                                   </div>
