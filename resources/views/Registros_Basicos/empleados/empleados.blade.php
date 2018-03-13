@@ -365,7 +365,7 @@
                                                                         <input type="password" class="form-control" name="psw_agr" id="psw_agr"><i class="fa fa-lock icemp"></i>    
                                                                     </div>
                                                                 </div>
-                                                                {{-- <div class="col-md-8 col-md-offset-2">
+                                                                <div class="col-md-8 col-md-offset-2">
                                                                     <div class="form-group row">
                                                                         <label for="stUs">Estatus de Usuario</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
                                                                         <select name="statusEm_agr" id="statusEm_agr" class="form-control">
@@ -374,7 +374,7 @@
                                                                             <option value="0">Inactivo</option>
                                                                         </select><i class="fa fa-check icemp"></i>
                                                                     </div>
-                                                                </div> --}}
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -684,7 +684,7 @@
                                                                 <input type="password" class="form-control" name="psw_m" id="psw_m"><i class="fa fa-lock icemp"></i>    
                                                             </div>
                                                         </div>
-                                                       {{--  <div class="col-md-8 col-md-offset-2">
+                                                        <div class="col-md-8 col-md-offset-2">
                                                             <div class="form-group row">
                                                                 <label for="stUsm">Estatus de Usuario</label><span class="ic"><i class="fa fa-chevron-down" ></i></span>
                                                                 <select name="statusEm_m" id="statusEm_m" class="form-control">
@@ -693,7 +693,7 @@
                                                                     <option value="0">Inactivo</option>
                                                                 </select><i class="fa fa-check icemp"></i>
                                                             </div>
-                                                        </div> --}}
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
