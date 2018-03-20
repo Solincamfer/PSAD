@@ -314,32 +314,32 @@ class Buscador extends Controller
 
 
           ///////////////////////////////Cargar acciones //////////////////////////////////////////
-        // $descripcion='Perfil';
-        // $orden=60;
-        // $submoduloPadre=5;
-        // $accionPadre=86;
-        // $perfil_id=24;
+        $descripcion='Plan';
+        $orden=53;
+        $submoduloPadre=3;
+        $accionPadre=67;
+        $perfil_id=24;
 
-        // $accion=new Accion();
-        //   $accion->status_ac=1;
-        //   $accion->descripcion='Eliminar'.' '.$descripcion;
-        //   $accion->desci='';
-        //   $accion->url='';
-        //   $accion->identificador='';
-        //   $accion->clase_cont='';
-        //   $accion->clase_css='fa fa-trash-o EliminarR';
-        //   $accion->clase_elem='';
-        //   $accion->ventana=0;
-        //   $accion->orden=$orden;
-        //   $accion->vista=0;
-        //   $accion->submodulo_id=$submoduloPadre;
-        //   $accion->tabla=0;
-        //   $accion->accion_id=$accionPadre;
-        // $accion->save();
+        $accion=new Accion();
+          $accion->status_ac=1;
+          $accion->descripcion='Eliminar'.' '.$descripcion;
+          $accion->desci='';
+          $accion->url='';
+          $accion->identificador='';
+          $accion->clase_cont='';
+          $accion->clase_css='fa fa-trash-o EliminarR';
+          $accion->clase_elem='';
+          $accion->ventana=0;
+          $accion->orden=$orden;
+          $accion->vista=0;
+          $accion->submodulo_id=$submoduloPadre;
+          $accion->tabla=0;
+          $accion->accion_id=$accionPadre;
+        $accion->save();
 
 
-        // $perfil=Perfil::find($perfil_id);
-        // $perfil->acciones()->attach($accion->id);
+        $perfil=Perfil::find($perfil_id);
+        $perfil->acciones()->attach($accion->id);
 
         /////////////////////////////eliminar acciones asociadas a los perfiles que no son root////////////
 
@@ -525,12 +525,13 @@ class Buscador extends Controller
       //     $accion_perfil=DB::table('accion_perfil')->where('perfil_id',$perfil)->delete();
       //  }
 
-      $consultaAcciones=DB::table('accion_perfil')->where('perfil_id',34)->get();
-      $consultaSubmodulo=DB::table('perfil_submodulo')->where('perfil_id',34)->get();
-      $consultaModulo=DB::table('modulo_perfil')->where('perfil_id',34)->get();
+      // $consultaAcciones=DB::table('accion_perfil')->where('perfil_id',34)->get();
+      // $consultaSubmodulo=DB::table('perfil_submodulo')->where('perfil_id',34)->get();
+      // $consultaModulo=DB::table('modulo_perfil')->where('perfil_id',34)->get();
 
       
-       return Response::json(['acciones'=>$consultaAcciones,'submodulos'=>$consultaSubmodulo,'modulos'=>$consultaSubmodulo]);
-			}
+      //  return Response::json(['acciones'=>$consultaAcciones,'submodulos'=>$consultaSubmodulo,'modulos'=>$consultaSubmodulo]);
+		
+    	}
 
 }

@@ -253,7 +253,7 @@ public function capturar_datos_responsables()
 ///////////////////////////////////////////Submodulo movimientos por usuario ////////////////////////////////////
 public function	movimientosUsuario()
 {	    $datos=$this->cargar_header_sidebar_acciones();
-	return view('Registros_Basicos\Bitacoras\movimientos_por_usuario',$this->datos_vista_($datos,DB::table('departamentos')->get()));
+	return view('Registros_Basicos.Bitacoras.Movimientos_por_usuario',$this->datos_vista_($datos,DB::table('departamentos')->get()));
 }
 
 public function mostrarUsuarios()
@@ -857,7 +857,7 @@ public function actualizar_registrosCD()
 public function planes_servicios()
 	{
 		$datos=$this->cargar_header_sidebar_acciones();
-		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(65,66,67),64);
+		$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(65,66,67,122),64);
 		return view ('Registros_Basicos.PlaneS.planes',$this->datos_vista($datos,$acciones,DB::table('planes')->paginate(11),5));
 
 

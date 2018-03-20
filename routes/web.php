@@ -330,4 +330,6 @@ Route::match(['post','get'],'/clientes/eliminar/sucursales',						   	['uses'=>'
 Route::match(['post','get'],'/clientes/eliminar/categorias',						   	['uses'=>'Eliminar@eliminarCategoria']);
 Route::match(['post','get'],'/clientes/eliminar/clientes',						   	['uses'=>'Eliminar@eliminarCliente']);
 Route::match(['post','get'],'/clientes/eliminar/perfiles',						   	['uses'=>'Eliminar@eliminarPerfil']);
+Route::match(['post','get'],'/clientes/eliminar/planes',						   	['uses'=>'Eliminar@eliminarPlan']);
+
 });

@@ -47,12 +47,18 @@
                                                     <i class="{{$accion->clase_css}}"></i>
                                                 </a>
                                             </span>
-                                        @elseif($accion->id!=65)
+                                        @elseif($accion->id==67)
                                             <span class="iclsp">
                                                 <a href="{{$accion->url.$planes->id}}" class="tltp consultarPlan" data-ttl="{{$accion->descripcion}}">
                                                     <i class="{{$accion->clase_css}}"></i>
                                                 </a>
                                             </span>
+                                         @elseif($accion->id==122)
+                                                <span class="iclsp">
+                                                      <a class="_eliminarPlan_" id="elimPlan{{$planes->id}}" data-reg="{{$planes->id}}" data-ttl="{{$accion->descripcion}}">
+                                                         <i class="{{$accion->clase_css}}"></i>
+                                                    </a>
+                                              </span>
                                         @endif
                                     @elseif($accion->id==66)
                                         @if($planes->status==1)

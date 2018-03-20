@@ -18,6 +18,83 @@ $(document).ready(function()
 			return 0;
 		}
 
+////////////////////////////////////////////////////Eliminar plan///////////////////////////////////////////
+	$('._eliminarPlan_').click(function() 
+	{
+			var registry=$(this).data('reg');
+			var route='/menu/registros/clientes/eliminar/planes';
+			var _token=$( "input[name^='_token']" ).val();
+			
+
+				swal({
+							title: "Eliminar Plan",
+							text: "¿ Desea eliminar el plan seleccionado ? ",
+							type: "warning",
+							showCancelButton: true,
+							confirmButtonColor:'#EE1919',
+							confirmButtonText:'Eliminar Plan',
+							cancelButtonText: "Cancelar",
+							closeOnConfirm: false,
+							closeOnCancel: false
+						 },
+					 function(isConfirm)
+					 {
+
+					 		if(isConfirm)
+					 		{
+
+								$.post(route, {_token:_token,registry:registry})
+								.done(function(answer)
+								{	
+									
+									if(answer.codigo==1)
+									{
+										
+										swal({
+												title:'Eliminacion Exitosa',//Contenido del modal
+												text: '<p style="font-size: 1.0em;">'+''+'</p>',
+												type: "success",
+												showConfirmButton:true,//Eliminar boton de confirmacion
+												html: true
+											},
+								  		function(isConfirm)
+								  			{
+								  				if(isConfirm)
+								  				 {
+								  				 	window.location.href='/menu/registros/planeservicios/';
+								  				 }	
+
+								  			});
+										
+
+									}
+									else if(answer.codigo==2)
+									{
+										swal({
+												title:'Imposible eliminar el plan',//Contenido del modal
+												text: '<p style="font-size: 1.0em;">'+answer.extra+'</p>',
+												type: "warning",
+												showConfirmButton:true,//Eliminar boton de confirmacion
+												html: true
+											});
+									}
+									else
+										{
+											 swal("No se elimino el plan!!!", "", "error");
+										}
+								})
+								.fail(function()
+									{ swal("Error Inesperado !!", "Comuniquese con el administrador", "error");});
+							}
+							else
+							{
+								 
+								 swal("Eliminacion Cancelada !!", "", "error");
+								
+								 
+							}
+					});
+	});
 
  //////////////////////////////////////////////////funcion boton modificar, Modificar plan///////////////////////////////////////////////////////////////////////
  
