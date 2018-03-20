@@ -35,7 +35,8 @@ Route::match(['post','get'],'/menu',['middleware'=>'v_menu','uses'=>'InicioContr
 Route::get('/menu/cambio/registros','RegistrosBasicos@cambio_registros'); //check de status
 Route::get('/menu/modificar/registros','RegistrosBasicos@modificar_registrosCD'); //modificar registros
 Route::get('/buscarRegistros','Buscador@buscarRegistros'); //modificar registros
-Route::get('/menu/registros/bitacoras/movimientosUsuario','RegistrosBasicos@movimientosUsuario'); //modificar registros
+Route::get('/menu/registros/bitacoras/movimientosUsuario','RegistrosBasicos@movimientosUsuario'); //
+Route::post('/menu/registros/bitacoras/movimientosUsuarioRegistros','RegistrosBasicos@movimientosUsuarioRegistros'); //modificar registros
 Route::post('/menu/registros/bitacoras/usuarios','RegistrosBasicos@mostrarUsuarios'); //modificar registros
 
 Route::post('/menu/registros/bitacoras/registros','RegistrosBasicos@movUsuariosReg');
@@ -328,4 +329,5 @@ Route::match(['post','get'],'/clientes/eliminar/respclie',						   	['uses'=>'El
 Route::match(['post','get'],'/clientes/eliminar/sucursales',						   	['uses'=>'Eliminar@eliminarSucursal']);
 Route::match(['post','get'],'/clientes/eliminar/categorias',						   	['uses'=>'Eliminar@eliminarCategoria']);
 Route::match(['post','get'],'/clientes/eliminar/clientes',						   	['uses'=>'Eliminar@eliminarCliente']);
+Route::match(['post','get'],'/clientes/eliminar/perfiles',						   	['uses'=>'Eliminar@eliminarPerfil']);
 });

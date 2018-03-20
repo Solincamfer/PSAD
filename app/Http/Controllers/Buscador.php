@@ -314,10 +314,10 @@ class Buscador extends Controller
 
 
           ///////////////////////////////Cargar acciones //////////////////////////////////////////
-        // $descripcion='Responsable Matriz';
-        // $orden=18;
-        // $submoduloPadre=7;
-        // $accionPadre=10;
+        // $descripcion='Perfil';
+        // $orden=60;
+        // $submoduloPadre=5;
+        // $accionPadre=86;
         // $perfil_id=24;
 
         // $accion=new Accion();
@@ -516,16 +516,21 @@ class Buscador extends Controller
       //       ->where(['marca_modelo.marca_id'=>$marca,'modelo_npieza.npieza_id'=>$pieza])
       //       ->select('marca_modelo.modelo_id AS modelo_id')
       //       ->get();
-       $perfiles=[33,34];
+      //  $perfiles=[33,34];
 
-       foreach ($perfiles as $perfil) 
-       {
-          $perfil_submodulo=DB::table('perfil_submodulo')->where('perfil_id',$perfil)->delete();
-          $modulo_perfil=DB::table('modulo_perfil')->where('perfil_id',$perfil)->delete();
-          $accion_perfil=DB::table('accion_perfil')->where('perfil_id',$perfil)->delete();
-       }
+      //  foreach ($perfiles as $perfil) 
+      //  {
+      //     $perfil_submodulo=DB::table('perfil_submodulo')->where('perfil_id',$perfil)->delete();
+      //     $modulo_perfil=DB::table('modulo_perfil')->where('perfil_id',$perfil)->delete();
+      //     $accion_perfil=DB::table('accion_perfil')->where('perfil_id',$perfil)->delete();
+      //  }
+
+      $consultaAcciones=DB::table('accion_perfil')->where('perfil_id',34)->get();
+      $consultaSubmodulo=DB::table('perfil_submodulo')->where('perfil_id',34)->get();
+      $consultaModulo=DB::table('modulo_perfil')->where('perfil_id',34)->get();
+
       
-      return 0;
+       return Response::json(['acciones'=>$consultaAcciones,'submodulos'=>$consultaSubmodulo,'modulos'=>$consultaSubmodulo]);
 			}
 
 }

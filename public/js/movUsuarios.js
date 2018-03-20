@@ -73,14 +73,25 @@ $(document).ready(function()
 
 							.done(function(answer)
 							{
-								
+								var colores=['#ffffff','#f7f4f4'];
+  								var color=0;
 
-								// if(answer.bitacora.length==0)
-								// {
-								// 	swal("No existen datos !!", "No hay registro de actividades para el usuario seleccionado", "warning");
-								// }
-								$('#tablaResultadosUs').remove();
-								$('#ResultadosMovUs').append(answer);
+								var longitud=answer.length;
+								if (longitud>0) 
+								{
+									$('#tablaResultadosUs').remove();
+									$('#ResultadosMovUs').append('<div class="table-responsive" id="tablaResultadosUs"><table class="table table-condensed table-bordered" id="tablaRegistros_" style="width:75%;height:2%">  <tr style="background-color:#333333;color: #FEFCFC">  <td style="text-align:center;width:13%;height:10%">Usuario</td> <td style="text-align:center;width:13%;height:10%">Empleado</td> <td style="text-align: center;width:16%;height:10%">Fecha</td> <td style="text-align: center;width:16%;height:10%">Accion</td>  <td style="text-align: center;width:16%;height:10%">Ventana</td></tr></table></div>');
+									for (var i = 0; i < longitud; i++) 
+									{
+										$('#tablaRegistros_').append('<tr style="background-color:'+colores[color]+';color: #050505;text-align: center;"><td style="text-align:center;width:13%;height:10%">'+answer[i].username+'</td><td style="text-align:center;width:13%;height:10%">'+answer[i].usuario+'</td><td>'+answer[i].created_at+'</td><td><button type="button" class="btn btn-link btn-primary movUsuario"  data-reg="'+answer[i].id+'" id=Bit"'+answer[i].id+'">'+answer[i].accion+'</button></td><td>'+answer[i].ventana+'</td></tr>')
+										if (color==0) {color=1;}else{color=0;}
+									}
+								}
+								else
+								{
+									swal("No existen movimientos para el usuario seleccionado !!", "", "warning");
+								}
+								//$('#ResultadosMovUs').append(answer);
 								
 
 								
@@ -95,6 +106,34 @@ $(document).ready(function()
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   $('#ResultadosMovUs').on("click",".movUsuario",(function() 
   {
+  		var route='/menu/registros/bitacoras/movimientosUsuarioRegistros';
+  		var registry=$(this).data('reg');
+  		var _token=$( "input[name^='_token']" ).val();
+  		$.post(route, {_token:_token,registry:registry}) 
+  		.done(function(answer)
+  		{
+  			var detalles=JSON.parse(answer.detalles);
+  			var colores=['#ffffff','#f7f4f4'];
+  			var color=0;
+  			
+  			$('#username').html(answer.usuario+' - '+answer.username);
+  			$('#fecha').html(answer.created_at);
+  			$('#registro').html(answer.registro);
+  			$('#ventana').html(answer.ventana);
+  			$('#detallesAc').html('Accion:&nbsp;&nbsp; '+answer.accion);
+  			
+  			$('.bitacora').remove();
+  			$.each(detalles,function(campo,valor) 
+  			{
+  				$('#detalles_').append('<tr class="bitacora" style="background-color:'+colores[color]+'"><td style="font-weight: bold;width:20%;height:2%;text-align: left">'+campo+':</td><td style="width:80%;height:2%;text-align: left;">'+valor+' .</td></tr>');
+  				if (color==0) {color=1;}else{color=0;}
+  			});
+  			
+  		})
+
+  		.fail(function(){swal("Error Inesperado !!", "Comuniquese con el administrador", "error");});
+
+  		
   		$('#ModalBitacora').modal('show');
   }));
 

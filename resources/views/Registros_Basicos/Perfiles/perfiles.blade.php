@@ -48,12 +48,18 @@
                                                              <i class="{{$accion->clase_css}}"></i>
                                                        </a>
                                                     </span>
-                                              @elseif($accion->id!=84)
+                                              @elseif($accion->id==86)
                                                    <span class="iclsp">
                                                        <a href="{{$accion->url.$perfiles->id}}" class="tltp modificarperfil" id="m{{$perfiles->id}}" data-ttl="{{$accion->descripcion}}">
                                                            <i class="{{$accion->clase_css}}"></i>                                                   
                                                        </a>
                                                    </span>
+                                               @elseif($accion->id==121)
+                                                <span class="iclsp">
+                                                      <a class="_eliminarPer_" id="elimPer{{$perfiles->id}}" data-reg="{{$perfiles->id}}" data-ttl="{{$accion->descripcion}}">
+                                                         <i class="{{$accion->clase_css}}"></i>
+                                                    </a>
+                                              </span>
                                               @endif
 
                                         @elseif($accion->id==85)

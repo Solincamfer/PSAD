@@ -20,7 +20,7 @@ use App\Rif;
 use App\Correo;
 use App\Direccion;
 use App\Telefono;
-use App\TIpo;
+use App\Tipo;
 use App\Modulo;
 use App\Submodulo;
 use App\Accion;
@@ -287,7 +287,15 @@ public function movUsuariosReg()
 	$bitacora=Bitacora::where('usuario',$usuario->primerNombre.' '.$usuario->primerApellido)->get();
 
 
-	return view ('Registros_Basicos.Bitacoras.movimientos_usuario',compact('bitacora'));
+	return Response::json($bitacora);
+}
+
+public function movimientosUsuarioRegistros()
+{
+	$registro=Request::get('registry');
+	$bitacora=Bitacora::find($registro);
+
+	return Response::json($bitacora);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -2106,7 +2114,7 @@ public function cargar_combos(){
 public function perfiles()//ventana perfiles
 {
 	$datos=$this->cargar_header_sidebar_acciones();
-	$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(84,85,86),83);
+	$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(84,85,86,121),83);
 	return view('Registros_Basicos.Perfiles.perfiles',$this->datos_vista($datos,$acciones,DB::table('perfiles')->where('descripcion','<>','ROOT')->where('descripcion','<>','STANDAR')->paginate(11),2));
 }
 
@@ -2256,15 +2264,21 @@ public function perfilesActualizar()
 {
 
 	$formulario=(object)['descripcion'=>strtoupper(Request::get('Descripcion')),'status'=>Request::get('Status'),'id'=>Request::get('Registro')];
-	$indicadores=['update'=>false,'duplicate'=>1];
+	$indicadores=(object)['update'=>false,'duplicate'=>0];
 	$cambios=array();
 
 
 	//////////////////////////////Verificar si el registro existe en el sistema /////////////////////////////////////////////////////
-	$indicadores['duplicate']=Perfil::where('descripcion',$formulario->descripcion)->count();
+	$aux=DB::table('perfiles')->where('descripcion',$formulario->descripcion)->where('id','<>',$formulario->id)->first();
+
+	if($aux!=null)
+		{
+			$indicadores->duplicate=2;
+		}
 	//////////////////////////////////////Si no hay registros duplicados ////////////////////////////////////////////////////////////
-	if($indicadores['duplicate']==0)
+	if($indicadores->duplicate==0)
 	{
+		
 
        $perfil=Perfil::find($formulario->id);
 
@@ -2277,12 +2291,15 @@ public function perfilesActualizar()
        $cambio=$this->detectarCambios($traduccionFor,$traduccionBd,'Status');
        $cambios=$this->agregarCambios($cambio,$cambios);
        $perfil->status=$formulario->status;
-       $indicadores['update']=$perfil->save();
+       
+       $aux=count($cambios);
 
 
-       if($indicadores['update']==true)
+       if($aux>0)
        {
         $cambios=$this->documentarCambios($cambios);
+        $indicadores->update=true;
+        $indicadores->duplicate=1;
        	$this->registroBitacora('Id del registro modificado: '.$perfil->id,'Modificar Perfil',$cambios,'Perfil -> Modificar Perfil');
        }
 
@@ -2290,7 +2307,7 @@ public function perfilesActualizar()
 
 
 
-   return Response()->json($indicadores);
+   return Response::json($indicadores);
 }
 
 
@@ -2631,8 +2648,8 @@ public function clientesMostrar()//inicializacion del submodulo: clientes
 
 			///////////////////////Crear registro para el cliente ////////////////////////////////////////////////
 			$clienteN=new Cliente();
-			$clienteN->razonSocial=$cliente->razonSocial;
-			$clienteN->nombreComercial=$cliente->nombreComercial;
+			$clienteN->razonSocial=strtoupper($cliente->razonSocial);
+			$clienteN->nombreComercial=strtoupper($cliente->nombreComercial);
 			$clienteN->rif_id=$rif->id;
 			$clienteN->direccionFiscal_id=$direccionFiscal->id;
 			$clienteN->direccionComercial_id=$direccionComercial->id;
@@ -5293,7 +5310,7 @@ public function clientes_sucursales($categoria_id)//vista de sucursales de una c
 		$modelo=Request::get('modelo');
 		$marca=Request::get('marca');
 
-		$npieza=Pieza::find($pieza);
+		$npieza=Npieza::find($pieza);
 		$nmodelo=Modelo::find($modelo);
 		$nmarca=Marca::find($marca);
 

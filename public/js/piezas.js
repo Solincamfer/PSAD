@@ -27,7 +27,7 @@ $(document).ready(function()
 	  	$.post(route,{_token:_token,registry:registry,tabla:tabla})
 	  .done(function(answer)
 	  	{
-      //console.log(answer.id);
+      
 	  	loadModal(answer.descripcion,answer.id);
 	  	})
 
@@ -62,7 +62,7 @@ $(document).ready(function()
           $.post(route, {_token:_token,registry:registry})
           .done(function(answer)
           {
-            console.log(answer);
+            
             if(answer[0]==1){
               swal({
                 title:'Borrado exitoso',//Contenido del modal
@@ -117,7 +117,7 @@ $(document).ready(function()
 		$.post(route,{_token:_token,registry:registry,padreTipo})
 		.done(function(answer)
 		{
-			console.log(answer);
+			
 			$.each(answer,function(key, registro) {
 				$("#marcaP").append('<option class="marcaP" value='+registro.id+'>'+registro.descripcion+'</option>');
 			});
@@ -162,7 +162,7 @@ $('#marcaP').on('change',function()
 		$('.modelos').remove();
 		
 		var registro=$('#registry').val();
-		console.log(registro);
+		
 		var valor = $("#marca option:selected").val();
 		$('#marcaPadre').val(valor);
 		var _token=$( "input[name^='_token']" ).val();
@@ -170,7 +170,7 @@ $('#marcaP').on('change',function()
 		$.post(route,{_token:_token,registro:registro,valor:valor})
 		.done(function(answer)
 		{
-			//console.log(answer);
+			
 			$.each(answer,function(key, registro) {
 			$("#modelo").append('<option class="modelos" value='+registro.id+'>'+registro.descripcion+'</option>');
 			});
@@ -317,7 +317,7 @@ $('#minusMarcaP').on("click",function()
 			        })
 		          	.done(function(answer)
 		          	{
-							console.log(answer);
+							
 				            if(answer[0]==1) 
 				            {
 
@@ -431,7 +431,7 @@ $('#minusMarcaP').on("click",function()
 				          data: {_token:_token,registro:registro,valor:valor,padreTipo:padreTipo}
 			        })
 		          	.done(function(answer){
-						//console.log(answer);
+						
 			            if(answer[0]==1) {
 			              	swal({
 				                title:'Borrado exitoso',//Contenido del modal
@@ -508,7 +508,7 @@ $('#minusMarcaP').on("click",function()
 					var route='/menu/registros/datos/borrarmodelocomponente';
 					$.post(route,{_token:_token,registro:registro,modelo:modelo,marca:marca,padreTipo:padreTipo})
 		          	.done(function(answer){
-						//console.log(answer);
+						
 			            if(answer[0]==1) {
 			              	swal({
 				                title:'Borrado exitoso',//Contenido del modal
@@ -568,7 +568,7 @@ $('#minusMarcaP').on("click",function()
 				var route='/menu/registros/agregar/pieza';
 				$.post(route,formulario)
 		  		.done(function(answer){
-						//console.log(answer)
+						
 						if(answer[0]==1){
 							 swal({
 									title:'Guardado exitoso',//Contenido del modal
@@ -618,7 +618,7 @@ $('#minusMarcaP').on("click",function()
 			var route='/menu/registros/modificar/pieza';
 			$.post(route,formulario)
 				.done(function(answer){
-					//console.log(answer)
+					
 				if(answer[0]==1){
 						 swal({
 								title:'Actualización Exitosa',//Contenido del modal
@@ -732,7 +732,7 @@ $('#minusMarcaP').on("click",function()
  				var route='/menu/registros/agregar/marca/pieza';
  				$.post(route,formulario)
  		  		.done(function(answer){
- 		  				console.log(answer)
+ 		  				
  						if(answer[0]==1){
  							 swal({
  									title:'Guardado exitoso',//Contenido del modal
@@ -785,7 +785,7 @@ $('#minusMarcaP').on("click",function()
  				var route='/menu/registros/agregar/marca/componente';
  				$.post(route,formulario)
  		  		.done(function(answer){
- 		  				//console.log(answer)
+ 		  				
  						if(answer[0]==1){
  							 swal({
  									title:'Guardado exitoso',//Contenido del modal
@@ -839,7 +839,7 @@ $('#minusMarcaP').on("click",function()
  				var route='/menu/registros/agregar/modelo/componente';
  				$.post(route,formulario)
  		  		.done(function(answer){
- 		  				console.log(answer)
+ 		  				
  						if(answer[0]==1){
  							 swal({
  									title:'Guardado exitoso',//Contenido del modal

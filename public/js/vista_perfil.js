@@ -16,7 +16,83 @@ $(document).ready(function()
 		return 0;
 	}
 
+	////////////////////////////////////// Eliminar perfil/////////////////////////////////////////////////
+	$('._eliminarPer_').click(function()
+{
+			var registry=$(this).data('reg');
+			var route='/menu/registros/clientes/eliminar/perfiles';
+			var _token=$( "input[name^='_token']" ).val();
+			var sucursal=$('#_sucursal_id_').val();
 
+				swal({
+							title: "Eliminar Perfil",
+							text: "Al eliminar el perfil seleccionado, se eliminaran sus permisos asociados. ¿Desea eliminar el perfil?",
+							type: "warning",
+							showCancelButton: true,
+							confirmButtonColor:'#EE1919',
+							confirmButtonText:'Eliminar Perfil',
+							cancelButtonText: "Cancelar",
+							closeOnConfirm: false,
+							closeOnCancel: false
+						 },
+					 function(isConfirm)
+					 {
+
+					 		if(isConfirm)
+					 		{
+
+								$.post(route, {_token:_token,registry:registry})
+								.done(function(answer)
+								{
+									
+									if(answer.codigo==1)
+									{
+										
+										swal({
+												title:'Eliminacion Exitosa',//Contenido del modal
+												text: '<p style="font-size: 1.0em;">'+''+'</p>',
+												type: "success",
+												showConfirmButton:true,//Eliminar boton de confirmacion
+												html: true
+											},
+								  		function(isConfirm)
+								  			{
+								  				if(isConfirm)
+								  				 {
+								  				 	window.location.href='/menu/registros/perfiles/';
+								  				 }	
+
+								  			});
+										
+
+									}
+									else if(answer.codigo==2)
+									{
+										swal({
+												title:'Imposible eliminar el perfil',//Contenido del modal
+												text: '<p style="font-size: 1.0em;">'+answer.extra+'</p>',
+												type: "warning",
+												showConfirmButton:true,//Eliminar boton de confirmacion
+												html: true
+											});
+									}
+									else
+										{
+											 swal("No se elimino el perfil!!!", "", "error");
+										}
+								})
+								.fail(function()
+									{ swal("Error Inesperado !!", "Comuniquese con el administrador", "error");});
+							}
+							else
+							{
+								 
+								 swal("Eliminacion Cancelada !!", "", "error");
+								
+								 
+							}
+					});
+});
 
 	//////////////////////////////////////Funcion boton: modificar llena el modal con los datos del registro que se desea modificar/////////////////////////////////////////////////////
 	$('.ModificarPerfil').click(function() 
@@ -65,16 +141,16 @@ $(document).ready(function()
 		  		.done(function(answer)
 		  			{
 		  				 
-		  				 if(answer.duplicate>0 && answer.update==false)
+		  				 if(answer.duplicate==2 && answer.update==false)
 		  				 {
 		  				 	swal("El perfil existe en el sistema !!", "No puede crear perfiles con el mismo nombre", "warning");
-		  				 	//$('#forActPerf').data('bootstrapValidator').resetForm();
+		  				 	
 		  				 }
 		  				 else if(answer.duplicate==0 && answer.update==false)
 		  				 {
-		  				 	swal("Actualizacion Fallida !!", "Comuniquese con el administrador", "error");
+		  				 	$('#myModal2').modal('hide');
 		  				 }
-		  				 else if (answer.duplicate==0 && answer.update==true)
+		  				 else if (answer.duplicate==1 && answer.update==true)
 		  				 {
 		  				 	
 		  				 	swal({
@@ -137,7 +213,7 @@ $(document).ready(function()
 						else if(answer.duplicate==0 && answer.insert==true)
 						{
 							swal({
-										title:'Isercion exitosa',//Contenido del modal
+										title:'Guardado Exitoso',//Contenido del modal
 										text: '<p style="font-size: 1.0em;">'+'El perfil se agrego correctamente'+'</p>',
 										type: "success",
 										showConfirmButton:true,//Eliminar boton de confirmacion

@@ -20,7 +20,7 @@ use App\Rif;
 use App\Correo;
 use App\Direccion;
 use App\Telefono;
-use App\TIpo;
+use App\Tipo;
 use App\Modulo;
 use App\Submodulo;
 use App\Accion;
@@ -410,6 +410,32 @@ public function eliminarEquipo_($equipo_id)
     }
 
 
+    public function eliminarPerfil()
+{
+    $duplicado=(object)array('codigo'=>0,'extra'=>0);
+    $perfil=Request::get('registry');
+    $consulta=DB::table('usuarios')->where('perfil_id',$perfil)->first();
+    if($consulta!=null)
+    {
+        $duplicado->codigo=2;
+        $duplicado->extra='Se encuetra asociado al menos al usuario: '.$consulta->n_usuario;
+    }
+    else
+    {
+        $perfil=Perfil::find($perfil);
+        /////Elimina las tablas intermedias///////////////////////////////////////////
+        $consultarAcciones=DB::table('accion_perfil')->where('perfil_id',$perfil->id)->delete();
+        $consultaSubmodulos=DB::table('perfil_submodulo')->where('perfil_id',$perfil->id)->delete();
+        $consultaModulos=DB::table('modulo_perfil')->where('perfil_id',$perfil->id)->delete();
+        //////////Eliminar el perfil///////////////
+        $delete=$perfil->delete();
+        if($delete)
+        {
+            $duplicado->codigo=1;
+        }
+    }
 
+    return Response::json($duplicado);
+}
 
 }
