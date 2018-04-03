@@ -120,14 +120,16 @@ class RegistrosBasicos extends Controller
 
 
 
-		public function datos_vista_($datos_session,$consulta)
+		public function datos_vista_($datos_session,$consulta,$extra='',$datosC1='')
 	{
 		$valores_vista=array(
 								'modulos'=>$datos_session['modulos'],//side bar
 								'submodulos'=>$datos_session['submodulos'],//side bar
 								'nombre'=>$datos_session['nombre'],//header
 								'apellido'=>$datos_session['apellido'],//header
-								'consulta'=>$consulta
+								'consulta'=>$consulta,
+								'extra'=>$extra,
+								'datosC1'=>$datosC1
 
 			);
 
@@ -253,7 +255,9 @@ public function capturar_datos_responsables()
 ///////////////////////////////////////////Submodulo movimientos por usuario ////////////////////////////////////
 public function	movimientosUsuario()
 {	    $datos=$this->cargar_header_sidebar_acciones();
-	return view('Registros_Basicos.Bitacoras.Movimientos_por_usuario',$this->datos_vista_($datos,DB::table('departamentos')->get()));
+		$operaciones=DB::table('operaciones')->get();
+		$submodulos=DB::table('submodulos')->select('id As id','descripcion AS descripcion')->where('status_sm',1)->where('padre',1)->orderBy('orden','asc')->get();
+	return view('Registros_Basicos.Bitacoras.Movimientos_por_usuario',$this->datos_vista_($datos,DB::table('departamentos')->get(),$operaciones,$submodulos));
 }
 
 public function mostrarUsuarios()
@@ -277,6 +281,14 @@ public function movUsuariosReg()
 {
 
 	$usuario=Request::get('registry');
+	$desde=Request::get('desde');
+	$hasta=Request::get('hasta');
+	$submodulo=Request::get('submodulo');
+	$operacion=Request::get('operacion');
+	$respuesta=[];
+	$respuesta_=[];
+
+
 	$usuario=DB::table('usuarios')
 				->join('empleado_usuario','empleado_usuario.usuario_id','=','usuarios.id')
 				->join('empleados','empleados.id','=','empleado_usuario.empleado_id')
@@ -284,10 +296,49 @@ public function movUsuariosReg()
 				->where('usuarios.id',$usuario)
 				->first();
 
+	/////Cuando no se seleccionan ninguno de los filtros
 	$bitacora=Bitacora::where('usuario',$usuario->primerNombre.' '.$usuario->primerApellido)->get();
+	if ((empty($desde)&&empty($hasta))&&(($submodulo==0)&&($operacion==0)) )
+	{
+		$respuesta=$bitacora;
+	}
+	else
+	{
+		if ($submodulo>0) 
+		{
+			foreach ($bitacora as $registro) 
+			{
+				if ($registro->submodulo==$submodulo) 
+				{
+					
+					array_push($respuesta,$registro);
+				}
+			}
+			if ($operacion>0) 
+			{
+				foreach ($respuesta as $registro) 
+				{
+					if ($registro->operacion==$operacion) 
+					{
+						array_push($respuesta_,$registro);
+					}
+				}
+				$respuesta=$respuesta_;
+			}
+			else
+			{
+				$respuesta=$respuesta;
+			}
+		}
+		else
+		{
+			$respuesta=$bitacora;
+		}
+	}
 
 
-	return Response::json($bitacora);
+
+	return Response::json($respuesta);
 }
 
 public function movimientosUsuarioRegistros()
@@ -1252,7 +1303,7 @@ public function empleados()
 
 
 	$datos=$this->cargar_header_sidebar_acciones();
-	$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(76,77,78),75);
+	$acciones=$this->cargar_acciones_submodulo_perfil($datos['acciones'],array(76,77,78,123),75);
 	return view ('Registros_Basicos.empleados.empleados',$this->datos_vista($datos,$acciones,DB::table('empleados')->get(),$tipoR,$tipoD,$paises,$codigoC,$codigoL,$directores,$empleados_usuario));//el 3 significa que es la vista 3
 }
 
@@ -1302,7 +1353,7 @@ public function empleados_asignar_perfil()
 	$perfilNuevo=Perfil::find($perfil_id);//informacion del nuevo perfil
 
 	$actualizacion=DB::table('usuarios')->where('id',$usuario_id)->update(['perfil_id'=>$perfil_id]);
-	$this->registroBitacora('Usuario: '.$usuario->n_usuario.' - '.$empleado->primerNombre.' '.$empleado->primerApellido,'Asignar Perfil','{'.'"Perfil":'.'"'.$perfilActual->descripcion.' , Fue cambiado a: '.$perfilNuevo->descripcion.'"}','Empleados -> Permisos');
+	$this->registroBitacora('Usuario: '.$usuario->n_usuario.' - '.$empleado->primerNombre.' '.$empleado->primerApellido,'Asignar Perfil','{'.'"Perfil'.' ('.$empleado->primerNombre.' '.$empleado->primerApellido.') ":'.'"'.$perfilActual->descripcion.' , Fue cambiado a: '.$perfilNuevo->descripcion.'"}','Empleados - Permisos',6,5);
 
 	return $actualizacion;
 
@@ -1509,46 +1560,38 @@ public function documentarCambios($cambios)
 
 public function empleadosActualizar()
 {
-
    $cambios=array();
    $formulario=$this->obtenerFormularioActualizar();
-   $empleado=Empleado::where('id',$formulario->empleado_id)->first();
-   // ///////////////verificar si el usuario esta duplicado, para el resto de empleados //////////////
-   $empleadoUsu=DB::table('empleado_usuario')
-   					->join('usuarios','usuarios.id','=','empleado_usuario.usuario_id')
-   					->where('empleado_usuario.empleado_id',$formulario->empleado_id)
-   					->select('usuarios.n_usuario AS usuario','usuarios.id AS usuario_id')
-   					->first();////captura el username y el id de ese registro en la base de datos que est asociado al empleado a modificar
+   $empleado=Empleado::where('id',$formulario->empleado_id)->first();//obtener los datos del empleado
+   $mensaje=(object)array('codigo'=>0,'mensaje'=>'');
+   $empleadoUsu=DB::table('empleado_usuario')->where('empleado_id',$formulario->empleado_id)->first();
+   ////obtener los datos de la cedula, el rif y el usuario
+   $cedula=Cedula::where('tipo_id',$formulario->tipoCedula)->where('numero',$formulario->numeroCedula)->where('rol','EMPLEADO')->first();
+   $rif=Rif::where('tipo_id',$formulario->tipoRif)->where('numero',$formulario->numeroRif)->where('rol','EMPLEADO')->first();
+   $usuario=Usuario::where('n_usuario',strtoupper($formulario->nombreUsuario))->first();
+   ////////////////////////////////verificar si existen registrados en la base de datos //////////////////////////
+   
+   if ($cedula!=null ||$rif!=null||$usuario!=null) //si alguno de los datos existe
+   {
+   	 	if ($empleado->cedula_id!=$cedula->id) //si la cedula se encuentra pero en otro empleado
+   	 	{
+   	 		$empleadoDup=Empleado::where('cedula_id',$cedula->id)->first();
+   	 		$mensaje->mensaje=$mensaje->mensaje.'La cedula ingresada, se encuentra asociada a: '.$empleadoDup->primerNombre.' '.$empleadoDup->primerApellido.' <br>';
+   	 	}
+   	 	if($empleado->rif_id!=$rif->id)
+   	 	{
+   	 		$empleadoDup=Empleado::where('rif_id',$rif->id)->first();
+   	 		$mensaje->mensaje=$mensaje->mensaje.'El rif ingresado, se encuentra asociado a: '.$empleadoDup->primerNombre.' '.$empleadoDup->primerApellido.' <br>';
+   	 	}
+   	 	////////////////////consultar usuario//////////////////
+   	 	$consUsuario=DB::table('empleado_usuario')->where('usuario_id','=',$usuario->id)->where('empleado_id','<>',$empleado->id)->first();
 
-   	$mensaje=(object)array('usuario'=>0,'cedula'=>0,'rif'=>0,'mensaje'=>'');
-
-
-   // 	///Buscar usuario duplicado
-
-   $usuarioDuplicado=DB::table('usuarios')->where('id','<>',$empleadoUsu->usuario_id)->where('n_usuario','=',$formulario->nombreUsuario)->first();
-
-   //  ////Verificar si existe la cedula insertada en el formulario
-   	$verificarCedula=DB::table('cedulas')->where(['numero'=>$formulario->numeroCedula,'rol'=>'EMPLEADO','tipo_id'=>$formulario->tipoCedula])->where('id','<>',$empleado->cedula_id)->first();
-
-   //  ///Verificar si existe el rif  insertado en el formulario
-    $verificarRif=DB::table('rifs')->where(['numero'=>$formulario->numeroRif,'rol'=>'EMPLEADO','tipo_id'=>$formulario->tipoRif])->where('id','<>',$empleado->rif_id)->first();
-
-   //  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    if(count($usuarioDuplicado)>0){$mensaje->usuario=1;$mensaje->mensaje=$mensaje->mensaje.'<br>El usuario: '.$formulario->nombreUsuario.', existe en el sistema!!!';}
-    if(count($verificarCedula)>0)
-    	{
-    		$empleadoDup=Empleado::where('cedula_id',$verificarCedula->id)->select('primerNombre AS nombre','primerApellido AS apellido')->first();
-    		$mensaje->cedula=1;
-    		$mensaje->mensaje=$mensaje->mensaje.'<br>La cedula: '.$formulario->numeroCedula.' , se encuentra asignada a: '.$empleadoDup->nombre.' '.$empleadoDup->apellido;
-    	}
-    if(count($verificarRif)>0)
-    {
-    	    $empleadoDup=Empleado::where('rif_id',$verificarRif->id)->select('primerNombre AS nombre','primerApellido AS apellido')->first();
-    	    $mensaje->rif=1;
-    	    $mensaje->mensaje=$mensaje->mensaje.'<br>El rif: '.$formulario->numeroRif.' , se encuentra asignado a: '.$empleadoDup->nombre.' '.$empleadoDup->apellido;
-    }
-
+   	 	if($consUsuario!=null)
+   	 	{
+   	 		$empleadoDup=Empleado::where('id',$consUsuario->empleado_id)->first();
+   	 		$mensaje->mensaje=$mensaje->mensaje.'El usuario ingresado, se encuentra asociado a:  '.$empleadoDup->primerNombre.' '.$empleadoDup->primerApellido.' <br>';
+   	 	}
+   }
 
 
     if($mensaje->mensaje=='')//si no existe ningun mensaje
@@ -1659,7 +1702,7 @@ public function empleadosActualizar()
     				$cambios=$this->agregarCambios($cambio,$cambios);
     				$telefono->codigo=$formulario->telefonoLocal1Codigo;
 
-    				$cambio=$this->detectarCambios($formulario->telefonoLocal1Numero,$telefono->telefono,'Numero Local 1');
+    				$cambio=$this->detectarCambios($formulario->telefonoLocal1Numero,$telefono->telefono,'Numero Oficina');
     				$cambios=$this->agregarCambios($cambio,$cambios);
     				$telefono->telefono=$formulario->telefonoLocal1Numero;
     				$telefono->save();
@@ -1727,8 +1770,12 @@ public function empleadosActualizar()
 
     	if($longitud>0)
     	 {
-
-    		$this->registroBitacora('Id del registro modificado: '.$empleado->id,'Modificar Empleado',$cambios,'Empleados');
+    	 	$mensaje->codigo=1;
+    		$this->registroBitacora('Id del registro modificado: '.$empleado->id,'Modificar Empleado',$cambios,'Empleados - Empleado',6,2);
+    	 }
+    	 else
+    	 {
+    	 	$mensaje->codigo=0;
     	 }
 
 
@@ -1847,7 +1894,7 @@ public function empleadosStatus()
 				->where('cedulas.id',$empleado->cedula_id)
 				->first();
 
-    $this->registroBitacora($empleado->primerNombre.' '.$empleado->primerApellido.' - '.$cedula->tipoCedula.' '.$cedula->numero,'Cambiar Status','{"Status":"'.$status_[$empleado->status].' -> '.$status__[$empleado->status].'"}','Empleados');
+    $this->registroBitacora($empleado->primerNombre.' '.$empleado->primerApellido.' - '.$cedula->tipoCedula.' '.$cedula->numero,'Cambiar Status','{"Status":"'.$status_[$empleado->status].' -> '.$status__[$empleado->status].'"}','Empleados - Empleado',6,3);
     /////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	return Response()->json(['update'=>$aux]);
@@ -1946,11 +1993,29 @@ public function certificarCedulaRif($cedula,$rif)
 }
 
 
+public function usuarioDuplicado($usuario)
+{
+	$mensaje=array('extra'=>0,'codigo'=>0);
+	$consulta=DB::table('usuarios')->where('n_usuario',$usuario)->first();
+	if($consulta!=null)
+	{
+		$mensaje['codigo']=4;
+		$consultaEmpleado=DB::table('empleado_usuario')
+			->join('empleados','empleado_usuario.empleado_id','=','empleados.id')
+			->where('empleado_usuario.usuario_id',$consulta->id)
+			->select('empleados.primerNombre AS nombre','empleados.primerApellido AS apellido')->first();
+		$mensaje['extra']='El usuario: '.$usuario.', se encuentra asignado a : '.$consultaEmpleado->nombre.' '.$consultaEmpleado->apellido;
+	}
+
+	return $mensaje;
+}
+
 
 public function insertar_empleado()
 {
 	$formulario=$this->caprturarFormularioEmpleado();
 	$duplicado=$this->certificarCedulaRif(array('numero'=>$formulario['numeroCedula'],'tipo'=>$formulario['tipoCedula']), array('numero'=>$formulario['numeroRif'],'tipo'=>$formulario['tipoRif']));
+	$duplicadoUsuario=$this->usuarioDuplicado(strtoupper($formulario['nombreUsuario']));
 	$mensaje="";
 
 
@@ -1958,103 +2023,109 @@ public function insertar_empleado()
 
 
 
-	if($duplicado['cedula_id']==0 && $duplicado['rif_id']==0)
-	{
+			if($duplicado['cedula_id']==0 && $duplicado['rif_id']==0)
+			{
+				if($duplicadoUsuario['codigo']==0)
+				{
+					$cedula=new Cedula();
+					$cedula->numero=$formulario['numeroCedula'];
+					$cedula->tipo_id=$formulario['tipoCedula'];
+					$cedula->rol='EMPLEADO';
+					$cedula->save();
 
-		$cedula=new Cedula();
-		$cedula->numero=$formulario['numeroCedula'];
-		$cedula->tipo_id=$formulario['tipoCedula'];
-		$cedula->rol='EMPLEADO';
-		$cedula->save();
-
-		$rif=new Rif();
-		$rif->numero=$formulario['numeroRif'];
-		$rif->rol="EMPLEADO";
-		$rif->tipo_id=$formulario['tipoRif'];
-		$rif->save();
-
-
-		$correo=new Correo();
-		$correo->correo=$formulario['correo'];
-		$correo->save();
+					$rif=new Rif();
+					$rif->numero=$formulario['numeroRif'];
+					$rif->rol="EMPLEADO";
+					$rif->tipo_id=$formulario['tipoRif'];
+					$rif->save();
 
 
-		$direccion=new Direccion();
-		$direccion->descripcion=$formulario['descripcionDireccion'];
-		$direccion->codigoPostal=$formulario['codigoPostal'];
-		$direccion->municipio_id=$formulario['municipio'];
-		$direccion->pais_id=$formulario['pais'];
-		$direccion->region_id=$formulario['region'];
-		$direccion->estado_id=$formulario['estado'];
-		$direccion->save();
+					$correo=new Correo();
+					$correo->correo=$formulario['correo'];
+					$correo->save();
 
 
-		$empleado=new Empleado();
-		$empleado->primerNombre=$formulario['primerNombre'];
-		$empleado->segundoNombre=$formulario['segundoNombre'];
-		$empleado->primerApellido=$formulario['primerApellido'];
-		$empleado->segundoApellido=$formulario['segundoApellido'];
-		$empleado->fechaNacimiento=$formulario['fechaNacimiento'];
-		$empleado->status=$formulario['status'];
-		$empleado->cedula_id=$cedula->id;
-		$empleado->rif_id=$rif->id;
-		$empleado->correo_id=$correo->id;
-		$empleado->direccion_id=$direccion->id;
-		$empleado->cargo_id=$formulario['cargo'];
-		$empleado->save();
+					$direccion=new Direccion();
+					$direccion->descripcion=$formulario['descripcionDireccion'];
+					$direccion->codigoPostal=$formulario['codigoPostal'];
+					$direccion->municipio_id=$formulario['municipio'];
+					$direccion->pais_id=$formulario['pais'];
+					$direccion->region_id=$formulario['region'];
+					$direccion->estado_id=$formulario['estado'];
+					$direccion->save();
 
 
-		$telefonoLocal1=new Telefono();
-		$telefonoLocal1->telefono=$formulario['telefonoLocal1Numero'];
-		$telefonoLocal1->codigo=$formulario['telefonoLocal1Codigo'];
-		$telefonoLocal1->tipo=0;
-		$telefonoLocal1->save();
-
-		$telefonoLocal2=new Telefono();
-		$telefonoLocal2->telefono=$formulario['telefonoLocal2Numero'];
-		$telefonoLocal2->codigo=$formulario['telefonoLocal2Codigo'];
-		$telefonoLocal2->tipo=1;
-		$telefonoLocal2->save();
-
-
-		$codigoMovil=Tipo::where('id',$formulario['telefonoMovilCodigo'])->select('descripcion')->first();
-
-		$telefonoMovil=new Telefono();
-		$telefonoMovil->telefono=$formulario['telefonoMovil'];
-		$telefonoMovil->codigo=$codigoMovil->descripcion;
-		$telefonoMovil->tipo=2;
-		$telefonoMovil->save();
+					$empleado=new Empleado();
+					$empleado->primerNombre=$formulario['primerNombre'];
+					$empleado->segundoNombre=$formulario['segundoNombre'];
+					$empleado->primerApellido=$formulario['primerApellido'];
+					$empleado->segundoApellido=$formulario['segundoApellido'];
+					$empleado->fechaNacimiento=$formulario['fechaNacimiento'];
+					$empleado->status=$formulario['status'];
+					$empleado->cedula_id=$cedula->id;
+					$empleado->rif_id=$rif->id;
+					$empleado->correo_id=$correo->id;
+					$empleado->direccion_id=$direccion->id;
+					$empleado->cargo_id=$formulario['cargo'];
+					$empleado->save();
 
 
-		$empleado->telefonos()->attach($telefonoLocal1->id);
-		$empleado->telefonos()->attach($telefonoLocal2->id);
-		$empleado->telefonos()->attach($telefonoMovil->id);
+					$telefonoLocal1=new Telefono();
+					$telefonoLocal1->telefono=$formulario['telefonoLocal1Numero'];
+					$telefonoLocal1->codigo=$formulario['telefonoLocal1Codigo'];
+					$telefonoLocal1->tipo=0;
+					$telefonoLocal1->save();
 
-		$usuario=new Usuario();
-		$usuario->n_usuario=$formulario['nombreUsuario'];
-		$usuario->clave=$formulario['password'];
-		$usuario->status=$formulario['status'];
-		$usuario->perfil_id=35;
-		$usuario->save();
-		$usuario->empleados()->attach($empleado->id);
-
-
-		$traduccionTipoCedula=$this->traducirId($cedula->tipo_id,1);
-		$this->registroBitacora('Id del registro creado: '.$empleado->id,'Agregar Empleado','{'.'"Registro al empleado":'.'"'.$empleado->primerNombre.' '.$empleado->primerApellido.' , C.i: '.$traduccionTipoCedula.' '.$cedula->numero.'"}','Agregar Empleado');
+					$telefonoLocal2=new Telefono();
+					$telefonoLocal2->telefono=$formulario['telefonoLocal2Numero'];
+					$telefonoLocal2->codigo=$formulario['telefonoLocal2Codigo'];
+					$telefonoLocal2->tipo=1;
+					$telefonoLocal2->save();
 
 
+					$codigoMovil=Tipo::where('id',$formulario['telefonoMovilCodigo'])->select('descripcion')->first();
 
-		$duplicado['codigo']=1;
+					$telefonoMovil=new Telefono();
+					$telefonoMovil->telefono=$formulario['telefonoMovil'];
+					$telefonoMovil->codigo=$codigoMovil->descripcion;
+					$telefonoMovil->tipo=2;
+					$telefonoMovil->save();
 
 
-	}
-	else if($duplicado['cedula_id']!=0 && $duplicado['rif_id']!=0)//primera capa de mensajes  aqui se genera el error porque consulta un foreignKey que no existe
-	{
-		$duplicado['codigo']=2;///los datos de rif y cedula ya estan registrados
-		$empleado=Empleado::where(['cedula_id'=>$duplicado['cedula_id'],'rif_id'=>$duplicado['rif_id']])->select('primerNombre','primerApellido')->first();
-		$duplicado['extra']=$empleado->primerNombre.' '.$empleado->primerApellido;
+					$empleado->telefonos()->attach($telefonoLocal1->id);
+					$empleado->telefonos()->attach($telefonoLocal2->id);
+					$empleado->telefonos()->attach($telefonoMovil->id);
 
-	}
+					$usuario=new Usuario();
+					$usuario->n_usuario=strtoupper($formulario['nombreUsuario']);
+					$usuario->clave=$formulario['password'];
+					$usuario->status=$formulario['status'];
+					$usuario->perfil_id=35;
+					$usuario->save();
+					$usuario->empleados()->attach($empleado->id);
+
+
+					$traduccionTipoCedula=$this->traducirId($cedula->tipo_id,1);
+					$this->registroBitacora('Id del registro creado: '.$empleado->id,'Agregar Empleado','{'.'"Registro al empleado":'.'"'.$empleado->primerNombre.' '.$empleado->primerApellido.' , C.i: '.$traduccionTipoCedula.' '.$cedula->numero.'"}','Empleados - Empleado',6,1);
+
+
+
+					$duplicado['codigo']=1;
+				}
+				else
+				{
+					$duplicado=$duplicadoUsuario;
+				}
+
+
+			}
+			else if($duplicado['cedula_id']!=0 || $duplicado['rif_id']!=0)//primera capa de mensajes  aqui se genera el error porque consulta un foreignKey que no existe
+			{
+				$duplicado['codigo']=2;///los datos de rif y cedula ya estan registrados
+				$empleado=Empleado::where('cedula_id',$duplicado['cedula_id'])->orWhere('rif_id',$duplicado['rif_id'])->select('primerNombre','primerApellido')->first();
+				$duplicado['extra']=$empleado->primerNombre.' '.$empleado->primerApellido;
+
+			}
 
 
 
@@ -2175,7 +2246,7 @@ public function perfiles_insertar()
 		$insert=$nuevoPerfil->save();
 		if($insert)
 		{
-			$this->registroBitacora('Id del registro creado: '.$nuevoPerfil->id,'Agregar Perfil','{"Registro el perfil":'.'"'.$nuevoPerfil->descripcion.'"'.'}','Perfil -> Agregar Perfil');
+			$this->registroBitacora('Id del registro creado: '.$nuevoPerfil->id,'Agregar Perfil','{"Registro el perfil":'.'"'.$nuevoPerfil->descripcion.'"'.'}','Perfiles - Perfil',5,1);
 		}
 
 		$this->configurarPerfil($nuevoPerfil->id);//configuracion de todo los modulos aceptados para el perfil normalmente tarda
@@ -2189,7 +2260,7 @@ public function perfiles_insertar()
 
 }
 
-public function registroBitacora($registry,$accion,$detalles,$ventana)
+public function registroBitacora($registry,$accion,$detalles,$ventana,$submodulo=0,$operacion=0)
 {
 
 	$datos=Session::get('sesion');
@@ -2204,6 +2275,8 @@ public function registroBitacora($registry,$accion,$detalles,$ventana)
 	$bitacora->registro=$registry;
 	$bitacora->detalles=$detalles;
 	$bitacora->ventana=$ventana;
+	$bitacora->submodulo=$submodulo;
+	$bitacora->operacion=$operacion;
 
      return $bitacora->save();
 
@@ -2222,7 +2295,7 @@ public function perfilesModificarStatus()
 	$perfil->status=$status[$perfil->status];
 	$aux=$perfil->save();
 	/////////////////////////////////////////////////////////////////////////////////////////////////////
-    $this->registroBitacora('Perfil: '.$perfil->descripcion,'Cambiar Status','{"Status":" Cambio de: '.$status_[$perfil->status].' a: '.$status__[$perfil->status].'"}','Perfil');
+    $this->registroBitacora('Perfil: '.$perfil->descripcion,'Cambiar Status','{"Status":" Cambio de: '.$status_[$perfil->status].' a: '.$status__[$perfil->status].'"}','Perfiles - Perfil',5,3);
     /////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	return Response()->json(['update'=>$aux]);
@@ -2291,6 +2364,7 @@ public function perfilesActualizar()
        $cambio=$this->detectarCambios($traduccionFor,$traduccionBd,'Status');
        $cambios=$this->agregarCambios($cambio,$cambios);
        $perfil->status=$formulario->status;
+       $perfil->save();
        
        $aux=count($cambios);
 
@@ -2300,7 +2374,7 @@ public function perfilesActualizar()
         $cambios=$this->documentarCambios($cambios);
         $indicadores->update=true;
         $indicadores->duplicate=1;
-       	$this->registroBitacora('Id del registro modificado: '.$perfil->id,'Modificar Perfil',$cambios,'Perfil -> Modificar Perfil');
+       	$this->registroBitacora('Id del registro modificado: '.$perfil->id,'Modificar Perfil',$cambios,'Perfiles - Perfil',5,2);
        }
 
 	}

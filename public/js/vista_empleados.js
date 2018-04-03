@@ -99,8 +99,103 @@ $(document).ready(function()
 
 			$('#myModal2').modal('show');
 		}
+		/////////////////////////////////////////////No aplica telefono movil //////////////////////////////////////////////
+		$('.tlMovil').change(function() 
+		{
+			var valor= $(this).val();
+			var caso=$(this).data('caso');
+			var casos=['numerom_t','numerom_tm'];
+			if(valor)
+			{
+				if(valor==16)
+				{
+					$('#'+casos[caso]).val('0000000');
+				}
+				else
+				{
+					$('#'+casos[caso]).val('');
+				}
+				
+			}
+			else
+			{
+				$('#'+casos[caso]).val('');
+			}
+			
+		});
+		////////////////////////////////////////////Eliminar empleado//////////////////////////////////////////////////////
+		////////////////////////////////////// Eliminar perfil/////////////////////////////////////////////////
+	$('._eliminarEmp_').click(function()
+{
+			var registry=$(this).data('reg');
+			var route='/menu/registros/clientes/eliminar/empleados';
+			var _token=$( "input[name^='_token']" ).val();
+			
+
+				swal({
+							title: "Eliminar Empleado",
+							text: "Al eliminar el empleado seleccionado, se eliminaran sus datos asociados. ¿Desea eliminar el empleado?",
+							type: "warning",
+							showCancelButton: true,
+							confirmButtonColor:'#EE1919',
+							confirmButtonText:'Eliminar Empleado',
+							cancelButtonText: "Cancelar",
+							closeOnConfirm: false,
+							closeOnCancel: false
+						 },
+					 function(isConfirm)
+					 {
+
+					 		if(isConfirm)
+					 		{
+
+								$.post(route, {_token:_token,registry:registry})
+								.done(function(answer)
+								{
+									
+									if(answer.codigo==1)
+									{
+										
+										swal({
+												title:'Eliminacion Exitosa',//Contenido del modal
+												text: '<p style="font-size: 1.0em;">'+''+'</p>',
+												type: "success",
+												showConfirmButton:true,//Eliminar boton de confirmacion
+												html: true
+											},
+								  		function(isConfirm)
+								  			{
+								  				if(isConfirm)
+								  				 {
+								  				 	window.location.href='/menu/registros/empleados/';
+								  				 }	
+
+								  			});
+										
+
+									}
+									
+									
+									else
+										{
+											 swal("No se elimino el empleado!!!", "", "error");
+										}
+								})
+								.fail(function()
+									{ swal("Error Inesperado !!", "Comuniquese con el administrador", "error");});
+							}
+							else
+							{
+								 
+								 swal("Eliminacion Cancelada !!", "", "error");
+								
+								 
+							}
+					});
+});
 
 
+		
 		/////////////////////////////////////////////Funciones para los select de estructura //////////////////////////////
 
 
@@ -363,49 +458,40 @@ $(document).ready(function()
 				        }
 			       	}
 			   	},
-			   	tlflcle:{
+			   	numerol_1c:{
 			       	validators: {
 						notEmpty: {
 				           message: 'Debe indicar el código de área'
 				        }
 			       	}
 			   	},
-			   		tlfmvle:{
-			   			validators: {
-						notEmpty: {
-				           message: 'Debe indicar el código de área'
-				        }
-			       	}
-			   		}
-			   	,
-
-			  
+			 	
 			   	numerol_1t:{
 			       	validators: {
 						notEmpty: {
-				           message: 'Debe indicar el número de telefono'
+				           message: 'Debe indicar el número de telefono local'
 				        },
 				        regexp: {
 			                regexp: /^[0-9]+$/,
 			                message: 'El telefono local debe ser solo números'                            
 		                }
 			       	}
-			   	},
+			   	},	
 			   	numerol_2c:{
 			       	validators: {
-				        regexp: {
-			                regexp: /^[0-9]+$/,
-			                message: 'El telefono local debe ser solo números'                            
-		                }
+						notEmpty: {
+				           message: 'Debe indicar el código de área'
+				        }
 			       	}
 			   	},
+			   
 			   	numerol_2t:{
 			       	validators: {notEmpty: {
-				           message: 'Debe indicar el número de telefono'
+				           message: 'Debe indicar el número de telefono de oficina'
 				        },
 				        regexp: {
 			                regexp: /^[0-9]+$/,
-			                message: 'El telefono local debe ser solo números'                            
+			                message: 'El telefono de oficina debe tener solo numeros'                            
 		                }
 			       	}
 			   	},
@@ -419,11 +505,11 @@ $(document).ready(function()
 			   	numerom_t:{
 			       	validators: {
 			       		notEmpty: {
-				           message: 'Debe indicar el número de telefono'
+				           message: 'Debe indicar el número de telefono movil'
 				        },
 				        regexp: {
 			                regexp: /^[0-9]+$/,
-			                message: 'El telefono local debe ser solo números'                            
+			                message: 'El telefono movil debe tener solo numeros'                            
 		                }
 			       	}
 			   	},
@@ -447,7 +533,13 @@ $(document).ready(function()
 			       		notEmpty: {
 				           	message: 'Debe ingresar una contraseña para el usuario creado'
 				        }
+			       	}},
+			       	statusEm_agr:{validators: {
+			       		notEmpty: {
+				           	message: 'Debe indicar un status para el usuario'
+				        }
 			       	}}
+
 		   	}
 	  	}).on('success.form.bv',function(e,data){
 	  		e.preventDefault();
@@ -457,9 +549,9 @@ $(document).ready(function()
 			var route='/menu/registros/empleados/agregar';
 			$.post(route,form)
 			.done(function(answer){
-					if(answer.codigo==1){
+										if(answer.codigo==1){
 						swal({
-								title:'Isercion exitosa',//Contenido del modal
+								title:'Guardado Exitoso',//Contenido del modal
 								text: '<p style="font-size: 1.0em;">'+'El empleado se registro correctamente!!'+'</p>',
 								type: "success",
 								showConfirmButton:true,//Eliminar boton de confirmacion
@@ -478,8 +570,18 @@ $(document).ready(function()
 
 					else if(answer.codigo==2){
 						swal({
-							title:'Cedula y Rif duplicados!!!',//Contenido del modal
+							title:'Cedula o Rif duplicados!!!',//Contenido del modal
 							text: '<p style="font-size: 0.9em;">'+'Se encuentran asociados a  : '+ answer.extra+'.<br><br><br>Los datos de: Cedula y Rif para un empleado, deben ser unicos.</p>',
+							type: "warning",
+							showConfirmButton:true,//Eliminar boton de confirmacion
+							html: true
+						});
+					}
+					else if(answer.codigo==4)
+					{
+						swal({
+							title:'Usuario duplicado!!!',//Contenido del modal
+							text: '<p style="font-size: 0.9em;">'+ answer.extra+'.<br><br><br>Ingrese un numero de usuario diferente.</p>',
 							type: "warning",
 							showConfirmButton:true,//Eliminar boton de confirmacion
 							html: true
@@ -496,19 +598,270 @@ $(document).ready(function()
 
  
 		/////////////////////////////////////////////Funcion Boton Guardar modificar /////////////////////////////////////////////////////////// 
+		$('#updateEmp').bootstrapValidator({
+			excluded: [':disabled'],
+		   	fields: {
+				nomEmp1m: {
+			       	validators: {
+				        notEmpty: {
+				           message: 'Indique el nombre del empleado'
+				        },
+				        regexp: {
+			                regexp: /^[a-z\s]+$/i,
+			                message: 'El nombre debe contener solo caracteres alfabéticos'
+		                }
+			       	}
+				},
+			    nomEmp2m: {
+			       	validators: {
+			       		 notEmpty: {
+				           message: 'Indique el nombre del empleado'
+				        },
+			       		regexp:{
+				       		regexp: /^[a-z\s]+$/i,
+			                message: 'El nombre debe contener solo caracteres alfabéticos'
+			        	}
+			       }
+			    },
+			    apellEmp1m: {
+			       validators: {
+			         	notEmpty: {
+			           		message: 'Indique el apellido del empleado'
+			        	},
+			        	regexp: {
+			                regexp: /^[a-z\s]+$/i,
+			                message: 'El apellido debe contener solo caracteres alfabéticos'
+	                	}
+			       	}
+			    },
+			     apellEmp2m: {
+			       validators: {
+			       	notEmpty: {
+			           		message: 'Indique el apellido del empleado'
+			        	},
+			        regexp: {
+		                regexp: /^[a-z\s]+$/i,
+		                message: 'El apellido debe contener solo caracteres alfabéticos'
+	                }
+			       }
+			     },
+			    TrifEmpm: {
+			       	validators: {
+			         	notEmpty: {
+			           		message: 'Debe indicar el tipo de rif'
+			         	}
+			       	}
+			    },
+				rifEmpm: {
+			       	validators: {
+			         	notEmpty: {
+			           		message: 'Debe indicar el número de rif'
+			         	},
+				        regexp: {
+			                regexp: /^[0-9]+$/,
+			                message: 'El rif debe contener solo numeros'                            
+		                }
+			       	}
+				},
+				TciEmpm: {
+			       	validators: {
+		         		notEmpty: {
+				        	message: 'Debe indicar el tipo de documento'
+				        }
+			       	}
+			   	},
+			    ciEmpm:{
+			       	validators: {
+						notEmpty: {
+				           message: 'Debe indicar el numero de documento'
+				        },
+				        regexp: {
+			                regexp: /^[0-9]+$/,
+			                message: 'La cédula de identidad debe contener solo números'                            
+		                }
+			       	}
+			   	},
+			   	fnEmpmm:{
+			       	validators: {
+						notEmpty: {
+				           message: 'Debe indicar la fecha de nacimiento'
+				        }
+			       	}
+			   	},
+			   	direccionEmprm:{
+			       	validators: {
+						notEmpty: {
+				           message: 'Debe indicar la dirección a la cual pertenece el empleado'
+				        }
+			       	}
+			   	},
+			   	departamentoEmpm:{
+			       	validators: {
+						notEmpty: {
+				           message: 'Debe indicar el departamento al cual pertenece el empleado'
+				        }
+			       	}
+			   	},
+			   	areaEmp_m:{
+			       	validators: {
+						notEmpty: {
+				           message: 'Debe indicar el área a la cual pertenece el empleado'
+				        }
+			       	}
+			   	},
+			   	cgoEmpm:{
+			       	validators: {
+						notEmpty: {
+				           message: 'Debe indicar el cargo del empleado'
+				        }
+			       	}
+			   	},
+			   	pdhem:{
+			       	validators: {
+						notEmpty: {
+				           message: 'Seleccione el país'
+				        }
+			       	}
+			   	},
+			   	rgdhem:{
+			       	validators: {
+						notEmpty: {
+				           message: 'Seleccione la región'
+				        }
+			       	}
+			   	},
+			   	edodhem:{
+			       	validators: {
+						notEmpty: {
+				           message: 'Seleccione el estado'
+				        }
+			       	}
+			   	},
+			   	mundhem:{
+			       	validators: {
+						notEmpty: {
+				           message: 'Seleccione el municipio'
+				        }
+			       	}
+			   	},
+			   	codigoPostalm:{
+			       	validators: {
+						notEmpty: {
+				           message: 'Debe indicar el código postal'
+				        },
+				        regexp: {
+			                regexp: /^[0-9]+$/,
+			                message: 'El código postal debe contener solo números'                            
+		                }
+			       	}
+			   	},
+			   	descpdhem:{
+			       	validators: {
+						notEmpty: {
+				           message: 'Debe indicar la dirección específica'
+				        }
+			       	}
+			   	},
+			   	numerol_1cm:{
+			       	validators: {
+						notEmpty: {
+				           message: 'Debe indicar el código de área'
+				        }
+			       	}
+			   	},
+			   		numerol_1tm:{
+			   			validators: {
+						notEmpty: {
+				           message: 'Debe indicar el numero de telefono local'
+				        },
+				         regexp: {
+			                regexp: /^[0-9]+$/,
+			                message: 'El numero de telefeno debe contener solo numeros'                            
+		                }
+			       	}
+			   		}
+			   	,
 
+			  
+			   	numerol_2cm:{
+			       	validators: {
+						notEmpty: {
+				           message: 'Debe indicar el código de área '
+				        }
+			       	}
+			   	},
+			   	numerol_2tm:{
+			       validators: {
+						notEmpty: {
+				           message: 'Debe indicar el numero de telefono de oficina'
+				        },
+				         regexp: {
+			                regexp: /^[0-9]+$/,
+			                message: 'El numero de telefeno debe contener solo numeros'                            
+		                }
+			       	}
+			   	},
+			  	numerom_cm:{
+			       	validators: {
+						notEmpty: {
+				           message: 'Seleccione el código de operadora'
+				        }
+				    }
+			   	},
+			   	numerom_tm:{
+			       	validators: {
+			       		notEmpty: {
+				           message: 'Debe indicar el número de telefono'
+				        },
+				        regexp: {
+			                regexp: /^[0-9]+$/,
+			                message: 'El telefono movil debe tener solo numeros'                            
+		                }
+			       	}
+			   	},
+			   	correo_m:{
+			       	validators: {
+			       		notEmpty: {
+				           	message: 'Debe indicar el correo electrónico'
+				        },
+				        emailAddress: {
+                        	message: 'El correo electronico debe tener el formato minombre@midominio.com'
+                		}
+			       	}
+			   	}
+			   	,nomUs_m:{	validators: {
+			       		notEmpty: {
+				           	message: 'Debe indicar un nombre de usuario'
+				        }
+			       	}},
+			      psw_m:{
+			      	validators: {
+			       		notEmpty: {
+				           	message: 'Debe ingresar una contraseña para el usuario creado'
+				        }
+			       	}},
+			       	statusEm_m:{validators: {
+			       		notEmpty: {
+				           	message: 'Debe indicar un status para el usuario'
+				        }
+			       	}}
 
-       $('#btnSvm').click(function()
-       {
-       		var form=$('#updateEmp').serialize();
+		   	}
+	  	}).on('success.form.bv',function(e,data){
+
+      		e.preventDefault();
+	  		var $form = $(e.target);               
+            var bv    = $form.data('bootstrapValidator');
+			var form=$('#updateEmp').serialize();
+       		
        		var route='/menu/registros/empleados/actualizar';
 
        		$.post(route,form)
 			.done(function(answer)
 				{
+					console.log(answer);
 					
-					
-					if(answer.mensaje!='')
+					if(answer.mensaje!='' && answer.codigo==0)//si el mensaje no es vacio
 					{
 						swal({
 									title:'Datos duplicados!!!',//Contenido del modal
@@ -518,7 +871,7 @@ $(document).ready(function()
 									html: true
 							});
 					}
-					else
+					else if(answer.mensaje=='' && answer.codigo==1)
 					{
 						swal({
 									title:'Actualizacion exitosa',//Contenido del modal
@@ -535,6 +888,10 @@ $(document).ready(function()
 		  				 		}	
 
 		  				 	});
+					}
+					else if(answer.mensaje=='' && answer.codigo==0)
+					{
+						$('#myModal2').modal('hide');
 					}
 
 				})

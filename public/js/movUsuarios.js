@@ -60,16 +60,27 @@ $(document).ready(function()
 		{
 			var dep=$('#DepBitUs').val();
 			var usr=$('#UsBitUs').val();
+			var des=$('#fechaDesde').val();
+			var has=$('#fechaHasta').val();
+			var sub=$('#submodulo_id').val();
+			var ope=$('#operacion_id').val();
 			var route='/menu/registros/bitacoras/registros';
+			alert('Desde: '+des+', Hasta: '+has+', sub: '+sub+', ope: '+ope);
 			var _token=$( "input[name^='_token']" ).val();
 
 			if(dep==0 && usr==0)
 			{
-				swal("Datos incompletos !!", "Debe seleccionar un departamento y un usuario para continuar", "error");
+				swal("Datos incompletos !!", "Debe seleccionar un departamento y un usuario para continuar", "warning");
+				$('#tablaResultadosUs').remove();
+			}
+			else if(dep!=0 && usr==0)
+			{
+				swal("Datos incompletos !!", "Debe seleccionar un usuario para continuar", "warning");
+				$('#tablaResultadosUs').remove();
 			}
 			else
 			{
-				  $.post(route,{_token:_token,registry:usr})
+				  $.post(route,{_token:_token,registry:usr,desde:des,hasta:has,submodulo:sub,operacion:ope})
 
 							.done(function(answer)
 							{
@@ -80,10 +91,10 @@ $(document).ready(function()
 								if (longitud>0) 
 								{
 									$('#tablaResultadosUs').remove();
-									$('#ResultadosMovUs').append('<div class="table-responsive" id="tablaResultadosUs"><table class="table table-condensed table-bordered" id="tablaRegistros_" style="width:75%;height:2%">  <tr style="background-color:#333333;color: #FEFCFC">  <td style="text-align:center;width:13%;height:10%">Usuario</td> <td style="text-align:center;width:13%;height:10%">Empleado</td> <td style="text-align: center;width:16%;height:10%">Fecha</td> <td style="text-align: center;width:16%;height:10%">Accion</td>  <td style="text-align: center;width:16%;height:10%">Ventana</td></tr></table></div>');
+									$('#ResultadosMovUs').append('<div class="table-responsive" id="tablaResultadosUs"><table class="table table-condensed table-bordered" id="tablaRegistros_" style="width:75%;height:2%;margin-left: 2%;">  <tr style="background-color:#333333;color: #FEFCFC">  <td style="text-align:center;width:13%;height:10%">Usuario</td> <td style="text-align:center;width:13%;height:10%">Empleado</td> <td style="text-align: center;width:16%;height:10%">Fecha</td> <td style="text-align: center;width:16%;height:10%">Ventana</td>  <td style="text-align: center;width:16%;height:10%">Operacion</td></tr></table></div>');
 									for (var i = 0; i < longitud; i++) 
 									{
-										$('#tablaRegistros_').append('<tr style="background-color:'+colores[color]+';color: #050505;text-align: center;"><td style="text-align:center;width:13%;height:10%">'+answer[i].username+'</td><td style="text-align:center;width:13%;height:10%">'+answer[i].usuario+'</td><td>'+answer[i].created_at+'</td><td><button type="button" class="btn btn-link btn-primary movUsuario"  data-reg="'+answer[i].id+'" id=Bit"'+answer[i].id+'">'+answer[i].accion+'</button></td><td>'+answer[i].ventana+'</td></tr>')
+										$('#tablaRegistros_').append('<tr style="background-color:'+colores[color]+';color: #050505;text-align: center;"><td style="text-align:center;width:13%;height:10%">'+answer[i].username+'</td><td style="text-align:center;width:13%;height:10%">'+answer[i].usuario+'</td><td>'+answer[i].created_at+'</td><td>'+answer[i].ventana+'</td><td><button type="button" class="btn btn-link btn-primary movUsuario"  data-reg="'+answer[i].id+'" id=Bit"'+answer[i].id+'">'+answer[i].accion+'</button></td></tr>')
 										if (color==0) {color=1;}else{color=0;}
 									}
 								}
@@ -91,7 +102,7 @@ $(document).ready(function()
 								{
 									swal("No existen movimientos para el usuario seleccionado !!", "", "warning");
 								}
-								//$('#ResultadosMovUs').append(answer);
+								
 								
 
 								

@@ -313,33 +313,32 @@ class Buscador extends Controller
       //       dd($consultaModelos);
 
 
-          ///////////////////////////////Cargar acciones //////////////////////////////////////////
-        $descripcion='Plan';
-        $orden=53;
-        $submoduloPadre=3;
-        $accionPadre=67;
-        $perfil_id=24;
+          /////////////////////////////Cargar acciones //////////////////////////////////////////
+        // $descripcion='Empleado';
+        // $orden=58;
+        // $submoduloPadre=3;
+        // $accionPadre=75;//cambiar por el id de la accion generado
+        // $perfil_id=24;
 
-        $accion=new Accion();
-          $accion->status_ac=1;
-          $accion->descripcion='Eliminar'.' '.$descripcion;
-          $accion->desci='';
-          $accion->url='';
-          $accion->identificador='';
-          $accion->clase_cont='';
-          $accion->clase_css='fa fa-trash-o EliminarR';
-          $accion->clase_elem='';
-          $accion->ventana=0;
-          $accion->orden=$orden;
-          $accion->vista=0;
-          $accion->submodulo_id=$submoduloPadre;
-          $accion->tabla=0;
-          $accion->accion_id=$accionPadre;
-        $accion->save();
+        // $accion=new Accion();
+        //   $accion->status_ac=1;
+        //   $accion->descripcion='Eliminar'.' '.$descripcion;
+        //   $accion->desci='';
+        //   $accion->url='';
+        //   $accion->identificador='';
+        //   $accion->clase_cont='';
+        //   $accion->clase_css='fa fa-trash-o EliminarR';
+        //   $accion->clase_elem='';
+        //   $accion->ventana=0;
+        //   $accion->orden=$orden;
+        //   $accion->vista=0;
+        //   $accion->submodulo_id=$submoduloPadre;
+        //   $accion->tabla=0;
+        //   $accion->accion_id=$accionPadre;
+        // $accion->save();
 
 
-        $perfil=Perfil::find($perfil_id);
-        $perfil->acciones()->attach($accion->id);
+        // stat
 
         /////////////////////////////eliminar acciones asociadas a los perfiles que no son root////////////
 
@@ -357,7 +356,7 @@ class Buscador extends Controller
 
        // $consulta=DB::table('perfiles')->where('id','<>',24)->delete();
 
-      //$consulta=DB::table('acciones')->where('id','>',109)->where('id','<',121)->update(['status_ac'=>1]);
+      // $consulta=DB::table('acciones')->where('id','>',109)->where('id','<',121)->update(['status_ac'=>1]);
 
         /////////////////////////consulta modificar equipos/////////////////////////////////
 
@@ -531,6 +530,7 @@ class Buscador extends Controller
 
       
       //  return Response::json(['acciones'=>$consultaAcciones,'submodulos'=>$consultaSubmodulo,'modulos'=>$consultaSubmodulo]);
+       return 0;
 		
     	}
 

@@ -59,6 +59,28 @@ class Eliminar extends Controller
 
 ////////////////Metodos usados por otros//////////////////////////////
 
+public function registrarBitacora($registry,$accion,$detalles,$ventana,$submodulo=0,$operacion=0)
+{
+
+    $datos=Session::get('sesion');
+    $usuario=$datos[0]['nombre'].' '.$datos[0]['apellido'];
+    $username=$datos[0]['usuario'];
+
+
+    $bitacora=new Bitacora;
+    $bitacora->usuario=$usuario;
+    $bitacora->username=$username;
+    $bitacora->accion=$accion;
+    $bitacora->registro=$registry;
+    $bitacora->detalles=$detalles;
+    $bitacora->ventana=$ventana;
+    $bitacora->submodulo=$submodulo;
+    $bitacora->operacion=$operacion;
+
+     return $bitacora->save();
+
+}
+
 public function eliminarCliente_($cliente_id)
 {
     $retorno=0;
@@ -424,6 +446,7 @@ public function eliminarEquipo_($equipo_id)
             else
             {
                 $perfil=Perfil::find($perfil);
+                $perfil_=$perfil;
                 /////Elimina las tablas intermedias///////////////////////////////////////////
                 $consultarAcciones=DB::table('accion_perfil')->where('perfil_id',$perfil->id)->delete();
                 $consultaSubmodulos=DB::table('perfil_submodulo')->where('perfil_id',$perfil->id)->delete();
@@ -433,6 +456,7 @@ public function eliminarEquipo_($equipo_id)
                 if($delete)
                 {
                     $duplicado->codigo=1;
+                    $this->registrarBitacora('Id del registro eliminado: '.$perfil_->id,'Eliminar Perfil','{"Elimino el perfil":'.'"'.$perfil_->descripcion.'"'.'}','Perfiles - Perfil',5,4);
                 }
             }
 
@@ -465,6 +489,53 @@ public function eliminarEquipo_($equipo_id)
             }
 
             return Response::json($duplicado);
+    }
+
+    public function eliminarEmpleado()
+    {
+        $retorno=0;
+        $registry=Request::get('registry');
+        $empleado=Empleado::find($registry);
+
+        //////obtiene los datos de cedula, rif,correo y direccion
+        $cedula=Cedula::find($empleado->cedula_id);
+        $rif=Rif::find($empleado->rif_id);
+        $correo=Correo::find($empleado->correo_id);
+        $direccion=Direccion::find($empleado->direccion_id);
+
+        /////obtiene los datos del usuario y los borra ////////////////////////////////////
+        $empUsuario=DB::table('empleado_usuario')->where('empleado_id',$registry)->first();
+        if($empUsuario!=null)
+        {
+                $usuario=Usuario::find($empUsuario->usuario_id);
+                $usuario->delete();
+                DB::table('empleado_usuario')->where('id',$empUsuario->id)->delete();
+        }
+
+        /////obtiene los datos del telefono y los elimina /////////////////////////////////
+        $datosTelf=DB::table('empleado_telefono')->where('empleado_id',$registry)->get();
+        foreach ($datosTelf as $telefono) 
+        {
+            DB::table('telefonos')->where('id',$telefono->telefono_id)->delete();
+            DB::table('empleado_telefono')->where('id',$telefono->id)->delete();
+        }
+
+        //////Eliminar empleado
+        $empleado_=$empleado; 
+        $delete=$empleado->delete();
+        ////Eliminar datos de cedula, rif, correo y direccion/////////////
+        $cedula->delete();
+        $rif->delete();
+        $correo->delete();
+        $direccion->delete();
+
+        if($delete)
+        {
+            $retorno=1;
+             $this->registrarBitacora('Id del registro eliminado: '.$empleado_->id,'Eliminar Empleado','{"Elimino al empleado":'.'"'.$empleado_->primerNombre.' '.$empleado_->primerApellido.'"}','Empleados - Empleado',6,4);
+        }
+
+        return Response::json(['codigo'=>$retorno]);
     }
 
 

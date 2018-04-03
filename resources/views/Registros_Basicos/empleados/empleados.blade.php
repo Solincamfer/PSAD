@@ -9,7 +9,7 @@
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-md-2 ttlp">
-                                    <h1>Empleados</h1>
+                                    <h1>Empleado</h1>
                                 </div>
                             </div>
                             <div class="row sep-div">
@@ -55,7 +55,14 @@
                                                   <i class="{{$accion->clase_css}}"></i>
                                                   </a>
                                                </span>
-                                             @endif
+                                               @elseif($accion->id==123)
+                                                <span class="iclsp">
+                                                      <a class="_eliminarEmp_" id="elimEmp{{$empleado->id}}" data-reg="{{$empleado->id}}" data-ttl="{{$accion->descripcion}}">
+                                                         <i class="{{$accion->clase_css}}"></i>
+                                                    </a>
+                                              </span>
+                                              @endif
+
                                           @elseif($accion->id==78)
                                             @if($empleado->status==1)
                                                   <div class="chbx">
@@ -108,7 +115,7 @@
                                                                <div class="col-md-6">
                                                                    <div class="form-group row">
                                                                        <label for="nomEmp2">2do Nombre</label>
-                                                                       <input type="text" name="nomEmp2" class="form-control" id="nomEmp2"><i class="fa fa-user-plus icemp"></i>
+                                                                       <input type="text" name="nomEmp2" class="form-control" id="nomEmp2" value="NA"><i class="fa fa-user-plus icemp" ></i>
                                                                    </div>
                                                                </div>
                                                                <div class="col-md-6">
@@ -120,7 +127,7 @@
                                                                <div class="col-md-6">
                                                                    <div class="form-group row">
                                                                        <label for="apellEmp2">2do Apellido</label>
-                                                                       <input type="text" name="apellEmp2" class="form-control" id="apellEmp2"><i class="fa fa-user-plus icemp"></i>
+                                                                       <input type="text" name="apellEmp2" class="form-control" id="apellEmp2" value="NA"><i class="fa fa-user-plus icemp"></i>
                                                                    </div>
                                                                </div>
                                                            </div>
@@ -278,12 +285,12 @@
 
 
                                                                <div class="col-md-10 col-md-offset-1">
-                                                                  <label for="tlflcle">Teléfono Local 1</label>
+                                                                  <label for="tlflcle">Teléfono Local</label>
                                                                   <br>
                                                                    <div class="col-md-5">
                                                                        <div class="form-group row">
                                                                           <span class="ic"><i class="fa fa-chevron-down" ></i></span>
-                                                                           <select name="tlflcle" class="form-control" id="tlflcle">
+                                                                           <select name="numerol_1c" class="form-control" id="numerol_1c">
                                                                                <option value="">-</option>
                                                                               @foreach ($datosC4 as $tl)
                                                                                 <option value="{{$tl->id}}">{{$tl->descripcion}}</option>
@@ -298,15 +305,15 @@
                                                                    </div>
                                                                </div>
                                                                <div class="col-md-10 col-md-offset-1">
-                                                                   <label for="tlfmvle">Teléfono Local 2</label>
+                                                                   <label for="tlfmvle">Teléfono de oficina</label>
                                                                    <br>
                                                                    <div class="col-md-5">
                                                                        <div class="form-group row">
                                                                           <span class="ic"><i class="fa fa-chevron-down" ></i></span>
-                                                                           <select name="tlfmvle" class="form-control" id="tlfmvle">
+                                                                           <select name="numerol_2c" class="form-control" id="numerol_2c">
                                                                                <option value="">-</option>
-                                                                              @foreach ($datosC3 as $tc)
-                                                                                <option value="{{$tc->id}}">{{$tc->descripcion}}</option>
+                                                                              @foreach ($datosC4 as $tl)
+                                                                                <option value="{{$tl->id}}">{{$tl->descripcion}}</option>
                                                                               @endforeach
                                                                            </select><i class="fa fa-hashtag icemp"></i>
                                                                        </div>
@@ -324,7 +331,7 @@
                                                                    <div class="col-md-5">
                                                                        <div class="form-group row">
                                                                            <span class="ic"><i class="fa fa-chevron-down" ></i></span>
-                                                                           <select name="numerom_c" class="form-control" id="numerom_c">
+                                                                           <select name="numerom_c" class="form-control tlMovil" id="numerom_c" data-caso="0">
                                                                                <option value="">-</option>
                                                                               @foreach ($datosC3 as $tc)
                                                                                 <option value="{{$tc->id}}">{{$tc->descripcion}}</option>
@@ -399,7 +406,7 @@
                                 <h4 class="modal-title" id="myModalLabel2">Modificar Empleado</h4>
                             </div>
                             <div class="modal-body">
-                                <form action="" id="updateEmp">
+                                <form  id="updateEmp">
                                     {{ csrf_field() }}
                                     <ul class="nav nav-tabs" role="tablist">
                                         <li role="presentation" class="active"><a href="#dbem1" aria-controls="dbem1" role="tab" data-toggle="tab">Datos básic. Prim.</a></li>
@@ -497,7 +504,7 @@
                                                                    <div class="form-group row">
                                                                        <label for="dptoEmp"> Direccion </label><span class="ic"><i class="fa fa-chevron-down"></i></span>
                                                                        <select name="direccionEmprm" class="form-control estructura_agr" id="direccionEmprm"   data-caso="1" data-vista="1">
-                                                                           <option value="0">-</option>
+                                                                           <option value="">-</option>
                                                                            @foreach ($datosC5 as $direccion)
                                                                               <option value="{{$direccion->id}}" class="op_agr">{{$direccion->descripcion}}</option>
                                                                             @endforeach
@@ -590,19 +597,17 @@
 
 
                                                         <div class="col-md-10 col-md-offset-1">
-                                                                  <label for="tlflcle">Teléfono Local 1</label>
+                                                                  <label for="tlflcle">Teléfono Local</label>
                                                                   <br>
                                                                    <div class="col-md-5">
                                                                        <div class="form-group row">
-                                                                          {{--  <span class="ic"><i class="fa fa-chevron-down" ></i></span>
-                                                                           <select name="tlflcle" class="form-control" id="tlflcle">
-                                                                               <option value="0">-</option>
+                                                                          <span class="ic"><i class="fa fa-chevron-down" ></i></span>
+                                                                           <select name="numerol_1cm" class="form-control" id="numerol_1cm">
+                                                                               <option value="">-</option>
                                                                               @foreach ($datosC4 as $tl)
                                                                                 <option value="{{$tl->id}}">{{$tl->descripcion}}</option>
                                                                               @endforeach
-                                                                           </select><i class="fa fa-hashtag icemp"></i> --}}
-                                                                           <input type="tel" name="numerol_1cm"  placeholder="Codigo" class="form-control" id="numerol_1cm"><i class="fa fa-hashtag icemp"></i>
-
+                                                                           </select><i class="fa fa-hashtag icemp"></i>
                                                                        </div>
                                                                    </div>
                                                                    <div class="col-md-7">
@@ -612,18 +617,17 @@
                                                                    </div>
                                                                </div>
                                                                <div class="col-md-10 col-md-offset-1">
-                                                                   <label for="tlfmvle">Teléfono Local 2</label>
+                                                                    <label for="tlfmvle">Teléfono de oficina</label>
                                                                    <br>
                                                                    <div class="col-md-5">
                                                                        <div class="form-group row">
-                                                                          {{--  <span class="ic"><i class="fa fa-chevron-down" ></i></span>
-                                                                           <select name="tlfmvle" class="form-control" id="tlfmvle">
-                                                                               <option value="0">-</option>
-                                                                              @foreach ($datosC3 as $tc)
-                                                                                <option value="{{$tc->id}}">{{$tc->descripcion}}</option>
+                                                                          <span class="ic"><i class="fa fa-chevron-down" ></i></span>
+                                                                           <select name="numerol_2cm" class="form-control" id="numerol_2cm">
+                                                                               <option value="">-</option>
+                                                                              @foreach ($datosC4 as $tl)
+                                                                                <option value="{{$tl->id}}">{{$tl->descripcion}}</option>
                                                                               @endforeach
-                                                                           </select><i class="fa fa-hashtag icemp"></i> --}}
-                                                                            <input type="tel" placeholder="Codigo" name="numerol_2cm" class="form-control" id="numerol_2cm"><i class="fa fa-hashtag icemp"></i>
+                                                                           </select><i class="fa fa-hashtag icemp"></i>
                                                                        </div>
                                                                    </div>
                                                                    <div class="col-md-7">
@@ -639,8 +643,8 @@
                                                                    <div class="col-md-5">
                                                                        <div class="form-group row">
                                                                            <span class="ic"><i class="fa fa-chevron-down" ></i></span>
-                                                                           <select name="numerom_cm" class="form-control" id="numerom_cm">
-                                                                               <option value="0">-</option>
+                                                                           <select name="numerom_cm" class="form-control tlMovil" id="numerom_cm" data-caso="1">
+                                                                               <option value="">-</option>
                                                                               @foreach ($datosC3 as $tc)
                                                                                 <option value="{{$tc->id}}">{{$tc->descripcion}}</option>
                                                                               @endforeach
@@ -699,11 +703,13 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <input type="hidden" name="empleadoId" id="_idEmpleado_" value="">
                                   </div>
+
                                   <div class="modal-footer">
-                                      <button type="button" class="bttnMd" id="btnSvm">Guardar <i class="fa fa-floppy-o"></i></button>
+                                      <button type="submit" class="bttnMd" id="btnSvm">Guardar <i class="fa fa-floppy-o"></i></button>
                                   </div>
-                                  <input type="hidden" name="empleadoId" id="_idEmpleado_" value="">
+                                 
                                 </form>
                             
                         </div>
